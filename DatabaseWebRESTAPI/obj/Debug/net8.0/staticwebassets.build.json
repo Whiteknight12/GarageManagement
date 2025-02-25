@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "B5GBf2T3b969QAe33gC6m09f6XM24tx9PXyHM4AT2zk=",
+  "Source": "DatabaseWebRESTAPI",
+  "BasePath": "_content/DatabaseWebRESTAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
