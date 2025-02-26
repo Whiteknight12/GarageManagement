@@ -9,33 +9,35 @@ using System.Threading.Tasks;
 
 namespace APIClient
 {
-    public class APIClientService
+    public class APIClientService<T> where T : class
     {
         private readonly HttpClient httpclient;
-        public APIClientService(APIClientOption option) 
+        private string endpoint; 
+        public APIClientService(APIClientOption option, string endpoint) 
         {
             httpclient = new HttpClient();
             httpclient.BaseAddress=new System.Uri(option.APIBaseAddress);
+            this.endpoint = endpoint;
         }
-        public async Task<List<Car>> GetAllCars()
+        public async Task<List<T>> GetAll()
         {
-            return await httpclient.GetFromJsonAsync<List<Car>?>("/api/Car");
+            return await httpclient.GetFromJsonAsync<List<T>?>($"{endpoint}");
         }
-        public async Task<Car> GetCarByID(int id)
+        public async Task<T> GetByID(int id)
         {
-            return await httpclient.GetFromJsonAsync<Car?>($"/api/Car/{id}");
+            return await httpclient.GetFromJsonAsync<T?>($"{endpoint}/{id}");
         }
-        public async Task CreateCar(Car car)
+        public async Task Create(T item)
         {
-            await httpclient.PostAsJsonAsync("/api/Car", car);
+            await httpclient.PostAsJsonAsync($"{endpoint}", item);
         }
-        public async Task UpdateCar(Car car)
+        public async Task Update(T item)
         {
-            await httpclient.PutAsJsonAsync("/api/Car", car);
+            await httpclient.PutAsJsonAsync($"{endpoint}", item);
         }
-        public async Task DeleteCar(int id)
+        public async Task Delete(int id)
         {
-            await httpclient.DeleteAsync($"/api/Car/{id}");
+            await httpclient.DeleteAsync($"{endpoint}/{id}");
         }
     }
 }

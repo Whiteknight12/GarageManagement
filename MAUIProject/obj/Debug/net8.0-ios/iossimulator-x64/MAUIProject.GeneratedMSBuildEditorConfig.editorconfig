@@ -3,6 +3,11 @@ build_property.EnableAotAnalyzer =
 build_property.EnableSingleFileAnalyzer = 
 build_property.EnableTrimAnalyzer = false
 build_property.IncludeAllContentForSelfExtract = 
+build_property.MvvmToolkitEnableINotifyPropertyChangingSupport = true
+build_property._MvvmToolkitIsUsingWindowsRuntimePack = false
+build_property.CsWinRTComponent = 
+build_property.CsWinRTAotOptimizerEnabled = 
+build_property.CsWinRTAotWarningLevel = 
 build_property.TargetFramework = net8.0-ios
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = 
@@ -29,6 +34,18 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = MAUIProject.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[C:/Users/MINH QUANG/source/repos/GarageManagement/MAUIProject/Pages/CreateAccountPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MAUIProject.Pages.CreateAccountPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\CreateAccountPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\CreateAccountPage.xaml
+
+[C:/Users/MINH QUANG/source/repos/GarageManagement/MAUIProject/Pages/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = MAUIProject.Pages.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Pages\LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Pages\LoginPage.xaml
 
 [C:/Users/MINH QUANG/source/repos/GarageManagement/MAUIProject/Pages/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

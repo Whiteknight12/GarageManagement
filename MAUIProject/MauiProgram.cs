@@ -1,4 +1,8 @@
 ﻿using APIClient.IoC;
+using APIClient.Models;
+using APIClient.Models.APIModels;
+using MAUIProject.Pages;
+using MAUIProject.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace MAUIProject;
@@ -15,10 +19,16 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
-		builder.Services.AddAPIClientService(x => x.APIBaseAddress = "http://10.0.2.2:5015/");
+        builder.Services.AddAPIClientService<Car>(x => x.APIBaseAddress = "http://10.0.2.2:5015", "/api/Car");
+        builder.Services.AddAPIClientService<User>(x => x.APIBaseAddress = "http://10.0.2.2:5015", "/api/User");
+		
+		builder.Services.AddScoped<UserViewModel>();
+        
+		builder.Services.AddScoped<LoginPage>();
+		builder.Services.AddScoped<CreateAccountPage>();
 
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
 		return builder.Build();

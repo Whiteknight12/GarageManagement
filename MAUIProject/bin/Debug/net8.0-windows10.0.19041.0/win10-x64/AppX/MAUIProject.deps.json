@@ -10,6 +10,7 @@
       "MAUIProject/1.0": {
         "dependencies": {
           "APIClient": "1.0.0",
+          "CommunityToolkit.Mvvm": "8.4.0",
           "Microsoft.Extensions.Logging.Debug": "8.0.1",
           "Microsoft.Maui.Controls": "8.0.100",
           "Microsoft.Maui.Controls.Compatibility": "8.0.100",
@@ -28,6 +29,14 @@
           "WinRT.Runtime.dll": {
             "assemblyVersion": "2.2.0.0",
             "fileVersion": "2.2.0.48161"
+          }
+        }
+      },
+      "CommunityToolkit.Mvvm/8.4.0": {
+        "runtime": {
+          "lib/net8.0-windows10.0.17763/CommunityToolkit.Mvvm.dll": {
+            "assemblyVersion": "8.4.0.0",
+            "fileVersion": "8.4.0.1"
           }
         }
       },
@@ -510,6 +519,13 @@
       "type": "runtimepack",
       "serviceable": false,
       "sha512": ""
+    },
+    "CommunityToolkit.Mvvm/8.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tqVU8yc/ADO9oiTRyTnwhFN68hCwvkliMierptWOudIAvWY1mWCh5VFh+guwHJmpMwfg0J0rY+yyd5Oy7ty9Uw==",
+      "path": "communitytoolkit.mvvm/8.4.0",
+      "hashPath": "communitytoolkit.mvvm.8.4.0.nupkg.sha512"
     },
     "Microsoft.Extensions.Configuration/8.0.0": {
       "type": "package",

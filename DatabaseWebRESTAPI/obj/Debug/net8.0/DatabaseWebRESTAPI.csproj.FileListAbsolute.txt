@@ -62,6 +62,7 @@ C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\bin\Debug\n
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\bin\Debug\net8.0\System.IO.Pipelines.dll
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\bin\Debug\net8.0\System.Memory.Data.dll
+C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\bin\Debug\net8.0\System.Net.Http.Json.dll
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\bin\Debug\net8.0\System.Runtime.Caching.dll
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\bin\Debug\net8.0\System.Security.Permissions.dll
@@ -153,6 +154,7 @@ C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\n
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\DatabaseWebRESTAPI.csproj.CoreCompileInputs.cache
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\DatabaseWebRESTAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\DatabaseWebRESTAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\DatabaseWebRESTAPI.sourcelink.json
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\scopedcss\bundle\DatabaseWebRESTAPI.styles.css
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\staticwebassets.development.json
@@ -170,5 +172,4 @@ C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\n
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\DatabaseWebRESTAPI.pdb
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\DatabaseWebRESTAPI.genruntimeconfig.cache
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\ref\DatabaseWebRESTAPI.dll
-C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\bin\Debug\net8.0\System.Net.Http.Json.dll
-C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\DatabaseWebRESTAPI.sourcelink.json
+C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
