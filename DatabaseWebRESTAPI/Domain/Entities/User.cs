@@ -12,24 +12,24 @@ namespace DatabaseWebRESTAPI.Domain.Entities
         public int UserID { get; set; }
         [Column("UserName")]
         [MaxLength(100)]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
         [Column("Password")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
         [Column("Email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
         [Column("FullName")]
         [RegularExpression(@"^[A-Za-z\s]+$", ErrorMessage = "Tên chỉ được chứa chữ cái và khoảng trắng.")]
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
         [Column("PhoneNumber")]
         [RegularExpression(@"^\d+$", ErrorMessage = "Chỉ được nhập số.")]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
         [Column("Address")]
-        public string Address { get; set; }
+        public string? Address { get; set; }
         [Column("Role")]
-        public string Role { get; set; }
+        public string? Role { get; set; }
         [Column("Age")]
-        public int Age { get; set; }
+        public int? Age { get; set; }
         [Column("Gender")]
-        public string Gender { get; set; }  
+        public string? Gender { get; set; }  
     }
 }

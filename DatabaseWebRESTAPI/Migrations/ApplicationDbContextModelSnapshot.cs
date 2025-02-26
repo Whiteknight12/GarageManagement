@@ -62,6 +62,57 @@ namespace DatabaseWebRESTAPI.Migrations
 
                     b.ToTable("CAR");
                 });
+
+            modelBuilder.Entity("DatabaseWebRESTAPI.Domain.Entities.User", b =>
+                {
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("UserID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Address");
+
+                    b.Property<int?>("Age")
+                        .HasColumnType("int")
+                        .HasColumnName("Age");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Email");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("FullName");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Gender");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Password");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("PhoneNumber");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Role");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("UserName");
+
+                    b.HasKey("UserID");
+
+                    b.ToTable("USER");
+                });
 #pragma warning restore 612, 618
         }
     }

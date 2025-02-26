@@ -314,3 +314,4 @@ C:\Users\MINH QUANG\source\repos\GarageManagement\MAUIProject\obj\Debug\net8.0-i
 C:\Users\MINH QUANG\source\repos\GarageManagement\MAUIProject\obj\Debug\net8.0-ios\iossimulator-x64\MAUIProject.pdb
 C:\Users\MINH QUANG\source\repos\GarageManagement\MAUIProject\obj\Debug\net8.0-ios\iossimulator-x64\MAUIProject.genruntimeconfig.cache
 C:\Users\MINH QUANG\source\repos\GarageManagement\MAUIProject\obj\Debug\net8.0-ios\iossimulator-x64\ref\MAUIProject.dll
+C:\Users\MINH QUANG\source\repos\GarageManagement\MAUIProject\obj\Debug\net8.0-ios\iossimulator-x64\MAUIProject.sourcelink.json

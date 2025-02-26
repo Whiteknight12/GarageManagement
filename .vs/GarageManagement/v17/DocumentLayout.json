@@ -11,20 +11,12 @@
       "RelativeMoniker": "D:0:0:{5E595A96-848A-4D9C-A34D-F3ADD2C7F9F0}|DatabaseWebRESTAPI\\DatabaseWebRESTAPI.csproj|solutionrelative:databasewebrestapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E595A96-848A-4D9C-A34D-F3ADD2C7F9F0}|DatabaseWebRESTAPI\\DatabaseWebRESTAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\databasewebrestapi\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5E595A96-848A-4D9C-A34D-F3ADD2C7F9F0}|DatabaseWebRESTAPI\\DatabaseWebRESTAPI.csproj|solutionrelative:databasewebrestapi\\domain\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FC4DFC8C-C238-4E3F-B1F0-D596CFCC14C6}|APIClient\\APIClient.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\apiclient\\models\\apimodels\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC4DFC8C-C238-4E3F-B1F0-D596CFCC14C6}|APIClient\\APIClient.csproj|solutionrelative:apiclient\\models\\apimodels\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CCB6E62B-F054-453A-8A86-ADE3B389F017}|MAUIProject\\MAUIProject.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\mauiproject\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CCB6E62B-F054-453A-8A86-ADE3B389F017}|MAUIProject\\MAUIProject.csproj|solutionrelative:mauiproject\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CCB6E62B-F054-453A-8A86-ADE3B389F017}|MAUIProject\\MAUIProject.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\mauiproject\\pages\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{CCB6E62B-F054-453A-8A86-ADE3B389F017}|MAUIProject\\MAUIProject.csproj|solutionrelative:mauiproject\\pages\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CCB6E62B-F054-453A-8A86-ADE3B389F017}|MAUIProject\\MAUIProject.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\mauiproject\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CCB6E62B-F054-453A-8A86-ADE3B389F017}|MAUIProject\\MAUIProject.csproj|solutionrelative:mauiproject\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CCB6E62B-F054-453A-8A86-ADE3B389F017}|MAUIProject\\MAUIProject.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\mauiproject\\pages\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -52,22 +44,10 @@
               "RelativeDocumentMoniker": "DatabaseWebRESTAPI\\Controllers\\UserController.cs",
               "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\DatabaseWebRESTAPI\\Controllers\\UserController.cs",
               "RelativeToolTip": "DatabaseWebRESTAPI\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowDQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-25T17:05:37.259Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\APIClient\\Models\\APIModels\\User.cs",
-              "RelativeDocumentMoniker": "APIClient\\Models\\APIModels\\User.cs",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\APIClient\\Models\\APIModels\\User.cs",
-              "RelativeToolTip": "APIClient\\Models\\APIModels\\User.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAzwBMAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-25T15:38:27.329Z"
             },
             {
               "$type": "Document",
@@ -79,23 +59,12 @@
               "RelativeToolTip": "DatabaseWebRESTAPI\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-25T15:38:09.136Z"
+              "WhenOpened": "2025-02-25T15:38:09.136Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\DatabaseWebRESTAPI\\Domain\\Entities\\User.cs",
-              "RelativeDocumentMoniker": "DatabaseWebRESTAPI\\Domain\\Entities\\User.cs",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\DatabaseWebRESTAPI\\Domain\\Entities\\User.cs",
-              "RelativeToolTip": "DatabaseWebRESTAPI\\Domain\\Entities\\User.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAkwAsAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-25T15:32:01.446Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "MainPage.xaml",
               "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\MAUIProject\\Pages\\MainPage.xaml",
               "RelativeDocumentMoniker": "MAUIProject\\Pages\\MainPage.xaml",
@@ -107,7 +76,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "MainPage.xaml.cs",
               "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\MAUIProject\\Pages\\MainPage.xaml.cs",
               "RelativeDocumentMoniker": "MAUIProject\\Pages\\MainPage.xaml.cs",
@@ -119,7 +88,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "MauiProgram.cs",
               "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\MAUIProject\\MauiProgram.cs",
               "RelativeDocumentMoniker": "MAUIProject\\MauiProgram.cs",
@@ -127,7 +96,8 @@
               "RelativeToolTip": "MAUIProject\\MauiProgram.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-25T14:32:53.93Z"
+              "WhenOpened": "2025-02-25T14:32:53.93Z",
+              "EditorCaption": ""
             }
           ]
         }

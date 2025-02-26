@@ -10,3 +10,4 @@ C:\Users\MINH QUANG\source\repos\GarageManagement\APIClient\obj\Debug\net8.0\API
 C:\Users\MINH QUANG\source\repos\GarageManagement\APIClient\obj\Debug\net8.0\refint\APIClient.dll
 C:\Users\MINH QUANG\source\repos\GarageManagement\APIClient\obj\Debug\net8.0\APIClient.pdb
 C:\Users\MINH QUANG\source\repos\GarageManagement\APIClient\obj\Debug\net8.0\ref\APIClient.dll
+C:\Users\MINH QUANG\source\repos\GarageManagement\APIClient\obj\Debug\net8.0\APIClient.sourcelink.json

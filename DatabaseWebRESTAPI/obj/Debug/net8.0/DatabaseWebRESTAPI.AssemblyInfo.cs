@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DatabaseWebRESTAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b549959633f1d8c878d4d5d58505f398fd0a4c8")]
 [assembly: System.Reflection.AssemblyProductAttribute("DatabaseWebRESTAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DatabaseWebRESTAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

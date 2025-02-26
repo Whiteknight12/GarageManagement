@@ -171,3 +171,4 @@ C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\n
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\DatabaseWebRESTAPI.genruntimeconfig.cache
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\ref\DatabaseWebRESTAPI.dll
 C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\bin\Debug\net8.0\System.Net.Http.Json.dll
+C:\Users\MINH QUANG\source\repos\GarageManagement\DatabaseWebRESTAPI\obj\Debug\net8.0\DatabaseWebRESTAPI.sourcelink.json
