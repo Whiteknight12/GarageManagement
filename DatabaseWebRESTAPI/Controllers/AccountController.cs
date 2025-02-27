@@ -1,5 +1,6 @@
 ﻿using DatabaseWebRESTAPI.Domain.Api;
 using DatabaseWebRESTAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,8 @@ namespace DatabaseWebRESTAPI.Controllers
         {
             _jwtService = jwtservice;
         }
+        [AllowAnonymous]
+        [HttpPost("Login")]
         public async Task<ActionResult<LoginResponseModel>> Login(LoginRequestModel request)
         {
             var result=await _jwtService.Authenticate(request);

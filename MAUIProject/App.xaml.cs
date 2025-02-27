@@ -7,7 +7,7 @@ namespace MAUIProject
         public App(LoginPage loginpage)
         {
             InitializeComponent();
-            MainPage = loginpage;
+            MainPage = new AppShell();
         }
     }
 }

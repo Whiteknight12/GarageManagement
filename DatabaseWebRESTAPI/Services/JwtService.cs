@@ -22,7 +22,7 @@ namespace DatabaseWebRESTAPI.Services
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password)) return null;
             var useraccount = await _dbcontext.UserAccounts.FirstOrDefaultAsync(x => x.Username == request.Username);
             if (useraccount == null || !PasswordHandler.VerifyPassword(request.Password, useraccount.Password!)) return null;
-            var issuer = _configuration["JwtConfig:Issuers"];
+            var issuer = _configuration["JwtConfig:Issuer"];
             var audience = _configuration["JwtConfig:Audience"];
             var key = _configuration["JwtConfig:Key"];
             var tokenvaliditymin=_configuration.GetValue<int>("JwtConfig:TokenValidityMins");
@@ -45,7 +45,8 @@ namespace DatabaseWebRESTAPI.Services
             {
                 AccessToken=accessstoken,
                 Username= request.Username,
-                ExpireIn=(int)tokenexpirytimestamp.Subtract(DateTime.UtcNow).TotalSeconds
+                Role = useraccount.Role,
+                ExpireIn =(int)tokenexpirytimestamp.Subtract(DateTime.UtcNow).TotalSeconds
             };
         }
     }

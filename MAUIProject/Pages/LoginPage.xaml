@@ -39,7 +39,8 @@
                     <Entry Placeholder="Username or Email"
                            PlaceholderColor="#999999"
                            TextColor="Black"
-                           FontSize="16">
+                           FontSize="16"
+                           Text="{Binding username}">
                         <Entry.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                 <GradientStop Color="#F0F0F0" Offset="0.0"/>
@@ -52,7 +53,8 @@
                            IsPassword="True"
                            PlaceholderColor="#999999"
                            TextColor="Black"
-                           FontSize="16">
+                           FontSize="16"
+                           Text="{Binding password}">
                         <Entry.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                 <GradientStop Color="#F0F0F0" Offset="0.0"/>
@@ -78,7 +80,7 @@
                             FontAttributes="Bold"
                             CornerRadius="25"
                             HeightRequest="50"
-                            Clicked="Login" />
+                            Command="{Binding LoginCommand}"/>
 
                     <Label HorizontalOptions="Center" Margin="0,10,0,0">
                         <Label.FormattedText>

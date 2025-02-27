@@ -1,7 +1,7 @@
 ﻿using APIClient.IoC;
-using APIClient.Models;
-using APIClient.Models.APIModels;
+using MAUIProject.Models;
 using MAUIProject.Pages;
+using MAUIProject.Services;
 using MAUIProject.ViewModels;
 using Microsoft.Extensions.Logging;
 
@@ -21,10 +21,13 @@ public static class MauiProgram
 			});
         builder.Services.AddAPIClientService<Car>(x => x.APIBaseAddress = "http://10.0.2.2:5015", "/api/Car");
         builder.Services.AddAPIClientService<User>(x => x.APIBaseAddress = "http://10.0.2.2:5015", "/api/User");
-		
-		builder.Services.AddScoped<UserViewModel>();
-        
-		builder.Services.AddScoped<LoginPage>();
+		builder.Services.AddLoginService(x => x.APIBaseAddress = "http://10.0.2.2:5015", "/api/Account");
+
+
+        builder.Services.AddScoped<UserViewModel>();
+		builder.Services.AddScoped<AuthenticationService>();
+
+        builder.Services.AddScoped<LoginPage>();
 		builder.Services.AddScoped<CreateAccountPage>();
 
 #if DEBUG

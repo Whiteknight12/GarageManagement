@@ -20,5 +20,14 @@ namespace APIClient.IoC
                 return new APIClientService<T>(options, endpoint);
             });
         }
+        public static void AddLoginService(this IServiceCollection services, Action<APIClientOption> option, string endpoint)
+        {
+            services.Configure(option);
+            services.AddSingleton(providers =>
+            {
+                var options = providers.GetRequiredService<IOptions<APIClientOption>>().Value;
+                return new LoginService(options, endpoint);
+            });
+        }
     }
 }

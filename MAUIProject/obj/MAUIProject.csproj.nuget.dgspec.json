@@ -51,10 +51,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[8.0.12, )"
-            },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
               "target": "Package",
               "version": "[9.0.2, )"
@@ -171,10 +167,6 @@
               "target": "Package",
               "version": "[8.4.0, )"
             },
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[8.0.12, )"
-            },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[8.0.1, )"
@@ -280,7 +272,7 @@
               "version": "[18.0.8319, 18.0.8319]"
             },
             {
-              "name": "Microsoft.iOS.Runtime.iossimulator-x64.net8.0_18.0",
+              "name": "Microsoft.iOS.Runtime.ios-arm64.net8.0_18.0",
               "version": "[18.0.8319, 18.0.8319]"
             }
           ],
@@ -359,10 +351,6 @@
               "target": "Package",
               "version": "[8.4.0, )"
             },
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[8.0.12, )"
-            },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[8.0.1, )"
@@ -417,7 +405,7 @@
         "android-x86": {
           "#import": []
         },
-        "iossimulator-x64": {
+        "ios-arm64": {
           "#import": []
         },
         "maccatalyst-x64": {

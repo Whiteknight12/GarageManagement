@@ -113,6 +113,41 @@ namespace DatabaseWebRESTAPI.Migrations
 
                     b.ToTable("USER");
                 });
+
+            modelBuilder.Entity("DatabaseWebRESTAPI.Domain.Entities.UserAccount", b =>
+                {
+                    b.Property<int>("UserAccountID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("UserAccountID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserAccountID"));
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Password");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Role");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Username");
+
+                    b.HasKey("UserAccountID");
+
+                    b.ToTable("USER_ACCOUNT");
+
+                    b.HasData(
+                        new
+                        {
+                            UserAccountID = 1,
+                            Password = "$2a$11$TDDB6C/PpAeHNQKTO4p6qOmZw9B7GZX1g.fmFqZmr4YVGVhJZ5FSO",
+                            Role = "Admin",
+                            Username = "admin1"
+                        });
+                });
 #pragma warning restore 612, 618
         }
     }

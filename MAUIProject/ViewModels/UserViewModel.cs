@@ -1,5 +1,5 @@
 ﻿using APIClient;
-using APIClient.Models.APIModels;
+using MAUIProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

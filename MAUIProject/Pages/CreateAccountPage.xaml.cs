@@ -1,4 +1,3 @@
-using APIClient.Models.APIModels;
 using MAUIProject.ViewModels;
 
 namespace MAUIProject.Pages;
@@ -14,9 +13,6 @@ public partial class CreateAccountPage : ContentPage
     }
     public void CreateAccount(Object sender, EventArgs e)
     {
-        _viewModel.CreateUser(new User
-        {
-
-        });
+        
     }
 }

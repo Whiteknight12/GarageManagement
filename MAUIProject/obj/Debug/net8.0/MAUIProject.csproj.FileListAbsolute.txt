@@ -1,0 +1,6 @@
+C:\Users\MINH QUANG\source\repos\GarageManagement\MAUIProject\obj\Debug\net8.0\MAUIProject.csproj.AssemblyReference.cache
+C:\Users\MINH QUANG\source\repos\GarageManagement\MAUIProject\obj\Debug\net8.0\MAUIProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MINH QUANG\source\repos\GarageManagement\MAUIProject\obj\Debug\net8.0\MAUIProject.AssemblyInfoInputs.cache
+C:\Users\MINH QUANG\source\repos\GarageManagement\MAUIProject\obj\Debug\net8.0\MAUIProject.AssemblyInfo.cs
+C:\Users\MINH QUANG\source\repos\GarageManagement\MAUIProject\obj\Debug\net8.0\MAUIProject.csproj.CoreCompileInputs.cache
+C:\Users\MINH QUANG\source\repos\GarageManagement\MAUIProject\obj\Debug\net8.0\MAUIProject.sourcelink.json

@@ -226,8 +226,11 @@
     <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\communitytoolkit.mvvm\8.4.0\lib\net8.0-windows10.0.17763\CommunityToolkit.Mvvm.dll">
       <PackagePath>CommunityToolkit.Mvvm.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.aspnetcore.authentication.jwtbearer\8.0.12\lib\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll">
-      <PackagePath>Microsoft.AspNetCore.Authentication.JwtBearer.dll</PackagePath>
+    <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.extensions.configuration\8.0.0\lib\net8.0\Microsoft.Extensions.Configuration.dll">
+      <PackagePath>Microsoft.Extensions.Configuration.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.extensions.configuration.abstractions\8.0.0\lib\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll">
+      <PackagePath>Microsoft.Extensions.Configuration.Abstractions.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.extensions.dependencyinjection\8.0.1\lib\net8.0\Microsoft.Extensions.DependencyInjection.dll">
       <PackagePath>Microsoft.Extensions.DependencyInjection.dll</PackagePath>
@@ -252,24 +255,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.graphics.win2d\1.2.0\lib\net6.0-windows10.0.19041.0\Microsoft.Graphics.Canvas.Interop.dll">
       <PackagePath>Microsoft.Graphics.Canvas.Interop.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.identitymodel.abstractions\7.1.2\lib\net8.0\Microsoft.IdentityModel.Abstractions.dll">
-      <PackagePath>Microsoft.IdentityModel.Abstractions.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.identitymodel.jsonwebtokens\7.1.2\lib\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll">
-      <PackagePath>Microsoft.IdentityModel.JsonWebTokens.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.identitymodel.logging\7.1.2\lib\net8.0\Microsoft.IdentityModel.Logging.dll">
-      <PackagePath>Microsoft.IdentityModel.Logging.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.identitymodel.protocols\7.1.2\lib\net8.0\Microsoft.IdentityModel.Protocols.dll">
-      <PackagePath>Microsoft.IdentityModel.Protocols.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.identitymodel.protocols.openidconnect\7.1.2\lib\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll">
-      <PackagePath>Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.identitymodel.tokens\7.1.2\lib\net8.0\Microsoft.IdentityModel.Tokens.dll">
-      <PackagePath>Microsoft.IdentityModel.Tokens.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.io.recyclablememorystream\3.0.1\lib\net6.0\Microsoft.IO.RecyclableMemoryStream.dll">
       <PackagePath>Microsoft.IO.RecyclableMemoryStream.dll</PackagePath>
@@ -339,9 +324,6 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.windowsappsdk\1.5.240802000\lib\net6.0-windows10.0.18362.0\Microsoft.WindowsAppRuntime.Bootstrap.Net.dll">
       <PackagePath>Microsoft.WindowsAppRuntime.Bootstrap.Net.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\system.identitymodel.tokens.jwt\7.1.2\lib\net8.0\System.IdentityModel.Tokens.Jwt.dll">
-      <PackagePath>System.IdentityModel.Tokens.Jwt.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\system.io.pipelines\9.0.2\lib\net8.0\System.IO.Pipelines.dll">
       <PackagePath>System.IO.Pipelines.dll</PackagePath>

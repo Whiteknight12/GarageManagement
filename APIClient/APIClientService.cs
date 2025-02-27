@@ -1,5 +1,4 @@
 ﻿using APIClient.Models;
-using APIClient.Models.APIModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
