@@ -1,0 +1,143 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\controllers\\useraccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\useraccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\service\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\service\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\models\\car.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\models\\car.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\controllers\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserAccountController.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\UserAccountController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\UserAccountController.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\UserAccountController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\UserAccountController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T15:03:46.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T17:47:45.298Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CarController.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\CarController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\CarController.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\CarController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\CarController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAC8AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T17:07:22.282Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "WebAPI\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T16:39:12.118Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Car.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Models\\Car.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Models\\Car.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Models\\Car.cs",
+              "RelativeToolTip": "WebAPI\\Models\\Car.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T16:34:54.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "JwtService.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Service\\JwtService.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Service\\JwtService.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Service\\JwtService.cs",
+              "RelativeToolTip": "WebAPI\\Service\\JwtService.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAcwC8AAABdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T16:20:44.916Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Program.cs",
+              "RelativeToolTip": "WebAPI\\Program.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAAB8AAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T16:11:04.459Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
