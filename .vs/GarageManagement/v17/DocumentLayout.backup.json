@@ -3,32 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\controllers\\useraccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\useraccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\viewmodels\\loginpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\viewmodels\\loginpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\pages\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\pages\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\service\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\service\\jwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\pages\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\pages\\loginpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\models\\car.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\models\\car.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\webapi\\controllers\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754021B1-7002-441A-8271-7AD732E9E7B6}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,93 +38,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserAccountController.cs",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\UserAccountController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\UserAccountController.cs",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\UserAccountController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\UserAccountController.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAACoAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T15:03:46.099Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T17:47:45.298Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CarController.cs",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\CarController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\CarController.cs",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Controllers\\CarController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\CarController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAC8AAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T17:07:22.282Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "WebAPI\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T16:39:12.118Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Car.cs",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Models\\Car.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Models\\Car.cs",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Models\\Car.cs",
-              "RelativeToolTip": "WebAPI\\Models\\Car.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T16:34:54.07Z",
+              "Title": "AppShell.xaml",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\AppShell.xaml",
+              "RelativeDocumentMoniker": "GarageManagement\\AppShell.xaml",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\AppShell.xaml",
+              "RelativeToolTip": "GarageManagement\\AppShell.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-06T14:41:07.045Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "JwtService.cs",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Service\\JwtService.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Service\\JwtService.cs",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Service\\JwtService.cs",
-              "RelativeToolTip": "WebAPI\\Service\\JwtService.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAcwC8AAABdAAAAAAAAAA==",
+              "Title": "LoginPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Pages\\LoginPage.xaml.cs",
+              "RelativeDocumentMoniker": "GarageManagement\\Pages\\LoginPage.xaml.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Pages\\LoginPage.xaml.cs",
+              "RelativeToolTip": "GarageManagement\\Pages\\LoginPage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T16:20:44.916Z",
+              "WhenOpened": "2025-03-06T13:56:22.49Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Program.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\WebAPI\\Program.cs",
-              "RelativeToolTip": "WebAPI\\Program.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAB8AAAA/AAAAAAAAAA==",
+              "Title": "LoginPage.xaml",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Pages\\LoginPage.xaml",
+              "RelativeDocumentMoniker": "GarageManagement\\Pages\\LoginPage.xaml",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Pages\\LoginPage.xaml",
+              "RelativeToolTip": "GarageManagement\\Pages\\LoginPage.xaml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABcAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-06T13:55:50.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthenticationService.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Services\\AuthenticationService.cs",
+              "RelativeDocumentMoniker": "GarageManagement\\Services\\AuthenticationService.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Services\\AuthenticationService.cs",
+              "RelativeToolTip": "GarageManagement\\Services\\AuthenticationService.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T16:11:04.459Z",
+              "WhenOpened": "2025-03-06T09:40:45.913Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginPageViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\LoginPageViewModel.cs",
+              "RelativeDocumentMoniker": "GarageManagement\\ViewModels\\LoginPageViewModel.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\LoginPageViewModel.cs",
+              "RelativeToolTip": "GarageManagement\\ViewModels\\LoginPageViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T09:36:14.301Z",
               "EditorCaption": ""
             }
           ]
