@@ -15,14 +15,15 @@ namespace GarageManagement.Services
         private readonly HttpClient _httpclient;
         private UserAccountSession currentaccount;
         private string STORAGE_KEY="user-account-status";
-        public AuthenticationService()
+        public AuthenticationService(string baseaddress)
         {
             _httpclient = new HttpClient();
+            _httpclient.BaseAddress = new Uri(baseaddress);
         }
         public async Task<bool> Authentication(string username, string password)
         {
             var result = false;
-            var response=await _httpclient.PostAsJsonAsync("Account/Login", new
+            var response=await _httpclient.PostAsJsonAsync("/api/Account/Login", new 
             {
                 Username = username,
                 Password = password

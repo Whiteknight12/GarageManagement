@@ -1,6 +1,8 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
+using GarageManagement.Pages;
 using GarageManagement.Services;
+using GarageManagement.ViewModels;
 using Microsoft.Extensions.Logging;
 
 namespace GarageManagement;
@@ -27,7 +29,11 @@ public static class MauiProgram
     baseaddress = "http://192.168.1.100:5142/"; 
 #endif
         builder.Services.AddAPIClientService<Car>(x => x.BaseAddress = baseaddress, "Car");
-		builder.Services.AddScoped<AuthenticationService>();
+		builder.Services.AddScoped<AuthenticationService>(provider=>
+		{
+            return new AuthenticationService(baseaddress);
+        });
+        builder.Services.AddTransient<LoginPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

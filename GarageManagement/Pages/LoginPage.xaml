@@ -16,7 +16,7 @@
         <Frame Grid.Row="1" CornerRadius="10" Padding="10" BackgroundColor="#333">
             <StackLayout>
                 <Label Text="Tên đăng nhập" TextColor="White" FontSize="16"/>
-                <Entry x:Name="UsernameEntry" Placeholder="Nhập tên đăng nhập" Text="{Binding username}" TextColor="White" BackgroundColor="#444" PlaceholderColor="#bbb"/>
+                <Entry x:Name="UsernameEntry" Placeholder="Nhập tên đăng nhập" Text="{Binding Username}" TextColor="White" BackgroundColor="#444" PlaceholderColor="#bbb"/>
 
                 <Label Text="Mật khẩu" TextColor="White" FontSize="16" Margin="0,10,0,0"/>
                 <Entry x:Name="PasswordEntry" Placeholder="Nhập mật khẩu" Text="{Binding Password}" IsPassword="True" TextColor="White" BackgroundColor="#444" PlaceholderColor="#bbb"/>
