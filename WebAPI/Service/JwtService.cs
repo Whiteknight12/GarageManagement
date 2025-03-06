@@ -45,7 +45,8 @@ namespace WebAPI.Service
             {
                 Token = accesstoken,
                 Username = request.Username,
-                Expiration = (int)tokenexpirytimestamp.Subtract(DateTime.UtcNow).TotalSeconds
+                Expiration = (int)tokenexpirytimestamp.Subtract(DateTime.UtcNow).TotalSeconds,
+                Role= useraccount.Role
             };
         }
     }

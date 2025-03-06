@@ -50,6 +50,6 @@ namespace GarageManagement.Services
             currentaccount = null;
         }
         public UserAccountSession GetCurrentAccountStatus=>currentaccount;
-        public bool IsAdmin => currentaccount is not null && currentaccount.Role == "Admin";
+        public string CurrentRole => currentaccount.Role;
     }
 }

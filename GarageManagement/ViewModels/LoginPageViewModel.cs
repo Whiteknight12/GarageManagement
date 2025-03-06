@@ -21,7 +21,13 @@ namespace GarageManagement.ViewModels
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password)) 
                 await Shell.Current.DisplayAlert("Login Failed", "Invalid Username or Password", "OK");
             var isauthenticated=await _authenticationservice.Authentication(username, password);
-            if (isauthenticated) await Shell.Current.GoToAsync("//MainPage");
+            if (isauthenticated && _authenticationservice.CurrentRole is not null)
+            {
+                if (_authenticationservice.CurrentRole=="Admin")
+                    await Shell.Current.GoToAsync("//MainPage");
+                else if (_authenticationservice.CurrentRole=="Member") 
+                    await Shell.Current.GoToAsync("//MemberMainPage");
+            }
             else await Shell.Current.DisplayAlert("Login Failed", "Invalid Username or Password", "OK");
         }
     }
