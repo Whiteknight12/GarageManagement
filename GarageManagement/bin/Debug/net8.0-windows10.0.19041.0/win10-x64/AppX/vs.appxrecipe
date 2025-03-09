@@ -29,25 +29,25 @@
     <AppXManifest Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-03-09T17:29:47.780</Modified>
+      <Modified>2025-03-09T19:09:26.581</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2025-03-09T11:35:59.575</Modified>
+      <Modified>2025-03-09T17:39:45.490</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\GarageManagement.runtimeconfig.json">
       <PackagePath>GarageManagement.runtimeconfig.json</PackagePath>
-      <Modified>2025-03-07T04:41:00.951</Modified>
+      <Modified>2025-03-09T17:39:45.203</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\GarageManagement.dll">
       <PackagePath>GarageManagement.dll</PackagePath>
-      <Modified>2025-03-09T17:29:47.366</Modified>
+      <Modified>2025-03-09T19:09:26.037</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>GarageManagement.exe</PackagePath>
-      <Modified>2025-03-09T17:29:47.404</Modified>
+      <Modified>2025-03-09T19:09:26.091</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -55,23 +55,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-100.png">
       <PackagePath>splashSplashScreen.scale-100.png</PackagePath>
-      <Modified>2025-03-07T04:40:58.312</Modified>
+      <Modified>2025-03-09T17:39:42.677</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-125.png">
       <PackagePath>splashSplashScreen.scale-125.png</PackagePath>
-      <Modified>2025-03-07T04:40:58.328</Modified>
+      <Modified>2025-03-09T17:39:42.688</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-150.png">
       <PackagePath>splashSplashScreen.scale-150.png</PackagePath>
-      <Modified>2025-03-07T04:40:58.343</Modified>
+      <Modified>2025-03-09T17:39:42.704</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-200.png">
       <PackagePath>splashSplashScreen.scale-200.png</PackagePath>
-      <Modified>2025-03-07T04:40:58.359</Modified>
+      <Modified>2025-03-09T17:39:42.728</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-400.png">
       <PackagePath>splashSplashScreen.scale-400.png</PackagePath>
-      <Modified>2025-03-07T04:40:58.482</Modified>
+      <Modified>2025-03-09T17:39:42.828</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Regular.ttf">
       <PackagePath>OpenSans-Regular.ttf</PackagePath>
@@ -83,211 +83,211 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appicon.ico">
       <PackagePath>appicon.ico</PackagePath>
-      <Modified>2025-03-07T04:40:59.145</Modified>
+      <Modified>2025-03-09T17:39:43.545</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-100.png">
       <PackagePath>appiconLargeTile.scale-100.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.130</Modified>
+      <Modified>2025-03-09T17:39:43.536</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-125.png">
       <PackagePath>appiconLargeTile.scale-125.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.130</Modified>
+      <Modified>2025-03-09T17:39:43.535</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-150.png">
       <PackagePath>appiconLargeTile.scale-150.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.130</Modified>
+      <Modified>2025-03-09T17:39:43.535</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-200.png">
       <PackagePath>appiconLargeTile.scale-200.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.130</Modified>
+      <Modified>2025-03-09T17:39:43.535</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-400.png">
       <PackagePath>appiconLargeTile.scale-400.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.130</Modified>
+      <Modified>2025-03-09T17:39:43.535</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-16.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.543</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-24.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.542</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-256.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.542</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-32.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.542</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-48.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.542</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-16.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.543</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-24.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.543</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-256.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.141</Modified>
+      <Modified>2025-03-09T17:39:43.543</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-32.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.543</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-48.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.141</Modified>
+      <Modified>2025-03-09T17:39:43.543</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-100.png">
       <PackagePath>appiconLogo.scale-100.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.545</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-125.png">
       <PackagePath>appiconLogo.scale-125.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.545</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-150.png">
       <PackagePath>appiconLogo.scale-150.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.545</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-200.png">
       <PackagePath>appiconLogo.scale-200.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.545</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-400.png">
       <PackagePath>appiconLogo.scale-400.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.544</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-16.png">
       <PackagePath>appiconLogo.targetsize-16.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.544</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-24.png">
       <PackagePath>appiconLogo.targetsize-24.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.544</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-256.png">
       <PackagePath>appiconLogo.targetsize-256.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.543</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-32.png">
       <PackagePath>appiconLogo.targetsize-32.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.544</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-48.png">
       <PackagePath>appiconLogo.targetsize-48.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.142</Modified>
+      <Modified>2025-03-09T17:39:43.544</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-100.png">
       <PackagePath>appiconMediumTile.scale-100.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.538</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-125.png">
       <PackagePath>appiconMediumTile.scale-125.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.538</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-150.png">
       <PackagePath>appiconMediumTile.scale-150.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.538</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-200.png">
       <PackagePath>appiconMediumTile.scale-200.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.538</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-400.png">
       <PackagePath>appiconMediumTile.scale-400.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.537</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-100.png">
       <PackagePath>appiconSmallTile.scale-100.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.539</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-125.png">
       <PackagePath>appiconSmallTile.scale-125.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.539</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-150.png">
       <PackagePath>appiconSmallTile.scale-150.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.539</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-200.png">
       <PackagePath>appiconSmallTile.scale-200.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.539</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-400.png">
       <PackagePath>appiconSmallTile.scale-400.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.539</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-100.png">
       <PackagePath>appiconStoreLogo.scale-100.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.541</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-125.png">
       <PackagePath>appiconStoreLogo.scale-125.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.541</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-150.png">
       <PackagePath>appiconStoreLogo.scale-150.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.541</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-200.png">
       <PackagePath>appiconStoreLogo.scale-200.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.541</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-400.png">
       <PackagePath>appiconStoreLogo.scale-400.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.539</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-100.png">
       <PackagePath>appiconWideTile.scale-100.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.537</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-125.png">
       <PackagePath>appiconWideTile.scale-125.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.537</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-150.png">
       <PackagePath>appiconWideTile.scale-150.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.537</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-200.png">
       <PackagePath>appiconWideTile.scale-200.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.537</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-400.png">
       <PackagePath>appiconWideTile.scale-400.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.134</Modified>
+      <Modified>2025-03-09T17:39:43.536</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png">
       <PackagePath>dotnet_bot.scale-100.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.145</Modified>
+      <Modified>2025-03-09T17:39:43.547</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-125.png">
       <PackagePath>dotnet_bot.scale-125.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.145</Modified>
+      <Modified>2025-03-09T17:39:43.547</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-150.png">
       <PackagePath>dotnet_bot.scale-150.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.145</Modified>
+      <Modified>2025-03-09T17:39:43.546</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-200.png">
       <PackagePath>dotnet_bot.scale-200.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.145</Modified>
+      <Modified>2025-03-09T17:39:43.546</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
-      <Modified>2025-03-07T04:40:59.145</Modified>
+      <Modified>2025-03-09T17:39:43.545</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\GarageManagement\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\GarageManagement.deps.json">
       <PackagePath>GarageManagement.deps.json</PackagePath>
-      <Modified>2025-03-09T11:35:59.251</Modified>
+      <Modified>2025-03-09T17:39:45.060</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.57\lib\net8.0\Microsoft.Windows.SDK.NET.dll">
       <PackagePath>Microsoft.Windows.SDK.NET.dll</PackagePath>
@@ -627,7 +627,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\source\repos\GarageManagement\APIClassLibrary\bin\Debug\net8.0\APIClassLibrary.dll">
       <PackagePath>APIClassLibrary.dll</PackagePath>
-      <Modified>2025-03-09T16:26:37.737</Modified>
+      <Modified>2025-03-09T19:06:41.114</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\MINH QUANG\.nuget\packages\microsoft.maui.controls.compatibility\8.0.100\lib\net8.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.pri">
       <PackagePath>Microsoft.Maui.Controls.Compatibility.pri</PackagePath>

@@ -8,7 +8,7 @@ namespace APIClassLibrary.APIModels
 {
     public class VatTuPhuTung
     {
-        public string? VTPTID { get; set; }
+        public int? VTPTID { get; set; }
         public string? Name { get; set; }
         public double? Price { get; set; }
     }

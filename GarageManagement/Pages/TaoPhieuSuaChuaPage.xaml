@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:GarageManagement.ViewModels"
              x:Class="GarageManagement.Pages.TaoPhieuSuaChuaPage">
     <ScrollView>
         <StackLayout Padding="20" Spacing="10">
             <Label Text="Biển số xe:" />
             <Picker Title="Chọn biển số xe"
+                    ItemDisplayBinding="{Binding .}"
                     ItemsSource="{Binding Listbiensoxe}"
                     SelectedItem="{Binding Selectedbiensoxe, Mode=TwoWay}" />
             <Label Text="Ngày sửa chữa:" />
@@ -24,9 +26,9 @@
 
                                 <Label Text="Vật tư phụ tùng:" />
                                 <Picker Title="Chọn vật tư phụ tùng"
-                                        ItemsSource="{Binding Listvattuphutung}"
+                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=Listvattuphutung}"
                                         ItemDisplayBinding="{Binding Name}"
-                                        SelectedItem="{Binding VatTuPhuTung, Mode=TwoWay}" />
+                                        SelectedItem="{Binding VatTuPhuTung, Mode=TwoWay}" />       
 
                                 <Label Text="Số lượng:" />
                                 <Entry Text="{Binding SoLuong, Mode=TwoWay}"
@@ -38,9 +40,9 @@
 
                                 <Label Text="Tiền công:" />
                                 <Picker Title="Chọn tiền công"
-                                        ItemsSource="{Binding Listtiencong}"
+                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=Listtiencong}"
                                         ItemDisplayBinding="{Binding Name}"
-                                        SelectedItem="{Binding TienCong, Mode=TwoWay}" />
+                                        SelectedItem="{Binding TienCong, Mode=TwoWay}" />   
 
                                 <Label Text="Thành tiền:" />
                                 <Label Text="{Binding ThanhTien, StringFormat='{0:C}'}" />

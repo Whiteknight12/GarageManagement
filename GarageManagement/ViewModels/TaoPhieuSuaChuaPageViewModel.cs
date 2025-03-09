@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,13 +52,11 @@ namespace GarageManagement.ViewModels
             _noidungphieuservice = noidungphieuservice;
             _chitiettiencongservice = chitiettiencongservice;
             _phieuservice = phieuservice;
-            LoadAsync();
+            _=LoadAsync();
         }
         private async Task LoadAsync()
         {
             var listcar = await _carservice.GetAll();
-            var listcong=await _tiencongservice.GetAll();
-            var listphutung=await _vattuservice.GetAll();
             if (listcar is not null)
             {
                 listbiensoxe.Clear();
@@ -65,21 +64,23 @@ namespace GarageManagement.ViewModels
                 {
                     listbiensoxe.Add(car.BienSo);
                 }
+                OnPropertyChanged(nameof(Listbiensoxe));
             }
+            var listcong = await _tiencongservice.GetAll();
             if (listcong is not null)
             {
                 listtiencong.Clear();
                 foreach (var tiencong in listcong) listtiencong.Add(tiencong);
+                OnPropertyChanged(nameof(Listtiencong));
             }
+            var listphutung = await _vattuservice.GetAll();
             if (listphutung is not null)
             {
                 listvattuphutung.Clear();
                 foreach (var vattu in listphutung) listvattuphutung.Add(vattu);
+                OnPropertyChanged(nameof(Listvattuphutung));
             }
-            listnoidung.Add(new NoiDungPhieuSuaChua
-            {
-                
-            });
+            listnoidung.Add(new NoiDungPhieuSuaChua());
         }
 
         [RelayCommand]

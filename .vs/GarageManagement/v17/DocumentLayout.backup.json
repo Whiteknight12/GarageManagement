@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\viewmodels\\taophieusuachuapageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\viewmodels\\taophieusuachuapageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\viewmodels\\tiepnhanxepageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\viewmodels\\tiepnhanxepageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\viewmodels\\taophieusuachuapageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\viewmodels\\taophieusuachuapageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6751365-497E-4364-A08C-352099752B2F}|APIClassLibrary\\APIClassLibrary.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\apiclasslibrary\\apimodels\\vattuphutung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6751365-497E-4364-A08C-352099752B2F}|APIClassLibrary\\APIClassLibrary.csproj|solutionrelative:apiclasslibrary\\apimodels\\vattuphutung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\pages\\taophieusuachuapage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,39 +34,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "VatTuPhuTung.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\APIClassLibrary\\APIModels\\VatTuPhuTung.cs",
+              "RelativeDocumentMoniker": "APIClassLibrary\\APIModels\\VatTuPhuTung.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\APIClassLibrary\\APIModels\\VatTuPhuTung.cs",
+              "RelativeToolTip": "APIClassLibrary\\APIModels\\VatTuPhuTung.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-09T19:05:15.255Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "TiepNhanXePageViewModel.cs",
               "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\TiepNhanXePageViewModel.cs",
               "RelativeDocumentMoniker": "GarageManagement\\ViewModels\\TiepNhanXePageViewModel.cs",
               "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\TiepNhanXePageViewModel.cs",
               "RelativeToolTip": "GarageManagement\\ViewModels\\TiepNhanXePageViewModel.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAAD4AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAADcAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-09T17:33:41.308Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "TaoPhieuSuaChuaPage.xaml",
               "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Pages\\TaoPhieuSuaChuaPage.xaml",
               "RelativeDocumentMoniker": "GarageManagement\\Pages\\TaoPhieuSuaChuaPage.xaml",
               "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Pages\\TaoPhieuSuaChuaPage.xaml",
               "RelativeToolTip": "GarageManagement\\Pages\\TaoPhieuSuaChuaPage.xaml",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAwDoAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-03-09T17:14:48.307Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "TaoPhieuSuaChuaPageViewModel.cs",
               "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\TaoPhieuSuaChuaPageViewModel.cs",
               "RelativeDocumentMoniker": "GarageManagement\\ViewModels\\TaoPhieuSuaChuaPageViewModel.cs",
               "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\TaoPhieuSuaChuaPageViewModel.cs",
               "RelativeToolTip": "GarageManagement\\ViewModels\\TaoPhieuSuaChuaPageViewModel.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAAwDkAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAFIAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-09T16:30:10.946Z",
               "EditorCaption": ""
