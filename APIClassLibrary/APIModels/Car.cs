@@ -12,5 +12,8 @@ namespace APIClassLibrary.APIModels
         public string? Name { get; set; }
         public string? Model { get; set; }
         public string? BienSo { get; set; }
+        public string? TenChuXe { get; set; }
+        public string? DienThoai { get; set; }
+        public string? DiaChi { get; set; }
     }
 }

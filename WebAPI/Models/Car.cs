@@ -15,7 +15,13 @@ namespace WebAPI.Models
         [Column("MODEL")]
         public string? Model { get; set; }
         [Column("BIENSO")]
-        [RegularExpression(@"^\d+$", ErrorMessage = "Chỉ được nhập số.")]
         public string? BienSo { get; set; }
+        [Column("TENCHUXE")]
+        public string? TenChuXe { get; set; }
+        [Column("DIACHI")]
+        public string? DiaChi { get; set; }
+        [Column("DIENTHOAI")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Chuỗi chỉ được chứa các chữ số.")]
+        public string? DienThoai { get; set; }
     }
 }

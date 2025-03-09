@@ -1,0 +1,16 @@
+using APIClassLibrary;
+using APIClassLibrary.APIModels;
+using GarageManagement.ViewModels;
+
+namespace GarageManagement.Pages;
+
+public partial class TiepNhanXePage : ContentPage
+{
+	public TiepNhanXePage(APIClientService<CarRecord> service, APIClientService<RuleVariable> ruleservice, 
+		APIClientService<Car> carservice,
+		APIClientService<HieuXe> hieuxeservice)
+	{
+		InitializeComponent();
+		BindingContext = new TiepNhanXePageViewModel(service, ruleservice, carservice, hieuxeservice);
+	}
+}

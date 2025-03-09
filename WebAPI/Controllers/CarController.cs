@@ -48,5 +48,11 @@ namespace WebAPI.Controllers
             await _db.SaveChangesAsync();
             return Ok();
         }
+        [HttpGet("GetByBienSo/{bienso}")]
+        public async Task<ActionResult<Car?>> GetCarByBienSo(string bienso)
+        {
+            var car = await _db.Cars.Where(u=>u.BienSo== bienso).FirstOrDefaultAsync();
+            return Ok(new { data = car });
+        }
     }
 }

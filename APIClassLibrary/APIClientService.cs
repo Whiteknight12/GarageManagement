@@ -38,5 +38,9 @@ namespace APIClassLibrary
         {
             await _httpclient.DeleteAsync($"/api/{_endpoint}/{id}");
         }
+        public async Task<T> GetThroughtSpecialRoute(string route, string parameter="")
+        {
+            return await _httpclient.GetFromJsonAsync<T>($"/api/{_endpoint}/{route}/{parameter}");
+        }
     }
 }

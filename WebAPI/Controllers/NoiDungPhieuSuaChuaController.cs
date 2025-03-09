@@ -1,0 +1,51 @@
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebAPI.Data;
+using WebAPI.Models;
+
+namespace WebAPI.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class NoiDungPhieuSuaChuaController : ControllerBase
+    {
+        private readonly ApplicationDbContext _db;
+        public NoiDungPhieuSuaChuaController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
+        [HttpGet]
+        public IEnumerable<NoiDungPhieuSuaChua> GetAll()
+        {
+            return _db.noiDungPhieuSuaChuas;
+        }
+        [HttpGet("{id}")]
+        public async Task<NoiDungPhieuSuaChua> GetByID(int id)
+        {
+            return await _db.noiDungPhieuSuaChuas.Where(u => u.NoiDungID== id).FirstOrDefaultAsync();
+        }
+        [HttpPost]
+        public async Task<ActionResult> Create(NoiDungPhieuSuaChua entity)
+        {
+            await _db.AddAsync(entity);
+            await _db.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetByID), new { id = entity.NoiDungID }, entity);
+        }
+        [HttpPut]
+        public async Task<ActionResult> Update(NoiDungPhieuSuaChua entity)
+        {
+            _db.Update(entity);
+            await _db.SaveChangesAsync();
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var deleted = await _db.noiDungPhieuSuaChuas.Where(u => u.NoiDungID == id).FirstOrDefaultAsync();
+            _db.noiDungPhieuSuaChuas.Remove(deleted);
+            await _db.SaveChangesAsync();
+            return Ok();
+        }
+    }
+}

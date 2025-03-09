@@ -15,8 +15,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.Column="0" Text="Tiếp nhận bảo trì xe" FontSize="16" CornerRadius="10" BackgroundColor="#007AFF" TextColor="White" HeightRequest="60"/>
-            <Button Grid.Row="0" Grid.Column="1" Text="Lập phiếu sửa chữa" FontSize="16" CornerRadius="10" BackgroundColor="#28A745" TextColor="White" HeightRequest="60"/>
+            <Button Grid.Row="0" Grid.Column="0" Text="Tiếp nhận bảo trì xe" FontSize="16" CornerRadius="10" BackgroundColor="#007AFF" TextColor="White" HeightRequest="60" Command="{Binding GotoTiepNhanXePageCommand}"/>
+            <Button Grid.Row="0" Grid.Column="1" Text="Lập phiếu sửa chữa" FontSize="16" CornerRadius="10" BackgroundColor="#28A745" TextColor="White" HeightRequest="60" Command="{Binding GotoPhieuSuaChuaPageCommand}"/>
             <Button Grid.Row="1" Grid.Column="0" Text="Tra cứu xe" FontSize="16" CornerRadius="10" BackgroundColor="#FFC107" TextColor="Black" HeightRequest="60"/>
             <Button Grid.Row="1" Grid.Column="1" Text="Lập phiếu thu tiền" FontSize="16" CornerRadius="10" BackgroundColor="#DC3545" TextColor="White" HeightRequest="60"/>
             <Button Grid.Row="2" Grid.Column="0" Text="Lập báo cáo tháng" FontSize="16" CornerRadius="10" BackgroundColor="#17A2B8" TextColor="White" HeightRequest="60"/>

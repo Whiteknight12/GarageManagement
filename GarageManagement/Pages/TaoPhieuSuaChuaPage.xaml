@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.TaoPhieuSuaChuaPage">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <Label Text="Biển số xe:" />
+            <Picker Title="Chọn biển số xe"
+                    ItemsSource="{Binding Listbiensoxe}"
+                    SelectedItem="{Binding Selectedbiensoxe, Mode=TwoWay}" />
+            <Label Text="Ngày sửa chữa:" />
+            <DatePicker Date="{Binding Ngaysuachua, Mode=TwoWay}" />
+            <Label Text="Nội dung sửa chữa:" />
+            <ListView ItemsSource="{Binding Listnoidung}"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Spacing="10" Padding="10">
+                                
+                                <Entry Text="{Binding NoiDung, Mode=TwoWay}"
+                                       Placeholder="Nhập nội dung sửa chữa" />
+
+                                <Label Text="Vật tư phụ tùng:" />
+                                <Picker Title="Chọn vật tư phụ tùng"
+                                        ItemsSource="{Binding Listvattuphutung}"
+                                        ItemDisplayBinding="{Binding Name}"
+                                        SelectedItem="{Binding VatTuPhuTung, Mode=TwoWay}" />
+
+                                <Label Text="Số lượng:" />
+                                <Entry Text="{Binding SoLuong, Mode=TwoWay}"
+                                       Keyboard="Numeric"
+                                       Placeholder="Nhập số lượng" />
+
+                                <Label Text="Đơn giá:" />
+                                <Label Text="{Binding DonGia, StringFormat='{0:C}'}" />
+
+                                <Label Text="Tiền công:" />
+                                <Picker Title="Chọn tiền công"
+                                        ItemsSource="{Binding Listtiencong}"
+                                        ItemDisplayBinding="{Binding Name}"
+                                        SelectedItem="{Binding TienCong, Mode=TwoWay}" />
+
+                                <Label Text="Thành tiền:" />
+                                <Label Text="{Binding ThanhTien, StringFormat='{0:C}'}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="+ Thêm nội dung sửa chữa"
+                    Command="{Binding ThemNoiDungSuaChuaCommand}"
+                    HorizontalOptions="Start" />
+
+            <Button Text="Lưu phiếu sửa chữa"
+                    Command="{Binding LuuPhieuSuaChuaCommand}"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    HorizontalOptions="Center" />
+            
+            <Button Text="Quay lại"
+                Command="{Binding BackToMainPageCommand}"
+                BackgroundColor="DarkGrey"
+                TextColor="Black"
+                HorizontalOptions="Center" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

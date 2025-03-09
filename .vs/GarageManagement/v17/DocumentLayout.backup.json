@@ -3,20 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\viewmodels\\loginpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\viewmodels\\loginpageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\viewmodels\\tiepnhanxepageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\viewmodels\\tiepnhanxepageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\viewmodels\\taophieusuachuapageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\viewmodels\\taophieusuachuapageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\services\\authenticationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\pages\\nhansumainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\pages\\nhansumainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|c:\\users\\minh quang\\source\\repos\\garagemanagement\\garagemanagement\\pages\\taophieusuachuapage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D557B68A-36DE-4523-AD18-F4DEC410E42C}|GarageManagement\\GarageManagement.csproj|solutionrelative:garagemanagement\\pages\\taophieusuachuapage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,52 +30,42 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AppShell.xaml",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\AppShell.xaml",
-              "RelativeDocumentMoniker": "GarageManagement\\AppShell.xaml",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\AppShell.xaml",
-              "RelativeToolTip": "GarageManagement\\AppShell.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-06T16:42:00.723Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LoginPageViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\LoginPageViewModel.cs",
-              "RelativeDocumentMoniker": "GarageManagement\\ViewModels\\LoginPageViewModel.cs",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\LoginPageViewModel.cs",
-              "RelativeToolTip": "GarageManagement\\ViewModels\\LoginPageViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA1AAAAAAAAAA==",
+              "Title": "TiepNhanXePageViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\TiepNhanXePageViewModel.cs",
+              "RelativeDocumentMoniker": "GarageManagement\\ViewModels\\TiepNhanXePageViewModel.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\TiepNhanXePageViewModel.cs",
+              "RelativeToolTip": "GarageManagement\\ViewModels\\TiepNhanXePageViewModel.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAD4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T16:11:45.675Z",
+              "WhenOpened": "2025-03-09T17:33:41.308Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "AuthenticationService.cs",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Services\\AuthenticationService.cs",
-              "RelativeDocumentMoniker": "GarageManagement\\Services\\AuthenticationService.cs",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Services\\AuthenticationService.cs",
-              "RelativeToolTip": "GarageManagement\\Services\\AuthenticationService.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAADUAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T15:55:48.806Z"
+              "Title": "TaoPhieuSuaChuaPage.xaml",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Pages\\TaoPhieuSuaChuaPage.xaml",
+              "RelativeDocumentMoniker": "GarageManagement\\Pages\\TaoPhieuSuaChuaPage.xaml",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Pages\\TaoPhieuSuaChuaPage.xaml",
+              "RelativeToolTip": "GarageManagement\\Pages\\TaoPhieuSuaChuaPage.xaml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAwDoAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-09T17:14:48.307Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NhanSuMainPage.xaml",
-              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Pages\\NhanSuMainPage.xaml",
-              "RelativeDocumentMoniker": "GarageManagement\\Pages\\NhanSuMainPage.xaml",
-              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\Pages\\NhanSuMainPage.xaml",
-              "RelativeToolTip": "GarageManagement\\Pages\\NhanSuMainPage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-06T15:49:07.487Z"
+              "DocumentIndex": 1,
+              "Title": "TaoPhieuSuaChuaPageViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\TaoPhieuSuaChuaPageViewModel.cs",
+              "RelativeDocumentMoniker": "GarageManagement\\ViewModels\\TaoPhieuSuaChuaPageViewModel.cs",
+              "ToolTip": "C:\\Users\\MINH QUANG\\source\\repos\\GarageManagement\\GarageManagement\\ViewModels\\TaoPhieuSuaChuaPageViewModel.cs",
+              "RelativeToolTip": "GarageManagement\\ViewModels\\TaoPhieuSuaChuaPageViewModel.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAwDkAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-09T16:30:10.946Z",
+              "EditorCaption": ""
             }
           ]
         }

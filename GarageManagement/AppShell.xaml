@@ -20,5 +20,13 @@
         Title="Home"
         ContentTemplate="{DataTemplate page:NhanSuMainPage}"
         Route="MemberMainPage"/>
+    <ShellContent 
+        Title="Tiếp Nhận Xe"
+        ContentTemplate="{DataTemplate page:TiepNhanXePage}"
+        Route="TiepNhanXePage"/>
+    <ShellContent
+        Title="Tạo Phiếu Sửa Chữa"
+        ContentTemplate="{DataTemplate page:TaoPhieuSuaChuaPage}"
+        Route="TaoPhieuSuaChuaPage"/>
 
 </Shell>
