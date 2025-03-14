@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.TiepNhanXePage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Tên Chủ Xe" FontSize="Medium"/>
+            <Entry x:Name="txtTenChuXe" Placeholder="Nhập tên chủ xe" Text="{Binding Tenchuxe, Mode=TwoWay}"/>
+            
+            <Label Text="Tên Xe" FontSize="Medium"/>
+            <Entry x:Name="txtTenXe" Placeholder="Nhập tên xe" Text="{Binding Tenxe, Mode=TwoWay}"/>
+            
+            <Label Text="Biển Số" FontSize="Medium"/>
+            <Entry x:Name="txtBienSo" Placeholder="Nhập biển số xe" Text="{Binding Bienso, Mode=TwoWay}"/>
+            
+            <Label Text="Hiệu Xe" FontSize="Medium"/>
+            <Picker x:Name="CarListView"
+              ItemsSource="{Binding Listmodel}"
+              SelectedItem="{Binding Selectedmodel}"
+              ItemDisplayBinding="{Binding TenHieuXe}"
+              HorizontalOptions="Fill"
+              VerticalOptions="Start"/>
+
+            <Label Text="Địa Chỉ" FontSize="Medium"/>
+            <Entry x:Name="txtDiaChi" Placeholder="Nhập địa chỉ chủ xe" Text="{Binding Diachi, Mode=TwoWay}"/>
+            
+            <Label Text="Điện Thoại" FontSize="Medium"/>
+            <Entry x:Name="txtDienThoai" Placeholder="Nhập số điện thoại" Keyboard="Telephone" Text="{Binding Dienthoai, Mode=TwoWay}"/>
+            
+            <Label Text="Ngày Tiếp Nhận" FontSize="Medium"/>
+            <DatePicker x:Name="dpNgayTiepNhan" Date="{Binding Ngaytiepnhan, Mode=TwoWay}"/>
+
+            <Button Text="Lưu" BackgroundColor="Blue" TextColor="White" Command="{Binding AddNewCarRecordCommand, Mode=TwoWay}"/>
+            <Button Text="Quay Lại" BackgroundColor="Gray" TextColor="Black" Command="{Binding BackCommand}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

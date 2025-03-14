@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:service="clr-namespace:GarageManagement.Services"
+             xmlns:viewmodel="clr-namespace:GarageManagement.ViewModels"
+             x:Class="GarageManagement.Pages.QuanLiXePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <service:AvailabilityToColorConverterServive x:Key="AvailabilityToColorConverter"/>
+            <Style x:Key="HeaderLabelStyle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="#FFFFFF" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+            <Style x:Key="DataLabelStyle" TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#2196F3" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="10,5" />
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Grid BackgroundColor="#1976D2" Padding="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Text="ID" Grid.Column="0" Style="{StaticResource HeaderLabelStyle}" />
+                <Label Text="Tên Xe" Grid.Column="1" Style="{StaticResource HeaderLabelStyle}" />
+                <Label Text="Model" Grid.Column="2" Style="{StaticResource HeaderLabelStyle}" />
+                <Label Text="Biển Số" Grid.Column="3" Style="{StaticResource HeaderLabelStyle}" />
+                <Label Text="Chủ Xe" Grid.Column="4" Style="{StaticResource HeaderLabelStyle}" />
+                <Label Text="Tiền Nợ" Grid.Column="5" Style="{StaticResource HeaderLabelStyle}" />
+                <Label Text="Hành động" Grid.Column="6" Style="{StaticResource HeaderLabelStyle}" />
+            </Grid>
+            <CollectionView ItemsSource="{Binding Listcar}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="{Binding IsAvailable, Converter={StaticResource AvailabilityToColorConverter}}"
+                              Margin="0,2"
+                              Padding="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="{Binding Id}" Grid.Column="0" Style="{StaticResource DataLabelStyle}" />
+                            <Label Text="{Binding Name}" Grid.Column="1" Style="{StaticResource DataLabelStyle}" />
+                            <Label Text="{Binding Model}" Grid.Column="2" Style="{StaticResource DataLabelStyle}" />
+                            <Label Text="{Binding BienSo}" Grid.Column="3" Style="{StaticResource DataLabelStyle}" />
+                            <Label Text="{Binding TenChuXe}" Grid.Column="4" Style="{StaticResource DataLabelStyle}" />
+                            <Label Text="{Binding TienNoCuaChuXe}" Grid.Column="5" Style="{StaticResource DataLabelStyle}" />
+
+                            <Button Text="Chi tiết"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.GoToChiTietXePageCommand}"
+                                    CommandParameter="{Binding Id}"
+                                    Grid.Column="6"
+                                    Style="{StaticResource ButtonStyle}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="QUAY LẠI"
+                Command="{Binding GoBackCommand}"
+                Style="{StaticResource ButtonStyle}"
+                HorizontalOptions="Center"
+                Margin="0,20,0,0" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

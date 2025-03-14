@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.ThuTienPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Họ và Tên Chủ Xe:" FontSize="16"/>
+            <Picker ItemsSource="{Binding ListChuXe}"
+                    SelectedItem="{Binding SelectedChuXe}"
+                    SelectedIndexChanged="OnChuXeChanged"
+                    Title="Chọn chủ xe"
+                    ItemDisplayBinding="{Binding Fullname}"
+                    FontSize="16"/>
+
+            <Label Text="Biển Số Xe:" FontSize="16"/>
+            <Picker ItemsSource="{Binding ListBienSo}"
+                    SelectedItem="{Binding SelectedBienSo}"
+                    ItemDisplayBinding="{Binding BienSo}"
+                    Title="Chọn biển số xe"
+                    FontSize="16"/>
+
+            <Label Text="Số Điện Thoại:" FontSize="16"/>
+            <Entry Text="{Binding DienThoai, Mode=OneWay}"
+                   FontSize="16"/>
+
+            <Label Text="Email:" FontSize="16"/>
+            <Entry Text="{Binding Email, Mode=TwoWay}"
+                   Placeholder="Nhập email"
+                   FontSize="16"/>
+
+            <Label Text="Ngày Thu Tiền:" FontSize="16"/>
+            <DatePicker Date="{Binding NgayThuTien}" FontSize="16"/>
+
+            <Label Text="Số Tiền Thu:" FontSize="16"/>
+            <Entry Text="{Binding SoTienThu}"
+                   Placeholder="Nhập số tiền"
+                   Keyboard="Numeric"
+                   FontSize="16"/>
+
+            <Button Text="Xác Nhận"
+                    Command="{Binding XacNhanCommand}"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    FontSize="18"/>
+
+            <Button
+                Text="QUAY LAI"
+                Command="{Binding GoBackCommand}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

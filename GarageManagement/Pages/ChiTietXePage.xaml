@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.ChiTietXePage"
+             Title="ChiTietXePage">
+    <ContentPage.Resources>
+        <Style x:Key="LabelTitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="#666666" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+
+        <Style x:Key="LabelValueStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="#212121" />
+        </Style>
+
+        <Style x:Key="BoxViewStyle" TargetType="BoxView">
+            <Setter Property="HeightRequest" Value="1" />
+            <Setter Property="Color" Value="#E0E0E0" />
+            <Setter Property="Margin" Value="0,10" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            <Frame BackgroundColor="#FFFFFF"
+                   CornerRadius="10"
+                   Padding="15"
+                   HasShadow="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0"
+                           Text="{Binding Name}"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           TextColor="#1976D2"
+                           HorizontalOptions="Center" />
+
+                    <Label Grid.Row="1"
+                           Text="{Binding Model}"
+                           FontSize="16"
+                           TextColor="#757575"
+                           HorizontalOptions="Center" />
+                </Grid>
+            </Frame>
+
+            <Frame BackgroundColor="#FFFFFF"
+                   CornerRadius="10"
+                   Padding="15"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <VerticalStackLayout>
+                        <Label Text="Biển số"
+                               Style="{StaticResource LabelTitleStyle}" />
+                        <Label Text="{Binding BienSo}"
+                               Style="{StaticResource LabelValueStyle}" />
+                    </VerticalStackLayout>
+
+                    <BoxView Style="{StaticResource BoxViewStyle}" />
+
+                    <VerticalStackLayout>
+                        <Label Text="Tên chủ xe"
+                               Style="{StaticResource LabelTitleStyle}" />
+                        <Label Text="{Binding TenChuXe}"
+                               Style="{StaticResource LabelValueStyle}" />
+                    </VerticalStackLayout>
+
+                    <BoxView Style="{StaticResource BoxViewStyle}" />
+
+                    <VerticalStackLayout>
+                        <Label Text="Điện thoại"
+                               Style="{StaticResource LabelTitleStyle}" />
+                        <Label Text="{Binding DienThoai}"
+                               Style="{StaticResource LabelValueStyle}" />
+                    </VerticalStackLayout>
+
+                    <BoxView Style="{StaticResource BoxViewStyle}" />
+
+                    <VerticalStackLayout>
+                        <Label Text="Địa chỉ"
+                               Style="{StaticResource LabelTitleStyle}" />
+                        <Label Text="{Binding DiaChi}"
+                               Style="{StaticResource LabelValueStyle}" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="#FFFFFF"
+                   CornerRadius="10"
+                   Padding="15"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <HorizontalStackLayout>
+                        <Label Text="Trạng thái: "
+                               Style="{StaticResource LabelTitleStyle}" />
+                        <Label Text="{Binding TinhTrang, StringFormat='{}{0}'}"
+                               TextColor="{Binding TinhTrang}"
+                               Style="{StaticResource LabelValueStyle}" />
+                    </HorizontalStackLayout>
+
+                    <BoxView Style="{StaticResource BoxViewStyle}" />
+
+                    <HorizontalStackLayout>
+                        <Label Text="Tiền nợ: "
+                               Style="{StaticResource LabelTitleStyle}" />
+                        <Label Text="{Binding TienNoCuaChuXe, StringFormat='{0:N0} VNĐ'}"
+                               TextColor="#D32F2F"
+                               Style="{StaticResource LabelValueStyle}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+            <Button
+                Text="QUAY LAI"
+                BackgroundColor="Gray"
+                Command="{Binding GoBackCommand}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

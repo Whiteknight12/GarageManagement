@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.LoginPage"
+             Title="LOGIN">
+    <Grid Padding="30" RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Text="Đăng Nhập" FontSize="28" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center"/>
+
+        <Frame Grid.Row="1" CornerRadius="10" Padding="10" BackgroundColor="#333">
+            <StackLayout>
+                <Label Text="Tên đăng nhập" TextColor="White" FontSize="16"/>
+                <Entry x:Name="UsernameEntry" Placeholder="Nhập tên đăng nhập" Text="{Binding Username}" TextColor="White" BackgroundColor="#444" PlaceholderColor="#bbb"/>
+
+                <Label Text="Mật khẩu" TextColor="White" FontSize="16" Margin="0,10,0,0"/>
+                <Entry x:Name="PasswordEntry" Placeholder="Nhập mật khẩu" Text="{Binding Password}" IsPassword="True" TextColor="White" BackgroundColor="#444" PlaceholderColor="#bbb"/>
+            </StackLayout>
+        </Frame>
+
+        <Button Grid.Row="2" Text="Đăng Nhập" FontSize="18" CornerRadius="10" BackgroundColor="#007AFF" TextColor="White" HeightRequest="50" Command="{Binding LoginCommand}"/>
+
+        <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="Center">
+            <Label Text="Chưa có tài khoản? " TextColor="White" FontSize="14"/>
+            <Label Text="Đăng ký ngay" TextColor="#007AFF" FontSize="14" FontAttributes="Bold" GestureRecognizers="{TapGestureRecognizer Tapped=OnRegisterTapped}"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

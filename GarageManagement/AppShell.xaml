@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="GarageManagement.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:GarageManagement"
+    xmlns:page="clr-namespace:GarageManagement.Pages"
+    Shell.FlyoutBehavior="Disabled"
+    Title="GarageManagement">
+
+    <ShellContent
+        Title="LOGIN"
+        ContentTemplate="{DataTemplate page:LoginPage}"
+        Route="LoginPage"/>
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate page:NhanSuMainPage}"
+        Route="MemberMainPage"/>
+    <ShellContent 
+        Title="Tiếp Nhận Xe"
+        ContentTemplate="{DataTemplate page:TiepNhanXePage}"
+        Route="TiepNhanXePage"/>
+    <ShellContent
+        Title="Tạo Phiếu Sửa Chữa"
+        ContentTemplate="{DataTemplate page:TaoPhieuSuaChuaPage}"
+        Route="TaoPhieuSuaChuaPage"/>
+    <ShellContent
+        Title="Quản Lí Xe"
+        ContentTemplate="{DataTemplate page:QuanLiXePage}"
+        Route="QuanLiXePage"/>
+    <ShellContent
+        Title="Chi Tiết Xe"
+        ContentTemplate="{DataTemplate page:ChiTietXePage}"
+        Route="ChiTietXePage"/>
+    <ShellContent
+        Title="Lập Phiếu Thu Tiền"
+        ContentTemplate="{DataTemplate page:ThuTienPage}"
+        Route="ThuTienPage"/>
+
+</Shell>
