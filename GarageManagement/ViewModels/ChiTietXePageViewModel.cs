@@ -2,6 +2,7 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private async Task GoBack()
         {
-            await Shell.Current.GoToAsync("//QuanLiXePage", true);
+            await Shell.Current.GoToAsync($"//{nameof(QuanLiXePage)}", true);
         }
     }
 }
