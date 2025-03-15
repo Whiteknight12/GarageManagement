@@ -32,6 +32,8 @@ namespace WebAPI.Service
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Name, request.Username),
+                    new Claim(JwtRegisteredClaimNames.NameId, useraccount.Id.ToString()),
+                    new Claim(ClaimTypes.Role, useraccount.Role) // Thêm Role vào Claims
                 }),
                 Expires = tokenexpirytimestamp,
                 Issuer = issuer,

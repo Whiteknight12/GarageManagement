@@ -62,7 +62,6 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<JwtService>();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
