@@ -2,6 +2,7 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -58,9 +59,9 @@ namespace GarageManagement.ViewModels
         private async Task GoBack()
         {
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
-            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync("//LoginPage", true);
+            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
             var currentaccount = JsonSerializer.Deserialize<UserAccountSession>(json);
-            if (currentaccount.Role=="Member") await Shell.Current.GoToAsync("//MemberMainPage", true);
+            if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
         [RelayCommand]
         private async Task XacNhan()
@@ -135,9 +136,9 @@ namespace GarageManagement.ViewModels
             await _carservice.Update(selectedBienSo);
             await _userservice.Update(selectedChuXe);
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
-            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync("//LoginPage", true);
+            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
             var currentaccount = JsonSerializer.Deserialize<UserAccountSession>(json);
-            if (currentaccount.Role == "Member") await Shell.Current.GoToAsync("//MemberMainPage", true);
+            if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
     }
 }

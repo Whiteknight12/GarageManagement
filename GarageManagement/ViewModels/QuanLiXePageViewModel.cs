@@ -2,6 +2,7 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -53,15 +54,15 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private async Task GoToChiTietXePage(int parameter)
         {
-            await Shell.Current.GoToAsync($"//ChiTietXePage?parameterID={parameter}", true);
+            await Shell.Current.GoToAsync($"//{nameof(ChiTietXePage)}?parameterID={parameter}", true);
         }
         [RelayCommand]
         private async Task GoBack()
         {
             var json=await SecureStorage.Default.GetAsync(STORAGE_KEY);
-            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync("//LoginPage");
+            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
             var currentaccount = JsonSerializer.Deserialize<UserAccountSession>(json);
-            if (currentaccount.Role=="Member") await Shell.Current.GoToAsync("//MemberMainPage", true);
+            if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
     }
 }

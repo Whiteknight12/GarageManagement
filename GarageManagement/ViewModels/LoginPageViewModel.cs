@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using GarageManagement.Services;
 
 namespace GarageManagement.ViewModels
@@ -24,9 +25,9 @@ namespace GarageManagement.ViewModels
             if (isauthenticated && _authenticationservice.CurrentRole is not null)
             {
                 if (_authenticationservice.CurrentRole=="Admin")
-                    await Shell.Current.GoToAsync("//MainPage");
+                    await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
                 else if (_authenticationservice.CurrentRole=="Member") 
-                    await Shell.Current.GoToAsync("//MemberMainPage");
+                    await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}");
             }
             else await Shell.Current.DisplayAlert("Login Failed", "Invalid Username or Password", "OK");
         }

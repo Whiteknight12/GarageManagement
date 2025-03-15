@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,22 +13,22 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public async void GotoTiepNhanXePage()
         {
-            await Shell.Current.GoToAsync("//TiepNhanXePage", true);
+            await Shell.Current.GoToAsync($"//{nameof(TiepNhanXePage)}", true);
         }
         [RelayCommand]
         public async void GotoPhieuSuaChuaPage()
         {
-            await Shell.Current.GoToAsync("//TaoPhieuSuaChuaPage", true);
+            await Shell.Current.GoToAsync($"//{nameof(TaoPhieuSuaChuaPage)}", true);
         }
         [RelayCommand]
         public async void GotoQuanLiXePage()
         {
-            await Shell.Current.GoToAsync("//QuanLiXePage", true);
+            await Shell.Current.GoToAsync($"//{nameof(QuanLiXePage)}", true);
         }
         [RelayCommand]
         public async void GoToThuTienPage()
         {
-            await Shell.Current.GoToAsync("//ThuTienPage", true);
+            await Shell.Current.GoToAsync($"//{nameof(ThuTienPage)}", true);
         }
     }
 }
