@@ -19,7 +19,7 @@
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate page:NhanSuMainPage}"
-        Route="MemberMainPage"/>
+        Route="NhanSuMainPage"/>
     <ShellContent 
         Title="Tiếp Nhận Xe"
         ContentTemplate="{DataTemplate page:TiepNhanXePage}"
