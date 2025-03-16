@@ -8,49 +8,17 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NoiDungPhieuSuaChuaController : ControllerBase
+    public class NoiDungPhieuSuaChuaController : BaseController<NoiDungPhieuSuaChua>
     {
-        private readonly ApplicationDbContext _db;
-        public NoiDungPhieuSuaChuaController(ApplicationDbContext db)
+        ApplicationDbContext _applicationDbContext;
+        public NoiDungPhieuSuaChuaController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
-            _db = db;
+            _applicationDbContext = applicationDbContext;
         }
-        [HttpGet]
-        public IEnumerable<NoiDungPhieuSuaChua> GetAll()
+        [HttpGet("GetListByPhieuSuaChuaID/{ID}")]
+        public async Task<ActionResult<IEnumerable<NoiDungPhieuSuaChua>>> GetListByPhieuSuaChuaID(int ID)
         {
-            return _db.noiDungPhieuSuaChuas;
-        }
-        [HttpGet("{id}")]
-        public async Task<NoiDungPhieuSuaChua> GetByID(int id)
-        {
-            return await _db.noiDungPhieuSuaChuas.Where(u => u.NoiDungID== id).FirstOrDefaultAsync();
-        }
-        [HttpPost]
-        public async Task<ActionResult> Create(NoiDungPhieuSuaChua entity)
-        {
-            await _db.AddAsync(entity);
-            await _db.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetByID), new { id = entity.NoiDungID }, entity);
-        }
-        [HttpPut]
-        public async Task<ActionResult> Update(NoiDungPhieuSuaChua entity)
-        {
-            _db.Update(entity);
-            await _db.SaveChangesAsync();
-            return Ok();
-        }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var deleted = await _db.noiDungPhieuSuaChuas.Where(u => u.NoiDungID == id).FirstOrDefaultAsync();
-            _db.noiDungPhieuSuaChuas.Remove(deleted);
-            await _db.SaveChangesAsync();
-            return Ok();
-        }
-        [HttpGet("GetListThroughPhieuSuaChuaID/{ID}")]
-        public async Task<ActionResult<IEnumerable<NoiDungPhieuSuaChua>>> GetListThroughPhieuSuaChuaID(int ID)
-        {
-            var list = await _db.noiDungPhieuSuaChuas.Where(u => u.PhieuSuaChuaID == ID).ToListAsync();
+            var list = await _applicationDbContext.noiDungPhieuSuaChuas.Where(u => u.PhieuSuaChuaID == ID).ToListAsync();
             if (list is not null) return Ok(list);
             return NotFound();
         }

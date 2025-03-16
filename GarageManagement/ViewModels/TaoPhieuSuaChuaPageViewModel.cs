@@ -173,7 +173,7 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Error", "Khong tim thay xe co bien so tren", "OK");
                 return;
             }
-            var checkuser = await _userservice.GetThroughtSpecialRoute($"GetThroughPhoneNumber/{checkcar.DienThoai}");
+            var checkuser = await _userservice.GetThroughtSpecialRoute($"GetByPhoneNumber/{checkcar.DienThoai}");
             if (checkuser is null)
             {
                 await Shell.Current.DisplayAlert("Error", "Khong tim chu xe cua xe co bien so tren", "OK");

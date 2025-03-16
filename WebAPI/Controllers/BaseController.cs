@@ -40,15 +40,26 @@ namespace WebAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = GetEntityId(entity) }, entity);
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody] T entity)
+        [HttpPut]
+        public async Task<ActionResult> Update([FromBody] T entity)
         {
-            var existingEntity = await _dbSet.FindAsync(id);
-            if (existingEntity == null) return NotFound();
+            var id = GetEntityId(entity);
 
-            _applicationDbContext.Entry(existingEntity).CurrentValues.SetValues(entity);
+            if (id == null)
+            {
+                return BadRequest("Entity must contain an Id.");
+            }
+
+            var existingEntity = await _dbSet.FindAsync(id);
+            if (existingEntity == null)
+            {
+                return NotFound($"Entity with ID {id} not found.");
+            }
+
+            _dbSet.Update(entity);
             await _applicationDbContext.SaveChangesAsync();
-            return NoContent();
+
+            return Ok(entity);
         }
 
         [HttpDelete("{id}")]

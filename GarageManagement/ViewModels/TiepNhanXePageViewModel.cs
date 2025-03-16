@@ -153,7 +153,7 @@ namespace GarageManagement.ViewModels
                 checkcar.IsAvailable = true;
                 await _carservice.Update(checkcar);
             }
-            var checkuser = await _userservice.GetThroughtSpecialRoute($"GetThroughPhoneNumber/{dienthoai}");
+            var checkuser = await _userservice.GetThroughtSpecialRoute($"GetByPhoneNumber/{dienthoai}");
             if (checkuser is null) await _userservice.Create(new User
             {
                 Fullname=tenchuxe,

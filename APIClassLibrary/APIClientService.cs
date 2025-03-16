@@ -26,9 +26,9 @@ namespace APIClassLibrary
         {
             return await _httpclient.GetFromJsonAsync<T>($"/api/{_endpoint}/{id}");
         }
-        public async Task Update(int id, T entity)
+        public async Task Update(T entity)
         {
-            await _httpclient.PutAsJsonAsync($"/api/{_endpoint}/{id}", entity);
+            await _httpclient.PutAsJsonAsync($"/api/{_endpoint}", entity);
         }
         public async Task<T> Create(T entity)
         {

@@ -41,8 +41,8 @@ namespace GarageManagement.ViewModels
                 {
                     if (item.TienNoCuaChuXe is null)
                     {
-                        var phieusuachua = _phieuservice.GetThroughtSpecialRoute($"GetThroughBienSoXe/{item.BienSo}");
-                        List<NoiDungPhieuSuaChua> listnoidung = await _noidungphieuservice.GetListOnSpecialRequirement($"GetListThroughPhieuSuaChuaID/{phieusuachua.Id}");
+                        var phieusuachua = _phieuservice.GetThroughtSpecialRoute($"GetByBienSoXe/{item.BienSo}");
+                        List<NoiDungPhieuSuaChua> listnoidung = await _noidungphieuservice.GetListOnSpecialRequirement($"GetListByPhieuSuaChuaID/{phieusuachua.Id}");
                         item.TienNoCuaChuXe = 0;
                         item.TienNoCuaChuXe = listnoidung.Sum(u => u.ThanhTien);
                         await _carservice.Update(item);

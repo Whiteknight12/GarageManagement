@@ -8,50 +8,20 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PhieuSuaChuaController : ControllerBase
+    public class PhieuSuaChuaController : BaseController<PhieuSuaChua>
     {
-        private readonly ApplicationDbContext _db;
-        public PhieuSuaChuaController(ApplicationDbContext db)
+        ApplicationDbContext _applicationDbContext; 
+        public PhieuSuaChuaController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
-            _db = db;
+            _applicationDbContext = applicationDbContext;
         }
-        [HttpGet]
-        public IEnumerable<PhieuSuaChua> GetAll()
+
+        [HttpGet("GetByBienSoXe/{bienso}")]
+        public async Task<ActionResult<PhieuSuaChua>> GetByBienSoXe(string bienso)
         {
-            return _db.phieuSuaChuas;
-        }
-        [HttpGet("{id}")]
-        public async Task<PhieuSuaChua> GetByID(int id)
-        {
-            return await _db.phieuSuaChuas.Where(u => u.PhieuSuaChuaID == id).FirstOrDefaultAsync();
-        }
-        [HttpPost]
-        public async Task<ActionResult> Create(PhieuSuaChua entity)
-        {
-            await _db.AddAsync(entity);
-            await _db.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetByID), new { id = entity.PhieuSuaChuaID }, entity);
-        }
-        [HttpPut]
-        public async Task<ActionResult> Update(PhieuSuaChua entity)
-        {
-            _db.Update(entity);
-            await _db.SaveChangesAsync();
-            return Ok();
-        }
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var deleted = await _db.phieuSuaChuas.Where(u => u.PhieuSuaChuaID == id).FirstOrDefaultAsync();
-            _db.phieuSuaChuas.Remove(deleted);
-            await _db.SaveChangesAsync();
-            return Ok();
-        }
-        [HttpGet("GetThroughBienSoXe/{bienso}")]
-        public async Task<ActionResult<PhieuSuaChua>> GetThroughBienSoXe(string bienso)
-        {
-            var obj = await _db.phieuSuaChuas.Where(u => u.BienSoXe == bienso).FirstOrDefaultAsync();
+            var obj = await _applicationDbContext.phieuSuaChuas.Where(u => u.BienSoXe == bienso).FirstOrDefaultAsync(); 
             return Ok(new { data = obj });
         }
+
     }
 }
