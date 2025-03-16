@@ -28,16 +28,16 @@ public static class MauiProgram
 #else
     baseaddress = "http://192.168.1.100:5142/"; 
 #endif
-        builder.Services.AddAPIClientService<Car>(x => x.BaseAddress = baseaddress, "Car");
-		builder.Services.AddAPIClientService<CarRecord>(x => x.BaseAddress = baseaddress, "CarRecord");
-		builder.Services.AddAPIClientService<RuleVariable>(x => x.BaseAddress = baseaddress, "RuleVariable");
-		builder.Services.AddAPIClientService<HieuXe>(x => x.BaseAddress = baseaddress, "HieuXe");
-		builder.Services.AddAPIClientService<TienCong>(x => x.BaseAddress = baseaddress, "TienCong");
-		builder.Services.AddAPIClientService<PhieuSuaChua>(x => x.BaseAddress = baseaddress, "PhieuSuaChua");
-		builder.Services.AddAPIClientService<NoiDungPhieuSuaChua>(x => x.BaseAddress = baseaddress, "NoiDungPhieuSuaChua");
-		builder.Services.AddAPIClientService<VatTuPhuTung>(x => x.BaseAddress = baseaddress, "VatTuPhuTung");
-		builder.Services.AddAPIClientService<User>(x => x.BaseAddress = baseaddress, "User");
-		builder.Services.AddAPIClientService<PhieuThuTien>(x => x.BaseAddress = baseaddress, "PhieuThuTien"); 
+        builder.Services.AddAPIClientService<Car>(x => x.BaseAddress = baseaddress, $"{nameof(Car)}");
+        builder.Services.AddAPIClientService<CarRecord>(x => x.BaseAddress = baseaddress, $"{nameof(CarRecord)}");
+        builder.Services.AddAPIClientService<RuleVariable>(x => x.BaseAddress = baseaddress, $"{nameof(RuleVariable)}");
+        builder.Services.AddAPIClientService<HieuXe>(x => x.BaseAddress = baseaddress, $"{nameof(HieuXe)}");
+        builder.Services.AddAPIClientService<TienCong>(x => x.BaseAddress = baseaddress, $"{nameof(TienCong)}");
+        builder.Services.AddAPIClientService<PhieuSuaChua>(x => x.BaseAddress = baseaddress, $"{nameof(PhieuSuaChua)}");
+        builder.Services.AddAPIClientService<NoiDungPhieuSuaChua>(x => x.BaseAddress = baseaddress, $"{nameof(NoiDungPhieuSuaChua)}");
+        builder.Services.AddAPIClientService<VatTuPhuTung>(x => x.BaseAddress = baseaddress, $"{nameof(VatTuPhuTung)}");
+        builder.Services.AddAPIClientService<User>(x => x.BaseAddress = baseaddress, $"{nameof(User)}");
+        builder.Services.AddAPIClientService<PhieuThuTien>(x => x.BaseAddress = baseaddress, $"{nameof(PhieuThuTien)}");
 
 		builder.Services.AddScoped<AuthenticationService>(provider=>
 		{

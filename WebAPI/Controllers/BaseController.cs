@@ -62,7 +62,6 @@ namespace WebAPI.Controllers
             return NoContent();
         }
 
-        // Helper to extract the primary key (Id)
         private object GetEntityId(T entity)
         {
             var property = typeof(T).GetProperty("Id") ?? typeof(T).GetProperty($"{typeof(T).Name}ID");
