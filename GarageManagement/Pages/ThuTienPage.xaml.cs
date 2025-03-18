@@ -19,7 +19,7 @@ public partial class ThuTienPage : ContentPage
 	private async void OnChuXeChanged(object sender, EventArgs e)
 	{
 		var sdt = _viewmodel.SelectedChuXe.PhoneNumber;
-		var list = await _carservice.GetListOnSpecialRequirement($"GetListThroughPhoneNumber/{sdt}");
+		var list = await _carservice.GetListOnSpecialRequirement($"GetListByPhoneNumber/{sdt}");
 		if (list is not null)
 		{
 			_viewmodel.ListBienSo.Clear();
