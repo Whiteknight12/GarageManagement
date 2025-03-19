@@ -22,6 +22,12 @@ namespace WebAPI.Controllers
             var obj = await _applicationDbContext.phieuSuaChuas.Where(u => u.BienSoXe == bienso).FirstOrDefaultAsync(); 
             return Ok(new { data = obj });
         }
-
+        [HttpGet("GetListByBienSoXe/{bienso}")]
+        public async Task<ActionResult<IEnumerable<PhieuSuaChua>>> GetListByBienSoXe(string bienso)
+        {
+            var list=await _applicationDbContext.phieuSuaChuas.Where(u=>u.BienSoXe==bienso).ToListAsync();
+            if (list is not null) return Ok(list);
+            return NotFound();
+        }
     }
 }

@@ -19,7 +19,7 @@
             <Button Grid.Row="0" Grid.Column="1" Text="Lập phiếu sửa chữa" FontSize="16" CornerRadius="10" BackgroundColor="#28A745" TextColor="White" HeightRequest="60" Command="{Binding GotoPhieuSuaChuaPageCommand}"/>
             <Button Grid.Row="1" Grid.Column="0" Text="Quản lí danh sách xe" FontSize="16" CornerRadius="10" BackgroundColor="#FFC107" TextColor="Black" HeightRequest="60" Command="{Binding GotoQuanLiXePageCommand}"/>
             <Button Grid.Row="1" Grid.Column="1" Text="Lập phiếu thu tiền" FontSize="16" CornerRadius="10" BackgroundColor="#DC3545" TextColor="White" HeightRequest="60" Command="{Binding GoToThuTienPageCommand}"/>
-            <Button Grid.Row="2" Grid.Column="0" Text="Lập báo cáo tháng" FontSize="16" CornerRadius="10" BackgroundColor="#17A2B8" TextColor="White" HeightRequest="60"/>
+            <Button Grid.Row="2" Grid.Column="0" Text="Lập báo cáo tháng" FontSize="16" CornerRadius="10" BackgroundColor="#17A2B8" TextColor="White" HeightRequest="60" Command="{Binding GoToBaoCaoDoanhSoPageCommand}"/>
             <Button Grid.Row="2" Grid.Column="1" Text="Thay đổi quy định" FontSize="16" CornerRadius="10" BackgroundColor="#6C757D" TextColor="White" HeightRequest="60"/>
         </Grid>
     </VerticalStackLayout>

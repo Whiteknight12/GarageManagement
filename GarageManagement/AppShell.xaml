@@ -40,5 +40,9 @@
         Title="Lập Phiếu Thu Tiền"
         ContentTemplate="{DataTemplate page:ThuTienPage}"
         Route="ThuTienPage"/>
+    <ShellContent
+        Title="Báo Cáo Doanh Số"
+        ContentTemplate="{DataTemplate page:BaoCaoDoanhSoPage}"
+        Route="BaoCaoDoanhSoPage"/>
 
 </Shell>

@@ -30,5 +30,10 @@ namespace GarageManagement.ViewModels
         {
             await Shell.Current.GoToAsync($"//{nameof(ThuTienPage)}", true);
         }
+        [RelayCommand]
+        public async void GoToBaoCaoDoanhSoPage()
+        {
+            await Shell.Current.GoToAsync($"//{nameof(BaoCaoDoanhSoPage)}", true);
+        }
     }
 }

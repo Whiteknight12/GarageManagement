@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.BaoCaoDoanhSoPage">
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+            <Picker x:Name="MonthPicker" Title="Chọn tháng"
+                ItemsSource="{Binding Months}"
+                SelectedItem="{Binding SelectedMonth, Mode=TwoWay}" 
+                SelectedIndexChanged="OnMonthChanged"
+                WidthRequest="150" />
+
+            <Picker x:Name="YearPicker" Title="Chọn năm"
+                ItemsSource="{Binding Years, Mode=TwoWay}"
+                SelectedItem="{Binding SelectedYear}" 
+                SelectedIndexChanged="OnYearChanged"
+                WidthRequest="150" />
+        </HorizontalStackLayout>
+
+        <Frame BackgroundColor="#EFEFEF" Padding="10" CornerRadius="10" HasShadow="True">
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Tổng doanh số:" FontSize="20" FontAttributes="Bold" />
+                <Label Text="{Binding TongDoanhSo}" FontSize="20" TextColor="Green" FontAttributes="Bold" />
+            </HorizontalStackLayout>
+        </Frame>
+
+        <Frame BorderColor="Gray" Padding="0" CornerRadius="10">
+            <CollectionView ItemsSource="{Binding BaoCaoList, Mode=TwoWay}" Margin="0">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="2*, *, *, *" Padding="10" BackgroundColor="#D3D3D3">
+                        <Label Text="Hiệu Xe" Grid.Column="0" FontAttributes="Bold" />
+                        <Label Text="Số Lượt Sửa" Grid.Column="1" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                        <Label Text="Thành Tiền" Grid.Column="2" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                        <Label Text="Tỉ Lệ (%)" Grid.Column="3" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+                    </Grid>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="2*, *, *, *" Padding="10" BackgroundColor="{Binding AlternatingColor}">
+                            <Label Text="{Binding HieuXe}" Grid.Column="0" />
+                            <Label Text="{Binding SoLuotSua}" Grid.Column="1" HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding ThanhTien}" Grid.Column="2" HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding TiLe}" Grid.Column="3" HorizontalTextAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Frame>
+
+        <Button Text="QUAY LẠI" Command="{Binding GoBackCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>
