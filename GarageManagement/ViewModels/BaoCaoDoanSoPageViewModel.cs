@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
@@ -33,6 +34,7 @@ namespace GarageManagement.ViewModels
         private List<PhieuThuTien> listphieuthutien = new List<PhieuThuTien>();
         private readonly APIClientService<PhieuSuaChua> _phieusuachuaservce;
         private readonly APIClientService<NoiDungPhieuSuaChua> _noidungphieusuachuaservice;
+        private string STORAGE_KEY = "user-account-status";
 
         public BaoCaoDoanSoPageViewModel(APIClientService<PhieuThuTien> phieuthutienservice,
             APIClientService<Car> carservice,
@@ -139,7 +141,10 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private async Task GoBack()
         {
-            await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
+            var json = await SecureStorage.GetAsync(STORAGE_KEY);
+            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
+            var currentaccount=JsonSerializer.Deserialize<UserAccountSession>(json);
+            if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
     }
     public class BaoCaoDoanhThuVM
