@@ -37,28 +37,14 @@ namespace WebAPI.Controllers
         {
             await _dbSet.AddAsync(entity);
             await _applicationDbContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetById), new { id = GetEntityId(entity) }, entity);
+            return Ok(entity);
         }
 
         [HttpPut]
         public async Task<ActionResult> Update([FromBody] T entity)
         {
-            var id = GetEntityId(entity);
-
-            if (id == null)
-            {
-                return BadRequest("Entity must contain an Id.");
-            }
-
-            var existingEntity = await _dbSet.FindAsync(id);
-            if (existingEntity == null)
-            {
-                return NotFound($"Entity with ID {id} not found.");
-            }
-
             _dbSet.Update(entity);
             await _applicationDbContext.SaveChangesAsync();
-
             return Ok(entity);
         }
 

@@ -47,11 +47,12 @@ namespace GarageManagement.ViewModels
             _phieuthuservice = phieuthuservice;
             ngayThuTien=DateTime.Now;
         }
-        private async Task LoadAsync()
+        public async Task LoadAsync()
         {
             var list = await _userservice.GetListOnSpecialRequirement($"GetListThroughRole/{role}");
             if (list is not null)
             {
+                listChuXe.Clear();
                 foreach (var item in list) ListChuXe.Add(item);
             }
         }

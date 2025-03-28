@@ -14,4 +14,10 @@ public partial class TiepNhanXePage : ContentPage
 		InitializeComponent();
 		BindingContext = new TiepNhanXePageViewModel(service, ruleservice, carservice, hieuxeservice, userservice);
 	}
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+		if (BindingContext is TiepNhanXePageViewModel viewmodel) viewmodel.LoadAsync();
+    }
 }

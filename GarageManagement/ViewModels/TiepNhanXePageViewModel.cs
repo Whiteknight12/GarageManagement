@@ -56,7 +56,7 @@ namespace GarageManagement.ViewModels
             LoadAsync();
         }
 
-        private async Task LoadAsync()
+        public async Task LoadAsync()
         {
             var list = await _hieuxeservice.GetAll();
             if (list is not null)

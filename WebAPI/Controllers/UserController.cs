@@ -16,8 +16,8 @@ namespace WebAPI.Controllers
             _applicationDbContext = applicationDbContext;
         }
 
-        [HttpGet("GetThroughPhoneNumber/{phonenumber}")]
-        public async Task<ActionResult<User>> GetThroughPhoneNumber(string phonenumber)
+        [HttpGet("GetByPhoneNumber/{phonenumber}")]
+        public async Task<ActionResult<User>> GetByPhoneNumber(string phonenumber)
         {
             var user = await _applicationDbContext.users.Where(u => u.PhoneNumber == phonenumber).FirstOrDefaultAsync();
             if (user is not null) return Ok(user);

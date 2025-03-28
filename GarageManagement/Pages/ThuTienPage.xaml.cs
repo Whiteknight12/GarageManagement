@@ -16,6 +16,7 @@ public partial class ThuTienPage : ContentPage
         _carservice = carservice;
 		InitializeComponent();
 	}
+
 	private async void OnChuXeChanged(object sender, EventArgs e)
 	{
 		var sdt = _viewmodel.SelectedChuXe.PhoneNumber;
@@ -28,4 +29,10 @@ public partial class ThuTienPage : ContentPage
 		_viewmodel.DienThoai = sdt;
 		_viewmodel.Email = _viewmodel.SelectedChuXe.Email;
 	}
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+		if (BindingContext is ThuTienPageViewModel vm) vm.LoadAsync();
+    }
 }

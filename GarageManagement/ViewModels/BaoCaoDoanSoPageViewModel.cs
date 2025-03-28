@@ -58,8 +58,7 @@ namespace GarageManagement.ViewModels
             _ = GenerateBaoCao();
         }
 
-        //lay gia tri ngay cua list phieu sua chua 
-        private async Task LoadAsync()
+        public async Task LoadAsync()
         {
             var list=await _phieusuachuaservice.GetAll();
             SortedSet<int> tmp= new SortedSet<int>();
@@ -67,6 +66,7 @@ namespace GarageManagement.ViewModels
             {
                 tmp.Add(item.NgaySuaChua.Value.Year);
             }
+            years.Clear();
             foreach (var item in tmp) years.Add(item);
         }
 

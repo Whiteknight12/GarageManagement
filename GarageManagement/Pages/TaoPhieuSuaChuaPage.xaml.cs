@@ -64,4 +64,10 @@ public partial class TaoPhieuSuaChuaPage : ContentPage
             }
         }
     }
+
+    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    {
+        base.OnNavigatedTo(args);
+        if (BindingContext is TaoPhieuSuaChuaPageViewModel vm) vm.LoadAsync();
+    }
 }

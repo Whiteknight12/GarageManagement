@@ -62,7 +62,7 @@ namespace GarageManagement.ViewModels
             _userservice = userservice;
             _ = LoadAsync();
         }
-        private async Task LoadAsync()
+        public async Task LoadAsync()
         {
             var listcar = await _carservice.GetAll();
             if (listcar is not null)

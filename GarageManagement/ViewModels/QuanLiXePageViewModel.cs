@@ -32,11 +32,12 @@ namespace GarageManagement.ViewModels
             _phieuservice = phieuservice;
             _noidungphieuservice = noidungphieuservice;
         }
-        private async Task LoadAsync()
+        public async Task LoadAsync()
         {
             var list = await _carservice.GetAll();
             if (list is not null)
             {
+                listcar.Clear();
                 foreach (var item in list)
                 {
                     if (item.TienNoCuaChuXe is null)
