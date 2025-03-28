@@ -29,5 +29,12 @@ namespace WebAPI.Controllers
             if (list is not null) return Ok(list);
             return NotFound();
         }
+        [HttpGet("GetListByMonthAndYear/{month}/{year}")]
+        public async Task<ActionResult<IEnumerable<PhieuSuaChua>>> GetListByMonthAndYear(int month, int year)
+        {
+            var list=await _applicationDbContext.phieuSuaChuas.Where(u => u.NgaySuaChua.Value.Month == month && u.NgaySuaChua.Value.Year == year).ToListAsync();
+            if (list is not null) return Ok(list);
+            return NotFound();
+        }
     }
 }

@@ -32,7 +32,8 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<PhieuThuTien> _phieuthutienservice;
         private readonly APIClientService<Car> _carservice;
         private List<PhieuThuTien> listphieuthutien = new List<PhieuThuTien>();
-        private readonly APIClientService<PhieuSuaChua> _phieusuachuaservce;
+        private List<PhieuSuaChua> listphieusuachua = new List<PhieuSuaChua>();
+        private readonly APIClientService<PhieuSuaChua> _phieusuachuaservice;
         private readonly APIClientService<NoiDungPhieuSuaChua> _noidungphieusuachuaservice;
         private string STORAGE_KEY = "user-account-status";
 
@@ -45,25 +46,26 @@ namespace GarageManagement.ViewModels
             SelectedMonth = DateTime.Now.Month;
             _phieuthutienservice = phieuthutienservice;
             _carservice = carservice;
-            _phieusuachuaservce = phieusuachuaservce;
+            _phieusuachuaservice = phieusuachuaservce;
             _noidungphieusuachuaservice = noidungphieusuachuaservice;
             _ = LoadAsync();
-            if (listphieuthutien.Any())
+            if (listphieusuachua.Any())
             {
-                foreach (var item in listphieuthutien) years.Add(item.NgayThuTien.Value.Year);
+                foreach (var item in listphieusuachua) years.Add(item.NgaySuaChua.Value.Year);
             }
             SelectedYear = DateTime.Now.Year;
             tongDoanhSo = listphieuthutien.Sum(u => u.SoTienThu) ?? 0;
             _ = GenerateBaoCao();
         }
 
+        //lay gia tri ngay cua list phieu sua chua 
         private async Task LoadAsync()
         {
-            var list = await _phieuthutienservice.GetAll();
+            var list=await _phieusuachuaservice.GetAll();
             SortedSet<int> tmp= new SortedSet<int>();
             foreach (var item in list)
             {
-                tmp.Add(item.NgayThuTien.Value.Year);
+                tmp.Add(item.NgaySuaChua.Value.Year);
             }
             foreach (var item in tmp) years.Add(item);
         }
@@ -72,16 +74,14 @@ namespace GarageManagement.ViewModels
         {
             BaoCaoList.Clear();
             Dictionary<string, double> tmplist= new Dictionary<string, double>();
-            foreach (var item in listphieuthutien)
+            foreach (var item in listphieusuachua)
             {
                 var car = await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{item.BienSoXe}");
                 if (car != null)
                 {
-                    if (!tmplist.ContainsKey(car.Model))
-                    {
-                        tmplist[car.Model] = 0; 
-                    }
-                    tmplist[car.Model] += item.SoTienThu ?? 0;
+                    tmplist[car.Model] = 0;
+                    var tmp=await _phieuthutienservice.GetListOnSpecialRequirement($"GetListByBienSo/{item.BienSoXe}");
+                    if (tmp!=null) tmplist[car.Model] += tmp.Sum(u => u.SoTienThu) ?? 0;
                 }
             }
             foreach (var item in tmplist)
@@ -92,7 +92,7 @@ namespace GarageManagement.ViewModels
                 {
                     foreach(var caritem in listcar)
                     {
-                        var listphieusuachua = await _phieusuachuaservce.GetListOnSpecialRequirement($"GetListByBienSoXe/{caritem.BienSo}");
+                        var listphieusuachua = await _phieusuachuaservice.GetListOnSpecialRequirement($"GetListByBienSoXe/{caritem.BienSo}");
                         foreach (var phieu in listphieusuachua)
                         {
                             if (phieu.NgaySuaChua.Value.Month == selectedMonth && phieu.NgaySuaChua.Value.Year == selectedYear) sum++;
@@ -112,6 +112,7 @@ namespace GarageManagement.ViewModels
         public async Task OnMonthChanged()
         {
             var list = await _phieuthutienservice.GetListOnSpecialRequirement($"GetListByMonthAndYear/{selectedMonth}/{selectedYear}");
+            var newlist=await _phieusuachuaservice.GetListOnSpecialRequirement($"GetListByMonthAndYear/{selectedMonth}/{selectedYear}");
             if (list is not null)
             {
                 listphieuthutien.Clear(); 
@@ -120,8 +121,16 @@ namespace GarageManagement.ViewModels
                     listphieuthutien.Add(item);
                 }
                 TongDoanhSo = listphieuthutien.Sum(u => u.SoTienThu) ?? 0;
-                await GenerateBaoCao();
             }
+            if (newlist is not null)
+            {
+                listphieusuachua.Clear();
+                foreach (var item in newlist)
+                {
+                    listphieusuachua.Add(item);
+                }
+            }
+            await GenerateBaoCao();
         }
 
         public async Task OnYearChanged()
@@ -135,8 +144,17 @@ namespace GarageManagement.ViewModels
                     listphieuthutien.Add(item);
                 }
                 TongDoanhSo = listphieuthutien.Sum(u => u.SoTienThu) ?? 0;
-                await GenerateBaoCao();
             }
+            var newlist=await _phieusuachuaservice.GetListOnSpecialRequirement($"GetListByMonthAndYear/{selectedMonth}/{selectedYear}");
+            if (newlist is not null)
+            {
+                listphieusuachua.Clear();
+                foreach (var item in newlist)
+                {
+                    listphieusuachua.Add(item);
+                }
+            }
+            await GenerateBaoCao();
         }
         [RelayCommand]
         private async Task GoBack()

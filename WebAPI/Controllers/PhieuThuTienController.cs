@@ -22,5 +22,12 @@ namespace WebAPI.Controllers
             if (list is not null) return Ok(list);
             return NotFound();
         }
+        [HttpGet("GetListByBienSo/{bienso}")]
+        public async Task<ActionResult<IEnumerable<PhieuThuTien>>> GetListByBienSo(string bienso)
+        {
+            var list=await _applicationdbcontext.phieuThuTiens.Where(u => u.BienSoXe == bienso).ToListAsync();
+            if (list is not null) return Ok(list);
+            return NotFound();
+        }
     }
 }
