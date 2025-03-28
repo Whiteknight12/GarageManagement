@@ -3,6 +3,7 @@ using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Pages;
+using GarageManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -40,6 +41,7 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<Car> _carservice;
         private readonly APIClientService<HieuXe> _hieuxeservice;
         private readonly APIClientService<User> _userservice;
+        private readonly UniqueConstraintCheckingService _checkservice;
         public TiepNhanXePageViewModel(APIClientService<CarRecord> recordservice, 
             APIClientService<RuleVariable> ruleservice, 
             APIClientService<Car> carservice,
@@ -164,17 +166,17 @@ namespace GarageManagement.ViewModels
                 UserRole="Customer"
             });
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
-            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
             var currentaccount = JsonSerializer.Deserialize<UserAccountSession>(json);
-            if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}");
+            if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
         [RelayCommand]
         private async void Back()
         {
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
-            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
+            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
             var currentaccount=JsonSerializer.Deserialize<UserAccountSession>(json);
-            if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}");
+            if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
     }
 }

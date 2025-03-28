@@ -43,6 +43,7 @@ public static class MauiProgram
 		{
             return new AuthenticationService(baseaddress);
         });
+		builder.Services.AddScoped<UniqueConstraintCheckingService>();
 
         builder.Services.AddTransient<LoginPage>();
 		builder.Services.AddTransient<TiepNhanXePage>();
