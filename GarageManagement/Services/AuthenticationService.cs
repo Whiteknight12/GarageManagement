@@ -1,12 +1,6 @@
 ﻿using APIClassLibrary.APIModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Json;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace GarageManagement.Services
 {
@@ -14,6 +8,7 @@ namespace GarageManagement.Services
     {
         private readonly HttpClient _httpclient;
         private UserAccountSession currentaccount;
+        private DateTime expireDate; 
         private string STORAGE_KEY="user-account-status";
         public AuthenticationService(string baseaddress)
         {
@@ -43,6 +38,7 @@ namespace GarageManagement.Services
         {
             var currentaccountjson=await SecureStorage.Default.GetAsync(STORAGE_KEY);
             if (currentaccountjson is not null) currentaccount=JsonSerializer.Deserialize<UserAccountSession>(currentaccountjson);
+            if (DateTime.UtcNow >= currentaccount.Expiry) Logout();
         }
         public void Logout()
         {
