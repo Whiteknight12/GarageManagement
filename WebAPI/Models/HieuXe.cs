@@ -6,8 +6,7 @@ namespace WebAPI.Models
     public class HieuXe
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string? TenHieuXe { get; set; }
     }
 }
