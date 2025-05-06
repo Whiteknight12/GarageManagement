@@ -40,12 +40,12 @@ namespace GarageManagement.ViewModels
                 listcar.Clear();
                 foreach (var item in list)
                 {
-                    if (item.TienNoCuaChuXe is null)
+                    if (item.TienNo is null)
                     {
                         var phieusuachua = _phieuservice.GetThroughtSpecialRoute($"GetByBienSoXe/{item.BienSo}");
-                        List<NoiDungPhieuSuaChua> listnoidung = await _noidungphieuservice.GetListOnSpecialRequirement($"GetListByPhieuSuaChuaID/{phieusuachua.Id}");
-                        item.TienNoCuaChuXe = 0;
-                        item.TienNoCuaChuXe = listnoidung.Sum(u => u.ThanhTien);
+                        List<ChiTietPhieuSuaChua> listnoidung = await _noidungphieuservice.GetListOnSpecialRequirement($"GetListByPhieuSuaChuaID/{phieusuachua.Id}");
+                        item.TienNo = 0;
+                        item.TienNo = listnoidung.Sum(u => u.ThanhTien);
                         await _carservice.Update(item);
                     }
                     listcar.Add(item);

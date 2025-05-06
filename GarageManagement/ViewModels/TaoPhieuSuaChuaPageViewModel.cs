@@ -19,12 +19,12 @@ namespace GarageManagement.ViewModels
         private int index = 0;
         private string STORAGE_KEY = "user-account-status";
 
-        private readonly APIClientService<Car> _carservice;
+        private readonly APIClientService<Xe> _carservice;
         private readonly APIClientService<TienCong> _tiencongservice;
         private readonly APIClientService<VatTuPhuTung> _vattuservice;
-        private readonly APIClientService<NoiDungPhieuSuaChua> _noidungphieuservice;
+        private readonly APIClientService<ChiTietPhieuSuaChua> _noidungphieuservice;
         private readonly APIClientService<PhieuSuaChua> _phieuservice;
-        private readonly APIClientService<User> _userservice;
+        private readonly APIClientService<KhachHang> _userservice;
 
         [ObservableProperty]
         private ObservableCollection<string> listbiensoxe=new ObservableCollection<string>();
@@ -36,7 +36,7 @@ namespace GarageManagement.ViewModels
         private DateTime ngaysuachua=DateTime.Now;
 
         [ObservableProperty]
-        private ObservableCollection<NoiDungPhieuSuaChua> listnoidung = new ObservableCollection<NoiDungPhieuSuaChua>();
+        private ObservableCollection<ChiTietPhieuSuaChua> listnoidung = new ObservableCollection<ChiTietPhieuSuaChua>();
 
         [ObservableProperty]
         public ObservableCollection<TienCong> listtiencong=new ObservableCollection<TienCong>();
@@ -47,12 +47,12 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private double tongthanhtien=0;
 
-        public TaoPhieuSuaChuaPageViewModel(APIClientService<Car> carservice, 
+        public TaoPhieuSuaChuaPageViewModel(APIClientService<Xe> carservice, 
             APIClientService<TienCong> tiencongservice,
             APIClientService<VatTuPhuTung> vattuservice,
-            APIClientService<NoiDungPhieuSuaChua> noidungphieuservice,
+            APIClientService<ChiTietPhieuSuaChua> noidungphieuservice,
             APIClientService<PhieuSuaChua> phieuservice,
-            APIClientService<User> userservice)
+            APIClientService<KhachHang> userservice)
         {
             _carservice = carservice;
             _tiencongservice = tiencongservice;
@@ -88,18 +88,18 @@ namespace GarageManagement.ViewModels
                 foreach (var vattu in listphutung) listvattuphutung.Add(vattu);
                 OnPropertyChanged(nameof(Listvattuphutung));
             }
-            listnoidung.Add(new NoiDungPhieuSuaChua
+            listnoidung.Add(new ChiTietPhieuSuaChua
             {
-                NoiDungID = index++
+                //tang index cua noi dung duoc them vao 
             });
         }
 
         [RelayCommand]
         public void ThemNoiDungSuaChua()
         {
-            listnoidung.Add(new NoiDungPhieuSuaChua
+            listnoidung.Add(new ChiTietPhieuSuaChua
             {
-                NoiDungID = index++
+                //tang index cua noi dung duoc them vao
             });
         }
         [RelayCommand]
@@ -117,12 +117,12 @@ namespace GarageManagement.ViewModels
                     await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong noi dung!", "OK");
                     return;
                 }
-                if (item.VatTuPhuTungID is null)
+                if (item.VatTuPhuTungId is null)
                 {
                     await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong vat tu phu tung!", "OK");
                     return;
                 }
-                if (item.TienCongID is null)
+                if (item.TienCongId is null)
                 {
                     await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong tien cong!", "OK");
                     return;
@@ -149,41 +149,40 @@ namespace GarageManagement.ViewModels
                     return;
                 }
             }
+            Xe xe=await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{selectedbiensoxe}");
             PhieuSuaChua obj=await _phieuservice.Create(new PhieuSuaChua
             {
-                BienSoXe = selectedbiensoxe,
-                NgaySuaChua=ngaysuachua
+                XeId= xe.Id, 
+                NgaySuaChua =ngaysuachua
             });
             foreach (var item in listnoidung)
             {
-                await _noidungphieuservice.Create(new NoiDungPhieuSuaChua
+                await _noidungphieuservice.Create(new ChiTietPhieuSuaChua
                 {
                     NoiDung = item.NoiDung,
-                    PhieuSuaChuaID=obj.PhieuSuaChuaID,
-                    VatTuPhuTungID=item.VatTuPhuTungID,
-                    TienCongID=item.TienCongID,
+                    PhieuSuaChuaId=obj.Id,
+                    VatTuPhuTungId=item.VatTuPhuTungId,
+                    TienCongId=item.TienCongId,
                     SoLuong=item.SoLuong,
                     DonGia=item.DonGia,
                     ThanhTien=item.ThanhTien
                 });
             }
-            Car checkcar = await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{selectedbiensoxe}");
-            if (checkcar is null)
+            if (xe is null)
             {
                 await Shell.Current.DisplayAlert("Error", "Khong tim thay xe co bien so tren", "OK");
                 return;
             }
-            var checkuser = await _userservice.GetThroughtSpecialRoute($"GetByPhoneNumber/{checkcar.DienThoai}");
+            var checkuser = await _userservice.GetByID(xe.KhachHangId);
             if (checkuser is null)
             {
                 await Shell.Current.DisplayAlert("Error", "Khong tim chu xe cua xe co bien so tren", "OK");
                 return;
             }
-            if (checkuser.TienNo is null) checkuser.TienNo = 0;
             checkuser.TienNo += tongthanhtien;
-            checkcar.TienNoCuaChuXe += tongthanhtien;
+            xe.TienNo += tongthanhtien;
             await _userservice.Update(checkuser);
-            await _carservice.Update(checkcar);
+            await _carservice.Update(xe);
             await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}");
         }
         [RelayCommand]
@@ -195,9 +194,9 @@ namespace GarageManagement.ViewModels
             if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}");
         }
         [RelayCommand]
-        public void Remove(int itemid)
+        public void Remove(Guid itemid)
         {
-            var item=listnoidung.Where(u=>u.NoiDungID == itemid).FirstOrDefault();
+            var item=listnoidung.Where(u=>u.PhieuSuaChuaId == itemid).FirstOrDefault();
             if (item != null) listnoidung.Remove(item);
             tongthanhtien=listnoidung.Sum(u=>u.ThanhTien ?? 0);
             OnPropertyChanged(nameof(tongthanhtien));

@@ -16,13 +16,13 @@ namespace GarageManagement.ViewModels
     public partial class ThuTienPageViewModel: BaseViewModel
     {
         [ObservableProperty]
-        private ObservableCollection<User> listChuXe=new ObservableCollection<User>();
+        private ObservableCollection<KhachHang> listChuXe=new ObservableCollection<KhachHang>();
         [ObservableProperty]
-        private Car selectedBienSo;
+        private Xe selectedBienSo;
         [ObservableProperty]
-        private User selectedChuXe;
+        private KhachHang selectedChuXe;
         [ObservableProperty]
-        private ObservableCollection<Car> listBienSo = new ObservableCollection<Car>();
+        private ObservableCollection<Xe> listBienSo = new ObservableCollection<Xe>();
         [ObservableProperty]
         private string dienThoai;
         [ObservableProperty]
@@ -34,12 +34,12 @@ namespace GarageManagement.ViewModels
 
         private string role = "Customer";
         private string STORAGE_KEY = "user-account-status";
-        private readonly APIClientService<User> _userservice;
+        private readonly APIClientService<KhachHang> _userservice;
         private readonly APIClientService<PhieuThuTien> _phieuthuservice;
-        private readonly APIClientService<Car> _carservice;
-        public ThuTienPageViewModel(APIClientService<User> userservice,
+        private readonly APIClientService<Xe> _carservice;
+        public ThuTienPageViewModel(APIClientService<KhachHang> userservice,
             APIClientService<PhieuThuTien> phieuthuservice,
-            APIClientService<Car> carservice)
+            APIClientService<Xe> carservice)
         {
             _userservice = userservice;
             _carservice = carservice;
@@ -53,7 +53,7 @@ namespace GarageManagement.ViewModels
             if (list is not null)
             {
                 listChuXe.Clear();
-                foreach (var item in list) ListChuXe.Add(item);
+                foreach (var item in list) listChuXe.Add(item);
             }
         }
         [RelayCommand]
@@ -110,7 +110,7 @@ namespace GarageManagement.ViewModels
                     return;
                 }
             }
-            if (double.Parse(soTienThu)>selectedBienSo.TienNoCuaChuXe)
+            if (double.Parse(soTienThu)>selectedBienSo.TienNo)
             {
                 await Shell.Current.DisplayAlert("Error", "Khong duoc thu nhieu tien hon so tien no cua chu xe", "OK");
                 return;
@@ -122,18 +122,15 @@ namespace GarageManagement.ViewModels
             }
             await _phieuthuservice.Create(new PhieuThuTien
             {
-                TenChuXe = selectedChuXe.Fullname,
-                BienSoXe = selectedBienSo.BienSo,
-                DienThoai = dienThoai,
                 Email = email,
                 NgayThuTien = ngayThuTien,
                 SoTienThu = double.Parse(soTienThu),
-                CarID=selectedBienSo.Id,
-                UserID=selectedChuXe.UserID
+                XeId=selectedBienSo.Id,
+                KhachHangId=selectedChuXe.Id
             });
             selectedChuXe.TienNo -= double.Parse(soTienThu);
-            selectedBienSo.TienNoCuaChuXe-= double.Parse(soTienThu);
-            if (selectedBienSo.TienNoCuaChuXe == 0) selectedBienSo.IsAvailable = false;
+            selectedBienSo.TienNo-= double.Parse(soTienThu);
+            if (selectedBienSo.TienNo == 0) selectedBienSo.KhaDung = false;
             await _carservice.Update(selectedBienSo);
             await _userservice.Update(selectedChuXe);
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);

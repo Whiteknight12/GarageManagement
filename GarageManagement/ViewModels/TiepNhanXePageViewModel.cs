@@ -113,10 +113,10 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Error", "Ngay tiep nhan khong duoc nho hon ngay hien tai", "OK");
                 return;
             }
-            RuleVariable rulemodel = await _ruleservice.GetThroughtSpecialRoute("GetRule");
-            List<CarRecord> carRecords = await _recordservice.GetAll();
+            ThamSo rulemodel = await _ruleservice.GetThroughtSpecialRoute("GetRule");
+            List<PhieuTiepNhan> carRecords = await _recordservice.GetAll();
             int c = 0;
-            foreach (CarRecord record in carRecords)
+            foreach (PhieuTiepNhan record in carRecords)
             {
                 if (record.NgayTiepNhan.Value.Date == DateTime.Today) c++;
             }
@@ -125,45 +125,39 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Error", "Vuot qua so xe tiep nhan toi da mot ngay", "OK");
                 return;
             }
-            await _recordservice.Create(new CarRecord
-            {
-                TenChuXe = tenchuxe,
-                TenXe = tenxe,
-                BienSo = bienso,
-                HieuXe = selectedmodel.TenHieuXe,
-                DiaChi = diachi,
-                NgayTiepNhan = ngaytiepnhan,
-                SoDienThoai = dienthoai,
-            });
             var checkcar = await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{bienso}");
             if (checkcar is null)
             {
-                await _carservice.Create(new Car
+                KhachHang khachHang=await _userservice.GetThroughtSpecialRoute($"GetByPhoneNumber/{dienthoai}");
+                await _carservice.Create(new Xe
                 {
-                    Name = tenxe,
-                    Model = selectedmodel.TenHieuXe,
+                    Ten = tenxe,
+                    HieuXeId=selectedmodel.Id,
                     BienSo = bienso,
-                    TenChuXe = tenchuxe,
-                    DiaChi = diachi,
-                    DienThoai = dienthoai,
-                    IsAvailable = true,
-                    TienNoCuaChuXe=0
+                    KhachHangId= khachHang.Id,
+                    KhaDung = true,
+                    TienNo=0 
                 });
             }
             else
             {
-                checkcar.IsAvailable = true;
+                checkcar.KhaDung = true;
                 await _carservice.Update(checkcar);
             }
-            var checkuser = await _userservice.GetThroughtSpecialRoute($"GetByPhoneNumber/{dienthoai}");
-            if (checkuser is null) await _userservice.Create(new User
+            var xe=await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{bienso}");
+            await _recordservice.Create(new PhieuTiepNhan
             {
-                Fullname=tenchuxe,
-                Address=diachi,
-                PhoneNumber=dienthoai,
-                HasAccount=false,
-                TienNo=0,
-                UserRole="Customer"
+                XeId = xe.Id,
+                NgayTiepNhan = ngaytiepnhan
+            });
+            var checkuser = await _userservice.GetThroughtSpecialRoute($"GetByPhoneNumber/{dienthoai}");
+            if (checkuser is null) await _userservice.Create(new KhachHang
+            {
+                HoVaTen=tenchuxe,
+                DiaChi=diachi,
+                SoDienThoai=dienthoai,
+                DaCoTaiKhoan=false,
+                TienNo=0
             });
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
             if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
