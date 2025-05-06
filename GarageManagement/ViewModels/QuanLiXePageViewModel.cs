@@ -16,16 +16,16 @@ namespace GarageManagement.ViewModels
     public partial class QuanLiXePageViewModel: BaseViewModel
     {
         private string STORAGE_KEY = "user-account-status";
-        private readonly APIClientService<Car> _carservice;
+        private readonly APIClientService<Xe> _carservice;
         private readonly APIClientService<PhieuSuaChua> _phieuservice;
-        private readonly APIClientService<NoiDungPhieuSuaChua> _noidungphieuservice;
+        private readonly APIClientService<ChiTietPhieuSuaChua> _noidungphieuservice;
 
         [ObservableProperty]
-        private ObservableCollection<Car> listcar = new ObservableCollection<Car>();
+        private ObservableCollection<Xe> listcar = new ObservableCollection<Xe>();
 
-        public QuanLiXePageViewModel(APIClientService<Car> carservice,
+        public QuanLiXePageViewModel(APIClientService<Xe> carservice,
             APIClientService<PhieuSuaChua> phieuservice, 
-            APIClientService<NoiDungPhieuSuaChua> noidungphieuservice)
+            APIClientService<ChiTietPhieuSuaChua> noidungphieuservice)
         {
             _carservice = carservice;
             _ = LoadAsync();

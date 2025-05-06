@@ -30,17 +30,19 @@ namespace GarageManagement.ViewModels
         private ObservableCollection<BaoCaoDoanhThuVM> baoCaoList = new ObservableCollection<BaoCaoDoanhThuVM>();
 
         private readonly APIClientService<PhieuThuTien> _phieuthutienservice;
-        private readonly APIClientService<Car> _carservice;
+        private readonly APIClientService<Xe> _carservice;
         private List<PhieuThuTien> listphieuthutien = new List<PhieuThuTien>();
         private List<PhieuSuaChua> listphieusuachua = new List<PhieuSuaChua>();
         private readonly APIClientService<PhieuSuaChua> _phieusuachuaservice;
-        private readonly APIClientService<NoiDungPhieuSuaChua> _noidungphieusuachuaservice;
+        private readonly APIClientService<ChiTietPhieuSuaChua> _noidungphieusuachuaservice;
+        private readonly APIClientService<HieuXe> _hieuXeService; 
         private string STORAGE_KEY = "user-account-status";
 
         public BaoCaoDoanSoPageViewModel(APIClientService<PhieuThuTien> phieuthutienservice,
-            APIClientService<Car> carservice,
+            APIClientService<Xe> carservice,
             APIClientService<PhieuSuaChua> phieusuachuaservce,
-            APIClientService<NoiDungPhieuSuaChua> noidungphieusuachuaservice)
+            APIClientService<ChiTietPhieuSuaChua> noidungphieusuachuaservice,
+            APIClientService<HieuXe> hieuXeService)
         {
             for (int i = 1; i <= 12; i++) months.Add(i);
             SelectedMonth = DateTime.Now.Month;
@@ -48,13 +50,14 @@ namespace GarageManagement.ViewModels
             _carservice = carservice;
             _phieusuachuaservice = phieusuachuaservce;
             _noidungphieusuachuaservice = noidungphieusuachuaservice;
+            _hieuXeService = hieuXeService;
             _ = LoadAsync();
             if (listphieusuachua.Any())
             {
-                foreach (var item in listphieusuachua) years.Add(item.NgaySuaChua.Value.Year);
+                foreach (var item in listphieusuachua) years.Add(item.NgaySuaChua.Year);
             }
             SelectedYear = DateTime.Now.Year;
-            tongDoanhSo = listphieuthutien.Sum(u => u.SoTienThu) ?? 0;
+            tongDoanhSo = listphieuthutien.Sum(u => u.SoTienThu);
             _ = GenerateBaoCao();
         }
 
@@ -64,7 +67,7 @@ namespace GarageManagement.ViewModels
             SortedSet<int> tmp= new SortedSet<int>();
             foreach (var item in list)
             {
-                tmp.Add(item.NgaySuaChua.Value.Year);
+                tmp.Add(item.NgaySuaChua.Year);
             }
             years.Clear();
             foreach (var item in tmp) years.Add(item);
@@ -76,12 +79,13 @@ namespace GarageManagement.ViewModels
             Dictionary<string, double> tmplist= new Dictionary<string, double>();
             foreach (var item in listphieusuachua)
             {
-                var car = await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{item.BienSoXe}");
+                var car = await _carservice.GetByID(item.XeId);
                 if (car != null)
                 {
-                    tmplist[car.Model] = 0;
-                    var tmp=await _phieuthutienservice.GetListOnSpecialRequirement($"GetListByBienSo/{item.BienSoXe}");
-                    if (tmp!=null) tmplist[car.Model] += tmp.Sum(u => u.SoTienThu) ?? 0;
+                    HieuXe hieuXe= await _hieuXeService.GetByID(car.HieuXeId);
+                    tmplist[hieuXe.TenHieuXe] = 0;
+                    var tmp=await _phieuthutienservice.GetListOnSpecialRequirement($"GetListByBienSo/{car.BienSo}");
+                    if (tmp != null) tmplist[hieuXe.TenHieuXe] += tmp.Sum(u => u.SoTienThu);
                 }
             }
             foreach (var item in tmplist)
@@ -95,7 +99,7 @@ namespace GarageManagement.ViewModels
                         var listphieusuachua = await _phieusuachuaservice.GetListOnSpecialRequirement($"GetListByBienSoXe/{caritem.BienSo}");
                         foreach (var phieu in listphieusuachua)
                         {
-                            if (phieu.NgaySuaChua.Value.Month == selectedMonth && phieu.NgaySuaChua.Value.Year == selectedYear) sum++;
+                            if (phieu.NgaySuaChua.Month == selectedMonth && phieu.NgaySuaChua.Year == selectedYear) sum++;
                         }
                     }
                 }
@@ -120,7 +124,7 @@ namespace GarageManagement.ViewModels
                 {
                     listphieuthutien.Add(item);
                 }
-                TongDoanhSo = listphieuthutien.Sum(u => u.SoTienThu) ?? 0;
+                TongDoanhSo = listphieuthutien.Sum(u => u.SoTienThu);
             }
             if (newlist is not null)
             {
@@ -143,7 +147,7 @@ namespace GarageManagement.ViewModels
                 {
                     listphieuthutien.Add(item);
                 }
-                TongDoanhSo = listphieuthutien.Sum(u => u.SoTienThu) ?? 0;
+                TongDoanhSo = listphieuthutien.Sum(u => u.SoTienThu);
             }
             var newlist=await _phieusuachuaservice.GetListOnSpecialRequirement($"GetListByMonthAndYear/{selectedMonth}/{selectedYear}");
             if (newlist is not null)

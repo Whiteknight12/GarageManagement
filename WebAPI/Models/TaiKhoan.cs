@@ -6,8 +6,7 @@ namespace WebAPI.Models
     public class TaiKhoan
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string TenDangNhap { get; set; }
         public string MatKhau { get; set; }
         public Guid NhomNguoiDungId { get; set; }

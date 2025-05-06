@@ -6,10 +6,10 @@ namespace GarageManagement.Pages;
 
 public partial class ThuTienPage : ContentPage
 {
-	private readonly APIClientService<Car> _carservice;
+	private readonly APIClientService<Xe> _carservice;
 	private readonly ThuTienPageViewModel _viewmodel;
 	public ThuTienPage(ThuTienPageViewModel viewmodel,
-		APIClientService<Car> carservice)
+		APIClientService<Xe> carservice)
 	{ 
 		_viewmodel = viewmodel;
         BindingContext = _viewmodel;

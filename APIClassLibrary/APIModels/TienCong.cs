@@ -8,8 +8,8 @@ namespace APIClassLibrary.APIModels
 {
     public class TienCong
     {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public double? Cost { get; set; }
+        public Guid Id { get; set; }
+        public string TenLoaiTienCong { get; set; }
+        public double DonGiaLoaiTienCong { get; set; }
     }
 }

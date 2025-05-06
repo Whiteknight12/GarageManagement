@@ -6,8 +6,8 @@ namespace GarageManagement.Pages;
 
 public partial class QuanLiXePage : ContentPage
 {
-	public QuanLiXePage(APIClientService<Car> carservice,
-		APIClientService<NoiDungPhieuSuaChua> noidungphieuservice,
+	public QuanLiXePage(APIClientService<Xe> carservice,
+		APIClientService<ChiTietPhieuSuaChua> noidungphieuservice,
 		APIClientService<PhieuSuaChua> phieuservice)
 	{
 		BindingContext = new QuanLiXePageViewModel(carservice, phieuservice, noidungphieuservice);
