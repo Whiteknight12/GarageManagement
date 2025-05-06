@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAPI.Models
 {
-    public class PhieuSuaChua
+    public class PhieuTiepNhan
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
-        public Guid XeId { get; set; } = Guid.NewGuid();
-        public DateTime NgaySuaChua {  get; set; }
-        public double TongTien { get; set; }
+        public DateTime? NgayTiepNhan {  get; set; }
+        //khoa ngoai 
+        public Guid XeId { get; set; }
     }
 }
