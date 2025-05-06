@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<T>> GetById(int id)
+        public async Task<ActionResult<T>> GetById(Guid id)
         {
             var entity = await _dbSet.FindAsync(id);
             if (entity == null) return NotFound();
@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             var entity = await _dbSet.FindAsync(id);
             if (entity == null) return NotFound();
