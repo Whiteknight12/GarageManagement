@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace APIClassLibrary.APIModels
 {
-    public class HieuXe
+    public class NhomNguoiDung
     {
         public Guid Id { get; set; } 
-        public string? TenHieuXe { get; set; }
+        public string TenNhom { get; set; }
     }
 }

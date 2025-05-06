@@ -7,7 +7,7 @@ namespace WebAPI.Models
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
-        public Guid XeId { get; set; } = Guid.NewGuid();
+        public Guid XeId { get; set; } 
         public DateTime NgaySuaChua {  get; set; }
         public double TongTien { get; set; }
     }

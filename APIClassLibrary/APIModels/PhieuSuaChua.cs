@@ -8,8 +8,9 @@ namespace APIClassLibrary.APIModels
 {
     public class PhieuSuaChua
     {
-        public int PhieuSuaChuaID { get; set; }
-        public string? BienSoXe { get; set; }
-        public DateTime? NgaySuaChua { get; set; }
+        public Guid Id { get; set; } 
+        public Guid XeId { get; set; } 
+        public DateTime NgaySuaChua { get; set; }
+        public double TongTien { get; set; }
     }
 }
