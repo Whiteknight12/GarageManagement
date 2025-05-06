@@ -32,9 +32,9 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private double tienNoCuaChuXe;
 
-        private readonly APIClientService<Car> _carservice;
+        private readonly APIClientService<Xe> _carservice;
         private string carid;
-        public ChiTietXePageViewModel(string CarID, APIClientService<Car> carservice)
+        public ChiTietXePageViewModel(string CarID, APIClientService<Xe> carservice)
         {
             _carservice = carservice;
             carid= CarID;

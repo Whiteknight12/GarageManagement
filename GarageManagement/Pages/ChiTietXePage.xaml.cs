@@ -8,8 +8,8 @@ namespace GarageManagement.Pages;
 public partial class ChiTietXePage : ContentPage
 {
     public string CarID { get; set; }
-    private readonly APIClientService<Car> _carservice;
-    public ChiTietXePage(APIClientService<Car> carservice)
+    private readonly APIClientService<Xe> _carservice;
+    public ChiTietXePage(APIClientService<Xe> carservice)
     {
         _carservice = carservice;
         InitializeComponent();

@@ -9,10 +9,10 @@ namespace GarageManagement.Pages;
 public partial class TaoPhieuSuaChuaPage : ContentPage
 {
 	private readonly TaoPhieuSuaChuaPageViewModel _viewmodel;
-	public TaoPhieuSuaChuaPage(APIClientService<Car> carservice,
+	public TaoPhieuSuaChuaPage(APIClientService<Xe> carservice,
 		APIClientService<TienCong> congservice,
 		APIClientService<VatTuPhuTung> vattuservice,
-		APIClientService<NoiDungPhieuSuaChua> noidungphieuservice,
+		APIClientService<ChiTietPhieuSuaChua> noidungphieuservice,
 		APIClientService<PhieuSuaChua> phieuservice,
 		TaoPhieuSuaChuaPageViewModel viewmodel
 		)
@@ -25,13 +25,13 @@ public partial class TaoPhieuSuaChuaPage : ContentPage
 	{
 		if (sender is Picker picker && picker.SelectedItem is VatTuPhuTung vtpt)
 		{
-			if (picker.BindingContext is NoiDungPhieuSuaChua noidung)
+			if (picker.BindingContext is ChiTietPhieuSuaChua noidung)
 			{
-				noidung.DonGia = vtpt.Price;
-                if (noidung.TienCongID != null && noidung.SoLuong != null && noidung.VatTuPhuTungID != null)
+				noidung.DonGia = vtpt.DonGiaBanLoaiVatTuPhuTung;
+                if (noidung.TienCongId != null && noidung.SoLuong != null && noidung.VatTuPhuTungId != null)
                 {
-                    var tc = _viewmodel.listtiencong.Where(u => u.Id == noidung.TienCongID).FirstOrDefault();
-                    noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tc.Cost;
+                    var tc = _viewmodel.listtiencong.Where(u => u.Id == noidung.TienCongId).FirstOrDefault();
+                    noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tc.DonGiaLoaiTienCong;
                     noidung.OnPropertyChanged(nameof(noidung.ThanhTien));
 					_viewmodel.Tongthanhtien = _viewmodel.Listnoidung.Sum(u => u.ThanhTien ?? 0);
                 }
@@ -41,12 +41,12 @@ public partial class TaoPhieuSuaChuaPage : ContentPage
 	}
 	private void OnSoLuongChanged(object sender, EventArgs e)
 	{
-		if (sender is Entry entry && entry.BindingContext is NoiDungPhieuSuaChua noidung)
+		if (sender is Entry entry && entry.BindingContext is ChiTietPhieuSuaChua noidung)
 		{
-			if (noidung.TienCongID != null && noidung.SoLuong != null && noidung.VatTuPhuTungID != null)
+			if (noidung.TienCongId != null && noidung.SoLuong != null && noidung.VatTuPhuTungId != null)
 			{
-				var tc = _viewmodel.listtiencong.Where(u => u.Id == noidung.TienCongID).FirstOrDefault();
-				noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tc.Cost;
+				var tc = _viewmodel.listtiencong.Where(u => u.Id == noidung.TienCongId).FirstOrDefault();
+				noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tc.DonGiaLoaiTienCong;
 				noidung.OnPropertyChanged(nameof(noidung.ThanhTien));
                 _viewmodel.Tongthanhtien = _viewmodel.Listnoidung.Sum(u => u.ThanhTien ?? 0);
             }
@@ -54,11 +54,11 @@ public partial class TaoPhieuSuaChuaPage : ContentPage
 	}
 	private void OnTienCongChanged(object sender, EventArgs e)
 	{
-        if (sender is Picker picker && picker.BindingContext is NoiDungPhieuSuaChua noidung && picker.SelectedItem is TienCong tiencong)
+        if (sender is Picker picker && picker.BindingContext is ChiTietPhieuSuaChua noidung && picker.SelectedItem is TienCong tiencong)
         {
-            if (noidung.TienCongID != null && noidung.SoLuong != null && noidung.VatTuPhuTungID != null)
+            if (noidung.TienCongId != null && noidung.SoLuong != null && noidung.VatTuPhuTungId != null)
             {
-				noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tiencong.Cost;
+				noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tiencong.DonGiaLoaiTienCong;
                 noidung.OnPropertyChanged(nameof(noidung.ThanhTien));
                 _viewmodel.Tongthanhtien = _viewmodel.Listnoidung.Sum(u => u.ThanhTien ?? 0);
             }

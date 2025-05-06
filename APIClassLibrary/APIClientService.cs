@@ -22,7 +22,7 @@ namespace APIClassLibrary
         {
             return await _httpclient.GetFromJsonAsync<List<T>>($"/api/{_endpoint}");
         }
-        public async Task<T> GetByID(int id)
+        public async Task<T> GetByID(Guid id)
         {
             return await _httpclient.GetFromJsonAsync<T>($"/api/{_endpoint}/{id}");
         }
@@ -36,7 +36,7 @@ namespace APIClassLibrary
             var obj = await response.Content.ReadFromJsonAsync<T>();
             return obj;
         }
-        public async Task Delete(int id)
+        public async Task Delete(Guid id)
         {
             await _httpclient.DeleteAsync($"/api/{_endpoint}/{id}");
         }

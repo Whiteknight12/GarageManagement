@@ -36,17 +36,17 @@ namespace GarageManagement.ViewModels
         private HieuXe selectedmodel;
 
         private string STORAGE_KEY = "user-account-status";
-        private readonly APIClientService<CarRecord> _recordservice;
-        private readonly APIClientService<RuleVariable> _ruleservice;
-        private readonly APIClientService<Car> _carservice;
+        private readonly APIClientService<PhieuTiepNhan> _recordservice;
+        private readonly APIClientService<ThamSo> _ruleservice;
+        private readonly APIClientService<Xe> _carservice;
         private readonly APIClientService<HieuXe> _hieuxeservice;
-        private readonly APIClientService<User> _userservice;
+        private readonly APIClientService<KhachHang> _userservice;
         private readonly UniqueConstraintCheckingService _checkservice;
-        public TiepNhanXePageViewModel(APIClientService<CarRecord> recordservice, 
-            APIClientService<RuleVariable> ruleservice, 
-            APIClientService<Car> carservice,
+        public TiepNhanXePageViewModel(APIClientService<PhieuTiepNhan> recordservice, 
+            APIClientService<ThamSo> ruleservice, 
+            APIClientService<Xe> carservice,
             APIClientService<HieuXe> hieuxeservice,
-            APIClientService<User> userservice)
+            APIClientService<KhachHang> userservice)
         {
             _recordservice = recordservice;
             _ruleservice = ruleservice;
