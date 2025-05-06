@@ -1,5 +1,8 @@
-﻿namespace WebAPI.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace WebAPI.Models
 {
+    [NotMapped]
     public class EntityBase
     {
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;

@@ -5,8 +5,8 @@ namespace GarageManagement
 {
     public partial class MainPage : ContentPage
     {
-        private readonly APIClientService<Car> _service;
-        public MainPage(APIClientService<Car> service)
+        private readonly APIClientService<Xe> _service;
+        public MainPage(APIClientService<Xe> service)
         {
             InitializeComponent();
             _service = service;

@@ -63,7 +63,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CAR");
+                    b.ToTable("CAR", (string)null);
                 });
 
             modelBuilder.Entity("WebAPI.Models.CarRecord", b =>
@@ -97,7 +97,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("CarRecordID");
 
-                    b.ToTable("CARRECORD");
+                    b.ToTable("CARRECORD", (string)null);
                 });
 
             modelBuilder.Entity("WebAPI.Models.HieuXe", b =>
@@ -113,7 +113,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("hieuXes");
+                    b.ToTable("hieuXes", (string)null);
                 });
 
             modelBuilder.Entity("WebAPI.Models.NoiDungPhieuSuaChua", b =>
@@ -147,7 +147,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("NoiDungID");
 
-                    b.ToTable("noiDungPhieuSuaChuas");
+                    b.ToTable("noiDungPhieuSuaChuas", (string)null);
                 });
 
             modelBuilder.Entity("WebAPI.Models.PhieuSuaChua", b =>
@@ -166,7 +166,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("PhieuSuaChuaID");
 
-                    b.ToTable("phieuSuaChuas");
+                    b.ToTable("phieuSuaChuas", (string)null);
                 });
 
             modelBuilder.Entity("WebAPI.Models.PhieuThuTien", b =>
@@ -203,7 +203,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("PhieuThuTienId");
 
-                    b.ToTable("phieuThuTiens");
+                    b.ToTable("phieuThuTiens", (string)null);
                 });
 
             modelBuilder.Entity("WebAPI.Models.RuleVariable", b =>
@@ -221,7 +221,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RULEVARIABLE");
+                    b.ToTable("RULEVARIABLE", (string)null);
                 });
 
             modelBuilder.Entity("WebAPI.Models.TienCong", b =>
@@ -240,7 +240,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tienCongs");
+                    b.ToTable("tienCongs", (string)null);
                 });
 
             modelBuilder.Entity("WebAPI.Models.User", b =>
@@ -280,7 +280,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("UserID");
 
-                    b.ToTable("users");
+                    b.ToTable("users", (string)null);
                 });
 
             modelBuilder.Entity("WebAPI.Models.UserAccount", b =>
@@ -312,7 +312,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("USERACCOUNT");
+                    b.ToTable("USERACCOUNT", (string)null);
                 });
 
             modelBuilder.Entity("WebAPI.Models.VatTuPhuTung", b =>
@@ -331,7 +331,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("VTPTID");
 
-                    b.ToTable("vatTuPhuTungs");
+                    b.ToTable("vatTuPhuTungs", (string)null);
                 });
 #pragma warning restore 612, 618
         }

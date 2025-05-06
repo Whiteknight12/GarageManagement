@@ -19,7 +19,7 @@ namespace GarageManagement.Services
         {
             if (value is VatTuPhuTung vattuphutung)
             {
-                return vattuphutung.VTPTID;
+                return vattuphutung.VatTuPhuTungId;
             }
             if (value is TienCong tiencong) return tiencong.Id;
             return null;

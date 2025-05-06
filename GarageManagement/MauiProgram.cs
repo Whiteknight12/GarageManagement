@@ -28,15 +28,15 @@ public static class MauiProgram
 #else
     baseaddress = "http://192.168.1.100:5142/"; 
 #endif
-        builder.Services.AddAPIClientService<Car>(x => x.BaseAddress = baseaddress, $"{nameof(Car)}");
-        builder.Services.AddAPIClientService<CarRecord>(x => x.BaseAddress = baseaddress, $"{nameof(CarRecord)}");
-        builder.Services.AddAPIClientService<RuleVariable>(x => x.BaseAddress = baseaddress, $"{nameof(RuleVariable)}");
+        builder.Services.AddAPIClientService<Xe>(x => x.BaseAddress = baseaddress, $"{nameof(Xe)}");
+        builder.Services.AddAPIClientService<PhieuTiepNhan>(x => x.BaseAddress = baseaddress, $"{nameof(PhieuTiepNhan)}");
+        builder.Services.AddAPIClientService<ThamSo>(x => x.BaseAddress = baseaddress, $"{nameof(ThamSo)}");
         builder.Services.AddAPIClientService<HieuXe>(x => x.BaseAddress = baseaddress, $"{nameof(HieuXe)}");
         builder.Services.AddAPIClientService<TienCong>(x => x.BaseAddress = baseaddress, $"{nameof(TienCong)}");
         builder.Services.AddAPIClientService<PhieuSuaChua>(x => x.BaseAddress = baseaddress, $"{nameof(PhieuSuaChua)}");
-        builder.Services.AddAPIClientService<NoiDungPhieuSuaChua>(x => x.BaseAddress = baseaddress, $"{nameof(NoiDungPhieuSuaChua)}");
+        builder.Services.AddAPIClientService<ChiTietPhieuSuaChua>(x => x.BaseAddress = baseaddress, $"{nameof(ChiTietPhieuSuaChua)}");
         builder.Services.AddAPIClientService<VatTuPhuTung>(x => x.BaseAddress = baseaddress, $"{nameof(VatTuPhuTung)}");
-        builder.Services.AddAPIClientService<User>(x => x.BaseAddress = baseaddress, $"{nameof(User)}");
+        builder.Services.AddAPIClientService<KhachHang>(x => x.BaseAddress = baseaddress, $"{nameof(KhachHang)}");
         builder.Services.AddAPIClientService<PhieuThuTien>(x => x.BaseAddress = baseaddress, $"{nameof(PhieuThuTien)}");
 
 		builder.Services.AddScoped<AuthenticationService>(provider=>

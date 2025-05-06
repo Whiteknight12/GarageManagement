@@ -6,8 +6,8 @@ namespace WebAPI.Models
     public class ChiTietPhieuSuaChua
     {
         [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
         public Guid PhieuSuaChuaId { get; set; }
-        [Key]
         public Guid VatTuPhuTungId {  get; set; }
         public Guid TienCongId { get; set; }
 
