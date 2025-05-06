@@ -4,14 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAPI.Models
 {
-    [Table("RULEVARIABLE")]
-    public class RuleVariable
+    public class ThamSo
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("ID")]
-        public int Id { get; set; }
-        [Column("SOXETIEPNHANTOIDAMOTNGAY")]
+        public Guid Id { get; set; } = Guid.NewGuid();
         public int SoXeTiepNhanToiDaMotNgay {  get; set; }
     }
 }

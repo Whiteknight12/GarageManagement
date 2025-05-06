@@ -6,15 +6,11 @@ namespace WebAPI.Models
     public class PhieuThuTien
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int PhieuThuTienId { get; set; }
-        public string? TenChuXe { get; set; }
-        public string? BienSoXe { get; set; }
-        public string? DienThoai { get; set; }
-        public string? Email { get; set; }
-        public DateTime? NgayThuTien { get; set; }
-        public double? SoTienThu {  get; set; }
-        public int? CarID { get; set; }
-        public int? UserID { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid(); 
+        public Guid KhachHangId { get; set; }
+        public Guid XeId { get; set; }
+        public string Email { get; set; }
+        public DateTime NgayThuTien { get; set; }
+        public double SoTienThu {  get; set; }
     }
 }

@@ -6,9 +6,8 @@ namespace WebAPI.Models
     public class TienCong
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public double? Cost { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string? TenLoaiTienCong { get; set; }
+        public double? DonGiaLoaiTienCong { get; set; }
     }
 }

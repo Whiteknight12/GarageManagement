@@ -6,9 +6,8 @@ namespace WebAPI.Models
     public class VatTuPhuTung
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int VTPTID { get; set; }
-        public string? Name { get; set; }
-        public double? Price { get; set; }
+        public Guid VatTuPhuTungId { get; set; } = Guid.NewGuid();
+        public string TenLoaiVatTuPhuTung { get; set; }
+        public double GiaLoaiVatTuPhuTung { get; set; }
     }
 }
