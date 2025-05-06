@@ -20,7 +20,8 @@ namespace WebAPI.Service
         public async Task<LoginResponseModel> Authentication(LoginRequestModel request)
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password)) return null;
-            var useraccount=await _db.UserAccounts.Where(x => x.Username == request.Username && x.Password == request.Password).FirstOrDefaultAsync();
+            var useraccount=await _db.taiKhoans.Where(x => x.TenDangNhap == request.Username && x.MatKhau == request.Password).FirstOrDefaultAsync();
+            var role = _db.nhomNguoiDungs.FirstOrDefault(u => u.Id == useraccount.NhomNguoiDungId); 
             if (useraccount == null) return null;
             var issuer= _configuration["JwtConfig:Issuer"];
             var audience = _configuration["JwtConfig:Audience"];
@@ -33,7 +34,7 @@ namespace WebAPI.Service
                 {
                     new Claim(JwtRegisteredClaimNames.Name, request.Username),
                     new Claim(JwtRegisteredClaimNames.NameId, useraccount.Id.ToString()),
-                    new Claim(ClaimTypes.Role, useraccount.Role) // Thêm Role vào Claims
+                    new Claim(ClaimTypes.Role, role.TenNhom) // Thêm Role vào Claims
                 }),
                 Expires = tokenexpirytimestamp,
                 Issuer = issuer,
@@ -48,7 +49,7 @@ namespace WebAPI.Service
                 Token = accesstoken,
                 Username = request.Username,
                 Expiration = (int)tokenexpirytimestamp.Subtract(DateTime.UtcNow).TotalSeconds,
-                Role= useraccount.Role
+                Role= role.TenNhom
             };
         }
     }
