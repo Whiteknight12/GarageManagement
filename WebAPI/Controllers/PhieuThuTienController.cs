@@ -18,14 +18,15 @@ namespace WebAPI.Controllers
         [HttpGet("GetListByMonthAndYear/{month}/{year}")]
         public async Task<ActionResult<IEnumerable<PhieuThuTien>>> GetListByMonthAndYear(int month, int year)
         {
-            var list = await _applicationdbcontext.phieuThuTiens.Where(u => u.NgayThuTien.Value.Month == month && u.NgayThuTien.Value.Year == year).ToListAsync();
+            var list = await _applicationdbcontext.phieuThuTiens.Where(u => u.NgayThuTien.Date.Month == month && u.NgayThuTien.Date.Year == year).ToListAsync();
             if (list is not null) return Ok(list);
             return NotFound();
         }
         [HttpGet("GetListByBienSo/{bienso}")]
         public async Task<ActionResult<IEnumerable<PhieuThuTien>>> GetListByBienSo(string bienso)
         {
-            var list=await _applicationdbcontext.phieuThuTiens.Where(u => u.BienSoXe == bienso).ToListAsync();
+            var xe = _applicationdbcontext.xes.FirstOrDefault(x => x.BienSo == bienso);
+            var list = await _applicationdbcontext.phieuThuTiens.Where(u => u.XeId == xe.Id).ToListAsync();
             if (list is not null) return Ok(list);
             return NotFound();
         }
