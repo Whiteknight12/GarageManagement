@@ -11,10 +11,10 @@ namespace GarageManagement.Services
 {
     public class UniqueConstraintCheckingService
     {
-        private readonly APIClientService<Car> _carservice;
-        private readonly APIClientService<User> _userservice;
+        private readonly APIClientService<Xe> _carservice;
+        private readonly APIClientService<KhachHang> _userservice;
 
-        public UniqueConstraintCheckingService(APIClientService<Car> carservice, APIClientService<User> userservice)
+        public UniqueConstraintCheckingService(APIClientService<Xe> carservice, APIClientService<KhachHang> userservice)
         {
             _carservice = carservice;
             _userservice = userservice;
@@ -29,7 +29,7 @@ namespace GarageManagement.Services
         public async Task<bool> CheckUniquePhoneNumber(string phonenumber)
         {
             var userlist = await _userservice.GetAll();
-            return userlist.Any(x => x.PhoneNumber == phonenumber);
+            return userlist.Any(x => x.SoDienThoai == phonenumber);
         }
     }
 }
