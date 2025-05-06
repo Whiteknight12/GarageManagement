@@ -8,17 +8,17 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NoiDungPhieuSuaChuaController : BaseController<NoiDungPhieuSuaChua>
+    public class ChiTietPhieuSuaChuaController : BaseController<ChiTietPhieuSuaChua>
     {
         ApplicationDbContext _applicationDbContext;
-        public NoiDungPhieuSuaChuaController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
+        public ChiTietPhieuSuaChuaController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
             _applicationDbContext = applicationDbContext;
         }
         [HttpGet("GetListByPhieuSuaChuaID/{ID}")]
-        public async Task<ActionResult<IEnumerable<NoiDungPhieuSuaChua>>> GetListByPhieuSuaChuaID(int ID)
+        public async Task<ActionResult<IEnumerable<ChiTietPhieuSuaChua>>> GetListByPhieuSuaChuaID(Guid Id)
         {
-            var list = await _applicationDbContext.noiDungPhieuSuaChuas.Where(u => u.PhieuSuaChuaID == ID).ToListAsync();
+            var list = await _applicationDbContext.chiTietPhieuSuaChuas.Where(u => u.PhieuSuaChuaId == Id).ToListAsync();
             if (list is not null) return Ok(list);
             return NotFound();
         }

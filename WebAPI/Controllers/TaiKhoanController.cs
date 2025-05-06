@@ -7,7 +7,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserAccountController : BaseController<UserAccount>
+    public class UserAccountController : BaseController<TaiKhoan>
     {
         public UserAccountController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {

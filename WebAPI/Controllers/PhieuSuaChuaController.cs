@@ -16,23 +16,18 @@ namespace WebAPI.Controllers
             _applicationDbContext = applicationDbContext;
         }
 
-        [HttpGet("GetByBienSoXe/{bienso}")]
-        public async Task<ActionResult<PhieuSuaChua>> GetByBienSoXe(string bienso)
-        {
-            var obj = await _applicationDbContext.phieuSuaChuas.Where(u => u.BienSoXe == bienso).FirstOrDefaultAsync(); 
-            return Ok(new { data = obj });
-        }
         [HttpGet("GetListByBienSoXe/{bienso}")]
         public async Task<ActionResult<IEnumerable<PhieuSuaChua>>> GetListByBienSoXe(string bienso)
         {
-            var list=await _applicationDbContext.phieuSuaChuas.Where(u=>u.BienSoXe==bienso).ToListAsync();
+            var xe = _applicationDbContext.xes.FirstOrDefault(x => x.BienSo == bienso);
+            var list = await _applicationDbContext.phieuSuaChuas.Where(u => u.XeId == xe.Id).ToListAsync();
             if (list is not null) return Ok(list);
             return NotFound();
         }
         [HttpGet("GetListByMonthAndYear/{month}/{year}")]
         public async Task<ActionResult<IEnumerable<PhieuSuaChua>>> GetListByMonthAndYear(int month, int year)
         {
-            var list=await _applicationDbContext.phieuSuaChuas.Where(u => u.NgaySuaChua.Value.Month == month && u.NgaySuaChua.Value.Year == year).ToListAsync();
+            var list=await _applicationDbContext.phieuSuaChuas.Where(u => u.NgaySuaChua.Date.Month == month && u.NgaySuaChua.Date.Year == year).ToListAsync();
             if (list is not null) return Ok(list);
             return NotFound();
         }
