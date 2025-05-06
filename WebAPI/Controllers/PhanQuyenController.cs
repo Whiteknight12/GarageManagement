@@ -7,9 +7,9 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TaiKhoanController : BaseController<TaiKhoan>
+    public class PhanQuyenController : BaseController<PhanQuyen>
     {
-        public TaiKhoanController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
+        public PhanQuyenController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
     }
