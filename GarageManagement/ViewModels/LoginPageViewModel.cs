@@ -31,14 +31,13 @@ namespace GarageManagement.ViewModels
                 var toast=Toast.Make("Đăng nhập thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
                 if (_authenticationservice.CurrentRole == "Admin")
                 {
-                    await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
-                    await toast.Show();
+                    ((AppShell)Shell.Current).setupMenu("Admin");
                 }
                 else if (_authenticationservice.CurrentRole == "User")
                 {
-                    await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}");
-                    await toast.Show(); 
+                    ((AppShell)Shell.Current).setupMenu("User");
                 }
+                await toast.Show();
             }
             else
             {

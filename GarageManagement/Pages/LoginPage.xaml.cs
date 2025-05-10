@@ -10,6 +10,7 @@ public partial class LoginPage : ContentPage
 		InitializeComponent();
         BindingContext=new LoginPageViewModel(service);
     }
+
     public void OnRegisterTapped(object sender, EventArgs e)
     {
         
