@@ -34,7 +34,7 @@ namespace GarageManagement.ViewModels
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
                     await toast.Show();
                 }
-                else if (_authenticationservice.CurrentRole == "Member")
+                else if (_authenticationservice.CurrentRole == "User")
                 {
                     await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}");
                     await toast.Show(); 
