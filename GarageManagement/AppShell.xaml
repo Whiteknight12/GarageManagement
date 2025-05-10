@@ -9,6 +9,7 @@
     Shell.FlyoutBehavior="Disabled"
     Shell.FlyoutWidth="240"
     FlyoutBackgroundColor="White"
+    Shell.TitleColor="Black"
     Title="MyGara">
 
     <Shell.Resources>
@@ -55,5 +56,4 @@
     <ShellContent
         ContentTemplate="{DataTemplate page:LoginPage}"
         Route="LoginPage" />
-
 </Shell>

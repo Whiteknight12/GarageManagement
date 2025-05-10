@@ -24,6 +24,7 @@ namespace GarageManagement
                 Items.Add(new FlyoutItem
                 {
                     Title = "Tiếp nhận xe",
+                    Icon = "dotnet_bot.png",
                     Items = {new ShellContent
                     {
                         ContentTemplate = new DataTemplate(typeof(TiepNhanXePage))
@@ -36,6 +37,33 @@ namespace GarageManagement
                     Items = {new ShellContent
                     {
                         ContentTemplate = new DataTemplate(typeof(QuanLiXePage))
+                    } }
+                });
+                Items.Add(new FlyoutItem
+                {
+                    Title = "Lập phiếu sữa chữa",
+                    Icon = "dotnet_bot.png",
+                    Items = {new ShellContent
+                    {
+                        ContentTemplate = new DataTemplate(typeof(TaoPhieuSuaChuaPage))
+                    } }
+                });
+                Items.Add(new FlyoutItem
+                {
+                    Title = "Lập phiếu thu tiền",
+                    Icon = "dotnet_bot.png",
+                    Items = {new ShellContent
+                    {
+                        ContentTemplate = new DataTemplate(typeof(ThuTienPage))
+                    } }
+                });
+                Items.Add(new FlyoutItem
+                {
+                    Title = "Báo cáo doanh số",
+                    Icon = "dotnet_bot.png",
+                    Items = {new ShellContent
+                    {
+                        ContentTemplate = new DataTemplate(typeof(BaoCaoDoanhSoPage))
                     } }
                 });
             }

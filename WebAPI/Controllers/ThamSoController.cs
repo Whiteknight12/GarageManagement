@@ -9,11 +9,22 @@ using WebAPI.Models;
 namespace WebAPI.Controllers
 {
     //them role de phan quyen tham so 
-    [Authorize(Roles = "")]
+    //[Authorize(Roles = "")]
     [Route("api/[controller]")]
     [ApiController]
     public class ThamSoController : BaseController<ThamSo>
     {
-        public ThamSoController(ApplicationDbContext db) : base(db) { }
+        private readonly ApplicationDbContext _db; 
+        public ThamSoController(ApplicationDbContext db) : base(db) {
+            _db = db;
+        }
+
+        [HttpGet("GetSoXeTiepNhanToiDaMotNgay")]
+        public async Task<ActionResult<ThamSo>> GetSoXeTiepNhanToiDaMotNgay()
+        {
+            var result=await _db.thamSos.FirstOrDefaultAsync(u => u.TenThamSo == "SoXeTiepNhanToiDaMotNgay");
+            if (result is not null) return Ok(result);
+            return NotFound();
+        }
     }
 }

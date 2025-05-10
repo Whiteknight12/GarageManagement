@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] T entity)
+        public async Task<ActionResult<T>> Create([FromBody] T entity)
         {
             await _dbSet.AddAsync(entity);
             await _applicationDbContext.SaveChangesAsync();
