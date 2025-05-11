@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
@@ -17,15 +18,15 @@ namespace WebAPI.Controllers
             _applicationDbContext = applicationDbContext;
             _dbSet = applicationDbContext.Set<T>();
         }
-
+        
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<T>>> GetAll()
+        public virtual async Task<ActionResult<IEnumerable<T>>> GetAll()
         {
             return Ok(await _dbSet.ToListAsync());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<T>> GetById(Guid id)
+        public virtual async Task<ActionResult<T>> GetById(Guid id)
         {
             var entity = await _dbSet.FindAsync(id);
             if (entity == null) return NotFound();
@@ -33,7 +34,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] T entity)
+        public virtual async Task<ActionResult> Create([FromBody] T entity)
         {
             await _dbSet.AddAsync(entity);
             await _applicationDbContext.SaveChangesAsync();
@@ -41,7 +42,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Update([FromBody] T entity)
+        public virtual async Task<ActionResult> Update([FromBody] T entity)
         {
             _dbSet.Update(entity);
             await _applicationDbContext.SaveChangesAsync();
@@ -49,7 +50,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(Guid id)
+        public virtual async Task<ActionResult> Delete(Guid id)
         {
             var entity = await _dbSet.FindAsync(id);
             if (entity == null) return NotFound();

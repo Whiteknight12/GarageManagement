@@ -190,7 +190,7 @@ namespace GarageManagement.ViewModels
         {
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
             if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-            var currentaccount = JsonSerializer.Deserialize<UserAccountSession>(json);
+            var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
             if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}");
         }
         [RelayCommand]

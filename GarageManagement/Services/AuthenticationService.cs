@@ -7,7 +7,7 @@ namespace GarageManagement.Services
     public class AuthenticationService
     {
         private readonly HttpClient _httpclient;
-        private UserAccountSession currentaccount;
+        private taiKhoanSession currentaccount;
         private DateTime expireDate; 
         private string STORAGE_KEY="user-account-status";
         public AuthenticationService(string baseaddress)
@@ -25,7 +25,7 @@ namespace GarageManagement.Services
             });
             if (response is not null && response.IsSuccessStatusCode)
             {
-                currentaccount = await response.Content.ReadFromJsonAsync<UserAccountSession>();
+                currentaccount = await response.Content.ReadFromJsonAsync<taiKhoanSession>();
                 if (currentaccount is not null)
                 {
                     await SecureStorage.Default.SetAsync(STORAGE_KEY, JsonSerializer.Serialize(currentaccount));
@@ -34,10 +34,10 @@ namespace GarageManagement.Services
             }
             return result;
         }
-        public async Task FetUserAccountSession()
+        public async Task FettaiKhoanSession()
         {
             var currentaccountjson=await SecureStorage.Default.GetAsync(STORAGE_KEY);
-            if (currentaccountjson is not null) currentaccount=JsonSerializer.Deserialize<UserAccountSession>(currentaccountjson);
+            if (currentaccountjson is not null) currentaccount=JsonSerializer.Deserialize<taiKhoanSession>(currentaccountjson);
             if (DateTime.UtcNow >= currentaccount.Expiry) Logout();
         }
         public void Logout()
@@ -45,7 +45,7 @@ namespace GarageManagement.Services
             SecureStorage.Default.Remove(STORAGE_KEY);
             currentaccount = null;
         }
-        public UserAccountSession GetCurrentAccountStatus=>currentaccount;
+        public taiKhoanSession GetCurrentAccountStatus=>currentaccount;
         public string CurrentRole => currentaccount.Role;
     }
 }

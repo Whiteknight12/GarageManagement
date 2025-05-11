@@ -61,7 +61,7 @@ namespace GarageManagement.ViewModels
         {
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
             if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
-            var currentaccount = JsonSerializer.Deserialize<UserAccountSession>(json);
+            var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
             if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
         [RelayCommand]
@@ -135,7 +135,7 @@ namespace GarageManagement.ViewModels
             await _userservice.Update(selectedChuXe);
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
             if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
-            var currentaccount = JsonSerializer.Deserialize<UserAccountSession>(json);
+            var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
             if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
     }

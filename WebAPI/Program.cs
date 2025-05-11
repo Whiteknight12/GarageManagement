@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using WebAPI.Authorization;
 using WebAPI.Data;
+using WebAPI.Middlewares;
 using WebAPI.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -61,6 +64,8 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<JwtService>();
+builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicAuthorizationPolicyProvider>();
+builder.Services.AddScoped<IAuthorizationHandler, DynamicPermissionHandler>();
 
 var app = builder.Build();
 
@@ -70,12 +75,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ClaimsLoaderMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.Run();

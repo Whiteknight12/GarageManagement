@@ -161,16 +161,17 @@ namespace GarageManagement.ViewModels
             });
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
             if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
-            var currentaccount = JsonSerializer.Deserialize<UserAccountSession>(json);
-            if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
+            var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
+            if (currentaccount.Role == "User") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
+
         [RelayCommand]
         private async void Back()
         {
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
             if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
-            var currentaccount=JsonSerializer.Deserialize<UserAccountSession>(json);
-            if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
+            var currentaccount=JsonSerializer.Deserialize<taiKhoanSession>(json);
+            if (currentaccount.Role=="User") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
     }
 }

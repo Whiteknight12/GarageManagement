@@ -20,9 +20,9 @@ namespace WebAPI.Service
         public async Task<LoginResponseModel> Authentication(LoginRequestModel request)
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password)) return null;
-            var useraccount=await _db.taiKhoans.Where(x => x.TenDangNhap == request.Username && x.MatKhau == request.Password).FirstOrDefaultAsync();
-            var role = _db.nhomNguoiDungs.FirstOrDefault(u => u.Id == useraccount.NhomNguoiDungId); 
-            if (useraccount == null) return null;
+            var taiKhoan=await _db.taiKhoans.Where(x => x.TenDangNhap == request.Username && x.MatKhau == request.Password).FirstOrDefaultAsync();
+            var role = _db.nhomNguoiDungs.FirstOrDefault(u => u.Id == taiKhoan.NhomNguoiDungId); 
+            if (taiKhoan == null) return null;
             var issuer= _configuration["JwtConfig:Issuer"];
             var audience = _configuration["JwtConfig:Audience"];
             var key = _configuration["JwtConfig:Key"];
@@ -33,7 +33,7 @@ namespace WebAPI.Service
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Name, request.Username),
-                    new Claim(JwtRegisteredClaimNames.NameId, useraccount.Id.ToString()),
+                    new Claim(JwtRegisteredClaimNames.NameId, taiKhoan.Id.ToString()),
                     new Claim(ClaimTypes.Role, role.TenNhom) // Thêm Role vào Claims
                 }),
                 Expires = tokenexpirytimestamp,

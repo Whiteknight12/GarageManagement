@@ -17,6 +17,37 @@ namespace WebAPI.Controllers
             _applicationDbContext = applicationDbContext;
         }
 
+        
+        [HttpGet]
+        public override async Task<ActionResult<IEnumerable<Xe>>> GetAll()
+        {
+            return await base.GetAll();
+        }
+
+        [HttpGet("{id}")]
+        public virtual async Task<ActionResult<Xe>> GetById(Guid id)
+        {
+            return await base.GetById(id);
+        }
+
+        [HttpPost]
+        public virtual async Task<ActionResult> Create([FromBody] Xe entity)
+        {
+            return await base.Create(entity);
+        }
+
+        [HttpPut]
+        public virtual async Task<ActionResult> Update([FromBody] Xe entity)
+        {
+            return await base.Update(entity);
+        }
+
+        [HttpDelete("{id}")]
+        public virtual async Task<ActionResult> Delete(Guid id)
+        {
+            return await base.Delete(id);
+        }
+
         [HttpGet("GetByBienSo/{bienso}")]
         public async Task<ActionResult<Xe?>> GetXeByBienSo(string bienso)
         {

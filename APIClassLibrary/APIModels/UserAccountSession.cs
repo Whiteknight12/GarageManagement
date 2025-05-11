@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APIClassLibrary.APIModels
 {
-    public class UserAccountSession
+    public class taiKhoanSession
     {
         public string? Username { get; set; }
         public string? Token { get; set; }

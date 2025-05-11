@@ -26,7 +26,7 @@ namespace GarageManagement.ViewModels
             {
                 if (_authenticationservice.CurrentRole=="Admin")
                     await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
-                else if (_authenticationservice.CurrentRole=="Member") 
+                else if (_authenticationservice.CurrentRole=="User") 
                     await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}");
             }
             else await Shell.Current.DisplayAlert("Login Failed", "Invalid Username or Password", "OK");

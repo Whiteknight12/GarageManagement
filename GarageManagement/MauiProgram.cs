@@ -38,8 +38,12 @@ public static class MauiProgram
         builder.Services.AddAPIClientService<VatTuPhuTung>(x => x.BaseAddress = baseaddress, $"{nameof(VatTuPhuTung)}");
         builder.Services.AddAPIClientService<KhachHang>(x => x.BaseAddress = baseaddress, $"{nameof(KhachHang)}");
         builder.Services.AddAPIClientService<PhieuThuTien>(x => x.BaseAddress = baseaddress, $"{nameof(PhieuThuTien)}");
+        builder.Services.AddAPIClientService<PhanQuyen>(x => x.BaseAddress = baseaddress, $"{nameof(PhanQuyen)}");
+        builder.Services.AddAPIClientService<NhomNguoiDung>(x => x.BaseAddress = baseaddress, $"{nameof(NhomNguoiDung)}");
+        builder.Services.AddAPIClientService<ChucNang>(x => x.BaseAddress = baseaddress, $"{nameof(ChucNang)}");
+        builder.Services.AddAPIClientService<TaiKhoan>(x => x.BaseAddress = baseaddress, $"{nameof(TaiKhoan)}");
 
-		builder.Services.AddScoped<AuthenticationService>(provider=>
+        builder.Services.AddScoped<AuthenticationService>(provider=>
 		{
             return new AuthenticationService(baseaddress);
         });
