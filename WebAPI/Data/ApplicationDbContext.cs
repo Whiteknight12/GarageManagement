@@ -28,6 +28,8 @@ namespace WebAPI.Data
         public DbSet<ChiTietPhieuNhapVatTu> chiTietPhieuNhapVatTus { get; set; }
         public DbSet<BaoCaoDoanhThuThang> baoCaoDoanhThuThangs { get; set; }
         public DbSet<ChiTietBaoCaoDoanhThuThang> chiTietBaoCaoDoanhThuThangs { get; set; }
+        public DbSet<BaoCaoTon> baoCaoTons { get; set; }
+        public DbSet<ChiTietBaoCaoTon> chiTietBaoCaoTons { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Tạo GUID cho các nhóm người dùng
