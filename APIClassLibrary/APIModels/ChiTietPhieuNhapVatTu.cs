@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace APIClassLibrary.APIModels
 {
-    public class VatTuPhuTung
+    class ChiTietPhieuNhapVatTu
     {
-        public Guid VatTuPhuTungId { get; set; } 
-        public string TenLoaiVatTuPhuTung { get; set; }
+        public Guid PhieuNhapId { get; set; }
+        public Guid VatTuId { get; set; }
+        public double DonGia { get; set; }
         public int SoLuong { get; set; }
-        public double DonGiaBanLoaiVatTuPhuTung { get; set; }
     }
 }

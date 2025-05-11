@@ -16,5 +16,6 @@ namespace APIClassLibrary.APIModels
         public Guid KhachHangId { get; set; }
         public bool? KhaDung { get; set; }
         public double? TienNo { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

@@ -10,5 +10,6 @@ namespace WebAPI.Models
         public DateTime? NgayTiepNhan {  get; set; }
         //khoa ngoai 
         public Guid XeId { get; set; }
+        public bool DaHoanThanhBaoTri { get; set; }  
     }
 }
