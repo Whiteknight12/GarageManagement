@@ -23,6 +23,7 @@ namespace WebAPI.Data
         public DbSet<PhanQuyen> phanQuyens { get; set; }
         public DbSet<ChucNang> chucNangs { get; set; }
         public DbSet<KhachHang> khachHangs { get; set; }
+        public DbSet<NhanVien> nhanViens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
