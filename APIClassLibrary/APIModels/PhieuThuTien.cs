@@ -11,8 +11,9 @@ namespace APIClassLibrary.APIModels
         public Guid Id { get; set; }
         public Guid KhachHangId { get; set; }
         public Guid XeId { get; set; }
-        public string Email { get; set; }
+        //Email => trich xuat email tu khach hang  
         public DateTime NgayThuTien { get; set; }
-        public double SoTienThu { get; set; }
+        public double SoTienThu { get; set; } // tao bien ThamSo de check : so tien thu duoc phep vuot qua so tien dang no hay khong?  
+                                              // default: so tien thu khong duoc phep vuot qua so tien dang no 
     }
 }

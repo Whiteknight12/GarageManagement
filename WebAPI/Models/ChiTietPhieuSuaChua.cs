@@ -12,9 +12,8 @@ namespace WebAPI.Models
         public Guid TienCongId { get; set; }
 
         public string? NoiDung { get; set; }
-        // so luong VatTu (thuoc 1 loai) 
         public int SoLuong { get; set; }
-        public double DonGia { get; set; }
+        //DonGia => trich xuat tu VatTuPhuTung 
         public double ThanhTien {  get; set; } // = VatTu.DonGia * SoLuong + TienCong.Tien
     }
 }   

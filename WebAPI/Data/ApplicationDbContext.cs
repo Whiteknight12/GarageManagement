@@ -24,7 +24,10 @@ namespace WebAPI.Data
         public DbSet<ChucNang> chucNangs { get; set; }
         public DbSet<KhachHang> khachHangs { get; set; }
         public DbSet<NhanVien> nhanViens { get; set; }
-
+        public DbSet<PhieuNhapVatTu> phieuNhapVatTus { get; set; }
+        public DbSet<ChiTietPhieuNhapVatTu> chiTietPhieuNhapVatTus { get; set; }
+        public DbSet<BaoCaoDoanhThuThang> baoCaoDoanhThuThangs { get; set; }
+        public DbSet<ChiTietBaoCaoDoanhThuThang> chiTietBaoCaoDoanhThuThangs { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Tạo GUID cho các nhóm người dùng

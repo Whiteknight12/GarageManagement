@@ -27,15 +27,15 @@ public partial class TaoPhieuSuaChuaPage : ContentPage
 		{
 			if (picker.BindingContext is ChiTietPhieuSuaChua noidung)
 			{
-				noidung.DonGia = vtpt.DonGiaBanLoaiVatTuPhuTung;
-                if (noidung.TienCongId != null && noidung.SoLuong != null && noidung.VatTuPhuTungId != null)
-                {
-                    var tc = _viewmodel.listtiencong.Where(u => u.Id == noidung.TienCongId).FirstOrDefault();
-                    noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tc.DonGiaLoaiTienCong;
-                    noidung.OnPropertyChanged(nameof(noidung.ThanhTien));
-					_viewmodel.Tongthanhtien = _viewmodel.Listnoidung.Sum(u => u.ThanhTien ?? 0);
-                }
-                noidung.OnPropertyChanged(nameof(noidung.DonGia));
+				//noidung.DonGia = vtpt.DonGiaBanLoaiVatTuPhuTung;
+    //            if (noidung.TienCongId != null && noidung.SoLuong != null && noidung.VatTuPhuTungId != null)
+    //            {
+    //                var tc = _viewmodel.listtiencong.Where(u => u.Id == noidung.TienCongId).FirstOrDefault();
+    //                noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tc.DonGiaLoaiTienCong;
+    //                noidung.OnPropertyChanged(nameof(noidung.ThanhTien));
+				//	_viewmodel.Tongthanhtien = _viewmodel.Listnoidung.Sum(u => u.ThanhTien ?? 0);
+    //            }
+    //            noidung.OnPropertyChanged(nameof(noidung.DonGia));
 			}
 		}
 	}
@@ -45,10 +45,10 @@ public partial class TaoPhieuSuaChuaPage : ContentPage
 		{
 			if (noidung.TienCongId != null && noidung.SoLuong != null && noidung.VatTuPhuTungId != null)
 			{
-				var tc = _viewmodel.listtiencong.Where(u => u.Id == noidung.TienCongId).FirstOrDefault();
-				noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tc.DonGiaLoaiTienCong;
-				noidung.OnPropertyChanged(nameof(noidung.ThanhTien));
-                _viewmodel.Tongthanhtien = _viewmodel.Listnoidung.Sum(u => u.ThanhTien ?? 0);
+				//var tc = _viewmodel.listtiencong.Where(u => u.Id == noidung.TienCongId).FirstOrDefault();
+				//noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tc.DonGiaLoaiTienCong;
+				//noidung.OnPropertyChanged(nameof(noidung.ThanhTien));
+    //            _viewmodel.Tongthanhtien = _viewmodel.Listnoidung.Sum(u => u.ThanhTien ?? 0);
             }
 		}
 	}
@@ -56,12 +56,12 @@ public partial class TaoPhieuSuaChuaPage : ContentPage
 	{
         if (sender is Picker picker && picker.BindingContext is ChiTietPhieuSuaChua noidung && picker.SelectedItem is TienCong tiencong)
         {
-            if (noidung.TienCongId != null && noidung.SoLuong != null && noidung.VatTuPhuTungId != null)
-            {
-				noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tiencong.DonGiaLoaiTienCong;
-                noidung.OnPropertyChanged(nameof(noidung.ThanhTien));
-                _viewmodel.Tongthanhtien = _viewmodel.Listnoidung.Sum(u => u.ThanhTien ?? 0);
-            }
+    //        if (noidung.TienCongId != null && noidung.SoLuong != null && noidung.VatTuPhuTungId != null)
+    //        {
+				//noidung.ThanhTien = (noidung.SoLuong * noidung.DonGia) + tiencong.DonGiaLoaiTienCong;
+    //            noidung.OnPropertyChanged(nameof(noidung.ThanhTien));
+    //            _viewmodel.Tongthanhtien = _viewmodel.Listnoidung.Sum(u => u.ThanhTien ?? 0);
+    //        }
         }
     }
 

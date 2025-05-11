@@ -120,14 +120,14 @@ namespace GarageManagement.ViewModels
                 selectedChuXe.Email= email;
                 await _userservice.Update(SelectedChuXe);
             }
-            await _phieuthuservice.Create(new PhieuThuTien
-            {
-                Email = email,
-                NgayThuTien = ngayThuTien,
-                SoTienThu = double.Parse(soTienThu),
-                XeId=selectedBienSo.Id,
-                KhachHangId=selectedChuXe.Id
-            });
+            //await _phieuthuservice.Create(new PhieuThuTien
+            //{
+            //    Email = email,
+            //    NgayThuTien = ngayThuTien,
+            //    SoTienThu = double.Parse(soTienThu),
+            //    XeId=selectedBienSo.Id,
+            //    KhachHangId=selectedChuXe.Id
+            //});
             selectedChuXe.TienNo -= double.Parse(soTienThu);
             selectedBienSo.TienNo-= double.Parse(soTienThu);
             if (selectedBienSo.TienNo == 0) selectedBienSo.KhaDung = false;

@@ -127,11 +127,11 @@ namespace GarageManagement.ViewModels
                     await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong tien cong!", "OK");
                     return;
                 }
-                if (item.DonGia is null)
-                {
-                    await Shell.Current.DisplayAlert("Error", "Co ve nhu co loi xay ra", "OK");
-                    return;
-                }
+                //if (item.DonGia is null)
+                //{
+                //    await Shell.Current.DisplayAlert("Error", "Co ve nhu co loi xay ra", "OK");
+                //    return;
+                //}
                 string tmp = item.SoLuong.ToString() ?? "";
                 if (item.SoLuong is null || !tmp.All(Char.IsDigit))
                 {
@@ -157,16 +157,16 @@ namespace GarageManagement.ViewModels
             });
             foreach (var item in listnoidung)
             {
-                await _noidungphieuservice.Create(new ChiTietPhieuSuaChua
-                {
-                    NoiDung = item.NoiDung,
-                    PhieuSuaChuaId=obj.Id,
-                    VatTuPhuTungId=item.VatTuPhuTungId,
-                    TienCongId=item.TienCongId,
-                    SoLuong=item.SoLuong,
-                    DonGia=item.DonGia,
-                    ThanhTien=item.ThanhTien
-                });
+                //await _noidungphieuservice.Create(new ChiTietPhieuSuaChua
+                //{
+                //    NoiDung = item.NoiDung,
+                //    PhieuSuaChuaId=obj.Id,
+                //    VatTuPhuTungId=item.VatTuPhuTungId,
+                //    TienCongId=item.TienCongId,
+                //    SoLuong=item.SoLuong,
+                //    DonGia=item.DonGia,
+                //    ThanhTien=item.ThanhTien
+                //});
             }
             if (xe is null)
             {
