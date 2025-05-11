@@ -1,5 +1,6 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Pages;
@@ -112,7 +113,12 @@ namespace GarageManagement.ViewModels
             {
                 await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong bien so xe", "OK");
                 return;
-            } 
+            }
+            if (ListNoiDung.Count == 0)
+            {
+                await Shell.Current.DisplayAlert("Error", "Không có nội dung sữa chữa", "OK");
+                return;
+            }
             foreach (var item in ListNoiDung)
             {
                 if (string.IsNullOrEmpty(item.NoiDung))
@@ -166,6 +172,11 @@ namespace GarageManagement.ViewModels
                 NgaySuaChua = NgaySuaChua,
                 TongTien=TongThanhTien
             });
+            if (obj is null)
+            {
+                await Shell.Current.DisplayAlert("Error", "Tao phieu sua chua moi that bai", "OK");
+                return;
+            }
             foreach (var item in ListNoiDung)
             {
                 await _noidungphieuservice.Create(new ChiTietPhieuSuaChua
@@ -182,7 +193,10 @@ namespace GarageManagement.ViewModels
             xe.TienNo += TongThanhTien;
             await _userservice.Update(checkuser);
             await _carservice.Update(xe);
-            
+            var toast = Toast.Make("Thêm phiếu sữa chữa mới thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
+            await toast.Show();
+            SelectedBienSoXe = null;
+            ListNoiDung = new ObservableCollection<ChiTietPhieuSuaChua>();
         }
 
         [RelayCommand]
