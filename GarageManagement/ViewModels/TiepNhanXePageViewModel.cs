@@ -53,7 +53,7 @@ namespace GarageManagement.ViewModels
             _carservice = carservice;
             _hieuxeservice = hieuxeservice;
             _userservice = userservice;
-            LoadAsync();
+            _=LoadAsync();
         }
 
         public async Task LoadAsync()
@@ -108,19 +108,19 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Error", "Ngay Tiep Nhan Khong Duoc Bo Trong", "OK");
                 return;
             }
-            if (ngaytiepnhan.Date<DateTime.Today)
+            if (ngaytiepnhan.Date < DateTime.Today)
             {
                 await Shell.Current.DisplayAlert("Error", "Ngay tiep nhan khong duoc nho hon ngay hien tai", "OK");
                 return;
             }
-            ThamSo rulemodel = await _ruleservice.GetThroughtSpecialRoute("GetRule");
+            ThamSo soXeTiepNhanToiDaMotNgay = await _ruleservice.GetThroughtSpecialRoute("GetSoXeTiepNhanToiDaMotNgay");
             List<PhieuTiepNhan> carRecords = await _recordservice.GetAll();
             int c = 0;
             foreach (PhieuTiepNhan record in carRecords)
             {
                 if (record.NgayTiepNhan.Value.Date == DateTime.Today) c++;
             }
-            if (c>=rulemodel.SoXeTiepNhanToiDaMotNgay)
+            if (c >= soXeTiepNhanToiDaMotNgay.GiaTri)
             {
                 await Shell.Current.DisplayAlert("Error", "Vuot qua so xe tiep nhan toi da mot ngay", "OK");
                 return;
@@ -128,15 +128,28 @@ namespace GarageManagement.ViewModels
             var checkcar = await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{bienso}");
             if (checkcar is null)
             {
-                KhachHang khachHang=await _userservice.GetThroughtSpecialRoute($"GetByPhoneNumber/{dienthoai}");
+                KhachHang khachHang = await _userservice.GetThroughtSpecialRoute($"GetByPhoneNumber/{dienthoai}");
+                if (khachHang is null)
+                {
+                    khachHang=await _userservice.Create(new KhachHang
+                    {
+                        Id = Guid.NewGuid(),
+                        HoVaTen = tenchuxe,
+                        DiaChi = diachi,
+                        SoDienThoai = dienthoai,
+                        DaCoTaiKhoan = false,
+                        TienNo = 0
+                    });
+                }
                 await _carservice.Create(new Xe
                 {
+                    Id=Guid.NewGuid(),
                     Ten = tenxe,
-                    HieuXeId=selectedmodel.Id,
+                    HieuXeId = selectedmodel.Id,
                     BienSo = bienso,
-                    KhachHangId= khachHang.Id,
+                    KhachHangId = khachHang.Id,
                     KhaDung = true,
-                    TienNo=0 
+                    TienNo = 0
                 });
             }
             else
@@ -144,34 +157,16 @@ namespace GarageManagement.ViewModels
                 checkcar.KhaDung = true;
                 await _carservice.Update(checkcar);
             }
-            var xe=await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{bienso}");
+            var xe = await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{bienso}");
             await _recordservice.Create(new PhieuTiepNhan
             {
                 XeId = xe.Id,
                 NgayTiepNhan = ngaytiepnhan
             });
-            var checkuser = await _userservice.GetThroughtSpecialRoute($"GetByPhoneNumber/{dienthoai}");
-            if (checkuser is null) await _userservice.Create(new KhachHang
-            {
-                HoVaTen=tenchuxe,
-                DiaChi=diachi,
-                SoDienThoai=dienthoai,
-                DaCoTaiKhoan=false,
-                TienNo=0
-            });
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
             if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
-            var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
-            if (currentaccount.Role == "User") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
-        }
-
-        [RelayCommand]
-        private async void Back()
-        {
-            var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
-            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
-            var currentaccount=JsonSerializer.Deserialize<taiKhoanSession>(json);
-            if (currentaccount.Role=="User") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
+            var currentaccount = JsonSerializer.Deserialize<UserAccountSession>(json);
+            return;
         }
     }
 }

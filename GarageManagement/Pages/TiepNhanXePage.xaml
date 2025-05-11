@@ -1,37 +1,134 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GarageManagement.Pages.TiepNhanXePage">
-    <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
-            <Label Text="Tên Chủ Xe" FontSize="Medium"/>
-            <Entry x:Name="txtTenChuXe" Placeholder="Nhập tên chủ xe" Text="{Binding Tenchuxe, Mode=TwoWay}"/>
-            
-            <Label Text="Tên Xe" FontSize="Medium"/>
-            <Entry x:Name="txtTenXe" Placeholder="Nhập tên xe" Text="{Binding Tenxe, Mode=TwoWay}"/>
-            
-            <Label Text="Biển Số" FontSize="Medium"/>
-            <Entry x:Name="txtBienSo" Placeholder="Nhập biển số xe" Text="{Binding Bienso, Mode=TwoWay}"/>
-            
-            <Label Text="Hiệu Xe" FontSize="Medium"/>
-            <Picker x:Name="CarListView"
-              ItemsSource="{Binding Listmodel}"
-              SelectedItem="{Binding Selectedmodel}"
-              ItemDisplayBinding="{Binding TenHieuXe}"
-              HorizontalOptions="Fill"
-              VerticalOptions="Start"/>
+             x:Class="GarageManagement.Pages.TiepNhanXePage"
+             BackgroundColor="Bisque"
+             Shell.NavBarIsVisible="False">
+    <ScrollView Margin="20">
+        <Frame CornerRadius="20"
+            BackgroundColor="White"
+            BorderColor="Black"
+            Padding="20"
+            MaximumWidthRequest="800"
+            HasShadow="True">
 
-            <Label Text="Địa Chỉ" FontSize="Medium"/>
-            <Entry x:Name="txtDiaChi" Placeholder="Nhập địa chỉ chủ xe" Text="{Binding Diachi, Mode=TwoWay}"/>
-            
-            <Label Text="Điện Thoại" FontSize="Medium"/>
-            <Entry x:Name="txtDienThoai" Placeholder="Nhập số điện thoại" Keyboard="Telephone" Text="{Binding Dienthoai, Mode=TwoWay}"/>
-            
-            <Label Text="Ngày Tiếp Nhận" FontSize="Medium"/>
-            <DatePicker x:Name="dpNgayTiepNhan" Date="{Binding Ngaytiepnhan, Mode=TwoWay}"/>
+            <VerticalStackLayout Spacing="15">
+                <Label Text="TIẾP NHẬN XE MỚI" TextColor="Black" HorizontalTextAlignment="Center" FontSize="40"/>
+                <Label Text="Tên Chủ Xe"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+                <Frame CornerRadius="10"
+                   BorderColor="Black"
+                   Padding="0"
+                   HasShadow="False">
+                    <Entry x:Name="txtTenChuXe"
+                       BackgroundColor="LightGray"
+                       Placeholder="Nhập tên chủ xe"
+                       Text="{Binding Tenchuxe, Mode=TwoWay}"
+                       TextColor="Black"
+                       HorizontalOptions="Fill"/>
+                </Frame>
 
-            <Button Text="Lưu" BackgroundColor="Blue" TextColor="White" Command="{Binding AddNewCarRecordCommand, Mode=TwoWay}"/>
-            <Button Text="Quay Lại" BackgroundColor="Gray" TextColor="Black" Command="{Binding BackCommand}"/>
-        </VerticalStackLayout>
+                <Label Text="Tên Xe"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+                <Frame CornerRadius="10"
+                   BorderColor="Black"
+                   Padding="0"
+                   HasShadow="False">
+                    <Entry x:Name="txtTenXe"
+                       BackgroundColor="LightGray"
+                       Placeholder="Nhập tên xe"
+                       Text="{Binding Tenxe, Mode=TwoWay}"
+                       TextColor="Black"
+                       HorizontalOptions="Fill"/>
+                </Frame>
+
+                <Label Text="Biển Số"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+                <Frame CornerRadius="10"
+                   BorderColor="Black"
+                   Padding="0"
+                   HasShadow="False">
+                    <Entry x:Name="txtBienSo"
+                       Placeholder="Nhập biển số xe"
+                       Text="{Binding Bienso, Mode=TwoWay}"
+                       TextColor="Black"
+                       BackgroundColor="LightGray"
+                       HorizontalOptions="Fill"/>
+                </Frame>
+
+                <Label Text="Hiệu Xe"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+                <Frame CornerRadius="10"
+                   BorderColor="Black"
+                   Padding="0"
+                   HasShadow="False">
+                    <Picker x:Name="CarListView"
+                        ItemsSource="{Binding Listmodel}"
+                        SelectedItem="{Binding Selectedmodel}"
+                        ItemDisplayBinding="{Binding TenHieuXe}"
+                        HorizontalOptions="Fill"
+                        BackgroundColor="LightGray"
+                        TextColor="Black"/>
+                </Frame>
+
+                <Label Text="Địa Chỉ"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+                <Frame CornerRadius="10"
+                   BorderColor="Black"
+                   Padding="0"
+                   HasShadow="False">
+                    <Entry x:Name="txtDiaChi"
+                       Placeholder="Nhập địa chỉ chủ xe"
+                       Text="{Binding Diachi, Mode=TwoWay}"
+                       TextColor="Black"
+                        BackgroundColor="LightGray"
+                       HorizontalOptions="Fill"/>
+                </Frame>
+
+                <Label Text="Điện Thoại"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+                <Frame CornerRadius="10"
+                   BorderColor="Black"
+                   Padding="0"
+                   HasShadow="False">
+                    <Entry x:Name="txtDienThoai"
+                       Placeholder="Nhập số điện thoại"
+                       Keyboard="Telephone"
+                       Text="{Binding Dienthoai, Mode=TwoWay}"
+                       TextColor="Black"
+                       BackgroundColor="LightGray"
+                       HorizontalOptions="Fill"/>
+                </Frame>
+
+                <Label Text="Ngày Tiếp Nhận"
+                   FontSize="Medium"
+                   TextColor="Black"/>
+                <Frame CornerRadius="10"
+                   BorderColor="Black"
+                   Padding="10,5"
+                       BackgroundColor="LightGray"
+                   HasShadow="False">
+                    <DatePicker x:Name="dpNgayTiepNhan"
+                        TextColor="Black"
+                        Date="{Binding Ngaytiepnhan, Mode=TwoWay}"
+                        HorizontalOptions="Fill"/>
+                </Frame>
+
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Button Text="Lưu"
+                        BackgroundColor="Blue"
+                        TextColor="White"
+                        CornerRadius="10"
+                        WidthRequest="300"
+                        Command="{Binding AddNewCarRecordCommand}"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
     </ScrollView>
 </ContentPage>
