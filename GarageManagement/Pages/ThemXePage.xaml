@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.ThemXePage"
+             BackgroundColor="#F3F4F6">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Frame CornerRadius="20" Padding="20" BackgroundColor="White" HasShadow="True">
+                <VerticalStackLayout Spacing="16">
+
+                    <Label Text="THÊM XE MỚI" FontAttributes="Bold" FontSize="20" TextColor="#1F2937" />
+
+                    <Entry Placeholder="Tên xe"
+                           Text="{Binding TenXe}"
+                           TextColor="Black"
+                           BackgroundColor="#F9FAFB"
+                           HeightRequest="50"/>
+
+                    <Label Text="Hiệu xe" FontAttributes="Bold" FontSize="16" TextColor="Black"/>
+                    <Picker
+                        Title="Chọn hiệu xe"
+                        ItemsSource="{Binding DanhSachHieuXe}"
+                        ItemDisplayBinding="{Binding TenHieuXe}"
+                        SelectedItem="{Binding SelectedHieuXe, Mode=TwoWay}"
+                        TextColor="Black"
+                        BackgroundColor="#F9FAFB"
+                        HeightRequest="50"
+                        TitleColor="#9CA3AF" />
+
+                    <Entry Placeholder="Biển số xe"
+                           Text="{Binding BienSoXe}"
+                           BackgroundColor="#F9FAFB"
+                           HeightRequest="50" />
+
+                    <Entry Placeholder="Số điện thoại chủ xe"
+                           Text="{Binding SoDienThoai}"
+                           TextColor="Black"
+                           Keyboard="Telephone"
+                           BackgroundColor="#F9FAFB"
+                           HeightRequest="50" />
+
+                    <Frame IsVisible="{Binding ChuXeExist}"
+                           CornerRadius="12"
+                           Padding="15"
+                           BackgroundColor="#E0F2F1"
+                           HasShadow="True">
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="Chủ xe đã tồn tại trong hệ thống"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="#065F46" />
+                            <Label Text="{Binding HoVaTen}" TextColor="Black" FontSize="14" />
+                            <Label Text="{Binding SoDienThoai}" TextColor="Black" FontSize="14" />
+                            <Label Text="{Binding DiaChi}" TextColor="Black" FontSize="14" />
+                            <Button Text="Xem chi tiết"
+                                    Command="{Binding XemChiTietChuXeCommand}"
+                                    BackgroundColor="#3B82F6"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    HeightRequest="40"/>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Button x:Name="btnThemChuXe"
+                            Text="Thêm chủ xe"
+                            BackgroundColor="#10B981"
+                            TextColor="White"
+                            IsVisible="{Binding ChuXeNotExist}"
+                            CornerRadius="10"
+                            HeightRequest="40"/>
+
+                    <Label Text="Ảnh xe" FontAttributes="Bold" FontSize="16" />
+                    <Image x:Name="imgXe"
+                           HeightRequest="150"
+                           Aspect="AspectFill"
+                           BackgroundColor="#E5E7EB" />
+                    <Button Text="Chọn ảnh từ thiết bị"
+                            x:Name="btnChonAnh"
+                            BackgroundColor="#6B7280"
+                            TextColor="White"
+                            CornerRadius="10"
+                            HeightRequest="45" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="Lưu Xe Mới"
+                    BackgroundColor="#2563EB"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="50"
+                    Command="{Binding SaveButtonClickCommand}"
+                    FontAttributes="Bold"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

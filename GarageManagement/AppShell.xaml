@@ -56,4 +56,4 @@
     <ShellContent
         ContentTemplate="{DataTemplate page:LoginPage}"
         Route="LoginPage" />
-</Shell>
+</Shell>        

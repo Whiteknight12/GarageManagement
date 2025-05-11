@@ -2,6 +2,7 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using GarageManagement.Services;
 
 namespace GarageManagement.ViewModels
@@ -111,21 +112,21 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        public async Task ViewCarDetailsCommand()
+        public async Task ViewCarDetails()
         {
 
         }
 
         [RelayCommand]
-        public async Task ViewCarOwnerDetailsCommand()
+        public async Task ViewCarOwnerDetails()
         {
 
         }
 
         [RelayCommand]
-        public async Task AddNewCarCommand()
+        public async Task AddNewCar()
         {
-
+            await Shell.Current.GoToAsync($"{nameof(ThemXePage)}");
         }
     }
 }

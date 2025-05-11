@@ -9,6 +9,7 @@ namespace GarageManagement
             InitializeComponent();
             FlyoutBehavior = FlyoutBehavior.Disabled;
             ItemTemplate = (DataTemplate)Resources["NavItemTemplate"];
+            Routing.RegisterRoute(nameof(ThemXePage), typeof(ThemXePage));
         }
 
         public void setupMenu(string role)

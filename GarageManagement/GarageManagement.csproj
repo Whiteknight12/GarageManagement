@@ -89,6 +89,9 @@
 	  <MauiXaml Update="Pages\TaoPhieuSuaChuaPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\ThemXePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\ThuTienPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

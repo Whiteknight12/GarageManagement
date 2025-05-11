@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
             _applicationDbContext = applicationDbContext;
         }
 
-        [HttpGet("GetByPhoneNumber/{phonenumber}")]
+        [HttpGet("PhoneNumber/{phonenumber}")]
         public async Task<ActionResult<KhachHang>> GetByPhoneNumber(string phonenumber)
         {
             var user = await _applicationDbContext.khachHangs.Where(u => u.SoDienThoai == phonenumber).FirstOrDefaultAsync();

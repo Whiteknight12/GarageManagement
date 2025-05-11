@@ -15,9 +15,4 @@ public partial class TiepNhanXePage : ContentPage
 		InitializeComponent();
 		BindingContext = new TiepNhanXePageViewModel(service, ruleService, carService, hieuxeService, userService, groupService);
 	}
-
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-		base.OnNavigatedTo(args);
-    }
 }
