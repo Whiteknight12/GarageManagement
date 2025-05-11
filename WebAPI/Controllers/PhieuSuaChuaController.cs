@@ -31,5 +31,35 @@ namespace WebAPI.Controllers
             if (list is not null) return Ok(list);
             return NotFound();
         }
+
+        [HttpGet]
+        public override async Task<ActionResult<IEnumerable<PhieuSuaChua>>> GetAll()
+        {
+            return await base.GetAll();
+        }
+
+        [HttpGet("{id}")]
+        public override async Task<ActionResult<PhieuSuaChua>> GetById(Guid id)
+        {
+            return await base.GetById(id);
+        }
+
+        [HttpPost]
+        public override async Task<ActionResult<PhieuSuaChua>> Create([FromBody] PhieuSuaChua entity)
+        {
+            return await base.Create(entity);
+        }
+
+        [HttpPut]
+        public override async Task<ActionResult> Update([FromBody] PhieuSuaChua entity)
+        {
+            return await base.Update(entity);
+        }
+
+        [HttpDelete("{id}")]
+        public override async Task<ActionResult> Delete(Guid id)
+        {
+            return await base.Delete(id);
+        }
     }
 }
