@@ -27,25 +27,25 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<KhachHang> _userservice;
 
         [ObservableProperty]
-        private ObservableCollection<string> listbiensoxe=new ObservableCollection<string>();
+        private ObservableCollection<string> listBienSoXe=new ObservableCollection<string>();
 
         [ObservableProperty]
-        private string selectedbiensoxe;
+        private string selectedBienSoXe;
 
         [ObservableProperty]
-        private DateTime ngaysuachua=DateTime.Now;
+        private DateTime ngaySuaChua=DateTime.Now;
 
         [ObservableProperty]
-        private ObservableCollection<ChiTietPhieuSuaChua> listnoidung = new ObservableCollection<ChiTietPhieuSuaChua>();
+        private ObservableCollection<ChiTietPhieuSuaChua> listNoiDung = new ObservableCollection<ChiTietPhieuSuaChua>();
 
         [ObservableProperty]
-        public ObservableCollection<TienCong> listtiencong=new ObservableCollection<TienCong>();
+        public ObservableCollection<TienCong> listTienCong=new ObservableCollection<TienCong>();
 
         [ObservableProperty]
-        private ObservableCollection<VatTuPhuTung> listvattuphutung=new ObservableCollection<VatTuPhuTung>();
+        private ObservableCollection<VatTuPhuTung> listVatTuPhuTung=new ObservableCollection<VatTuPhuTung>();
 
         [ObservableProperty]
-        private double tongthanhtien=0;
+        private double tongThanhTien=0;
 
         public TaoPhieuSuaChuaPageViewModel(APIClientService<Xe> carservice, 
             APIClientService<TienCong> tiencongservice,
@@ -60,57 +60,60 @@ namespace GarageManagement.ViewModels
             _noidungphieuservice = noidungphieuservice;
             _phieuservice = phieuservice;
             _userservice = userservice;
-            _ = LoadAsync();
         }
+
         public async Task LoadAsync()
         {
             var listcar = await _carservice.GetAll();
             if (listcar is not null)
             {
-                listbiensoxe.Clear();
+                ListBienSoXe.Clear();
                 foreach (var car in listcar)
                 {
-                    listbiensoxe.Add(car.BienSo);
+                    ListBienSoXe.Add(car.BienSo);
                 }
-                OnPropertyChanged(nameof(Listbiensoxe));
+                OnPropertyChanged(nameof(ListBienSoXe));
             }
             var listcong = await _tiencongservice.GetAll();
             if (listcong is not null)
             {
-                listtiencong.Clear();
-                foreach (var tiencong in listcong) listtiencong.Add(tiencong);
-                OnPropertyChanged(nameof(Listtiencong));
+                ListTienCong.Clear();
+                foreach (var tiencong in listcong) ListTienCong.Add(tiencong);
+                OnPropertyChanged(nameof(ListTienCong));
             }
             var listphutung = await _vattuservice.GetAll();
             if (listphutung is not null)
             {
-                listvattuphutung.Clear();
-                foreach (var vattu in listphutung) listvattuphutung.Add(vattu);
-                OnPropertyChanged(nameof(Listvattuphutung));
+                ListVatTuPhuTung.Clear();
+                foreach (var vattu in listphutung) ListVatTuPhuTung.Add(vattu);
+                OnPropertyChanged(nameof(ListVatTuPhuTung));
             }
-            listnoidung.Add(new ChiTietPhieuSuaChua
+            if (ListNoiDung.Count==0)
             {
-                //tang index cua noi dung duoc them vao 
-            });
+                ListNoiDung.Add(new ChiTietPhieuSuaChua
+                {
+                    NoiDungId=index++
+                });
+            }
         }
 
         [RelayCommand]
         public void ThemNoiDungSuaChua()
         {
-            listnoidung.Add(new ChiTietPhieuSuaChua
+            ListNoiDung.Add(new ChiTietPhieuSuaChua
             {
-                //tang index cua noi dung duoc them vao
+                NoiDungId = index++
             });
         }
         [RelayCommand]
         public async void LuuPhieuSuaChua()
         {
-            if (selectedbiensoxe is null)
+            if (SelectedBienSoXe is null)
             {
                 await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong bien so xe", "OK");
                 return;
             } 
-            foreach (var item in listnoidung)
+            foreach (var item in ListNoiDung)
             {
                 if (string.IsNullOrEmpty(item.NoiDung))
                 {
@@ -127,11 +130,6 @@ namespace GarageManagement.ViewModels
                     await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong tien cong!", "OK");
                     return;
                 }
-                //if (item.DonGia is null)
-                //{
-                //    await Shell.Current.DisplayAlert("Error", "Co ve nhu co loi xay ra", "OK");
-                //    return;
-                //}
                 string tmp = item.SoLuong.ToString() ?? "";
                 if (item.SoLuong is null || !tmp.All(Char.IsDigit))
                 {
@@ -143,31 +141,13 @@ namespace GarageManagement.ViewModels
                     await Shell.Current.DisplayAlert("Error", "Co ve nhu co loi xay ra", "OK");
                     return;
                 }
-                if (ngaysuachua.Date<DateTime.Now.Date)
+                if (NgaySuaChua.Date<DateTime.Now.Date)
                 {
                     await Shell.Current.DisplayAlert("Error", "Ngay sua chua khong duoc nho hon ngay hien tai!", "OK");
                     return;
                 }
             }
-            Xe xe=await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{selectedbiensoxe}");
-            PhieuSuaChua obj=await _phieuservice.Create(new PhieuSuaChua
-            {
-                XeId= xe.Id, 
-                NgaySuaChua =ngaysuachua
-            });
-            foreach (var item in listnoidung)
-            {
-                //await _noidungphieuservice.Create(new ChiTietPhieuSuaChua
-                //{
-                //    NoiDung = item.NoiDung,
-                //    PhieuSuaChuaId=obj.Id,
-                //    VatTuPhuTungId=item.VatTuPhuTungId,
-                //    TienCongId=item.TienCongId,
-                //    SoLuong=item.SoLuong,
-                //    DonGia=item.DonGia,
-                //    ThanhTien=item.ThanhTien
-                //});
-            }
+            Xe xe=await _carservice.GetThroughtSpecialRoute($"BienSo/{SelectedBienSoXe}");
             if (xe is null)
             {
                 await Shell.Current.DisplayAlert("Error", "Khong tim thay xe co bien so tren", "OK");
@@ -179,27 +159,39 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Error", "Khong tim chu xe cua xe co bien so tren", "OK");
                 return;
             }
-            checkuser.TienNo += tongthanhtien;
-            xe.TienNo += tongthanhtien;
+            PhieuSuaChua obj=await _phieuservice.Create(new PhieuSuaChua
+            {
+                Id=Guid.NewGuid(),
+                XeId= xe.Id, 
+                NgaySuaChua = NgaySuaChua,
+                TongTien=TongThanhTien
+            });
+            foreach (var item in ListNoiDung)
+            {
+                await _noidungphieuservice.Create(new ChiTietPhieuSuaChua
+                {
+                    NoiDung = item.NoiDung,
+                    PhieuSuaChuaId = obj.Id,
+                    VatTuPhuTungId = item.VatTuPhuTungId,
+                    TienCongId = item.TienCongId,
+                    SoLuong = item.SoLuong,
+                    ThanhTien = item.ThanhTien
+                });
+            }
+            checkuser.TienNo += TongThanhTien;
+            xe.TienNo += TongThanhTien;
             await _userservice.Update(checkuser);
             await _carservice.Update(xe);
-            await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}");
+            
         }
+
         [RelayCommand]
-        public async void BackToMainPage()
+        public void Remove(int itemid)
         {
-            var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
-            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
-            var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
-            if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}");
-        }
-        [RelayCommand]
-        public void Remove(Guid itemid)
-        {
-            var item=listnoidung.Where(u=>u.PhieuSuaChuaId == itemid).FirstOrDefault();
-            if (item != null) listnoidung.Remove(item);
-            tongthanhtien=listnoidung.Sum(u=>u.ThanhTien ?? 0);
-            OnPropertyChanged(nameof(tongthanhtien));
+            var item=ListNoiDung.Where(u=>u.NoiDungId == itemid).FirstOrDefault();
+            if (item != null) ListNoiDung.Remove(item);
+            TongThanhTien=ListNoiDung.Sum(u=>u.ThanhTien ?? 0);
+            OnPropertyChanged(nameof(TongThanhTien));
         }
     }
 }
