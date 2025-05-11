@@ -6,18 +6,18 @@ namespace GarageManagement.Pages;
 
 public partial class TiepNhanXePage : ContentPage
 {
-	public TiepNhanXePage(APIClientService<PhieuTiepNhan> service, APIClientService<ThamSo> ruleservice, 
-		APIClientService<Xe> carservice,
-		APIClientService<HieuXe> hieuxeservice,
-		APIClientService<KhachHang> userservice)
+	public TiepNhanXePage(APIClientService<PhieuTiepNhan> service, APIClientService<ThamSo> ruleService, 
+		APIClientService<Xe> carService,
+		APIClientService<HieuXe> hieuxeService,
+		APIClientService<KhachHang> userService,
+		APIClientService<NhomNguoiDung> groupService)
 	{
 		InitializeComponent();
-		BindingContext = new TiepNhanXePageViewModel(service, ruleservice, carservice, hieuxeservice, userservice);
+		BindingContext = new TiepNhanXePageViewModel(service, ruleService, carService, hieuxeService, userService, groupService);
 	}
 
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        base.OnNavigatedTo(args);
-		if (BindingContext is TiepNhanXePageViewModel viewmodel) viewmodel.LoadAsync();
+		base.OnNavigatedTo(args);
     }
 }

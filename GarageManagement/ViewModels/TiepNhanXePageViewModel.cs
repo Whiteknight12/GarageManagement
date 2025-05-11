@@ -19,154 +19,123 @@ namespace GarageManagement.ViewModels
     public partial class TiepNhanXePageViewModel: BaseViewModel
     {
         [ObservableProperty]
-        private string tenchuxe;
+        private string tenChuXe;
         [ObservableProperty]
-        private string tenxe;
+        private string tenXe;
         [ObservableProperty]
-        private string bienso;
+        private string bienSo;
         [ObservableProperty]
-        private string diachi;
+        private string diaChi;
         [ObservableProperty]
-        private string dienthoai;
+        private string soDienThoai;
         [ObservableProperty]
-        private DateTime ngaytiepnhan=DateTime.Now;
+        private DateTime ngayTiepNhan=DateTime.Now;
         [ObservableProperty]
-        private ObservableCollection<HieuXe> listmodel = new ObservableCollection<HieuXe>();
+        private bool isCarExists = false;
         [ObservableProperty]
-        private HieuXe selectedmodel;
+        private bool isCarNotFound = true; 
 
         private string STORAGE_KEY = "user-account-status";
-        private readonly APIClientService<PhieuTiepNhan> _recordservice;
-        private readonly APIClientService<ThamSo> _ruleservice;
-        private readonly APIClientService<Xe> _carservice;
-        private readonly APIClientService<HieuXe> _hieuxeservice;
-        private readonly APIClientService<KhachHang> _userservice;
-        private readonly UniqueConstraintCheckingService _checkservice;
-        public TiepNhanXePageViewModel(APIClientService<PhieuTiepNhan> recordservice, 
-            APIClientService<ThamSo> ruleservice, 
-            APIClientService<Xe> carservice,
-            APIClientService<HieuXe> hieuxeservice,
-            APIClientService<KhachHang> userservice)
+        private readonly APIClientService<PhieuTiepNhan> _recordService;
+        private readonly APIClientService<ThamSo> _ruleService;
+        private readonly APIClientService<Xe> _carService;
+        private readonly APIClientService<HieuXe> _hieuXeService;
+        private readonly APIClientService<KhachHang> _userService;
+        private readonly APIClientService<NhomNguoiDung> _groupService;
+        private readonly UniqueConstraintCheckingService _checkService;
+
+        public TiepNhanXePageViewModel(
+            APIClientService<PhieuTiepNhan> recordService,
+            APIClientService<ThamSo> ruleService,
+            APIClientService<Xe> carService,
+            APIClientService<HieuXe> hieuXeService,
+            APIClientService<KhachHang> userService,
+            APIClientService<NhomNguoiDung> groupService)
         {
-            _recordservice = recordservice;
-            _ruleservice = ruleservice;
-            _carservice = carservice;
-            _hieuxeservice = hieuxeservice;
-            _userservice = userservice;
-            _=LoadAsync();
+            _recordService = recordService;
+            _ruleService = ruleService;
+            _carService = carService;
+            _hieuXeService = hieuXeService;
+            _userService = userService;
+            _groupService = groupService;
         }
 
-        public async Task LoadAsync()
+
+        partial void OnBienSoChanged(string value)
         {
-            var list = await _hieuxeservice.GetAll();
-            if (list is not null)
-            {
-                Listmodel.Clear(); 
-                foreach (var item in list)
-                {
-                    Listmodel.Add(item); 
-                }
-            }
-            OnPropertyChanged(nameof(listmodel));
+            if (string.IsNullOrEmpty(value)) return;
+            _=checkCarExist(value);
         }
 
-        [RelayCommand]
-        public async void AddNewCarRecord()
+        private async Task checkCarExist(string bienSo)
         {
-            if (string.IsNullOrWhiteSpace(tenchuxe))
+            var result=await _carService.GetThroughtSpecialRoute($"BienSo/{bienSo}");
+            if (result is null)
             {
-                await Shell.Current.DisplayAlert("Error", "Ten Chu Xe Khong Duoc Bo Trong", "OK");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(tenxe))
-            {
-                await Shell.Current.DisplayAlert("Error", "Ten Xe Khong Duoc Bo Trong", "OK");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(bienso))
-            {
-                await Shell.Current.DisplayAlert("Error", "Bien So Khong Duoc Bo Trong", "OK");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(selectedmodel.TenHieuXe))
-            {
-                await Shell.Current.DisplayAlert("Error", "Hieu Xe Khong Duoc Bo Trong", "OK");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(diachi))
-            {
-                await Shell.Current.DisplayAlert("Error", "Dia Chi Khong Duoc Bo Trong", "OK");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(dienthoai) || !dienthoai.All(char.IsDigit))
-            {
-                await Shell.Current.DisplayAlert("Error", "So Dien Thoai Khong Hop Le", "OK");
-                return;
-            }
-            if (ngaytiepnhan == null)
-            {
-                await Shell.Current.DisplayAlert("Error", "Ngay Tiep Nhan Khong Duoc Bo Trong", "OK");
-                return;
-            }
-            if (ngaytiepnhan.Date < DateTime.Today)
-            {
-                await Shell.Current.DisplayAlert("Error", "Ngay tiep nhan khong duoc nho hon ngay hien tai", "OK");
-                return;
-            }
-            ThamSo soXeTiepNhanToiDaMotNgay = await _ruleservice.GetThroughtSpecialRoute("GetSoXeTiepNhanToiDaMotNgay");
-            List<PhieuTiepNhan> carRecords = await _recordservice.GetAll();
-            int c = 0;
-            foreach (PhieuTiepNhan record in carRecords)
-            {
-                if (record.NgayTiepNhan.Value.Date == DateTime.Today) c++;
-            }
-            if (c >= soXeTiepNhanToiDaMotNgay.GiaTri)
-            {
-                await Shell.Current.DisplayAlert("Error", "Vuot qua so xe tiep nhan toi da mot ngay", "OK");
-                return;
-            }
-            var checkcar = await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{bienso}");
-            if (checkcar is null)
-            {
-                KhachHang khachHang = await _userservice.GetThroughtSpecialRoute($"GetByPhoneNumber/{dienthoai}");
-                if (khachHang is null)
-                {
-                    khachHang=await _userservice.Create(new KhachHang
-                    {
-                        Id = Guid.NewGuid(),
-                        HoVaTen = tenchuxe,
-                        DiaChi = diachi,
-                        SoDienThoai = dienthoai,
-                        DaCoTaiKhoan = false,
-                        TienNo = 0
-                    });
-                }
-                await _carservice.Create(new Xe
-                {
-                    Id=Guid.NewGuid(),
-                    Ten = tenxe,
-                    HieuXeId = selectedmodel.Id,
-                    BienSo = bienso,
-                    KhachHangId = khachHang.Id,
-                    KhaDung = true,
-                    TienNo = 0
-                });
+                isCarExists = false;
+                isCarNotFound = true;
             }
             else
             {
-                checkcar.KhaDung = true;
-                await _carservice.Update(checkcar);
+                isCarExists = true;
+                isCarNotFound = false;
+                tenXe = result.Ten;
+                bienSo = result.BienSo;
+                var hieuXe=await _hieuXeService.GetByID(result.HieuXeId);
+                if (hieuXe is not null) tenXe = hieuXe.TenHieuXe;
+                var khachHang = await _userService.GetByID(result.KhachHangId);
+                if (khachHang is not null)
+                {
+                    tenChuXe = khachHang.HoVaTen;
+                    diaChi = khachHang.DiaChi;
+                    soDienThoai = khachHang.SoDienThoai;
+                }
             }
-            var xe = await _carservice.GetThroughtSpecialRoute($"GetByBienSo/{bienso}");
-            await _recordservice.Create(new PhieuTiepNhan
+        }
+        
+        [RelayCommand]
+        public async void AddNewCarRecord()
+        {
+            if (!isCarExists || isCarNotFound)
             {
-                XeId = xe.Id,
-                NgayTiepNhan = ngaytiepnhan
+                Shell.Current.DisplayAlert("Thông báo", "Xe không tồn tại trong hệ thống, vui lòng kiểm tra lại thông tin xe.", "OK");
+                return;
+            }
+            if (string.IsNullOrEmpty(bienSo))
+            {
+                Shell.Current.DisplayAlert("Thông báo", "Vui lòng nhập đầy đủ thông tin chủ xe.", "OK");
+                return;
+            }
+            if (ngayTiepNhan < DateTime.Now)
+            {
+                Shell.Current.DisplayAlert("Thông báo", "Ngày tiếp nhận không hợp lệ.", "OK");
+                return;
+            }
+            var car=await _carService.GetThroughtSpecialRoute($"BienSo/{bienSo}");
+            await _recordService.Create(new PhieuTiepNhan()
+            {
+                Id=Guid.NewGuid(),
+                XeId = car.Id,
+                NgayTiepNhan = ngayTiepNhan,
             });
-            var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
-            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
-            var currentaccount = JsonSerializer.Deserialize<UserAccountSession>(json);
-            return;
+        }
+
+        [RelayCommand]
+        public async Task ViewCarDetailsCommand()
+        {
+
+        }
+
+        [RelayCommand]
+        public async Task ViewCarOwnerDetailsCommand()
+        {
+
+        }
+
+        [RelayCommand]
+        public async Task AddNewCarCommand()
+        {
+
         }
     }
 }

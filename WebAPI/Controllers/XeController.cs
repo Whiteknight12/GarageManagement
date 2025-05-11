@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
             _applicationDbContext = applicationDbContext;
         }
 
-        [HttpGet("GetByBienSo/{bienso}")]
+        [HttpGet("BienSo/{bienso}")]
         public async Task<ActionResult<Xe?>> GetXeByBienSo(string bienso)
         {
             var xe = await _applicationDbContext.xes.Where(u => u.BienSo == bienso).FirstOrDefaultAsync();
