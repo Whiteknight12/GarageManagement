@@ -3,87 +3,116 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:GarageManagement.ViewModels"
              xmlns:service="clr-namespace:GarageManagement.Services"
-             x:Class="GarageManagement.Pages.TaoPhieuSuaChuaPage">
+             x:Class="GarageManagement.Pages.TaoPhieuSuaChuaPage"
+             BackgroundColor="#F9FAFB">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <service:PickerConverterService x:Key="IDConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ScrollView>
-        <StackLayout Padding="20" Spacing="10">
-            <Label Text="Biển số xe:" />
-            <Picker Title="Chọn biển số xe"
-                    ItemDisplayBinding="{Binding .}"
-                    ItemsSource="{Binding Listbiensoxe}"
-                    SelectedItem="{Binding Selectedbiensoxe, Mode=TwoWay}" />
-            <Label Text="Ngày sửa chữa:" />
-            <DatePicker Date="{Binding Ngaysuachua, Mode=TwoWay}" />
-            <Label Text="Nội dung sửa chữa:" />
-            <ListView ItemsSource="{Binding Listnoidung}"
-                      HasUnevenRows="True"
-                      SeparatorVisibility="None">
-                <ListView.ItemTemplate>
+        <VerticalStackLayout Padding="20" Spacing="16" MaximumWidthRequest="800">
+            <Frame CornerRadius="20" BackgroundColor="White" Padding="20" HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Biển số xe:" FontAttributes="Bold" FontSize="16" TextColor="#1F2937"/>
+                    <Picker Title="Chọn biển số xe"
+                            TitleColor="Black"
+                            ItemDisplayBinding="{Binding .}"
+                            ItemsSource="{Binding ListBienSoXe}"
+                            SelectedItem="{Binding SelectedBienSoXe, Mode=TwoWay}"
+                            BackgroundColor="#F3F4F6"
+                            TextColor="Black" />
+
+                    <Label Text="Ngày sửa chữa:" FontAttributes="Bold" FontSize="16" TextColor="#1F2937"/>
+                    <DatePicker Date="{Binding NgaySuaChua, Mode=TwoWay}"
+                                BackgroundColor="#F3F4F6"
+                                TextColor="Black"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding ListNoiDung}">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Spacing="10" Padding="10">
+                        <Frame CornerRadius="20" BackgroundColor="White" Padding="20" Margin="0,10" HasShadow="True">
+                            <VerticalStackLayout Spacing="10">
+                                <Label Text="Nội dung sữa chữa" FontAttributes="Bold" TextColor="Black"/>
                                 <Entry Text="{Binding NoiDung, Mode=TwoWay}"
-                                Placeholder="Nhập nội dung sửa chữa" />
+                                       Placeholder="Nhập nội dung sửa chữa"
+                                       PlaceholderColor="DarkGray"
+                                       BackgroundColor="#F9FAFB"
+                                       TextColor="Black"/>
 
-                                <Label Text="Vật tư phụ tùng:" />
+                                <Label Text="Vật tư phụ tùng:" FontAttributes="Bold"/>
                                 <Picker Title="Chọn vật tư phụ tùng"
-                                    ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=Listvattuphutung}"
-                                    ItemDisplayBinding="{Binding Name}"
-                                    SelectedItem="{Binding VatTuPhuTungID, Mode=TwoWay, Converter={StaticResource IDConverter}}"
-                                    SelectedIndexChanged="OnVTPTChanged"/>
+                                        TitleColor="Black"
+                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListVatTuPhuTung}"
+                                        ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
+                                        SelectedItem="{Binding VatTuPhuTungId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
+                                        SelectedIndexChanged="OnVTPTChanged"
+                                        BackgroundColor="#F3F4F6"
+                                        TextColor="Black"/>
 
-                                <Label Text="Số lượng:" />
+                                <Label Text="Số lượng:" FontAttributes="Bold" TextColor="Black"/>
                                 <Entry Text="{Binding SoLuong, Mode=TwoWay}"
-                                Keyboard="Numeric"
-                                Placeholder="Nhập số lượng"
-                                TextChanged="OnSoLuongChanged"/>
+                                       Placeholder="Nhập số lượng"
+                                       Keyboard="Numeric"
+                                       BackgroundColor="#F9FAFB"
+                                       TextChanged="OnSoLuongChanged"
+                                       TextColor="Black"/>
 
-                                <Label Text="Đơn giá:" />
-                                <Label Text="{Binding DonGia}"/>
+                                <Label Text="Đơn giá:" FontAttributes="Bold" TextColor="Black"/>
+                                <Label Text="{Binding DonGia}" TextColor="Black"/>
 
-                                <Label Text="Tiền công:" />
+                                <Label Text="Tiền công:" FontAttributes="Bold" TextColor="Black"/>
                                 <Picker Title="Chọn tiền công"
-                                ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=Listtiencong}"
-                                ItemDisplayBinding="{Binding Name}"
-                                SelectedItem="{Binding TienCongID, Mode=TwoWay, Converter={StaticResource IDConverter}}" 
-                                SelectedIndexChanged="OnTienCongChanged"/>
+                                        TitleColor="Black"
+                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListTienCong}"
+                                        ItemDisplayBinding="{Binding TenLoaiTienCong}"
+                                        SelectedItem="{Binding TienCongId, Mode=TwoWay, Converter={StaticResource IDConverter}}"  
+                                        SelectedIndexChanged="OnTienCongChanged"
+                                        BackgroundColor="#F3F4F6"
+                                        TextColor="Black"/>
 
-                                <Label Text="Thành tiền:" />
-                                <Label Text="{Binding ThanhTien}" />
+                                <Label Text="Thành tiền:" FontAttributes="Bold" TextColor="Black"/>
+                                <Label Text="{Binding ThanhTien}" TextColor="Black"/>
 
                                 <Button Text="Xóa"
-                                TextColor="White"
-                                BackgroundColor="Red"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=RemoveCommand}"
-                                CommandParameter="{Binding NoiDungID}"/>
-                            </StackLayout>
-                        </ViewCell>
+                                        BackgroundColor="Red"
+                                        TextColor="Black"
+                                        CornerRadius="10"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=RemoveCommand}"
+                                        CommandParameter="{Binding NoiDungId}"/>
+                            </VerticalStackLayout>
+                        </Frame>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <Button Text="+ Thêm nội dung sửa chữa"
                     Command="{Binding ThemNoiDungSuaChuaCommand}"
+                    BackgroundColor="#3B82F6"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="45"
+                    FontAttributes="Bold"
                     HorizontalOptions="Start" />
 
-            <Label Text="Tổng thành tiền: " FontSize="Large"/>
-            <Label Text="{Binding Tongthanhtien}" FontSize="Large"/>
-
+            <Frame CornerRadius="15" BackgroundColor="#F3F4F6" Padding="15">
+                <HorizontalStackLayout>
+                    <Label Text="Tổng thành tiền:" FontSize="16" FontAttributes="Bold" TextColor="#1F2937"/>
+                    <Label Text="{Binding TongThanhTien}" FontSize="16" TextColor="#1F2937" Margin="10,0,0,0"/>
+                </HorizontalStackLayout>
+            </Frame>
+            
             <Button Text="Lưu phiếu sửa chữa"
                     Command="{Binding LuuPhieuSuaChuaCommand}"
-                    BackgroundColor="Green"
-                    TextColor="White"/>
-            
-            <Button Text="Quay lại"
-                Command="{Binding BackToMainPageCommand}"
-                BackgroundColor="DarkGrey"
-                TextColor="Black"/>
-        </StackLayout>
+                    BackgroundColor="#10B981"
+                    TextColor="White"
+                    CornerRadius="12"
+                    HeightRequest="50"
+                    FontAttributes="Bold"/>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

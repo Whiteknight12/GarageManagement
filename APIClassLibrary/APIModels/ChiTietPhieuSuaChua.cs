@@ -13,7 +13,11 @@ namespace APIClassLibrary.APIModels
         // so luong VatTu (thuoc 1 loai) 
         public int? SoLuong { get; set; }
         public double? ThanhTien { get; set; }
-        //public double? DonGia { get; set; }
+
+        //don gia de xu li UI, khong luu vao db
+        public double? DonGia { get; set; }
+        //ID de xu li trong UI, khong luu vao db
+        public int? NoiDungId { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged(string propertyName)
