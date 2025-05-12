@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.LapPhieuNhapPage"
+             xmlns:viewmodel="clr-namespace:GarageManagement.ViewModels"
+            xmlns:service="clr-namespace:GarageManagement.Services"
+             Title="LapPhieuNhapPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <service:PickerConverterService x:Key="IDConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Label Text="Danh sách Chi Tiết Phiếu Nhập" FontSize="Medium" />
+
+            <!-- CollectionView hiển thị các chi tiết -->
+            <CollectionView ItemsSource="{Binding ListChiTietPhieuNhap}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="5" Padding="10" BorderColor="LightGray">
+                            <VerticalStackLayout Spacing="10">
+                                <!-- Picker: Loại Vật Tư -->
+                                <HorizontalStackLayout>
+                                    <Label Text="Loại Vật Tư:" />
+                                    <Picker 
+                                        Title="Chọn Vật Tư"
+                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LapPhieuNhapPageViewModel}}, Path=ListVatTu}" 
+                                        SelectedItem="{Binding VatTuPhuTung, Mode=TwoWay}"
+                                        ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"/>
+                                </HorizontalStackLayout>
+
+                                <!-- Số Lượng -->
+                                <HorizontalStackLayout>
+                                    <Label Text="Số Lượng:" />
+                                    <Entry Keyboard="Numeric" Text="{Binding SoLuong, Mode=TwoWay}" />
+                                </HorizontalStackLayout>
+
+                                <!-- Đơn Giá -->
+                                <HorizontalStackLayout>
+                                    <Label Text="Đơn Giá:" />
+                                    <Entry Keyboard="Numeric" Text="{Binding DonGia, Mode=TwoWay}" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <HorizontalStackLayout>
+                <Label Text="Tổng Giá Tiền:" FontSize="Large" />
+                <Label Text="{Binding TongGiaTien}" FontSize="Large" TextColor="Green" />
+            </HorizontalStackLayout>
+
+            <Button Text="+ Thêm Chi Tiết Phiếu Nhập" Command="{Binding ThemChiTietPhieuNhapCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

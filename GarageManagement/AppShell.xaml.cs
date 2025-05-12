@@ -67,6 +67,15 @@ namespace GarageManagement
                         ContentTemplate = new DataTemplate(typeof(BaoCaoDoanhSoPage))
                     } }
                 });
+                Items.Add(new FlyoutItem
+                {
+                    Title = "Lập Phiếu Nhập VTPT",
+                    Icon = "dotnet_bot.png",
+                    Items = {new ShellContent
+                    {
+                        ContentTemplate = new DataTemplate(typeof(LapPhieuNhapPage))
+                    } }
+                });
             }
             else
             {
