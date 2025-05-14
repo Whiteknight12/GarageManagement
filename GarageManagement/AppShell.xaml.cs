@@ -4,6 +4,7 @@ namespace GarageManagement
 {
     public partial class AppShell : Shell
     {
+        private readonly App _app;
         public AppShell()
         {
             InitializeComponent();
@@ -14,6 +15,11 @@ namespace GarageManagement
             Routing.RegisterRoute("LapPhieuNhapPage", typeof(LapPhieuNhapPage));
             Routing.RegisterRoute("QuanLiDanhSachHieuXePage", typeof(QuanLiDanhSachHieuXePage));
             FlyoutBehavior = FlyoutBehavior.Disabled;
+            _app = (App)Application.Current;
+        }
+        private void OnToggleThemeClicked(object sender, EventArgs e)
+        {
+            _app.ToggleTheme();
         }
     }
 }

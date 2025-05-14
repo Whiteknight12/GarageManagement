@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="GarageManagement.Resources.Themes.Themes">
+
+    <!-- Define Light and Dark Mode Colors -->
+    <Color x:Key="BackgroundColorLight">#F9FAFB</Color>
+    <Color x:Key="BackgroundColorDark">#1F2937</Color>
+    <Color x:Key="CardBackgroundColorLight">White</Color>
+    <Color x:Key="CardBackgroundColorDark">#374151</Color>
+    <Color x:Key="TextColorLight">#1F2937</Color>
+    <Color x:Key="TextColorDark">#F9FAFB</Color>
+    <Color x:Key="InputBackgroundColorLight">#F3F4F6</Color>
+    <Color x:Key="InputBackgroundColorDark">#4B5563</Color>
+    <Color x:Key="PlaceholderColorLight">#6B7280</Color>
+    <Color x:Key="PlaceholderColorDark">#9CA3AF</Color>
+
+    <!-- Define Dynamic Keys with Initial Values (Light Mode by Default) -->
+    <Color x:Key="BackgroundColor">#F9FAFB</Color>
+    <Color x:Key="CardBackgroundColor">White</Color>
+    <Color x:Key="TextColor">#1F2937</Color>
+    <Color x:Key="InputBackgroundColor">#F3F4F6</Color>
+    <Color x:Key="PlaceholderColor">#6B7280</Color>
+</ResourceDictionary>

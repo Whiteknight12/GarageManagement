@@ -9,65 +9,15 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <service:PickerConverterService x:Key="IDConverter"/>
-            <!-- Define Light and Dark Mode Colors -->
-            <Color x:Key="BackgroundColorLight">#F9FAFB</Color>
-            <Color x:Key="BackgroundColorDark">#1F2937</Color>
-            <Color x:Key="CardBackgroundColorLight">White</Color>
-            <Color x:Key="CardBackgroundColorDark">#374151</Color>
-            <Color x:Key="TextColorLight">#1F2937</Color>
-            <Color x:Key="TextColorDark">#F9FAFB</Color>
-            <Color x:Key="InputBackgroundColorLight">#F3F4F6</Color>
-            <Color x:Key="InputBackgroundColorDark">#4B5563</Color>
-            <Color x:Key="PlaceholderColorLight">#6B7280</Color>
-            <Color x:Key="PlaceholderColorDark">#9CA3AF</Color>
-
-            <!-- Define Dynamic Keys with Initial Values -->
-            <Color x:Key="BackgroundColor">#F9FAFB</Color>
-            <Color x:Key="CardBackgroundColor">White</Color>
-            <Color x:Key="TextColor">#1F2937</Color>
-            <Color x:Key="InputBackgroundColor">#F3F4F6</Color>
-            <Color x:Key="PlaceholderColor">#6B7280</Color>
         </ResourceDictionary>
     </ContentView.Resources>
 
     <ScrollView>
         <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="800">
-            <!-- Theme Toggle Button -->
-            <Button x:Name="ThemeToggleButton"
-                    Text="Toggle Theme"
-                    BackgroundColor="#3B82F6"
-                    TextColor="White"
-                    HeightRequest="48"
-                    FontFamily="OpenSans-SemiBold"
-                    Clicked="OnToggleThemeClicked">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroupList>
-                        <VisualStateGroup x:Name="CommonStates">
-                            <VisualState x:Name="Normal">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#3B82F6" />
-                                </VisualState.Setters>
-                            </VisualState>
-                            <VisualState x:Name="Pressed">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#2563EB" />
-                                </VisualState.Setters>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </VisualStateManager.VisualStateGroups>
-            </Button>
-
-            
-
             <!-- Header Section -->
             <Frame HasShadow="True"
-                    BackgroundColor="{DynamicResource CardBackgroundColor}"
-                    CornerRadius="12"
-                    Padding="20">
-                <Frame.Shadow>
-                    <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.1"/>
-                </Frame.Shadow>
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20">
                 <VerticalStackLayout Spacing="12">
                     <Label Text="Danh sách Chi Tiết Phiếu Nhập" 
                            FontSize="18" 
@@ -83,13 +33,9 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame HasShadow="True"
-                                BackgroundColor="{DynamicResource CardBackgroundColor}"
-                                CornerRadius="12"
-                                Padding="20"
-                                Margin="0,12,0,0">
-                            <Frame.Shadow>
-                                <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.1"/>
-                            </Frame.Shadow>
+                               BackgroundColor="{DynamicResource CardBackgroundColor}"
+                               Padding="20"
+                               Margin="0,12,0,0">
                             <VerticalStackLayout Spacing="16">
                                 <Label Text="Loại Vật Tư:" 
                                        FontAttributes="Bold" 
@@ -169,12 +115,8 @@
 
             <!-- Total Price Section -->
             <Frame HasShadow="True"
-                    BackgroundColor="{DynamicResource CardBackgroundColor}"
-                    CornerRadius="12"
-                    Padding="20">
-                <Frame.Shadow>
-                    <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.1"/>
-                </Frame.Shadow>
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20">
                 <HorizontalStackLayout Spacing="10">
                     <Label Text="Tổng Giá Tiền:" 
                            FontSize="16" 

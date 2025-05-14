@@ -70,6 +70,7 @@ public static class MauiProgram
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<QuanLiDanhSachHieuXePage>();
         builder.Services.AddTransient<ThemHieuXePage>();
+        builder.Services.AddTransient<QuanLiDanhSachLoaiVatTuPage>();
 
         builder.Services.AddTransient<TaoPhieuSuaChuaPageViewModel>();
 		builder.Services.AddTransient<ThuTienPageViewModel>();

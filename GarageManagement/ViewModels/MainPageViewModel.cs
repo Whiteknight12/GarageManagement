@@ -29,6 +29,8 @@ namespace GarageManagement.ViewModels
         private bool thuTienActive = false;
         [ObservableProperty]
         private bool baoCaoDoanhSoActive = false;
+        [ObservableProperty]
+        private bool quanLiDanhSachLoaiVatTuActive = false;
 
         private readonly TiepNhanXePage _tiepNhanXe;
         private readonly TaoPhieuSuaChuaPage _taoPhieuSuaChua;
@@ -37,13 +39,15 @@ namespace GarageManagement.ViewModels
         private readonly QuanLiXePage _quanLiXePage;
         private readonly ThuTienPage _thuTienPage;
         private readonly BaoCaoDoanhSoPage _baoCaoDoanhSoPage;
+        private readonly QuanLiDanhSachLoaiVatTuPage _quanLiDanhSachLoaiVatTuPage;
         public MainPageViewModel(TiepNhanXePage tiepNhanXe, 
             LapPhieuNhapPage taoPhieuNhap, 
             TaoPhieuSuaChuaPage taoPhieuSuaChua,
             QuanLiDanhSachHieuXePage quanLiDanhSachHieuXe,
             QuanLiXePage quanLiXePage,
             ThuTienPage thuTienPage,
-            BaoCaoDoanhSoPage baoCaoDoanhSoPage)
+            BaoCaoDoanhSoPage baoCaoDoanhSoPage,
+            QuanLiDanhSachLoaiVatTuPage quanLiDanhSachLoaiVatTuPage)
         {
             currentPageContent = new NhanSuMainPage();
             _tiepNhanXe = tiepNhanXe;
@@ -53,6 +57,7 @@ namespace GarageManagement.ViewModels
             _quanLiXePage = quanLiXePage;
             _thuTienPage = thuTienPage;
             _baoCaoDoanhSoPage = baoCaoDoanhSoPage;
+            _quanLiDanhSachLoaiVatTuPage = quanLiDanhSachLoaiVatTuPage;
         }
 
         [RelayCommand]
@@ -66,6 +71,7 @@ namespace GarageManagement.ViewModels
             QlXeActive = parameter == "QLXe";
             ThuTienActive = parameter == "ThuTien";
             BaoCaoDoanhSoActive = parameter == "BaoCaoDoanhSo";
+            QuanLiDanhSachLoaiVatTuActive = parameter == "QLDanhSachLoaiVatTu";
             CurrentPageContent = parameter switch
             {
                 "Home" => new NhanSuMainPage(),
@@ -76,6 +82,7 @@ namespace GarageManagement.ViewModels
                 "QLXe" => _quanLiXePage,
                 "ThuTien" =>  _thuTienPage,
                 "BaoCaoDoanhSo" => _baoCaoDoanhSoPage,
+                "QLDanhSachLoaiVatTu" => _quanLiDanhSachLoaiVatTuPage,
                 _ => new NhanSuMainPage()
             };
         }

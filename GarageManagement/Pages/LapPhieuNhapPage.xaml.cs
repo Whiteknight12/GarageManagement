@@ -76,17 +76,18 @@ public partial class LapPhieuNhapPage : ContentView
         }
     }
 
-    private void OnToggleThemeClicked(object sender, EventArgs e)
-    {
-        // Toggle the theme state
-        _isDarkMode = !_isDarkMode;
+    //private void OnToggleThemeClicked(object sender, EventArgs e)
+    //{
+    //    // Toggle the theme state
+    //    _isDarkMode = !_isDarkMode;
 
-        // Update the resources dynamically based on the theme state
-        Resources["BackgroundColor"] = _isDarkMode ? (Color)Resources["BackgroundColorDark"] : (Color)Resources["BackgroundColorLight"];
-        Resources["CardBackgroundColor"] = _isDarkMode ? (Color)Resources["CardBackgroundColorDark"] : (Color)Resources["CardBackgroundColorLight"];
-        Resources["TextColor"] = _isDarkMode ? (Color)Resources["TextColorDark"] : (Color)Resources["TextColorLight"];
-        Resources["InputBackgroundColor"] = _isDarkMode ? (Color)Resources["InputBackgroundColorDark"] : (Color)Resources["InputBackgroundColorLight"];
-        Resources["PlaceholderColor"] = _isDarkMode ? (Color)Resources["PlaceholderColorDark"] : (Color)Resources["PlaceholderColorLight"];
-    }
+    //    // Update the resources dynamically based on the theme state
+    //    Resources["BackgroundColor"] = _isDarkMode ? (Color)Resources["BackgroundColorDark"] : (Color)Resources["BackgroundColorLight"];
+    //    Resources["CardBackgroundColor"] = _isDarkMode ? (Color)Resources["CardBackgroundColorDark"] : (Color)Resources["CardBackgroundColorLight"];
+    //    Resources["TextColor"] = _isDarkMode ? (Color)Resources["TextColorDark"] : (Color)Resources["TextColorLight"];
+    //    Resources["InputBackgroundColor"] = _isDarkMode ? (Color)Resources["InputBackgroundColorDark"] : (Color)Resources["InputBackgroundColorLight"];
+    //    Resources["PlaceholderColor"] = _isDarkMode ? (Color)Resources["PlaceholderColorDark"] : (Color)Resources["PlaceholderColorLight"];
+    //}
+
 
 }
