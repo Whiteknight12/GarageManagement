@@ -10,5 +10,6 @@ namespace APIClassLibrary.APIModels
     {
         public Guid Id { get; set; } 
         public string? TenHieuXe { get; set; }
+        public bool IsSelected { get; set; } = false;
     }
 }
