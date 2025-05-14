@@ -87,7 +87,7 @@ namespace GarageManagement.ViewModels
         }
         
         [RelayCommand]
-        public async void AddNewCarRecord()
+        public async Task AddNewCarRecord()
         {
             if (!IsCarExists || IsCarNotFound)
             {
@@ -104,7 +104,7 @@ namespace GarageManagement.ViewModels
                 Shell.Current?.DisplayAlert("Thông báo", "Ngày tiếp nhận không hợp lệ.", "OK");
                 return;
             }
-            var car=await _carService.GetThroughtSpecialRoute($"BienSo/{bienSo}");
+            var car=await _carService.GetThroughtSpecialRoute($"BienSo/{BienSo}");
             await _recordService.Create(new PhieuTiepNhan()
             {
                 Id=Guid.NewGuid(),

@@ -6,54 +6,30 @@
     xmlns:local="clr-namespace:GarageManagement"
     xmlns:page="clr-namespace:GarageManagement.Pages"
     xmlns:shell="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
-    Shell.FlyoutBehavior="Disabled"
-    Shell.FlyoutWidth="240"
-    FlyoutBackgroundColor="White"
     Shell.TitleColor="Black"
     Title="MyGara">
-
-    <Shell.Resources>
-        <DataTemplate x:Key="NavItemTemplate">
-            <Frame Margin="5"
-                Padding="10"
-                BackgroundColor="#E0E0E0"
-                CornerRadius="10"
-                HasShadow="True"
-                BorderColor="Black">
-                <Grid ColumnDefinitions="Auto, *">
-                    <Image Source="{Binding Icon}"
-                        HeightRequest="30"
-                        WidthRequest="30"
-                        VerticalOptions="Center"/>
-                    <Label
-                        x:Name="ItemLabel"
-                        Grid.Column="1"
-                        Text="{Binding Title}"
-                        TextColor="Black"
-                        FontSize="16"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Start" />
-                </Grid>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal">
-                            <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#E0E0E0" />
-                            </VisualState.Setters>
-                        </VisualState>
-                        <VisualState x:Name="Selected">
-                            <VisualState.Setters>
-                                <Setter Property="BackgroundColor" Value="#2196F3" />
-                                <Setter TargetName="ItemLabel" Property="Label.TextColor" Value="White" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-            </Frame>
-        </DataTemplate>
-    </Shell.Resources>
 
     <ShellContent
         ContentTemplate="{DataTemplate page:LoginPage}"
         Route="LoginPage" />
+
+    <ShellContent
+        ContentTemplate="{DataTemplate page:MainPage}"
+        Route="MainPage"/>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate page:NhanSuMainPage}"
+        Route="NhanSuMainPage"/>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate page:TiepNhanXePage}"
+        Route="TiepNhanXePage"/>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate page:TaoPhieuSuaChuaPage}"
+        Route="TaoPhieuSuaChuaPage"/>
+
+    <ShellContent 
+        ContentTemplate="{DataTemplate page:LapPhieuNhapPage}"
+        Route="LapPhieuNhapPage"/>
 </Shell>        
