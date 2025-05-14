@@ -4,7 +4,7 @@ using GarageManagement.ViewModels;
 
 namespace GarageManagement.Pages;
 
-public partial class TiepNhanXePage : ContentPage
+public partial class TiepNhanXePage : ContentView
 {
 	public TiepNhanXePage(APIClientService<PhieuTiepNhan> service, APIClientService<ThamSo> ruleService, 
 		APIClientService<Xe> carService,
