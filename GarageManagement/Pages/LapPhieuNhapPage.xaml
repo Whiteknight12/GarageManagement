@@ -29,7 +29,7 @@
                                 <Picker 
                                     Title="Chọn Vật Tư"
                                     ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LapPhieuNhapPageViewModel}}, Path=ListVatTu}" 
-                                    SelectedItem="{Binding VatTuId, Mode=OneWay, Converter={StaticResource IDConverter}}"
+                                    SelectedItem="{Binding VatTuId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
                                     ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
                                     SelectedIndexChanged="OnLoaiVatTuPicked"
                                     BackgroundColor="#F3F4F6"
