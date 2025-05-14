@@ -4,7 +4,7 @@ using GarageManagement.ViewModels;
 
 namespace GarageManagement.Pages;
 
-public partial class ThuTienPage : ContentPage
+public partial class ThuTienPage : ContentView
 {
 	private readonly APIClientService<Xe> _carservice;
 	private readonly ThuTienPageViewModel _viewmodel;
@@ -30,9 +30,9 @@ public partial class ThuTienPage : ContentPage
 		_viewmodel.Email = _viewmodel.SelectedChuXe.Email;
 	}
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override void OnSizeAllocated(double width, double height)
     {
-        base.OnNavigatedTo(args);
-		if (BindingContext is ThuTienPageViewModel vm) vm.LoadAsync();
+        base.OnSizeAllocated(width, height);
+		_ = _viewmodel.LoadAsync();
     }
 }

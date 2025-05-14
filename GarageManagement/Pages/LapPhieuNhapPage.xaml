@@ -1,91 +1,247 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:GarageManagement.ViewModels"
              xmlns:service="clr-namespace:GarageManagement.Services"
              x:Class="GarageManagement.Pages.LapPhieuNhapPage"
-             BackgroundColor="#F9FAFB">
+             BackgroundColor="{DynamicResource BackgroundColor}">
 
-    <ContentPage.Resources>
+    <ContentView.Resources>
         <ResourceDictionary>
             <service:PickerConverterService x:Key="IDConverter"/>
+            <!-- Define Light and Dark Mode Colors -->
+            <Color x:Key="BackgroundColorLight">#F9FAFB</Color>
+            <Color x:Key="BackgroundColorDark">#1F2937</Color>
+            <Color x:Key="CardBackgroundColorLight">White</Color>
+            <Color x:Key="CardBackgroundColorDark">#374151</Color>
+            <Color x:Key="TextColorLight">#1F2937</Color>
+            <Color x:Key="TextColorDark">#F9FAFB</Color>
+            <Color x:Key="InputBackgroundColorLight">#F3F4F6</Color>
+            <Color x:Key="InputBackgroundColorDark">#4B5563</Color>
+            <Color x:Key="PlaceholderColorLight">#6B7280</Color>
+            <Color x:Key="PlaceholderColorDark">#9CA3AF</Color>
+
+            <!-- Define Dynamic Keys with Initial Values -->
+            <Color x:Key="BackgroundColor">#F9FAFB</Color>
+            <Color x:Key="CardBackgroundColor">White</Color>
+            <Color x:Key="TextColor">#1F2937</Color>
+            <Color x:Key="InputBackgroundColor">#F3F4F6</Color>
+            <Color x:Key="PlaceholderColor">#6B7280</Color>
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </ContentView.Resources>
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="16" MaximumWidthRequest="800">
-            <Frame CornerRadius="20" BackgroundColor="White" Padding="20" HasShadow="True">
+        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="800">
+            <!-- Theme Toggle Button -->
+            <Button x:Name="ThemeToggleButton"
+                    Text="Toggle Theme"
+                    BackgroundColor="#3B82F6"
+                    TextColor="White"
+                    HeightRequest="48"
+                    FontFamily="OpenSans-SemiBold"
+                    Clicked="OnToggleThemeClicked">
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#2563EB" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </VisualStateManager.VisualStateGroups>
+            </Button>
+
+            
+
+            <!-- Header Section -->
+            <Frame HasShadow="True"
+                    BackgroundColor="{DynamicResource CardBackgroundColor}"
+                    CornerRadius="12"
+                    Padding="20">
+                <Frame.Shadow>
+                    <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.1"/>
+                </Frame.Shadow>
                 <VerticalStackLayout Spacing="12">
-                    <Label Text="Danh sách Chi Tiết Phiếu Nhập" FontSize="Medium" FontAttributes="Bold" TextColor="#1F2937"/>
+                    <Label Text="Danh sách Chi Tiết Phiếu Nhập" 
+                           FontSize="18" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalOptions="Start"/>
                 </VerticalStackLayout>
             </Frame>
 
+            <!-- CollectionView for Items -->
             <CollectionView ItemsSource="{Binding ListChiTietPhieuNhap}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame CornerRadius="20" BackgroundColor="White" Padding="20" Margin="0,10" HasShadow="True">
-                            <VerticalStackLayout Spacing="10">
-                                <Label Text="Loại Vật Tư:" FontAttributes="Bold" TextColor="Black"/>
-                                <Picker 
-                                    Title="Chọn Vật Tư"
-                                    ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LapPhieuNhapPageViewModel}}, Path=ListVatTu}" 
-                                    SelectedItem="{Binding VatTuId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
-                                    ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
-                                    SelectedIndexChanged="OnLoaiVatTuPicked"
-                                    BackgroundColor="#F3F4F6"
-                                    TextColor="Black"/>
+                        <Frame HasShadow="True"
+                                BackgroundColor="{DynamicResource CardBackgroundColor}"
+                                CornerRadius="12"
+                                Padding="20"
+                                Margin="0,12,0,0">
+                            <Frame.Shadow>
+                                <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.1"/>
+                            </Frame.Shadow>
+                            <VerticalStackLayout Spacing="16">
+                                <Label Text="Loại Vật Tư:" 
+                                       FontAttributes="Bold" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
+                                <Picker x:Name="VatTuPicker"
+                                        Title="Chọn Vật Tư"
+                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LapPhieuNhapPageViewModel}}, Path=ListVatTu}" 
+                                        SelectedItem="{Binding VatTuId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
+                                        ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
+                                        SelectedIndexChanged="OnLoaiVatTuPicked"
+                                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                        TextColor="{DynamicResource TextColor}"
+                                        TitleColor="{DynamicResource PlaceholderColor}"
+                                        Margin="0,5,0,0"
+                                        HeightRequest="48"/>
 
-                                <Label Text="Số Lượng:" FontAttributes="Bold" TextColor="Black"/>
-                                <Entry Keyboard="Numeric" 
+                                <Label Text="Số Lượng:" 
+                                       FontAttributes="Bold" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
+                                <Entry x:Name="SoLuongEntry"
+                                       Keyboard="Numeric" 
                                        Placeholder="Nhập số lượng"
+                                       PlaceholderColor="{DynamicResource PlaceholderColor}"
                                        Text="{Binding SoLuong, Mode=TwoWay}" 
                                        TextChanged="OnSoLuongChanged"
-                                       BackgroundColor="#F9FAFB"
-                                       TextColor="Black"/>
+                                       BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                       TextColor="{DynamicResource TextColor}"
+                                       Margin="0,5,0,0"
+                                       HeightRequest="48"/>
 
-                                <Label Text="Đơn Giá:" FontAttributes="Bold" TextColor="Black"/>
-                                <Entry Keyboard="Numeric" 
+                                <Label Text="Đơn Giá:" 
+                                       FontAttributes="Bold" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
+                                <Entry x:Name="DonGiaEntry"
+                                       Keyboard="Numeric" 
                                        Text="{Binding DonGia, Mode=TwoWay}" 
-                                       BackgroundColor="#F9FAFB" 
-                                       TextColor="Black"
-                                       TextChanged="OnDonGiaChanged"/>
+                                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                                       BackgroundColor="{DynamicResource InputBackgroundColor}" 
+                                       TextColor="{DynamicResource TextColor}"
+                                       TextChanged="OnDonGiaChanged"
+                                       Margin="0,5,0,0"
+                                       HeightRequest="48"/>
 
-                                <Button
-                                    Text="Xoá"
-                                    BackgroundColor="Red"
-                                    TextColor="White"
-                                    CornerRadius="10"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LapPhieuNhapPageViewModel}}, Path=XoaChiTietPhieuNhapCommand}"
-                                    CommandParameter="{Binding .}"/>
+                                <Button x:Name="DeleteButton"
+                                        Text="Xoá"
+                                        BackgroundColor="#EF4444"
+                                        TextColor="White"
+                                        HeightRequest="40"
+                                        FontFamily="OpenSans-SemiBold"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LapPhieuNhapPageViewModel}}, Path=XoaChiTietPhieuNhapCommand}"
+                                        CommandParameter="{Binding .}">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroupList>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="#EF4444" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="#DC2626" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateGroupList>
+                                    </VisualStateManager.VisualStateGroups>
+                                </Button>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Frame CornerRadius="15" BackgroundColor="#F3F4F6" Padding="15">
-                <HorizontalStackLayout>
-                    <Label Text="Tổng Giá Tiền:" FontSize="16" FontAttributes="Bold" TextColor="#1F2937"/>
-                    <Label Text="{Binding TongGiaTien}" FontSize="16" TextColor="#1F2937" Margin="10,0,0,0"/>
+            <!-- Total Price Section -->
+            <Frame HasShadow="True"
+                    BackgroundColor="{DynamicResource CardBackgroundColor}"
+                    CornerRadius="12"
+                    Padding="20">
+                <Frame.Shadow>
+                    <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.1"/>
+                </Frame.Shadow>
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Tổng Giá Tiền:" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"/>
+                    <Label Text="{Binding TongGiaTien}" 
+                           FontSize="16" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
                 </HorizontalStackLayout>
             </Frame>
 
-            <Button Text="+ Thêm Chi Tiết Phiếu Nhập"
-                    Command="{Binding ThemChiTietPhieuNhapCommand}"
-                    BackgroundColor="#3B82F6"
-                    TextColor="White"
-                    CornerRadius="12"
-                    HeightRequest="45"
-                    FontAttributes="Bold"
-                    HorizontalOptions="Start" />
+            <!-- Add and Save Buttons -->
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
+                <Button x:Name="AddButton"
+                        Text="+ Thêm Chi Tiết Phiếu Nhập"
+                        Command="{Binding ThemChiTietPhieuNhapCommand}"
+                        BackgroundColor="#3B82F6"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#2563EB" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
 
-            <Button Text="Lưu phiếu nhập"
-                    Command="{Binding LuuPhieuNhapCommand}"
-                    BackgroundColor="#10B981"
-                    TextColor="White"
-                    CornerRadius="12"
-                    HeightRequest="50"
-                    FontAttributes="Bold"/> 
+                <Button x:Name="SaveButton"
+                        Text="Lưu phiếu nhập"
+                        Command="{Binding LuuPhieuNhapCommand}"
+                        BackgroundColor="#10B981"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#10B981" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#059669" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
-</ContentPage>
+</ContentView>

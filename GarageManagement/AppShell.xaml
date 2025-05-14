@@ -32,4 +32,8 @@
     <ShellContent 
         ContentTemplate="{DataTemplate page:LapPhieuNhapPage}"
         Route="LapPhieuNhapPage"/>
+
+    <ShellContent
+        ContentTemplate="{DataTemplate page:QuanLiDanhSachHieuXePage}"
+        Route="QuanLiXeDanhSachHieuXePage"/>
 </Shell>        

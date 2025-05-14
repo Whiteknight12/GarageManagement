@@ -56,7 +56,7 @@ namespace GarageManagement.ViewModels
             var phieuNhapVatTu = new PhieuNhapVatTu
             {
                 Id = Guid.NewGuid(),
-                NgayNhap = DateTime.UtcNow,
+                NgayNhap = DateTime.UtcNow.ToLocalTime(),
                 TongTien = TongGiaTien
             };
             _ = _phieuNhapVatTuService.Create(phieuNhapVatTu);

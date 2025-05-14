@@ -2,7 +2,7 @@ using GarageManagement.ViewModels;
 
 namespace GarageManagement.Pages;
 
-public partial class BaoCaoDoanhSoPage : ContentPage
+public partial class BaoCaoDoanhSoPage : ContentView
 {
 	private readonly BaoCaoDoanSoPageViewModel _viewmodel;
 	public BaoCaoDoanhSoPage(BaoCaoDoanSoPageViewModel viewmodel)
@@ -22,9 +22,9 @@ public partial class BaoCaoDoanhSoPage : ContentPage
 		await _viewmodel.OnYearChanged();
 	}
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        base.OnNavigatedTo(args);
-		if (BindingContext is BaoCaoDoanSoPageViewModel vm) vm.LoadAsync();
+	protected override void OnSizeAllocated(double width, double height)
+	{
+		base.OnSizeAllocated(width, height);
+        _ = _viewmodel.LoadAsync();
     }
 }

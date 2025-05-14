@@ -21,17 +21,38 @@ namespace GarageManagement.ViewModels
         private bool taoPhieuNhapActive = false;
         [ObservableProperty]
         private bool taoPhieuSuaChuaActive = false;
+        [ObservableProperty]
+        private bool qlDanhSachHieuXeActive = false;
+        [ObservableProperty]
+        private bool qlXeActive = false;
+        [ObservableProperty]
+        private bool thuTienActive = false;
+        [ObservableProperty]
+        private bool baoCaoDoanhSoActive = false;
 
         private readonly TiepNhanXePage _tiepNhanXe;
         private readonly TaoPhieuSuaChuaPage _taoPhieuSuaChua;
         private readonly LapPhieuNhapPage _taoPhieuNhap;
-
-        public MainPageViewModel(TiepNhanXePage tiepNhanXe, LapPhieuNhapPage taoPhieuNhap, TaoPhieuSuaChuaPage taoPhieuSuaChua)
+        private readonly QuanLiDanhSachHieuXePage _quanLiDanhSachHieuXe;
+        private readonly QuanLiXePage _quanLiXePage;
+        private readonly ThuTienPage _thuTienPage;
+        private readonly BaoCaoDoanhSoPage _baoCaoDoanhSoPage;
+        public MainPageViewModel(TiepNhanXePage tiepNhanXe, 
+            LapPhieuNhapPage taoPhieuNhap, 
+            TaoPhieuSuaChuaPage taoPhieuSuaChua,
+            QuanLiDanhSachHieuXePage quanLiDanhSachHieuXe,
+            QuanLiXePage quanLiXePage,
+            ThuTienPage thuTienPage,
+            BaoCaoDoanhSoPage baoCaoDoanhSoPage)
         {
             currentPageContent = new NhanSuMainPage();
             _tiepNhanXe = tiepNhanXe;
             _taoPhieuNhap = taoPhieuNhap;
             _taoPhieuSuaChua = taoPhieuSuaChua;
+            _quanLiDanhSachHieuXe = quanLiDanhSachHieuXe;
+            _quanLiXePage = quanLiXePage;
+            _thuTienPage = thuTienPage;
+            _baoCaoDoanhSoPage = baoCaoDoanhSoPage;
         }
 
         [RelayCommand]
@@ -41,11 +62,20 @@ namespace GarageManagement.ViewModels
             TiepNhanXeActive = parameter == "TiepNhanXe";
             TaoPhieuNhapActive = parameter == "TaoPhieuNhap";
             TaoPhieuSuaChuaActive = parameter == "TaoPhieuSuaChua";
+            QlDanhSachHieuXeActive = parameter == "QLDanhSachHieuXe";
+            QlXeActive = parameter == "QLXe";
+            ThuTienActive = parameter == "ThuTien";
+            BaoCaoDoanhSoActive = parameter == "BaoCaoDoanhSo";
             CurrentPageContent = parameter switch
             {
                 "Home" => new NhanSuMainPage(),
                 "TiepNhanXe" => _tiepNhanXe,
                 "TaoPhieuSuaChua" => _taoPhieuSuaChua,
+                "TaoPhieuNhap" => _taoPhieuNhap,
+                "QLDanhSachHieuXe" => _quanLiDanhSachHieuXe,
+                "QLXe" => _quanLiXePage,
+                "ThuTien" =>  _thuTienPage,
+                "BaoCaoDoanhSo" => _baoCaoDoanhSoPage,
                 _ => new NhanSuMainPage()
             };
         }

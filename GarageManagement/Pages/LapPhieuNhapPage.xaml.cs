@@ -6,8 +6,9 @@ using System.Collections.ObjectModel;
 
 namespace GarageManagement.Pages;
 
-public partial class LapPhieuNhapPage : ContentPage
+public partial class LapPhieuNhapPage : ContentView
 {
+    private bool _isDarkMode = false;
     LapPhieuNhapPageViewModel _viewModel;
     public LapPhieuNhapPage(LapPhieuNhapPageViewModel viewModel)
     {
@@ -73,6 +74,19 @@ public partial class LapPhieuNhapPage : ContentPage
                 .Select(item => (Guid)item.VatTuId)  // Chỉ ép kiểu những mục không null
                 .ToList();
         }
+    }
+
+    private void OnToggleThemeClicked(object sender, EventArgs e)
+    {
+        // Toggle the theme state
+        _isDarkMode = !_isDarkMode;
+
+        // Update the resources dynamically based on the theme state
+        Resources["BackgroundColor"] = _isDarkMode ? (Color)Resources["BackgroundColorDark"] : (Color)Resources["BackgroundColorLight"];
+        Resources["CardBackgroundColor"] = _isDarkMode ? (Color)Resources["CardBackgroundColorDark"] : (Color)Resources["CardBackgroundColorLight"];
+        Resources["TextColor"] = _isDarkMode ? (Color)Resources["TextColorDark"] : (Color)Resources["TextColorLight"];
+        Resources["InputBackgroundColor"] = _isDarkMode ? (Color)Resources["InputBackgroundColorDark"] : (Color)Resources["InputBackgroundColorLight"];
+        Resources["PlaceholderColor"] = _isDarkMode ? (Color)Resources["PlaceholderColorDark"] : (Color)Resources["PlaceholderColorLight"];
     }
 
 }

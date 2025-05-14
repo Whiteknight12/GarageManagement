@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GarageManagement.Pages.QuanLiDanhSachHieuXePage"
-             xmlns:service="clr-namespace:GarageManagement.Services"
-             Title="Quản Lý Danh Sách Hiệu Xe">
-    <ContentPage.Resources>
+             xmlns:service="clr-namespace:GarageManagement.Services">
+    <ContentView.Resources>
         <ResourceDictionary>
             <service:DeleteModeTextConverter x:Key="DeleteModeTextConverter" />
             <Style x:Key="HeaderLabelStyle" TargetType="Label">
@@ -26,7 +25,7 @@
                 <Setter Property="FontSize" Value="13" />
             </Style>
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </ContentView.Resources>
 
     <ScrollView>
         <StackLayout Padding="10">
@@ -40,14 +39,14 @@
                         Command="{Binding EditCommand}"
                         Style="{StaticResource ButtonStyle}"
                         HorizontalOptions="Center" />
-                <Button Text="Xoá"
-                        Command="{Binding DeleteCommand}"
-                        Style="{StaticResource ButtonStyle}"
-                        IsVisible="{Binding IsDeleteMode}"
-                        HorizontalOptions="End" />
                 <Button Text="{Binding IsDeleteMode, Converter={StaticResource DeleteModeTextConverter}}"
                         Command="{Binding ToggleDeleteModeCommand}"
                         Style="{StaticResource ButtonStyle}"
+                        HorizontalOptions="End" />
+                <Button Text="Xoá các mục đã chọn"
+                        Command="{Binding DeleteCommand}"
+                        Style="{StaticResource ButtonStyle}"
+                        IsVisible="{Binding IsDeleteMode}"
                         HorizontalOptions="End" />
             </HorizontalStackLayout>
 
@@ -75,14 +74,14 @@
                             </Grid.ColumnDefinitions>
                             <StackLayout Orientation="Horizontal" Grid.Column="0">
                                 <CheckBox IsChecked="{Binding IsSelected}" 
-                                          IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IsDeleteMode}" />
+                                          IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentView}}, Path=BindingContext.IsDeleteMode}" />
                                 <Label Text="{Binding Id}" Style="{StaticResource DataLabelStyle}" />
                             </StackLayout>
 
                             <Label Text="{Binding TenHieuXe}" Grid.Column="1" Style="{StaticResource DataLabelStyle}" />
 
                             <Button Text="Chi tiết"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.GoToChiTietHieuXePageCommand}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentView}}, Path=BindingContext.GoToChiTietHieuXePageCommand}"
                                     CommandParameter="{Binding Id}"
                                     Grid.Column="2"
                                     Style="{StaticResource ButtonStyle}" />
@@ -99,4 +98,4 @@
                     Margin="0,20,0,0" />
         </StackLayout>
     </ScrollView>
-</ContentPage>
+</ContentView>
