@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GarageManagement.Pages;
 
-public partial class TaoPhieuSuaChuaPage : ContentPage
+public partial class TaoPhieuSuaChuaPage : ContentView
 {
 	private readonly TaoPhieuSuaChuaPageViewModel _viewmodel;
 	private readonly APIClientService<VatTuPhuTung> _vatTuService;
@@ -75,9 +75,12 @@ public partial class TaoPhieuSuaChuaPage : ContentPage
 		}
     }
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override void OnSizeAllocated(double width, double height)
     {
-        base.OnNavigatedTo(args);
-		_=_viewmodel.LoadAsync();
+        base.OnSizeAllocated(width, height);
+		if (width > 0 && height > 0)
+		{
+			_ = _viewmodel.LoadAsync();
+		}
     }
 }

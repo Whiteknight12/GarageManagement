@@ -67,16 +67,15 @@ public static class MauiProgram
 		builder.Services.AddTransient<BaoCaoDoanhSoPage>();
 		builder.Services.AddTransient<ThemXePage>();
         builder.Services.AddTransient<LapPhieuNhapPage>();
-        builder.Services.AddTransient<QuanLiDanhSachHieuXePage>();
-        builder.Services.AddTransient<ThemHieuXePage>();
+        builder.Services.AddTransient<MainPage>();
 
         builder.Services.AddTransient<TaoPhieuSuaChuaPageViewModel>();
 		builder.Services.AddTransient<ThuTienPageViewModel>();
 		builder.Services.AddTransient<BaoCaoDoanSoPageViewModel>();
         builder.Services.AddTransient<ThemXePageViewModel>();
-        builder.Services.AddTransient<ThemHieuXePageViewModel>();
         builder.Services.AddTransient<LapPhieuNhapPageViewModel>();
-        builder.Services.AddTransient<QuanLiDanhSachHieuXePageViewModel>();
+        builder.Services.AddTransient<MainPageViewModel>();
+
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

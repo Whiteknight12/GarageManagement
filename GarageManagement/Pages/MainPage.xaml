@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:service="clr-namespace:GarageManagement.Services"
+             x:Class="GarageManagement.Pages.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <service:BoolToColorConverterService x:Key="BoolToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <VerticalStackLayout BackgroundColor="#2C3E50"
+            Spacing="10"
+            Padding="10"
+            Grid.Column="0">
+            <Label Text="Menu"
+                   TextColor="White"
+                   FontAttributes="Bold"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,20" />
+
+            <Frame BackgroundColor="{Binding TrangChuActive, Converter={StaticResource BoolToColorConverter}}"
+                   CornerRadius="10"
+                   Padding="10"
+                   Margin="5">
+                    <Label Text="Home"
+                           TextColor="White"
+                           FontSize="16"
+                           HorizontalOptions="Center" />
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Home" />
+                    </Frame.GestureRecognizers>
+            </Frame>
+
+            <Frame BackgroundColor="{Binding TiepNhanXeActive, Converter={StaticResource BoolToColorConverter}}"
+                   CornerRadius="10"
+                   Padding="10"
+                   Margin="5">
+                <Label Text="Tiếp Nhận Xe"
+                       TextColor="White"
+                       FontSize="16"
+                       HorizontalOptions="Center" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TiepNhanXe" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Frame BackgroundColor="{Binding TaoPhieuSuaChuaActive, Converter={StaticResource BoolToColorConverter}}"
+                CornerRadius="10"
+                Padding="10"
+                Margin="5">
+                <Label Text="Lập phiếu sữa chữa"
+                   TextColor="White"
+                   FontSize="16"
+                   HorizontalOptions="Center" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TaoPhieuSuaChua" />
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <Frame BackgroundColor="{Binding TaoPhieuNhapActive, Converter={StaticResource BoolToColorConverter}}"
+                CornerRadius="10"
+                Padding="10"
+                Margin="5">
+                <Label Text="Lập phiếu nhập"
+                   TextColor="White"
+                   FontSize="16"
+                   HorizontalOptions="Center" />
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TaoPhieuNhap" />
+                </Frame.GestureRecognizers>
+            </Frame>
+        </VerticalStackLayout>
+
+        <ContentView Grid.Column="1"
+            BackgroundColor="#ECF0F1"
+            Content="{Binding CurrentPageContent}" />
+    </Grid>
+</ContentPage>
