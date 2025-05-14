@@ -7,93 +7,97 @@
     Shell.NavBarIsVisible="False">
 
     <ScrollView Margin="20">
-        <VerticalStackLayout Spacing="20">
-            
-            <Label
-                Text="TIẾP NHẬN XE MỚI"
-                FontSize="36"
-                FontAttributes="Bold"
-                HorizontalTextAlignment="Center" />
+        <Frame CornerRadius="10" BorderColor="Black" BackgroundColor="AliceBlue" HasShadow="False" MaximumWidthRequest="800">
+            <VerticalStackLayout Spacing="20">
+                <Label TextColor="Black"
+                    Text="TIẾP NHẬN XE MỚI"
+                    FontSize="36"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="Center" />
 
-            <Label Text="Biển số" FontSize="Medium" />
-            <Frame
-                CornerRadius="10"
-                BorderColor="Black"
-                Padding="0"
-                HasShadow="False">
-                <Entry
-                    x:Name="txtBienSo"
+                <Label Text="Biển số" FontSize="Medium" TextColor="Black"/>
+                <Frame
+                    CornerRadius="10"
+                    BorderColor="Black"
+                    Padding="0"
+                    HasShadow="False">
+                    <Entry
+                        x:Name="txtBienSo"
+                        BackgroundColor="LightGray"
+                        Placeholder="Nhập biển số xe"
+                        Text="{Binding BienSo, Mode=TwoWay}"
+                        TextColor="Black"
+                        HorizontalOptions="Fill" />
+                </Frame>
+
+                <Label TextColor="Black" Text="Ngày tiếp nhận" FontSize="Medium" />
+                <Frame
+                    CornerRadius="10"
+                    BorderColor="Black"
+                    Padding="10,5"
                     BackgroundColor="LightGray"
-                    Placeholder="Nhập biển số xe"
-                    Text="{Binding BienSo, Mode=TwoWay}"
-                    TextColor="Black"
-                    HorizontalOptions="Fill" />
-            </Frame>
-
-            <Label Text="Ngày tiếp nhận" FontSize="Medium" />
-            <Frame
-                CornerRadius="10"
-                BorderColor="Black"
-                Padding="10,5"
-                BackgroundColor="LightGray"
-                HasShadow="False">
-                <DatePicker
-                    x:Name="dpNgayTiepNhan"
-                    Date="{Binding NgayTiepNhan, Mode=TwoWay}"
-                    TextColor="Black"
-                    HorizontalOptions="Fill" />
-            </Frame>
-
-            <StackLayout Spacing="15">
-
-                <Frame
-                    CornerRadius="10"
-                    BorderColor="Gray"
-                    Padding="15"
-                    HasShadow="True"
-                    IsVisible="{Binding IsCarExists}">
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Xe đã tồn tại" FontAttributes="Bold" />
-                        <Label Text="{Binding TenXe, StringFormat='Tên xe: {0}'}" />
-                        <Label Text="{Binding TenHieuXe, StringFormat='Hiệu xe: {0}'}" />
-                        <Label Text="{Binding BienSo, StringFormat=Empty'Biển số: {0}'}"/>
-                        <Button
-                            Text="Chi tiết xe"
-                            Command="{Binding ViewCarDetailsCommand}" />
-                    </VerticalStackLayout>
+                    HasShadow="False">
+                    <DatePicker
+                        x:Name="dpNgayTiepNhan"
+                        Date="{Binding NgayTiepNhan, Mode=TwoWay}"
+                        TextColor="Black"
+                        HorizontalOptions="Fill" />
                 </Frame>
 
-                <Frame
-                    CornerRadius="10"
-                    BorderColor="Gray"
-                    Padding="15"
-                    HasShadow="True"
-                    IsVisible="{Binding IsCarExists}">
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Thông tin chủ xe" FontAttributes="Bold" />
-                        <Label Text="{Binding TenChuXe, StringFormat='Họ và tên: {0}'}" />
-                        <Label Text="{Binding DiaChi, StringFormat='Địa chỉ: {0}'}" />
-                        <Label Text="{Binding SoDienThoai, StringFormat='Điện thoại: {0}'}" />
-                        <Button
-                            Text="Xem chi tiết chủ xe"
-                            Command="{Binding ViewOwnerDetailsCommand}" />
-                    </VerticalStackLayout>
-                </Frame>
+                <StackLayout Spacing="15">
 
-                <Frame
-                    CornerRadius="10"
-                    BorderColor="Gray"
-                    Padding="15"
-                    HasShadow="True"
-                    IsVisible="{Binding IsCarNotFound}">
-                    <VerticalStackLayout Spacing="10">
-                        <Label Text="Xe chưa có trong hệ thống" FontAttributes="Bold" />
-                        <Button
-                            Text="Thêm xe mới"
-                            Command="{Binding AddNewCarCommand}" />
-                    </VerticalStackLayout>
-                </Frame>
-            </StackLayout>
-        </VerticalStackLayout>
+                    <Frame CornerRadius="10"
+                        BorderColor="Gray"
+                        Padding="15"
+                        HasShadow="True"
+                        BackgroundColor="White"
+                        IsVisible="{Binding IsCarExists}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Xe đã tồn tại" FontAttributes="Bold" TextColor="Green"/>
+                            <Label Text="{Binding TenXe, StringFormat='Tên xe: {0}'}" TextColor="Black"/>
+                            <Label Text="{Binding TenHieuXe, StringFormat='Hiệu xe: {0}'}" TextColor="Black"/>
+                            <Label Text="{Binding BienSo, StringFormat='Biển số: {0}'}" TextColor="Black"/>
+                            <Button
+                    Text="Chi tiết xe"
+                    Command="{Binding ViewCarDetailsCommand}" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame
+                        CornerRadius="10"
+                        BorderColor="Gray"
+                        Padding="15"
+                        HasShadow="True"
+                        BackgroundColor="White"
+                        IsVisible="{Binding IsCarExists}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Thông tin chủ xe" FontAttributes="Bold" TextColor="Green"/>
+                            <Label Text="{Binding TenChuXe, StringFormat='Họ và tên: {0}'}" TextColor="Black"/>
+                            <Label Text="{Binding DiaChi, StringFormat='Địa chỉ: {0}'}" TextColor="Black"/>
+                            <Label Text="{Binding SoDienThoai, StringFormat='Điện thoại: {0}'}" TextColor="Black"/>
+                            <Button
+                    Text="Xem chi tiết chủ xe"
+                    Command="{Binding ViewOwnerDetailsCommand}" />
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame
+                        CornerRadius="10"
+                        BorderColor="Gray"
+                        Padding="15"
+                        HasShadow="True"
+                        BackgroundColor="White"
+                        IsVisible="{Binding IsCarNotFound}">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Xe chưa có trong hệ thống" FontAttributes="Bold" TextColor="Red"/>
+                            <Button
+                                Text="Thêm xe mới"
+                                Command="{Binding AddNewCarCommand}" />
+                        </VerticalStackLayout>
+                    </Frame>
+                </StackLayout>
+                <Button Text="Thêm phiếu tiếp nhận" BackgroundColor="#10B981" Command="AddNewCarRecordCommand"/>
+            </VerticalStackLayout>
+        </Frame>
     </ScrollView>
 </ContentPage>

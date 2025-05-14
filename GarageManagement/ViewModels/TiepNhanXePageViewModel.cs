@@ -16,6 +16,8 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private string bienSo;
         [ObservableProperty]
+        private string tenHieuXe;
+        [ObservableProperty]
         private string diaChi;
         [ObservableProperty]
         private string soDienThoai;
@@ -63,23 +65,23 @@ namespace GarageManagement.ViewModels
             var result=await _carService.GetThroughtSpecialRoute($"BienSo/{bienSo}");
             if (result is null)
             {
-                isCarExists = false;
-                isCarNotFound = true;
+                IsCarExists = false;
+                IsCarNotFound = true;
             }
             else
             {
-                isCarExists = true;
-                isCarNotFound = false;
-                tenXe = result.Ten;
-                bienSo = result.BienSo;
+                IsCarExists = true;
+                IsCarNotFound = false;
+                TenXe = result.Ten;
+                BienSo = result.BienSo;
                 var hieuXe=await _hieuXeService.GetByID(result.HieuXeId);
-                if (hieuXe is not null) tenXe = hieuXe.TenHieuXe;
+                if (hieuXe is not null) TenHieuXe = hieuXe.TenHieuXe;
                 var khachHang = await _userService.GetByID(result.KhachHangId);
                 if (khachHang is not null)
                 {
-                    tenChuXe = khachHang.HoVaTen;
-                    diaChi = khachHang.DiaChi;
-                    soDienThoai = khachHang.SoDienThoai;
+                    TenChuXe = khachHang.HoVaTen;
+                    DiaChi = khachHang.DiaChi;
+                    SoDienThoai = khachHang.SoDienThoai;
                 }
             }
         }
@@ -87,19 +89,19 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public async void AddNewCarRecord()
         {
-            if (!isCarExists || isCarNotFound)
+            if (!IsCarExists || IsCarNotFound)
             {
-                Shell.Current.DisplayAlert("Thông báo", "Xe không tồn tại trong hệ thống, vui lòng kiểm tra lại thông tin xe.", "OK");
+                Shell.Current?.DisplayAlert("Thông báo", "Xe không tồn tại trong hệ thống, vui lòng kiểm tra lại thông tin xe.", "OK");
                 return;
             }
-            if (string.IsNullOrEmpty(bienSo))
+            if (string.IsNullOrEmpty(BienSo))
             {
-                Shell.Current.DisplayAlert("Thông báo", "Vui lòng nhập đầy đủ thông tin chủ xe.", "OK");
+                Shell.Current?.DisplayAlert("Thông báo", "Vui lòng nhập đầy đủ thông tin chủ xe.", "OK");
                 return;
             }
-            if (ngayTiepNhan < DateTime.Now)
+            if (NgayTiepNhan < DateTime.Now)
             {
-                Shell.Current.DisplayAlert("Thông báo", "Ngày tiếp nhận không hợp lệ.", "OK");
+                Shell.Current?.DisplayAlert("Thông báo", "Ngày tiếp nhận không hợp lệ.", "OK");
                 return;
             }
             var car=await _carService.GetThroughtSpecialRoute($"BienSo/{bienSo}");
@@ -107,7 +109,7 @@ namespace GarageManagement.ViewModels
             {
                 Id=Guid.NewGuid(),
                 XeId = car.Id,
-                NgayTiepNhan = ngayTiepNhan,
+                NgayTiepNhan = NgayTiepNhan,
             });
         }
 

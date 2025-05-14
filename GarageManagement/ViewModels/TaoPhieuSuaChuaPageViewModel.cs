@@ -179,7 +179,7 @@ namespace GarageManagement.ViewModels
             }
             foreach (var item in ListNoiDung)
             {
-                await _noidungphieuservice.Create(new ChiTietPhieuSuaChua
+                var chiTietPhieuSuaChua=await _noidungphieuservice.Create(new ChiTietPhieuSuaChua
                 {
                     NoiDung = item.NoiDung,
                     PhieuSuaChuaId = obj.Id,
@@ -188,6 +188,9 @@ namespace GarageManagement.ViewModels
                     SoLuong = item.SoLuong,
                     ThanhTien = item.ThanhTien
                 });
+                var vatTuPhuTung = await _vattuservice.GetByID(item.VatTuPhuTungId??Guid.Empty);
+                if (vatTuPhuTung != null) vatTuPhuTung.SoLuong -= item.SoLuong ?? 0;
+                await _vattuservice.Update(vatTuPhuTung);
             }
             checkuser.TienNo += TongThanhTien;
             xe.TienNo += TongThanhTien;
@@ -197,6 +200,7 @@ namespace GarageManagement.ViewModels
             await toast.Show();
             SelectedBienSoXe = null;
             ListNoiDung = new ObservableCollection<ChiTietPhieuSuaChua>();
+            TongThanhTien = 0;
         }
 
         [RelayCommand]
