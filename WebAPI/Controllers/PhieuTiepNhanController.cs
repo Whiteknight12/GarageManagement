@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using System.Runtime.InteropServices;
 using WebAPI.Data;
 using WebAPI.Models;
@@ -51,6 +52,14 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<IEnumerable<PhieuTiepNhan>>> GetListByXeId(Guid xeId)
         {
             var result = await _db.phieuTiepNhans.Where(x => x.XeId == xeId).ToListAsync();
+            if (result is not null) return Ok(result);
+            return NotFound();
+        }
+
+        [HttpGet("DayAndMonth/{day}/{month}")]
+        public async Task<ActionResult<IEnumerable<PhieuTiepNhan>>> GetListPhieuTiepNhanByDayAndMonth(int day, int month)
+        {
+            var result=await _db.phieuTiepNhans.Where(u=>u.NgayTiepNhan.Value.Day==day && u.NgayTiepNhan.Value.Month==month).ToListAsync();
             if (result is not null) return Ok(result);
             return NotFound();
         }

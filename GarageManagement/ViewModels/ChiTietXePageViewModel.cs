@@ -14,7 +14,7 @@ namespace GarageManagement.ViewModels
     public partial class ChiTietXePageViewModel: BaseViewModel
     {
         [ObservableProperty]
-        private Guid id;
+        private Guid carId;
         [ObservableProperty]
         private string name;
         [ObservableProperty]
@@ -35,37 +35,30 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<Xe> _carservice;
         private readonly APIClientService<HieuXe> _hieuxeservice;
         private readonly APIClientService<KhachHang> _khachHangService;
-        private Guid carid;
-        public ChiTietXePageViewModel(Guid CarID, APIClientService<Xe> carservice, 
+
+        public ChiTietXePageViewModel(APIClientService<Xe> carservice, 
             APIClientService<HieuXe> hieuXeService, APIClientService<KhachHang> khachHangService)
         {
             _carservice = carservice;
             _hieuxeservice = hieuXeService;
             _khachHangService = khachHangService;
-            carid = CarID;
-            _ = LoadAsync();
         }
-        private async Task LoadAsync()
+
+        public async Task LoadAsync()
         {
-            var obj=await _carservice.GetByID(carid);
+            var obj=await _carservice.GetByID(CarId);
             var hieuXe=await _hieuxeservice.GetByID(obj.HieuXeId);
             var khachHang= await _khachHangService.GetByID(obj.KhachHangId);
-            id = obj.Id;
             Name = obj.Ten;
-            Model = hieuXe.TenHieuXe;
+            Model = hieuXe.TenHieuXe ?? "";
             BienSo = obj.BienSo;
             TenChuXe = khachHang.HoVaTen;
             DienThoai = khachHang.SoDienThoai;
             DiaChi = khachHang.DiaChi;
             bool tmp = obj.KhaDung ?? false;
-            if (tmp) TinhTrang = "Dang Trong Gara";
-            else TinhTrang = "Khong O Trong Gara";
+            if (tmp) TinhTrang = "Đang tiếp nhận trong Gara";
+            else TinhTrang = "Không có trong Gara";
             TienNoCuaChuXe = obj.TienNo ?? 0;
-        }
-        [RelayCommand]
-        private async Task GoBack()
-        {
-            await Shell.Current.GoToAsync($"//{nameof(QuanLiXePage)}", true);
         }
     }
 }

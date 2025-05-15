@@ -55,7 +55,7 @@
                             <Label Text="{Binding TenXe, StringFormat='Tên xe: {0}'}" TextColor="{DynamicResource TextColor}"/>
                             <Label Text="{Binding TenHieuXe, StringFormat='Hiệu xe: {0}'}" TextColor="{DynamicResource TextColor}"/>
                             <Label Text="{Binding BienSo, StringFormat='Biển số: {0}'}" TextColor="{DynamicResource TextColor}"/>
-                            <Button Text="Chi tiết xe" Command="{Binding ViewCarDetailsCommand}" BackgroundColor="Purple" TextColor="White" />
+                            <Button Text="Chi tiết xe" Command="{Binding ViewCarDetailsCommand}" CommandParameter="{Binding CarId}" BackgroundColor="Purple" TextColor="White" />
                         </VerticalStackLayout>
                     </Frame>
 

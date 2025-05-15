@@ -1,5 +1,6 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Pages;
@@ -22,11 +23,13 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private string soDienThoai;
         [ObservableProperty]
-        private DateTime ngayTiepNhan=DateTime.Now;
+        private DateTime ngayTiepNhan=DateTime.UtcNow.ToLocalTime();
         [ObservableProperty]
         private bool isCarExists = false;
         [ObservableProperty]
-        private bool isCarNotFound = false; 
+        private bool isCarNotFound = false;
+        [ObservableProperty]
+        private Guid carId;
 
         private string STORAGE_KEY = "user-account-status";
         private readonly APIClientService<PhieuTiepNhan> _recordService;
@@ -72,6 +75,7 @@ namespace GarageManagement.ViewModels
             {
                 IsCarExists = true;
                 IsCarNotFound = false;
+                CarId = result.Id;
                 TenXe = result.Ten;
                 BienSo = result.BienSo;
                 var hieuXe=await _hieuXeService.GetByID(result.HieuXeId);
@@ -99,7 +103,7 @@ namespace GarageManagement.ViewModels
                 Shell.Current?.DisplayAlert("Thông báo", "Vui lòng nhập biển số xe", "OK");
                 return;
             }
-            if (NgayTiepNhan < DateTime.Now)
+            if (NgayTiepNhan.Day < DateTime.UtcNow.ToLocalTime().Day)
             {
                 Shell.Current?.DisplayAlert("Thông báo", "Ngày tiếp nhận không hợp lệ.", "OK");
                 return;
@@ -117,18 +121,29 @@ namespace GarageManagement.ViewModels
                     }
                 }
             }
+            var soXeTiepNhanToiDa = await _ruleService.GetThroughtSpecialRoute("SoXeTiepNhanToiDaMotNgay");
+            var listTiepNhan = await _recordService.GetListOnSpecialRequirement($"DayAndMonth/{DateTime.UtcNow.ToLocalTime().Day}/{DateTime.UtcNow.ToLocalTime().Month}");
+            if (listTiepNhan?.Count>=soXeTiepNhanToiDa?.GiaTri)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Đã đạt số lượng xe tiếp nhận tối đa trong ngày", "OK");
+                return;
+            }
             await _recordService.Create(new PhieuTiepNhan()
             {
                 Id=Guid.NewGuid(),
                 XeId = car.Id,
                 NgayTiepNhan = NgayTiepNhan,
             });
+            var toast = Toast.Make("Thêm phiếu tiếp nhận mới thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
+            await toast.Show();
+            BienSo = string.Empty;
+            NgayTiepNhan = DateTime.UtcNow.ToLocalTime();
         }
 
         [RelayCommand]
-        public async Task ViewCarDetails()
+        public async Task ViewCarDetails(Guid carId)
         {
-
+            await Shell.Current.GoToAsync($"{nameof(ChiTietXePage)}?parameterID={carId}");
         }
 
         [RelayCommand]

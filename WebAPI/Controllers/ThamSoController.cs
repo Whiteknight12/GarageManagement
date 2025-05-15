@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
             _db = db;
         }
 
-        [HttpGet("GetSoXeTiepNhanToiDaMotNgay")]
+        [HttpGet("SoXeTiepNhanToiDaMotNgay")]
         public async Task<ActionResult<ThamSo>> GetSoXeTiepNhanToiDaMotNgay()
         {
             var result=await _db.thamSos.FirstOrDefaultAsync(u => u.TenThamSo == "SoXeTiepNhanToiDaMotNgay");
