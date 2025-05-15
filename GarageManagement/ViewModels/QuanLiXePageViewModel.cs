@@ -51,6 +51,7 @@ namespace GarageManagement.ViewModels
                     listcar.Add(item);
                 }
             }
+            //Listcar = new ObservableCollection<Xe>(list);
         }
         [RelayCommand]
         private async Task GoToChiTietXePage(int parameter)

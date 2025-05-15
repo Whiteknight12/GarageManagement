@@ -44,9 +44,10 @@
     <ShellContent
         ContentTemplate="{DataTemplate page:ChiTietXePage}"
         Route="ChiTietXePage"/>
-
+   
     <Shell.ToolbarItems>
         <ToolbarItem Text="Toggle Theme"
-                     Clicked="OnToggleThemeClicked" />
+                     Clicked="OnToggleThemeClicked"/>
     </Shell.ToolbarItems>
+    
 </Shell>        

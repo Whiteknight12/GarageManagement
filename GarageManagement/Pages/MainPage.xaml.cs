@@ -16,13 +16,13 @@ public partial class MainPage : ContentPage
         if (_viewModel.IsCollapsed)
         {
             // Expand
-            CollapsibleToolbar.Animate("Expand", new Animation(v => CollapsibleToolbar.WidthRequest = v, 70, 200), 16, 300, Easing.CubicInOut);
+            CollapsibleToolbar.Animate("Expand", new Animation(v => CollapsibleToolbar.WidthRequest = v, 80, 200), 16, 200, Easing.CubicInOut);
             _viewModel.IsCollapsed = false;
         }
         else
         {
             // Collapse
-            CollapsibleToolbar.Animate("Collapse", new Animation(v => CollapsibleToolbar.WidthRequest = v, 200, 70), 16, 300, Easing.CubicInOut);
+            CollapsibleToolbar.Animate("Collapse", new Animation(v => CollapsibleToolbar.WidthRequest = v, 200, 80), 16, 200, Easing.CubicInOut);
             _viewModel.IsCollapsed = true;
         }
     }

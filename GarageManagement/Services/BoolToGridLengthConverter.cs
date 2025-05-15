@@ -8,7 +8,7 @@ public class BoolToGridLengthConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (bool)value ? new GridLength(70) : new GridLength(200);
+        return (bool)value ? new GridLength(80) : new GridLength(200);
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

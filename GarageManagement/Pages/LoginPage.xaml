@@ -2,168 +2,208 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GarageManagement.Pages.LoginPage"
-             BackgroundColor="#f8f9fa"
+             BackgroundColor="{DynamicResource BackgroundColor}"
              Title="ĐĂNG NHẬP">
-    
-    <ContentPage.Background>
-        <LinearGradientBrush EndPoint="0,1">
-            <GradientStop Color="#f8f9fa" Offset="0.1" />
-            <GradientStop Color="#e9ecef" Offset="1.0" />
-        </LinearGradientBrush>
-    </ContentPage.Background>
 
-    <Shell.TitleView>
-        <Grid Padding="10" HeightRequest="50">
-            <Label 
-                Text="ĐĂNG NHẬP"
-                FontSize="25"
-                FontAttributes="Bold"
-                TextColor="White"/>
-        </Grid>
-    </Shell.TitleView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="20" />
+                <On Platform="iOS" Value="20" />
+                <On Platform="Windows" Value="20" />
+            </OnPlatform>
+            <OnPlatform x:Key="ButtonCornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="12" />
+                <On Platform="iOS" Value="12" />
+                <On Platform="Windows" Value="12" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ScrollView>
-        <Grid Padding="25">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <StackLayout Grid.Row="0" HorizontalOptions="Center" Spacing="15" Margin="0,40,0,20">
-                <Image Source="app_logo.png" HeightRequest="100" WidthRequest="100" />
-                <Label Text="MYGARA" 
-               FontSize="22" 
-               FontAttributes="Bold" 
-               TextColor="#3a86ff" 
-               HorizontalOptions="Center" />
-            </StackLayout>
-
-           <Frame Grid.Row="1" 
-           CornerRadius="20" 
-           HasShadow="True"
-           Padding="25" 
-           Margin="10,0" 
-           BorderColor="Transparent"
-           BackgroundColor="White"
-           MaximumWidthRequest="800"
-           VerticalOptions="Center">
-
-                <StackLayout Spacing="20">
-                    <Label Text="Đăng Nhập" 
-                   FontSize="28" 
-                   FontAttributes="Bold" 
-                   TextColor="#212529" 
-                   HorizontalOptions="Center"
-                   Margin="0,0,0,10" />
-
-                    <StackLayout Spacing="8">
-                        <Label Text="Tên đăng nhập" 
-                       TextColor="#495057" 
-                       FontSize="16" />
-                        <Frame Padding="15,0" 
-                       CornerRadius="10" 
-                       BorderColor="#dee2e6" 
-                       HasShadow="False"
-                       BackgroundColor="White"
-                       HeightRequest="50">
-                            <Grid ColumnDefinitions="Auto,*">
-                                <Image Grid.Column="0"
-                               Source="user.png" 
-                               HeightRequest="24" 
-                               WidthRequest="24" 
-                               VerticalOptions="Center" />
-                                <Entry Grid.Column="1"
-                               x:Name="UsernameEntry" 
-                               Placeholder="Nhập tên đăng nhập" 
-                               Text="{Binding Username}" 
-                               TextColor="#212529"
-                               BackgroundColor="Transparent"
-                               PlaceholderColor="#adb5bd" 
-                               VerticalOptions="Center" />
-                            </Grid>
-                        </Frame>
-                    </StackLayout>
-
-                    <StackLayout Spacing="8">
-                        <Label Text="Mật khẩu" 
-                       TextColor="#495057" 
-                       FontSize="16" />
-                        <Frame Padding="15,0" 
-                       CornerRadius="10" 
-                       BorderColor="#dee2e6" 
-                       BackgroundColor="White"
-                       HasShadow="False"
-                       HeightRequest="50">
-                            <Grid ColumnDefinitions="Auto,*,Auto">
-                                <Image Grid.Column="0"
-                               Source="passlock.png" 
-                               HeightRequest="24" 
-                               WidthRequest="24" 
-                               VerticalOptions="Center" />
-                                <Entry Grid.Column="1"
-                               x:Name="PasswordEntry" 
-                               Placeholder="Nhập mật khẩu" 
-                               Text="{Binding Password}" 
-                               IsPassword="True" 
-                               TextColor="#212529"
-                               BackgroundColor="Transparent"
-                               PlaceholderColor="#adb5bd" 
-                               VerticalOptions="Center" />
-                                <ImageButton Grid.Column="2"
-                                     Source="hide.png"
-                                     HeightRequest="10"
-                                     WidthRequest="10"
-                                     BackgroundColor="Transparent" />
-                            </Grid>
-                        </Frame>
-                    </StackLayout>
-
-                    <Grid ColumnDefinitions="*,*" Margin="0,5">
-                        <StackLayout Grid.Column="0" Orientation="Horizontal">
-                            <CheckBox Color="#3a86ff" />
-                            <Label Text="Nhớ mật khẩu" 
-                           TextColor="#495057" 
-                           VerticalOptions="Center" />
-                        </StackLayout>
-                        <Label Grid.Column="1" 
-                       Text="Quên mật khẩu?" 
-                       TextColor="#3a86ff" 
-                       FontAttributes="Bold"
-                       HorizontalOptions="End"
-                       VerticalOptions="Center" />
-                    </Grid>
-
-                    <Button Text="ĐĂNG NHẬP" 
-                    FontSize="16" 
-                    FontAttributes="Bold"
-                    CornerRadius="15" 
-                    BackgroundColor="#3a86ff" 
-                    TextColor="White" 
-                    HeightRequest="50"
-                    Margin="0,10" 
-                    Command="{Binding LoginCommand}" />
-                </StackLayout>
+        <VerticalStackLayout Padding="30" Spacing="25" MaximumWidthRequest="800">
+            <!-- Logo and Title -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                    <Image Source="app_logo.png" HeightRequest="80" WidthRequest="80" />
+                    <Label Text="MYGARA"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
             </Frame>
 
-            <StackLayout Grid.Row="2" 
-                 Orientation="Horizontal" 
-                 HorizontalOptions="Center"
-                 Margin="0,25,0,10">
-                <Label Text="Chưa có tài khoản? " 
-               TextColor="#495057" 
-               FontSize="16"
-               VerticalOptions="Center" />
-                <Label Text="Đăng ký ngay" 
-               TextColor="#3a86ff" 
-               FontSize="16" 
-               FontAttributes="Bold"
-               VerticalOptions="Center">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnRegisterTapped" />
-                    </Label.GestureRecognizers>
-                </Label>
-            </StackLayout>
-        </Grid>
+            <!-- Login Form -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="25"
+                   CornerRadius="{StaticResource CornerRadiusHandler}"
+                   VerticalOptions="Center">
+                <VerticalStackLayout Spacing="20">
+                    <Label Text="ĐĂNG NHẬP"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalOptions="Center"
+                           Margin="0,0,0,10"/>
+
+                    <!-- Username -->
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Tên đăng nhập"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"/>
+                        <Frame Padding="0"
+                               CornerRadius="{StaticResource CornerRadiusHandler}"
+                               HasShadow="False"
+                               BackgroundColor="{DynamicResource InputBackgroundColor}"
+                               HeightRequest="48">
+                            <Grid ColumnDefinitions="Auto,*" Padding="15,0">
+                                <Image Grid.Column="0"
+                                       Source="user.png"
+                                       HeightRequest="20"
+                                       WidthRequest="20"
+                                       VerticalOptions="Center"/>
+                                <Entry Grid.Column="1"
+                                       x:Name="UsernameEntry"
+                                       Placeholder="Nhập tên đăng nhập"
+                                       Text="{Binding Username}"
+                                       TextColor="{DynamicResource TextColor}"
+                                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                                       BackgroundColor="Transparent"
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- Password -->
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Mật khẩu"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"/>
+                        <Frame Padding="0"
+                               CornerRadius="{StaticResource CornerRadiusHandler}"
+                               HasShadow="False"
+                               BackgroundColor="{DynamicResource InputBackgroundColor}"
+                               HeightRequest="48">
+                            <Grid ColumnDefinitions="Auto,*,Auto" Padding="15,0">
+                                <Image Grid.Column="0"
+                                       Source="passlock.png"
+                                       HeightRequest="20"
+                                       WidthRequest="20"
+                                       VerticalOptions="Center"/>
+                                <Entry Grid.Column="1"
+                                       x:Name="PasswordEntry"
+                                       Placeholder="Nhập mật khẩu"
+                                       Text="{Binding Password}"
+                                       IsPassword="True"
+                                       TextColor="{DynamicResource TextColor}"
+                                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                                       BackgroundColor="Transparent"
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       VerticalOptions="Center"
+                                       />
+                                <ImageButton Grid.Column="2"
+                                             Source="hide.png"
+                                             Scale="0.5"
+                                             HeightRequest="20"
+                                             WidthRequest="20"
+                                             BackgroundColor="Transparent"
+                                             Clicked="OnTogglePasswordVisibilityClicked"/>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+
+                    <!-- Remember Me and Forgot Password -->
+                    <Grid ColumnDefinitions="*,*" Margin="0,5">
+                        <HorizontalStackLayout Grid.Column="0" Spacing="5">
+                            <CheckBox Color="#10B981" VerticalOptions="Center"/>
+                            <Label Text="Nhớ mật khẩu"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   TextColor="{DynamicResource TextColor}"
+                                   VerticalOptions="Center"/>
+                        </HorizontalStackLayout>
+                        <Label Grid.Column="1"
+                               Text="Quên mật khẩu?"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               FontFamily="OpenSans-Regular"
+                               TextColor="#3B82F6"
+                               HorizontalOptions="End"
+                               VerticalOptions="Center">
+                            <!--<Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnForgotPasswordTapped"/>
+                            </Label.GestureRecognizers>-->
+                        </Label>
+                    </Grid>
+
+                    <!-- Login Button -->
+                    <Button Text="ĐĂNG NHẬP"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            FontFamily="OpenSans-SemiBold"
+                            CornerRadius="{StaticResource ButtonCornerRadiusHandler}"
+                            BackgroundColor="#10B981"
+                            TextColor="White"
+                            HeightRequest="48"
+                            Margin="0,10"
+                            Command="{Binding LoginCommand}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#10B981"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#059669"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Register Link -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="Chưa có tài khoản?"
+                           FontSize="14"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"
+                           VerticalOptions="Center"/>
+                    <Label Text="Đăng ký ngay"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="#3B82F6"
+                           VerticalOptions="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnRegisterTapped"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </HorizontalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -33,7 +33,7 @@
                 Padding="10"
                 Grid.Column="0"
                 WidthRequest="200"
-                MinimumWidthRequest="70">
+                MinimumWidthRequest="80">
 
                 <HorizontalStackLayout>
                     <Label Text="{Binding HelloText}"

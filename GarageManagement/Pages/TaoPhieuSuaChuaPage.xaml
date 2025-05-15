@@ -52,7 +52,7 @@
                             SelectedItem="{Binding SelectedBienSoXe, Mode=TwoWay}"
                             BackgroundColor="{DynamicResource InputBackgroundColor}"
                             TextColor="{DynamicResource TextColor}"
-                            HeightRequest="48"
+                            HeightRequest="60"
                             Margin="0,5,0,0" />
 
                     <Label Text="Ngày sửa chữa:" 
@@ -63,7 +63,7 @@
                     <DatePicker Date="{Binding NgaySuaChua, Mode=TwoWay}"
                                 BackgroundColor="{DynamicResource InputBackgroundColor}"
                                 TextColor="{DynamicResource TextColor}"
-                                HeightRequest="48"
+                                HeightRequest="60"
                                 Margin="0,5,0,0"/>
                 </VerticalStackLayout>
             </Frame>
@@ -103,7 +103,7 @@
                                         SelectedIndexChanged="OnVTPTChanged"
                                         BackgroundColor="{DynamicResource InputBackgroundColor}"
                                         TextColor="{DynamicResource TextColor}"
-                                        HeightRequest="48"
+                                        HeightRequest="60"
                                         Margin="0,5,0,0"/>
 
                                 <Label Text="Số lượng:" 
@@ -144,7 +144,7 @@
                                         SelectedIndexChanged="OnTienCongChanged"
                                         BackgroundColor="{DynamicResource InputBackgroundColor}"
                                         TextColor="{DynamicResource TextColor}"
-                                        HeightRequest="48"
+                                        HeightRequest="60"
                                         Margin="0,5,0,0"/>
 
                                 <Label Text="Thành tiền:" 

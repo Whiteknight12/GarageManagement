@@ -39,47 +39,39 @@
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalOptions="Center"/>
+                    <Label Text="Biển số"
+            FontSize="16"
+            FontAttributes="Bold"
+            FontFamily="OpenSans-Regular"
+            TextColor="{DynamicResource TextColor}"/>
+                    <Entry x:Name="txtBienSo"
+Placeholder="Nhập biển số xe"
+TextChanged="OnBienSoChanged"
+PlaceholderColor="{DynamicResource PlaceholderColor}"
+Text="{Binding BienSo, Mode=TwoWay}"
+TextColor="{DynamicResource TextColor}"
+HeightRequest="48"
+Margin="0,5,0,0"
+HorizontalOptions="Fill"/>
+
+
+                    <!-- Date of Reception -->
+                    <Label Text="Ngày tiếp nhận"
+            FontSize="16"
+            FontAttributes="Bold"
+            FontFamily="OpenSans-Regular"
+            TextColor="{DynamicResource TextColor}"/>
+                    <DatePicker x:Name="dpNgayTiepNhan"
+     Date="{Binding NgayTiepNhan, Mode=TwoWay}"
+     TextColor="{DynamicResource TextColor}"
+     HeightRequest="48"
+     Margin="0,5,0,0"
+     HorizontalOptions="Fill"/>
                 </VerticalStackLayout>
             </Frame>
 
             <!-- License Plate Input -->
-            <Label Text="Biển số"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   FontFamily="OpenSans-Regular"
-                   TextColor="{DynamicResource TextColor}"/>
-            <Frame BackgroundColor="{DynamicResource InputBackgroundColor}"
-                   Padding="0"
-                   HasShadow="False"
-                   CornerRadius="{StaticResource CornerRadiusHandler}">
-                <Entry x:Name="txtBienSo"
-                       Placeholder="Nhập biển số xe"
-                       TextChanged="OnBienSoChanged"
-                       PlaceholderColor="{DynamicResource PlaceholderColor}"
-                       Text="{Binding BienSo, Mode=TwoWay}"
-                       TextColor="{DynamicResource TextColor}"
-                       HeightRequest="48"
-                       Margin="0,5,0,0"
-                       HorizontalOptions="Fill"/>
-            </Frame>
-
-            <!-- Date of Reception -->
-            <Label Text="Ngày tiếp nhận"
-                   FontSize="16"
-                   FontAttributes="Bold"
-                   FontFamily="OpenSans-Regular"
-                   TextColor="{DynamicResource TextColor}"/>
-            <Frame Padding="20"
-                   BackgroundColor="{DynamicResource InputBackgroundColor}"
-                   HasShadow="False"
-                   CornerRadius="{StaticResource CornerRadiusHandler}">
-                <DatePicker x:Name="dpNgayTiepNhan"
-                            Date="{Binding NgayTiepNhan, Mode=TwoWay}"
-                            TextColor="{DynamicResource TextColor}"
-                            HeightRequest="48"
-                            Margin="0,5,0,0"
-                            HorizontalOptions="Fill"/>
-            </Frame>
+            
 
             <!-- Car Exists Section -->
             <Frame Padding="20"
