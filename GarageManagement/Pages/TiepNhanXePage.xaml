@@ -70,7 +70,7 @@
                             <Label Text="{Binding TenChuXe, StringFormat='Họ và tên: {0}'}" TextColor="{DynamicResource TextColor}"/>
                             <Label Text="{Binding DiaChi, StringFormat='Địa chỉ: {0}'}" TextColor="{DynamicResource TextColor}"/>
                             <Label Text="{Binding SoDienThoai, StringFormat='Điện thoại: {0}'}" TextColor="{DynamicResource TextColor}"/>
-                            <Button Text="Xem chi tiết chủ xe" Command="{Binding ViewOwnerDetailsCommand}" BackgroundColor="Purple" TextColor="White" />
+                            <Button Text="Xem chi tiết chủ xe" Command="{Binding ViewCarOwnerDetailsCommand}" BackgroundColor="Purple" TextColor="White" />
                         </VerticalStackLayout>
                     </Frame>
 

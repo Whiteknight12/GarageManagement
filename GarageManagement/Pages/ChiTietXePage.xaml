@@ -123,6 +123,8 @@
             </Frame>
 
             <Button Text="Cập nhật thông tin xe" BackgroundColor="#10B981" TextColor="White"/>
+            
+            <Button Text="Quay lại" BackgroundColor="Gray" TextColor="White" Command="{Binding BackCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

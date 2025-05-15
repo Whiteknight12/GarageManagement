@@ -32,6 +32,7 @@ namespace GarageManagement.ViewModels
         private Guid carId;
 
         private string STORAGE_KEY = "user-account-status";
+        private Guid ownerId;
         private readonly APIClientService<PhieuTiepNhan> _recordService;
         private readonly APIClientService<ThamSo> _ruleService;
         private readonly APIClientService<Xe> _carService;
@@ -78,6 +79,7 @@ namespace GarageManagement.ViewModels
                 CarId = result.Id;
                 TenXe = result.Ten;
                 BienSo = result.BienSo;
+                ownerId = result.KhachHangId;
                 var hieuXe=await _hieuXeService.GetByID(result.HieuXeId);
                 if (hieuXe is not null) TenHieuXe = hieuXe.TenHieuXe;
                 var khachHang = await _userService.GetByID(result.KhachHangId);
@@ -149,7 +151,7 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public async Task ViewCarOwnerDetails()
         {
-
+            await Shell.Current.GoToAsync($"{nameof(ChiTietKhachHangPage)}?parameterID={ownerId}");
         }
 
         [RelayCommand]

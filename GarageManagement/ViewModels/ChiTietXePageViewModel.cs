@@ -2,12 +2,6 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using GarageManagement.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
 {
@@ -59,6 +53,20 @@ namespace GarageManagement.ViewModels
             if (tmp) TinhTrang = "Đang tiếp nhận trong Gara";
             else TinhTrang = "Không có trong Gara";
             TienNoCuaChuXe = obj.TienNo ?? 0;
+        }
+
+        [RelayCommand]
+        public async Task Back()
+        {
+            var navigationStack = Shell.Current.Navigation.NavigationStack;
+            if (navigationStack.Count > 1)
+            {
+                await Shell.Current.Navigation.PopAsync();
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Không thể quay lại trang trước", "OK");
+            }
         }
     }
 }

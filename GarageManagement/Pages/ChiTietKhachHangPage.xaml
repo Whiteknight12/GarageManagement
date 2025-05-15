@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.ChiTietKhachHangPage"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20" MaximumWidthRequest="800">
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+               CornerRadius="10"
+               Padding="15"
+               HasShadow="True">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Chi Tiết Chủ Xe" 
+                       TextColor="{DynamicResource TextColor}" 
+                       FontSize="30" 
+                       HorizontalOptions="Center" 
+                       FontAttributes="Bold"/>
+                </Grid>
+            </Frame>
+
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+               CornerRadius="10"
+               Padding="15"
+               HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <VerticalStackLayout>
+                        <Label Text="Họ và tên"
+                           FontSize="16"
+                           TextColor="{DynamicResource TextColor}"/>
+                        <Label Text="{Binding HoVaTen}"
+                           FontSize="16"
+                           TextColor="{DynamicResource TextColor}" />
+                    </VerticalStackLayout>
+
+                    <BoxView/>
+
+                    <VerticalStackLayout>
+                        <Label Text="Tuổi"
+                       FontSize="16"
+                       TextColor="{DynamicResource TextColor}"/>
+                        <Label Text="{Binding Tuoi}"
+                       FontSize="16"
+                       TextColor="{DynamicResource TextColor}" />
+                    </VerticalStackLayout>
+
+                    <BoxView/>
+
+                    <VerticalStackLayout>
+                        <Label Text="Địa chỉ"
+                           FontSize="16"
+                           TextColor="{DynamicResource TextColor}"/>
+                        <Label Text="{Binding DiaChi}"
+                           FontSize="16"
+                           TextColor="{DynamicResource TextColor}" />
+                    </VerticalStackLayout>
+
+                    <BoxView/>
+
+                    <VerticalStackLayout>
+                        <Label Text="Số điện thoại"
+                           FontSize="16"
+                           TextColor="{DynamicResource TextColor}" />
+                        <Label Text="{Binding SoDienThoai}"
+                           FontSize="16"
+                           TextColor="{DynamicResource TextColor}" />
+                    </VerticalStackLayout>
+
+                    <BoxView/>
+
+                    <VerticalStackLayout>
+                        <Label Text="Tiền nợ: "
+                           FontSize="16"
+                           TextColor="{DynamicResource TextColor}" />
+
+                        <Label Text="{Binding TienNo, StringFormat='{0:N0} VNĐ'}"
+                           TextColor="#D32F2F"
+                           FontSize="16"/>
+                    </VerticalStackLayout>
+
+                    <BoxView/>
+
+                    <VerticalStackLayout>
+                        <Label Text="Email"
+                           FontSize="16"
+                           TextColor="{DynamicResource TextColor}" />
+
+                        <Label Text="{Binding Email}"
+                           FontSize="16"
+                           TextColor="{DynamicResource TextColor}" />
+                    </VerticalStackLayout>
+
+                    <BoxView/>
+
+                    <VerticalStackLayout>
+
+                        <Label Text="Tài khoản"
+                        FontSize="16"
+                        TextColor="{DynamicResource TextColor}" />
+
+                        <Label Text="{Binding HasAccount}"
+                        TextColor="{DynamicResource TextColor}"
+                        FontSize="16"/>
+
+                    </VerticalStackLayout>
+
+                    <BoxView/>
+
+                    
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="Cập nhật thông tin chủ xe" BackgroundColor="#10B981" TextColor="White"/>
+
+            <Button Text="Quay lại" BackgroundColor="Gray" TextColor="White" Command="{Binding BackCommand}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
