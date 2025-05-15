@@ -7,8 +7,8 @@
     xmlns:page="clr-namespace:GarageManagement.Pages"
     xmlns:shell="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
     Shell.TitleColor="Black"
-    Title="MyGara">
-
+    Title="MyGara"
+    BackgroundColor="DimGray">
     <ShellContent
         ContentTemplate="{DataTemplate page:LoginPage}"
         Route="LoginPage" />

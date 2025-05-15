@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Pages;
+using GarageManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,10 @@ namespace GarageManagement.ViewModels
         private bool baoCaoDoanhSoActive = false;
         [ObservableProperty]
         private bool quanLiDanhSachLoaiVatTuActive = false;
+        [ObservableProperty] 
+        private bool isCollapsed;
+        [ObservableProperty]
+        private string helloText = string.Empty;
 
         private readonly TiepNhanXePage _tiepNhanXe;
         private readonly TaoPhieuSuaChuaPage _taoPhieuSuaChua;
@@ -40,6 +45,7 @@ namespace GarageManagement.ViewModels
         private readonly ThuTienPage _thuTienPage;
         private readonly BaoCaoDoanhSoPage _baoCaoDoanhSoPage;
         private readonly QuanLiDanhSachLoaiVatTuPage _quanLiDanhSachLoaiVatTuPage;
+        private readonly AuthenticationService _authenticationServices;
         public MainPageViewModel(TiepNhanXePage tiepNhanXe, 
             LapPhieuNhapPage taoPhieuNhap, 
             TaoPhieuSuaChuaPage taoPhieuSuaChua,
@@ -47,7 +53,8 @@ namespace GarageManagement.ViewModels
             QuanLiXePage quanLiXePage,
             ThuTienPage thuTienPage,
             BaoCaoDoanhSoPage baoCaoDoanhSoPage,
-            QuanLiDanhSachLoaiVatTuPage quanLiDanhSachLoaiVatTuPage)
+            QuanLiDanhSachLoaiVatTuPage quanLiDanhSachLoaiVatTuPage,
+            AuthenticationService authenticationService)
         {
             currentPageContent = new NhanSuMainPage();
             _tiepNhanXe = tiepNhanXe;
@@ -58,6 +65,9 @@ namespace GarageManagement.ViewModels
             _thuTienPage = thuTienPage;
             _baoCaoDoanhSoPage = baoCaoDoanhSoPage;
             _quanLiDanhSachLoaiVatTuPage = quanLiDanhSachLoaiVatTuPage;
+            IsCollapsed = false;
+            _authenticationServices = authenticationService;
+            LoadUserAsync();
         }
 
         [RelayCommand]
@@ -85,6 +95,19 @@ namespace GarageManagement.ViewModels
                 "QLDanhSachLoaiVatTu" => _quanLiDanhSachLoaiVatTuPage,
                 _ => new NhanSuMainPage()
             };
+        }
+        private void LoadUserAsync()
+        {
+            _ = _authenticationServices.FettaiKhoanSession();
+            var user = _authenticationServices.GetCurrentAccountStatus;
+            if (user != null)
+            {
+                HelloText = $"Xin chào {user.Role}: {user.Username}";
+            }
+            else
+            {
+                HelloText = "Không có thông tin account";
+            }
         }
     }
 }

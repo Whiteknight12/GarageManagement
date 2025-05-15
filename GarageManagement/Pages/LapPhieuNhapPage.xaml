@@ -9,6 +9,21 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <service:PickerConverterService x:Key="IDConverter"/>
+            <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="20" />
+                <On Platform="iOS" Value="20" />
+                <On Platform="Windows" Value="20" />
+            </OnPlatform>
+            <OnPlatform x:Key="ButtonCornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="12" />
+                <On Platform="iOS" Value="12" />
+                <On Platform="Windows" Value="12" />
+            </OnPlatform>
+            <OnPlatform x:Key="DeleteButtonCornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="10" />
+                <On Platform="iOS" Value="10" />
+                <On Platform="Windows" Value="10" />
+            </OnPlatform>
         </ResourceDictionary>
     </ContentView.Resources>
 
@@ -17,7 +32,8 @@
             <!-- Header Section -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   Padding="20">
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
                 <VerticalStackLayout Spacing="12">
                     <Label Text="Danh sách Chi Tiết Phiếu Nhập" 
                            FontSize="18" 
@@ -35,9 +51,11 @@
                         <Frame HasShadow="True"
                                BackgroundColor="{DynamicResource CardBackgroundColor}"
                                Padding="20"
-                               Margin="0,12,0,0">
+                               Margin="0,12,0,0"
+                               CornerRadius="{StaticResource CornerRadiusHandler}">
                             <VerticalStackLayout Spacing="16">
                                 <Label Text="Loại Vật Tư:" 
+                                       FontSize="16"
                                        FontAttributes="Bold" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"/>
@@ -54,6 +72,7 @@
                                         HeightRequest="48"/>
 
                                 <Label Text="Số Lượng:" 
+                                       FontSize="16"
                                        FontAttributes="Bold" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"/>
@@ -69,6 +88,7 @@
                                        HeightRequest="48"/>
 
                                 <Label Text="Đơn Giá:" 
+                                       FontSize="16"
                                        FontAttributes="Bold" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"/>
@@ -88,6 +108,7 @@
                                         TextColor="White"
                                         HeightRequest="40"
                                         FontFamily="OpenSans-SemiBold"
+                                        CornerRadius="{StaticResource DeleteButtonCornerRadiusHandler}"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LapPhieuNhapPageViewModel}}, Path=XoaChiTietPhieuNhapCommand}"
                                         CommandParameter="{Binding .}">
                                     <VisualStateManager.VisualStateGroups>
@@ -116,7 +137,8 @@
             <!-- Total Price Section -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   Padding="20">
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
                 <HorizontalStackLayout Spacing="10">
                     <Label Text="Tổng Giá Tiền:" 
                            FontSize="16" 
@@ -139,7 +161,8 @@
                         TextColor="White"
                         HeightRequest="48"
                         FontAttributes="Bold"
-                        FontFamily="OpenSans-SemiBold">
+                        FontFamily="OpenSans-SemiBold"
+                        CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
                     <VisualStateManager.VisualStateGroups>
                         <VisualStateGroupList>
                             <VisualStateGroup x:Name="CommonStates">
@@ -165,7 +188,8 @@
                         TextColor="White"
                         HeightRequest="48"
                         FontAttributes="Bold"
-                        FontFamily="OpenSans-SemiBold">
+                        FontFamily="OpenSans-SemiBold"
+                        CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
                     <VisualStateManager.VisualStateGroups>
                         <VisualStateGroupList>
                             <VisualStateGroup x:Name="CommonStates">

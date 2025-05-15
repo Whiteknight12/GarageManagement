@@ -2,150 +2,257 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:service="clr-namespace:GarageManagement.Services"
-             x:Class="GarageManagement.Pages.MainPage">
+             x:Class="GarageManagement.Pages.MainPage"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <service:BoolToColorConverterService x:Key="BoolToColorConverter" />
+            <service:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter" />
+            <service:WidthToVisibilityConverter x:Key="WidthToVisibilityConverter" />
+            <!-- Handler for rounded corners -->
+            <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="10" />
+                <On Platform="iOS" Value="10" />
+                <On Platform="Windows" Value="10" />
+            </OnPlatform>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="{Binding IsCollapsed, Converter={StaticResource BoolToGridLengthConverter}}" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <VerticalStackLayout BackgroundColor="#2C3E50"
-            Spacing="10"
-            Padding="10"
-            Grid.Column="0">
-            <Label Text="Menu"
-                   TextColor="White"
-                   FontAttributes="Bold"
-                   FontSize="20"
-                   HorizontalOptions="Center"
-                   Margin="0,20,0,20" />
+        <ScrollView>
+            <VerticalStackLayout 
+                BackgroundColor="#264f76"
+                x:Name="CollapsibleToolbar"
+                Spacing="10"
+                Padding="10"
+                Grid.Column="0"
+                WidthRequest="200"
+                MinimumWidthRequest="70">
 
-            <Frame BackgroundColor="{Binding TrangChuActive, Converter={StaticResource BoolToColorConverter}}"
-                   CornerRadius="10"
-                   Padding="10"
-                   Margin="5">
-                    <Label Text="Home"
-                           TextColor="White"
-                           FontSize="16"
-                           HorizontalOptions="Center" />
+                <HorizontalStackLayout>
+                    <Label Text="{Binding HelloText}"
+   TextColor="White"
+   FontAttributes="Bold"
+   FontFamily="OpenSans-SemiBold"
+   FontSize="15"
+   Margin="0,20,0,20" 
+   HorizontalOptions="Start"
+   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    <Button Text="☰"
+    TextColor="White"
+    BackgroundColor="Transparent"
+    HorizontalOptions="End"
+    VerticalOptions="Center"
+    Clicked="OnCollapseClicked" />
+
+                    <Label Text="Menu"
+   TextColor="White"
+   FontAttributes="Bold"
+   FontFamily="OpenSans-SemiBold"
+   FontSize="20"
+   HorizontalOptions="Center"
+   Margin="0,20,0,20" 
+   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+
+                </HorizontalStackLayout>
+
+                <Frame BackgroundColor="{Binding TrangChuActive, Converter={StaticResource BoolToColorConverter}}"
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True">
+                    <HorizontalStackLayout >
+                        <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                        <Label Text="Home"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap" 
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Home" />
                     </Frame.GestureRecognizers>
-            </Frame>
+                </Frame>
 
-            <Frame BackgroundColor="{Binding TiepNhanXeActive, Converter={StaticResource BoolToColorConverter}}"
-                   CornerRadius="10"
-                   Padding="10"
-                   Margin="5">
-                <Label Text="Tiếp Nhận Xe"
-                       TextColor="White"
-                       FontSize="16"
-                       HorizontalOptions="Center" />
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TiepNhanXe" />
-                </Frame.GestureRecognizers>
-            </Frame>
+                <Frame BackgroundColor="{Binding TiepNhanXeActive, Converter={StaticResource BoolToColorConverter}}"
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True">
+                    <HorizontalStackLayout>
+                        <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                        <Label Text="Tiếp Nhận Xe"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TiepNhanXe" />
+                    </Frame.GestureRecognizers>
+                </Frame>
 
-            <Frame BackgroundColor="{Binding TaoPhieuSuaChuaActive, Converter={StaticResource BoolToColorConverter}}"
-                CornerRadius="10"
-                Padding="10"
-                Margin="5">
-                <Label Text="Lập phiếu sữa chữa"
-                   TextColor="White"
-                   FontSize="16"
-                   HorizontalOptions="Center" />
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TaoPhieuSuaChua" />
-                </Frame.GestureRecognizers>
-            </Frame>
+                <Frame BackgroundColor="{Binding TaoPhieuSuaChuaActive, Converter={StaticResource BoolToColorConverter}}"
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True">
+                    <HorizontalStackLayout>
+                        <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                        <Label Text="Lập Phiếu Sửa Chữa"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TaoPhieuSuaChua" />
+                    </Frame.GestureRecognizers>
+                </Frame>
 
-            <Frame BackgroundColor="{Binding TaoPhieuNhapActive, Converter={StaticResource BoolToColorConverter}}"
-                CornerRadius="10"
-                Padding="10"
-                Margin="5">
-                <Label Text="Lập phiếu nhập"
-                   TextColor="White"
-                   FontSize="16"
-                   HorizontalOptions="Center" />
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TaoPhieuNhap" />
-                </Frame.GestureRecognizers>
-            </Frame>
+                <Frame BackgroundColor="{Binding TaoPhieuNhapActive, Converter={StaticResource BoolToColorConverter}}"
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True">
+                    <HorizontalStackLayout>
+                        <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                        <Label Text="Lập Phiếu Nhập"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TaoPhieuNhap" />
+                    </Frame.GestureRecognizers>
+                </Frame>
 
-            <Frame BackgroundColor="{Binding QlDanhSachHieuXeActive, Converter={StaticResource BoolToColorConverter}}"
-                CornerRadius="10"
-                Padding="10"
-                Margin="5">
-                <Label Text="QL DS Hiệu Xe"
-                       TextColor="White"
-                       FontSize="16"
-                       HorizontalOptions="Center" />
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QLDanhSachHieuXe" />
-                </Frame.GestureRecognizers>
-            </Frame>
+                <Frame BackgroundColor="{Binding QlDanhSachHieuXeActive, Converter={StaticResource BoolToColorConverter}}"
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True">
+                    <HorizontalStackLayout>
+                        <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                        <Label Text="QL DS Hiệu Xe"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QLDanhSachHieuXe" />
+                    </Frame.GestureRecognizers>
+                </Frame>
 
-            <Frame BackgroundColor="{Binding QlXeActive, Converter={StaticResource BoolToColorConverter}}"
-                CornerRadius="10"
-                Padding="10"
-                Margin="5">
-                <Label Text="QL DS Xe"
-                       TextColor="White"
-                       FontSize="16"
-                       HorizontalOptions="Center" />
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QLXe" />
-                </Frame.GestureRecognizers>
-            </Frame>
+                <Frame BackgroundColor="{Binding QlXeActive, Converter={StaticResource BoolToColorConverter}}"
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True">
+                    <HorizontalStackLayout>
+                        <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                        <Label Text="QL DS Xe"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QLXe" />
+                    </Frame.GestureRecognizers>
+                </Frame>
 
-            <Frame BackgroundColor="{Binding ThuTienActive, Converter={StaticResource BoolToColorConverter}}"
-                CornerRadius="10"
-                Padding="10"
-                Margin="5">
-                <Label Text="Lập Phiếu Thu Tiền"
-                       TextColor="White"
-                       FontSize="16"
-                       HorizontalOptions="Center" />
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="ThuTien" />
-                </Frame.GestureRecognizers>
-            </Frame>
+                <Frame BackgroundColor="{Binding ThuTienActive, Converter={StaticResource BoolToColorConverter}}"
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True">
+                    <HorizontalStackLayout>
+                        <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                        <Label Text="Lập Phiếu Thu Tiền"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="ThuTien" />
+                    </Frame.GestureRecognizers>
+                </Frame>
 
-            <Frame BackgroundColor="{Binding BaoCaoDoanhSoActive, Converter={StaticResource BoolToColorConverter}}"
-                CornerRadius="10"
-                Padding="10"
-                Margin="5">
-                <Label Text="Báo Cáo Doanh Số"
-                       TextColor="White"
-                       FontSize="16"
-                       HorizontalOptions="Center" />
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="BaoCaoDoanhSo" />
-                </Frame.GestureRecognizers>
-            </Frame>
+                <Frame BackgroundColor="{Binding BaoCaoDoanhSoActive, Converter={StaticResource BoolToColorConverter}}"
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True">
+                    <HorizontalStackLayout>
+                        <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                        <Label Text="Báo Cáo Doanh Số"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="BaoCaoDoanhSo" />
+                    </Frame.GestureRecognizers>
+                </Frame>
 
-            <Frame BackgroundColor="{Binding QuanLiDanhSachLoaiVatTuActive, Converter={StaticResource BoolToColorConverter}}"
-                CornerRadius="10"
-                Padding="10"
-                Margin="5">
-                <Label Text="QL DS Loại vật tư"
-                       TextColor="White"
-                       FontSize="16"
-                       HorizontalOptions="Center" />
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QLDanhSachLoaiVatTu" />
-                </Frame.GestureRecognizers>
-            </Frame>
-        </VerticalStackLayout>
+                <Frame BackgroundColor="{Binding QuanLiDanhSachLoaiVatTuActive, Converter={StaticResource BoolToColorConverter}}"
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True">
+                    <HorizontalStackLayout>
+                        <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                        <Label Text="QL DS Loại Vật Tư Phụ Tùng" 
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QLDanhSachLoaiVatTu" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
 
         <ContentView Grid.Column="1"
-            BackgroundColor="#ECF0F1"
-            Content="{Binding CurrentPageContent}" />
+                     BackgroundColor="{DynamicResource BackgroundColor}"
+                     Content="{Binding CurrentPageContent}" />
     </Grid>
 </ContentPage>
