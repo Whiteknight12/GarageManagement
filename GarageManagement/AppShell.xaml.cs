@@ -14,6 +14,7 @@ namespace GarageManagement
             Routing.RegisterRoute("TaoPhieuSuaChuaPage", typeof(TaoPhieuSuaChuaPage));
             Routing.RegisterRoute("LapPhieuNhapPage", typeof(LapPhieuNhapPage));
             Routing.RegisterRoute("QuanLiDanhSachHieuXePage", typeof(QuanLiDanhSachHieuXePage));
+            Routing.RegisterRoute("ThemXePage", typeof(ThemXePage));
             FlyoutBehavior = FlyoutBehavior.Disabled;
             _app = (App)Application.Current;
         }

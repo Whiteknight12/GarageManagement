@@ -1,100 +1,93 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="GarageManagement.Pages.TiepNhanXePage"
-    BackgroundColor="Bisque"
-    Shell.NavBarIsVisible="False">
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.TiepNhanXePage"
+             BackgroundColor="{DynamicResource BackgroundColor}"
+             Shell.NavBarIsVisible="False">
 
     <ScrollView Margin="20">
-        <Frame CornerRadius="10" BorderColor="Black" BackgroundColor="AliceBlue" HasShadow="False" MaximumWidthRequest="800">
+        <Frame CornerRadius="10" BorderColor="{DynamicResource BorderColor}" BackgroundColor="{DynamicResource CardBackgroundColor}" HasShadow="False" MaximumWidthRequest="800">
             <VerticalStackLayout Spacing="20">
-                <Label TextColor="Black"
+                <Label TextColor="{DynamicResource TextColor}"
                     Text="TIẾP NHẬN XE MỚI"
                     FontSize="36"
                     FontAttributes="Bold"
                     HorizontalTextAlignment="Center" />
 
-                <Label Text="Biển số" FontSize="Medium" TextColor="Black"/>
+                <Label Text="Biển số" FontSize="Medium" TextColor="{DynamicResource TextColor}"/>
                 <Frame
                     CornerRadius="10"
-                    BorderColor="Black"
+                    BackgroundColor="{DynamicResource InputBackgroundColor}"
                     Padding="0"
                     HasShadow="False">
                     <Entry
                         x:Name="txtBienSo"
-                        BackgroundColor="LightGray"
                         Placeholder="Nhập biển số xe"
+                        PlaceholderColor="{DynamicResource PlaceholderColor}"
                         Text="{Binding BienSo, Mode=TwoWay}"
-                        TextColor="Black"
+                        TextColor="{DynamicResource TextColor}"
                         HorizontalOptions="Fill" />
                 </Frame>
 
-                <Label TextColor="Black" Text="Ngày tiếp nhận" FontSize="Medium" />
+                <Label TextColor="{DynamicResource TextColor}" Text="Ngày tiếp nhận" FontSize="Medium" />
                 <Frame
                     CornerRadius="10"
-                    BorderColor="Black"
                     Padding="10,5"
-                    BackgroundColor="LightGray"
+                    BackgroundColor="{DynamicResource InputBackgroundColor}"
                     HasShadow="False">
                     <DatePicker
                         x:Name="dpNgayTiepNhan"
                         Date="{Binding NgayTiepNhan, Mode=TwoWay}"
-                        TextColor="Black"
+                        TextColor="{DynamicResource TextColor}"
                         HorizontalOptions="Fill" />
                 </Frame>
 
                 <StackLayout Spacing="15">
 
                     <Frame CornerRadius="10"
-                        BorderColor="Gray"
                         Padding="15"
                         HasShadow="True"
-                        BackgroundColor="White"
+                        BackgroundColor="{DynamicResource CardBackgroundColor}"
                         IsVisible="{Binding IsCarExists}">
                         <VerticalStackLayout Spacing="10">
                             <Label Text="Xe đã tồn tại" FontAttributes="Bold" TextColor="Green"/>
-                            <Label Text="{Binding TenXe, StringFormat='Tên xe: {0}'}" TextColor="Black"/>
-                            <Label Text="{Binding TenHieuXe, StringFormat='Hiệu xe: {0}'}" TextColor="Black"/>
-                            <Label Text="{Binding BienSo, StringFormat='Biển số: {0}'}" TextColor="Black"/>
-                            <Button
-                    Text="Chi tiết xe"
-                    Command="{Binding ViewCarDetailsCommand}" />
+                            <Label Text="{Binding TenXe, StringFormat='Tên xe: {0}'}" TextColor="{DynamicResource TextColor}"/>
+                            <Label Text="{Binding TenHieuXe, StringFormat='Hiệu xe: {0}'}" TextColor="{DynamicResource TextColor}"/>
+                            <Label Text="{Binding BienSo, StringFormat='Biển số: {0}'}" TextColor="{DynamicResource TextColor}"/>
+                            <Button Text="Chi tiết xe" Command="{Binding ViewCarDetailsCommand}" BackgroundColor="Purple" TextColor="White" />
                         </VerticalStackLayout>
                     </Frame>
 
                     <Frame
                         CornerRadius="10"
-                        BorderColor="Gray"
                         Padding="15"
                         HasShadow="True"
-                        BackgroundColor="White"
+                        BackgroundColor="{DynamicResource CardBackgroundColor}"
                         IsVisible="{Binding IsCarExists}">
                         <VerticalStackLayout Spacing="10">
                             <Label Text="Thông tin chủ xe" FontAttributes="Bold" TextColor="Green"/>
-                            <Label Text="{Binding TenChuXe, StringFormat='Họ và tên: {0}'}" TextColor="Black"/>
-                            <Label Text="{Binding DiaChi, StringFormat='Địa chỉ: {0}'}" TextColor="Black"/>
-                            <Label Text="{Binding SoDienThoai, StringFormat='Điện thoại: {0}'}" TextColor="Black"/>
-                            <Button Text="Xem chi tiết chủ xe" Command="{Binding ViewOwnerDetailsCommand}" />
+                            <Label Text="{Binding TenChuXe, StringFormat='Họ và tên: {0}'}" TextColor="{DynamicResource TextColor}"/>
+                            <Label Text="{Binding DiaChi, StringFormat='Địa chỉ: {0}'}" TextColor="{DynamicResource TextColor}"/>
+                            <Label Text="{Binding SoDienThoai, StringFormat='Điện thoại: {0}'}" TextColor="{DynamicResource TextColor}"/>
+                            <Button Text="Xem chi tiết chủ xe" Command="{Binding ViewOwnerDetailsCommand}" BackgroundColor="Purple" TextColor="White" />
                         </VerticalStackLayout>
                     </Frame>
 
                     <Frame
+                        x:Name="noCarFoundContainer"
                         CornerRadius="10"
-                        BorderColor="Gray"
                         Padding="15"
                         HasShadow="True"
-                        BackgroundColor="White"
+                        BackgroundColor="{DynamicResource CardBackgroundColor}"
                         IsVisible="{Binding IsCarNotFound}">
                         <VerticalStackLayout Spacing="10">
                             <Label Text="Xe chưa có trong hệ thống" FontAttributes="Bold" TextColor="Red"/>
-                            <Button
-                                Text="Thêm xe mới"
-                                Command="{Binding AddNewCarCommand}" />
+                            <Button Text="Thêm xe mới" Command="{Binding AddNewCarCommand}" BackgroundColor="#3B82F6" TextColor="White" />
                         </VerticalStackLayout>
                     </Frame>
                 </StackLayout>
                 
+                <Button IsVisible="{Binding IsCarExists}" CornerRadius="10" BackgroundColor="#10B981" TextColor="White" Text="Tạo phiếu tiếp nhận mới" Command="{Binding AddNewCarRecordCommand}"/>
             </VerticalStackLayout>
         </Frame>
     </ScrollView>

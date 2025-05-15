@@ -25,7 +25,7 @@
                         SelectedItem="{Binding SelectedHieuXe, Mode=TwoWay}"
                         TextColor="Black"
                         BackgroundColor="#F9FAFB"
-                        HeightRequest="50"
+                        HeightRequest="70"
                         TitleColor="#9CA3AF" />
 
                     <Entry Placeholder="Biển số xe"
@@ -91,6 +91,14 @@
                     HeightRequest="50"
                     Command="{Binding SaveButtonClickCommand}"
                     FontAttributes="Bold"/>
+
+            <Button Text="Quay lại"
+                    BackgroundColor="Gray"
+                    TextColor="Black"
+                    CornerRadius="12"
+                    HeightRequest="50"
+                    FontAttributes="Bold"
+                    Command="{Binding BackCommand}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

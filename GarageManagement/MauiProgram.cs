@@ -81,6 +81,7 @@ public static class MauiProgram
         builder.Services.AddTransient<MainPageViewModel>();
         builder.Services.AddTransient<QuanLiDanhSachHieuXePageViewModel>();
         builder.Services.AddTransient<ThemHieuXePageViewModel>();
+        builder.Services.AddTransient<TiepNhanXePageViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();

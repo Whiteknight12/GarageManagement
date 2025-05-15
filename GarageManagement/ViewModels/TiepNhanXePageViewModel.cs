@@ -96,7 +96,7 @@ namespace GarageManagement.ViewModels
             }
             if (string.IsNullOrEmpty(BienSo))
             {
-                Shell.Current?.DisplayAlert("Thông báo", "Vui lòng nhập đầy đủ thông tin chủ xe.", "OK");
+                Shell.Current?.DisplayAlert("Thông báo", "Vui lòng nhập biển số xe", "OK");
                 return;
             }
             if (NgayTiepNhan < DateTime.Now)

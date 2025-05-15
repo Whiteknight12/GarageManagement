@@ -6,13 +6,17 @@ namespace GarageManagement.Pages;
 
 public partial class TiepNhanXePage : ContentView
 {
+	private readonly TiepNhanXePageViewModel _viewModel;
+	
 	public TiepNhanXePage(APIClientService<PhieuTiepNhan> service, APIClientService<ThamSo> ruleService, 
 		APIClientService<Xe> carService,
 		APIClientService<HieuXe> hieuxeService,
 		APIClientService<KhachHang> userService,
-		APIClientService<NhomNguoiDung> groupService)
+		APIClientService<NhomNguoiDung> groupService,
+		TiepNhanXePageViewModel viewModel)
 	{
 		InitializeComponent();
-		BindingContext = new TiepNhanXePageViewModel(service, ruleService, carService, hieuxeService, userService, groupService);
-	}
+        _viewModel = viewModel;
+        BindingContext = _viewModel;
+    }
 }

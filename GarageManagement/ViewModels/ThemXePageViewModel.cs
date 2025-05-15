@@ -103,7 +103,21 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private async Task XemChiTietChuXe()
         {
+            
+        }
 
+        [RelayCommand]
+        private async Task Back()
+        {
+            var navigationStack = Shell.Current.Navigation.NavigationStack;
+            if (navigationStack.Count > 1)
+            {
+                await Shell.Current.Navigation.PopAsync();
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Không thể quay lại trang trước", "OK");
+            }
         }
     }
 }

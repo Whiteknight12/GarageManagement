@@ -36,7 +36,11 @@
     <ShellContent
         ContentTemplate="{DataTemplate page:QuanLiDanhSachHieuXePage}"
         Route="QuanLiXeDanhSachHieuXePage"/>
-    
+
+    <ShellContent
+        ContentTemplate="{DataTemplate page:ThemXePage}"
+        Route="ThemXePage"/>
+
     <Shell.ToolbarItems>
         <ToolbarItem Text="Toggle Theme"
                      Clicked="OnToggleThemeClicked" />
