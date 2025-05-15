@@ -1,54 +1,196 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GarageManagement.Pages.BaoCaoDoanhSoPage">
-    <VerticalStackLayout Padding="20" Spacing="15">
+             x:Class="GarageManagement.Pages.BaoCaoDoanhSoPage"
+             BackgroundColor="{DynamicResource BackgroundColor}">
 
-        <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
-            <Picker x:Name="MonthPicker" Title="Chọn tháng"
-                ItemsSource="{Binding Months}"
-                SelectedItem="{Binding SelectedMonth, Mode=TwoWay}" 
-                SelectedIndexChanged="OnMonthChanged"
-                WidthRequest="150" />
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="20" />
+                <On Platform="iOS" Value="20" />
+                <On Platform="Windows" Value="20" />
+            </OnPlatform>
+            <OnPlatform x:Key="ButtonCornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="12" />
+                <On Platform="iOS" Value="12" />
+                <On Platform="Windows" Value="12" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentView.Resources>    
 
-            <Picker x:Name="YearPicker" Title="Chọn năm"
-                ItemsSource="{Binding Years, Mode=TwoWay}"
-                SelectedItem="{Binding SelectedYear}" 
-                SelectedIndexChanged="OnYearChanged"
-                WidthRequest="150" />
-        </HorizontalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="25" MaximumWidthRequest="800">
+            <!-- Page Title -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <HorizontalStackLayout HorizontalOptions="Center">
+                    <Label Text="BÁO CÁO DOANH SỐ"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalOptions="Center"/>
+                </HorizontalStackLayout>
+            </Frame>
 
-        <Frame BackgroundColor="#EFEFEF" Padding="10" CornerRadius="10" HasShadow="True">
-            <HorizontalStackLayout Spacing="5">
-                <Label Text="Tổng doanh số:" FontSize="20" FontAttributes="Bold" />
-                <Label Text="{Binding TongDoanhSo}" FontSize="20" TextColor="Green" FontAttributes="Bold" />
-            </HorizontalStackLayout>
-        </Frame>
+            <!-- Month and Year Pickers -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                    <Picker x:Name="MonthPicker"
+                            Title="Chọn tháng"
+                            TitleColor="{DynamicResource PlaceholderColor}"
+                            ItemsSource="{Binding Months}"
+                            SelectedItem="{Binding SelectedMonth, Mode=TwoWay}"
+                            SelectedIndexChanged="OnMonthChanged"
+                            WidthRequest="150"
+                            HeightRequest="60"
+                            Margin="0,5,0,0"
+                            BackgroundColor="{DynamicResource InputBackgroundColor}"
+                            TextColor="{DynamicResource TextColor}"/>
+                    <Picker x:Name="YearPicker"
+                            Title="Chọn năm"
+                            TitleColor="{DynamicResource PlaceholderColor}"
+                            ItemsSource="{Binding Years, Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedYear}"
+                            SelectedIndexChanged="OnYearChanged"
+                            WidthRequest="150"
+                            HeightRequest="60"
+                            Margin="0,5,0,0"
+                            BackgroundColor="{DynamicResource InputBackgroundColor}"
+                            TextColor="{DynamicResource TextColor}"/>
+                </HorizontalStackLayout>
+            </Frame>
 
-        <Frame BorderColor="Gray" Padding="0" CornerRadius="10">
-            <CollectionView ItemsSource="{Binding BaoCaoList, Mode=TwoWay}" Margin="0">
-                <CollectionView.Header>
-                    <Grid ColumnDefinitions="2*, *, *, *" Padding="10" BackgroundColor="#D3D3D3">
-                        <Label Text="Hiệu Xe" Grid.Column="0" FontAttributes="Bold" />
-                        <Label Text="Số Lượt Sửa" Grid.Column="1" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                        <Label Text="Thành Tiền" Grid.Column="2" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                        <Label Text="Tỉ Lệ (%)" Grid.Column="3" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
-                    </Grid>
-                </CollectionView.Header>
+            <!-- Total Revenue -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Tổng doanh số:"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                    <Label Text="{Binding TongDoanhSo}"
+                           FontSize="16"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="Green"/>
+                </HorizontalStackLayout>
+            </Frame>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="2*, *, *, *" Padding="10" BackgroundColor="{Binding AlternatingColor}">
-                            <Label Text="{Binding HieuXe}" Grid.Column="0" />
-                            <Label Text="{Binding SoLuotSua}" Grid.Column="1" HorizontalTextAlignment="Center" />
-                            <Label Text="{Binding ThanhTien}" Grid.Column="2" HorizontalTextAlignment="Center" />
-                            <Label Text="{Binding TiLe}" Grid.Column="3" HorizontalTextAlignment="Center" />
+            <!-- CollectionView -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="0"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <CollectionView ItemsSource="{Binding BaoCaoList, Mode=TwoWay}">
+                    <CollectionView.Header>
+                        <Grid ColumnDefinitions="2*,*,*,*"
+                              Padding="15"
+                              BackgroundColor="{DynamicResource CardBackgroundColor}">
+                            <Label Text="Hiệu Xe"
+                                   Grid.Column="0"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   FontFamily="OpenSans-SemiBold"
+                                   TextColor="{DynamicResource TextColor}"/>
+                            <Label Text="Số Lượt Sửa"
+                                   Grid.Column="1"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   FontFamily="OpenSans-SemiBold"
+                                   TextColor="{DynamicResource TextColor}"
+                                   HorizontalTextAlignment="Center"/>
+                            <Label Text="Thành Tiền"
+                                   Grid.Column="2"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   FontFamily="OpenSans-SemiBold"
+                                   TextColor="{DynamicResource TextColor}"
+                                   HorizontalTextAlignment="Center"/>
+                            <Label Text="Tỉ Lệ (%)"
+                                   Grid.Column="3"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   FontFamily="OpenSans-SemiBold"
+                                   TextColor="{DynamicResource TextColor}"
+                                   HorizontalTextAlignment="Center"/>
                         </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Frame>
+                    </CollectionView.Header>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="2*,*,*,*"
+                                  Padding="15"
+                                  BackgroundColor="{Binding AlternatingColor}"
+                                  Margin="0,12,0,0">
+                                <Label Text="{Binding HieuXe}"
+                                       Grid.Column="0"
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
+                                <Label Text="{Binding SoLuotSua}"
+                                       Grid.Column="1"
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding ThanhTien}"
+                                       Grid.Column="2"
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding TiLe}"
+                                       Grid.Column="3"
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
 
-        <Button Text="QUAY LẠI" Command="{Binding GoBackCommand}"/>
-    </VerticalStackLayout>
+            <!-- Back Button -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <Button Text="QUAY LẠI"
+                        Command="{Binding GoBackCommand}"
+                        BackgroundColor="#10B981"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold"
+                        CornerRadius="{StaticResource ButtonCornerRadiusHandler}"
+                        HorizontalOptions="Center">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#10B981" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#059669" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentView>

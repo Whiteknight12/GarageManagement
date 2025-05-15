@@ -9,111 +9,173 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <service:PickerConverterService x:Key="IDConverter"/>
+            <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="20" />
+                <On Platform="iOS" Value="20" />
+                <On Platform="Windows" Value="20" />
+            </OnPlatform>
+            <OnPlatform x:Key="ButtonCornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="12" />
+                <On Platform="iOS" Value="12" />
+                <On Platform="Windows" Value="12" />
+            </OnPlatform>
+            <OnPlatform x:Key="DeleteButtonCornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="10" />
+                <On Platform="iOS" Value="10" />
+                <On Platform="Windows" Value="10" />
+            </OnPlatform>
         </ResourceDictionary>
     </ContentView.Resources>
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="16" MaximumWidthRequest="800">
-            <Frame CornerRadius="20" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" HasShadow="True">
+        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="800">
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}" 
+                   Padding="20" 
+                   HasShadow="True"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
                 <VerticalStackLayout Spacing="12">
-                    <Label Text="LẬP PHIẾU SỮA CHỮA" FontAttributes="Bold" FontSize="20" TextColor="{DynamicResource TextColor}" HorizontalOptions="Center"/>
-                    <Label Text="Biển số xe:" FontAttributes="Bold" FontSize="16" TextColor="{DynamicResource TextColor}"/>
+                    <Label Text="LẬP PHIẾU SỮA CHỮA" 
+                           FontAttributes="Bold" 
+                           FontSize="20" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}" 
+                           HorizontalOptions="Center"/>
+                    <Label Text="Biển số xe:" 
+                           FontAttributes="Bold" 
+                           FontSize="16" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
                     <Picker Title="Chọn biển số xe"
                             TitleColor="{DynamicResource PlaceholderColor}"
                             ItemDisplayBinding="{Binding .}"
                             ItemsSource="{Binding ListBienSoXe}"
                             SelectedItem="{Binding SelectedBienSoXe, Mode=TwoWay}"
                             BackgroundColor="{DynamicResource InputBackgroundColor}"
-                            TextColor="{DynamicResource TextColor}" />
+                            TextColor="{DynamicResource TextColor}"
+                            HeightRequest="60"
+                            Margin="0,5,0,0" />
 
-                    <Label Text="Ngày sửa chữa:" FontAttributes="Bold" FontSize="16" TextColor="{DynamicResource TextColor}"/>
+                    <Label Text="Ngày sửa chữa:" 
+                           FontAttributes="Bold" 
+                           FontSize="16" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
                     <DatePicker Date="{Binding NgaySuaChua, Mode=TwoWay}"
                                 BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                TextColor="{DynamicResource TextColor}"/>
+                                TextColor="{DynamicResource TextColor}"
+                                HeightRequest="60"
+                                Margin="0,5,0,0"/>
                 </VerticalStackLayout>
             </Frame>
 
             <CollectionView ItemsSource="{Binding ListNoiDung}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame CornerRadius="20" 
-                           BackgroundColor="{DynamicResource CardBackgroundColor}" 
-                           Padding="20" 
-                           Margin="0, 10" 
-                           HasShadow="True" 
-                           BorderColor="{DynamicResource BorderColor}">
+                        <Frame BackgroundColor="{DynamicResource CardBackgroundColor}" 
+                               Padding="20" 
+                               Margin="0,12,0,0" 
+                               HasShadow="True" 
+                               CornerRadius="{StaticResource CornerRadiusHandler}">
                             <VerticalStackLayout Spacing="10">
                                 <Label Text="Nội dung sửa chữa" 
-                                   FontAttributes="Bold" 
-                                   TextColor="{DynamicResource TextPrimaryColor}"/>
+                                       FontAttributes="Bold" 
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
                                 <Entry Text="{Binding NoiDung, Mode=TwoWay}"
-                                   Placeholder="Nhập nội dung sửa chữa"
-                                   PlaceholderColor="{DynamicResource PlaceholderColor}"
-                                   BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                   TextColor="{DynamicResource TextPrimaryColor}"/>
+                                       Placeholder="Nhập nội dung sửa chữa"
+                                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                                       BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HeightRequest="48"
+                                       Margin="0,5,0,0"/>
 
                                 <Label Text="Vật tư phụ tùng:" 
-                                   FontAttributes="Bold" 
-                                   TextColor="{DynamicResource TextPrimaryColor}"/>
+                                       FontAttributes="Bold" 
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
                                 <Picker Title="Chọn vật tư phụ tùng"
-                                    TitleColor="{DynamicResource PlaceholderColor}"
-                                    ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListVatTuPhuTung}"
-                                    ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
-                                    SelectedItem="{Binding VatTuPhuTungId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
-                                    SelectedIndexChanged="OnVTPTChanged"
-                                    BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                    TextColor="{DynamicResource TextPrimaryColor}"/>
+                                        TitleColor="{DynamicResource PlaceholderColor}"
+                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListVatTuPhuTung}"
+                                        ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
+                                        SelectedItem="{Binding VatTuPhuTungId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
+                                        SelectedIndexChanged="OnVTPTChanged"
+                                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                        TextColor="{DynamicResource TextColor}"
+                                        HeightRequest="60"
+                                        Margin="0,5,0,0"/>
 
                                 <Label Text="Số lượng:" 
-                                   FontAttributes="Bold" 
-                                   TextColor="{DynamicResource TextPrimaryColor}"/>
+                                       FontAttributes="Bold" 
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
                                 <Entry Text="{Binding SoLuong, Mode=TwoWay}"
-                                   Placeholder="Nhập số lượng"
-                                   PlaceholderColor="{DynamicResource PlaceholderColor}"
-                                   Keyboard="Numeric"
-                                   BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                   TextChanged="OnSoLuongChanged"
-                                   TextColor="{DynamicResource TextPrimaryColor}"/>
+                                       Placeholder="Nhập số lượng"
+                                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                                       Keyboard="Numeric"
+                                       BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                       TextChanged="OnSoLuongChanged"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HeightRequest="48"
+                                       Margin="0,5,0,0"/>
 
                                 <Label Text="Đơn giá:" 
-                                   FontAttributes="Bold" 
-                                   TextColor="{DynamicResource TextPrimaryColor}"/>
-                                <Label Text="{Binding DonGia}" TextColor="{DynamicResource TextPrimaryColor}"/>
+                                       FontAttributes="Bold" 
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
+                                <Label Text="{Binding DonGia}" 
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
 
                                 <Label Text="Tiền công:" 
-                                   FontAttributes="Bold" 
-                                   TextColor="{DynamicResource TextPrimaryColor}"/>
+                                       FontAttributes="Bold" 
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
                                 <Picker Title="Chọn tiền công"
-                                    TitleColor="{DynamicResource PlaceholderColor}"
-                                    ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListTienCong}"
-                                    ItemDisplayBinding="{Binding TenLoaiTienCong}"
-                                    SelectedItem="{Binding TienCongId, Mode=TwoWay, Converter={StaticResource IDConverter}}"  
-                                    SelectedIndexChanged="OnTienCongChanged"
-                                    BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                    TextColor="{DynamicResource TextPrimaryColor}"/>
+                                        TitleColor="{DynamicResource PlaceholderColor}"
+                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListTienCong}"
+                                        ItemDisplayBinding="{Binding TenLoaiTienCong}"
+                                        SelectedItem="{Binding TienCongId, Mode=TwoWay, Converter={StaticResource IDConverter}}"  
+                                        SelectedIndexChanged="OnTienCongChanged"
+                                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                        TextColor="{DynamicResource TextColor}"
+                                        HeightRequest="60"
+                                        Margin="0,5,0,0"/>
 
                                 <Label Text="Thành tiền:" 
-                                   FontAttributes="Bold" 
-                                   TextColor="{DynamicResource TextPrimaryColor}"/>
-                                <Label Text="{Binding ThanhTien}" TextColor="{DynamicResource TextPrimaryColor}"/>
+                                       FontAttributes="Bold" 
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
+                                <Label Text="{Binding ThanhTien}" 
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
 
                                 <Button Text="Xóa"
-                                    BackgroundColor="Red"
-                                    TextColor="White"
-                                    CornerRadius="10"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=RemoveCommand}"
-                                    CommandParameter="{Binding NoiDungId}">
+                                        BackgroundColor="#EF4444"
+                                        TextColor="White"
+                                        HeightRequest="40"
+                                        FontFamily="OpenSans-SemiBold"
+                                        CornerRadius="{StaticResource DeleteButtonCornerRadiusHandler}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=RemoveCommand}"
+                                        CommandParameter="{Binding NoiDungId}">
                                     <VisualStateManager.VisualStateGroups>
                                         <VisualStateGroupList>
                                             <VisualStateGroup x:Name="CommonStates">
                                                 <VisualState x:Name="Normal">
                                                     <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="Red" />
+                                                        <Setter Property="BackgroundColor" Value="#EF4444" />
                                                     </VisualState.Setters>
                                                 </VisualState>
                                                 <VisualState x:Name="Pressed">
                                                     <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#059669" />
+                                                        <Setter Property="BackgroundColor" Value="#DC2626" />
                                                     </VisualState.Setters>
                                                 </VisualState>
                                             </VisualStateGroup>
@@ -127,13 +189,14 @@
             </CollectionView>
 
             <Button Text="+ Thêm nội dung sửa chữa"
-                Command="{Binding ThemNoiDungSuaChuaCommand}"
-                BackgroundColor="#3B82F6"
-                TextColor="{DynamicResource White}"
-                CornerRadius="12"
-                HeightRequest="45"
-                FontAttributes="Bold"
-                HorizontalOptions="Start">
+                    Command="{Binding ThemNoiDungSuaChuaCommand}"
+                    BackgroundColor="#3B82F6"
+                    TextColor="White"
+                    CornerRadius="{StaticResource ButtonCornerRadiusHandler}"
+                    HeightRequest="48"
+                    FontAttributes="Bold"
+                    FontFamily="OpenSans-SemiBold"
+                    HorizontalOptions="Start">
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -144,7 +207,7 @@
                             </VisualState>
                             <VisualState x:Name="Pressed">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#059669" />
+                                    <Setter Property="BackgroundColor" Value="#2563EB" />
                                 </VisualState.Setters>
                             </VisualState>
                         </VisualStateGroup>
@@ -152,29 +215,32 @@
                 </VisualStateManager.VisualStateGroups>
             </Button>
 
-            <Frame CornerRadius="15" 
-               BackgroundColor="{DynamicResource InputBackgroundColor}" 
-               Padding="15" 
-               BorderColor="{DynamicResource BorderColor}">
-                <HorizontalStackLayout>
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}" 
+                   Padding="15" 
+                   HasShadow="True"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <HorizontalStackLayout Spacing="10">
                     <Label Text="Tổng thành tiền:" 
-                       FontSize="16" 
-                       FontAttributes="Bold" 
-                       TextColor="{DynamicResource TextPrimaryColor}"/>
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"/>
                     <Label Text="{Binding TongThanhTien}" 
-                       FontSize="16" 
-                       TextColor="{DynamicResource TextPrimaryColor}" 
-                       Margin="10,0,0,0"/>
+                           FontSize="16" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}" 
+                           Margin="10,0,0,0"/>
                 </HorizontalStackLayout>
             </Frame>
 
             <Button Text="Lưu phiếu sửa chữa"
-                Command="{Binding LuuPhieuSuaChuaCommand}"
-                BackgroundColor="#10B981"
-                TextColor="White"
-                CornerRadius="12"
-                HeightRequest="50"
-                FontAttributes="Bold">
+                    Command="{Binding LuuPhieuSuaChuaCommand}"
+                    BackgroundColor="#10B981"
+                    TextColor="White"
+                    CornerRadius="{StaticResource ButtonCornerRadiusHandler}"
+                    HeightRequest="48"
+                    FontAttributes="Bold"
+                    FontFamily="OpenSans-SemiBold">
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
