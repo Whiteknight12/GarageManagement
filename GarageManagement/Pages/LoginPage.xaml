@@ -26,7 +26,7 @@
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
-                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                   >
                 <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
                     <Image Source="app_logo.png" HeightRequest="80" WidthRequest="80" />
                     <Label Text="MYGARA"
@@ -42,7 +42,7 @@
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="25"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
+                   
                    VerticalOptions="Center">
                 <VerticalStackLayout Spacing="20">
                     <Label Text="ĐĂNG NHẬP"
@@ -61,7 +61,7 @@
                                FontFamily="OpenSans-Regular"
                                TextColor="{DynamicResource TextColor}"/>
                         <Frame Padding="0"
-                               CornerRadius="{StaticResource CornerRadiusHandler}"
+                               
                                HasShadow="False"
                                BackgroundColor="{DynamicResource InputBackgroundColor}"
                                HeightRequest="48">
@@ -93,7 +93,7 @@
                                FontFamily="OpenSans-Regular"
                                TextColor="{DynamicResource TextColor}"/>
                         <Frame Padding="0"
-                               CornerRadius="{StaticResource CornerRadiusHandler}"
+                               
                                HasShadow="False"
                                BackgroundColor="{DynamicResource InputBackgroundColor}"
                                HeightRequest="48">
@@ -155,7 +155,7 @@
                             FontSize="16"
                             FontAttributes="Bold"
                             FontFamily="OpenSans-SemiBold"
-                            CornerRadius="{StaticResource ButtonCornerRadiusHandler}"
+                            
                             BackgroundColor="#10B981"
                             TextColor="White"
                             HeightRequest="48"
@@ -185,7 +185,7 @@
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
-                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                   >
                 <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
                     <Label Text="Chưa có tài khoản?"
                            FontSize="14"
