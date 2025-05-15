@@ -26,7 +26,7 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private bool isCarExists = false;
         [ObservableProperty]
-        private bool isCarNotFound = true; 
+        private bool isCarNotFound = false; 
 
         private string STORAGE_KEY = "user-account-status";
         private readonly APIClientService<PhieuTiepNhan> _recordService;
@@ -105,6 +105,18 @@ namespace GarageManagement.ViewModels
                 return;
             }
             var car=await _carService.GetThroughtSpecialRoute($"BienSo/{BienSo}");
+            var listPhieuTiepNhan = await _recordService.GetListOnSpecialRequirement($"XeId/{car.Id}");
+            if (listPhieuTiepNhan?.Count>0)
+            {
+                foreach (var phieu in listPhieuTiepNhan)
+                {
+                    if (!phieu.DaHoanThanhBaoTri)
+                    {
+                        await Shell.Current.DisplayAlert("Thông báo", "Xe đang được tiếp nhận, vui lòng kiểm tra lại thông tin.", "OK");
+                        return; 
+                    }
+                }
+            }
             await _recordService.Create(new PhieuTiepNhan()
             {
                 Id=Guid.NewGuid(),

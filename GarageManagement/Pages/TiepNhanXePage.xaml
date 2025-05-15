@@ -23,6 +23,7 @@
                     <Entry
                         x:Name="txtBienSo"
                         Placeholder="Nhập biển số xe"
+                        TextChanged="OnBienSoChanged"
                         PlaceholderColor="{DynamicResource PlaceholderColor}"
                         Text="{Binding BienSo, Mode=TwoWay}"
                         TextColor="{DynamicResource TextColor}"

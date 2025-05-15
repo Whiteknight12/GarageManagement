@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices;
 using WebAPI.Data;
 using WebAPI.Models;
 
@@ -9,8 +12,10 @@ namespace WebAPI.Controllers
     [ApiController]
     public class PhieuTiepNhanController : BaseController<PhieuTiepNhan>
     {
+        private readonly ApplicationDbContext _db;
         public PhieuTiepNhanController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
+            _db = applicationDbContext;
         }
         [HttpGet]
         public override async Task<ActionResult<IEnumerable<PhieuTiepNhan>>> GetAll()
@@ -40,6 +45,14 @@ namespace WebAPI.Controllers
         public override async Task<ActionResult> Delete(Guid id)
         {
             return await base.Delete(id);
+        }
+
+        [HttpGet("XeId/{xeId}")]
+        public async Task<ActionResult<IEnumerable<PhieuTiepNhan>>> GetListByXeId(Guid xeId)
+        {
+            var result = await _db.phieuTiepNhans.Where(x => x.XeId == xeId).ToListAsync();
+            if (result is not null) return Ok(result);
+            return NotFound();
         }
     }
 }

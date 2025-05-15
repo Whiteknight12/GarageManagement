@@ -19,4 +19,12 @@ public partial class TiepNhanXePage : ContentView
         _viewModel = viewModel;
         BindingContext = _viewModel;
     }
+
+	private void OnBienSoChanged(object sender, TextChangedEventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(txtBienSo.Text))
+        {
+			_viewModel.IsCarNotFound = false;
+        }
+    }
 }
