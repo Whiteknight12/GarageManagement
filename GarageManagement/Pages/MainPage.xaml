@@ -10,7 +10,6 @@
             <service:BoolToColorConverterService x:Key="BoolToColorConverter" />
             <service:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter" />
             <service:WidthToVisibilityConverter x:Key="WidthToVisibilityConverter" />
-            <!-- Handler for rounded corners -->
             <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
                 <On Platform="Android" Value="10" />
                 <On Platform="iOS" Value="10" />
@@ -37,28 +36,28 @@
 
                 <HorizontalStackLayout>
                     <Label Text="{Binding HelloText}"
-   TextColor="White"
-   FontAttributes="Bold"
-   FontFamily="OpenSans-SemiBold"
-   FontSize="15"
-   Margin="0,20,0,20" 
-   HorizontalOptions="Start"
-   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSans-SemiBold"
+                       FontSize="15"
+                       Margin="0,20,0,20" 
+                       HorizontalOptions="Start"
+                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                     <Button Text="☰"
-    TextColor="White"
-    BackgroundColor="Transparent"
-    HorizontalOptions="End"
-    VerticalOptions="Center"
-    Clicked="OnCollapseClicked" />
+                        TextColor="White"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Clicked="OnCollapseClicked" />
 
                     <Label Text="Menu"
-   TextColor="White"
-   FontAttributes="Bold"
-   FontFamily="OpenSans-SemiBold"
-   FontSize="20"
-   HorizontalOptions="Center"
-   Margin="0,20,0,20" 
-   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSans-SemiBold"
+                       FontSize="20"
+                       HorizontalOptions="Center"
+                       Margin="0,20,0,20" 
+                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
 
                 </HorizontalStackLayout>
 

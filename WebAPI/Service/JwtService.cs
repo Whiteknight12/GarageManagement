@@ -12,11 +12,13 @@ namespace WebAPI.Service
     {
         private readonly ApplicationDbContext _db;
         private readonly IConfiguration _configuration;
+        
         public JwtService(ApplicationDbContext db, IConfiguration configuration)
         {
             _db = db;
             _configuration = configuration;
         }
+
         public async Task<LoginResponseModel> Authentication(LoginRequestModel request)
         {
             if (string.IsNullOrEmpty(request.Username) || string.IsNullOrEmpty(request.Password)) return null;
@@ -34,7 +36,7 @@ namespace WebAPI.Service
                 {
                     new Claim(JwtRegisteredClaimNames.Name, request.Username),
                     new Claim(JwtRegisteredClaimNames.NameId, taiKhoan.Id.ToString()),
-                    new Claim(ClaimTypes.Role, role.TenNhom) // Thêm Role vào Claims
+                    new Claim(ClaimTypes.Role, role.TenNhom)
                 }),
                 Expires = tokenexpirytimestamp,
                 Issuer = issuer,
@@ -46,6 +48,7 @@ namespace WebAPI.Service
             var accesstoken = tokenhandler.WriteToken(securitytoken);
             return new LoginResponseModel
             {
+                AccountId = taiKhoan.Id,
                 Token = accesstoken,
                 Username = request.Username,
                 Expiry = tokenexpirytimestamp,

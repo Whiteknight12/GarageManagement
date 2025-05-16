@@ -1,39 +1,30 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using GarageManagement.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using APIClassLibrary;
+using APIClassLibrary.APIModels;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.Text.Json;
 
 namespace GarageManagement.ViewModels
 {
     public partial class NhanSuMainPageViewModel: BaseViewModel
     {
-        [RelayCommand]
-        public async void GotoTiepNhanXePage()
+        [ObservableProperty]
+        private string tenNguoiDung;
+
+        private readonly APIClientService<NhanVien> _nhanVienService;
+        private string STORAGE_KEY = "user-account-status";
+
+        public NhanSuMainPageViewModel(APIClientService<NhanVien> nhanVienService)
         {
-            await Shell.Current.GoToAsync($"//{nameof(TiepNhanXePage)}", true);
+            _nhanVienService=nhanVienService;
         }
-        [RelayCommand]
-        public async void GotoPhieuSuaChuaPage()
+
+        public async Task LoadAsync()
         {
-            await Shell.Current.GoToAsync($"//{nameof(TaoPhieuSuaChuaPage)}", true);
-        }
-        [RelayCommand]
-        public async void GotoQuanLiXePage()
-        {
-            await Shell.Current.GoToAsync($"//{nameof(QuanLiXePage)}", true);
-        }
-        [RelayCommand]
-        public async void GoToThuTienPage()
-        {
-            await Shell.Current.GoToAsync($"//{nameof(ThuTienPage)}", true);
-        }
-        [RelayCommand]
-        public async void GoToBaoCaoDoanhSoPage()
-        {
-            await Shell.Current.GoToAsync($"//{nameof(BaoCaoDoanhSoPage)}", true);
+            var json = await SecureStorage.GetAsync(STORAGE_KEY);
+            var currentAccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
+            var currentAccountId = currentAccount?.AccountId ?? Guid.Empty;
+            var result = await _nhanVienService.GetThroughtSpecialRoute("TaiKhoanId", currentAccountId.ToString());
+            TenNguoiDung = result?.HoTen ?? "";
         }
     }
 }

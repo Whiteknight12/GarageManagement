@@ -8,6 +8,7 @@ namespace APIClassLibrary.APIModels
 {
     public class taiKhoanSession
     {
+        public Guid? AccountId { get; set; }
         public string? Username { get; set; }
         public string? Token { get; set; }
         public DateTime Expiry { get; set; }

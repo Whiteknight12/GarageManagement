@@ -46,6 +46,7 @@ namespace GarageManagement.ViewModels
         private readonly BaoCaoDoanhSoPage _baoCaoDoanhSoPage;
         private readonly QuanLiDanhSachLoaiVatTuPage _quanLiDanhSachLoaiVatTuPage;
         private readonly AuthenticationService _authenticationServices;
+        private readonly NhanSuMainPageViewModel _viewModel;
         public MainPageViewModel(TiepNhanXePage tiepNhanXe, 
             LapPhieuNhapPage taoPhieuNhap, 
             TaoPhieuSuaChuaPage taoPhieuSuaChua,
@@ -54,9 +55,11 @@ namespace GarageManagement.ViewModels
             ThuTienPage thuTienPage,
             BaoCaoDoanhSoPage baoCaoDoanhSoPage,
             QuanLiDanhSachLoaiVatTuPage quanLiDanhSachLoaiVatTuPage,
-            AuthenticationService authenticationService)
+            AuthenticationService authenticationService,
+            NhanSuMainPageViewModel viewModel)
         {
-            currentPageContent = new NhanSuMainPage();
+            _viewModel = viewModel;
+            currentPageContent = new NhanSuMainPage(_viewModel);
             _tiepNhanXe = tiepNhanXe;
             _taoPhieuNhap = taoPhieuNhap;
             _taoPhieuSuaChua = taoPhieuSuaChua;
@@ -84,7 +87,7 @@ namespace GarageManagement.ViewModels
             QuanLiDanhSachLoaiVatTuActive = parameter == "QLDanhSachLoaiVatTu";
             CurrentPageContent = parameter switch
             {
-                "Home" => new NhanSuMainPage(),
+                "Home" => new NhanSuMainPage(_viewModel),
                 "TiepNhanXe" => _tiepNhanXe,
                 "TaoPhieuSuaChua" => _taoPhieuSuaChua,
                 "TaoPhieuNhap" => _taoPhieuNhap,
@@ -93,7 +96,7 @@ namespace GarageManagement.ViewModels
                 "ThuTien" =>  _thuTienPage,
                 "BaoCaoDoanhSo" => _baoCaoDoanhSoPage,
                 "QLDanhSachLoaiVatTu" => _quanLiDanhSachLoaiVatTuPage,
-                _ => new NhanSuMainPage()
+                _ => new NhanSuMainPage(_viewModel)
             };
         }
         private void LoadUserAsync()

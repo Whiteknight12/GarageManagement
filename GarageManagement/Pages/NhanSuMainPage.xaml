@@ -3,20 +3,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="GarageManagement.Pages.NhanSuMainPage"
-    BackgroundColor="White">
+    BackgroundColor="{DynamicResource BackgroundColor}">
 
     <Grid RowDefinitions="Auto, *" ColumnDefinitions="*">
         <Grid
             Grid.Row="0"
             Padding="10"
-            BackgroundColor="White">
+            BackgroundColor="{DynamicResource BackgroundColor}">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label TextColor="Black"
+            <Label TextColor="{DynamicResource TextColor}"
                 Text="{Binding TenNguoiDung, StringFormat='Xin chào, {0}!'}"
                 VerticalOptions="Center"
                 HorizontalOptions="Start"
@@ -28,14 +28,13 @@
                 VerticalOptions="Center"
                 HorizontalOptions="End"
                 FontSize="18"
-                TextColor="Black" />
+                TextColor="{DynamicResource TextColor}" />
         </Grid>
 
         <ContentView
             Grid.Row="1"
             x:Name="SlideContent"
-            BackgroundColor="#F0F0F0">
-            
+            BackgroundColor="{DynamicResource BackgroundColor}">
         </ContentView>
     </Grid>
 </ContentView>

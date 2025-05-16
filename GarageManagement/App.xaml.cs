@@ -24,7 +24,6 @@ namespace GarageManagement
             var mergedDictionaries = Resources.MergedDictionaries.FirstOrDefault();
             if (mergedDictionaries != null)
             {
-                // Use exact key names as defined in Themes.xaml
                 mergedDictionaries["BackgroundColor"] = _isDarkMode ? (Color)mergedDictionaries["BackgroundColorDark"] : (Color)mergedDictionaries["BackgroundColorLight"];
                 mergedDictionaries["CardBackgroundColor"] = _isDarkMode ? (Color)mergedDictionaries["CardBackgroundColorDark"] : (Color)mergedDictionaries["CardBackgroundColorLight"];
                 mergedDictionaries["TextColor"] = _isDarkMode ? (Color)mergedDictionaries["TextColorDark"] : (Color)mergedDictionaries["TextColorLight"];
@@ -33,7 +32,6 @@ namespace GarageManagement
             }
             else
             {
-                // Log or handle the case where the merged dictionary is not found
                 System.Diagnostics.Debug.WriteLine("MergedDictionaries is null or not found.");
             }
         }

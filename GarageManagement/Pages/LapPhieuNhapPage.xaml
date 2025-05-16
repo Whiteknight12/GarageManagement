@@ -69,7 +69,7 @@
                                         TextColor="{DynamicResource TextColor}"
                                         TitleColor="{DynamicResource PlaceholderColor}"
                                         Margin="0,5,0,0"
-                                        HeightRequest="48"/>
+                                        HeightRequest="60"/>
 
                                 <Label Text="Số Lượng:" 
                                        FontSize="16"
