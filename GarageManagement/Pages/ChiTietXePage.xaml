@@ -5,7 +5,7 @@
              BackgroundColor="{DynamicResource BackgroundColor}">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="20" Padding="20" MaximumWidthRequest="800">
+        <VerticalStackLayout Spacing="20" Padding="20" MaximumWidthRequest="1000">
             <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
                    CornerRadius="10"
                    Padding="15"

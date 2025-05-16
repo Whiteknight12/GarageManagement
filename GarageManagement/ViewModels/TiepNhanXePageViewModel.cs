@@ -118,7 +118,7 @@ namespace GarageManagement.ViewModels
                 {
                     if (!phieu.DaHoanThanhBaoTri)
                     {
-                        await Shell.Current.DisplayAlert("Thông báo", "Xe đang được tiếp nhận, vui lòng kiểm tra lại thông tin.", "OK");
+                        await Shell.Current.DisplayAlert("Thông báo", "Xe này đã được tiếp nhận và vẫn còn trong Gara", "OK");
                         return; 
                     }
                 }

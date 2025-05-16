@@ -26,8 +26,8 @@
     </ContentView.Resources>
 
     <ScrollView Margin="20">
-        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="800">
-            <!-- Header Section -->
+        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
+
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
@@ -40,40 +40,34 @@
                            TextColor="{DynamicResource TextColor}"
                            HorizontalOptions="Center"/>
                     <Label Text="Biển số"
-            FontSize="16"
-            FontAttributes="Bold"
-            FontFamily="OpenSans-Regular"
-            TextColor="{DynamicResource TextColor}"/>
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-Regular"
+                        TextColor="{DynamicResource TextColor}"/>
                     <Entry x:Name="txtBienSo"
-Placeholder="Nhập biển số xe"
-TextChanged="OnBienSoChanged"
-PlaceholderColor="{DynamicResource PlaceholderColor}"
-Text="{Binding BienSo, Mode=TwoWay}"
-TextColor="{DynamicResource TextColor}"
-HeightRequest="48"
-Margin="0,5,0,0"
-HorizontalOptions="Fill"/>
+                        Placeholder="Nhập biển số xe"
+                        TextChanged="OnBienSoChanged"
+                        PlaceholderColor="{DynamicResource PlaceholderColor}"
+                        Text="{Binding BienSo, Mode=TwoWay}"
+                        TextColor="{DynamicResource TextColor}"
+                        HeightRequest="48"
+                        Margin="0,5,0,0"
+                        HorizontalOptions="Fill"/>
 
-
-                    <!-- Date of Reception -->
                     <Label Text="Ngày tiếp nhận"
-            FontSize="16"
-            FontAttributes="Bold"
-            FontFamily="OpenSans-Regular"
-            TextColor="{DynamicResource TextColor}"/>
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-Regular"
+                        TextColor="{DynamicResource TextColor}"/>
                     <DatePicker x:Name="dpNgayTiepNhan"
-     Date="{Binding NgayTiepNhan, Mode=TwoWay}"
-     TextColor="{DynamicResource TextColor}"
-     HeightRequest="48"
-     Margin="0,5,0,0"
-     HorizontalOptions="Fill"/>
+                         Date="{Binding NgayTiepNhan, Mode=TwoWay}"
+                         TextColor="{DynamicResource TextColor}"
+                         HeightRequest="48"
+                         Margin="0,5,0,0"
+                         HorizontalOptions="Fill"/>
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- License Plate Input -->
-            
-
-            <!-- Car Exists Section -->
             <Frame Padding="20"
                    HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
@@ -125,7 +119,6 @@ HorizontalOptions="Fill"/>
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Owner Info Section -->
             <Frame Padding="20"
                    HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
@@ -176,7 +169,6 @@ HorizontalOptions="Fill"/>
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Car Not Found Section -->
             <Frame x:Name="noCarFoundContainer"
                    Padding="20"
                    HasShadow="True"
@@ -216,7 +208,6 @@ HorizontalOptions="Fill"/>
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Create New Record Button -->
             <Button IsVisible="{Binding IsCarExists}"
                     BackgroundColor="#10B981"
                     TextColor="White"

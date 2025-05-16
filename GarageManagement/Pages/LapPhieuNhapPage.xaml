@@ -28,8 +28,8 @@
     </ContentView.Resources>
 
     <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="800">
-            <!-- Header Section -->
+        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
+
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
@@ -44,7 +44,6 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- CollectionView for Items -->
             <CollectionView ItemsSource="{Binding ListChiTietPhieuNhap}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -134,7 +133,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- Total Price Section -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
@@ -152,7 +150,6 @@
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- Add and Save Buttons -->
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
                 <Button x:Name="AddButton"
                         Text="+ Thêm Chi Tiết Phiếu Nhập"

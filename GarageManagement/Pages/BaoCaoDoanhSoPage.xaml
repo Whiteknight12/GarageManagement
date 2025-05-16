@@ -20,8 +20,8 @@
     </ContentView.Resources>    
 
     <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="25" MaximumWidthRequest="800">
-            <!-- Page Title -->
+        <VerticalStackLayout Padding="30" Spacing="25" MaximumWidthRequest="1000">
+
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
@@ -36,7 +36,6 @@
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- Month and Year Pickers -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
@@ -67,7 +66,6 @@
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- Total Revenue -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
@@ -85,7 +83,6 @@
                 </HorizontalStackLayout>
             </Frame>
 
-            <!-- CollectionView -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="0"
@@ -159,7 +156,6 @@
                 </CollectionView>
             </Frame>
 
-            <!-- Back Button -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"

@@ -21,8 +21,8 @@
     </ContentPage.Resources>
 
     <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="25" MaximumWidthRequest="800">
-            <!-- Logo and Title -->
+        <VerticalStackLayout Padding="30" Spacing="25" MaximumWidthRequest="1000">
+
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
@@ -38,7 +38,6 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Login Form -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="25"
@@ -53,7 +52,6 @@
                            HorizontalOptions="Center"
                            Margin="0,0,0,10"/>
 
-                    <!-- Username -->
                     <VerticalStackLayout Spacing="8">
                         <Label Text="Tên đăng nhập"
                                FontSize="16"
@@ -85,7 +83,6 @@
                         </Frame>
                     </VerticalStackLayout>
 
-                    <!-- Password -->
                     <VerticalStackLayout Spacing="8">
                         <Label Text="Mật khẩu"
                                FontSize="16"
@@ -126,7 +123,6 @@
                         </Frame>
                     </VerticalStackLayout>
 
-                    <!-- Remember Me and Forgot Password -->
                     <Grid ColumnDefinitions="*,*" Margin="0,5">
                         <HorizontalStackLayout Grid.Column="0" Spacing="5">
                             <CheckBox Color="#10B981" VerticalOptions="Center"/>
@@ -150,7 +146,6 @@
                         </Label>
                     </Grid>
 
-                    <!-- Login Button -->
                     <Button Text="ĐĂNG NHẬP"
                             FontSize="16"
                             FontAttributes="Bold"
@@ -181,7 +176,6 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Register Link -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"

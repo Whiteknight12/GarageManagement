@@ -35,15 +35,9 @@
                 MinimumWidthRequest="80">
 
                 <HorizontalStackLayout>
-                    <Label Text="{Binding HelloText}"
-                       TextColor="White"
-                       FontAttributes="Bold"
-                       FontFamily="OpenSans-SemiBold"
-                       FontSize="15"
-                       Margin="0,20,0,20" 
-                       HorizontalOptions="Start"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    
                     <Button Text="☰"
+                        x:Name="CollapseButton"
                         TextColor="White"
                         BackgroundColor="Transparent"
                         HorizontalOptions="End"

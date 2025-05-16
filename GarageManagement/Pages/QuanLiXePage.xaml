@@ -28,8 +28,8 @@
     </ContentView.Resources>
 
     <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="800">
-            <!-- Header Section -->
+        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
+
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
@@ -44,7 +44,6 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <!-- Column Headers -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
@@ -104,7 +103,6 @@
                 </Grid>
             </Frame>
 
-            <!-- CollectionView for Items -->
             <CollectionView ItemsSource="{Binding Listcar}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -199,7 +197,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- Back Button Section -->
             <Button Text="QUAY LẠI"
                     Command="{Binding GoBackCommand}"
                     BackgroundColor="#10B981"

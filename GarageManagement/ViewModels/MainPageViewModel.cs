@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using APIClassLibrary;
+using APIClassLibrary.APIModels;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Pages;
 using GarageManagement.Services;
@@ -47,6 +49,9 @@ namespace GarageManagement.ViewModels
         private readonly QuanLiDanhSachLoaiVatTuPage _quanLiDanhSachLoaiVatTuPage;
         private readonly AuthenticationService _authenticationServices;
         private readonly NhanSuMainPageViewModel _viewModel;
+
+        private readonly APIClientService<NhanVien> _nhanVienService;
+
         public MainPageViewModel(TiepNhanXePage tiepNhanXe, 
             LapPhieuNhapPage taoPhieuNhap, 
             TaoPhieuSuaChuaPage taoPhieuSuaChua,
@@ -56,7 +61,8 @@ namespace GarageManagement.ViewModels
             BaoCaoDoanhSoPage baoCaoDoanhSoPage,
             QuanLiDanhSachLoaiVatTuPage quanLiDanhSachLoaiVatTuPage,
             AuthenticationService authenticationService,
-            NhanSuMainPageViewModel viewModel)
+            NhanSuMainPageViewModel viewModel,
+            APIClientService<NhanVien> nhanVienService)
         {
             _viewModel = viewModel;
             currentPageContent = new NhanSuMainPage(_viewModel);
@@ -68,6 +74,7 @@ namespace GarageManagement.ViewModels
             _thuTienPage = thuTienPage;
             _baoCaoDoanhSoPage = baoCaoDoanhSoPage;
             _quanLiDanhSachLoaiVatTuPage = quanLiDanhSachLoaiVatTuPage;
+            _nhanVienService = nhanVienService;
             IsCollapsed = false;
             _authenticationServices = authenticationService;
             LoadUserAsync();
@@ -99,13 +106,15 @@ namespace GarageManagement.ViewModels
                 _ => new NhanSuMainPage(_viewModel)
             };
         }
-        private void LoadUserAsync()
+
+        private async Task LoadUserAsync()
         {
             _ = _authenticationServices.FettaiKhoanSession();
             var user = _authenticationServices.GetCurrentAccountStatus;
             if (user != null)
             {
-                HelloText = $"Xin chào {user.Role}: {user.Username}";
+                var result=await _nhanVienService.GetThroughtSpecialRoute("TaiKhoanId", user.AccountId.ToString()??"");
+                HelloText = $"Xin chào {user.Role}: {result?.HoTen}";
             }
             else
             {
