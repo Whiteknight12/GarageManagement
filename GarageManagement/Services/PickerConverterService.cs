@@ -22,6 +22,7 @@ namespace GarageManagement.Services
                 return vattuphutung.VatTuPhuTungId;
             }
             if (value is TienCong tiencong) return tiencong.Id;
+            if (value is NoiDungSuaChua noiDungSuaChua) return noiDungSuaChua.Id;
             return null;
         }
     }

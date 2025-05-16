@@ -11,5 +11,6 @@ namespace APIClassLibrary.APIModels
         public Guid Id { get; set; }
         public string TenLoaiTienCong { get; set; }
         public double DonGiaLoaiTienCong { get; set; }
+        public Guid NoiDungSuaChuaId { get; set; }
     }
 }

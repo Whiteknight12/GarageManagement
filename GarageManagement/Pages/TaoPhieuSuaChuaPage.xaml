@@ -91,17 +91,20 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackLayout Grid.Column="0" Spacing="2">
-                                    <Label Text="Nội dung sửa chữa" 
+                                    <Label Text="Nội dung sửa chữa:" 
                                        FontAttributes="Bold" 
                                        FontSize="16"
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"/>
-                                    <Entry Text="{Binding NoiDung, Mode=TwoWay}"
-                                       Placeholder="Nhập nội dung sửa chữa"
-                                       PlaceholderColor="{DynamicResource PlaceholderColor}"
-                                       BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HeightRequest="48" />
+                                    <Picker 
+                                        TitleColor="{DynamicResource PlaceholderColor}"
+                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListNoiDungSuaChua}"
+                                        ItemDisplayBinding="{Binding TenNoiDungSuaChua}"
+                                        SelectedItem="{Binding NoiDungSuaChuaId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
+                                        SelectedIndexChanged="OnNoiDungSuaChuaChanged"
+                                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                        TextColor="{DynamicResource TextColor}"
+                                        HeightRequest="48" />
                                 </StackLayout>
 
                                 <StackLayout Grid.Column="1" Spacing="2">
@@ -146,7 +149,7 @@
                                        FontSize="16"
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"/>
-                                        </StackLayout>
+                                </StackLayout>
 
                                 <StackLayout Grid.Column="4" Spacing="2">
                                     <Label Text="Tiền công:" 
@@ -154,15 +157,10 @@
                                        FontSize="16"
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"/>
-                                    <Picker 
-                                        TitleColor="{DynamicResource PlaceholderColor}"
-                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListTienCong}"
-                                        ItemDisplayBinding="{Binding TenLoaiTienCong}"
-                                        SelectedItem="{Binding TienCongId, Mode=TwoWay, Converter={StaticResource IDConverter}}"  
-                                        SelectedIndexChanged="OnTienCongChanged"
-                                        BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                        TextColor="{DynamicResource TextColor}"
-                                        HeightRequest="48" />
+                                    <Label Text="{Binding GiaTienCong}" 
+                                       FontSize="16"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"/>
                                 </StackLayout>
 
                                 <StackLayout Grid.Column="5" Spacing="2">

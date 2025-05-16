@@ -8,8 +8,8 @@ namespace APIClassLibrary.APIModels
         public Guid PhieuSuaChuaId { get; set; }
         public Guid? VatTuPhuTungId { get; set; }
         public Guid? TienCongId { get; set; }
+        public Guid NoiDungSuaChuaId { get; set; }
 
-        public string? NoiDung { get; set; }
         // so luong VatTu (thuoc 1 loai) 
         public int? SoLuong { get; set; }
         public double? ThanhTien { get; set; }
@@ -18,6 +18,8 @@ namespace APIClassLibrary.APIModels
         public double? DonGia { get; set; }
         //ID de xu li trong UI, khong luu vao db
         public int? NoiDungId { get; set; }
+        //gia tien cong de xu li UI, khong luu vao db
+        public double? GiaTienCong { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged(string propertyName)

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Data;
 
@@ -11,9 +12,11 @@ using WebAPI.Data;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250516182648_addNoiDungSuaChuaToDb")]
+    partial class addNoiDungSuaChuaToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,8 +137,8 @@ namespace WebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("NoiDungSuaChuaId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("NoiDung")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("PhieuSuaChuaId")
                         .HasColumnType("uniqueidentifier");
@@ -275,12 +278,12 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8687b195-93d6-40e7-888f-4fb19ed16789"),
+                            Id = new Guid("6e6f9b96-75f3-43a5-ace7-5b827551c08d"),
                             TenNhom = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("5e67a760-9f8c-4dfa-9a5d-c2f4087a18b2"),
+                            Id = new Guid("111f3fcf-217d-4a76-94ab-18d031f543af"),
                             TenNhom = "User"
                         });
                 });
@@ -425,16 +428,16 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("67df2516-24a8-446d-86f6-0886ddaf0100"),
+                            Id = new Guid("cb05521b-31cd-4aea-a773-a989191579b5"),
                             MatKhau = "admin123",
-                            NhomNguoiDungId = new Guid("8687b195-93d6-40e7-888f-4fb19ed16789"),
+                            NhomNguoiDungId = new Guid("6e6f9b96-75f3-43a5-ace7-5b827551c08d"),
                             TenDangNhap = "admin"
                         },
                         new
                         {
-                            Id = new Guid("be73394f-0bb6-403e-9671-f3b835a68abc"),
+                            Id = new Guid("6a2ad280-1ab7-47bf-a998-3b03e3f29a9c"),
                             MatKhau = "user123",
-                            NhomNguoiDungId = new Guid("5e67a760-9f8c-4dfa-9a5d-c2f4087a18b2"),
+                            NhomNguoiDungId = new Guid("111f3fcf-217d-4a76-94ab-18d031f543af"),
                             TenDangNhap = "user"
                         });
                 });

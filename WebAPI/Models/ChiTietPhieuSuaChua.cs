@@ -10,10 +10,9 @@ namespace WebAPI.Models
         public Guid PhieuSuaChuaId { get; set; }
         public Guid VatTuPhuTungId {  get; set; }
         public Guid TienCongId { get; set; }
+        public Guid NoiDungSuaChuaId { get; set; }
 
-        public string? NoiDung { get; set; }
         public int SoLuong { get; set; }
-        //DonGia => trich xuat tu VatTuPhuTung 
-        public double ThanhTien {  get; set; } // = VatTu.DonGia * SoLuong + TienCong.Tien
+        public double ThanhTien {  get; set; } 
     }
 }   

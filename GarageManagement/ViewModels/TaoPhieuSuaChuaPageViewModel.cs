@@ -3,15 +3,7 @@ using APIClassLibrary.APIModels;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using GarageManagement.Pages;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
 {
@@ -26,6 +18,7 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<ChiTietPhieuSuaChua> _noidungphieuservice;
         private readonly APIClientService<PhieuSuaChua> _phieuservice;
         private readonly APIClientService<KhachHang> _userservice;
+        private readonly APIClientService<NoiDungSuaChua> _noidungsuachuaService;
 
         [ObservableProperty]
         private ObservableCollection<string> listBienSoXe=new ObservableCollection<string>();
@@ -48,12 +41,16 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private double tongThanhTien=0;
 
+        [ObservableProperty]
+        private ObservableCollection<NoiDungSuaChua> listNoiDungSuaChua=new ObservableCollection<NoiDungSuaChua>();
+
         public TaoPhieuSuaChuaPageViewModel(APIClientService<Xe> carservice, 
             APIClientService<TienCong> tiencongservice,
             APIClientService<VatTuPhuTung> vattuservice,
             APIClientService<ChiTietPhieuSuaChua> noidungphieuservice,
             APIClientService<PhieuSuaChua> phieuservice,
-            APIClientService<KhachHang> userservice)
+            APIClientService<KhachHang> userservice,
+            APIClientService<NoiDungSuaChua> noidungsuachuaService)
         {
             _carservice = carservice;
             _tiencongservice = tiencongservice;
@@ -61,6 +58,7 @@ namespace GarageManagement.ViewModels
             _noidungphieuservice = noidungphieuservice;
             _phieuservice = phieuservice;
             _userservice = userservice;
+            _noidungsuachuaService = noidungsuachuaService;
         }
 
         public async Task LoadAsync()
@@ -88,6 +86,13 @@ namespace GarageManagement.ViewModels
                 ListVatTuPhuTung.Clear();
                 foreach (var vattu in listphutung) ListVatTuPhuTung.Add(vattu);
                 OnPropertyChanged(nameof(ListVatTuPhuTung));
+            }
+            var listNoiDungSuaChua = await _noidungsuachuaService.GetAll();
+            if (listNoiDungSuaChua is not null)
+            {
+                ListNoiDungSuaChua.Clear();
+                foreach (var item in listNoiDungSuaChua) ListNoiDungSuaChua.Add(item);
+                OnPropertyChanged(nameof(ListNoiDungSuaChua));
             }
             if (ListNoiDung.Count==0)
             {
@@ -121,7 +126,7 @@ namespace GarageManagement.ViewModels
             }
             foreach (var item in ListNoiDung)
             {
-                if (string.IsNullOrEmpty(item.NoiDung))
+                if (string.IsNullOrEmpty(item.NoiDungSuaChuaId.ToString()))
                 {
                     await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong noi dung!", "OK");
                     return;
@@ -181,7 +186,7 @@ namespace GarageManagement.ViewModels
             {
                 var chiTietPhieuSuaChua=await _noidungphieuservice.Create(new ChiTietPhieuSuaChua
                 {
-                    NoiDung = item.NoiDung,
+                    NoiDungSuaChuaId=item.NoiDungSuaChuaId,
                     PhieuSuaChuaId = obj.Id,
                     VatTuPhuTungId = item.VatTuPhuTungId,
                     TienCongId = item.TienCongId,

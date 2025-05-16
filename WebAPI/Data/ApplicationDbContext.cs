@@ -9,6 +9,7 @@ namespace WebAPI.Data
         {
 
         }
+
         public DbSet<Xe> xes { get; set; }
         public DbSet<TaiKhoan> taiKhoans { get; set; }
         public DbSet<PhieuTiepNhan> phieuTiepNhans { get; set; }
@@ -30,6 +31,8 @@ namespace WebAPI.Data
         public DbSet<ChiTietBaoCaoDoanhThuThang> chiTietBaoCaoDoanhThuThangs { get; set; }
         public DbSet<BaoCaoTon> baoCaoTons { get; set; }
         public DbSet<ChiTietBaoCaoTon> chiTietBaoCaoTons { get; set; }
+        public DbSet<NoiDungSuaChua> noiDungSuaChuas { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Tạo GUID cho các nhóm người dùng

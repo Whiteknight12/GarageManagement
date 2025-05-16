@@ -61,19 +61,26 @@ public partial class TaoPhieuSuaChuaPage : ContentView
 		}
 	}
 
-	private async void OnTienCongChanged(object sender, EventArgs e)
+	private async void OnNoiDungSuaChuaChanged(object sender, EventArgs e)
 	{
-        if (sender is Picker picker && picker.BindingContext is ChiTietPhieuSuaChua noidung && picker.SelectedItem is TienCong tiencong)
-        {
-            if (noidung.TienCongId!=null && noidung.SoLuong != null && noidung.VatTuPhuTungId != null)
+		if (sender is Picker picker && picker.BindingContext is ChiTietPhieuSuaChua noidung)
+		{
+			if (!string.IsNullOrEmpty(noidung.NoiDungSuaChuaId.ToString()))
 			{
-                var item = await _vatTuService.GetByID(noidung.VatTuPhuTungId ?? Guid.Empty);
-                noidung.ThanhTien = (noidung.SoLuong * item.DonGiaBanLoaiVatTuPhuTung) + tiencong.DonGiaLoaiTienCong;
-				noidung.OnPropertyChanged(nameof(noidung.ThanhTien));
-				_viewmodel.TongThanhTien = _viewmodel.ListNoiDung.Sum(u => u.ThanhTien ?? 0);
-			}
+				var tienCong=_viewmodel.ListTienCong.FirstOrDefault(u => u.NoiDungSuaChuaId==noidung.NoiDungSuaChuaId);
+                noidung.TienCongId = tienCong?.Id;
+                noidung.GiaTienCong = tienCong?.DonGiaLoaiTienCong;
+				noidung.OnPropertyChanged(nameof(noidung.GiaTienCong));
+                if (noidung.VatTuPhuTungId!=null)
+				{
+                    var item = await _vatTuService.GetByID(noidung.VatTuPhuTungId??Guid.Empty);
+                    noidung.ThanhTien = (noidung.SoLuong * item.DonGiaBanLoaiVatTuPhuTung) + tienCong?.DonGiaLoaiTienCong;
+                    noidung.OnPropertyChanged(nameof(noidung.ThanhTien));
+                    _viewmodel.TongThanhTien = _viewmodel.ListNoiDung.Sum(u => u.ThanhTien ?? 0);
+                }
+            }
 		}
-    }
+	}
 
     protected override void OnSizeAllocated(double width, double height)
     {
