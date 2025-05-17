@@ -19,6 +19,8 @@ public partial class NhanSuMainPage : ContentView
         var timer = new System.Timers.Timer(1000);
         timer.Elapsed += (s, e) => MainThread.BeginInvokeOnMainThread(() => ClockLabel.Text = DateTime.Now.ToString("HH:mm:ss"));
         timer.Start();
+        DateLabel.Text = DateTime.UtcNow.ToLocalTime().ToString("dd/M/y");
+        DayLabel.Text = DateTime.UtcNow.ToLocalTime().DayOfWeek.ToString();
     }
 
     protected override void OnSizeAllocated(double width, double height)

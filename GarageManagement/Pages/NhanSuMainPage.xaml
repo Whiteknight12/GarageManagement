@@ -5,36 +5,107 @@
     x:Class="GarageManagement.Pages.NhanSuMainPage"
     BackgroundColor="{DynamicResource BackgroundColor}">
 
-    <Grid RowDefinitions="Auto, *" ColumnDefinitions="*">
-        <Grid
-            Grid.Row="0"
-            Padding="10"
-            BackgroundColor="{DynamicResource BackgroundColor}">
-
+    <Grid RowDefinitions="Auto,1,*,Auto" ColumnDefinitions="*">
+        
+        <Grid Grid.Row="0" Padding="10" BackgroundColor="{DynamicResource BackgroundColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Label TextColor="{DynamicResource TextColor}"
-                Text="{Binding TenNguoiDung, StringFormat='Xin chào, {0}!'}"
-                VerticalOptions="Center"
-                HorizontalOptions="Start"
-                FontSize="18"
-                FontAttributes="Bold"/>
+            <Label Grid.Column="0"
+                   Text="{Binding TenNguoiDung, StringFormat='Xin chào, {0}!'}"
+                   TextColor="{DynamicResource TextColor}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Start" />
 
-            <Label
-                x:Name="ClockLabel"
-                VerticalOptions="Center"
+            <Frame Grid.Column="1"
+                Padding="10"
+                CornerRadius="15"
+                BackgroundColor="#2A5D9F"  
+                HasShadow="True"
                 HorizontalOptions="End"
-                FontSize="18"
-                TextColor="{DynamicResource TextColor}" />
+                VerticalOptions="Center"
+                WidthRequest="220" HeightRequest="60">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Grid.Column="0" 
+                         Orientation="Vertical" 
+                         VerticalOptions="Center" 
+                         HorizontalOptions="Start"
+                         Spacing="0">
+                        <Label x:Name="DateLabel"
+                           FontSize="12"
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                        <Label x:Name="DayLabel"
+                           FontSize="12"
+                           TextColor="White"
+                           HorizontalOptions="Center"/>
+                    </StackLayout>
+
+                    <Label Grid.Column="1"
+                       x:Name="ClockLabel"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                </Grid>
+            </Frame>
         </Grid>
 
-        <ContentView
-            Grid.Row="1"
-            x:Name="SlideContent"
-            BackgroundColor="{DynamicResource BackgroundColor}">
-        </ContentView>
+        <BoxView Grid.Row="1"
+                 HeightRequest="1"
+                 BackgroundColor="Gray"
+                 HorizontalOptions="Fill"
+                 Margin="10,0" />
+
+        <Frame Grid.Row="2"
+               Margin="10"
+               Padding="15"
+               CornerRadius="15"
+               BackgroundColor="{DynamicResource CardBackgroundColor}"
+               HasShadow="True"
+               HorizontalOptions="Fill"
+               MaximumWidthRequest="700" 
+               VerticalOptions="Start">
+
+            <StackLayout Orientation="Vertical" Spacing="15">
+
+                <Frame WidthRequest="120" HeightRequest="120" Padding="0" CornerRadius="60" IsClippedToBounds="True" BorderColor="LightGray">
+                    <Image Source="{Binding AvatarUrl}"
+                       Aspect="AspectFill"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
+                </Frame>
+
+
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="5">
+                    <Label HorizontalOptions="Center" Text="{Binding TenTaiKhoan, StringFormat='Tên tài khoản: {0}'}" FontAttributes="Bold" FontSize="18" TextColor="{DynamicResource TextColor}"/>
+                    <Label HorizontalOptions="Center" Text="{Binding HoVaTen, StringFormat='Họ và tên: {0}'}" TextColor="{DynamicResource TextColor}"/>
+                    <Label HorizontalOptions="Center" Text="{Binding Tuoi, StringFormat='Tuổi: {0}'}" TextColor="{DynamicResource TextColor}"/>
+                    <Label HorizontalOptions="Center" Text="{Binding DiaChi, StringFormat='Địa chỉ: {0}'}" TextColor="{DynamicResource TextColor}"/>
+                    <Label HorizontalOptions="Center" Text="{Binding SoDienThoai, StringFormat='Số điện thoại: {0}'}" TextColor="{DynamicResource TextColor}"/>
+                    <Label HorizontalOptions="Center" Text="{Binding Email, StringFormat='Email: {0}'}" TextColor="{DynamicResource TextColor}"/>
+
+                    <Button Text="Cập nhật thông tin"
+                            HorizontalOptions="Center"
+                            BackgroundColor="#007788"
+                            TextColor="White"
+                            CornerRadius="10"
+                            Padding="10,5"
+                            Command="{Binding CapNhatThongTinCommand}" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
     </Grid>
 </ContentView>

@@ -10,6 +10,24 @@ namespace GarageManagement.ViewModels
     {
         [ObservableProperty]
         private string tenNguoiDung;
+        [ObservableProperty]
+        private string tenTaiKhoan;
+        [ObservableProperty]
+        private string tuoi;
+        [ObservableProperty]
+        private string diaChi;
+        [ObservableProperty]
+        private string soDienThoai;
+        [ObservableProperty]
+        private string email;
+        [ObservableProperty]
+        private string hoVaTen;
+        [ObservableProperty]
+        private string gioiTinh;
+        [ObservableProperty]
+        private string role;
+        [ObservableProperty]
+        private string avatarUrl;
 
         private readonly APIClientService<NhanVien> _nhanVienService;
         private readonly AuthenticationService _authenticationServices;
@@ -27,6 +45,13 @@ namespace GarageManagement.ViewModels
             var currentAccountId = currentAccount?.AccountId ?? Guid.Empty;
             var result = await _nhanVienService.GetThroughtSpecialRoute("TaiKhoanId", currentAccountId.ToString());
             TenNguoiDung = result?.HoTen ?? "";
+            TenTaiKhoan = currentAccount?.Username ?? "";
+            Tuoi = result?.Tuoi.ToString() ?? "";
+            DiaChi = result?.DiaChi ?? "";
+            SoDienThoai = result?.SoDienThoai ?? "";
+            Email = result?.Email ?? "";
+            HoVaTen = TenNguoiDung;
+            AvatarUrl = "dotnet_bot.png";
         }
     }
 }
