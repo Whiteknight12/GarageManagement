@@ -52,6 +52,7 @@ public static class MauiProgram
         builder.Services.AddAPIClientService<BaoCaoTon>(x => x.BaseAddress = baseaddress, $"{nameof(BaoCaoTon)}");
         builder.Services.AddAPIClientService<ChiTietBaoCaoTon>(x => x.BaseAddress = baseaddress, $"{nameof(ChiTietBaoCaoTon)}");
         builder.Services.AddAPIClientService<NoiDungSuaChua>(x=>x.BaseAddress=baseaddress, nameof(NoiDungSuaChua));
+        builder.Services.AddAPIClientService<VTPTChiTietPhieuSuaChua>(x => x.BaseAddress = baseaddress, $"{nameof(VTPTChiTietPhieuSuaChua)}");
 
         builder.Services.AddScoped<AuthenticationService>(provider=>
 		{

@@ -10,7 +10,7 @@ namespace GarageManagement.ViewModels
     public partial class TaoPhieuSuaChuaPageViewModel: BaseViewModel
     {
         private int index = 0;
-        private string STORAGE_KEY = "user-account-status";
+        private int indexVTPT = 0;
 
         private readonly APIClientService<Xe> _carservice;
         private readonly APIClientService<TienCong> _tiencongservice;
@@ -43,6 +43,9 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<NoiDungSuaChua> listNoiDungSuaChua=new ObservableCollection<NoiDungSuaChua>();
+
+        [ObservableProperty]
+        private ObservableCollection<VTPTChiTietPhieuSuaChua> listVTPT=new ObservableCollection<VTPTChiTietPhieuSuaChua>();
 
         public TaoPhieuSuaChuaPageViewModel(APIClientService<Xe> carservice, 
             APIClientService<TienCong> tiencongservice,
@@ -101,6 +104,13 @@ namespace GarageManagement.ViewModels
                     NoiDungId=index++
                 });
             }
+            if (ListVTPT.Count==0)
+            {
+                ListVTPT.Add(new VTPTChiTietPhieuSuaChua
+                {
+                    IdForUI=indexVTPT++
+                });
+            }
         }
 
         [RelayCommand]
@@ -111,6 +121,7 @@ namespace GarageManagement.ViewModels
                 NoiDungId = index++
             });
         }
+
         [RelayCommand]
         public async void LuuPhieuSuaChua()
         {
@@ -131,20 +142,9 @@ namespace GarageManagement.ViewModels
                     await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong noi dung!", "OK");
                     return;
                 }
-                if (item.VatTuPhuTungId is null)
-                {
-                    await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong vat tu phu tung!", "OK");
-                    return;
-                }
                 if (item.TienCongId is null)
                 {
                     await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong tien cong!", "OK");
-                    return;
-                }
-                string tmp = item.SoLuong.ToString() ?? "";
-                if (item.SoLuong is null || !tmp.All(Char.IsDigit))
-                {
-                    await Shell.Current.DisplayAlert("Error", "So luong khong hop le!", "OK");
                     return;
                 }
                 if (item.ThanhTien is null)
@@ -188,14 +188,12 @@ namespace GarageManagement.ViewModels
                 {
                     NoiDungSuaChuaId=item.NoiDungSuaChuaId,
                     PhieuSuaChuaId = obj.Id,
-                    VatTuPhuTungId = item.VatTuPhuTungId,
                     TienCongId = item.TienCongId,
-                    SoLuong = item.SoLuong,
                     ThanhTien = item.ThanhTien
                 });
-                var vatTuPhuTung = await _vattuservice.GetByID(item.VatTuPhuTungId??Guid.Empty);
-                if (vatTuPhuTung != null) vatTuPhuTung.SoLuong -= item.SoLuong ?? 0;
-                await _vattuservice.Update(vatTuPhuTung);
+                //var vatTuPhuTung = await _vattuservice.GetByID(item.VatTuPhuTungId??Guid.Empty);
+                //if (vatTuPhuTung != null) vatTuPhuTung.SoLuong -= item.SoLuong ?? 0;
+                //await _vattuservice.Update(vatTuPhuTung);
             }
             checkuser.TienNo += TongThanhTien;
             xe.TienNo += TongThanhTien;
@@ -215,6 +213,22 @@ namespace GarageManagement.ViewModels
             if (item != null) ListNoiDung.Remove(item);
             TongThanhTien=ListNoiDung.Sum(u=>u.ThanhTien ?? 0);
             OnPropertyChanged(nameof(TongThanhTien));
+        }
+
+        [RelayCommand]
+        public void AddVTPT()
+        {
+            ListVTPT.Add(new VTPTChiTietPhieuSuaChua
+            {
+                IdForUI = indexVTPT++
+            });
+        }
+
+        [RelayCommand]
+        public void RemoveVTPT(int id)
+        {
+            var item = ListVTPT.Where(u => u.IdForUI == id).FirstOrDefault();
+            if (item != null) ListVTPT.Remove(item);
         }
     }
 }

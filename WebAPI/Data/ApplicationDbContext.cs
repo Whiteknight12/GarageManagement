@@ -32,6 +32,7 @@ namespace WebAPI.Data
         public DbSet<BaoCaoTon> baoCaoTons { get; set; }
         public DbSet<ChiTietBaoCaoTon> chiTietBaoCaoTons { get; set; }
         public DbSet<NoiDungSuaChua> noiDungSuaChuas { get; set; }
+        public DbSet<VTPTChiTietPhieuSuaChua> vtptChiTietPhieuSuaChuas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

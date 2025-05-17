@@ -74,139 +74,165 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BackgroundColor="{DynamicResource CardBackgroundColor}" 
-                           Padding="20" 
-                           Margin="0,12,0,0" 
-                           HasShadow="True" 
+                           Padding="20" Margin="0,12,0,0" HasShadow="True" 
                            CornerRadius="{StaticResource CornerRadiusHandler}">
 
-                            <Grid ColumnSpacing="15" RowSpacing="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
+                            <StackLayout Spacing="15">
 
-                                <StackLayout Grid.Column="0" Spacing="2">
-                                    <Label Text="Nội dung sửa chữa:" 
+                                <Grid ColumnSpacing="15" RowSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Grid.Column="0" Spacing="2">
+                                        <Label Text="Nội dung sửa chữa:" 
+                                               FontAttributes="Bold" 
+                                               FontSize="16" 
+                                               FontFamily="OpenSans-Regular" 
+                                               TextColor="{DynamicResource TextColor}"/>
+                                        <Picker TitleColor="{DynamicResource PlaceholderColor}"
+                                            ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListNoiDungSuaChua}"
+                                            ItemDisplayBinding="{Binding TenNoiDungSuaChua}"
+                                            SelectedItem="{Binding NoiDungSuaChuaId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
+                                            SelectedIndexChanged="OnNoiDungSuaChuaChanged"
+                                            BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                            TextColor="{DynamicResource TextColor}"
+                                            HeightRequest="45" />
+                                    </StackLayout>
+
+                                    <StackLayout Grid.Column="1" />
+
+                                    <StackLayout Grid.Column="2" Spacing="2">
+                                        <Label Text="Tiền công:" FontAttributes="Bold" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
+                                        <Label Text="{Binding GiaTienCong}" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
+                                    </StackLayout>
+
+                                    <StackLayout Grid.Column="3" Spacing="2">
+                                        <Label Text="Thành tiền:" FontAttributes="Bold" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
+                                        <Label Text="{Binding ThanhTien}" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
+                                    </StackLayout>
+
+                                    <Button Grid.Column="5"
+                                        Text="Xóa ND"
+                                        BackgroundColor="#EF4444"
+                                        TextColor="White"
+                                        HeightRequest="40"
+                                        FontFamily="OpenSans-SemiBold"
+                                        CornerRadius="{StaticResource DeleteButtonCornerRadiusHandler}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=RemoveCommand}"
+                                        CommandParameter="{Binding NoiDungId}">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroupList>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="BackgroundColor" Value="#EF4444" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Pressed">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="BackgroundColor" Value="#DC2626" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateGroupList>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </Button>
+                                </Grid>
+
+                                <Label Text="Vật tư phụ tùng:" 
                                        FontAttributes="Bold" 
-                                       FontSize="16"
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                    <Picker 
-                                        TitleColor="{DynamicResource PlaceholderColor}"
-                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListNoiDungSuaChua}"
-                                        ItemDisplayBinding="{Binding TenNoiDungSuaChua}"
-                                        SelectedItem="{Binding NoiDungSuaChuaId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
-                                        SelectedIndexChanged="OnNoiDungSuaChuaChanged"
-                                        BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                        TextColor="{DynamicResource TextColor}"
-                                        HeightRequest="48" />
-                                </StackLayout>
+                                       FontSize="16" 
+                                       TextColor="{DynamicResource TextColor}" />
 
-                                <StackLayout Grid.Column="1" Spacing="2">
-                                    <Label Text="Vật tư phụ tùng:" 
-                                       FontAttributes="Bold" 
-                                       FontSize="16"
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                    <Picker 
-                                        TitleColor="{DynamicResource PlaceholderColor}"
-                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListVatTuPhuTung}"
-                                        ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
-                                        SelectedItem="{Binding VatTuPhuTungId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
-                                        SelectedIndexChanged="OnVTPTChanged"
-                                        BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                        TextColor="{DynamicResource TextColor}"
-                                        HeightRequest="48" />
-                                </StackLayout>
+                                <CollectionView ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListVTPT}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Padding="0,5" ColumnSpacing="10" RowSpacing="2">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="1.5*" />
+                                                    <ColumnDefinition Width="0.6*" />
+                                                    <ColumnDefinition Width="1.5*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
 
-                                <StackLayout Grid.Column="2" Spacing="2">
-                                    <Label Text="Số lượng:" 
-                                       FontAttributes="Bold" 
-                                       FontSize="16"
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                    <Entry Text="{Binding SoLuong, Mode=TwoWay}"
-                                       PlaceholderColor="{DynamicResource PlaceholderColor}"
-                                       Keyboard="Numeric"
-                                       BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                       TextChanged="OnSoLuongChanged"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HeightRequest="48" />
-                                </StackLayout>
+                                                <Label Grid.Row="0" Grid.Column="0" 
+                                                       Text="Loại vật tư phụ tùng" 
+                                                       FontAttributes="Bold" 
+                                                       TextColor="{DynamicResource TextColor}" />
+                                                <Label Grid.Row="0" 
+                                                       Grid.Column="1" Text="Số lượng" 
+                                                       FontAttributes="Bold" 
+                                                       TextColor="{DynamicResource TextColor}" 
+                                                       HorizontalTextAlignment="Center" />
+                                                <Label 
+                                                    Grid.Row="0" 
+                                                    Grid.Column="2" 
+                                                    Text="Đơn giá" 
+                                                    HorizontalTextAlignment="Center" 
+                                                    FontAttributes="Bold" 
+                                                    TextColor="{DynamicResource TextColor}"/>
+                                                <Label Grid.Row="0" Grid.Column="3" Text="" />
 
-                                <StackLayout Grid.Column="3" Spacing="2">
-                                    <Label Text="Đơn giá:" 
-                                       FontAttributes="Bold" 
-                                       FontSize="16"
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                    <Label Text="{Binding DonGia}" 
-                                       FontSize="16"
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                </StackLayout>
+                                                <Picker Grid.Row="1" Grid.Column="0"
+                                                    TitleColor="{DynamicResource TextColor}"
+                                                    ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListVatTuPhuTung}"
+                                                    ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
+                                                    SelectedIndexChanged="OnVTPTChanged"
+                                                    SelectedItem="{Binding SelectedVTPTId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
+                                                    BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                                    TextColor="{DynamicResource TextColor}"
+                                                    HeightRequest="45" />
 
-                                <StackLayout Grid.Column="4" Spacing="2">
-                                    <Label Text="Tiền công:" 
-                                       FontAttributes="Bold" 
-                                       FontSize="16"
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                    <Label Text="{Binding GiaTienCong}" 
-                                       FontSize="16"
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                </StackLayout>
+                                                <Entry Grid.Row="1" Grid.Column="1"
+                                                    Text="{Binding SoLuong, Mode=TwoWay}"
+                                                    Keyboard="Numeric"
+                                                    BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                                    TextColor="{DynamicResource TextColor}"
+                                                    HeightRequest="40"
+                                                       WidthRequest="70"
+                                                    HorizontalTextAlignment="Center"
+                                                    TextChanged="OnSoLuongChanged" />
 
-                                <StackLayout Grid.Column="5" Spacing="2">
-                                    <Label Text="Thành tiền:" 
-                                       FontAttributes="Bold" 
-                                       FontSize="16"
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                    <Label Text="{Binding ThanhTien}" 
-                                       FontSize="16"
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                </StackLayout>
+                                                <Label Grid.Row="1" Grid.Column="2"
+                                                    Text="{Binding DonGia, StringFormat='{0:N0} VNĐ'}"
+                                                    FontSize="14"
+                                                    TextColor="{DynamicResource TextColor}"
+                                                    HorizontalTextAlignment="Center" />
 
-                                <Button Grid.Column="6"
-                                    Text="Xóa"
-                                    BackgroundColor="#EF4444"
+                                                <Button Grid.Row="1" Grid.Column="3"
+                                                    Text="Xóa VTPT" 
+                                                    BackgroundColor="#EF4444"
+                                                    TextColor="White"
+                                                    HeightRequest="30"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=RemoveVTPTCommand}"
+                                                    CommandParameter="{Binding IdForUI}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                                <Button Text="Thêm vật tư phụ tùng"
+                                    BackgroundColor="#2563EB"
                                     TextColor="White"
                                     HeightRequest="40"
-                                    FontFamily="OpenSans-SemiBold"
-                                    CornerRadius="{StaticResource DeleteButtonCornerRadiusHandler}"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=RemoveCommand}"
-                                    CommandParameter="{Binding NoiDungId}">
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroupList>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#EF4444" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                                <VisualState x:Name="Pressed">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#DC2626" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateGroupList>
-                                    </VisualStateManager.VisualStateGroups>
-                                </Button>
-                            </Grid>
+                                    CornerRadius="8"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=AddVTPTCommand}"
+                                    CommandParameter="{Binding Id}" />
+                            </StackLayout>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
 
             <Button Text="+ Thêm nội dung sửa chữa"
                     Command="{Binding ThemNoiDungSuaChuaCommand}"
