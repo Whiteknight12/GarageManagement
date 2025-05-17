@@ -51,7 +51,7 @@ namespace GarageManagement.ViewModels
             SoDienThoai = result?.SoDienThoai ?? "";
             Email = result?.Email ?? "";
             HoVaTen = TenNguoiDung;
-            AvatarUrl = "dotnet_bot.png";
+            AvatarUrl = "male_staff_icon.png";
         }
     }
 }
