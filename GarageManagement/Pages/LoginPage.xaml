@@ -61,7 +61,7 @@
                         <Frame Padding="0"
                                
                                HasShadow="False"
-                               BackgroundColor="{DynamicResource InputBackgroundColor}"
+                               BackgroundColor="#F3F4F6"
                                HeightRequest="48">
                             <Grid ColumnDefinitions="Auto,*" Padding="15,0">
                                 <Image Grid.Column="0"
@@ -92,7 +92,7 @@
                         <Frame Padding="0"
                                
                                HasShadow="False"
-                               BackgroundColor="{DynamicResource InputBackgroundColor}"
+                               BackgroundColor="#F3F4F6"
                                HeightRequest="48">
                             <Grid ColumnDefinitions="Auto,*,Auto" Padding="15,0">
                                 <Image Grid.Column="0"
