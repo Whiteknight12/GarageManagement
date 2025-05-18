@@ -43,6 +43,7 @@ namespace GarageManagement.ViewModels
             _ = _authenticationServices.FettaiKhoanSession();
             var currentAccount = _authenticationServices.GetCurrentAccountStatus;
             var currentAccountId = currentAccount?.AccountId ?? Guid.Empty;
+            
             var result = await _nhanVienService.GetThroughtSpecialRoute("TaiKhoanId", currentAccountId.ToString());
             TenNguoiDung = result?.HoTen ?? "";
             TenTaiKhoan = currentAccount?.Username ?? "";
