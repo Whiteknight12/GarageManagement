@@ -19,6 +19,7 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<PhieuSuaChua> _phieuservice;
         private readonly APIClientService<KhachHang> _userservice;
         private readonly APIClientService<NoiDungSuaChua> _noidungsuachuaService;
+        private readonly APIClientService<VTPTChiTietPhieuSuaChua> _vtptChiTietPhieuSuaChuaService;
 
         [ObservableProperty]
         private ObservableCollection<string> listBienSoXe=new ObservableCollection<string>();
@@ -44,16 +45,14 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private ObservableCollection<NoiDungSuaChua> listNoiDungSuaChua=new ObservableCollection<NoiDungSuaChua>();
 
-        [ObservableProperty]
-        private ObservableCollection<VTPTChiTietPhieuSuaChua> listVTPT=new ObservableCollection<VTPTChiTietPhieuSuaChua>();
-
         public TaoPhieuSuaChuaPageViewModel(APIClientService<Xe> carservice, 
             APIClientService<TienCong> tiencongservice,
             APIClientService<VatTuPhuTung> vattuservice,
             APIClientService<ChiTietPhieuSuaChua> noidungphieuservice,
             APIClientService<PhieuSuaChua> phieuservice,
             APIClientService<KhachHang> userservice,
-            APIClientService<NoiDungSuaChua> noidungsuachuaService)
+            APIClientService<NoiDungSuaChua> noidungsuachuaService,
+            APIClientService<VTPTChiTietPhieuSuaChua> vtptChiTietPhieuSuaChuaService)
         {
             _carservice = carservice;
             _tiencongservice = tiencongservice;
@@ -62,6 +61,7 @@ namespace GarageManagement.ViewModels
             _phieuservice = phieuservice;
             _userservice = userservice;
             _noidungsuachuaService = noidungsuachuaService;
+            _vtptChiTietPhieuSuaChuaService = vtptChiTietPhieuSuaChuaService;
         }
 
         public async Task LoadAsync()
@@ -104,13 +104,6 @@ namespace GarageManagement.ViewModels
                     NoiDungId=index++
                 });
             }
-            if (ListVTPT.Count==0)
-            {
-                ListVTPT.Add(new VTPTChiTietPhieuSuaChua
-                {
-                    IdForUI=indexVTPT++
-                });
-            }
         }
 
         [RelayCommand]
@@ -127,47 +120,47 @@ namespace GarageManagement.ViewModels
         {
             if (SelectedBienSoXe is null)
             {
-                await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong bien so xe", "OK");
+                await Shell.Current.DisplayAlert("Thông báo", "Không được bỏ trống biển số xe", "OK");
                 return;
             }
             if (ListNoiDung.Count == 0)
             {
-                await Shell.Current.DisplayAlert("Error", "Không có nội dung sữa chữa", "OK");
+                await Shell.Current.DisplayAlert("Thông báo", "Không có nội dung sữa chữa", "OK");
+                return;
+            }
+            if (NgaySuaChua.Date<DateTime.UtcNow.ToLocalTime().Date)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Ngày sửa chữa không được nhỏ hơn ngày hiện tại!", "OK");
                 return;
             }
             foreach (var item in ListNoiDung)
             {
                 if (string.IsNullOrEmpty(item.NoiDungSuaChuaId.ToString()))
                 {
-                    await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong noi dung!", "OK");
+                    await Shell.Current.DisplayAlert("Thông báo", "Không được bỏ trống nội dung!", "OK");
                     return;
                 }
                 if (item.TienCongId is null)
                 {
-                    await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong tien cong!", "OK");
+                    await Shell.Current.DisplayAlert("Thông báo", "Không được bỏ trống tiền công!", "OK");
                     return;
                 }
                 if (item.ThanhTien is null)
                 {
-                    await Shell.Current.DisplayAlert("Error", "Co ve nhu co loi xay ra", "OK");
-                    return;
-                }
-                if (NgaySuaChua.Date<DateTime.Now.Date)
-                {
-                    await Shell.Current.DisplayAlert("Error", "Ngay sua chua khong duoc nho hon ngay hien tai!", "OK");
+                    await Shell.Current.DisplayAlert("Thông báo", "Có vẻ như đã có lỗi xảy ra", "OK");
                     return;
                 }
             }
             Xe xe=await _carservice.GetThroughtSpecialRoute($"BienSo/{SelectedBienSoXe}");
             if (xe is null)
             {
-                await Shell.Current.DisplayAlert("Error", "Khong tim thay xe co bien so tren", "OK");
+                await Shell.Current.DisplayAlert("Thông báo", "Không tìm thấy xe có biển số xe trên", "OK");
                 return;
             }
             var checkuser = await _userservice.GetByID(xe.KhachHangId);
             if (checkuser is null)
             {
-                await Shell.Current.DisplayAlert("Error", "Khong tim chu xe cua xe co bien so tren", "OK");
+                await Shell.Current.DisplayAlert("Thông báo", "Không tìm thấy chủ xe có biển số xe trên", "OK");
                 return;
             }
             PhieuSuaChua obj=await _phieuservice.Create(new PhieuSuaChua
@@ -179,7 +172,7 @@ namespace GarageManagement.ViewModels
             });
             if (obj is null)
             {
-                await Shell.Current.DisplayAlert("Error", "Tao phieu sua chua moi that bai", "OK");
+                await Shell.Current.DisplayAlert("Thông báo", "Tạo phiếu sữa chữa mới thất bại", "OK");
                 return;
             }
             foreach (var item in ListNoiDung)
@@ -191,9 +184,42 @@ namespace GarageManagement.ViewModels
                     TienCongId = item.TienCongId,
                     ThanhTien = item.ThanhTien
                 });
-                //var vatTuPhuTung = await _vattuservice.GetByID(item.VatTuPhuTungId??Guid.Empty);
-                //if (vatTuPhuTung != null) vatTuPhuTung.SoLuong -= item.SoLuong ?? 0;
-                //await _vattuservice.Update(vatTuPhuTung);
+                if (chiTietPhieuSuaChua is null)
+                {
+                    await Shell.Current.DisplayAlert("Thông báo", "Có lỗi xảy ra khi tạo chi tiết phiếu sữa chữa", "OK");
+                    return;
+                }
+                foreach (var chiTietVTPT in item.ListSpecifiedVTPT)
+                {
+                    if (chiTietVTPT.SelectedVTPTId==null)
+                    {
+                        await Shell.Current.DisplayAlert("Thông báo", "Không được bỏ trống vật tư phụ tùng", "OK");
+                        return;
+                    }
+                    if (string.IsNullOrEmpty(chiTietVTPT.SoLuong.ToString()) || chiTietVTPT.SoLuong==0)
+                    {
+                        await Shell.Current.DisplayAlert("Thông báo", "Không được bỏ trống số lượng", "OK");
+                        return; 
+                    }
+                    var result = await _vtptChiTietPhieuSuaChuaService.Create(new VTPTChiTietPhieuSuaChua
+                    {
+                        Id = Guid.NewGuid(),
+                        ChiTietPhieuSuaChuaId = chiTietPhieuSuaChua.Id,
+                        VatTuPhuTungId = chiTietVTPT.SelectedVTPTId ?? Guid.Empty,
+                        SoLuong = chiTietVTPT.SoLuong
+                    });
+                    if (result is null)
+                    {
+                        await Shell.Current.DisplayAlert("Thông báo", "Có lỗi xảy ra", "OK");
+                        return;
+                    }
+                    var vtpt=await _vattuservice.GetByID(chiTietVTPT.SelectedVTPTId ?? Guid.Empty);
+                    if (vtpt is not null)
+                    {
+                        vtpt.SoLuong -= chiTietVTPT.SoLuong;
+                        await _vattuservice.Update(vtpt);
+                    }
+                }
             }
             checkuser.TienNo += TongThanhTien;
             xe.TienNo += TongThanhTien;
@@ -209,26 +235,45 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public void Remove(int itemid)
         {
-            var item=ListNoiDung.Where(u=>u.NoiDungId == itemid).FirstOrDefault();
-            if (item != null) ListNoiDung.Remove(item);
-            TongThanhTien=ListNoiDung.Sum(u=>u.ThanhTien ?? 0);
-            OnPropertyChanged(nameof(TongThanhTien));
+            var item = ListNoiDung.FirstOrDefault(u => u.NoiDungId == itemid);
+            if (item is not null) ListNoiDung.Remove(item);
+            TongThanhTien = ListNoiDung.Sum(u => u.ThanhTien ?? 0);
         }
 
         [RelayCommand]
-        public void AddVTPT()
+        public void AddVTPT(int noiDungId)
         {
-            ListVTPT.Add(new VTPTChiTietPhieuSuaChua
+            ListNoiDung?.FirstOrDefault(u => u.NoiDungId == noiDungId)?.ListSpecifiedVTPT.Add(new VTPTChiTietPhieuSuaChua
             {
-                IdForUI = indexVTPT++
+                IdForUI=noiDungId,
+                IdForDeleteUI = indexVTPT++,
             });
+            var item = ListNoiDung?.FirstOrDefault(u => u.NoiDungId == noiDungId);
+            item?.OnPropertyChanged(nameof(item.ListSpecifiedVTPT));
         }
 
         [RelayCommand]
         public void RemoveVTPT(int id)
         {
-            var item = ListVTPT.Where(u => u.IdForUI == id).FirstOrDefault();
-            if (item != null) ListVTPT.Remove(item);
+            foreach (var item in ListNoiDung)
+            {
+                var deleteItem = item.ListSpecifiedVTPT.FirstOrDefault(u => u.IdForDeleteUI == id);
+                if (deleteItem is not null)
+                {
+                    var updateItem = ListNoiDung.FirstOrDefault(u => u.NoiDungId == deleteItem.IdForUI);
+                    if (updateItem is not null)
+                    {
+                        updateItem.ListSpecifiedVTPT?.Remove(deleteItem);
+                        updateItem.ThanhTien=updateItem.ListSpecifiedVTPT?.Sum(u => u.SoLuong * u.DonGia);
+                        updateItem.ThanhTien += updateItem.GiaTienCong ?? 0;
+                        updateItem.OnPropertyChanged(nameof(updateItem.ThanhTien));
+                    }
+                    item.ListSpecifiedVTPT.Remove(deleteItem);
+                    item.OnPropertyChanged(nameof(item.ListSpecifiedVTPT));
+                    break;
+                }
+            }
+            TongThanhTien = ListNoiDung.Sum(u => u.ThanhTien ?? 0);
         }
     }
 }

@@ -18,6 +18,8 @@ namespace APIClassLibrary.APIModels
         public double? DonGia { get; set; }
         //IdForUI de xu li trong UI, khong luu vao db
         public int? IdForUI { get; set; }
+        //IdForDeleteUI de xu li trong UI, khong luu vao db
+        public int? IdForDeleteUI { get; set; }
         //ten loai vtpt de xu li trong UI, khong luu vao db
         public string? TenLoaiVatTuPhuTung { get; set; }
         public Guid? SelectedVTPTId { get; set; }

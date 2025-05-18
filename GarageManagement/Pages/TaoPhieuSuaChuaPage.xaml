@@ -150,7 +150,7 @@
                                        FontSize="16" 
                                        TextColor="{DynamicResource TextColor}" />
 
-                                <CollectionView ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListVTPT}">
+                                <CollectionView ItemsSource="{Binding ListSpecifiedVTPT}">
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Padding="0,5" ColumnSpacing="10" RowSpacing="2">
@@ -199,7 +199,7 @@
                                                     BackgroundColor="{DynamicResource InputBackgroundColor}"
                                                     TextColor="{DynamicResource TextColor}"
                                                     HeightRequest="40"
-                                                       WidthRequest="70"
+                                                    WidthRequest="70"
                                                     HorizontalTextAlignment="Center"
                                                     TextChanged="OnSoLuongChanged" />
 
@@ -215,7 +215,7 @@
                                                     TextColor="White"
                                                     HeightRequest="30"
                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=RemoveVTPTCommand}"
-                                                    CommandParameter="{Binding IdForUI}" />
+                                                    CommandParameter="{Binding IdForDeleteUI}" />
                                             </Grid>
                                         </DataTemplate>
                                     </CollectionView.ItemTemplate>
@@ -227,7 +227,7 @@
                                     HeightRequest="40"
                                     CornerRadius="8"
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=AddVTPTCommand}"
-                                    CommandParameter="{Binding Id}" />
+                                    CommandParameter="{Binding NoiDungId}" />
                             </StackLayout>
                         </Frame>
                     </DataTemplate>
