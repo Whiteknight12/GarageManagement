@@ -44,4 +44,11 @@ namespace WebAPI.Middlewares
             await _next(context);
         }
     }
+    public static class ClaimsLoaderMiddlewareExtensions
+    {
+        public static IApplicationBuilder UseClaimsLoader(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<ClaimsLoaderMiddleware>();
+        }
+    }
 }

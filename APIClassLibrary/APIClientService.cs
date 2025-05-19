@@ -1,10 +1,4 @@
-﻿using APIClassLibrary.APIModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Json;
 
 namespace APIClassLibrary
 {
@@ -12,15 +6,22 @@ namespace APIClassLibrary
     {
         private readonly HttpClient _httpclient;
         private readonly string _endpoint;
+        private string STORAGE_KEY = "user-account-status";
+
         public APIClientService(APIClientOptions options, string endpoint)
         {
             _httpclient = new HttpClient();
             _httpclient.BaseAddress = new Uri(options.BaseAddress);
             _endpoint = endpoint;
+            
         }
+        
+        public HttpClient GetHttpClient => _httpclient; 
         public async Task<List<T>> GetAll()
         {
-            return await _httpclient.GetFromJsonAsync<List<T>>($"/api/{_endpoint}");
+            var response = await _httpclient.GetFromJsonAsync<List<T>>($"/api/{_endpoint}");
+
+            return response;
         }
         public async Task<T> GetByID(Guid id)
         {

@@ -3,6 +3,7 @@ using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Pages;
+using GarageManagement.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,14 +20,16 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<Xe> _carservice;
         private readonly APIClientService<PhieuSuaChua> _phieuservice;
         private readonly APIClientService<ChiTietPhieuSuaChua> _noidungphieuservice;
-
+        private readonly AuthenticationService _authenticationService; 
         [ObservableProperty]
         private ObservableCollection<Xe> listcar = new ObservableCollection<Xe>();
 
         public QuanLiXePageViewModel(APIClientService<Xe> carservice,
             APIClientService<PhieuSuaChua> phieuservice, 
-            APIClientService<ChiTietPhieuSuaChua> noidungphieuservice)
+            APIClientService<ChiTietPhieuSuaChua> noidungphieuservice,
+            AuthenticationService authenticationService)
         {
+            _authenticationService = authenticationService;
             _carservice = carservice;
             _ = LoadAsync();
             _phieuservice = phieuservice;
@@ -34,6 +37,11 @@ namespace GarageManagement.ViewModels
         }
         public async Task LoadAsync()
         {
+            _ = _authenticationService.FettaiKhoanSession();
+            var token = _authenticationService.GetCurrentAccountStatus.Token;
+            var client = _carservice.GetHttpClient; 
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            
             var list = await _carservice.GetAll();
             if (list is not null)
             {

@@ -3,6 +3,8 @@ using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Pages;
+using GarageManagement.Services;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Bson;
 using System;
 using System.Collections.Generic;
@@ -20,19 +22,29 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private bool isDeleteMode;
         private readonly APIClientService<HieuXe> _hieuXeService;
-        private readonly ThemHieuXePageViewModel _themHieuXePageViewModel; 
+        private readonly ThemHieuXePageViewModel _themHieuXePageViewModel;
+        private readonly AuthenticationService _authenticationService;
         public QuanLiDanhSachHieuXePageViewModel(APIClientService<HieuXe> hieuXeService,
-            ThemHieuXePageViewModel themHieuXePageViewModel)
+            ThemHieuXePageViewModel themHieuXePageViewModel,
+            ILogger<QuanLiDanhSachHieuXePageViewModel> logger,
+            AuthenticationService authenticationService)
         {
+            _authenticationService = authenticationService;
             _hieuXeService = hieuXeService;
             _ = LoadAsync();
             _themHieuXePageViewModel = themHieuXePageViewModel;
             IsDeleteMode = false;
+            
         }
 
         public async Task LoadAsync()
         {
+            _ = _authenticationService.FettaiKhoanSession();
+            var httpClient = _hieuXeService.GetHttpClient;
+            var token = _authenticationService.GetCurrentAccountStatus.Token;
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             var list = await _hieuXeService.GetAll();
+            Console.WriteLine(list[0].TenHieuXe);
             ListHieuXe = new ObservableCollection<HieuXe>(list);
         }
         public void Load(HieuXe item)

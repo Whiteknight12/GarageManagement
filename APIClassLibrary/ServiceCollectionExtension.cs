@@ -14,7 +14,7 @@ namespace APIClassLibrary
         public static void AddAPIClientService<T>(this IServiceCollection services, Action<APIClientOptions> options, string endpoint) where T : class
         {
             services.Configure(options);
-            services.AddSingleton(providers =>
+            services.AddScoped(providers =>
             {
                 var options = providers.GetRequiredService<IOptions<APIClientOptions>>().Value;
                 return new APIClientService<T>(options, endpoint);
