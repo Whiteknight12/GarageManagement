@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
+using WebAPI.Data;
 using WebAPI.IdentityModel;
 using WebAPI.Service;
 
@@ -12,9 +13,11 @@ namespace WebAPI.Controllers
     public class AccountController : ControllerBase
     {
         private readonly JwtService _service;
-        public AccountController(JwtService service)
+        private readonly ApplicationDbContext _dbContext;
+        public AccountController(JwtService service, ApplicationDbContext dbContext)
         {
             _service = service;
+            _dbContext = dbContext;
         }
         [HttpPost("Login")]
         [AllowAnonymous]

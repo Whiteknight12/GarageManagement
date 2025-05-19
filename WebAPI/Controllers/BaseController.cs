@@ -7,7 +7,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public abstract class BaseController<T> : ControllerBase where T : class
+    public class BaseController<T> : ControllerBase where T : class
     {
         private readonly ApplicationDbContext _applicationDbContext;
         private readonly DbSet<T> _dbSet;
@@ -19,13 +19,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public virtual async Task<ActionResult<IEnumerable<T>>> GetAll()
+        public async Task<ActionResult<IEnumerable<T>>> GetAll()
         {
             return Ok(await _dbSet.ToListAsync());
         }
 
         [HttpGet("{id}")]
-        public virtual async Task<ActionResult<T>> GetById(Guid id)
+        public async Task<ActionResult<T>> GetById(Guid id)
         {
             var entity = await _dbSet.FindAsync(id);
             if (entity == null) return NotFound();
@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<ActionResult<T>> Create([FromBody] T entity)
+        public async Task<ActionResult<T>> Create([FromBody] T entity)
         {
             await _dbSet.AddAsync(entity);
             await _applicationDbContext.SaveChangesAsync();
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public virtual async Task<ActionResult> Update([FromBody] T entity)
+        public async Task<ActionResult> Update([FromBody] T entity)
         {
             _dbSet.Update(entity);
             await _applicationDbContext.SaveChangesAsync();
@@ -49,7 +49,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public virtual async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             var entity = await _dbSet.FindAsync(id);
             if (entity == null) return NotFound();

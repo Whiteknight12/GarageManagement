@@ -6,9 +6,11 @@ namespace WebAPI.Authorization
     public class DynamicAuthorizationPolicyProvider : IAuthorizationPolicyProvider
     {
         private readonly DefaultAuthorizationPolicyProvider _fallbackPolicyProvider;
-        public DynamicAuthorizationPolicyProvider(IOptions<AuthorizationOptions> options)
+        private readonly ILogger<DynamicAuthorizationPolicyProvider> _logger;
+        public DynamicAuthorizationPolicyProvider(IOptions<AuthorizationOptions> options, ILogger<DynamicAuthorizationPolicyProvider> logger)
         {
             _fallbackPolicyProvider = new DefaultAuthorizationPolicyProvider(options);
+            _logger = logger;
         }
         public Task<AuthorizationPolicy> GetDefaultPolicyAsync()
         {
@@ -22,10 +24,14 @@ namespace WebAPI.Authorization
 
         public Task<AuthorizationPolicy?> GetPolicyAsync(string policyName)
         {
+            _logger.LogInformation("Creating dynamic policy for: {PolicyName}", policyName);
+
             var policy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 .AddRequirements(new DynamicPermissionRequirement(policyName))
                 .Build();
+
+            _logger.LogInformation("Policy created: {PolicyDetails}", policy.ToString());
 
             return Task.FromResult(policy);
         }

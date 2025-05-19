@@ -11,4 +11,4 @@ namespace WebAPI.Authorization
             Permission = permission;
         }
     }
-}
+}   

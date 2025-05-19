@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
+    [Authorize(Policy = "Phieu tiep nhan")]
     [Route("api/[controller]")]
     [ApiController]
     public class PhieuTiepNhanController : BaseController<PhieuTiepNhan>
@@ -18,35 +20,7 @@ namespace WebAPI.Controllers
         {
             _db = applicationDbContext;
         }
-        [HttpGet]
-        public override async Task<ActionResult<IEnumerable<PhieuTiepNhan>>> GetAll()
-        {
-            return await base.GetAll();
-        }
-
-        [HttpGet("{id}")]
-        public override async Task<ActionResult<PhieuTiepNhan>> GetById(Guid id)
-        {
-            return await base.GetById(id);
-        }
-
-        [HttpPost]
-        public override async Task<ActionResult<PhieuTiepNhan>> Create([FromBody] PhieuTiepNhan entity)
-        {
-            return await base.Create(entity);
-        }
-
-        [HttpPut]
-        public override async Task<ActionResult> Update([FromBody] PhieuTiepNhan entity)
-        {
-            return await base.Update(entity);
-        }
-
-        [HttpDelete("{id}")]
-        public override async Task<ActionResult> Delete(Guid id)
-        {
-            return await base.Delete(id);
-        }
+        
 
         [HttpGet("XeId/{xeId}")]
         public async Task<ActionResult<IEnumerable<PhieuTiepNhan>>> GetListByXeId(Guid xeId)

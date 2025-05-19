@@ -26,7 +26,7 @@ public static class MauiProgram
 #if ANDROID
 		baseaddress= "https://10.0.2.2:7228/";
 #elif WINDOWS
-		baseaddress= "http://localhost:5142/";
+		baseaddress= "https://localhost:7228/";
 #else
     baseaddress = "http://192.168.1.100:5142/"; 
 #endif
@@ -88,6 +88,13 @@ public static class MauiProgram
         builder.Services.AddTransient<ChiTietXePageViewModel>();
         builder.Services.AddTransient<ChiTietKhachHangViewModel>();
         builder.Services.AddTransient<NhanSuMainPageViewModel>();
+
+        builder.Services.AddLogging(logging =>
+        {
+            //logging.AddConsole();
+            logging.AddDebug();   // Ghi log ra debug window
+            logging.SetMinimumLevel(LogLevel.Information); // Ghi tất cả log từ Information trở lên
+        });
 
 #if DEBUG
         builder.Logging.AddDebug();

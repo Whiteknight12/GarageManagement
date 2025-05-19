@@ -40,15 +40,15 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    var connectionstring= builder.Configuration.GetConnectionString("DefaultConnection");
-    options.UseSqlServer(connectionstring);
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    options.UseSqlServer(connectionString);
 });
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme=JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
+}).AddJwtBearer("Bearer", options =>
 {
     options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
@@ -66,7 +66,11 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicAuthorizationPolicyProvider>();
 builder.Services.AddScoped<IAuthorizationHandler, DynamicPermissionHandler>();
-
+builder.Services.AddLogging(logging =>
+{
+    logging.AddConsole();
+    logging.SetMinimumLevel(LogLevel.Information);
+}); 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -75,11 +79,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseMiddleware<ClaimsLoaderMiddleware>();
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
+//app.UseClaimsLoader();
+app.UserJwtLogging();
 app.MapControllers();
 app.Run();
