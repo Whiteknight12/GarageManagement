@@ -4,40 +4,60 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Pages;
 using GarageManagement.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
 {
-    public partial class MainPageViewModel: BaseViewModel
+    public partial class MainPageViewModel : BaseViewModel
     {
         [ObservableProperty]
         private ContentView currentPageContent;
+
         [ObservableProperty]
         private bool trangChuActive = true;
+
         [ObservableProperty]
-        private bool tiepNhanXeActive= false;
+        private bool tiepNhanXeActive = false;
+
         [ObservableProperty]
         private bool taoPhieuNhapActive = false;
+
         [ObservableProperty]
         private bool taoPhieuSuaChuaActive = false;
+
         [ObservableProperty]
         private bool qlDanhSachHieuXeActive = false;
+
         [ObservableProperty]
         private bool qlXeActive = false;
+
         [ObservableProperty]
         private bool thuTienActive = false;
+
         [ObservableProperty]
         private bool baoCaoDoanhSoActive = false;
+
         [ObservableProperty]
         private bool quanLiDanhSachLoaiVatTuActive = false;
-        [ObservableProperty] 
+
+        [ObservableProperty]
+        private bool phanQuyenActive = false;
+
+        [ObservableProperty]
         private bool isCollapsed;
+
         [ObservableProperty]
         private string helloText = string.Empty;
+
+        // Thêm các thuộc tính để quản lý trạng thái mở rộng của các section
+        [ObservableProperty]
+        private bool quanLyExpanded;
+
+        [ObservableProperty]
+        private bool taoLapExpanded;
+
+        [ObservableProperty]
+        private bool quanTriExpanded;
 
         private readonly TiepNhanXePage _tiepNhanXe;
         private readonly TaoPhieuSuaChuaPage _taoPhieuSuaChua;
@@ -49,11 +69,12 @@ namespace GarageManagement.ViewModels
         private readonly QuanLiDanhSachLoaiVatTuPage _quanLiDanhSachLoaiVatTuPage;
         private readonly AuthenticationService _authenticationServices;
         private readonly NhanSuMainPageViewModel _viewModel;
-
         private readonly APIClientService<NhanVien> _nhanVienService;
+        private readonly PhanQuyenPage _phanQuyenPage;
 
-        public MainPageViewModel(TiepNhanXePage tiepNhanXe, 
-            LapPhieuNhapPage taoPhieuNhap, 
+        public MainPageViewModel(
+            TiepNhanXePage tiepNhanXe,
+            LapPhieuNhapPage taoPhieuNhap,
             TaoPhieuSuaChuaPage taoPhieuSuaChua,
             QuanLiDanhSachHieuXePage quanLiDanhSachHieuXe,
             QuanLiXePage quanLiXePage,
@@ -62,7 +83,8 @@ namespace GarageManagement.ViewModels
             QuanLiDanhSachLoaiVatTuPage quanLiDanhSachLoaiVatTuPage,
             AuthenticationService authenticationService,
             NhanSuMainPageViewModel viewModel,
-            APIClientService<NhanVien> nhanVienService)
+            APIClientService<NhanVien> nhanVienService,
+            PhanQuyenPage phanQuyenPage)
         {
             _viewModel = viewModel;
             currentPageContent = new NhanSuMainPage(_viewModel);
@@ -76,8 +98,12 @@ namespace GarageManagement.ViewModels
             _quanLiDanhSachLoaiVatTuPage = quanLiDanhSachLoaiVatTuPage;
             _nhanVienService = nhanVienService;
             IsCollapsed = false;
+            QuanLyExpanded = false; 
+            TaoLapExpanded = false;
+            QuanTriExpanded = false;
             _authenticationServices = authenticationService;
-            LoadUserAsync();
+            _phanQuyenPage = phanQuyenPage;
+            _ = LoadUserAsync();
         }
 
         [RelayCommand]
@@ -92,6 +118,8 @@ namespace GarageManagement.ViewModels
             ThuTienActive = parameter == "ThuTien";
             BaoCaoDoanhSoActive = parameter == "BaoCaoDoanhSo";
             QuanLiDanhSachLoaiVatTuActive = parameter == "QLDanhSachLoaiVatTu";
+            PhanQuyenActive = parameter == "PhanQuyen";
+
             CurrentPageContent = parameter switch
             {
                 "Home" => new NhanSuMainPage(_viewModel),
@@ -100,11 +128,44 @@ namespace GarageManagement.ViewModels
                 "TaoPhieuNhap" => _taoPhieuNhap,
                 "QLDanhSachHieuXe" => _quanLiDanhSachHieuXe,
                 "QLXe" => _quanLiXePage,
-                "ThuTien" =>  _thuTienPage,
+                "ThuTien" => _thuTienPage,
                 "BaoCaoDoanhSo" => _baoCaoDoanhSoPage,
                 "QLDanhSachLoaiVatTu" => _quanLiDanhSachLoaiVatTuPage,
+                "PhanQuyen" => _phanQuyenPage,
                 _ => new NhanSuMainPage(_viewModel)
             };
+        }
+
+        [RelayCommand]
+        public void ToggleSection(string section)
+        {
+            switch (section)
+            {
+                case "QuanLy":
+                    QuanLyExpanded = !QuanLyExpanded;
+                    if (QuanLyExpanded)
+                    {
+                        TaoLapExpanded = false;
+                        QuanTriExpanded = false;
+                    }
+                    break;
+                case "TaoLap":
+                    TaoLapExpanded = !TaoLapExpanded;
+                    if (TaoLapExpanded)
+                    {
+                        QuanLyExpanded = false;
+                        QuanTriExpanded = false;
+                    }
+                    break;
+                case "QuanTri":
+                    QuanTriExpanded = !QuanTriExpanded;
+                    if (QuanTriExpanded)
+                    {
+                        QuanLyExpanded = false;
+                        TaoLapExpanded = false;
+                    }
+                    break;
+            }
         }
 
         private async Task LoadUserAsync()
@@ -113,7 +174,7 @@ namespace GarageManagement.ViewModels
             var user = _authenticationServices.GetCurrentAccountStatus;
             if (user != null)
             {
-                var result=await _nhanVienService.GetThroughtSpecialRoute("TaiKhoanId", user.AccountId.ToString()??"");
+                var result = await _nhanVienService.GetThroughtSpecialRoute("TaiKhoanId", user.AccountId.ToString() ?? "");
                 HelloText = $"Xin chào {user.Role}: {result?.HoTen}";
             }
             else

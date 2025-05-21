@@ -64,8 +64,8 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<JwtService>();
-builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicAuthorizationPolicyProvider>();
-builder.Services.AddScoped<IAuthorizationHandler, DynamicPermissionHandler>();
+//builder.Services.AddSingleton<IAuthorizationPolicyProvider, DynamicAuthorizationPolicyProvider>();
+//builder.Services.AddScoped<IAuthorizationHandler, DynamicPermissionHandler>();
 builder.Services.AddLogging(logging =>
 {
     logging.AddConsole();
@@ -82,7 +82,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-//app.UseClaimsLoader();
 app.UserJwtLogging();
 app.MapControllers();
 app.Run();

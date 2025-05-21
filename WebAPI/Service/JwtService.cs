@@ -44,9 +44,10 @@ namespace WebAPI.Service
             {
                 new Claim(JwtRegisteredClaimNames.Name, request.Username),
                 new Claim(JwtRegisteredClaimNames.NameId, taiKhoan.Id.ToString()),
-                new Claim(ClaimTypes.Role, role.TenNhom)
+                //new Claim(ClaimTypes.Role, role.TenNhom)
             };
-            claims.AddRange(chucNangs.Select(p => new Claim("Permission", p)));
+            claims.AddRange(chucNangs.Select(p => new Claim(ClaimTypes.Role, p)));
+            
             var tokendescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),

@@ -13,5 +13,6 @@ namespace APIClassLibrary.APIModels
         public string? Token { get; set; }
         public DateTime Expiry { get; set; }
         public string? Role { get; set; }
+        public List<string>? Permissions { get; set; }
     }
 }
