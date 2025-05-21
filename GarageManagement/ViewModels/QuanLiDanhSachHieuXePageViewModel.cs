@@ -79,12 +79,12 @@ namespace GarageManagement.ViewModels
             IsDeleteMode = !IsDeleteMode;
         }
         [RelayCommand]
-        private void Delete()
+        private async Task Delete()
         {
             var selectedItems = ListHieuXe.Where(x => x.IsSelected).ToList();
             foreach (var item in selectedItems)
             {
-                _ = _hieuXeService.Delete(item.Id);
+                await _hieuXeService.Delete(item.Id);
                 ListHieuXe.Remove(item);
             }
             
