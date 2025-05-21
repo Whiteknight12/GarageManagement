@@ -37,6 +37,7 @@ namespace GarageManagement.ViewModels
         {
             var l = await _vatTuService.GetAll();
             PickerSource = ListVatTu = new ObservableCollection<VatTuPhuTung>(l);
+            ThemChiTietPhieuNhap(); 
         }
 
         [RelayCommand]
@@ -48,11 +49,17 @@ namespace GarageManagement.ViewModels
         private void XoaChiTietPhieuNhap(ChiTietPhieuNhapVatTu chi)
         {
             ListChiTietPhieuNhap.Remove(chi);
+            TongGiaTien = TongGiaTien - (chi.DonGia ?? 0) * (chi.SoLuong ?? 0); 
         }
         [RelayCommand]
         private void LuuPhieuNhap()
         {
             var listChiTiet = ListChiTietPhieuNhap.ToList();
+            if (listChiTiet.Select(d => (d.DonGia == null || d.SoLuong == null)) != null)
+            {
+                Shell.Current.DisplayAlert("Cảnh báo", "Không được bỏ trống SỐ LƯỢNG và ĐƠN GIÁ", "OK");
+                return;
+            }
             var phieuNhapVatTu = new PhieuNhapVatTu
             {
                 Id = Guid.NewGuid(),

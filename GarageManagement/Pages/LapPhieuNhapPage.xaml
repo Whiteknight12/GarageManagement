@@ -44,89 +44,120 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <CollectionView ItemsSource="{Binding ListChiTietPhieuNhap}">
+            <CollectionView ItemsSource="{Binding ListChiTietPhieuNhap}" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame HasShadow="True"
                                BackgroundColor="{DynamicResource CardBackgroundColor}"
                                Padding="20"
-                               Margin="0,12,0,0"
+                               Margin="10,12,10,10"
                                CornerRadius="{StaticResource CornerRadiusHandler}">
-                            <VerticalStackLayout Spacing="16">
-                                <Label Text="Loại Vật Tư:" 
-                                       FontSize="16"
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                <Picker x:Name="VatTuPicker"
-                                        Title="Chọn Vật Tư"
-                                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LapPhieuNhapPageViewModel}}, Path=ListVatTu}" 
-                                        SelectedItem="{Binding VatTuId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
-                                        ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
-                                        SelectedIndexChanged="OnLoaiVatTuPicked"
-                                        BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                        TextColor="{DynamicResource TextColor}"
-                                        TitleColor="{DynamicResource PlaceholderColor}"
-                                        Margin="0,5,0,0"
-                                        HeightRequest="60"/>
+                            <VerticalStackLayout Spacing="10">
+                                <!-- Hàng ngang cho 3 trường thông tin -->
+                                <Grid Padding="3" 
+                                      ColumnSpacing="10" 
+                                      RowSpacing="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="0.8*" />
+                                        <ColumnDefinition Width="0.8*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Text="Số Lượng:" 
-                                       FontSize="16"
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                <Entry x:Name="SoLuongEntry"
-                                       Keyboard="Numeric" 
-                                       Placeholder="Nhập số lượng"
-                                       PlaceholderColor="{DynamicResource PlaceholderColor}"
-                                       Text="{Binding SoLuong, Mode=TwoWay}" 
-                                       TextChanged="OnSoLuongChanged"
-                                       BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Margin="0,5,0,0"
-                                       HeightRequest="48"/>
+                                    <!-- Tiêu đề cột -->
+                                    <Label Grid.Row="0" Grid.Column="0" 
+                                           Text="Loại vật tư:" 
+                                           FontAttributes="Bold" 
+                                           FontFamily="OpenSans-Regular"
+                                           FontSize="16"
+                                           TextColor="{DynamicResource TextColor}" />
+                                    <Label Grid.Row="0" Grid.Column="1" 
+                                           Text="Số lượng:" 
+                                           FontAttributes="Bold" 
+                                           FontFamily="OpenSans-Regular"
+                                           FontSize="16"
+                                           TextColor="{DynamicResource TextColor}" 
+                                           HorizontalTextAlignment="Center" />
+                                    <Label Grid.Row="0" Grid.Column="2" 
+                                           Text="Đơn giá:" 
+                                           FontAttributes="Bold" 
+                                           FontFamily="OpenSans-Regular"
+                                           FontSize="16"
+                                           TextColor="{DynamicResource TextColor}" 
+                                           HorizontalTextAlignment="Center" />
+                                    <Label Grid.Row="0" Grid.Column="3" 
+                                           Text="" />
 
-                                <Label Text="Đơn Giá:" 
-                                       FontSize="16"
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"/>
-                                <Entry x:Name="DonGiaEntry"
-                                       Keyboard="Numeric" 
-                                       Text="{Binding DonGia, Mode=TwoWay}" 
-                                       PlaceholderColor="{DynamicResource PlaceholderColor}"
-                                       BackgroundColor="{DynamicResource InputBackgroundColor}" 
-                                       TextColor="{DynamicResource TextColor}"
-                                       TextChanged="OnDonGiaChanged"
-                                       Margin="0,5,0,0"
-                                       HeightRequest="48"/>
+                                    <!-- Dữ liệu -->
+                                    <Picker Grid.Row="1" Grid.Column="0"
+                                            x:Name="VatTuPicker"
+                                            
+                                            TitleColor="{DynamicResource PlaceholderColor}"
+                                            ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LapPhieuNhapPageViewModel}}, Path=ListVatTu}" 
+                                            SelectedItem="{Binding VatTuId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
+                                            ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
+                                            SelectedIndexChanged="OnLoaiVatTuPicked"
+                                            BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                            TextColor="{DynamicResource TextColor}"
+                                            HeightRequest="45" />
 
-                                <Button x:Name="DeleteButton"
-                                        Text="Xoá"
-                                        BackgroundColor="#EF4444"
-                                        TextColor="White"
-                                        HeightRequest="40"
-                                        FontFamily="OpenSans-SemiBold"
-                                        CornerRadius="{StaticResource DeleteButtonCornerRadiusHandler}"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LapPhieuNhapPageViewModel}}, Path=XoaChiTietPhieuNhapCommand}"
-                                        CommandParameter="{Binding .}">
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroupList>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#EF4444" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                                <VisualState x:Name="Pressed">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#DC2626" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateGroupList>
-                                    </VisualStateManager.VisualStateGroups>
-                                </Button>
+                                    <Entry Grid.Row="1" Grid.Column="1"
+                                           x:Name="SoLuongEntry"
+                                           Keyboard="Numeric" 
+                                           Placeholder="Nhập số lượng"
+                                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                                           Text="{Binding SoLuong, Mode=TwoWay}" 
+                                           TextChanged="OnSoLuongChanged"
+                                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                           TextColor="{DynamicResource TextColor}"
+                                           HeightRequest="40"
+                                           WidthRequest="150"
+                                           HorizontalTextAlignment="Center" />
+
+                                    <Entry Grid.Row="1" Grid.Column="2"
+                                           x:Name="DonGiaEntry"
+                                           Keyboard="Numeric" 
+                                           Text="{Binding DonGia, Mode=TwoWay}" 
+                                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                                           BackgroundColor="{DynamicResource InputBackgroundColor}" 
+                                           TextColor="{DynamicResource TextColor}"
+                                           TextChanged="OnDonGiaChanged"
+                                           HeightRequest="40"
+                                           WidthRequest="200"
+                                           HorizontalTextAlignment="Center" />
+
+                                    <Button Grid.Row="1" Grid.Column="3"
+                                            x:Name="DeleteButton"
+                                            Text="Xoá"
+                                            BackgroundColor="#EF4444"
+                                            TextColor="White"
+                                            HeightRequest="30"
+                                            FontFamily="OpenSans-SemiBold"
+                                            CornerRadius="{StaticResource DeleteButtonCornerRadiusHandler}"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:LapPhieuNhapPageViewModel}}, Path=XoaChiTietPhieuNhapCommand}"
+                                            CommandParameter="{Binding .}">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroupList>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="BackgroundColor" Value="#EF4444" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Pressed">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="BackgroundColor" Value="#DC2626" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateGroupList>
+                                        </VisualStateManager.VisualStateGroups>
+                                    </Button>
+                                </Grid>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>

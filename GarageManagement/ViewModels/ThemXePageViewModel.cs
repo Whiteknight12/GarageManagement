@@ -32,7 +32,7 @@ namespace GarageManagement.ViewModels
         private string email;
 
 
-        private Guid chuXeId;
+        private Guid chuXeId = Guid.NewGuid();
         private readonly APIClientService<Xe> _xeService;
         private readonly APIClientService<KhachHang> _customerService;
         private readonly APIClientService<HieuXe> _hieuXeService;
@@ -63,17 +63,15 @@ namespace GarageManagement.ViewModels
             }
             var chuXe = await _customerService.GetThroughtSpecialRoute("PhoneNumber", SoDienThoai);
             
-            int tui;
             if (ChuXeExist == false)
             {  
-                if (int.TryParse(this.Tuoi, out tui)) 
+                if (int.TryParse(this.Tuoi, out var tuoi)) 
                 {
-                    NewGuid();
                     await _customerService.Create(new KhachHang
                     {
                         Id = chuXeId,
                         HoVaTen = this.HoVaTen,
-                        Tuoi = tui,
+                        Tuoi = tuoi,
                         DiaChi = this.DiaChi,
                         SoDienThoai = this.SoDienThoai,
                         TienNo = 0,
@@ -145,10 +143,6 @@ namespace GarageManagement.ViewModels
             {
                 await Shell.Current.DisplayAlert("Thông báo", "Không thể quay lại trang trước", "OK");
             }
-        }
-        private void NewGuid() 
-        {
-            chuXeId = Guid.NewGuid();
         }
     }
 }
