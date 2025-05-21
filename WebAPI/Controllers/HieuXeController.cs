@@ -6,7 +6,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    [Authorize(Roles ="Hieu xe")]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class HieuXeController : BaseController<HieuXe>

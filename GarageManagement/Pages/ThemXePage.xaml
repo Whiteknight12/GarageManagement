@@ -1,104 +1,357 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:GarageManagement.ViewModels"
+             xmlns:service="clr-namespace:GarageManagement.Services"
              x:Class="GarageManagement.Pages.ThemXePage"
-             BackgroundColor="#F3F4F6">
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="20" />
+                <On Platform="iOS" Value="20" />
+                <On Platform="Windows" Value="20" />
+            </OnPlatform>
+            <OnPlatform x:Key="ButtonCornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="12" />
+                <On Platform="iOS" Value="12" />
+                <On Platform="Windows" Value="12" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20">
-            <Frame CornerRadius="20" Padding="20" BackgroundColor="White" HasShadow="True">
+        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
+
+            <!-- Header -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="THÊM XE MỚI" 
+                           FontSize="18" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Thông tin xe -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
                 <VerticalStackLayout Spacing="16">
-
-                    <Label Text="THÊM XE MỚI" FontAttributes="Bold" FontSize="20" TextColor="#1F2937" />
-
-                    <Entry Placeholder="Tên xe"
+                    <!-- Tên xe -->
+                    <Label Text="Tên xe" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                    <Entry Placeholder="Nhập tên xe"
                            Text="{Binding TenXe}"
-                           TextColor="Black"
-                           BackgroundColor="#F9FAFB"
+                           TextColor="{DynamicResource TextColor}"
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
                            HeightRequest="50"/>
 
-                    <Label Text="Hiệu xe" FontAttributes="Bold" FontSize="16" TextColor="Black"/>
-                    <Picker
-                        Title="Chọn hiệu xe"
-                        ItemsSource="{Binding DanhSachHieuXe}"
-                        ItemDisplayBinding="{Binding TenHieuXe}"
-                        SelectedItem="{Binding SelectedHieuXe, Mode=TwoWay}"
-                        TextColor="Black"
-                        BackgroundColor="#F9FAFB"
-                        HeightRequest="70"
-                        TitleColor="#9CA3AF" />
+                    <!-- Hiệu xe -->
+                    <Label Text="Hiệu xe" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                    <Picker Title="Chọn hiệu xe"
+                            ItemsSource="{Binding DanhSachHieuXe}"
+                            ItemDisplayBinding="{Binding TenHieuXe}"
+                            SelectedItem="{Binding SelectedHieuXe, Mode=TwoWay}"
+                            TextColor="{DynamicResource TextColor}"
+                            BackgroundColor="{DynamicResource InputBackgroundColor}"
+                            HeightRequest="60"
+                            TitleColor="{DynamicResource PlaceholderColor}"/>
 
-                    <Entry Placeholder="Biển số xe"
+                    <!-- Biển số xe -->
+                    <Label Text="Biển số xe" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                    <Entry Placeholder="Nhập biển số xe"
                            Text="{Binding BienSoXe}"
-                           BackgroundColor="#F9FAFB"
-                           HeightRequest="50" />
+                           TextColor="{DynamicResource TextColor}"
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                           HeightRequest="50"/>
 
-                    <Entry Placeholder="Số điện thoại chủ xe"
+                    <!-- Số điện thoại chủ xe -->
+                    <Label Text="Số điện thoại chủ xe" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                    <Entry Placeholder="Nhập số điện thoại"
                            Text="{Binding SoDienThoai}"
-                           TextColor="Black"
+                           TextColor="{DynamicResource TextColor}"
                            Keyboard="Telephone"
-                           BackgroundColor="#F9FAFB"
-                           HeightRequest="50" />
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                           HeightRequest="50"/>
+                </VerticalStackLayout>
+            </Frame>
 
-                    <Frame IsVisible="{Binding ChuXeExist}"
-                           CornerRadius="12"
-                           Padding="15"
-                           BackgroundColor="#E0F2F1"
-                           HasShadow="True">
-                        <VerticalStackLayout Spacing="8">
-                            <Label Text="Chủ xe đã tồn tại trong hệ thống"
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   TextColor="#065F46" />
-                            <Label Text="{Binding HoVaTen}" TextColor="Black" FontSize="14" />
-                            <Label Text="{Binding SoDienThoai}" TextColor="Black" FontSize="14" />
-                            <Label Text="{Binding DiaChi}" TextColor="Black" FontSize="14" />
-                            <Button Text="Xem chi tiết"
-                                    Command="{Binding XemChiTietChuXeCommand}"
-                                    BackgroundColor="#3B82F6"
-                                    TextColor="White"
-                                    CornerRadius="10"
-                                    HeightRequest="40"/>
-                        </VerticalStackLayout>
-                    </Frame>
+            <!-- Thông tin chủ xe nếu đã tồn tại -->
+            <Frame IsVisible="{Binding ChuXeExist}"
+                   HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <VerticalStackLayout Spacing="16">
+                    <!-- Tiêu đề -->
+                    <Label Text="Chủ xe đã tồn tại trong hệ thống"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalOptions="Start"/>
 
-                    <Button x:Name="btnThemChuXe"
-                            Text="Thêm chủ xe"
-                            BackgroundColor="#10B981"
+                    <!-- Thông tin chủ xe dạng bảng -->
+                    <Grid RowDefinitions="Auto,Auto,Auto" 
+                          ColumnDefinitions="Auto,*" 
+                          RowSpacing="8" 
+                          ColumnSpacing="12">
+                        <!-- Họ và tên -->
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="Họ và tên:" 
+                               FontAttributes="Bold"
+                               FontSize="20" 
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"
+                               HorizontalOptions="Start"/>
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Text="{Binding HoVaTen}" 
+                               FontSize="20" 
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"
+                               HorizontalOptions="Start"/>
+
+                        <!-- Số điện thoại -->
+                        <Label Grid.Row="1" Grid.Column="0"
+                               Text="Số điện thoại:" 
+                               FontAttributes="Bold"
+                               FontSize="20"  
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"
+                               HorizontalOptions="Start"/>
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Text="{Binding SoDienThoai}" 
+                               FontSize="20" 
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"
+                               HorizontalOptions="Start"/>
+
+                        <!-- Địa chỉ -->
+                        <Label Grid.Row="2" Grid.Column="0"
+                               Text="Địa chỉ:" 
+                               FontAttributes="Bold"
+                               FontSize="20" 
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"
+                               HorizontalOptions="Start"/>
+                        <Label Grid.Row="2" Grid.Column="1"
+                               Text="{Binding DiaChi}" 
+                               FontSize="20" 
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"
+                               HorizontalOptions="Start"/>
+                    </Grid>
+
+                    <!-- Nút Xem chi tiết -->
+                    <Button Text="Xem chi tiết"
+                            Command="{Binding XemChiTietChuXeCommand}"
+                            BackgroundColor="#3B82F6"
                             TextColor="White"
-                            IsVisible="{Binding ChuXeNotExist}"
-                            CornerRadius="10"
-                            HeightRequest="40"/>
+                            HeightRequest="40"
+                            FontFamily="OpenSans-SemiBold"
+                            CornerRadius="{StaticResource ButtonCornerRadiusHandler}"
+                            HorizontalOptions="Start">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#2563EB" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
+                </VerticalStackLayout>
+            </Frame>
 
-                    <Label Text="Ảnh xe" FontAttributes="Bold" FontSize="16" />
+            <!-- Thông tin chủ xe mới -->
+            <Frame IsVisible="{Binding ChuXeNotExist}"
+                   HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="Thêm thông tin chủ xe mới"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"/>
+
+                    <Label Text="Họ và tên" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                    <Entry Placeholder="Nhập họ và tên"
+                           Text="{Binding HoVaTen}"
+                           TextColor="{DynamicResource TextColor}"
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                           HeightRequest="50"/>
+
+                    <Label Text="Tuổi" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                    <Entry Placeholder="Nhập tuổi"
+                           Text="{Binding Tuoi}"
+                           TextColor="{DynamicResource TextColor}"
+                           Keyboard="Numeric"
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                           HeightRequest="50"/>
+
+                    <Label Text="Địa chỉ" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                    <Entry Placeholder="Nhập địa chỉ"
+                           Text="{Binding DiaChi}"
+                           TextColor="{DynamicResource TextColor}"
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                           HeightRequest="50"/>
+
+                    <Label Text="Email" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                    <Entry Placeholder="Nhập email"
+                           Text="{Binding Email}"
+                           TextColor="{DynamicResource TextColor}"
+                           Keyboard="Email"
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                           HeightRequest="50"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Ảnh xe -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <VerticalStackLayout Spacing="16">
+                    <Label Text="Ảnh xe" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
                     <Image x:Name="imgXe"
                            HeightRequest="150"
                            Aspect="AspectFill"
-                           BackgroundColor="#E5E7EB" />
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"/>
                     <Button Text="Chọn ảnh từ thiết bị"
                             x:Name="btnChonAnh"
                             BackgroundColor="#6B7280"
                             TextColor="White"
-                            CornerRadius="10"
-                            HeightRequest="45" />
+                            HeightRequest="48"
+                            FontFamily="OpenSans-SemiBold"
+                            CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#6B7280" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#4B5563" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
                 </VerticalStackLayout>
             </Frame>
 
-            <Button Text="Lưu Xe Mới"
-                    BackgroundColor="#2563EB"
-                    TextColor="White"
-                    CornerRadius="12"
-                    HeightRequest="50"
-                    Command="{Binding SaveButtonClickCommand}"
-                    FontAttributes="Bold"/>
+            <!-- Nút hành động -->
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
+                <Button Text="Lưu Xe Mới"
+                        Command="{Binding SaveButtonClickCommand}"
+                        BackgroundColor="#2563EB"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold"
+                        CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#2563EB" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#1D4ED8" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
 
-            <Button Text="Quay lại"
-                    BackgroundColor="Gray"
-                    TextColor="Black"
-                    CornerRadius="12"
-                    HeightRequest="50"
-                    FontAttributes="Bold"
-                    Command="{Binding BackCommand}"/>
+                <Button Text="Quay lại"
+                        Command="{Binding BackCommand}"
+                        BackgroundColor="#6B7280"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold"
+                        CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#6B7280" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#4B5563" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+            </HorizontalStackLayout>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
