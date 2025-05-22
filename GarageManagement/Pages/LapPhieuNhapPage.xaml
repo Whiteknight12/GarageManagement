@@ -54,7 +54,7 @@
                                CornerRadius="{StaticResource CornerRadiusHandler}">
                             <VerticalStackLayout Spacing="10">
                                 <!-- Hàng ngang cho 3 trường thông tin -->
-                                <Grid Padding="3" 
+                                <Grid Padding="10" 
                                       ColumnSpacing="10" 
                                       RowSpacing="2">
                                     <Grid.RowDefinitions>
@@ -121,6 +121,7 @@
                                     <Entry Grid.Row="1" Grid.Column="2"
                                            x:Name="DonGiaEntry"
                                            Keyboard="Numeric" 
+                                           Placeholder="Nhập đơn giá"
                                            Text="{Binding DonGia, Mode=TwoWay}" 
                                            PlaceholderColor="{DynamicResource PlaceholderColor}"
                                            BackgroundColor="{DynamicResource InputBackgroundColor}" 

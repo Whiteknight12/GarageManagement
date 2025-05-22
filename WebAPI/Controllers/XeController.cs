@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
             return NotFound();
         }
 
-        [HttpGet("GetListByPhoneNumber/{phoneNumber}")]
+        [HttpGet("PhoneNumber/{sdt}")]
         public async Task<ActionResult<IEnumerable<Xe>>> GetListByPhoneNumber(string sdt)
         {
             var kh = _applicationDbContext.khachHangs.FirstOrDefault(kh => kh.SoDienThoai == sdt);

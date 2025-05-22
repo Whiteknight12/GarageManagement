@@ -2,21 +2,14 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using GarageManagement.Pages;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
 {
-    public partial class ThuTienPageViewModel: BaseViewModel
+    public partial class ThuTienPageViewModel : BaseViewModel
     {
         [ObservableProperty]
-        private ObservableCollection<KhachHang> listChuXe=new ObservableCollection<KhachHang>();
+        private ObservableCollection<KhachHang> listChuXe = new ObservableCollection<KhachHang>();
         [ObservableProperty]
         private Xe selectedBienSo;
         [ObservableProperty]
@@ -31,93 +24,151 @@ namespace GarageManagement.ViewModels
         private DateTime ngayThuTien;
         [ObservableProperty]
         private string soTienThu;
+        [ObservableProperty]
+        private string ten;
+        [ObservableProperty]
+        public string tenHieuXe; 
+
+        // Thuộc tính mới cho chức năng lọc
+        [ObservableProperty]
+        private ObservableCollection<string> filterFields = new ObservableCollection<string> { "Tên", "Số điện thoại", "Email" };
+        [ObservableProperty]
+        private string selectedFilterField;
+        [ObservableProperty]
+        private string filterValue;
+        [ObservableProperty]
+        private bool isCustomerFound;
 
         private string role = "Customer";
         private string STORAGE_KEY = "user-account-status";
         private readonly APIClientService<KhachHang> _userservice;
         private readonly APIClientService<PhieuThuTien> _phieuthuservice;
         private readonly APIClientService<Xe> _carservice;
+
         public ThuTienPageViewModel(APIClientService<KhachHang> userservice,
             APIClientService<PhieuThuTien> phieuthuservice,
             APIClientService<Xe> carservice)
         {
             _userservice = userservice;
             _carservice = carservice;
-            _ = LoadAsync();
             _phieuthuservice = phieuthuservice;
-            ngayThuTien=DateTime.Now;
+            ngayThuTien = DateTime.Now;
+            SelectedFilterField = "Tên"; // Giá trị mặc định
+            _ = LoadAsync();
         }
+
         public async Task LoadAsync()
         {
-            var list = await _userservice.GetListOnSpecialRequirement($"GetListThroughRole/{role}");
-            if (list is not null)
+            var list = await _userservice.GetAll();
+            ListChuXe = new ObservableCollection<KhachHang>(list); 
+        }
+
+        [RelayCommand]
+        private async Task Filter()
+        {
+            if (string.IsNullOrEmpty(FilterValue))
             {
-                listChuXe.Clear();
-                foreach (var item in list) listChuXe.Add(item);
+                await Shell.Current.DisplayAlert("Error", "Vui lòng nhập giá trị để lọc", "OK");
+                return;
+            }
+
+            IsCustomerFound = false;
+            SelectedChuXe = null;
+            ListBienSo.Clear();
+
+            var filtered = ListChuXe.FirstOrDefault(kh =>
+            {
+                return SelectedFilterField switch
+                {
+                    "Tên" => kh.HoVaTen?.ToLower().TrimStart().TrimEnd().Contains(FilterValue.ToLower().TrimStart().TrimEnd()) ?? false,
+                    "Số điện thoại" => kh.SoDienThoai?.ToLower().TrimStart().TrimEnd().Contains(FilterValue.ToLower().TrimStart().TrimEnd()) ?? false,
+                    "Email" => kh.Email?.ToLower().TrimStart().TrimEnd().Contains(FilterValue.ToLower().TrimStart().TrimEnd()) ?? false,
+                    _ => false
+                };
+            });
+            
+            if (filtered != null)
+            {
+                SelectedChuXe = filtered;
+                DienThoai = filtered.SoDienThoai;
+                Email = filtered.Email;
+                var xeListBySDT = await _carservice.GetListOnSpecialRequirement($"PhoneNumber/{filtered.SoDienThoai}");
+                if (xeListBySDT != null)
+                {
+                    ListBienSo.Clear();
+                    ListBienSo = new ObservableCollection<Xe>(xeListBySDT);
+                }
+                IsCustomerFound = true;
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Không tìm thấy khách hàng", "OK");
             }
         }
+
         [RelayCommand]
         private async Task GoBack()
         {
-            var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
-            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
-            var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
-            if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
+            //var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
+            //if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
+            //var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
+            //if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
+
         [RelayCommand]
         private async Task XacNhan()
         {
-            if (string.IsNullOrEmpty(email))
+            if (string.IsNullOrEmpty(Email))
             {
-                await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong email", "OK");
+                await Shell.Current.DisplayAlert("Error", "Không được bỏ trống email", "OK");
                 return;
             }
-            if (selectedChuXe is null)
+            if (SelectedChuXe is null)
             {
-                await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong ten khach hang", "OK");
+                await Shell.Current.DisplayAlert("Error", "Không được bỏ trống tên khách hàng", "OK");
                 return;
             }
-            if (selectedBienSo is null)
+            if (SelectedBienSo is null)
             {
-                await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong bien so xe", "OK");
+                await Shell.Current.DisplayAlert("Error", "Không được bỏ trống biển số xe", "OK");
                 return;
             }
-            if (string.IsNullOrEmpty(dienThoai))
+            if (string.IsNullOrEmpty(DienThoai))
             {
-                await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong so dien thoai", "OK");
+                await Shell.Current.DisplayAlert("Error", "Không được bỏ trống số điện thoại", "OK");
                 return;
             }
-            if (ngayThuTien.Date<DateTime.Now.Date)
+            if (NgayThuTien.Date < DateTime.Now.Date)
             {
-                await Shell.Current.DisplayAlert("Error", "Ngay thu tien khong duoc nho hon ngay hien tai", "OK");
+                await Shell.Current.DisplayAlert("Error", "Ngày thu tiền không được nhỏ hơn ngày hiện tại", "OK");
                 return;
             }
-            if (string.IsNullOrEmpty(soTienThu))
+            if (string.IsNullOrEmpty(SoTienThu))
             {
-                await Shell.Current.DisplayAlert("Error", "Khong duoc bo trong so tien thu", "OK");
+                await Shell.Current.DisplayAlert("Error", "Không được bỏ trống số tiền thu", "OK");
                 return;
             }
             else
             {
-                if (!soTienThu.All(char.IsDigit))
+                if (!SoTienThu.All(char.IsDigit))
                 {
-                    await Shell.Current.DisplayAlert("Error", "So tien thu chi duoc chua so", "OK");
+                    await Shell.Current.DisplayAlert("Error", "Số tiền thu chỉ được chứa số", "OK");
                     return;
                 }
-                if (double.Parse(soTienThu)<=0)
+                if (double.Parse(SoTienThu) <= 0)
                 {
-                    await Shell.Current.DisplayAlert("Error", "So tien thu phai lon hon 0", "OK");
+                    await Shell.Current.DisplayAlert("Error", "Số tiền thu phải lớn hơn 0", "OK");
                     return;
                 }
             }
-            if (double.Parse(soTienThu)>selectedBienSo.TienNo)
+            if (double.Parse(SoTienThu) > SelectedBienSo.TienNo)
             {
-                await Shell.Current.DisplayAlert("Error", "Khong duoc thu nhieu tien hon so tien no cua chu xe", "OK");
+                await Shell.Current.DisplayAlert("Error", "Không được thu nhiều tiền hơn số tiền nợ của chủ xe", "OK");
                 return;
             }
-            if (string.IsNullOrEmpty(selectedChuXe.Email) || selectedChuXe.Email != email)
+            if (string.IsNullOrEmpty(SelectedChuXe.Email) || SelectedChuXe.Email != Email)
             {
-                selectedChuXe.Email= email;
+                SelectedChuXe.Email = Email;
                 await _userservice.Update(SelectedChuXe);
             }
             //await _phieuthuservice.Create(new PhieuThuTien
@@ -125,18 +176,19 @@ namespace GarageManagement.ViewModels
             //    Email = email,
             //    NgayThuTien = ngayThuTien,
             //    SoTienThu = double.Parse(soTienThu),
-            //    XeId=selectedBienSo.Id,
-            //    KhachHangId=selectedChuXe.Id
+            //    XeId = selectedBienSo.Id,
+            //    KhachHangId = selectedChuXe.Id
             //});
-            selectedChuXe.TienNo -= double.Parse(soTienThu);
-            selectedBienSo.TienNo-= double.Parse(soTienThu);
-            if (selectedBienSo.TienNo == 0) selectedBienSo.KhaDung = false;
-            await _carservice.Update(selectedBienSo);
-            await _userservice.Update(selectedChuXe);
-            var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
-            if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
-            var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
-            if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
+            SelectedChuXe.TienNo -= double.Parse(SoTienThu);
+            SelectedBienSo.TienNo -= double.Parse(SoTienThu);
+            if (SelectedBienSo.TienNo == 0) SelectedBienSo.KhaDung = false;
+            await _carservice.Update(SelectedBienSo);
+            await _userservice.Update(SelectedChuXe);
+
+            //var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
+            //if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
+            //var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
+            //if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
     }
 }
