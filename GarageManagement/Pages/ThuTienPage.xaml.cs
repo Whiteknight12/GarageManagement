@@ -50,6 +50,7 @@ public partial class ThuTienPage : ContentView
 				if(hieuXe.Id == _viewmodel.SelectedBienSo.HieuXeId)
 				{
                     _viewmodel.TenHieuXe = hieuXe.TenHieuXe;
+					_viewmodel.TienNoXeSelected = _viewmodel.SelectedBienSo.TienNo.ToString(); 
 					break;
                 }
 			}

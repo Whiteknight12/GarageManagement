@@ -51,7 +51,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                           Text="Lọc khách hàng theo: Tên/Email/Số điện thoại"
+                           Text="Lọc khách hàng theo: CCCD/Tên/Email/Số điện thoại"
                            FontSize="16"
                            FontAttributes="Bold"
                            FontFamily="OpenSans-Regular"
@@ -109,80 +109,75 @@
                     </Button>
                 </Grid>
             </Frame>
+
             <!-- Form nhập thông tin phiếu thu tiền -->
             <Frame HasShadow="True"
-                BackgroundColor="{DynamicResource CardBackgroundColor}"
-                Padding="20"
-                CornerRadius="{StaticResource CornerRadiusHandler}">
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
                 <Grid RowSpacing="10" ColumnSpacing="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <!-- Hàng cho nhãn -->
                         <RowDefinition Height="Auto" />
-                        <!-- Hàng cho các trường nhập liệu -->
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
-                        <!-- Biển số xe -->
                         <ColumnDefinition Width="1*" />
-                        <!-- Ngày thu tiền -->
                         <ColumnDefinition Width="1*" />
-                        <!-- Số tiền thu -->
                     </Grid.ColumnDefinitions>
 
-                    <!-- Nhãn cho từng trường -->
                     <Label Grid.Row="0" Grid.Column="0"
-        Text="Chọn biển Số Xe:"
-        FontSize="16"
-        FontAttributes="Bold"
-        FontFamily="OpenSans-Regular"
-        TextColor="{DynamicResource TextColor}"/>
+                           Text="Chọn biển Số Xe:"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
                     <Label Grid.Row="0" Grid.Column="1"
-        Text="Ngày Thu Tiền:"
-        FontSize="16"
-        FontAttributes="Bold"
-        FontFamily="OpenSans-Regular"
-        TextColor="{DynamicResource TextColor}"/>
+                           Text="Ngày Thu Tiền:"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
                     <Label Grid.Row="0" Grid.Column="2"
-        Text="Số Tiền Thu:"
-        FontSize="16"
-        FontAttributes="Bold"
-        FontFamily="OpenSans-Regular"
-        TextColor="{DynamicResource TextColor}"/>
+                           Text="Số Tiền Thu:"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
 
-                    <!-- Các trường nhập liệu -->
                     <Picker Grid.Row="1" Grid.Column="0"
-         ItemsSource="{Binding ListBienSo}"
-         SelectedItem="{Binding SelectedBienSo}"
-         ItemDisplayBinding="{Binding BienSo}"
-         TitleColor="{DynamicResource PlaceholderColor}"
-         FontSize="16"
-         FontFamily="OpenSans-Regular"
-         TextColor="{DynamicResource TextColor}"
-         HeightRequest="45"
+                            ItemsSource="{Binding ListBienSo}"
+                            SelectedItem="{Binding SelectedBienSo}"
+                            ItemDisplayBinding="{Binding BienSo}"
+                            TitleColor="{DynamicResource PlaceholderColor}"
+                            FontSize="16"
+                            FontFamily="OpenSans-Regular"
+                            TextColor="{DynamicResource TextColor}"
+                            HeightRequest="45"
                             SelectedIndexChanged="OnSelectedBienSoIndexChanged"
-         Margin="0,5,0,0"/>
+                            Margin="0,5,0,0"/>
 
                     <DatePicker Grid.Row="1" Grid.Column="1"
-             Date="{Binding NgayThuTien}"
-             FontSize="16"
-             FontFamily="OpenSans-Regular"
-             TextColor="{DynamicResource TextColor}"
-             HeightRequest="48"
-             Margin="0,5,0,0"/>
+                                Date="{Binding NgayThuTien}"
+                                FontSize="16"
+                                FontFamily="OpenSans-Regular"
+                                TextColor="{DynamicResource TextColor}"
+                                HeightRequest="48"
+                                Margin="0,5,0,0"/>
 
                     <Entry Grid.Row="1" Grid.Column="2"
-        Text="{Binding SoTienThu}"
-        Placeholder="Nhập số tiền"
-        PlaceholderColor="{DynamicResource PlaceholderColor}"
-        Keyboard="Numeric"
-        FontSize="16"
-        FontFamily="OpenSans-Regular"
-        TextColor="{DynamicResource TextColor}"
-        HeightRequest="48"
-        Margin="0,5,0,0"/>
+                           Text="{Binding SoTienThu}"
+                           Placeholder="Nhập số tiền"
+                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                           Keyboard="Numeric"
+                           FontSize="16"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"
+                           HeightRequest="48"
+                           Margin="0,5,0,0"/>
                 </Grid>
             </Frame>
+
             <!-- Hiển thị thông tin khách hàng và thông tin xe -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
@@ -191,18 +186,13 @@
                 <Grid RowSpacing="20" ColumnSpacing="30">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <!-- Tiêu đề -->
                         <RowDefinition Height="Auto" />
-                        <!-- Thông tin khách hàng và xe -->
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
-                        <!-- Thông tin khách hàng -->
                         <ColumnDefinition Width="1*" />
-                        <!-- Thông tin xe -->
                     </Grid.ColumnDefinitions>
 
-                    <!-- Tiêu đề "Phiếu thu tiền" -->
                     <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
                            Text="Phiếu thu tiền"
                            FontSize="30"
@@ -248,6 +238,28 @@
                                FontFamily="OpenSans-Regular"
                                TextColor="{DynamicResource TextColor}"/>
                         <Label Text="{Binding SelectedChuXe.Email, StringFormat='{}{0}'}"
+                               FontSize="16"
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"
+                               HorizontalOptions="Fill"/>
+
+                        <Label Text="CCCD:"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"/>
+                        <Label Text="{Binding SelectedChuXe.CCCD, StringFormat='{}{0}'}"
+                               FontSize="16"
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"
+                               HorizontalOptions="Fill"/>
+
+                        <Label Text="Giới tính:"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"/>
+                        <Label Text="{Binding SelectedChuXe.GioiTinh, StringFormat='{}{0}'}"
                                FontSize="16"
                                FontFamily="OpenSans-Regular"
                                TextColor="{DynamicResource TextColor}"
@@ -301,7 +313,7 @@
                                FontAttributes="Bold"
                                FontFamily="OpenSans-Regular"
                                TextColor="{DynamicResource TextColor}"/>
-                        <Label Text="{Binding SelectedBienSo.TienNo, StringFormat='{}{0} VNĐ'}"
+                        <Label Text="{Binding TienNoXeSelected, StringFormat='{}{0} VNĐ'}"
                                FontSize="16"
                                FontFamily="OpenSans-Regular"
                                TextColor="{DynamicResource TextColor}"
@@ -309,8 +321,6 @@
                     </VerticalStackLayout>
                 </Grid>
             </Frame>
-
-            
 
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"

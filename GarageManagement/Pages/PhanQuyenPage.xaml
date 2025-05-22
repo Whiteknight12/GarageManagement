@@ -43,24 +43,54 @@
         <Frame HasShadow="True"
                BackgroundColor="{DynamicResource CardBackgroundColor}"
                Padding="20"
-               CornerRadius="{StaticResource CornerRadiusHandler}">
-            <VerticalStackLayout Spacing="12">
-                <Label Text="Chọn Vai Trò" 
-                       FontSize="16" 
-                       FontAttributes="Bold" 
-                       FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}"/>
-                <Picker Title="Chọn Vai Trò"
-                        SelectedItem="{Binding Id, Mode=TwoWay, Converter={StaticResource IDConverter}}"
-                        BackgroundColor="{DynamicResource InputBackgroundColor}"
-                        TextColor="{DynamicResource TextColor}"
-                        TitleColor="{DynamicResource PlaceholderColor}"
-                        HeightRequest="60"
-                        ItemDisplayBinding="{Binding TenNhom}"
-                        SelectedIndexChanged="OnVaiTroPicked"
-                        ItemsSource="{Binding RoleList}">
-                </Picker>
-            </VerticalStackLayout>
+               CornerRadius="{StaticResource CornerRadiusHandler}"
+               WidthRequest="400"
+               HorizontalOptions="Start">
+            <HorizontalStackLayout Spacing="30">
+                <HorizontalStackLayout Spacing="30">
+                    <Label Text="Chọn Vai Trò" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           VerticalOptions="Center"/>
+                    <Picker SelectedItem="{Binding Id, Mode=TwoWay, Converter={StaticResource IDConverter}}"
+                            BackgroundColor="{DynamicResource InputBackgroundColor}"
+                            TextColor="{DynamicResource TextColor}"
+                            TitleColor="{DynamicResource PlaceholderColor}"
+                            HeightRequest="40"
+                            ItemDisplayBinding="{Binding TenNhom}"
+                            SelectedIndexChanged="OnVaiTroPicked"
+                            ItemsSource="{Binding RoleList}"
+                            WidthRequest="100">
+                    </Picker>
+                </HorizontalStackLayout>
+                <Button Text="Lưu Quyền"
+                        Command="{Binding SavePermissionsCommand}"
+                        BackgroundColor="#10B981"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold"
+                        CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#10B981" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#059669" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+            </HorizontalStackLayout>
         </Frame>
 
         <!-- Bố cục ngang: Quản lý, Tạo lập, Quản trị -->
@@ -573,37 +603,6 @@
         </Grid>
 
         <!-- Nút lưu -->
-        <Frame HasShadow="True"
-               BackgroundColor="{DynamicResource CardBackgroundColor}"
-               Padding="20"
-               CornerRadius="{StaticResource CornerRadiusHandler}">
-            <HorizontalStackLayout HorizontalOptions="Center">
-                <Button Text="Lưu Quyền"
-                        Command="{Binding SavePermissionsCommand}"
-                        BackgroundColor="#10B981"
-                        TextColor="White"
-                        HeightRequest="48"
-                        FontAttributes="Bold"
-                        FontFamily="OpenSans-SemiBold"
-                        CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#10B981" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#059669" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                </Button>
-            </HorizontalStackLayout>
-        </Frame>
+        
     </VerticalStackLayout>
 </ContentView>

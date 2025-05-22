@@ -28,11 +28,17 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private string ten;
         [ObservableProperty]
-        public string tenHieuXe; 
+        public string tenHieuXe;
+        [ObservableProperty]
+        private string tienNoXeSelected;
+        [ObservableProperty]
+        private string cCCD;
+        [ObservableProperty]
+        private string gioiTinh;
 
         // Thuộc tính mới cho chức năng lọc
         [ObservableProperty]
-        private ObservableCollection<string> filterFields = new ObservableCollection<string> { "Tên", "Số điện thoại", "Email" };
+        private ObservableCollection<string> filterFields = new ObservableCollection<string> { "CCCD", "Tên", "Số điện thoại", "Email" };
         [ObservableProperty]
         private string selectedFilterField;
         [ObservableProperty]
@@ -56,7 +62,7 @@ namespace GarageManagement.ViewModels
             _carservice = carservice;
             _phieuthuservice = phieuthuservice;
             ngayThuTien = DateTime.Now;
-            SelectedFilterField = "Tên"; // Giá trị mặc định
+            SelectedFilterField = "CCCD"; // Giá trị mặc định
             _ = LoadAsync();
         }
 
@@ -84,6 +90,7 @@ namespace GarageManagement.ViewModels
             {
                 return SelectedFilterField switch
                 {
+                    "CCCD" => kh.CCCD?.ToLower().TrimStart().TrimEnd().Contains(FilterValue.ToLower().TrimStart().TrimEnd()) ?? false,
                     "Tên" => kh.HoVaTen?.ToLower().TrimStart().TrimEnd().Contains(FilterValue.ToLower().TrimStart().TrimEnd()) ?? false,
                     "Số điện thoại" => kh.SoDienThoai?.ToLower().TrimStart().TrimEnd().Contains(FilterValue.ToLower().TrimStart().TrimEnd()) ?? false,
                     "Email" => kh.Email?.ToLower().TrimStart().TrimEnd().Contains(FilterValue.ToLower().TrimStart().TrimEnd()) ?? false,
@@ -96,6 +103,8 @@ namespace GarageManagement.ViewModels
                 SelectedChuXe = filtered;
                 DienThoai = filtered.SoDienThoai;
                 Email = filtered.Email;
+                CCCD = filtered.CCCD; 
+                GioiTinh = filtered.GioiTinh;
                 var xeListBySDT = await _carservice.GetListOnSpecialRequirement($"PhoneNumber/{filtered.SoDienThoai}");
                 if (xeListBySDT != null)
                 {
@@ -181,24 +190,27 @@ namespace GarageManagement.ViewModels
                 SelectedChuXe.Email = Email;
                 await _userservice.Update(SelectedChuXe);
             }
-            //await _phieuthuservice.Create(new PhieuThuTien
-            //{
-            //    Email = email,
-            //    NgayThuTien = ngayThuTien,
-            //    SoTienThu = double.Parse(soTienThu),
-            //    XeId = selectedBienSo.Id,
-            //    KhachHangId = selectedChuXe.Id
-            //});
+            await _phieuthuservice.Create(new PhieuThuTien
+            {
+                Id = Guid.NewGuid(),
+                NgayThuTien = ngayThuTien,
+                SoTienThu = double.Parse(soTienThu),
+                XeId = selectedBienSo.Id,
+                KhachHangId = selectedChuXe.Id
+            });
             SelectedChuXe.TienNo -= double.Parse(SoTienThu);
             SelectedBienSo.TienNo -= double.Parse(SoTienThu);
             if (SelectedBienSo.TienNo == 0) SelectedBienSo.KhaDung = false;
             await _carservice.Update(SelectedBienSo);
             await _userservice.Update(SelectedChuXe);
-
+            TienNoXeSelected = SelectedBienSo.TienNo.ToString();
+            SoTienThu = string.Empty; 
             //var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
             //if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
             //var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
             //if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
+            var toast = Toast.Make("Thông tin phiếu thu đã được hệ thống lưu trữ.", CommunityToolkit.Maui.Core.ToastDuration.Short);
+            await toast.Show();
         }
     }
 }
