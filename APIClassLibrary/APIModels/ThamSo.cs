@@ -10,6 +10,7 @@ namespace APIClassLibrary.APIModels
     {
         public Guid Id { get; set; }
         public string TenThamSo { get; set; }
-        public int GiaTri { get; set; }
+        public double GiaTri { get; set; }
+        public string MoTa { get; set; }
     }
 }

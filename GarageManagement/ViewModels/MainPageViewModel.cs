@@ -44,6 +44,9 @@ namespace GarageManagement.ViewModels
         private bool phanQuyenActive = false;
 
         [ObservableProperty]
+        private bool thayDoiThamSoActive = false;
+
+        [ObservableProperty]
         private bool isCollapsed;
 
         [ObservableProperty]
@@ -71,7 +74,7 @@ namespace GarageManagement.ViewModels
         private readonly NhanSuMainPageViewModel _viewModel;
         private readonly APIClientService<NhanVien> _nhanVienService;
         private readonly PhanQuyenPage _phanQuyenPage;
-
+        private readonly QuanLyThamSoPage _quanLyThamSoPage;
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
             LapPhieuNhapPage taoPhieuNhap,
@@ -84,7 +87,8 @@ namespace GarageManagement.ViewModels
             AuthenticationService authenticationService,
             NhanSuMainPageViewModel viewModel,
             APIClientService<NhanVien> nhanVienService,
-            PhanQuyenPage phanQuyenPage)
+            PhanQuyenPage phanQuyenPage,
+            QuanLyThamSoPage quanLyThamSoPage)
         {
             _viewModel = viewModel;
             currentPageContent = new NhanSuMainPage(_viewModel);
@@ -103,6 +107,7 @@ namespace GarageManagement.ViewModels
             QuanTriExpanded = false;
             _authenticationServices = authenticationService;
             _phanQuyenPage = phanQuyenPage;
+            _quanLyThamSoPage = quanLyThamSoPage;
             _ = LoadUserAsync();
         }
 
@@ -119,6 +124,7 @@ namespace GarageManagement.ViewModels
             BaoCaoDoanhSoActive = parameter == "BaoCaoDoanhSo";
             QuanLiDanhSachLoaiVatTuActive = parameter == "QLDanhSachLoaiVatTu";
             PhanQuyenActive = parameter == "PhanQuyen";
+            ThayDoiThamSoActive = parameter == "ThayDoiThamSo";
 
             CurrentPageContent = parameter switch
             {
@@ -132,6 +138,7 @@ namespace GarageManagement.ViewModels
                 "BaoCaoDoanhSo" => _baoCaoDoanhSoPage,
                 "QLDanhSachLoaiVatTu" => _quanLiDanhSachLoaiVatTuPage,
                 "PhanQuyen" => _phanQuyenPage,
+                "ThayDoiThamSo" => _quanLyThamSoPage,
                 _ => new NhanSuMainPage(_viewModel)
             };
         }
