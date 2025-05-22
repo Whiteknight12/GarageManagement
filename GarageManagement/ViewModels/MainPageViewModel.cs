@@ -62,6 +62,12 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private bool quanTriExpanded;
 
+        [ObservableProperty]
+        private bool isRightPaneVisible = false;
+
+        [ObservableProperty]
+        private ContentView rightPaneContent;
+
         private readonly TiepNhanXePage _tiepNhanXe;
         private readonly TaoPhieuSuaChuaPage _taoPhieuSuaChua;
         private readonly LapPhieuNhapPage _taoPhieuNhap;
@@ -194,5 +200,19 @@ namespace GarageManagement.ViewModels
                 HelloText = "Không có thông tin account";
             }
         }
+
+        public void ShowRightPane(ContentView contentView)
+        {
+            RightPaneContent = contentView;
+            IsRightPaneVisible = true;
+        }
+
+        [RelayCommand]
+        public void CloseRightPane()
+        {
+            IsRightPaneVisible = false;
+            RightPaneContent = null;
+        }
+
     }
 }
