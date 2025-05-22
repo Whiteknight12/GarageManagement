@@ -395,8 +395,8 @@
 
         <ContentView Grid.Column="3"
              x:Name="RightPane"
+             MaximumWidthRequest="500"
              BackgroundColor="{DynamicResource BackgroundColor}"
-             WidthRequest="300"
              IsVisible="{Binding IsRightPaneVisible}"
              Padding="10">
 

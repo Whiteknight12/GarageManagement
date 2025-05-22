@@ -6,7 +6,8 @@ namespace WebAPI.Models
     public class KhachHang
     {
         [Key]
-        public Guid Id { get; set; } = Guid.NewGuid(); 
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string CCCD { get; set; } = string.Empty;
         public string HoVaTen { get; set; }
         public int? Tuoi { get; set; }
         public string DiaChi { get; set; }
@@ -14,5 +15,6 @@ namespace WebAPI.Models
         public Guid? TaiKhoanId { get; set; }
         public double TienNo { get; set; }
         public string? Email { get; set; }
+        public string GioiTinh { get; set; } = string.Empty;
     }
 }

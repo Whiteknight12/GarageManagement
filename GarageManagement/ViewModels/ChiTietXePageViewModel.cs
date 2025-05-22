@@ -1,5 +1,6 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -47,6 +48,29 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private HieuXe selectedHieuXe;
 
+        [ObservableProperty]
+        private ObservableCollection<string> listTrangThaiXe;
+
+        [ObservableProperty]
+        private string selectedTrangThaiXe;
+
+        [ObservableProperty]
+        private ObservableCollection<KhachHang> listKhachHang;
+
+        [ObservableProperty]
+        private ObservableCollection<string> filterFields = new ObservableCollection<string> { "Tên", "Số điện thoại", "Email" };
+
+        [ObservableProperty]
+        private string selectedFilterField;
+
+        [ObservableProperty]
+        private string filterValue;
+
+        [ObservableProperty]
+        private bool isCustomerFound;
+
+        public Guid selectedKhachHangId;
+
         private readonly APIClientService<Xe> _carservice;
         private readonly APIClientService<HieuXe> _hieuxeservice;
         private readonly APIClientService<KhachHang> _khachHangService;
@@ -66,6 +90,9 @@ namespace GarageManagement.ViewModels
             var khachHang = await _khachHangService.GetByID(obj.KhachHangId);
             Name = obj.Ten;
             Model = hieuXe.TenHieuXe ?? "";
+            var list = await _hieuxeservice.GetAll();
+            ListHieuXe = new ObservableCollection<HieuXe>(list);
+            if (hieuXe is not null) SelectedHieuXe = ListHieuXe?.FirstOrDefault(x => x.Id == obj.HieuXeId);
             BienSo = obj.BienSo;
             TenChuXe = khachHang.HoVaTen;
             DienThoai = khachHang.SoDienThoai;
@@ -73,29 +100,58 @@ namespace GarageManagement.ViewModels
             bool tmp = obj.KhaDung ?? false;
             if (tmp) TinhTrang = "Đang tiếp nhận trong Gara";
             else TinhTrang = "Không có trong Gara";
-            TienNoCuaChuXe = obj.TienNo ?? 0;
-            var list = await _hieuxeservice.GetAll();
-            if (ListHieuXe.Any()) ListHieuXe.Clear();
-            ListHieuXe = new ObservableCollection<HieuXe>(list);
+            var listXe=await _carservice.GetListOnSpecialRequirement($"PhoneNumber/{khachHang.SoDienThoai}");
+            if (listXe is not null) TienNoCuaChuXe = listXe.Sum(u => u.TienNo ?? 0);
+            ListTrangThaiXe = new ObservableCollection<string>()
+            {
+                "Đang tiếp nhận trong Gara",
+                "Không có trong Gara"
+            };
+            if (obj.KhaDung ?? false) SelectedTrangThaiXe = "Đang tiếp nhận trong Gara";
+            else SelectedTrangThaiXe = "Không có trong Gara";
+            var listKhachHang = await _khachHangService.GetAll();
+            ListKhachHang = new ObservableCollection<KhachHang>(listKhachHang);
+            if (khachHang is not null) selectedKhachHangId = ListKhachHang?.FirstOrDefault(x => x.Id == obj.KhachHangId).Id ?? Guid.Empty;
         }
 
         [RelayCommand]
         public void ToggleEditMode()
         {
             IsReadOnly = false;
-            isUpdating = true;
+            IsUpdating = true;
         }
 
         [RelayCommand]
         public async Task UpdateCar()
         {
+            if (selectedKhachHangId == Guid.Empty)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Vui lòng chọn khách hàng", "OK");
+                return;
+            }
+            if (string.IsNullOrEmpty(BienSo))
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Vui lòng nhập biển số xe", "OK");
+                return;
+            }
+            if (string.IsNullOrEmpty(Name))
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Vui lòng nhập tên xe", "OK");
+                return;
+            }
             var car = await _carservice.GetByID(CarId);
             if (car is not null)
             {
                 car.Ten = Name;
                 car.BienSo = BienSo;
                 car.HieuXeId = selectedHieuXe.Id;
-
+                car.KhaDung= SelectedTrangThaiXe.Equals("Đang tiếp nhận trong Gara") ? true : false;
+                car.KhachHangId = selectedKhachHangId;
+                car.HieuXeId = SelectedHieuXe.Id;
+                await _carservice.Update(car);
+                var toast = Toast.Make("Đăng nhập thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
+                await LoadAsync();
+                await toast.Show();
             }
         }
 
@@ -104,6 +160,37 @@ namespace GarageManagement.ViewModels
         {
             IsReadOnly = true;
             IsUpdating = false;
+            _ = LoadAsync();
+        }
+
+        [RelayCommand]
+        public void Filter()
+        {
+            if (SelectedFilterField=="Tên")
+            {
+                var list=ListKhachHang.Where(x => x.HoVaTen.ToLower().Contains(FilterValue.ToLower())).ToList();
+                ListKhachHang.Clear();
+                if (list is not null) ListKhachHang=new ObservableCollection<KhachHang>(list);
+            }
+            else if (SelectedFilterField=="Số điện thoại")
+            {
+                var list=ListKhachHang.Where(x => x.SoDienThoai.ToLower().Contains(FilterValue.ToLower())).ToList();
+                ListKhachHang.Clear();
+                ListKhachHang=new ObservableCollection<KhachHang>(list);
+            }
+            else
+            {
+                var list = new List<KhachHang>();
+                foreach (var kh in ListKhachHang)
+                {
+                    if (kh.Email is not null && kh.Email.ToLower().Contains(FilterValue.ToLower()))
+                    {
+                        list.Add(kh);
+                    }
+                }
+                ListKhachHang.Clear();
+                ListKhachHang=new ObservableCollection<KhachHang>(list);
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using WebAPI.Data;
 using WebAPI.Models;
 
@@ -34,6 +35,36 @@ namespace WebAPI.Controllers
             if (list is not null) return Ok(list);
             return NotFound();
         }
+
+        [HttpGet("Name/{hovaten}")]
+        public async Task<ActionResult<IEnumerable<Xe>>> GetListByName(string hovaten)
+        {
+            var listkh = _applicationDbContext.khachHangs.Where(u => u.HoVaTen == hovaten);
+            if (!listkh.IsNullOrEmpty())
+            {
+                var result = new List<Xe>();
+                foreach (var kh in listkh)
+                {
+                    var list=await _applicationDbContext.xes.Where(u=>u.KhachHangId==kh.Id).ToListAsync();
+                    if (list is not null) result.AddRange(list);
+                }
+                return Ok(result);
+            }
+            return NotFound();
+        }
+
+        [HttpGet("Email/{email}")]
+        public async Task<ActionResult<IEnumerable<Xe>>> GetListByEmail(string email)
+        {
+            var kh = await _applicationDbContext.khachHangs.FirstOrDefaultAsync(u => u.Email == email);
+            if (kh is not null)
+            {
+                var list = await _applicationDbContext.xes.Where(u => u.KhachHangId == kh.Id).ToListAsync();
+                if (list is not null) return Ok(list);
+            }
+            return NotFound();
+        }
+
         [HttpGet("GetListByHieuXe/{hieuxe}")]
         public async Task<ActionResult<IEnumerable<Xe>>> GetListByHieuXe(string hieuxe)
         {

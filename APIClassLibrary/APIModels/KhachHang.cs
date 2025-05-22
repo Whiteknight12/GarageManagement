@@ -10,6 +10,8 @@ namespace APIClassLibrary.APIModels
     public class KhachHang
     {
         public Guid Id { get; set; } = Guid.NewGuid();
+        public string CCCD { get; set; } = string.Empty;
+        public string GioiTinh { get; set; } = string.Empty;
         public string HoVaTen { get; set; }
         public int? Tuoi { get; set; }
         public string DiaChi { get; set; }
