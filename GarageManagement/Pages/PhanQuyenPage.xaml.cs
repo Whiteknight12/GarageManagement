@@ -5,7 +5,7 @@ using GarageManagement.ViewModels;
 
 public partial class PhanQuyenPage : ContentView
 {
-	private readonly PhanQuyenPageViewModel _viewModel;
+	public readonly PhanQuyenPageViewModel _viewModel;
     public PhanQuyenPage(PhanQuyenPageViewModel viewModel)
 	{
 		InitializeComponent();

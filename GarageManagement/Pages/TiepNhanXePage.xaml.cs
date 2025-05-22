@@ -6,7 +6,7 @@ namespace GarageManagement.Pages;
 
 public partial class TiepNhanXePage : ContentView
 {
-	private readonly TiepNhanXePageViewModel _viewModel;
+	public readonly TiepNhanXePageViewModel _viewModel;
 	
 	public TiepNhanXePage(APIClientService<PhieuTiepNhan> service, APIClientService<ThamSo> ruleService, 
 		APIClientService<Xe> carService,

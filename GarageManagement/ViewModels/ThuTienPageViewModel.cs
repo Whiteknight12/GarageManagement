@@ -1,5 +1,6 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -38,6 +39,8 @@ namespace GarageManagement.ViewModels
         private string filterValue;
         [ObservableProperty]
         private bool isCustomerFound;
+        
+        public bool available { get; set; } = false;
 
         private string role = "Customer";
         private string STORAGE_KEY = "user-account-status";
@@ -66,6 +69,7 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private async Task Filter()
         {
+            available = true;
             if (string.IsNullOrEmpty(FilterValue))
             {
                 await Shell.Current.DisplayAlert("Error", "Vui lòng nhập giá trị để lọc", "OK");
@@ -95,15 +99,21 @@ namespace GarageManagement.ViewModels
                 var xeListBySDT = await _carservice.GetListOnSpecialRequirement($"PhoneNumber/{filtered.SoDienThoai}");
                 if (xeListBySDT != null)
                 {
+                    SelectedBienSo = xeListBySDT[0];
                     ListBienSo.Clear();
+                    available = false; 
                     ListBienSo = new ObservableCollection<Xe>(xeListBySDT);
                 }
                 IsCustomerFound = true;
+                SelectedBienSo = ListBienSo[0];
+                var toast = Toast.Make("Đã lọc thông tin khách hàng và xe liên quan", CommunityToolkit.Maui.Core.ToastDuration.Short);
+                await toast.Show();
             }
             else
             {
                 await Shell.Current.DisplayAlert("Thông báo", "Không tìm thấy khách hàng", "OK");
             }
+            
         }
 
         [RelayCommand]

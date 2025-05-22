@@ -4,9 +4,12 @@ namespace GarageManagement.Pages;
 
 public partial class QuanLyThamSoPage : ContentView
 {
-	public QuanLyThamSoPage(QuanLyThamSoPageViewModel viewModel)
+	public readonly QuanLyThamSoPageViewModel _viewModel; 
+    public QuanLyThamSoPage(QuanLyThamSoPageViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-	}
+        _viewModel = viewModel;
+
+    }
 }

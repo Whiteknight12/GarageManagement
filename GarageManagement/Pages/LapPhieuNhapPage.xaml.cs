@@ -9,7 +9,7 @@ namespace GarageManagement.Pages;
 public partial class LapPhieuNhapPage : ContentView
 {
     private bool _isDarkMode = false;
-    LapPhieuNhapPageViewModel _viewModel;
+    public readonly LapPhieuNhapPageViewModel _viewModel;
     public LapPhieuNhapPage(LapPhieuNhapPageViewModel viewModel)
     {
         InitializeComponent();

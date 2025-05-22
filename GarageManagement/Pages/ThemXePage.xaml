@@ -84,19 +84,82 @@
                            BackgroundColor="{DynamicResource InputBackgroundColor}"
                            HeightRequest="50"/>
 
-                    <!-- Số điện thoại chủ xe -->
-                    <Label Text="Số điện thoại chủ xe" 
-                           FontSize="16" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}"/>
-                    <Entry Placeholder="Nhập số điện thoại"
-                           Text="{Binding SoDienThoai}"
-                           TextColor="{DynamicResource TextColor}"
-                           Keyboard="Telephone"
-                           BackgroundColor="{DynamicResource InputBackgroundColor}"
-                           HeightRequest="50"/>
                 </VerticalStackLayout>
+            </Frame>
+
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <Grid RowSpacing="10" ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                           Text="Chọn khách hàng theo: Tên/Email/Số điện thoại"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"
+                           VerticalOptions="Center"/>
+
+                    <Picker Grid.Row="1" Grid.Column="0"
+                            x:Name="FilterFieldPicker"
+                            TitleColor="{DynamicResource PlaceholderColor}"
+                            ItemsSource="{Binding FilterFields}"
+                            SelectedItem="{Binding SelectedFilterField, Mode=TwoWay}"
+                            ItemDisplayBinding="{Binding .}"
+                            FontSize="16"
+                            FontFamily="OpenSans-Regular"
+                            TextColor="{DynamicResource TextColor}"
+                            HeightRequest="45"
+                            Margin="0,5,0,0"/>
+
+                    <Entry Grid.Row="1" Grid.Column="1"
+                           x:Name="FilterValueEntry"
+                           Placeholder="Nhập giá trị lọc"
+                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                           Text="{Binding FilterValue, Mode=TwoWay}"
+                           FontSize="16"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"
+                           HeightRequest="45"
+                           Margin="0,5,0,0"/>
+
+                    <Button Grid.Row="1" Grid.Column="2"
+                            Text="Lọc"
+                            Command="{Binding FilterCommand}"
+                            BackgroundColor="#3B82F6"
+                            TextColor="White"
+                            HeightRequest="48"
+                            FontAttributes="Bold"
+                            FontFamily="OpenSans-SemiBold"
+                            CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#2563EB" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
+                </Grid>
             </Frame>
 
             <!-- Thông tin chủ xe nếu đã tồn tại -->
@@ -115,54 +178,84 @@
                            HorizontalOptions="Start"/>
 
                     <!-- Thông tin chủ xe dạng bảng -->
-                    <Grid RowDefinitions="Auto,Auto,Auto" 
-                          ColumnDefinitions="Auto,*" 
-                          RowSpacing="8" 
-                          ColumnSpacing="12">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" 
+      ColumnDefinitions="Auto,*" 
+      RowSpacing="8" 
+      ColumnSpacing="12">
                         <!-- Họ và tên -->
                         <Label Grid.Row="0" Grid.Column="0"
-                               Text="Họ và tên:" 
-                               FontAttributes="Bold"
-                               FontSize="20" 
-                               FontFamily="OpenSans-Regular"
-                               TextColor="{DynamicResource TextColor}"
-                               HorizontalOptions="Start"/>
+           Text="Họ và tên:" 
+           FontAttributes="Bold"
+           FontSize="20" 
+           FontFamily="OpenSans-Regular"
+           TextColor="{DynamicResource TextColor}"
+           HorizontalOptions="Start"/>
                         <Label Grid.Row="0" Grid.Column="1"
-                               Text="{Binding HoVaTen}" 
-                               FontSize="20" 
-                               FontFamily="OpenSans-Regular"
-                               TextColor="{DynamicResource TextColor}"
-                               HorizontalOptions="Start"/>
+           Text="{Binding HoVaTen}" 
+           FontSize="20" 
+           FontFamily="OpenSans-Regular"
+           TextColor="{DynamicResource TextColor}"
+           HorizontalOptions="Start"/>
 
                         <!-- Số điện thoại -->
                         <Label Grid.Row="1" Grid.Column="0"
-                               Text="Số điện thoại:" 
-                               FontAttributes="Bold"
-                               FontSize="20"  
-                               FontFamily="OpenSans-Regular"
-                               TextColor="{DynamicResource TextColor}"
-                               HorizontalOptions="Start"/>
+           Text="Số điện thoại:" 
+           FontAttributes="Bold"
+           FontSize="20"  
+           FontFamily="OpenSans-Regular"
+           TextColor="{DynamicResource TextColor}"
+           HorizontalOptions="Start"/>
                         <Label Grid.Row="1" Grid.Column="1"
-                               Text="{Binding SoDienThoai}" 
-                               FontSize="20" 
-                               FontFamily="OpenSans-Regular"
-                               TextColor="{DynamicResource TextColor}"
-                               HorizontalOptions="Start"/>
+           Text="{Binding SoDienThoai}" 
+           FontSize="20" 
+           FontFamily="OpenSans-Regular"
+           TextColor="{DynamicResource TextColor}"
+           HorizontalOptions="Start"/>
 
                         <!-- Địa chỉ -->
                         <Label Grid.Row="2" Grid.Column="0"
-                               Text="Địa chỉ:" 
-                               FontAttributes="Bold"
-                               FontSize="20" 
-                               FontFamily="OpenSans-Regular"
-                               TextColor="{DynamicResource TextColor}"
-                               HorizontalOptions="Start"/>
+           Text="Địa chỉ:" 
+           FontAttributes="Bold"
+           FontSize="20" 
+           FontFamily="OpenSans-Regular"
+           TextColor="{DynamicResource TextColor}"
+           HorizontalOptions="Start"/>
                         <Label Grid.Row="2" Grid.Column="1"
-                               Text="{Binding DiaChi}" 
-                               FontSize="20" 
-                               FontFamily="OpenSans-Regular"
-                               TextColor="{DynamicResource TextColor}"
-                               HorizontalOptions="Start"/>
+           Text="{Binding DiaChi}" 
+           FontSize="20" 
+           FontFamily="OpenSans-Regular"
+           TextColor="{DynamicResource TextColor}"
+           HorizontalOptions="Start"/>
+
+                        <!-- Tuổi -->
+                        <Label Grid.Row="3" Grid.Column="0"
+           Text="Tuổi:" 
+           FontAttributes="Bold"
+           FontSize="20" 
+           FontFamily="OpenSans-Regular"
+           TextColor="{DynamicResource TextColor}"
+           HorizontalOptions="Start"/>
+                        <Label Grid.Row="3" Grid.Column="1"
+           Text="{Binding Tuoi}" 
+           FontSize="20" 
+           FontFamily="OpenSans-Regular"
+           TextColor="{DynamicResource TextColor}"
+           HorizontalOptions="Start"/>
+
+                        <!-- Email -->
+                        <Label Grid.Row="4" Grid.Column="0"
+           Text="Email:" 
+           FontAttributes="Bold"
+           FontSize="20" 
+           FontFamily="OpenSans-Regular"
+           TextColor="{DynamicResource TextColor}"
+           HorizontalOptions="Start"/>
+                        <Label Grid.Row="4" Grid.Column="1"
+           Text="{Binding Email}" 
+           FontSize="20" 
+           FontFamily="OpenSans-Regular"
+           TextColor="{DynamicResource TextColor}"
+           HorizontalOptions="Start"/>
                     </Grid>
 
                     <!-- Nút Xem chi tiết -->
@@ -230,6 +323,18 @@
                            BackgroundColor="{DynamicResource InputBackgroundColor}"
                            HeightRequest="50"/>
 
+                    <Label Text="Số điện thoại chủ xe" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                    <Entry Placeholder="Nhập số điện thoại"
+                           Text="{Binding SoDienThoai}"
+                           TextColor="{DynamicResource TextColor}"
+                           Keyboard="Telephone"
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                           HeightRequest="50"/>
+
                     <Label Text="Địa chỉ" 
                            FontSize="16" 
                            FontAttributes="Bold" 
@@ -252,48 +357,6 @@
                            Keyboard="Email"
                            BackgroundColor="{DynamicResource InputBackgroundColor}"
                            HeightRequest="50"/>
-                </VerticalStackLayout>
-            </Frame>
-
-            <!-- Ảnh xe -->
-            <Frame HasShadow="True"
-                   BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   Padding="20"
-                   CornerRadius="{StaticResource CornerRadiusHandler}">
-                <VerticalStackLayout Spacing="16">
-                    <Label Text="Ảnh xe" 
-                           FontSize="16" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}"/>
-                    <Image x:Name="imgXe"
-                           HeightRequest="150"
-                           Aspect="AspectFill"
-                           BackgroundColor="{DynamicResource InputBackgroundColor}"/>
-                    <Button Text="Chọn ảnh từ thiết bị"
-                            x:Name="btnChonAnh"
-                            BackgroundColor="#6B7280"
-                            TextColor="White"
-                            HeightRequest="48"
-                            FontFamily="OpenSans-SemiBold"
-                            CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroupList>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#6B7280" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#4B5563" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateGroupList>
-                        </VisualStateManager.VisualStateGroups>
-                    </Button>
                 </VerticalStackLayout>
             </Frame>
 

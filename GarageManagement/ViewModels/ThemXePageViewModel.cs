@@ -3,6 +3,8 @@ using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
 {
@@ -31,6 +33,14 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private string email;
 
+        [ObservableProperty]
+        private ObservableCollection<string> filterFields = new ObservableCollection<string> { "Tên", "Số điện thoại", "Email" };
+        [ObservableProperty]
+        private string selectedFilterField;
+        [ObservableProperty]
+        private string filterValue;
+        [ObservableProperty]
+        private bool isCustomerFound;
 
         private Guid chuXeId = Guid.NewGuid();
         private readonly APIClientService<Xe> _xeService;
@@ -79,22 +89,65 @@ namespace GarageManagement.ViewModels
                     });
                 }
             }
-            var result=await _xeService.Create(new Xe
+            else
             {
-                Id=Guid.NewGuid(),
-                Ten=TenXe,
+                chuXeId = chuXe.Id; 
+            }
+            await _xeService.Create(new Xe
+            {
+                Id = Guid.NewGuid(),
+                Ten = TenXe,
                 BienSo = BienSoXe,
                 HieuXeId = SelectedHieuXe.Id,
-                KhachHangId=chuXeId,
-                KhaDung=true,
+                KhachHangId = chuXeId,
+                KhaDung = true,
                 TienNo = 0
             });
-            if (result!=null)
-            {
-
-            }
+            chuXeId = Guid.NewGuid(); 
         }
 
+        [RelayCommand]
+        private async Task Filter()
+        {
+            if (string.IsNullOrEmpty(FilterValue))
+            {
+                await Shell.Current.DisplayAlert("Error", "Vui lòng nhập giá trị để lọc", "OK");
+                return;
+            }
+            var ListChuXe = await _customerService.GetAll();
+            var filtered = ListChuXe.FirstOrDefault(kh =>
+            {
+                return SelectedFilterField switch
+                {
+                    "Tên" => kh.HoVaTen?.ToLower().TrimStart().TrimEnd().Contains(FilterValue.ToLower().TrimStart().TrimEnd()) ?? false,
+                    "Số điện thoại" => kh.SoDienThoai?.ToLower().TrimStart().TrimEnd().Contains(FilterValue.ToLower().TrimStart().TrimEnd()) ?? false,
+                    "Email" => kh.Email?.ToLower().TrimStart().TrimEnd().Contains(FilterValue.ToLower().TrimStart().TrimEnd()) ?? false,
+                    _ => false
+                };
+            });
+            if (filtered != null)
+            {
+                IsCustomerFound = true;
+                ChuXeExist = true;
+                ChuXeNotExist = false;
+                HoVaTen = filtered.HoVaTen;
+                DiaChi = filtered.DiaChi;
+                SoDienThoai = filtered.SoDienThoai;
+                Tuoi = filtered.Tuoi.ToString() ?? string.Empty;
+                Email = filtered.Email ?? string.Empty;
+            }
+            else
+            {
+                IsCustomerFound = false;
+                ChuXeExist = false;
+                ChuXeNotExist = true;
+                HoVaTen = string.Empty;
+                DiaChi = string.Empty;
+                SoDienThoai = string.Empty;
+                Tuoi = string.Empty;
+                Email = string.Empty;
+            }
+        }
         partial void OnSoDienThoaiChanged(string value)
         {
             _ = checkCustomerExistence(value);

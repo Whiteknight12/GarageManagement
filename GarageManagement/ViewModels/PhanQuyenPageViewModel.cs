@@ -58,7 +58,7 @@ namespace GarageManagement.ViewModels
             _chucNangService = chucNangService; 
             _ = LoadAsync();
         }
-        private async Task LoadAsync()
+        public async Task LoadAsync()
         {
             try
             {

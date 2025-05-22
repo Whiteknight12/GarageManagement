@@ -4,6 +4,7 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 
 namespace GarageManagement.ViewModels
 {
@@ -17,7 +18,7 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private ObservableCollection<VatTuPhuTung> listVatTu = new();
         [ObservableProperty]
-        private ObservableCollection<ChiTietPhieuNhapVatTu> listChiTietPhieuNhap  = new();
+        private ObservableCollection<ChiTietPhieuNhapVatTu> listChiTietPhieuNhap = new();
 
         private readonly APIClientService<VatTuPhuTung> _vatTuService;
         private readonly APIClientService<PhieuNhapVatTu> _phieuNhapVatTuService;
@@ -31,13 +32,17 @@ namespace GarageManagement.ViewModels
             _chiTietPhieuNhapVatTuService = chiTietPhieuNhapVatTuService;
             _vatTuService = vatTuService;
             _ = LoadListVatTuAsync();
+            
         }
 
-        private async Task LoadListVatTuAsync()
+        public async Task LoadListVatTuAsync()
         {
             var l = await _vatTuService.GetAll();
             PickerSource = ListVatTu = new ObservableCollection<VatTuPhuTung>(l);
-            ThemChiTietPhieuNhap(); 
+            if(ListChiTietPhieuNhap.Count < 1)
+            {
+                ThemChiTietPhieuNhap();
+            }
         }
 
         [RelayCommand]

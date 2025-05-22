@@ -4,7 +4,7 @@ namespace GarageManagement.Pages;
 
 public partial class BaoCaoDoanhSoPage : ContentView
 {
-	private readonly BaoCaoDoanSoPageViewModel _viewmodel;
+	public readonly BaoCaoDoanSoPageViewModel _viewmodel;
 	public BaoCaoDoanhSoPage(BaoCaoDoanSoPageViewModel viewmodel)
 	{
 		_viewmodel = viewmodel;

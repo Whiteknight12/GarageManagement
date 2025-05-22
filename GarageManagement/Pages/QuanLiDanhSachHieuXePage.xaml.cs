@@ -4,10 +4,11 @@ namespace GarageManagement.Pages;
 
 public partial class QuanLiDanhSachHieuXePage : ContentView
 {
-	//private readonly QuanLiDanhSachHieuXePageViewModel _viewModel; 
+	public readonly QuanLiDanhSachHieuXePageViewModel _viewModel; 
 	public QuanLiDanhSachHieuXePage(QuanLiDanhSachHieuXePageViewModel viewModel)
 	{
 		InitializeComponent();
-		BindingContext = viewModel; 
+		BindingContext = viewModel;
+		_viewModel = viewModel; 
 	}
 }

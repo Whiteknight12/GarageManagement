@@ -70,7 +70,7 @@ namespace GarageManagement.ViewModels
             
         }
 
-        private async Task LoadAsync()
+        public async Task LoadAsync()
         {
             allThamSos = await _thamSoService.GetAll();
             Parameters = new ObservableCollection<ThamSo>

@@ -8,8 +8,9 @@ public partial class ThuTienPage : ContentView
 {
 	private readonly APIClientService<Xe> _carservice;
 	private readonly APIClientService<HieuXe> _hieuxeService;
-    private readonly ThuTienPageViewModel _viewmodel;
-	public ThuTienPage(ThuTienPageViewModel viewmodel,
+    public readonly ThuTienPageViewModel _viewmodel;
+	private List<HieuXe> hieuXes = new List<HieuXe>();
+    public ThuTienPage(ThuTienPageViewModel viewmodel,
 		APIClientService<Xe> carservice,
         APIClientService<HieuXe> hieuxeService)
 	{ 
@@ -18,7 +19,8 @@ public partial class ThuTienPage : ContentView
         _carservice = carservice;
         _hieuxeService = hieuxeService;
         InitializeComponent();
-	}
+		_ = set(); 
+    }
 
 	private async void OnChuXeChanged(object sender, EventArgs e)
 	{
@@ -31,7 +33,8 @@ public partial class ThuTienPage : ContentView
 		}
 		_viewmodel.DienThoai = sdt;
 		_viewmodel.Email = _viewmodel.SelectedChuXe.Email;
-	}
+		_viewmodel.SelectedBienSo = _viewmodel.ListBienSo[0];
+    }
 
     protected override void OnSizeAllocated(double width, double height)
     {
@@ -40,11 +43,20 @@ public partial class ThuTienPage : ContentView
     }
 	private async void OnSelectedBienSoIndexChanged(object sender, EventArgs e)
 	{
-		if(sender is Picker picker)
+		if(sender is Picker picker && _viewmodel.available == false)
 		{
-             var hieuXe = await _hieuxeService.GetByID(_viewmodel.SelectedBienSo.HieuXeId);
-
-			_viewmodel.TenHieuXe = hieuXe.TenHieuXe;
+			foreach(var hieuXe in hieuXes)
+			{
+				if(hieuXe.Id == _viewmodel.SelectedBienSo.HieuXeId)
+				{
+                    _viewmodel.TenHieuXe = hieuXe.TenHieuXe;
+					break;
+                }
+			}
 		}
 	}
+	private async Task set()
+	{
+        hieuXes = await _hieuxeService.GetAll();
+    }
 }

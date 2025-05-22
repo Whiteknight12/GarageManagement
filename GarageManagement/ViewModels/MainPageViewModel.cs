@@ -120,22 +120,70 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public void Navigate(string parameter)
         {
-            TrangChuActive = parameter == "Home";
+            TrangChuActive = parameter == "Home"; 
+            
             TiepNhanXeActive = parameter == "TiepNhanXe";
-            TaoPhieuNhapActive = parameter == "TaoPhieuNhap";
-            TaoPhieuSuaChuaActive = parameter == "TaoPhieuSuaChua";
-            QlDanhSachHieuXeActive = parameter == "QLDanhSachHieuXe";
-            QlXeActive = parameter == "QLXe";
-            ThuTienActive = parameter == "ThuTien";
-            BaoCaoDoanhSoActive = parameter == "BaoCaoDoanhSo";
-            QuanLiDanhSachLoaiVatTuActive = parameter == "QLDanhSachLoaiVatTu";
-            PhanQuyenActive = parameter == "PhanQuyen";
-            ThayDoiThamSoActive = parameter == "ThayDoiThamSo";
+            //if (TiepNhanXeActive == true)
+            //{
+            //    _ = _tiepNhanXe._viewmodel.LoadAsync();
+            //}
 
-            if(TaoPhieuSuaChuaActive == true)
+            TaoPhieuNhapActive = parameter == "TaoPhieuNhap";
+            if (TaoPhieuNhapActive == true)
+            {
+                _ = _taoPhieuNhap._viewModel.LoadListVatTuAsync();
+            }
+
+            TaoPhieuSuaChuaActive = parameter == "TaoPhieuSuaChua";
+            if (TaoPhieuSuaChuaActive == true)
             {
                 _ = _taoPhieuSuaChua._viewmodel.LoadAsync();
             }
+
+            QlDanhSachHieuXeActive = parameter == "QLDanhSachHieuXe";
+            if (QlDanhSachHieuXeActive == true)
+            {
+                _ = _quanLiDanhSachHieuXe._viewModel.LoadAsync();
+            }
+
+            QlXeActive = parameter == "QLXe";
+            //if (QlXeActive == true)
+            //{
+            //    _ = _quanLiXePage._viewModel.LoadAsync();
+            //}
+
+            ThuTienActive = parameter == "ThuTien";
+            if (ThuTienActive == true)
+            {
+                _ = _thuTienPage._viewmodel.LoadAsync();
+            }
+
+            BaoCaoDoanhSoActive = parameter == "BaoCaoDoanhSo";
+            if (BaoCaoDoanhSoActive == true)
+            {
+                _ = _baoCaoDoanhSoPage._viewmodel.LoadAsync();
+            }
+
+            QuanLiDanhSachLoaiVatTuActive = parameter == "QLDanhSachLoaiVatTu";
+            //if (QuanLiDanhSachLoaiVatTuActive == true)
+            //{
+            //    _ = _quanLiDanhSachLoaiVatTuPage._viewModel.LoadAsync();
+            //}
+
+            PhanQuyenActive = parameter == "PhanQuyen";
+            if (PhanQuyenActive == true)
+            {
+                _ = _phanQuyenPage._viewModel.LoadAsync();
+            }
+
+            ThayDoiThamSoActive = parameter == "ThayDoiThamSo";
+            if (ThayDoiThamSoActive == true)
+            {
+                _ = _quanLyThamSoPage._viewModel.LoadAsync();
+            }
+
+            
+
 
             CurrentPageContent = parameter switch
             {
