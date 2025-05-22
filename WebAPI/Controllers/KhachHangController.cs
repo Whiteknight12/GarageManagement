@@ -25,6 +25,23 @@ namespace WebAPI.Controllers
             if (user is not null) return Ok(user);
             return NotFound();
         }
+
+        [HttpGet("Name/{hovaten}")]
+        public async Task<ActionResult<IEnumerable<KhachHang>>> GetListByName(string hovaten)
+        {
+            var result = _applicationDbContext.khachHangs.Where(u => u.HoVaTen == hovaten);
+            if (result is not null) return Ok(result);
+            return NotFound();
+        }
+
+        [HttpGet("Email/{email}")]
+        public async Task<ActionResult<KhachHang>> GetByEmail(string email)
+        {
+            var result = await _applicationDbContext.khachHangs.FirstOrDefaultAsync(u => u.Email == email);
+            if (result is not null) return Ok(result);
+            return NotFound();
+        }
+
         [HttpGet]
         public override async Task<ActionResult<IEnumerable<KhachHang>>> GetAll()
         {

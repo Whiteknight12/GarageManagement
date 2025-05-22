@@ -6,6 +6,8 @@ namespace WebAPI.Models
     {
         [Key]
         public Guid Id { get; set; }
+        public string CCCD { get; set; } = string.Empty;
+        public string GioiTinh { get; set; } = string.Empty;
         public string HoTen { get; set; }
         public int Tuoi { get; set; }
         public string DiaChi { get; set; }
