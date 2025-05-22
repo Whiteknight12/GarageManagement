@@ -9,6 +9,7 @@ namespace WebAPI.Models
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
         public string TenThamSo { get; set; }
-        public int GiaTri {  get; set; }
+        public double GiaTri {  get; set; }
+        public string MoTa { get; set; }
     }
 }

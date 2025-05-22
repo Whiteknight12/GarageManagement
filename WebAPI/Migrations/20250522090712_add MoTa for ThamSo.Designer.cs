@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Data;
 
@@ -11,9 +12,11 @@ using WebAPI.Data;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250522090712_add MoTa for ThamSo")]
+    partial class addMoTaforThamSo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,12 +272,12 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f13f75cb-cbed-4b83-884a-72cec66d63f6"),
+                            Id = new Guid("f149931e-6c92-4949-b1dd-382056813a95"),
                             TenNhom = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("9b239800-d3ee-4883-8cf5-fd6c2132805f"),
+                            Id = new Guid("802b90da-c327-43d4-bf8c-dda5c5d65b49"),
                             TenNhom = "User"
                         });
                 });
@@ -419,16 +422,16 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("47a4d270-eeda-45d9-83fc-6fa57c00a199"),
+                            Id = new Guid("6c4576be-d6bf-4583-8c18-7e54077174b3"),
                             MatKhau = "admin123",
-                            NhomNguoiDungId = new Guid("f13f75cb-cbed-4b83-884a-72cec66d63f6"),
+                            NhomNguoiDungId = new Guid("f149931e-6c92-4949-b1dd-382056813a95"),
                             TenDangNhap = "admin"
                         },
                         new
                         {
-                            Id = new Guid("5b30c894-8840-4e00-9edd-6b3a4f3c07d0"),
+                            Id = new Guid("a6406fa3-b3df-41cb-a5d2-5e2a614803cb"),
                             MatKhau = "user123",
-                            NhomNguoiDungId = new Guid("9b239800-d3ee-4883-8cf5-fd6c2132805f"),
+                            NhomNguoiDungId = new Guid("802b90da-c327-43d4-bf8c-dda5c5d65b49"),
                             TenDangNhap = "user"
                         });
                 });
@@ -439,12 +442,8 @@ namespace WebAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("GiaTri")
-                        .HasColumnType("float");
-
-                    b.Property<string>("MoTa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("GiaTri")
+                        .HasColumnType("int");
 
                     b.Property<string>("TenThamSo")
                         .IsRequired()
