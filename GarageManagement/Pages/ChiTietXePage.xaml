@@ -69,6 +69,18 @@
 
                     <BoxView/>
 
+                    <Picker ItemsSource="{Binding ListKhachHang}"
+                            SelectedIndexChanged="SelectedKhachHangChanged"
+                            ItemDisplayBinding="{Binding HoVaTen}"
+                            TextColor="{DynamicResource TextColor}"
+                            SelectedItem="{Binding SelectedKhachHang}"
+                            Title="Chọn chủ xe"
+                            TitleColor="{DynamicResource TextColor}"
+                            BackgroundColor="{DynamicResource InputBackgroundColor}"
+                            IsVisible="{Binding IsUpdating}"/>
+
+                    <BoxView IsVisible="{Binding IsUpdating}"/>
+
                     <Frame HasShadow="True"
                        IsVisible="{Binding IsUpdating}"
                        BackgroundColor="{DynamicResource CardBackgroundColor}"
@@ -87,7 +99,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                               Text="Lọc khách hàng theo: Tên/Email/Số điện thoại"
+                               Text="Lọc khách hàng theo: CCCD/Tên/Email/SDT"
                                FontSize="16"
                                FontAttributes="Bold"
                                FontFamily="OpenSans-Regular"
@@ -125,7 +137,7 @@
                                 HeightRequest="48"
                                 FontAttributes="Bold"
                                 FontFamily="OpenSans-SemiBold"
-                                CornerRadius="{StaticResource ButtonCornerRadiusHandler}">          
+                                CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroupList>
                                         <VisualStateGroup x:Name="CommonStates">
@@ -148,23 +160,13 @@
 
                     <BoxView IsVisible="{Binding IsUpdating}"/>
 
-                    <Picker ItemsSource="{Binding ListKhachHang}"
-                            SelectedIndexChanged="SelectedKhachHangChanged"
-                            ItemDisplayBinding="{Binding HoVaTen}"
-                            TextColor="{DynamicResource TextColor}"
-                            Title="Chọn chủ xe"
-                            TitleColor="{DynamicResource TextColor}"
-                            BackgroundColor="{DynamicResource InputBackgroundColor}"
-                            IsVisible="{Binding IsUpdating}"/>
-
-                    <BoxView IsVisible="{Binding IsUpdating}"/>
-
                     <VerticalStackLayout>
                         <Label Text="Tên chủ xe"
                                FontSize="16"
                                TextColor="{DynamicResource TextColor}" />
                         <Label Text="{Binding TenChuXe}"
                                FontSize="16"
+                               Margin="15, 0, 0, 0"
                                TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
 
@@ -176,6 +178,7 @@
                                TextColor="{DynamicResource TextColor}" />
                         <Label Text="{Binding DienThoai}"
                                FontSize="16"
+                               Margin="15, 0, 0, 0"
                                TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
 
@@ -188,6 +191,7 @@
                         
                         <Label Text="{Binding DiaChi}"
                                FontSize="16"
+                               Margin="15, 0, 0, 0"
                                TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
 
@@ -199,23 +203,12 @@
                            FontSize="16"
                            TextColor="{DynamicResource TextColor}" />
 
-                        <Grid>
-                            <Label Text="{Binding SelectedTrangThaiXe}"
-                               LineBreakMode="TailTruncation"
-                               FontSize="16"
-                               TextColor="{DynamicResource TextColor}"
-                               VerticalOptions="Center"
-                               Margin="10,0"
-                               Padding="0"
-                               IsEnabled="False"/>
-
-                            <Picker ItemsSource="{Binding ListTrangThaiXe}"
+                        <Picker ItemsSource="{Binding ListTrangThaiXe}"
                                 SelectedItem="{Binding SelectedTrangThaiXe}"
-                                BackgroundColor="Transparent"
-                                TextColor="Transparent"
+                                BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                TextColor="{DynamicResource TextColor}"
                                 IsEnabled="{Binding IsUpdating}"
                                 FontSize="16" />
-                        </Grid>
 
                     </VerticalStackLayout>
 
@@ -227,6 +220,7 @@
                            TextColor="{DynamicResource TextColor}" />
 
                         <Label Text="{Binding TienNoCuaChuXe, StringFormat='{0:N0} VNĐ'}"
+                           Margin="12, 0, 0, 0"
                            TextColor="#D32F2F"
                            FontSize="16"/>
                     </VerticalStackLayout>

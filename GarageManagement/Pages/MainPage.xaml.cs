@@ -41,8 +41,13 @@ public partial class MainPage : ContentPage
         this, "ShowCarDetails",
         (sender, carId) =>
         {
-            _chiTietXePage.setCarId(carId);
-            _viewModel.ShowRightPane(_chiTietXePage);
+            if (_viewModel.IsRightPaneVisible) _viewModel.CloseRightPane();
+            else
+            {
+                _chiTietXePage.setCarId(carId);
+                _=_chiTietXePage._viewModel.LoadAsync();
+                _viewModel.ShowRightPane(_chiTietXePage);
+            }
         });
     }
 

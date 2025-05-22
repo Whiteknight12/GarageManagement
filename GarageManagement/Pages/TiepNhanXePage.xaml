@@ -29,44 +29,67 @@
         <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
 
             <Frame HasShadow="True"
-                   BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   Padding="20"
-                   CornerRadius="{StaticResource CornerRadiusHandler}">
-                <VerticalStackLayout Spacing="12">
-                    <Label Text="TIẾP NHẬN XE MỚI"
-                           FontSize="20"
-                           FontAttributes="Bold"
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"
-                           HorizontalOptions="Center"/>
-                    <Label Text="Biển số"
-                        FontSize="16"
-                        FontAttributes="Bold"
-                        FontFamily="OpenSans-Regular"
-                        TextColor="{DynamicResource TextColor}"/>
-                    <Entry x:Name="txtBienSo"
-                        Placeholder="Nhập biển số xe"
-                        TextChanged="OnBienSoChanged"
-                        PlaceholderColor="{DynamicResource PlaceholderColor}"
-                        Text="{Binding BienSo, Mode=TwoWay}"
-                        TextColor="{DynamicResource TextColor}"
-                        HeightRequest="48"
-                        Margin="0,5,0,0"
-                        HorizontalOptions="Fill"/>
+                BackgroundColor="{DynamicResource CardBackgroundColor}"
+                Padding="20"
+                CornerRadius="{StaticResource CornerRadiusHandler}">
 
-                    <Label Text="Ngày tiếp nhận"
-                        FontSize="16"
-                        FontAttributes="Bold"
-                        FontFamily="OpenSans-Regular"
-                        TextColor="{DynamicResource TextColor}"/>
-                    <DatePicker x:Name="dpNgayTiepNhan"
-                         Date="{Binding NgayTiepNhan, Mode=TwoWay}"
-                         TextColor="{DynamicResource TextColor}"
-                         HeightRequest="48"
-                         Margin="0,5,0,0"
-                         HorizontalOptions="Fill"/>
+                <VerticalStackLayout Spacing="16" HorizontalOptions="Center">
+
+                    <Label Text="TIẾP NHẬN XE MỚI"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       HorizontalTextAlignment="Center"
+                       FontFamily="OpenSans-SemiBold"
+                       TextColor="{DynamicResource TextColor}" />
+
+                    <Grid ColumnSpacing="10" RowSpacing="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Text="Biển số"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"
+                           Grid.Row="0" Grid.Column="0" />
+
+                        <Label Text="Ngày tiếp nhận"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"
+                           Grid.Row="0" Grid.Column="2" />
+
+                        <Entry x:Name="txtBienSo"
+                           Placeholder="Nhập biển số xe"
+                           TextChanged="OnBienSoChanged"
+                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                           Text="{Binding BienSo, Mode=TwoWay}"
+                           TextColor="{DynamicResource TextColor}"
+                           HeightRequest="48"
+                           HorizontalOptions="Fill"
+                           Grid.Row="1" Grid.Column="0" />
+
+                        <DatePicker x:Name="dpNgayTiepNhan"
+                            Date="{Binding NgayTiepNhan, Mode=TwoWay}"
+                            TextColor="{DynamicResource TextColor}"
+                            HeightRequest="48"
+                            HorizontalOptions='Center'
+                            Grid.Row="1" Grid.Column="2" />
+                    </Grid>
+
                 </VerticalStackLayout>
             </Frame>
+
 
             <Grid ColumnSpacing="12" Padding="10">
                 <Grid.ColumnDefinitions>
@@ -90,7 +113,7 @@
                            FontSize="16"
                            FontFamily="OpenSans-Regular"
                            TextColor="{DynamicResource TextColor}"/>
-                        <Label Text="{Binding DiaChi, StringFormat='Địa chỉ: {0}'}"
+                        <Label Text="{Binding CCCD, StringFormat='CCCD: {0}'}"
                            FontSize="16"
                            FontFamily="OpenSans-Regular"
                            TextColor="{DynamicResource TextColor}"/>

@@ -45,6 +45,7 @@
                            FontSize="16" 
                            FontFamily="OpenSans-Regular"
                            TextColor="{DynamicResource TextColor}"/>
+                    
                     <Picker Title="Chọn biển số xe"
                             TitleColor="{DynamicResource PlaceholderColor}"
                             ItemDisplayBinding="{Binding .}"

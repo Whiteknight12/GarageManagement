@@ -58,7 +58,7 @@ namespace GarageManagement.ViewModels
         private ObservableCollection<KhachHang> listKhachHang;
 
         [ObservableProperty]
-        private ObservableCollection<string> filterFields = new ObservableCollection<string> { "Tên", "Số điện thoại", "Email" };
+        private ObservableCollection<string> filterFields = new ObservableCollection<string> { "CCCD", "Tên", "Số điện thoại", "Email" };
 
         [ObservableProperty]
         private string selectedFilterField;
@@ -68,6 +68,9 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty]
         private bool isCustomerFound;
+
+        [ObservableProperty]
+        private KhachHang selectedKhachHang;
 
         public Guid selectedKhachHangId;
 
@@ -111,7 +114,12 @@ namespace GarageManagement.ViewModels
             else SelectedTrangThaiXe = "Không có trong Gara";
             var listKhachHang = await _khachHangService.GetAll();
             ListKhachHang = new ObservableCollection<KhachHang>(listKhachHang);
-            if (khachHang is not null) selectedKhachHangId = ListKhachHang?.FirstOrDefault(x => x.Id == obj.KhachHangId).Id ?? Guid.Empty;
+            if (khachHang is not null)
+            {
+                selectedKhachHangId = ListKhachHang?.FirstOrDefault(x => x.Id == obj.KhachHangId).Id ?? Guid.Empty;
+                SelectedKhachHang=ListKhachHang?.FirstOrDefault(x => x.Id == obj.KhachHangId);
+            }
+            SelectedFilterField = "CCCD";
         }
 
         [RelayCommand]
@@ -166,30 +174,37 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public void Filter()
         {
-            if (SelectedFilterField=="Tên")
+            if (selectedFilterField=="CCCD")
             {
-                var list=ListKhachHang.Where(x => x.HoVaTen.ToLower().Contains(FilterValue.ToLower())).ToList();
-                ListKhachHang.Clear();
-                if (list is not null) ListKhachHang=new ObservableCollection<KhachHang>(list);
+                var result = ListKhachHang.FirstOrDefault(u => u.CCCD.ToLower().Contains(FilterValue.ToLower()));
+                if (result is not null)
+                {
+                    SelectedKhachHang=ListKhachHang.FirstOrDefault(u => u.CCCD==result.CCCD);
+                }
+            }
+            else if (SelectedFilterField=="Tên")
+            {
+                var result = ListKhachHang.FirstOrDefault(u => u.HoVaTen.ToLower().Contains(FilterValue.ToLower()));
+                if (result is not null)
+                {
+                    SelectedKhachHang = ListKhachHang.FirstOrDefault(u => u.HoVaTen == result.HoVaTen);
+                }
             }
             else if (SelectedFilterField=="Số điện thoại")
             {
-                var list=ListKhachHang.Where(x => x.SoDienThoai.ToLower().Contains(FilterValue.ToLower())).ToList();
-                ListKhachHang.Clear();
-                ListKhachHang=new ObservableCollection<KhachHang>(list);
+                var result = ListKhachHang.FirstOrDefault(u => u.SoDienThoai.ToLower().Contains(FilterValue.ToLower()));
+                if (result is not null)
+                {
+                    SelectedKhachHang = ListKhachHang.FirstOrDefault(u => u.SoDienThoai == result.SoDienThoai);
+                }
             }
             else
             {
-                var list = new List<KhachHang>();
-                foreach (var kh in ListKhachHang)
+                var result = ListKhachHang.FirstOrDefault(u => u.Email.ToLower().Contains(FilterValue.ToLower()));
+                if (result is not null)
                 {
-                    if (kh.Email is not null && kh.Email.ToLower().Contains(FilterValue.ToLower()))
-                    {
-                        list.Add(kh);
-                    }
+                    SelectedKhachHang = ListKhachHang.FirstOrDefault(u => u.Email == result.Email);
                 }
-                ListKhachHang.Clear();
-                ListKhachHang=new ObservableCollection<KhachHang>(list);
             }
         }
     }

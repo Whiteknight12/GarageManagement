@@ -30,6 +30,8 @@ namespace GarageManagement.ViewModels
         private bool isCarNotFound = false;
         [ObservableProperty]
         private Guid carId;
+        [ObservableProperty]
+        private string cCCD;
 
         private string STORAGE_KEY = "user-account-status";
         private Guid ownerId;
@@ -85,6 +87,7 @@ namespace GarageManagement.ViewModels
                 var khachHang = await _userService.GetByID(result.KhachHangId);
                 if (khachHang is not null)
                 {
+                    CCCD = khachHang.CCCD;
                     TenChuXe = khachHang.HoVaTen;
                     DiaChi = khachHang.DiaChi;
                     SoDienThoai = khachHang.SoDienThoai;
