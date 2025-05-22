@@ -4,20 +4,8 @@ using GarageManagement.ViewModels;
 
 namespace GarageManagement.Pages;
 
-[QueryProperty(nameof(CarIDString), "parameterID")]
-public partial class ChiTietXePage : ContentPage
+public partial class ChiTietXePage : ContentView
 {
-    string _carIdString;
-    public string CarIDString
-    {
-        get => _carIdString;
-        set
-        {
-            _carIdString = value;
-            if (Guid.TryParse(value, out var g)) _viewModel.CarId = g;
-        }
-    }
-
     private readonly ChiTietXePageViewModel _viewModel;
     private readonly APIClientService<Xe> _carservice;
     private readonly APIClientService<HieuXe> _hieuxeservice;
@@ -36,9 +24,15 @@ public partial class ChiTietXePage : ContentPage
         BindingContext = _viewModel;
     }
 
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
+    protected override void OnSizeAllocated(double width, double height)
     {
-        base.OnNavigatedTo(args);
-        _ = _viewModel.LoadAsync();
+        base.OnSizeAllocated(width, height);
+        if (width>0 && height>0) _=_viewModel.LoadAsync();
+    }
+
+    public void setCarId(Guid id)
+    {
+        _viewModel.CarId = id;
+        _= _viewModel.LoadAsync();
     }
 }

@@ -143,9 +143,9 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        public async Task ViewCarDetails(Guid carId)
+        public void ViewCarDetails(Guid carId)
         {
-            await Shell.Current.GoToAsync($"{nameof(ChiTietXePage)}?parameterID={carId}");
+            MessagingCenter.Send(this, "ShowCarDetails", carId);
         }
 
         [RelayCommand]

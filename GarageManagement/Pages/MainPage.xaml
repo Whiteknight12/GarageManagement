@@ -26,6 +26,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="{Binding IsCollapsed, Converter={StaticResource BoolToGridLengthConverter}}" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="1" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <ScrollView>
@@ -384,5 +386,33 @@
         <ContentView Grid.Column="1"
                      BackgroundColor="{DynamicResource BackgroundColor}"
                      Content="{Binding CurrentPageContent}" />
+
+        <BoxView Grid.Column="2"
+         WidthRequest="1"
+         BackgroundColor="{DynamicResource TextColor}"
+         HorizontalOptions="Start"
+         IsVisible="{Binding IsRightPaneVisible}" />
+
+        <ContentView Grid.Column="3"
+             x:Name="RightPane"
+             BackgroundColor="{DynamicResource BackgroundColor}"
+             WidthRequest="300"
+             IsVisible="{Binding IsRightPaneVisible}"
+             Padding="10">
+
+            <Grid RowDefinitions="Auto,*">
+                
+                <Button Grid.Row="0"
+                Text="✕"
+                HorizontalOptions="End"
+                BackgroundColor="{DynamicResource BackgroundColor}"
+                TextColor="{DynamicResource TextColor}"
+                Command="{Binding CloseRightPaneCommand}" />
+
+                <ContentView Grid.Row="1"
+                     Content="{Binding RightPaneContent}" />
+            </Grid>
+        </ContentView>
+
     </Grid>
 </ContentPage>

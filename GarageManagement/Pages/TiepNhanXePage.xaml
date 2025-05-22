@@ -68,106 +68,95 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Frame Padding="20"
-                   HasShadow="True"
-                   BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   IsVisible="{Binding IsCarExists}"
-                   Margin="0,12,0,0">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="Xe đã tồn tại"
-                           FontAttributes="Bold"
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="Green"/>
-                    <Label Text="{Binding TenXe, StringFormat='Tên xe: {0}'}"
-                           FontSize="16"
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}"/>
-                    <Label Text="{Binding TenHieuXe, StringFormat='Hiệu xe: {0}'}"
-                           FontSize="16"
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}"/>
-                    <Label Text="{Binding BienSo, StringFormat='Biển số: {0}'}"
-                           FontSize="16"
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}"/>
-                    <Button Text="Chi tiết xe"
-                            Command="{Binding ViewCarDetailsCommand}"
-                            CommandParameter="{Binding CarId}"
-                            BackgroundColor="#3B82F6"
-                            TextColor="White"
-                            HeightRequest="40"
-                            FontFamily="OpenSans-SemiBold"
-                            CornerRadius="{StaticResource SecondaryButtonCornerRadiusHandler}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroupList>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#3B82F6" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#2563EB" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateGroupList>
-                        </VisualStateManager.VisualStateGroups>
-                    </Button>
-                </VerticalStackLayout>
-            </Frame>
+            <Grid ColumnSpacing="12" Padding="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Frame Padding="20"
-                   HasShadow="True"
-                   BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   IsVisible="{Binding IsCarExists}"
-                   Margin="0,12,0,0">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="Thông tin chủ xe"
+                <Frame Grid.Column="0"
+                    Padding="20"
+                    HasShadow="True"
+                    BackgroundColor="{DynamicResource CardBackgroundColor}"
+                    CornerRadius="{StaticResource CornerRadiusHandler}"
+                    IsVisible="{Binding IsCarExists}"
+                    Margin="0,12,0,0">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Thông tin chủ xe"
                            FontAttributes="Bold"
                            FontFamily="OpenSans-SemiBold"
                            TextColor="Green"/>
-                    <Label Text="{Binding TenChuXe, StringFormat='Họ và tên: {0}'}"
+                        <Label Text="{Binding TenChuXe, StringFormat='Họ và tên: {0}'}"
                            FontSize="16"
                            FontFamily="OpenSans-Regular"
                            TextColor="{DynamicResource TextColor}"/>
-                    <Label Text="{Binding DiaChi, StringFormat='Địa chỉ: {0}'}"
+                        <Label Text="{Binding DiaChi, StringFormat='Địa chỉ: {0}'}"
                            FontSize="16"
                            FontFamily="OpenSans-Regular"
                            TextColor="{DynamicResource TextColor}"/>
-                    <Label Text="{Binding SoDienThoai, StringFormat='Điện thoại: {0}'}"
+                        <Label Text="{Binding SoDienThoai, StringFormat='Điện thoại: {0}'}"
                            FontSize="16"
                            FontFamily="OpenSans-Regular"
                            TextColor="{DynamicResource TextColor}"/>
-                    <Button Text="Xem chi tiết chủ xe"
+                        <Button Text="Xem chi tiết chủ xe"
                             Command="{Binding ViewOwnerDetailsCommand}"
                             BackgroundColor="#3B82F6"
                             TextColor="White"
                             HeightRequest="40"
                             FontFamily="OpenSans-SemiBold"
-                            CornerRadius="{StaticResource SecondaryButtonCornerRadiusHandler}">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroupList>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#3B82F6" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#2563EB" />
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateGroupList>
-                        </VisualStateManager.VisualStateGroups>
-                    </Button>
-                </VerticalStackLayout>
-            </Frame>
+                    CornerRadius="{StaticResource SecondaryButtonCornerRadiusHandler}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroupList>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#2563EB" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateGroupList>
+                            </VisualStateManager.VisualStateGroups>
+                        </Button>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Grid.Column="1"
+                   Padding="20"
+                   HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   CornerRadius="{StaticResource CornerRadiusHandler}"
+                   IsVisible="{Binding IsCarExists}"
+                   Margin="0,12,0,0">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Thông tin xe"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="Green"/>
+                        <Label Text="{Binding TenXe, StringFormat='Tên xe: {0}'}"
+                           FontSize="16"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                        <Label Text="{Binding BienSo, StringFormat='Biển số: {0}'}"
+                           FontSize="16"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                        <Label Text="{Binding TenHieuXe, StringFormat='Hiệu xe: {0}'}"
+                           FontSize="16"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                        <Button Text="Xem chi tiết xe"
+                            BackgroundColor="#3B82F6"
+                            TextColor="White"
+                            Command="{Binding ViewCarDetailsCommand}"
+                            CommandParameter="{Binding CarId}"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
 
             <Frame x:Name="noCarFoundContainer"
                    Padding="20"

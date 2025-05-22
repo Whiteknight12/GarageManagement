@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GarageManagement.Pages.ChiTietXePage"
              BackgroundColor="{DynamicResource BackgroundColor}">
@@ -33,7 +33,8 @@
                         <Label Text="Tên xe"
                            FontSize="16"
                            TextColor="{DynamicResource TextColor}"/>
-                        <Label Text="{Binding Name}"
+                        <Entry Text="{Binding Name, Mode=TwoWay}"
+                           IsReadOnly="{Binding IsReadOnly}"
                            FontSize="16"
                            TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
@@ -44,7 +45,11 @@
                         <Label Text="Hiệu xe"
                            FontSize="16"
                            TextColor="{DynamicResource TextColor}"/>
-                        <Label Text="{Binding Model}"
+                        <Picker 
+                           ItemsSource="{Binding ListHieuXe}"
+                           IsEnabled="{Binding IsUpdating}"
+                           ItemDisplayBinding="{Binding TenHieuXe}"
+                           SelectedItem="{Binding SelectedHieuXe}"
                            FontSize="16"
                            TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
@@ -106,7 +111,7 @@
                             TextColor="{DynamicResource TextColor}"
                             FontSize="16"/>
 
-                    </VerticalStackLayout>
+                    </VerticalStackLayout>  
 
                     <BoxView/>
 
@@ -122,9 +127,24 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Button Text="Cập nhật thông tin xe" BackgroundColor="#10B981" TextColor="White"/>
-            
-            <Button Text="Quay lại" BackgroundColor="Gray" TextColor="White" Command="{Binding BackCommand}"/>
+            <Button Text="Cập nhật thông tin xe" 
+                    Command="{Binding ToggleEditModeCommand}" 
+                    BackgroundColor="#10B981" 
+                    IsVisible="{Binding IsReadOnly}"
+                    TextColor="White"/>
+
+            <Button Text="Cập nhật" 
+                Command="{Binding UpdateCarCommand}" 
+                BackgroundColor="#10B981" 
+                IsVisible="{Binding IsUpdating}"
+                TextColor="White"/>
+
+            <Button Text="Hủy" 
+                Command="{Binding ExitEditModeCommand}" 
+                BackgroundColor="Gray" 
+                IsVisible="{Binding IsUpdating}"
+                TextColor="White"/>
+
         </VerticalStackLayout>
     </ScrollView>
-</ContentPage>
+</ContentView>
