@@ -126,6 +126,11 @@ namespace GarageManagement.ViewModels
             PhanQuyenActive = parameter == "PhanQuyen";
             ThayDoiThamSoActive = parameter == "ThayDoiThamSo";
 
+            if(TaoPhieuSuaChuaActive == true)
+            {
+                _ = _taoPhieuSuaChua._viewmodel.LoadAsync();
+            }
+
             CurrentPageContent = parameter switch
             {
                 "Home" => new NhanSuMainPage(_viewModel),

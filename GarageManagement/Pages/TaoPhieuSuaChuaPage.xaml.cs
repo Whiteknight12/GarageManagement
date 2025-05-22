@@ -8,7 +8,7 @@ namespace GarageManagement.Pages;
 
 public partial class TaoPhieuSuaChuaPage : ContentView
 {
-	private readonly TaoPhieuSuaChuaPageViewModel _viewmodel;
+	public readonly TaoPhieuSuaChuaPageViewModel _viewmodel;
 	private readonly APIClientService<VatTuPhuTung> _vatTuService;
 
 	public TaoPhieuSuaChuaPage(APIClientService<Xe> carservice,
@@ -148,9 +148,11 @@ public partial class TaoPhieuSuaChuaPage : ContentView
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
-		if (width > 0 && height > 0)
+
+        if (width > 0 && height > 0)
 		{
-			_ = _viewmodel.LoadAsync();
-		}
+            _ = _viewmodel.LoadAsync();
+        }
     }
+
 }
