@@ -112,6 +112,9 @@
                                 </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
+                        </CollectionView.ItemsLayout>
                     </CollectionView>
                 </VerticalStackLayout>
             </Frame>

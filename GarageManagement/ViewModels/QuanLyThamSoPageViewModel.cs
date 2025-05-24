@@ -67,7 +67,7 @@ namespace GarageManagement.ViewModels
             IsEditFormVisible = false;
             var toast = Toast.Make("Thay đổi giá trị thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
             await toast.Show();
-            
+            await LoadAsync(); 
         }
 
         public async Task LoadAsync()

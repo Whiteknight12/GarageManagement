@@ -14,12 +14,12 @@ public partial class BaoCaoDoanhSoPage : ContentView
 
 	private async void OnMonthChanged(object sender, EventArgs e)
 	{
-		await _viewmodel.OnMonthChanged();
+		await _viewmodel.OnDateChanged();
 	}
 
 	private async void OnYearChanged(object sender, EventArgs e)
 	{
-		await _viewmodel.OnYearChanged();
+		await _viewmodel.OnDateChanged();
 	}
 
 	protected override void OnSizeAllocated(double width, double height)
