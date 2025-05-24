@@ -222,7 +222,7 @@
                                     </CollectionView.ItemTemplate>
                                 </CollectionView>
 
-                                <Button Text="Thêm vật tư phụ tùng"
+                                <Button Text="+ Thêm vật tư phụ tùng"
                                     BackgroundColor="#2563EB"
                                     TextColor="White"
                                     HeightRequest="40"

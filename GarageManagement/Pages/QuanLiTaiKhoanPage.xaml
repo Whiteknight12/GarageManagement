@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.QuanLiTaiKhoanPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15" MaximumWidthRequest="1000">
+
+            <Frame HasShadow="True"
+               BackgroundColor="{DynamicResource CardBackgroundColor}"
+               Padding="20"
+               CornerRadius="{StaticResource CornerRadiusHandler}">
+                <Grid RowSpacing="10" ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8"
+                       Text="Lọc tài khoản theo: Username/Tên chủ sở hữu/CCCD chủ sở hữu/Vai trò"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSans-Regular"
+                       TextColor="{DynamicResource TextColor}"
+                       VerticalOptions="Center"/>
+
+                    <Entry Grid.Row="1" Grid.Column="0"
+                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                        TextColor="{DynamicResource TextColor}"
+                        Text="Username"
+                        IsReadOnly="True"/>
+
+                    <Frame
+                      Grid.Row="1" Grid.Column="1"
+                      Padding="0"
+                      HasShadow="False"
+                      HeightRequest="45"
+                      BackgroundColor="{DynamicResource InputBackgroundColor}"
+                      BorderColor="{DynamicResource TextColor}"
+                      CornerRadius="8">
+                        <Entry 
+                           Placeholder="Nhập giá trị"
+                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                           Text="{Binding UsernameValue, Mode=TwoWay}"
+                           FontSize="16"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"/>
+                    </Frame>
+
+                    <Entry Grid.Row="1" Grid.Column="2"
+                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                        TextColor="{DynamicResource TextColor}"
+                        Text="Tên chủ sở hữu"
+                        IsReadOnly="True"/>
+
+                    <Frame
+                      Grid.Row="1" Grid.Column="3"
+                      Padding="0"
+                      HasShadow="False"
+                      HeightRequest="45"
+                      BackgroundColor="{DynamicResource InputBackgroundColor}"
+                      BorderColor="{DynamicResource TextColor}"
+                      CornerRadius="8">
+                        <Entry 
+                           Placeholder="Nhập giá trị"
+                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                           Text="{Binding NameValue, Mode=TwoWay}"
+                           FontSize="16"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"
+                           HeightRequest="45"/>
+                    </Frame>
+
+                    <Entry Grid.Row="1" Grid.Column="4"
+                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                        TextColor="{DynamicResource TextColor}"
+                        Text="CCCD chủ sở hữu"
+                        IsReadOnly="True"/>
+
+                    <Frame
+                      Grid.Row="1" Grid.Column="5"
+                      Padding="0"
+                      HasShadow="False"
+                      HeightRequest="45"
+                      BackgroundColor="{DynamicResource InputBackgroundColor}"
+                      BorderColor="{DynamicResource TextColor}"
+                      CornerRadius="8">
+                        <Entry 
+                           Placeholder="Nhập giá trị"
+                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                           Text="{Binding CCCDValue, Mode=TwoWay}"
+                           FontSize="16"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"
+                           HeightRequest="45"/>
+                    </Frame>
+
+                    <Entry Grid.Row="1" Grid.Column="6"
+                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                        TextColor="{DynamicResource TextColor}"
+                        Text="Vai trò"
+                        IsReadOnly="True"/>
+
+                    <Frame
+                      Grid.Row="1" Grid.Column="7"
+                      Padding="0"
+                      HasShadow="False"
+                      HeightRequest="45"
+                      BackgroundColor="{DynamicResource InputBackgroundColor}"
+                      BorderColor="{DynamicResource TextColor}"
+                      CornerRadius="8">
+                        <Picker
+                           ItemsSource="{Binding ListNhomNguoiDung}"
+                           ItemDisplayBinding="{Binding TenNhom}"
+                           SelectedItem="{Binding SelectedRole}"
+                           FontSize="16"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"
+                           HeightRequest="45"/>
+                    </Frame>
+
+                    <Button Grid.Row="2" 
+                        Grid.ColumnSpan="8"
+                        Text="Lọc"
+                        Command="{Binding FilterCommand}"
+                        BackgroundColor="#3B82F6"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold"
+                        MaximumWidthRequest="200"
+                        CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#2563EB" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
+                </Grid>
+            </Frame>
+
+            <Frame BackgroundColor="{DynamicResource BackgroundColor}"
+                   CornerRadius="8"
+                   HasShadow="True">
+                <VerticalStackLayout>
+                    <Label Text="Danh sách tài khoản"
+                           FontSize="20"
+                           HorizontalTextAlignment="Center"
+                           FontAttributes="Bold"
+                           Padding="0,0,0,10"
+                           Margin="20, 0, 20, 20"
+                           TextColor="{DynamicResource TextColor}" />
+
+                    <CollectionView ItemsSource="{Binding ListTaiKhoan}">
+                        
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout
+                                Orientation="Vertical"
+                                ItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.Header>
+                            <Frame Margin="0" 
+                                   Padding="10" 
+                                   HasShadow="False" 
+                                   BorderColor="LightGray"
+                                   BackgroundColor="{DynamicResource BackgroundColor}">
+                                <Grid ColumnSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        
+                                        <ColumnDefinition Width="*" />
+                                        
+                                        <ColumnDefinition Width="*" />
+                                        
+                                        <ColumnDefinition Width="*" />
+                                       
+                                        <ColumnDefinition Width="*" />
+                                        
+                                        <ColumnDefinition Width="*" />
+                                      
+                                        <ColumnDefinition Width="2" />
+                                        
+                                        <ColumnDefinition Width="*" />
+                                        
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="STT" Grid.Column="0"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalOptions="Center"
+                                           TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="Username" Grid.Column="1"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalOptions="Center"
+                                           TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="Password" Grid.Column="2"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalOptions="Center"
+                                           TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="Ngày cấp" Grid.Column="3"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalOptions="Center"
+                                           TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="Chủ sở hữu" Grid.Column="4"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalOptions="Center"
+                                           TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="Vai trò" Grid.Column="5"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalOptions="Center"
+                                           TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="" Grid.Column="6"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalOptions="Center"
+                                           TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="" Grid.Column="7"
+                                           FontAttributes="Bold"
+                                           HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalOptions="Center"
+                                           TextColor="{DynamicResource TextColor}" />
+                                </Grid>
+                            </Frame>
+                        </CollectionView.Header>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Margin="0"
+                                       Padding="10"
+                                       HasShadow="False"
+                                       BorderColor="LightGray"
+                                       BackgroundColor="{DynamicResource BackgroundColor}">
+                                    <Grid ColumnSpacing="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            
+                                            <ColumnDefinition Width="*" />
+                                           
+                                            <ColumnDefinition Width="*" />
+                                            
+                                            <ColumnDefinition Width="*" />
+                                            
+                                            <ColumnDefinition Width="*" />
+                                            
+                                            <ColumnDefinition Width="*" />
+                                            
+                                            <ColumnDefinition Width="Auto" />
+                                            
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Text="{Binding UIId}"
+                                               Grid.Column="0"
+                                               HorizontalOptions="Center"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalOptions="Center"
+                                               TextColor="{DynamicResource TextColor}" />
+
+                                        <Label Text="{Binding TenDangNhap}"
+                                               Grid.Column="1"
+                                               HorizontalOptions="Center"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalOptions="Center"
+                                               TextColor="{DynamicResource TextColor}" />
+
+                                        <Label Text="{Binding MatKhau}"
+                                               Grid.Column="2"
+                                               HorizontalOptions="Center"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalOptions="Center"
+                                               TextColor="{DynamicResource TextColor}" />
+
+                                        <Label Text="{Binding NgayCap, StringFormat='{0:dd/MM/yyyy}'}"
+                                               Grid.Column="3"
+                                               HorizontalOptions="Center"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalOptions="Center"
+                                               TextColor="{DynamicResource TextColor}" />
+
+                                        <Label Text="{Binding HoTenNguoiDung}"
+                                               Grid.Column="4"
+                                               HorizontalOptions="Center"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalOptions="Center"
+                                               TextColor="{DynamicResource TextColor}" />
+
+                                        <Label Text="{Binding VaiTro}"
+                                               Grid.Column="5"
+                                               HorizontalOptions="Center"
+                                               HorizontalTextAlignment="Center"
+                                               VerticalOptions="Center"
+                                               TextColor="{DynamicResource TextColor}" />
+
+                                        <Button Text="Sửa"
+                                                Grid.Column="6"
+                                                WidthRequest="60"
+                                                HeightRequest="30"
+                                                FontSize="12"
+                                                BackgroundColor="DodgerBlue"
+                                                TextColor="White"
+                                                HorizontalOptions="Center"
+                                                Command="{Binding EditAccountCommand}"
+                                                CommandParameter="{Binding Id}"
+                                                VerticalOptions="Center" />
+
+                                        <Button Text="Xóa"
+                                                Grid.Column="7"
+                                                WidthRequest="60"
+                                                HeightRequest="30"
+                                                FontSize="12"
+                                                BackgroundColor="Crimson"
+                                                TextColor="White"
+                                                HorizontalOptions="Center"
+                                                Command="{Binding EditAccountCommand}"
+                                                CommandParameter="{Binding Id}"
+                                                VerticalOptions="Center" />
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="+ Thêm tài khoản mới"
+                    BackgroundColor="Blue"
+                    TextColor="White"
+                    CornerRadius="8"
+                    MaximumWidthRequest="300"
+                    Command="{Binding AddNewAccountCommand}"
+                    HeightRequest="50" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

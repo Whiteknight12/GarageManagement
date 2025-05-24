@@ -9,13 +9,17 @@ public partial class MainPage : ContentPage
     private readonly MainPageViewModel _viewModel;
 
     private ChiTietXePage _chiTietXePage;
+    private AddNewAccountPage _addNewAccountPage;
 
-    public MainPage(MainPageViewModel viewModel, ChiTietXePage chiTietXePage)
+    public MainPage(MainPageViewModel viewModel, 
+        ChiTietXePage chiTietXePage,
+        AddNewAccountPage addNewAccountPage)
     {
         InitializeComponent();
         BindingContext = viewModel;
         _viewModel = viewModel;
         _chiTietXePage = chiTietXePage;
+        _addNewAccountPage = addNewAccountPage;
     }
 
     private void OnCollapseClicked(object sender, EventArgs e)
@@ -47,6 +51,18 @@ public partial class MainPage : ContentPage
                 _chiTietXePage.setCarId(carId);
                 _=_chiTietXePage._viewModel.LoadAsync();
                 _viewModel.ShowRightPane(_chiTietXePage);
+            }
+        });
+
+        MessagingCenter.Subscribe<QuanLiTaiKhoanPageViewModel>(
+        this, "ShowAddNewAccount",
+        (sender) =>
+        {
+            if (_viewModel.IsRightPaneVisible) _viewModel.CloseRightPane();
+            else
+            {
+                _=_addNewAccountPage._viewModel.LoadAsync();
+                _viewModel.ShowRightPane(_addNewAccountPage);
             }
         });
     }

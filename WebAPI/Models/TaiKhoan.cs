@@ -10,6 +10,8 @@ namespace WebAPI.Models
         public Guid Id { get; set; }
         public string TenDangNhap { get; set; }
         public string MatKhau { get; set; }
+        public DateTime NgayCap { get; set; }
+        public DateTime? NgayXoa { get; set; }
         public Guid NhomNguoiDungId { get; set; }
     }
 }
