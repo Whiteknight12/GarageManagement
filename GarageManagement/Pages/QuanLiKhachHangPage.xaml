@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.QuanLiKhachHangPage"
+             x:Name="RootContentView"
+             xmlns:service="clr-namespace:GarageManagement.Services"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <service:DeleteModeTextConverter x:Key="DeleteModeTextConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
+
+            <!-- Tiêu đề -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Quản Lý Khách Hàng" 
+                           FontSize="18" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalOptions="Start"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Các nút chức năng -->
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
+                <Button Text="Thêm"
+                        Command="{Binding AddCommand}"
+                        BackgroundColor="#3B82F6"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#2563EB" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+
+                <Button Text="Sửa"
+                        Command="{Binding EditCommand}"
+                        BackgroundColor="#3B82F6"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#2563EB" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+
+                <Button Text="{Binding IsDeleteMode, Converter={StaticResource DeleteModeTextConverter}}"
+                        Command="{Binding ToggleDeleteModeCommand}"
+                        BackgroundColor="#3B82F6"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#2563EB" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+
+                <Button Text="Xoá các mục đã chọn"
+                        Command="{Binding DeleteCommand}"
+                        IsVisible="{Binding IsDeleteMode}"
+                        BackgroundColor="#EF4444"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#EF4444" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#DC2626" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+            </HorizontalStackLayout>
+
+            <!-- Tiêu đề cột -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <!-- Cột cho CheckBox -->
+                        <ColumnDefinition Width="0.7*" />
+                        <!-- Cột STT -->
+                        <ColumnDefinition Width="1*" />
+                        <!-- Cột CCCD -->
+                        <ColumnDefinition Width="1*" />
+                        <!-- Cột Họ và Tên -->
+                        <ColumnDefinition Width="0.5*" />
+                        <!-- Cột Tuổi -->
+                        <ColumnDefinition Width="1*" />
+                        <!-- Cột Giới Tính -->
+                        <ColumnDefinition Width="1*" />
+                        <!-- Cột Địa Chỉ -->
+                        <ColumnDefinition Width="1*" />
+                        <!-- Cột Số Điện Thoại -->
+                        <ColumnDefinition Width="1*" />
+                        <!-- Cột Tiền Nợ -->
+                        <ColumnDefinition Width="1*" />
+                        <!-- Cột Email -->
+                        <ColumnDefinition Width="0.5*" />
+                        <!-- Cột Hành động -->
+                    </Grid.ColumnDefinitions>
+                    <Label Text="" Grid.Column="0" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"/>
+                    <Label Text="STT" Grid.Column="1" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"/>
+                    <Label Text="CCCD" Grid.Column="2" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"/>
+                    <Label Text="Họ và Tên" Grid.Column="3" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"/>
+                    <Label Text="Tuổi" Grid.Column="4" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"/>
+                    <Label Text="Giới Tính" Grid.Column="5" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"/>
+                    <Label Text="Địa Chỉ" Grid.Column="6" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"/>
+                    <Label Text="Số Điện Thoại" Grid.Column="7" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"/>
+                    <Label Text="Tiền Nợ" Grid.Column="8" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"/>
+                    <Label Text="Email" Grid.Column="9" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"/>
+                    <Label Text="Hành động" Grid.Column="10" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"/>
+                </Grid>
+            </Frame>
+
+            <!-- Danh sách khách hàng -->
+            <CollectionView ItemsSource="{Binding ListKhachHang}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame HasShadow="True"
+                               BackgroundColor="{DynamicResource CardBackgroundColor}"
+                               Padding="20"
+                               Margin="0,12,0,0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <!-- Cột cho CheckBox -->
+                                    <ColumnDefinition Width="0.7*" />
+                                    <!-- Cột STT -->
+                                    <ColumnDefinition Width="1*" />
+                                    <!-- Cột CCCD -->
+                                    <ColumnDefinition Width="1*" />
+                                    <!-- Cột Họ và Tên -->
+                                    <ColumnDefinition Width="0.5*" />
+                                    <!-- Cột Tuổi -->
+                                    <ColumnDefinition Width="1*" />
+                                    <!-- Cột Giới Tính -->
+                                    <ColumnDefinition Width="1*" />
+                                    <!-- Cột Địa Chỉ -->
+                                    <ColumnDefinition Width="1*" />
+                                    <!-- Cột Số Điện Thoại -->
+                                    <ColumnDefinition Width="1*" />
+                                    <!-- Cột Tiền Nợ -->
+                                    <ColumnDefinition Width="1*" />
+                                    <!-- Cột Email -->
+                                    <ColumnDefinition Width="0.5*" />
+                                    <!-- Cột Hành động -->
+                                </Grid.ColumnDefinitions>
+                                <CheckBox IsChecked="{Binding IsSelected}"
+                                          Margin="10,0,0,0"
+                                          IsVisible="{Binding Path=BindingContext.IsDeleteMode, Source={x:Reference RootContentView}}"
+                                          Grid.Column="0" />
+                                <Label Text="{Binding STT}" Grid.Column="1" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="13"
+                                       Margin="30,0,0,0"/>
+                                <Label Text="{Binding CCCD}" Grid.Column="2" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="13"
+                                       Margin="5"/>
+                                <Label Text="{Binding HoVaTen}" Grid.Column="3" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="13"
+                                       Margin="5"/>
+                                <Label Text="{Binding Tuoi}" Grid.Column="4" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="13"
+                                       Margin="5"/>
+                                <Label Text="{Binding GioiTinh}" Grid.Column="5" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="13"
+                                       Margin="5"/>
+                                <Label Text="{Binding DiaChi}" Grid.Column="6" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="13"
+                                       Margin="5"/>
+                                <Label Text="{Binding SoDienThoai}" Grid.Column="7" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="13"
+                                       Margin="5"/>
+                                <Label Text="{Binding TienNo}" Grid.Column="8" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="13"
+                                       Margin="5"/>
+                                <Label Text="{Binding Email}" Grid.Column="9" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="13"
+                                       Margin="5"/>
+                                <Button Text="Chi tiết"
+                                        Command="{Binding Source={x:Reference RootContentView}, Path=BindingContext.GoToChiTietKhachHangPageCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        Grid.Column="10"
+                                        BackgroundColor="#3B82F6"
+                                        TextColor="White"
+                                        HeightRequest="40"
+                                        FontFamily="OpenSans-SemiBold">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroupList>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                    <VisualState.Setters>
+                                                        <Setter Property="BackgroundColor" Value="#2563EB" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateGroupList>
+                                    </VisualStateManager.VisualStateGroups>
+                                </Button>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

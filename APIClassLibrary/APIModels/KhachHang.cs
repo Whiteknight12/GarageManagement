@@ -20,5 +20,8 @@ namespace APIClassLibrary.APIModels
         public Guid? TaiKhoanId { get; set; }
         public double TienNo { get; set; }
         public string? Email { get; set; }
+
+        public int STT { get; set; }
+        public bool IsSelected { get; set; } = false; 
     }
 }

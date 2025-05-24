@@ -34,7 +34,6 @@ namespace GarageManagement.ViewModels
             _ = LoadAsync();
             _themHieuXePageViewModel = themHieuXePageViewModel;
             IsDeleteMode = false;
-            
         }
 
         public async Task LoadAsync()
