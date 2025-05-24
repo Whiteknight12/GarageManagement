@@ -79,6 +79,8 @@ public static class MauiProgram
         builder.Services.AddTransient<QuanLiTaiKhoanPage>();
         builder.Services.AddTransient<AddNewAccountPage>();
         builder.Services.AddTransient<SuaHieuXePage>();
+        builder.Services.AddTransient<QuanLiNhanVienPage>();
+        builder.Services.AddTransient<QuanLiKhachHangPage>();
 
         builder.Services.AddTransient<TaoPhieuSuaChuaPageViewModel>();
 		builder.Services.AddTransient<ThuTienPageViewModel>();
@@ -98,6 +100,8 @@ public static class MauiProgram
         builder.Services.AddTransient<QuanLiTaiKhoanPageViewModel>();
         builder.Services.AddTransient<AddNewAccountPageViewModel>();
         builder.Services.AddTransient<SuaHieuXePageViewModel>();
+        builder.Services.AddTransient<QuanLiNhanVienPageViewModel>();
+        builder.Services.AddTransient<QuanLiKhachHangPageViewModel>();
 
         builder.Services.AddLogging(logging =>
         {

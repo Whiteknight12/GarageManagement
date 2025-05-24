@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace APIClassLibrary.APIModels
 {
-    public class NhanVien
+    public class NhanVien 
     {
         public Guid Id { get; set; }
         public string CCCD { get; set; } = string.Empty;
@@ -17,5 +18,7 @@ namespace APIClassLibrary.APIModels
         public string SoDienThoai { get; set; }
         public string Email { get; set; }
         public Guid? TaiKhoanId { get; set; }
+        public int STT { get; set; }
+        public bool IsSelected { get; set; } = false; 
     }
 }
