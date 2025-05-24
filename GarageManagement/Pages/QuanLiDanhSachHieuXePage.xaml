@@ -4,6 +4,7 @@
              x:Class="GarageManagement.Pages.QuanLiDanhSachHieuXePage"
              x:Name="RootContentView"
              xmlns:service="clr-namespace:GarageManagement.Services"
+             xmlns:pages="clr-namespace:GarageManagement.Pages"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
     <ContentView.Resources>
@@ -31,31 +32,6 @@
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
                 <Button Text="Thêm"
                         Command="{Binding AddCommand}"
-                        BackgroundColor="#3B82F6"
-                        TextColor="White"
-                        HeightRequest="48"
-                        FontAttributes="Bold"
-                        FontFamily="OpenSans-SemiBold">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#2563EB" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                </Button>
-
-                <Button Text="Sửa"
-                        Command="{Binding EditCommand}"
                         BackgroundColor="#3B82F6"
                         TextColor="White"
                         HeightRequest="48"
@@ -136,8 +112,8 @@
                    Padding="20">
                 <Grid>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <Label Text="ID" Grid.Column="0" 
@@ -162,6 +138,13 @@
             </Frame>
 
             <CollectionView ItemsSource="{Binding ListHieuXe}">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout
+                        Orientation="Vertical"
+                        ItemSpacing="10" />
+                    
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame HasShadow="True"
@@ -170,17 +153,18 @@
                                Margin="0,12,0,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackLayout Orientation="Horizontal" Grid.Column="0">
                                     <CheckBox IsChecked="{Binding IsSelected}" 
                                             IsVisible="{Binding Path=BindingContext.IsDeleteMode, Source={x:Reference RootContentView}}" />
-                                    <Label Text="{Binding Id}" 
+                                    <Label Text="{Binding IdForUI}" 
                                            FontFamily="OpenSans-Regular"
                                            TextColor="{DynamicResource TextColor}"
                                            HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"
                                            FontSize="13"
                                            Margin="5"/>
                                 </StackLayout>
@@ -188,10 +172,12 @@
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
                                        HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
                                        FontSize="13"
                                        Margin="5"/>
-                                <Button Text="Chi tiết"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentView}}, Path=BindingContext.GoToChiTietHieuXePageCommand}"
+                                <Button Text="Sửa"
+                                        VerticalOptions="Center"
+                                        Command="{Binding Path=BindingContext.SuaHieuXeCommand, Source={RelativeSource AncestorType={x:Type pages:QuanLiDanhSachHieuXePage}}}"
                                         CommandParameter="{Binding Id}"
                                         Grid.Column="2"
                                         BackgroundColor="#3B82F6"
@@ -220,33 +206,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-            <Button Text="QUAY LẠI"
-                    Command="{Binding GoBackCommand}"
-                    BackgroundColor="#10B981"
-                    TextColor="White"
-                    HeightRequest="48"
-                    FontAttributes="Bold"
-                    FontFamily="OpenSans-SemiBold"
-                    HorizontalOptions="Center"
-                    Margin="0,20,0,0">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroupList>
-                        <VisualStateGroup x:Name="CommonStates">
-                            <VisualState x:Name="Normal">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#10B981" />
-                                </VisualState.Setters>
-                            </VisualState>
-                            <VisualState x:Name="Pressed">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#059669" />
-                                </VisualState.Setters>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </VisualStateManager.VisualStateGroups>
-            </Button>
         </VerticalStackLayout>
     </ScrollView>
 </ContentView>

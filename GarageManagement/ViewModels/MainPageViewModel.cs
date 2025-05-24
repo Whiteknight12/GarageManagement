@@ -195,8 +195,6 @@ namespace GarageManagement.ViewModels
                 _ = _quanLiTaiKhoanPage._viewModel.LoadAsync();
             }
 
-
-
             CurrentPageContent = parameter switch
             {
                 "Home" => new NhanSuMainPage(_viewModel),
@@ -213,6 +211,8 @@ namespace GarageManagement.ViewModels
                 "QuanLiTaiKhoan" => _quanLiTaiKhoanPage,
                 _ => new NhanSuMainPage(_viewModel)
             };
+
+            if (IsRightPaneVisible) CloseRightPane();
         }
 
         [RelayCommand]

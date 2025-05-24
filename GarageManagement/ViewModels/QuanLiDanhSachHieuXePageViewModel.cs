@@ -19,11 +19,16 @@ namespace GarageManagement.ViewModels
     {
         [ObservableProperty]
         private ObservableCollection<HieuXe> listHieuXe = new();
+
         [ObservableProperty]
         private bool isDeleteMode;
+
         private readonly APIClientService<HieuXe> _hieuXeService;
         private readonly ThemHieuXePageViewModel _themHieuXePageViewModel;
         private readonly AuthenticationService _authenticationService;
+
+        int count = 0;
+
         public QuanLiDanhSachHieuXePageViewModel(APIClientService<HieuXe> hieuXeService,
             ThemHieuXePageViewModel themHieuXePageViewModel,
             ILogger<QuanLiDanhSachHieuXePageViewModel> logger,
@@ -34,7 +39,6 @@ namespace GarageManagement.ViewModels
             _ = LoadAsync();
             _themHieuXePageViewModel = themHieuXePageViewModel;
             IsDeleteMode = false;
-            
         }
 
         public async Task LoadAsync()
@@ -44,13 +48,17 @@ namespace GarageManagement.ViewModels
             var token = _authenticationService.GetCurrentAccountStatus.Token;
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             var list = await _hieuXeService.GetAll();
-            Console.WriteLine(list[0].TenHieuXe);
+            count = 0;
             ListHieuXe = new ObservableCollection<HieuXe>(list);
+            IndexCalculate(ListHieuXe);
         }
+
         public void Load(HieuXe item)
         {
             ListHieuXe.Add(item);
+            IndexCalculate(ListHieuXe);
         }
+
         [RelayCommand]
         private void Add()
         {
@@ -68,16 +76,29 @@ namespace GarageManagement.ViewModels
             };
             Application.Current.OpenWindow(newWindow);
         }
-        [RelayCommand]
-        private void Edit()
-        {
 
+        [RelayCommand]
+        public void SuaHieuXe(Guid Id)
+        {
+            MessagingCenter.Send(this, "ShowEditHieuXe", Id);
         }
+
         [RelayCommand]
         private void ToggleDeleteMode()
         {
             IsDeleteMode = !IsDeleteMode;
+            if (IsDeleteMode == false)
+            {
+                var updatedList = new List<HieuXe>(ListHieuXe);
+                foreach (var nv in updatedList)
+                {
+                    nv.IsSelected = false;
+                }
+                ListHieuXe = new ObservableCollection<HieuXe>(updatedList);
+                IndexCalculate(ListHieuXe);
+            }
         }
+
         [RelayCommand]
         private async Task Delete()
         {
@@ -87,10 +108,18 @@ namespace GarageManagement.ViewModels
                 await _hieuXeService.Delete(item.Id);
                 ListHieuXe.Remove(item);
             }
-            
+            IndexCalculate(ListHieuXe);
             IsDeleteMode = false; // Thoát chế độ xóa sau khi xóa xong
-
         }
 
+        private void IndexCalculate(ObservableCollection<HieuXe> listHieuXe)
+        {
+            int c = 0;
+            foreach (var item in ListHieuXe)
+            {
+                item.IdForUI = c++;
+                item.OnPropertyChanged(nameof(item.IdForUI));
+            }
+        }
     }
 }

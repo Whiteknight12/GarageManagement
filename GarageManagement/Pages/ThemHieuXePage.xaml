@@ -34,7 +34,10 @@
 
             <!-- Tên Hiệu Xe -->
             <Label Text="Tên Hiệu Xe:" Style="{StaticResource LabelStyle}" />
-            <Entry Placeholder="Nhập tên hiệu xe..." Text="{Binding TenHieuXe}" Style="{StaticResource EntryStyle}" />
+            <Entry Placeholder="Nhập tên hiệu xe" 
+                   Text="{Binding TenHieuXe}" 
+                   TextColor="{DynamicResource TextColor}"
+                   Style="{StaticResource EntryStyle}" />
 
             <!-- Buttons -->
             <HorizontalStackLayout Spacing="10">
