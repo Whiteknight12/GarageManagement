@@ -12,6 +12,14 @@ namespace APIClassLibrary.APIModels
         public Guid Id { get; set; }
         public string TenDangNhap { get; set; }
         public string MatKhau { get; set; }
-        public Guid NguoiDungId { get; set; }
+        public Guid NhomNguoiDungId { get; set; }
+        public DateTime NgayCap { get; set; }
+
+        //nhung truong duoi chi de xu li UI, khong luu vao db
+        public string? HoTenNguoiDung { get; set; }
+        public string? VaiTro { get; set; }
+        public string? DangHoatDong { get; set; }
+        public string? CCCD { get; set; }
+        public int? UIId { get; set; }
     }
 }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.AddNewAccountPage">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label
+                Text="THÊM TÀI KHOẢN MỚI"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Picker
+                Title="Chọn người dùng"
+                BackgroundColor="{DynamicResource InputBackgroundColor}"
+                TitleColor="{DynamicResource TextColor}"
+                SelectedIndexChanged="OnUserSelected"
+                ItemsSource="{Binding ListNguoiDung}"
+                ItemDisplayBinding="{Binding HoVaTen}"
+                TextColor="{DynamicResource TextColor}"
+                SelectedItem="{Binding SelectedUser, Mode=TwoWay}" />
+
+            <StackLayout IsVisible="{Binding IsSelectingUser}">
+
+                <Label Text="Họ và tên:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}"/>
+                <Label Text="{Binding HoVaTen}" TextColor="{DynamicResource TextColor}" />
+
+                <Label Text="CCCD:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" Margin="0, 10, 0, 0"/>
+                <Label Text="{Binding CCCD}" TextColor="{DynamicResource TextColor}"/>
+
+                <Label Text="Số điện thoại:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" Margin="0, 10, 0, 0"/>
+                <Label Text="{Binding PhoneNumber}" TextColor="{DynamicResource TextColor}"/>
+
+            </StackLayout>
+
+            <Label Text="Tên đăng nhập:" FontAttributes="Bold" />
+            <Entry
+                Placeholder="Nhập tên đăng nhập"
+                Text="{Binding NewUsername}" TextColor="{DynamicResource TextColor}"/>
+
+            <Label Text="Mật khẩu:" FontAttributes="Bold" />
+            <Entry
+                Placeholder="Nhập mật khẩu"
+                IsPassword="True"
+                Text="{Binding NewPassword}" TextColor="{DynamicResource TextColor}"/>
+
+            <Picker
+                Title="Chọn vai trò"
+                ItemsSource="{Binding NhomNguoiDung}"
+                ItemDisplayBinding="{Binding TenVaiTro}"
+                SelectedItem="{Binding SelectedRole}" />
+
+            <Button
+                Text="+ Thêm"
+                Command="{Binding AddAccountCommand}"
+                HorizontalOptions="Center"
+                WidthRequest="150" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

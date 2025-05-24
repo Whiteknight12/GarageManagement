@@ -11,5 +11,6 @@ namespace WebAPI.Models
         public string TenDangNhap { get; set; }
         public string MatKhau { get; set; }
         public Guid NhomNguoiDungId { get; set; }
+        public DateTime NgayCap { get; set; }
     }
 }

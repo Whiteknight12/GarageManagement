@@ -358,6 +358,26 @@
                             <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="ThayDoiThamSo" />
                         </Frame.GestureRecognizers>
                     </Frame>
+                    <Frame BackgroundColor="{Binding QuanLiTaiKhoanActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+                        CornerRadius="{StaticResource CornerRadiusHandler}"
+                        Padding="10"
+                        Margin="5"
+                        HasShadow="True">
+                        <HorizontalStackLayout>
+                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                            <Label Text="QL DS Tài Khoản"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                        </HorizontalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiTaiKhoan" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
                 </VerticalStackLayout>
 
                 <!-- Home (không thuộc nhóm nào) -->
