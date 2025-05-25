@@ -114,6 +114,8 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\QuanLiPhieuTiepNhanXePage.xaml">
+	  	<Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\QuanLiPhieuNhapPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
