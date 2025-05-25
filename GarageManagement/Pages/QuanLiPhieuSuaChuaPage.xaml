@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GarageManagement.Pages.QuanLiKhachHangPage"
+             x:Class="GarageManagement.Pages.QuanLiPhieuSuaChuaPage"
              x:Name="RootContentView"
              xmlns:service="clr-namespace:GarageManagement.Services"
              BackgroundColor="{DynamicResource BackgroundColor}">
@@ -20,7 +20,7 @@
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20">
                 <VerticalStackLayout Spacing="12">
-                    <Label Text="Quản Lý Khách Hàng" 
+                    <Label Text="Quản Lý Phiếu Sửa Chữa" 
                            FontSize="18" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
@@ -33,31 +33,6 @@
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
                 <Button Text="Thêm"
                         Command="{Binding AddCommand}"
-                        BackgroundColor="#3B82F6"
-                        TextColor="White"
-                        HeightRequest="48"
-                        FontAttributes="Bold"
-                        FontFamily="OpenSans-SemiBold">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#2563EB" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                </Button>
-
-                <Button Text="Sửa"
-                        Command="{Binding EditCommand}"
                         BackgroundColor="#3B82F6"
                         TextColor="White"
                         HeightRequest="48"
@@ -144,21 +119,13 @@
                         <ColumnDefinition Width="0.7*" />
                         <!-- Cột STT -->
                         <ColumnDefinition Width="1*" />
-                        <!-- Cột CCCD -->
+                        <!-- Cột Tên Xe -->
                         <ColumnDefinition Width="1*" />
-                        <!-- Cột Họ và Tên -->
-                        <ColumnDefinition Width="0.5*" />
-                        <!-- Cột Tuổi -->
+                        <!-- Cột Biển Số Xe -->
                         <ColumnDefinition Width="1*" />
-                        <!-- Cột Giới Tính -->
+                        <!-- Cột Ngày Sửa Chữa -->
                         <ColumnDefinition Width="1*" />
-                        <!-- Cột Địa Chỉ -->
-                        <ColumnDefinition Width="1*" />
-                        <!-- Cột Số Điện Thoại -->
-                        <ColumnDefinition Width="1*" />
-                        <!-- Cột Tiền Nợ -->
-                        <ColumnDefinition Width="1*" />
-                        <!-- Cột Email -->
+                        <!-- Cột Tổng Tiền -->
                         <ColumnDefinition Width="0.5*" />
                         <!-- Cột Hành động -->
                     </Grid.ColumnDefinitions>
@@ -174,55 +141,31 @@
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="CCCD" Grid.Column="2" 
+                    <Label Text="Tên Xe" Grid.Column="2" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="Họ và Tên" Grid.Column="3" 
+                    <Label Text="Biển Số Xe" Grid.Column="3" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="Tuổi" Grid.Column="4" 
+                    <Label Text="Ngày Sửa Chữa" Grid.Column="4" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="Giới Tính" Grid.Column="5" 
+                    <Label Text="Tổng Tiền" Grid.Column="5" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="Địa Chỉ" Grid.Column="6" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"
-                           HorizontalTextAlignment="Center"
-                           FontSize="14"/>
-                    <Label Text="Số Điện Thoại" Grid.Column="7" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"
-                           HorizontalTextAlignment="Center"
-                           FontSize="14"/>
-                    <Label Text="Tiền Nợ" Grid.Column="8" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"
-                           HorizontalTextAlignment="Center"
-                           FontSize="14"/>
-                    <Label Text="Email" Grid.Column="9" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"
-                           HorizontalTextAlignment="Center"
-                           FontSize="14"/>
-                    <Label Text="Hành động" Grid.Column="10" 
+                    <Label Text="Hành động" Grid.Column="6" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
@@ -231,8 +174,8 @@
                 </Grid>
             </Frame>
 
-            <!-- Danh sách khách hàng -->
-            <CollectionView ItemsSource="{Binding ListKhachHang}">
+            <!-- Danh sách phiếu sửa chữa -->
+            <CollectionView ItemsSource="{Binding ListPhieuSuaChua}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame HasShadow="True"
@@ -246,21 +189,13 @@
                                     <ColumnDefinition Width="0.7*" />
                                     <!-- Cột STT -->
                                     <ColumnDefinition Width="1*" />
-                                    <!-- Cột CCCD -->
+                                    <!-- Cột Tên Xe -->
                                     <ColumnDefinition Width="1*" />
-                                    <!-- Cột Họ và Tên -->
-                                    <ColumnDefinition Width="0.5*" />
-                                    <!-- Cột Tuổi -->
+                                    <!-- Cột Biển Số Xe -->
                                     <ColumnDefinition Width="1*" />
-                                    <!-- Cột Giới Tính -->
+                                    <!-- Cột Ngày Sửa Chữa -->
                                     <ColumnDefinition Width="1*" />
-                                    <!-- Cột Địa Chỉ -->
-                                    <ColumnDefinition Width="1*" />
-                                    <!-- Cột Số Điện Thoại -->
-                                    <ColumnDefinition Width="1*" />
-                                    <!-- Cột Tiền Nợ -->
-                                    <ColumnDefinition Width="1*" />
-                                    <!-- Cột Email -->
+                                    <!-- Cột Tổng Tiền -->
                                     <ColumnDefinition Width="0.5*" />
                                     <!-- Cột Hành động -->
                                 </Grid.ColumnDefinitions>
@@ -270,70 +205,42 @@
                                           Grid.Column="0" />
                                 <Label Text="{Binding STT}" Grid.Column="1" 
                                        FontFamily="OpenSans-Regular"
+                                       VerticalOptions="Center"
                                        TextColor="{DynamicResource TextColor}"
                                        FontSize="13"
-                                       VerticalOptions="Center"
-                                       Margin="30,0,0,0"/>
-                                <Label Text="{Binding CCCD}" Grid.Column="2" 
+                                       HorizontalTextAlignment="Center"/>
+                                <Label Text="{Binding TenXe}" Grid.Column="2" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
                                        HorizontalTextAlignment="Center"
                                        VerticalOptions="Center"
                                        FontSize="13"
                                        Margin="5"/>
-                                <Label Text="{Binding HoVaTen}" Grid.Column="3" 
+                                <Label Text="{Binding BienSoXe}" Grid.Column="3" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
-                                       HorizontalTextAlignment="Center"
                                        VerticalOptions="Center"
+                                       HorizontalTextAlignment="Center"
                                        FontSize="13"
                                        Margin="5"/>
-                                <Label Text="{Binding Tuoi}" Grid.Column="4" 
+                                <Label Text="{Binding NgaySuaChua, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="4" 
                                        FontFamily="OpenSans-Regular"
+                                       VerticalOptions="Center"
                                        TextColor="{DynamicResource TextColor}"
                                        HorizontalTextAlignment="Center"
                                        FontSize="13"
-                                       VerticalOptions="Center"
                                        Margin="5"/>
-                                <Label Text="{Binding GioiTinh}" Grid.Column="5" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalTextAlignment="Center"
+                                <Label Text="{Binding TongTien, StringFormat='{0:N0} VNĐ'}" Grid.Column="5" 
                                        VerticalOptions="Center"
-                                       FontSize="13"
-                                       Margin="5"/>
-                                <Label Text="{Binding DiaChi}" Grid.Column="6" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalTextAlignment="Center"
-                                       VerticalOptions="Center"
-                                       FontSize="13"
-                                       Margin="5"/>
-                                <Label Text="{Binding SoDienThoai}" Grid.Column="7" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
                                        HorizontalTextAlignment="Center"
                                        FontSize="13"
-                                       VerticalOptions="Center"
                                        Margin="5"/>
-                                <Label Text="{Binding TienNo}" Grid.Column="8" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalTextAlignment="Center"
-                                       VerticalOptions="Center"
-                                       FontSize="13"
-                                       Margin="5"/>
-                                <Label Text="{Binding Email}" Grid.Column="9" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalTextAlignment="Center"
-                                       VerticalOptions="Center"
-                                       FontSize="13"
-                                       Margin="5"/>
-                                <Button Text="Chi tiết"
-                                        Command="{Binding Source={x:Reference RootContentView}, Path=BindingContext.GoToChiTietKhachHangPageCommand}"
+                                <Button Text="Sửa"
+                                        Command="{Binding Source={x:Reference RootContentView}, Path=BindingContext.EditCommand}"
                                         CommandParameter="{Binding Id}"
-                                        Grid.Column="10"
+                                        Grid.Column="6"
                                         BackgroundColor="#3B82F6"
                                         TextColor="White"
                                         HeightRequest="40"

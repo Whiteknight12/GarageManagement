@@ -242,6 +242,64 @@
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiPhieuTiepNhan" />
+                    <Frame BackgroundColor="{Binding QuanLiPhieuNhapActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+                            CornerRadius="{StaticResource CornerRadiusHandler}"
+                            Padding="10"
+                            Margin="5"
+                            HasShadow="True">
+                        <HorizontalStackLayout>
+                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                            <Label Text="Quản lí phiếu nhập"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="WordWrap"
+                                   MaximumWidthRequest="120"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                        </HorizontalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiPhieuNhap" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Frame BackgroundColor="{Binding QuanLiPhieuSuaChuaActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+                            CornerRadius="{StaticResource CornerRadiusHandler}"
+                            Padding="10"
+                            Margin="5"
+                            HasShadow="True">
+                        <HorizontalStackLayout>
+                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                            <Label Text="Quản lí phiếu sữa chữa"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="WordWrap"
+                                   MaximumWidthRequest="120"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                        </HorizontalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiPhieuSuaChua" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Frame BackgroundColor="{Binding QuanLiPhieuThuTienActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+                            CornerRadius="{StaticResource CornerRadiusHandler}"
+                            Padding="10"
+                            Margin="5"
+                            HasShadow="True">
+                        <HorizontalStackLayout>
+                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                            <Label Text="Quản lí phiếu thu tiền"
+                                    TextColor="White"
+                                    FontSize="14"
+                                    FontFamily="OpenSans-Regular"
+                                    HorizontalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    MaximumWidthRequest="120"
+                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                        </HorizontalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiPhieuThuTien" />
                         </Frame.GestureRecognizers>
                     </Frame>
                 </VerticalStackLayout>

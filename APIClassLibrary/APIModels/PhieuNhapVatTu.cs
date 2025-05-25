@@ -11,5 +11,8 @@ namespace APIClassLibrary.APIModels
         public Guid Id { get; set; }
         public DateTime NgayNhap { get; set; }
         public double TongTien { get; set; }
+
+        public int STT { get; set; }
+        public bool IsSelected { get; set; } = false;
     }
 }

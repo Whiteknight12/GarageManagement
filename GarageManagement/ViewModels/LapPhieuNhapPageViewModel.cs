@@ -60,7 +60,12 @@ namespace GarageManagement.ViewModels
         private void LuuPhieuNhap()
         {
             var listChiTiet = ListChiTietPhieuNhap.ToList();
-            if (listChiTiet.Select(d => (d.DonGia == null || d.SoLuong == null)) != null)
+            if (listChiTiet.Count == 0)
+            {
+                Shell.Current.DisplayAlert("Cảnh báo", "Không được nhập phiếu TRỐNG", "OK");
+                return;
+            }
+            if (listChiTiet.Any(d => (d.DonGia == null || d.SoLuong == null)))
             {
                 Shell.Current.DisplayAlert("Cảnh báo", "Không được bỏ trống SỐ LƯỢNG và ĐƠN GIÁ", "OK");
                 return;
@@ -86,6 +91,9 @@ namespace GarageManagement.ViewModels
             }
             var toast = Toast.Make("Thêm phiếu nhập mới thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
             _ = toast.Show();
+
+            ListChiTietPhieuNhap.Clear();
+            ListChiTietPhieuNhap.Add(new ChiTietPhieuNhapVatTu()); 
         }
     }
 }

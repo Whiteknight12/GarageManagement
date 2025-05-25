@@ -1,8 +1,6 @@
 ﻿
 using APIClassLibrary.APIModels;
-using CommunityToolkit.Maui.Alerts;
 using GarageManagement.ViewModels;
-using System.Collections.ObjectModel;
 
 namespace GarageManagement.Pages;
 
@@ -23,7 +21,7 @@ public partial class LapPhieuNhapPage : ContentView
         {
             if (chiTietPhieuNhapVatTu.SoLuong != null && chiTietPhieuNhapVatTu.DonGia != null)
             {
-                var listGiaTien = _viewModel.ListChiTietPhieuNhap.Select(c => c.SoLuong * c.DonGia);
+                var listGiaTien = _viewModel.ListChiTietPhieuNhap.Where(c => c.SoLuong != null && c.DonGia != null).Select(c => c.SoLuong * c.DonGia);
                 _viewModel.TongGiaTien = listGiaTien.Sum(l => l.Value);
             }
         }
@@ -34,7 +32,7 @@ public partial class LapPhieuNhapPage : ContentView
         {
             if (chiTietPhieuNhapVatTu.SoLuong != null && chiTietPhieuNhapVatTu.DonGia != null)
             {
-                var listGiaTien = _viewModel.ListChiTietPhieuNhap.Select(c => c.SoLuong * c.DonGia);
+                var listGiaTien = _viewModel.ListChiTietPhieuNhap.Where(c => c.SoLuong != null && c.DonGia != null).Select(c => c.SoLuong * c.DonGia);
                 _viewModel.TongGiaTien = listGiaTien.Sum(l => l.Value);
             }
         }

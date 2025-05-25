@@ -54,7 +54,12 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty]
         private bool quanLiKhachHangActive = false;
-
+        [ObservableProperty]
+        private bool quanLiPhieuNhapActive = false;
+        [ObservableProperty]
+        private bool quanLiPhieuThuTienActive = false;
+        [ObservableProperty]
+        private bool quanLiPhieuSuaChuaActive = false;
         [ObservableProperty]
         private bool quanLiPhieuTiepNhanActive = false;
 
@@ -98,6 +103,9 @@ namespace GarageManagement.ViewModels
         private readonly QuanLiKhachHangPage _quanLiKhachHangPage;
         private readonly QuanLiPhieuTiepNhanXePage _quanLiPhieuTiepNhanXePage;
 
+        private readonly QuanLiPhieuNhapPage _quanLiPhieuNhapPage;
+        private readonly QuanLiPhieuThuTienPage _quanLiPhieuThuTienPage;
+        private readonly QuanLiPhieuSuaChuaPage _quanLiPhieuSuaChuaPage;
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
             LapPhieuNhapPage taoPhieuNhap,
@@ -116,6 +124,9 @@ namespace GarageManagement.ViewModels
             QuanLiNhanVienPage quanLiNhanVienPage,
             QuanLiKhachHangPage quanLiKhachHangPage,
             QuanLiPhieuTiepNhanXePage quanLiPhieuTiepNhanXePage)
+            QuanLiPhieuNhapPage quanLiPhieuNhapPage,
+            QuanLiPhieuThuTienPage quanLiPhieuThuTienPage,
+            QuanLiPhieuSuaChuaPage quanLiPhieuSuaChuaPage)
         {
             _viewModel = viewModel;
             currentPageContent = new NhanSuMainPage(_viewModel);
@@ -140,6 +151,9 @@ namespace GarageManagement.ViewModels
             _quanLiDanhSachHieuXe = quanLiDanhSachHieuXe;
             _quanLiKhachHangPage = quanLiKhachHangPage;
             _quanLiPhieuTiepNhanXePage = quanLiPhieuTiepNhanXePage;
+            _quanLiPhieuNhapPage = quanLiPhieuNhapPage;
+            _quanLiPhieuThuTienPage = quanLiPhieuThuTienPage;
+            _quanLiPhieuSuaChuaPage = quanLiPhieuSuaChuaPage;
             _ = LoadUserAsync();
         }
 
@@ -230,6 +244,22 @@ namespace GarageManagement.ViewModels
             if (QuanLiPhieuTiepNhanActive==true)
             {
                 _ = _quanLiPhieuTiepNhanXePage._viewModel.LoadAsync();
+            QuanLiPhieuNhapActive = parameter == "QuanLiPhieuNhap";
+            if (QuanLiPhieuNhapActive == true)
+            {
+                _ = _quanLiPhieuNhapPage._viewModel.LoadAsync();
+            }
+
+            QuanLiPhieuThuTienActive = parameter == "QuanLiPhieuThuTien";
+            if (QuanLiPhieuThuTienActive == true)
+            {
+                _ = _quanLiPhieuThuTienPage._viewModel.LoadAsync();
+            }
+
+            QuanLiPhieuSuaChuaActive = parameter == "QuanLiPhieuSuaChua";
+            if (QuanLiPhieuSuaChuaActive == true)
+            {
+                _ = _quanLiPhieuSuaChuaPage._viewModel.LoadAsync();
             }
 
             CurrentPageContent = parameter switch
@@ -249,6 +279,9 @@ namespace GarageManagement.ViewModels
                 "QuanLiNhanVien" => _quanLiNhanVienPage,
                 "QuanLiKhachHang" => _quanLiKhachHangPage,
                 "QuanLiPhieuTiepNhan" => _quanLiPhieuTiepNhanXePage,
+                "QuanLiPhieuNhap" => _quanLiPhieuNhapPage,
+                "QuanLiPhieuThuTien" => _quanLiPhieuThuTienPage,
+                "QuanLiPhieuSuaChua" => _quanLiPhieuSuaChuaPage,
                 _ => new NhanSuMainPage(_viewModel)
             };
 
