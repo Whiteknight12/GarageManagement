@@ -74,6 +74,9 @@
 	  <Compile Update="Pages\ChiTietKhachHangPage.xaml.cs">
 	    <DependentUpon>ChiTietKhachHangPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\QuanLiPhieuNhapPage.xaml.cs">
+	    <DependentUpon>QuanLiPhieuNhapPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -108,6 +111,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\QuanLiNhanVienPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\QuanLiPhieuNhapPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\QuanLiPhieuSuaChuaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\QuanLiPhieuThuTienPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\QuanLiTaiKhoanPage.xaml">
