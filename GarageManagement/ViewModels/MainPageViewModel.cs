@@ -56,6 +56,9 @@ namespace GarageManagement.ViewModels
         private bool quanLiKhachHangActive = false;
 
         [ObservableProperty]
+        private bool quanLiPhieuTiepNhanActive = false;
+
+        [ObservableProperty]
         private bool isCollapsed;
 
         [ObservableProperty]
@@ -93,6 +96,8 @@ namespace GarageManagement.ViewModels
         private readonly QuanLiTaiKhoanPage _quanLiTaiKhoanPage;
         private readonly QuanLiNhanVienPage _quanLiNhanVienPage;
         private readonly QuanLiKhachHangPage _quanLiKhachHangPage;
+        private readonly QuanLiPhieuTiepNhanXePage _quanLiPhieuTiepNhanXePage;
+
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
             LapPhieuNhapPage taoPhieuNhap,
@@ -109,7 +114,8 @@ namespace GarageManagement.ViewModels
             QuanLyThamSoPage quanLyThamSoPage,
             QuanLiTaiKhoanPage quanLiTaiKhoanPage,
             QuanLiNhanVienPage quanLiNhanVienPage,
-            QuanLiKhachHangPage quanLiKhachHangPage)
+            QuanLiKhachHangPage quanLiKhachHangPage,
+            QuanLiPhieuTiepNhanXePage quanLiPhieuTiepNhanXePage)
         {
             _viewModel = viewModel;
             currentPageContent = new NhanSuMainPage(_viewModel);
@@ -133,6 +139,7 @@ namespace GarageManagement.ViewModels
             _quanLiNhanVienPage = quanLiNhanVienPage;
             _quanLiDanhSachHieuXe = quanLiDanhSachHieuXe;
             _quanLiKhachHangPage = quanLiKhachHangPage;
+            _quanLiPhieuTiepNhanXePage = quanLiPhieuTiepNhanXePage;
             _ = LoadUserAsync();
         }
 
@@ -219,6 +226,12 @@ namespace GarageManagement.ViewModels
                 _ = _quanLiKhachHangPage._viewModel.LoadAsync();
             }
 
+            QuanLiPhieuTiepNhanActive = parameter == "QuanLiPhieuTiepNhan";
+            if (QuanLiPhieuTiepNhanActive==true)
+            {
+                _ = _quanLiPhieuTiepNhanXePage._viewModel.LoadAsync();
+            }
+
             CurrentPageContent = parameter switch
             {
                 "Home" => new NhanSuMainPage(_viewModel),
@@ -235,6 +248,7 @@ namespace GarageManagement.ViewModels
                 "QuanLiTaiKhoan" => _quanLiTaiKhoanPage,
                 "QuanLiNhanVien" => _quanLiNhanVienPage,
                 "QuanLiKhachHang" => _quanLiKhachHangPage,
+                "QuanLiPhieuTiepNhan" => _quanLiPhieuTiepNhanXePage,
                 _ => new NhanSuMainPage(_viewModel)
             };
 

@@ -143,6 +143,8 @@ namespace GarageManagement.ViewModels
             await toast.Show();
             BienSo = string.Empty;
             NgayTiepNhan = DateTime.UtcNow.ToLocalTime();
+            IsCarExists = false;
+            IsCarNotFound = true;
         }
 
         [RelayCommand]
@@ -154,7 +156,7 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public async Task ViewCarOwnerDetails()
         {
-            await Shell.Current.GoToAsync($"{nameof(ChiTietKhachHangPage)}?parameterID={ownerId}");
+            MessagingCenter.Send(this, "ShowCustomerDetails", ownerId);
         }
 
         [RelayCommand]

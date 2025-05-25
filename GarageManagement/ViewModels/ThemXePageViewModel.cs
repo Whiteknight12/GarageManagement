@@ -1,9 +1,11 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
@@ -103,7 +105,18 @@ namespace GarageManagement.ViewModels
                 KhaDung = true,
                 TienNo = 0
             });
-            chuXeId = Guid.NewGuid(); 
+            var toast = Toast.Make("Thêm xe mới thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
+            await toast.Show();
+            chuXeId = Guid.NewGuid();
+            TenXe = string.Empty;
+            SelectedHieuXe = null;
+            BienSoXe = string.Empty;
+            FilterValue = null;
+            HoVaTen = string.Empty;
+            Tuoi = string.Empty;
+            SoDienThoai = string.Empty;
+            DiaChi = string.Empty;
+            Email = string.Empty;
         }
 
         [RelayCommand]

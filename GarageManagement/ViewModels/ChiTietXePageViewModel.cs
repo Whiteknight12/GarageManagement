@@ -72,6 +72,18 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private KhachHang selectedKhachHang;
 
+        [ObservableProperty]
+        private string nameValue;
+
+        [ObservableProperty]
+        private string emailValue;
+
+        [ObservableProperty]
+        private string cCCDValue;
+
+        [ObservableProperty]
+        private string phoneValue;
+
         public Guid selectedKhachHangId;
 
         private readonly APIClientService<Xe> _carservice;
@@ -152,10 +164,9 @@ namespace GarageManagement.ViewModels
             {
                 car.Ten = Name;
                 car.BienSo = BienSo;
-                car.HieuXeId = selectedHieuXe.Id;
+                car.HieuXeId = SelectedHieuXe.Id;
                 car.KhaDung= SelectedTrangThaiXe.Equals("Đang tiếp nhận trong Gara") ? true : false;
                 car.KhachHangId = selectedKhachHangId;
-                car.HieuXeId = SelectedHieuXe.Id;
                 await _carservice.Update(car);
                 var toast = Toast.Make("Đăng nhập thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
                 await LoadAsync();
@@ -172,40 +183,15 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        public void Filter()
+        public async Task Filter()
         {
-            if (selectedFilterField=="CCCD")
-            {
-                var result = ListKhachHang.FirstOrDefault(u => u.CCCD.ToLower().Contains(FilterValue.ToLower()));
-                if (result is not null)
-                {
-                    SelectedKhachHang=ListKhachHang.FirstOrDefault(u => u.CCCD==result.CCCD);
-                }
-            }
-            else if (SelectedFilterField=="Tên")
-            {
-                var result = ListKhachHang.FirstOrDefault(u => u.HoVaTen.ToLower().Contains(FilterValue.ToLower()));
-                if (result is not null)
-                {
-                    SelectedKhachHang = ListKhachHang.FirstOrDefault(u => u.HoVaTen == result.HoVaTen);
-                }
-            }
-            else if (SelectedFilterField=="Số điện thoại")
-            {
-                var result = ListKhachHang.FirstOrDefault(u => u.SoDienThoai.ToLower().Contains(FilterValue.ToLower()));
-                if (result is not null)
-                {
-                    SelectedKhachHang = ListKhachHang.FirstOrDefault(u => u.SoDienThoai == result.SoDienThoai);
-                }
-            }
-            else
-            {
-                var result = ListKhachHang.FirstOrDefault(u => u.Email.ToLower().Contains(FilterValue.ToLower()));
-                if (result is not null)
-                {
-                    SelectedKhachHang = ListKhachHang.FirstOrDefault(u => u.Email == result.Email);
-                }
-            }
+            await LoadAsync();
+            var list= ListKhachHang.ToList();
+            if (!string.IsNullOrEmpty(NameValue)) list=list.Where(x => x.HoVaTen.Contains(NameValue, StringComparison.OrdinalIgnoreCase)).ToList();
+            if (!string.IsNullOrEmpty(EmailValue)) list=list.Where(x => x.Email?.Contains(EmailValue, StringComparison.OrdinalIgnoreCase) ?? false).ToList();
+            if (!string.IsNullOrEmpty(CCCDValue)) list=list.Where(x => x.CCCD.Contains(CCCDValue, StringComparison.OrdinalIgnoreCase)).ToList();
+            if (!string.IsNullOrEmpty(PhoneValue)) list=list.Where(x => x.SoDienThoai.Contains(PhoneValue, StringComparison.OrdinalIgnoreCase)).ToList();
+            ListKhachHang = new ObservableCollection<KhachHang>(list);
         }
     }
 }

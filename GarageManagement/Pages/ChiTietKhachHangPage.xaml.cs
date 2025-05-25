@@ -3,7 +3,7 @@ using GarageManagement.ViewModels;
 namespace GarageManagement.Pages;
 
 [QueryProperty(nameof(CustomerIDString), "parameterID")]
-public partial class ChiTietKhachHangPage : ContentPage
+public partial class ChiTietKhachHangPage : ContentView
 {
     string _customerIdString;
     public string CustomerIDString 
@@ -16,7 +16,7 @@ public partial class ChiTietKhachHangPage : ContentPage
         }
     }
 
-    private readonly ChiTietKhachHangViewModel _viewModel;
+    public readonly ChiTietKhachHangViewModel _viewModel;
 
     public ChiTietKhachHangPage(ChiTietKhachHangViewModel viewModel)
 	{
@@ -24,10 +24,4 @@ public partial class ChiTietKhachHangPage : ContentPage
         _viewModel = viewModel;
         BindingContext = _viewModel;
 	}
-
-    protected override void OnNavigatedTo(NavigatedToEventArgs args)
-    {
-        base.OnNavigatedTo(args);
-        _viewModel.LoadAsync();
-    }
 }

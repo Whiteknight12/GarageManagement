@@ -12,5 +12,6 @@ namespace APIClassLibrary.APIModels
         public string? HoVaTen { get; set; }
         public string? CCCD { get; set; }
         public string? SDT { get; set; }
+        public string? Email { get; set; }
     }
 }

@@ -1,123 +1,157 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GarageManagement.Pages.ChiTietKhachHangPage"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="20" MaximumWidthRequest="1000">
-            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
-               CornerRadius="10"
-               Padding="15"
-               HasShadow="True">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
 
-                    <Label Text="Chi Tiết Chủ Xe" 
-                       TextColor="{DynamicResource TextColor}" 
-                       FontSize="30" 
-                       HorizontalOptions="Center" 
-                       FontAttributes="Bold"/>
-                </Grid>
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   CornerRadius="10"
+                   Padding="15"
+                   HasShadow="True">
+                <Label Text="Chi Tiết Chủ Xe"
+                       TextColor="{DynamicResource TextColor}"
+                       FontSize="30"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold" />
             </Frame>
 
             <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
-               CornerRadius="10"
-               Padding="15"
-               HasShadow="True">
+                   CornerRadius="10"
+                   Padding="15"
+                   HasShadow="True">
                 <VerticalStackLayout Spacing="15">
+
                     <VerticalStackLayout>
-                        <Label Text="Họ và tên"
+                        <Label Text="CCCD"
                            FontSize="16"
-                           TextColor="{DynamicResource TextColor}"/>
-                        <Label Text="{Binding HoVaTen}"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource TextColor}" />
+                        <Entry Text="{Binding CCCD, Mode=TwoWay}"
+                           IsReadOnly="{Binding IsReadOnly}"
                            FontSize="16"
                            TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
 
-                    <BoxView/>
+                    <VerticalStackLayout>
+                        <Label Text="Họ và tên"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
+                        <Entry Text="{Binding HoVaTen, Mode=TwoWay}"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}" />
+                    </VerticalStackLayout>
 
                     <VerticalStackLayout>
                         <Label Text="Tuổi"
-                       FontSize="16"
-                       TextColor="{DynamicResource TextColor}"/>
-                        <Label Text="{Binding Tuoi}"
-                       FontSize="16"
-                       TextColor="{DynamicResource TextColor}" />
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
+                        <Entry Text="{Binding Tuoi, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
-
-                    <BoxView/>
 
                     <VerticalStackLayout>
                         <Label Text="Địa chỉ"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}"/>
-                        <Label Text="{Binding DiaChi}"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}" />
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
+                        <Editor Text="{Binding DiaChi, Mode=TwoWay}"
+                                IsReadOnly="{Binding IsReadOnly}"
+                                AutoSize="TextChanges"
+                                FontSize="16"
+                                TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
-
-                    <BoxView/>
 
                     <VerticalStackLayout>
                         <Label Text="Số điện thoại"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}" />
-                        <Label Text="{Binding SoDienThoai}"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}" />
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
+                        <Entry Text="{Binding SoDienThoai, Mode=TwoWay}"
+                               Keyboard="Telephone"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
-
-                    <BoxView/>
-
-                    <VerticalStackLayout>
-                        <Label Text="Tiền nợ: "
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}" />
-
-                        <Label Text="{Binding TienNo, StringFormat='{0:N0} VNĐ'}"
-                           TextColor="#D32F2F"
-                           FontSize="16"/>
-                    </VerticalStackLayout>
-
-                    <BoxView/>
 
                     <VerticalStackLayout>
                         <Label Text="Email"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}" />
-
-                        <Label Text="{Binding Email}"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}" />
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
+                        <Entry Text="{Binding Email, Mode=TwoWay}"
+                               Keyboard="Email"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
-
-                    <BoxView/>
 
                     <VerticalStackLayout>
-
-                        <Label Text="Tài khoản"
-                        FontSize="16"
-                        TextColor="{DynamicResource TextColor}" />
-
-                        <Label Text="{Binding HasAccount}"
-                        TextColor="{DynamicResource TextColor}"
-                        FontSize="16"/>
-
+                        <Label Text="Giới tính"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            TextColor="{DynamicResource TextColor}" />
+                        <Picker 
+                            BackgroundColor="{DynamicResource InputBackgroundColor}"
+                            ItemsSource="{Binding ListGioiTinh}"
+                            SelectedItem="{Binding SelectedGioiTinh}"
+                            IsEnabled="{Binding IsUpdating}"
+                            FontSize="16"
+                            TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
 
-                    <BoxView/>
+                    <VerticalStackLayout>
+                        <Label Text="Tiền nợ"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
+                        <Entry Text="{Binding TienNo, StringFormat='{0:N0}', Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               IsReadOnly="True"
+                               FontSize="16"
+                               TextColor="#D32F2F" />
+                    </VerticalStackLayout>
 
-                    
+                    <VerticalStackLayout>
+                        <Label Text="Tài khoản"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
+                        <Label Text="{Binding HasAccount}"
+                            Margin="10, 10, 0, 0"
+                            TextColor="{DynamicResource TextColor}"
+                            FontSize="16"/>
+                    </VerticalStackLayout>
+
                 </VerticalStackLayout>
             </Frame>
 
-            <Button Text="Cập nhật thông tin chủ xe" BackgroundColor="#10B981" TextColor="White"/>
+            <Button Text="Cập nhật thông tin chủ xe"
+                    Command="{Binding ToggleUpdateCommand}"
+                    BackgroundColor="#10B981"
+                    TextColor="White"
+                    IsVisible="{Binding IsReadOnly}" />
 
-            <Button Text="Quay lại" BackgroundColor="Gray" TextColor="White" Command="{Binding BackCommand}"/>
+            <Button Text="Cập nhật"
+                    Command="{Binding UpdateCustomerCommand}"
+                    BackgroundColor="#10B981"
+                    TextColor="White"
+                    IsVisible="{Binding IsUpdating}" />
+
+            <Button Text="Hủy"
+                    Command="{Binding ExitUpdateCommand}"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    IsVisible="{Binding IsUpdating}" />
+
         </VerticalStackLayout>
     </ScrollView>
-</ContentPage>
+</ContentView>

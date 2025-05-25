@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:GarageManagement.Pages"
+             x:Class="GarageManagement.Pages.QuanLiPhieuTiepNhanXePage">
+
+    <ScrollView MaximumWidthRequest="1000" HorizontalOptions="Center">
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <Label Text="QUẢN LÍ PHIẾU TIẾP NHẬN"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{DynamicResource TextColor}" />
+
+            <Frame BorderColor="Gray"
+                   CornerRadius="10"
+                   HasShadow="True"
+                   Padding="10"
+                   BackgroundColor="{DynamicResource BackgroundColor}">
+                <CollectionView ItemsSource="{Binding ListPhieuTiepNhan}" Margin="0">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout
+                            Orientation="Vertical"
+                            ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    
+                    <CollectionView.Header>
+                        <Grid Padding="5" ColumnSpacing="10" RowSpacing="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Text="STT" Grid.Column="0"
+                                   FontAttributes="Bold" 
+                                   TextColor="{DynamicResource TextColor}" 
+                                   HorizontalTextAlignment="Center"/>
+                            
+                            <Label Text="Ngày tiếp nhận" Grid.Column="1"
+                                   FontAttributes="Bold" 
+                                   TextColor="{DynamicResource TextColor}"  
+                                   HorizontalTextAlignment="Center"/>
+
+                            <Label Text="Biển số xe" Grid.Column="2"
+                                   FontAttributes="Bold" 
+                                   TextColor="{DynamicResource TextColor}" 
+                                   HorizontalTextAlignment="Center"/>
+
+                            <Label Text="Chủ xe" Grid.Column="3"
+                               FontAttributes="Bold" 
+                               TextColor="{DynamicResource TextColor}" 
+                               HorizontalTextAlignment="Center"/>
+
+                            <Label Text="Tình trạng" Grid.Column="4"
+                                   FontAttributes="Bold" 
+                                   TextColor="{DynamicResource TextColor}" 
+                                   HorizontalTextAlignment="Center"/>
+
+                            <Label Text="Hành động" Grid.Column="5"
+                               FontAttributes="Bold" 
+                               TextColor="{DynamicResource TextColor}" 
+                               HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </CollectionView.Header>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="{DynamicResource TextColor}"
+                                   CornerRadius="6"
+                                   Padding="5"
+                                   Margin="0,5"
+                                   BackgroundColor="{DynamicResource BackgroundColor}">
+                                <Grid ColumnSpacing="10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding IdForUI}" 
+                                           Grid.Column="0"
+                                           VerticalTextAlignment="Center"
+                                           TextColor="{DynamicResource TextColor}" 
+                                           HorizontalTextAlignment="Center"/>
+                                    
+                                    <Label Text="{Binding NgayTiepNhan, StringFormat='{0:dd/MM/yyyy}'}" 
+                                           Grid.Column="1"
+                                           VerticalTextAlignment="Center"
+                                           TextColor="{DynamicResource TextColor}" 
+                                           HorizontalTextAlignment="Center"/>
+
+                                    <Label Text="{Binding BienSoXe}" 
+                                           Grid.Column="2"
+                                           TextDecorations="Underline" 
+                                           TextColor="Blue"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Center">
+
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                                Command="{Binding BindingContext.ShowXeDetailCommand, Source={RelativeSource AncestorType={x:Type pages:QuanLiPhieuTiepNhanXePage}}}" 
+                                                CommandParameter="{Binding XeId}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <Label Text="{Binding TenKhachHang}" 
+                                        Grid.Column="3"
+                                        TextDecorations="Underline" 
+                                        TextColor="Blue" 
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Center">
+
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                                Command="{Binding BindingContext.ShowKhachHangDetailCommand, Source={RelativeSource AncestorType={x:Type pages:QuanLiPhieuTiepNhanXePage}}}" 
+                                                CommandParameter="{Binding KhachHangId}" />
+                                        </Label.GestureRecognizers>
+                                    </Label>
+
+                                    <Label Text="{Binding TinhTrang}" 
+                                           TextColor="{DynamicResource TextColor}" 
+                                           Grid.Column="4"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Start"/>
+
+                                    <StackLayout Orientation="Horizontal"
+                                         Grid.Column="5"
+                                         Spacing="10"
+                                         HorizontalOptions="Center">
+
+                                        <Button Text="Sửa"
+                                            FontSize="13"
+                                            BackgroundColor="CadetBlue"
+                                            TextColor="White"
+                                            Padding="10,0"
+                                            Command="{Binding BindingContext.EditCommand, Source={RelativeSource AncestorType={x:Type pages:QuanLiPhieuTiepNhanXePage}}}"
+                                            CommandParameter="{Binding Id}" />
+
+                                        <Button Text="Xóa"
+                                            FontSize="13"
+                                            Padding="10,0"
+                                            BackgroundColor="Red"
+                                            TextColor="White"
+                                            Command="{Binding BindingContext.DeleteCommand, Source={RelativeSource AncestorType={x:Type pages:QuanLiPhieuTiepNhanXePage}}}"
+                                            CommandParameter="{Binding Id}" />
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentView>

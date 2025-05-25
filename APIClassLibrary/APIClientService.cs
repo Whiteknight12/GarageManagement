@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Runtime.InteropServices;
 
 namespace APIClassLibrary
 {
@@ -23,9 +24,11 @@ namespace APIClassLibrary
 
             return response;
         }
-        public async Task<T> GetByID(Guid id)
+        public async Task<T?> GetByID(Guid id)
         {
-            return await _httpclient.GetFromJsonAsync<T>($"/api/{_endpoint}/{id}");
+            var response = await _httpclient.GetAsync($"/api/{_endpoint}/{id}");
+            if (response.IsSuccessStatusCode) return await response.Content.ReadFromJsonAsync<T>();
+            return null;
         }
         public async Task Update(T entity)
         {

@@ -1,5 +1,6 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
@@ -103,6 +104,46 @@ namespace GarageManagement.ViewModels
             {
                 var list = ListTaiKhoan.Where(u => u.NhomNguoiDungId == SelectedRole.Id).ToList();
                 ListTaiKhoan = new ObservableCollection<TaiKhoan>(list);
+            }
+        }
+
+        [RelayCommand]
+        public void EditAccount(Guid Id)
+        {
+            MessagingCenter.Send(this, "EditAccount", Id);
+        }
+
+        [RelayCommand]
+        public async Task DeleteAccount(Guid Id)
+        {
+            var confirm = await Shell.Current.DisplayAlert(
+                "Xác nhận",
+                "Bạn có chắc chắn muốn xóa tài khoản này không?",
+                "Xóa",
+                "Hủy"
+            );
+            if (!confirm) return;
+            var account = ListTaiKhoan.FirstOrDefault(x => x.Id == Id);
+            if (account is not null)
+            {
+                var list1 = await _userService.GetAll();
+                var list2 = await _customerService.GetAll();
+                var user = list1.FirstOrDefault(x => x.TaiKhoanId == Id);
+                var customer = list2.FirstOrDefault(x => x.TaiKhoanId == Id);
+                if (user is not null)
+                {
+                    user.TaiKhoanId = null;
+                    await _userService.Update(user);
+                }
+                else if (customer is not null)
+                {
+                    customer.TaiKhoanId = null;
+                    await _customerService.Update(customer);
+                }
+                await _accountService.Delete(Id);
+                var toast=Toast.Make("Xóa tài khoản thành công", CommunityToolkit.Maui.Core.ToastDuration.Short, 14);
+                await LoadAsync();
+                await toast.Show();
             }
         }
     }

@@ -7,6 +7,7 @@
 
             <Label
                 Text="THÊM TÀI KHOẢN MỚI"
+                TextColor="{DynamicResource TextColor}"
                 FontSize="24"
                 FontAttributes="Bold"
                 HorizontalOptions="Center" />
@@ -21,6 +22,127 @@
                 TextColor="{DynamicResource TextColor}"
                 SelectedItem="{Binding SelectedUser, Mode=TwoWay}" />
 
+            <Frame HasShadow="True"
+                BackgroundColor="{DynamicResource CardBackgroundColor}"
+                Padding="20"
+                CornerRadius="8">
+                <Grid RowSpacing="10" ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                        Text="Lọc người dùng theo: CCCD/Tên/Email/Số điện thoại"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-Regular"
+                        TextColor="{DynamicResource TextColor}"
+                        VerticalOptions="Center"/>
+
+                    <Entry Grid.Row="1" Grid.Column="0"
+                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                        TextColor="{DynamicResource TextColor}"
+                        Text="CCCD"
+                        IsReadOnly="True"/> 
+
+                    <Entry Grid.Row="1" Grid.Column="1"
+                       Placeholder="Nhập giá trị lọc"
+                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                       Text="{Binding CCCDValue, Mode=TwoWay}"
+                       FontSize="16"
+                       FontFamily="OpenSans-Regular"
+                       TextColor="{DynamicResource TextColor}"
+                       HeightRequest="45"
+                       Margin="0,5,0,0"/>
+
+                    <Entry Grid.Row="2" Grid.Column="0"
+                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                        TextColor="{DynamicResource TextColor}"
+                        Text="Tên"
+                        IsReadOnly="True"/>
+
+                    <Entry Grid.Row="2" Grid.Column="1"
+                       Placeholder="Nhập giá trị lọc"
+                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                       Text="{Binding NameValue, Mode=TwoWay}"
+                       FontSize="16"
+                       FontFamily="OpenSans-Regular"
+                       TextColor="{DynamicResource TextColor}"
+                       HeightRequest="45"
+                       Margin="0,5,0,0"/>
+
+                    <Entry Grid.Row="3" Grid.Column="0"
+                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                        TextColor="{DynamicResource TextColor}"
+                        Text="Email"
+                        IsReadOnly="True"/>
+
+                    <Entry Grid.Row="3" Grid.Column="1"
+                       Placeholder="Nhập giá trị lọc"
+                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                       Text="{Binding EmailValue, Mode=TwoWay}"
+                       FontSize="16"
+                       FontFamily="OpenSans-Regular"
+                       TextColor="{DynamicResource TextColor}"
+                       HeightRequest="45"
+                       Margin="0,5,0,0"/>
+
+                    <Entry Grid.Row="4" Grid.Column="0"
+                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                        TextColor="{DynamicResource TextColor}"
+                        Text="Số điện thoại"
+                        IsReadOnly="True"/>
+
+                    <Entry Grid.Row="4" Grid.Column="1"
+                       Placeholder="Nhập giá trị lọc"
+                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                       Text="{Binding PhoneValue, Mode=TwoWay}"
+                       FontSize="16"
+                       FontFamily="OpenSans-Regular"
+                       TextColor="{DynamicResource TextColor}"
+                       HeightRequest="45"
+                       Margin="0,5,0,0"/>
+
+                    <Button Grid.Row="5" 
+                        Grid.ColumnSpan="2"
+                        Text="Lọc"
+                        Command="{Binding FilterCommand}"
+                        BackgroundColor="#3B82F6"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold"
+                        MaximumWidthRequest="200"
+                        CornerRadius="8">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#2563EB" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                    </Button>
+                </Grid>
+            </Frame>
+
             <StackLayout IsVisible="{Binding IsSelectingUser}">
 
                 <Label Text="Họ và tên:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}"/>
@@ -34,26 +156,36 @@
 
             </StackLayout>
 
-            <Label Text="Tên đăng nhập:" FontAttributes="Bold" />
+            <Label Text="Tên đăng nhập:" 
+                   TextColor="{DynamicResource TextColor}"
+                   FontAttributes="Bold" />
             <Entry
                 Placeholder="Nhập tên đăng nhập"
-                Text="{Binding NewUsername}" TextColor="{DynamicResource TextColor}"/>
+                Text="{Binding NewUsername}" 
+                BackgroundColor="{DynamicResource InputBackgroundColor}"
+                TextColor="{DynamicResource TextColor}"/>
 
-            <Label Text="Mật khẩu:" FontAttributes="Bold" />
+            <Label Text="Mật khẩu:" 
+                   TextColor="{DynamicResource TextColor}"
+                   FontAttributes="Bold" />
             <Entry
                 Placeholder="Nhập mật khẩu"
                 IsPassword="True"
+                BackgroundColor="{DynamicResource InputBackgroundColor}"
                 Text="{Binding NewPassword}" TextColor="{DynamicResource TextColor}"/>
 
             <Picker
+                BackgroundColor="{DynamicResource InputBackgroundColor}"
+                TextColor="{DynamicResource TextColor}"
                 Title="Chọn vai trò"
+                TitleColor="{DynamicResource TextColor}"
                 ItemsSource="{Binding NhomNguoiDung}"
-                ItemDisplayBinding="{Binding TenVaiTro}"
+                ItemDisplayBinding="{Binding TenNhom}"
                 SelectedItem="{Binding SelectedRole}" />
 
             <Button
                 Text="+ Thêm"
-                Command="{Binding AddAccountCommand}"
+                Command="{Binding AddNewAccountCommand}"
                 HorizontalOptions="Center"
                 WidthRequest="150" />
 

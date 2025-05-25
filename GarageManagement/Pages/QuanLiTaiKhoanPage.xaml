@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:GarageManagement.Pages"
              x:Class="GarageManagement.Pages.QuanLiTaiKhoanPage">
 
     <ScrollView>
@@ -335,7 +336,7 @@
                                                 BackgroundColor="DodgerBlue"
                                                 TextColor="White"
                                                 HorizontalOptions="Center"
-                                                Command="{Binding EditAccountCommand}"
+                                                Command="{Binding Path=BindingContext.EditAccountCommand, Source={RelativeSource AncestorType={x:Type pages:QuanLiTaiKhoanPage}}}"
                                                 CommandParameter="{Binding Id}"
                                                 VerticalOptions="Center" />
 
@@ -347,7 +348,7 @@
                                                 BackgroundColor="Crimson"
                                                 TextColor="White"
                                                 HorizontalOptions="Center"
-                                                Command="{Binding EditAccountCommand}"
+                                                Command="{Binding Path=BindingContext.DeleteAccountCommand, Source={RelativeSource AncestorType={x:Type pages:QuanLiTaiKhoanPage}}}"
                                                 CommandParameter="{Binding Id}"
                                                 VerticalOptions="Center" />
                                     </Grid>

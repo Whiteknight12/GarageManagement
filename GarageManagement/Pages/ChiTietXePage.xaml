@@ -33,6 +33,7 @@
                     <VerticalStackLayout>
                         <Label Text="Tên xe"
                            FontSize="16"
+                           FontAttributes="Bold"
                            TextColor="{DynamicResource TextColor}"/>
                         <Entry Text="{Binding Name, Mode=TwoWay}"
                            IsReadOnly="{Binding IsReadOnly}"
@@ -40,11 +41,10 @@
                            TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
 
-                    <BoxView/>
-
                     <VerticalStackLayout>
                         <Label Text="Hiệu xe"
                            FontSize="16"
+                           FontAttributes="Bold"
                            TextColor="{DynamicResource TextColor}"/>
                         <Picker 
                            ItemsSource="{Binding ListHieuXe}"
@@ -55,11 +55,10 @@
                            TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
 
-                    <BoxView/>
-
                     <VerticalStackLayout>
                         <Label Text="Biển số"
                                FontSize="16"
+                               FontAttributes="Bold"
                                TextColor="{DynamicResource TextColor}"/>
                         <Entry Text="{Binding BienSo, Mode=TwoWay}"
                                FontSize="16"
@@ -67,69 +66,130 @@
                                TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
 
+                    <VerticalStackLayout>
+
+                        <Label Text="Trạng thái:"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="{DynamicResource TextColor}" />
+
+                        <Picker ItemsSource="{Binding ListTrangThaiXe}"
+                            SelectedItem="{Binding SelectedTrangThaiXe}"
+                            BackgroundColor="{DynamicResource InputBackgroundColor}"
+                            TextColor="{DynamicResource TextColor}"
+                            IsEnabled="{Binding IsUpdating}"
+                            FontSize="16" />
+
+                    </VerticalStackLayout>
+
                     <BoxView/>
 
+                    <Label Text="Chọn chủ xe"
+                       FontSize="16"
+                       IsVisible="{Binding IsUpdating}"
+                       FontAttributes="Bold"
+                       TextColor="{DynamicResource TextColor}"/>
                     <Picker ItemsSource="{Binding ListKhachHang}"
                             SelectedIndexChanged="SelectedKhachHangChanged"
                             ItemDisplayBinding="{Binding HoVaTen}"
                             TextColor="{DynamicResource TextColor}"
                             SelectedItem="{Binding SelectedKhachHang}"
-                            Title="Chọn chủ xe"
-                            TitleColor="{DynamicResource TextColor}"
                             BackgroundColor="{DynamicResource InputBackgroundColor}"
                             IsVisible="{Binding IsUpdating}"/>
 
-                    <BoxView IsVisible="{Binding IsUpdating}"/>
-
                     <Frame HasShadow="True"
-                       IsVisible="{Binding IsUpdating}"
-                       BackgroundColor="{DynamicResource CardBackgroundColor}"
-                       Padding="20"
-                       HorizontalOptions="Fill"
-                       CornerRadius="{StaticResource CornerRadiusHandler}">
+                        BackgroundColor="{DynamicResource CardBackgroundColor}"
+                        Padding="20"
+                        IsVisible="{Binding IsUpdating}"
+                        CornerRadius="8">
                         <Grid RowSpacing="10" ColumnSpacing="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
-                               Text="Lọc khách hàng theo: CCCD/Tên/Email/SDT"
+                            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                               Text="Lọc tài khoản theo: CCCD/Tên/Email/Số điện thoại"
                                FontSize="16"
                                FontAttributes="Bold"
                                FontFamily="OpenSans-Regular"
                                TextColor="{DynamicResource TextColor}"
                                VerticalOptions="Center"/>
 
-                            <Picker Grid.Row="1" Grid.Column="0"
-                                x:Name="FilterFieldPicker"
-                                TitleColor="{DynamicResource PlaceholderColor}"
-                                ItemsSource="{Binding FilterFields}"
-                                SelectedItem="{Binding SelectedFilterField, Mode=TwoWay}"
-                                ItemDisplayBinding="{Binding .}"
-                                FontSize="16"
-                                FontFamily="OpenSans-Regular"
+                            <Entry Grid.Row="1" Grid.Column="0"
+                                BackgroundColor="{DynamicResource InputBackgroundColor}"
                                 TextColor="{DynamicResource TextColor}"
-                                HeightRequest="45"
-                                BackgroundColor="{DynamicResource InputBackgroundColor}" />
+                                Text="CCCD"
+                                IsReadOnly="True"/>
 
                             <Entry Grid.Row="1" Grid.Column="1"
-                               x:Name="FilterValueEntry"
                                Placeholder="Nhập giá trị lọc"
                                PlaceholderColor="{DynamicResource PlaceholderColor}"
-                               Text="{Binding FilterValue, Mode=TwoWay}"
+                               Text="{Binding CCCDValue, Mode=TwoWay}"
                                FontSize="16"
                                FontFamily="OpenSans-Regular"
                                TextColor="{DynamicResource TextColor}"
                                HeightRequest="45"
                                Margin="0,5,0,0"/>
 
-                            <Button Grid.Row="1" Grid.Column="2"
+                            <Entry Grid.Row="2" Grid.Column="0"
+                                BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                TextColor="{DynamicResource TextColor}"
+                                Text="Tên"
+                                IsReadOnly="True"/>
+
+                            <Entry Grid.Row="2" Grid.Column="1"
+                               Placeholder="Nhập giá trị lọc"
+                               PlaceholderColor="{DynamicResource PlaceholderColor}"
+                               Text="{Binding NameValue, Mode=TwoWay}"
+                               FontSize="16"
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"
+                               HeightRequest="45"
+                               Margin="0,5,0,0"/>
+
+                            <Entry Grid.Row="3" Grid.Column="0"
+                                BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                TextColor="{DynamicResource TextColor}"
+                                Text="Email"
+                                IsReadOnly="True"/>
+
+                            <Entry Grid.Row="3" Grid.Column="1"
+                               Placeholder="Nhập giá trị lọc"
+                               PlaceholderColor="{DynamicResource PlaceholderColor}"
+                               Text="{Binding EmailValue, Mode=TwoWay}"
+                               FontSize="16"
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"
+                               HeightRequest="45"
+                               Margin="0,5,0,0"/>
+
+                            <Entry Grid.Row="4" Grid.Column="0"
+                                BackgroundColor="{DynamicResource InputBackgroundColor}"
+                                TextColor="{DynamicResource TextColor}"
+                                Text="Số điện thoại"
+                                IsReadOnly="True"/>
+
+                            <Entry Grid.Row="4" Grid.Column="1"
+                               Placeholder="Nhập giá trị lọc"
+                               PlaceholderColor="{DynamicResource PlaceholderColor}"
+                               Text="{Binding PhoneValue, Mode=TwoWay}"
+                               FontSize="16"
+                               FontFamily="OpenSans-Regular"
+                               TextColor="{DynamicResource TextColor}"
+                               HeightRequest="45"
+                               Margin="0,5,0,0"/>
+
+                            <Button Grid.Row="5" 
+                                Grid.ColumnSpan="2"
                                 Text="Lọc"
                                 Command="{Binding FilterCommand}"
                                 BackgroundColor="#3B82F6"
@@ -137,6 +197,7 @@
                                 HeightRequest="48"
                                 FontAttributes="Bold"
                                 FontFamily="OpenSans-SemiBold"
+                                MaximumWidthRequest="200"
                                 CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroupList>
@@ -163,10 +224,11 @@
                     <VerticalStackLayout>
                         <Label Text="Tên chủ xe"
                                FontSize="16"
+                               FontAttributes="Bold"
                                TextColor="{DynamicResource TextColor}" />
                         <Label Text="{Binding TenChuXe}"
                                FontSize="16"
-                               Margin="15, 0, 0, 0"
+                               Margin="15, 10, 0, 0"
                                TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
 
@@ -174,11 +236,12 @@
 
                     <VerticalStackLayout>
                         <Label Text="Điện thoại chủ xe"
+                               FontAttributes="Bold"
                                FontSize="16"
                                TextColor="{DynamicResource TextColor}" />
                         <Label Text="{Binding DienThoai}"
                                FontSize="16"
-                               Margin="15, 0, 0, 0"
+                               Margin="15, 10, 0, 0"
                                TextColor="{DynamicResource TextColor}" />
                     </VerticalStackLayout>
 
@@ -186,30 +249,14 @@
 
                     <VerticalStackLayout>
                         <Label Text="Địa chỉ chủ xe"
+                               FontAttributes="Bold"
                                FontSize="16"
                                TextColor="{DynamicResource TextColor}" />
                         
                         <Label Text="{Binding DiaChi}"
                                FontSize="16"
-                               Margin="15, 0, 0, 0"
+                               Margin="15, 10, 0, 0"
                                TextColor="{DynamicResource TextColor}" />
-                    </VerticalStackLayout>
-
-                    <BoxView/>
-
-                    <VerticalStackLayout>
-
-                        <Label Text="Trạng thái:"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}" />
-
-                        <Picker ItemsSource="{Binding ListTrangThaiXe}"
-                                SelectedItem="{Binding SelectedTrangThaiXe}"
-                                BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                TextColor="{DynamicResource TextColor}"
-                                IsEnabled="{Binding IsUpdating}"
-                                FontSize="16" />
-
                     </VerticalStackLayout>
 
                     <BoxView/>
@@ -217,6 +264,7 @@
                     <VerticalStackLayout>
                         <Label Text="Tiền nợ: "
                            FontSize="16"
+                           FontAttributes="Bold"
                            TextColor="{DynamicResource TextColor}" />
 
                         <Label Text="{Binding TienNoCuaChuXe, StringFormat='{0:N0} VNĐ'}"
