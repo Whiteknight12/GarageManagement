@@ -27,10 +27,11 @@ In this project, we use:
 Download this project file directly [here](https://github.com/Whiteknight12/GarageManagement/archive/refs/heads/main.zip) or ``` git clone https://github.com/Whiteknight12/GarageManagement```
 ### 2. Install Sql Server Management Studio
 Download via [here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) and enter Server name as _localhost_
+![](https://ibb.co/dJs1rSWC)
 ### 3. Create database 
 Open Visual Studio and run ```update-database``` on Packet Manager Console 
-![](https://drive.google.com/file/d/1MWXsOVT9tX-80a0bVD4QgD7GS7d9_R-r/view?usp=sharing)
+![](https://ibb.co/MyZKbg6s)
 
 Or change direction to the solution folder in terminal and install EF Core CLI ``` dotnet tool install --global dotnet-ef
 ``` then run ```dotnet ef database update```
-![](https://drive.google.com/file/d/1eKcbFVWxfoR7tYyBTRsGmL17Y50YKQ0I/view?usp=sharing)
+![](https://ibb.co/PsShbpyc)
