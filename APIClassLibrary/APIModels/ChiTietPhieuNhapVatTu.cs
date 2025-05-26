@@ -15,6 +15,10 @@ namespace APIClassLibrary.APIModels
         public double? DonGia { get; set; }
         public int? SoLuong { get; set; }
 
+        //de xu li UI
+        public string? TenVatTu { get; set; }
+        public double? ThanhTien { get; set; }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged(string propertyName)
         {

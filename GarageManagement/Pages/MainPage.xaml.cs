@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using APIClassLibrary.APIModels;
+using CommunityToolkit.Maui.Views;
 using GarageManagement.ViewModels;
 using System.Runtime.CompilerServices;
 
@@ -13,13 +14,15 @@ public partial class MainPage : ContentPage
     private readonly SuaHieuXePage _suaHieuXePage;
     private readonly ChiTietKhachHangPage _chiTietKhachHangPage;
     private readonly SuaTaiKhoanPage _suaTaiKhoanPage;
+    private readonly ChiTietPhieuNhapVatTuPage _chiTietPhieuNhapVatTuPage;
     
     public MainPage(MainPageViewModel viewModel, 
         ChiTietXePage chiTietXePage, 
         AddNewAccountPage addNewAccountPage,
         SuaHieuXePage suaHieuXePage,
         ChiTietKhachHangPage chiTietKhachHangPage,
-        SuaTaiKhoanPage suaTaiKhoanPage)
+        SuaTaiKhoanPage suaTaiKhoanPage,
+        ChiTietPhieuNhapVatTuPage chiTietPhieuNhapVatTuPage)
     {
         InitializeComponent();
         BindingContext = viewModel;
@@ -29,6 +32,7 @@ public partial class MainPage : ContentPage
         _suaHieuXePage = suaHieuXePage;
         _chiTietKhachHangPage = chiTietKhachHangPage;
         _suaTaiKhoanPage = suaTaiKhoanPage;
+        _chiTietPhieuNhapVatTuPage = chiTietPhieuNhapVatTuPage;
     }
 
     private void OnCollapseClicked(object sender, EventArgs e)
@@ -137,6 +141,22 @@ public partial class MainPage : ContentPage
                 _viewModel.ShowRightPane(_chiTietKhachHangPage);
             }
         });
+        MessagingCenter.Subscribe<QuanLiKhachHangPageViewModel, Guid>(
+        this, "ShowCustomerDetails",
+        (sender, Id) =>
+        {
+            if (_viewModel.IsRightPaneVisible)
+            {
+                _viewModel.CloseRightPane();
+                _ = _chiTietKhachHangPage._viewModel.ExitUpdate();
+            }
+            else
+            {
+                _chiTietKhachHangPage._viewModel.khachHangId = Id;
+                _ = _chiTietKhachHangPage._viewModel.LoadAsync();
+                _viewModel.ShowRightPane(_chiTietKhachHangPage);
+            }
+        });
         MessagingCenter.Subscribe<QuanLiTaiKhoanPageViewModel, Guid>(
             this, "EditAccount", (sender, Id) =>
             {
@@ -151,6 +171,20 @@ public partial class MainPage : ContentPage
                     _viewModel.ShowRightPane(_suaTaiKhoanPage);
                 }
             });
+        MessagingCenter.Subscribe<QuanLiPhieuNhapPageViewModel, Guid>(
+            this, "ViewChiTietPhieuNhap", (sender, id) =>
+            {
+                if (_viewModel.IsRightPaneVisible)
+                {
+                    _viewModel.CloseRightPane();
+                }
+                else
+                {
+                    _chiTietPhieuNhapVatTuPage._viewModel.phieuNhapId = id;
+                    _= _chiTietPhieuNhapVatTuPage._viewModel.LoadAsync();
+                    _viewModel.ShowRightPane(_chiTietPhieuNhapVatTuPage);
+                }
+            });
     }
 
     protected override void OnDisappearing()
@@ -162,5 +196,6 @@ public partial class MainPage : ContentPage
         MessagingCenter.Unsubscribe<QuanLiTaiKhoanPageViewModel, Guid>(this, "ShowEditHieuXe");
         MessagingCenter.Unsubscribe<QuanLiPhieuTiepNhanPageViewModel, Guid>(this, "ShowCustomerDetails");
         MessagingCenter.Unsubscribe<TiepNhanXePageViewModel, Guid>(this, "ShowCustomerDetails");
+        MessagingCenter.Unsubscribe<QuanLiPhieuNhapPageViewModel, PhieuNhapVatTu>(this, "ViewChiTietPhieuNhap");
     }
 }

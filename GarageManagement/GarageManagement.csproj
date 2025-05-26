@@ -89,6 +89,9 @@
 	  <MauiXaml Update="Pages\ChiTietKhachHangPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\ChiTietPhieuNhapVatTuPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\ChiTietXePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

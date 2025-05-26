@@ -45,7 +45,7 @@ namespace GarageManagement.ViewModels
         public void Load(PhieuNhapVatTu item)
         {
             ListPhieuNhapVatTu.Add(item);
-            
+
             for (int i = 0; i < ListPhieuNhapVatTu.Count; i++)
             {
                 ListPhieuNhapVatTu[i].STT = i + 1;
@@ -55,27 +55,27 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private void Add()
         {
-            
+
         }
 
         [RelayCommand]
         private void Edit(Guid id)
         {
-            
+
         }
 
         [RelayCommand]
         private void ToggleDeleteMode()
         {
             IsDeleteMode = !IsDeleteMode;
-            if (!IsDeleteMode) 
+            if (!IsDeleteMode)
             {
                 var updatedList = new List<PhieuNhapVatTu>(ListPhieuNhapVatTu);
                 foreach (var ps in updatedList)
                 {
                     ps.IsSelected = false;
                 }
-                
+
                 ListPhieuNhapVatTu = new ObservableCollection<PhieuNhapVatTu>(updatedList);
             }
         }
@@ -89,12 +89,18 @@ namespace GarageManagement.ViewModels
                 await _PhieuNhapVatTuService.Delete(item.Id);
                 ListPhieuNhapVatTu.Remove(item);
             }
-            
+
             for (int i = 0; i < ListPhieuNhapVatTu.Count; i++)
             {
                 ListPhieuNhapVatTu[i].STT = i + 1;
             }
             IsDeleteMode = false;
+        }
+
+        [RelayCommand]
+        public void ViewDetailPhieuNhap(Guid Id)
+        {
+            MessagingCenter.Send(this, "ViewChiTietPhieuNhap", Id);
         }
     }
 }

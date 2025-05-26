@@ -103,10 +103,9 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private async Task GoToChiTietKhachHangPage(Guid id)
+        private void GoToChiTietKhachHangPage(Guid Id)
         {
-            await Shell.Current.GoToAsync($"ChiTietKhachHangPage?id={id}");
+            MessagingCenter.Send(this, "ShowCustomerDetails", Id);
         }
-
     }
 }
