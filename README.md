@@ -30,6 +30,7 @@ Download via [here](https://www.microsoft.com/en-us/sql-server/sql-server-downlo
 ### 3. Create database 
 Open Visual Studio and run ```update-database``` on Packet Manager Console 
 ![](https://drive.google.com/file/d/1MWXsOVT9tX-80a0bVD4QgD7GS7d9_R-r/view?usp=sharing)
-Or change direction to the solution folder in terminal by installing EF Core CLI ``` dotnet tool install --global dotnet-ef
-``` and run ```dotnet ef database update```
+
+Or change direction to the solution folder in terminal and install EF Core CLI ``` dotnet tool install --global dotnet-ef
+``` then run ```dotnet ef database update```
 ![](https://drive.google.com/file/d/1eKcbFVWxfoR7tYyBTRsGmL17Y50YKQ0I/view?usp=sharing)
