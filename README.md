@@ -34,4 +34,5 @@ Open Visual Studio and run ```update-database``` on Packet Manager Console
 
 Or change direction to the solution folder in terminal and install EF Core CLI ``` dotnet tool install --global dotnet-ef
 ``` then run ```dotnet ef database update```
+
 ![](https://i.ibb.co/0pwMWNLC/Screenshot-2025-05-25-114458.png)
