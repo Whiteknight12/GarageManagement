@@ -1,6 +1,6 @@
-
-![Logo](https://www.uit.edu.vn/sites/vi/files/banner_uit.png)
-
+<p align="center">
+  <img src="https://www.uit.edu.vn/sites/vi/files/banner_uit.png" alt="Trường Đại học Công nghệ Thông tin | University of Information Technology">
+</p>
 
 # Garage Management Project
 We have developed a MAUI cross-platform application for managing all garage business services and human resources. Following my teacher's instruction, this app has been built that meets four key software requirement: Storage, Retrieval, Extraction, Evolution
