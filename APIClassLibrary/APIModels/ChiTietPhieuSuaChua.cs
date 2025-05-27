@@ -19,6 +19,8 @@ namespace APIClassLibrary.APIModels
         public double? GiaTienCong { get; set; }
         //list nay de xu li UI, khong luu vao db
         public ObservableCollection<VTPTChiTietPhieuSuaChua>? ListSpecifiedVTPT { get; set; } = new();
+        //ten noi dung sua chua de xu li trong UI, khong luu vao db
+        public string? TenNoiDungSuaChua { get; set; }
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged(string propertyName)

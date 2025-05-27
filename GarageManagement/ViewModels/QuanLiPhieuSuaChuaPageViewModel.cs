@@ -106,5 +106,11 @@ namespace GarageManagement.ViewModels
             }
             IsDeleteMode = false;
         }
+
+        [RelayCommand]
+        private void ViewDetailPhieuSuaChua(Guid id)
+        {
+           MessagingCenter.Send(this, "ViewChiTietPhieuSuaChua", id);
+        }
     }
 }

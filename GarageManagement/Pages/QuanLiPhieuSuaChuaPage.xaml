@@ -4,6 +4,7 @@
              x:Class="GarageManagement.Pages.QuanLiPhieuSuaChuaPage"
              x:Name="RootContentView"
              xmlns:service="clr-namespace:GarageManagement.Services"
+             xmlns:pages="clr-namespace:GarageManagement.Pages"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
     <ContentView.Resources>
@@ -182,6 +183,13 @@
                                BackgroundColor="{DynamicResource CardBackgroundColor}"
                                Padding="20"
                                Margin="0,12,0,0">
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Path=BindingContext.ViewDetailPhieuSuaChuaCommand, Source={RelativeSource AncestorType={x:Type pages:QuanLiPhieuSuaChuaPage}}}"
+                                    CommandParameter="{Binding Id}"/>
+                            </Frame.GestureRecognizers>
+                            
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />

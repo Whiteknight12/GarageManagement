@@ -15,14 +15,16 @@ public partial class MainPage : ContentPage
     private readonly ChiTietKhachHangPage _chiTietKhachHangPage;
     private readonly SuaTaiKhoanPage _suaTaiKhoanPage;
     private readonly ChiTietPhieuNhapVatTuPage _chiTietPhieuNhapVatTuPage;
-    
+    private readonly ChiTietPhieuSuaChuaPage _chiTietPhieuSuaChuaPage;
+
     public MainPage(MainPageViewModel viewModel, 
         ChiTietXePage chiTietXePage, 
         AddNewAccountPage addNewAccountPage,
         SuaHieuXePage suaHieuXePage,
         ChiTietKhachHangPage chiTietKhachHangPage,
         SuaTaiKhoanPage suaTaiKhoanPage,
-        ChiTietPhieuNhapVatTuPage chiTietPhieuNhapVatTuPage)
+        ChiTietPhieuNhapVatTuPage chiTietPhieuNhapVatTuPage,
+        ChiTietPhieuSuaChuaPage chiTietPhieuSuaChuaPage)
     {
         InitializeComponent();
         BindingContext = viewModel;
@@ -33,6 +35,7 @@ public partial class MainPage : ContentPage
         _chiTietKhachHangPage = chiTietKhachHangPage;
         _suaTaiKhoanPage = suaTaiKhoanPage;
         _chiTietPhieuNhapVatTuPage = chiTietPhieuNhapVatTuPage;
+        _chiTietPhieuSuaChuaPage = chiTietPhieuSuaChuaPage;
     }
 
     private void OnCollapseClicked(object sender, EventArgs e)
@@ -185,6 +188,20 @@ public partial class MainPage : ContentPage
                     _viewModel.ShowRightPane(_chiTietPhieuNhapVatTuPage);
                 }
             });
+        MessagingCenter.Subscribe<QuanLiPhieuSuaChuaPageViewModel, Guid>(
+            this, "ViewChiTietPhieuSuaChua", (sender, id) =>
+            {
+                if (_viewModel.IsRightPaneVisible)
+                {
+                    _viewModel.CloseRightPane();
+                }
+                else
+                {
+                    _chiTietPhieuSuaChuaPage._viewModel.phieuSuaId = id;
+                    _= _chiTietPhieuSuaChuaPage._viewModel.LoadAsync();
+                    _viewModel.ShowRightPane(_chiTietPhieuSuaChuaPage);
+                }
+            });
     }
 
     protected override void OnDisappearing()
@@ -197,5 +214,6 @@ public partial class MainPage : ContentPage
         MessagingCenter.Unsubscribe<QuanLiPhieuTiepNhanPageViewModel, Guid>(this, "ShowCustomerDetails");
         MessagingCenter.Unsubscribe<TiepNhanXePageViewModel, Guid>(this, "ShowCustomerDetails");
         MessagingCenter.Unsubscribe<QuanLiPhieuNhapPageViewModel, PhieuNhapVatTu>(this, "ViewChiTietPhieuNhap");
+        MessagingCenter.Unsubscribe<QuanLiPhieuSuaChuaPageViewModel, Guid>(this, "ViewChiTietPhieuSuaChua");
     }
 }

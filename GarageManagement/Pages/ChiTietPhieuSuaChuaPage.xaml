@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.ChiTietPhieuSuaChuaPage">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
+
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+             Padding="20"
+             HasShadow="True"
+             CornerRadius="8">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="CHI TIẾT PHIẾU SỮA CHỮA"
+                        FontAttributes="Bold"
+                        FontSize="20"
+                        FontFamily="OpenSans-SemiBold"
+                        TextColor="{DynamicResource TextColor}"
+                        HorizontalOptions="Center"/>
+                    
+                    <HorizontalStackLayout Spacing="10">
+
+                        <Label  
+                            Text="Biển số xe:" 
+                            FontAttributes="Bold" 
+                            FontSize="16" 
+                            TextColor="{DynamicResource TextColor}" />
+
+                        <Label 
+                            Text="{Binding BienSoXe}" 
+                            FontSize="16" 
+                            TextColor="{DynamicResource TextColor}" />
+
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Spacing="10">
+
+                        <Label 
+                           Text="Ngày sửa chữa:" 
+                           FontAttributes="Bold" 
+                           FontSize="16" 
+                           TextColor="{DynamicResource TextColor}" />
+
+                        <Label 
+                           Text="{Binding NgaySuaChua, StringFormat='{}{0:dd/MM/yyyy}'}" 
+                           FontSize="16" 
+                           TextColor="{DynamicResource TextColor}" />
+
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding ListNoiDung}"
+                      Margin="0,0,0,10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+                           Padding="20"
+                           HasShadow="True"
+                           CornerRadius="{StaticResource CornerRadiusHandler}"
+                           Margin="0,8,0,0">
+                            <VerticalStackLayout Spacing="15">
+
+                                <Label Text="{Binding TenNoiDungSuaChua}"
+                                   FontAttributes="Bold"
+                                   FontSize="18"
+                                   TextColor="{DynamicResource TextColor}" />
+
+                                <Grid ColumnDefinitions="*, Auto, Auto" ColumnSpacing="20">
+                                    <StackLayout Grid.Column="0" Spacing="4">
+                                        <Label Text="Tiền công:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                                        <Label Text="{Binding GiaTienCong, StringFormat='{0:N0} VNĐ'}"
+                                            TextColor="{DynamicResource TextColor}" />
+                                    </StackLayout>
+
+                                    <StackLayout Grid.Column="1" Spacing="4">
+                                        <Label Text="Thành tiền:" FontAttributes="Bold" 
+                                               TextColor="{DynamicResource TextColor}" />
+                                        <Label Text="{Binding ThanhTien, StringFormat='{0:N0} VNĐ'}"
+                                            TextColor="{DynamicResource TextColor}" />
+                                    </StackLayout>
+                                </Grid>
+
+                                <Label Text="Danh sách vật tư phụ tùng:" 
+                                   FontAttributes="Bold"
+                                   FontSize="16"
+                                   TextColor="{DynamicResource TextColor}" />
+
+                                <CollectionView ItemsSource="{Binding ListSpecifiedVTPT}"
+                                Margin="0,4,0,0">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid ColumnDefinitions="1*, 2*, 2*"
+                                            RowSpacing="4"
+                                            ColumnSpacing="10"
+                                            Padding="4">
+                                                <Label Grid.Column="0"
+                                                   Text="{Binding TenLoaiVatTuPhuTung}"
+                                                   TextColor="{DynamicResource TextColor}" />
+                                                
+                                                <Label Grid.Column="1"
+                                                   Text="{Binding SoLuong, StringFormat='Số lượng: {0}'}"
+                                                   HorizontalTextAlignment="Center"
+                                                   TextColor="{DynamicResource TextColor}" />
+                                                
+                                                <Label Grid.Column="2"
+                                                   Text="{Binding DonGia, StringFormat='Đơn giá: {0:N0} VNĐ'}"
+                                                   HorizontalTextAlignment="End"
+                                                   TextColor="{DynamicResource TextColor}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+             Padding="15"
+             HasShadow="True"
+             CornerRadius="{StaticResource CornerRadiusHandler}">
+                <HorizontalStackLayout Spacing="10">
+
+                    <Label Text="Tổng thành tiền:" 
+                        FontSize="16" 
+                        FontAttributes="Bold"
+                        TextColor="{DynamicResource TextColor}" />
+
+                    <Label Text="{Binding TongThanhTien, StringFormat='{0:N0} VNĐ'}"
+                         FontSize="16"
+                         TextColor="{DynamicResource TextColor}" />
+                </HorizontalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>
