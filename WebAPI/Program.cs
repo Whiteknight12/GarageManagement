@@ -11,6 +11,16 @@ using WebAPI.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// allow android emulator to access the API
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(5142);
+    serverOptions.ListenLocalhost(7228, listenOptions =>
+    {
+        listenOptions.UseHttps(); 
+    });
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -79,7 +89,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseHttpsRedirection();
+//Should be used in production environment, for testing purposes, UseHttpsRedirection is commented out
+//app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UserJwtLogging();

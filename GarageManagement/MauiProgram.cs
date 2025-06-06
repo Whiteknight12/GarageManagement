@@ -24,7 +24,7 @@ public static class MauiProgram
 			});
 		builder.Services.AddTransient<MainPage>();
 #if ANDROID
-		baseaddress= "https://10.0.2.2:7228/";
+		baseaddress= "http://10.0.2.2:5142/";
 #elif WINDOWS
 		baseaddress= "https://localhost:7228/";
 #else
