@@ -2,9 +2,9 @@ using GarageManagement.ViewModels;
 
 namespace GarageManagement.Pages
 {
-    public partial class QuanLiDanhSachLoaiVatTuPage : ContentView
+    public partial class ThemLoaiVatTuPhuTungPage : ContentPage
     {
-        public QuanLiDanhSachLoaiVatTuPage(QuanLiDanhSachLoaiVatTuPageViewModel viewModel)
+        public ThemLoaiVatTuPhuTungPage(ThemLoaiVatTuPhuTungPageViewModel viewModel)
         {
             InitializeComponent();
             BindingContext = viewModel;
