@@ -47,7 +47,7 @@
                    WidthRequest="140"
                    HeightRequest="42"
                    FontFamily="OpenSans-Regular"
-                   BackgroundColor="White"/>
+                   BackgroundColor="{DynamicResource BackgroundColor}"/>
                     </HorizontalStackLayout>
 
                     <!-- Ngày sửa chữa -->
@@ -59,7 +59,9 @@
                         <DatePicker Date="{Binding SelectedRepairDate}"
                         Format="dd/MM/yyyy"
                         WidthRequest="150"
-                        HeightRequest="42"/>
+                        HeightRequest="42"
+                                  BackgroundColor="{DynamicResource BackgroundColor}"
+                                    TextColor="{DynamicResource TextColor}"/>
                     </HorizontalStackLayout>
 
                     <!-- Giá từ -->
@@ -74,7 +76,7 @@
                    WidthRequest="110"
                    HeightRequest="42"
                    FontFamily="OpenSans-Regular"
-                   BackgroundColor="White"/>
+                   BackgroundColor="{DynamicResource BackgroundColor}"/>
                     </HorizontalStackLayout>
 
                     <!-- Giá đến -->
@@ -89,7 +91,7 @@
                    WidthRequest="110"
                    HeightRequest="42"
                    FontFamily="OpenSans-Regular"
-                   BackgroundColor="White"/>
+                   BackgroundColor="{DynamicResource BackgroundColor}"/>
                     </HorizontalStackLayout>
 
                 </HorizontalStackLayout>

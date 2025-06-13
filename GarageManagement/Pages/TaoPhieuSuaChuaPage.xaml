@@ -40,34 +40,40 @@
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}" 
                            HorizontalOptions="Center"/>
-                    <Label Text="Biển số xe:" 
-                           FontAttributes="Bold" 
-                           FontSize="16" 
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}"/>
-                    
-                    <Picker Title="Chọn biển số xe"
-                            TitleColor="{DynamicResource PlaceholderColor}"
-                            ItemDisplayBinding="{Binding .}"
-                            ItemsSource="{Binding ListBienSoXe}"
-                            SelectedItem="{Binding SelectedBienSoXe, Mode=TwoWay}"
-                            BackgroundColor="{DynamicResource InputBackgroundColor}"
-                            TextColor="{DynamicResource TextColor}"
-                            HeightRequest="60"
-                            WidthRequest="450"
-                            HorizontalOptions="Start"
-                            Margin="0,5,0,0" />
+                    <HorizontalStackLayout>
+                        <Label Text="Biển số xe:" 
+       FontAttributes="Bold" 
+       FontSize="16" 
+       FontFamily="OpenSans-Regular"
+       TextColor="{DynamicResource TextColor}"
+                               VerticalOptions="Center"
+                               Padding="20"/>
 
-                    <Label Text="Ngày sửa chữa:" 
-                           FontAttributes="Bold" 
-                           FontSize="16" 
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}"/>
-                    <DatePicker Date="{Binding NgaySuaChua, Mode=TwoWay}"
-                                BackgroundColor="{DynamicResource InputBackgroundColor}"
-                                TextColor="{DynamicResource TextColor}"
-                                HeightRequest="60"
-                                Margin="0,5,0,0"/>
+                        <Picker
+        TitleColor="{DynamicResource PlaceholderColor}"
+        ItemDisplayBinding="{Binding .}"
+        ItemsSource="{Binding ListBienSoXe}"
+        SelectedItem="{Binding SelectedBienSoXe, Mode=TwoWay}"
+        BackgroundColor="{DynamicResource InputBackgroundColor}"
+        TextColor="{DynamicResource TextColor}"
+        HeightRequest="40"
+        WidthRequest="250"
+        HorizontalOptions="Start"
+        Margin="0,5,0,0" />
+
+                        <Label Text="Ngày sửa chữa:" 
+                               Padding="50"
+       FontAttributes="Bold" 
+       FontSize="16" 
+       FontFamily="OpenSans-Regular"
+       TextColor="{DynamicResource TextColor}"
+                               VerticalOptions="Center"/>
+                        <DatePicker Date="{Binding NgaySuaChua, Mode=TwoWay}"
+            BackgroundColor="{DynamicResource InputBackgroundColor}"
+            TextColor="{DynamicResource TextColor}"
+            HeightRequest="60"
+            Margin="0,5,0,0"/>
+                    </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
 

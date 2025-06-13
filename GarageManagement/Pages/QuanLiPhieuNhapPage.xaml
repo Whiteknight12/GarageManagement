@@ -49,13 +49,16 @@
                     FontFamily="OpenSans-Regular"
                     WidthRequest="110"
                     HeightRequest="42"
-                    BackgroundColor="White"/>
+                    BackgroundColor="{DynamicResource BackgroundColor}"
+                                TextColor="{DynamicResource TextColor}"/>
 
                         <!-- DatePicker: chỉ hiển thị khi chọn “Ngày” -->
                         <DatePicker Date="{Binding SelectedDate, Mode=TwoWay}"
                         IsVisible="{Binding IsDayFilter}"
                         HeightRequest="42"
-                        WidthRequest="140" />
+                        WidthRequest="140" 
+                            BackgroundColor="{DynamicResource BackgroundColor}"
+            TextColor="{DynamicResource TextColor}"        />
 
                         <!-- Tháng / Năm: Entry đơn giản -->
                         <Entry Placeholder="MM/yyyy"
@@ -64,7 +67,7 @@
                    HeightRequest="42"
                    WidthRequest="120"
                    FontFamily="OpenSans-Regular"
-                   BackgroundColor="White"/>
+                   BackgroundColor="{DynamicResource BackgroundColor}"/>
                     </HorizontalStackLayout>
 
                     <!-- Lọc theo giá -->
@@ -79,7 +82,7 @@
                    WidthRequest="100"
                    HeightRequest="42"
                    FontFamily="OpenSans-Regular"
-                   BackgroundColor="White"/>
+                   BackgroundColor="{DynamicResource BackgroundColor}"/>
 
                         <Label Text="đến"
                    VerticalOptions="Center"
@@ -91,7 +94,7 @@
                    WidthRequest="100"
                    HeightRequest="42"
                    FontFamily="OpenSans-Regular"
-                   BackgroundColor="White"/>
+                   BackgroundColor="{DynamicResource BackgroundColor}"/>
                     </HorizontalStackLayout>
 
                 </HorizontalStackLayout>

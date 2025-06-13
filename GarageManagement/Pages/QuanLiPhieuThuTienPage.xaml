@@ -65,7 +65,9 @@
                         <Label Text="Ngày:" WidthRequest="45" VerticalOptions="Center"
                    TextColor="{DynamicResource TextColor}"/>
                         <DatePicker Date="{Binding SelectedDate}" Format="dd/MM/yyyy"
-                        WidthRequest="150" HeightRequest="42"/>
+                        WidthRequest="150" HeightRequest="42"
+                                    BackgroundColor="{DynamicResource BackgroundColor}"
+                                    TextColor="{DynamicResource TextColor}"/>
                     </HorizontalStackLayout>
 
                     <!-- Giá -->

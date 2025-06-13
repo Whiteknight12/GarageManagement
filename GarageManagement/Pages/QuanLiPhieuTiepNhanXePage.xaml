@@ -82,7 +82,9 @@
                         <DatePicker Date="{Binding SelectedDate}"
                         Format="dd/MM/yyyy"
                         WidthRequest="150"
-                        HeightRequest="42"/>
+                        HeightRequest="42"
+                                    Background="{DynamicResource BackgroundColor}"
+                                    TextColor="{DynamicResource TextColor}"/>
                     </HorizontalStackLayout>
 
                 </HorizontalStackLayout>

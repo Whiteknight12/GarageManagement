@@ -11,7 +11,7 @@ namespace GarageManagement.ViewModels
     public partial class QuanLiNhanVienPageViewModel : BaseViewModel
     {
         [ObservableProperty]
-        private ObservableCollection<NhanVien> listNhanVien = new();
+        private ObservableCollection<NhanVien> listNhanVien = new();    
 
         private List<NhanVien> _allNhanVien = new();
 
@@ -19,6 +19,7 @@ namespace GarageManagement.ViewModels
         [ObservableProperty] private string nameFilter = string.Empty;
         [ObservableProperty] private string phoneFilter = string.Empty;
 
+        [ObservableProperty] private List<string> listGioiTinh = new List<string> { "Nam", "Nữ" };
         partial void OnCccdFilterChanged(string _) => ApplyFilter();
         partial void OnNameFilterChanged(string _) => ApplyFilter();
         partial void OnPhoneFilterChanged(string _) => ApplyFilter();

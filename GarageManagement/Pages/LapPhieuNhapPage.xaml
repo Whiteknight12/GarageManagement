@@ -34,13 +34,26 @@
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
                    CornerRadius="{StaticResource CornerRadiusHandler}">
-                <VerticalStackLayout Spacing="12">
-                    <Label Text="Danh sách Chi Tiết Phiếu Nhập" 
+                <VerticalStackLayout Spacing="30">
+                    <Label Text="Lập Phiếu Nhập" 
                            FontSize="18" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalOptions="Start"/>
+                    <HorizontalStackLayout Spacing="30">
+                        <Label Text="Ngày lập phiếu: " 
+                           FontSize="16" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                        <DatePicker Date="{Binding SelectedDate, Mode=TwoWay}"
+            HeightRequest="42"
+            WidthRequest="140" 
+                BackgroundColor="{DynamicResource BackgroundColor}"
+TextColor="{DynamicResource TextColor}"        />
+                    </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
 

@@ -140,17 +140,21 @@
                     TextColor="White"
                     IsVisible="{Binding IsReadOnly}" />
 
-            <Button Text="Cập nhật"
-                    Command="{Binding UpdateCustomerCommand}"
-                    BackgroundColor="#10B981"
-                    TextColor="White"
-                    IsVisible="{Binding IsUpdating}" />
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="CenterAndExpand">
+                <Button Text="Cập nhật"
+        Command="{Binding UpdateCustomerCommand}"
+        BackgroundColor="#10B981"
+        TextColor="White"
+        IsVisible="{Binding IsUpdating}"
+                        WidthRequest="200"/>
 
-            <Button Text="Hủy"
-                    Command="{Binding ExitUpdateCommand}"
-                    BackgroundColor="Gray"
-                    TextColor="White"
-                    IsVisible="{Binding IsUpdating}" />
+                <Button Text="Hủy"
+        Command="{Binding ExitUpdateCommand}"
+        BackgroundColor="Gray"
+        TextColor="White"
+        IsVisible="{Binding IsUpdating}" 
+                        WidthRequest="200"/>
+            </HorizontalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

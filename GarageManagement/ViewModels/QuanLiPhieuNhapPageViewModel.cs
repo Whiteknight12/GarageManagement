@@ -2,6 +2,7 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using GarageManagement.Services;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
@@ -19,6 +20,8 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty] private string priceFromText = "";
         [ObservableProperty] private string priceToText = "";
+
+        private readonly LapPhieuNhapPageViewModel _lapPhieuNhapPageViewModel; 
 
         // helper cho Visible
         public bool IsDayFilter => SelectedTimeFilter == "Ngày";
@@ -42,10 +45,12 @@ namespace GarageManagement.ViewModels
 
         public QuanLiPhieuNhapPageViewModel(APIClientService<PhieuNhapVatTu> PhieuNhapVatTuService,
             ILogger<QuanLiPhieuNhapPageViewModel> logger,
-            AuthenticationService authenticationService)
+            AuthenticationService authenticationService,
+            LapPhieuNhapPageViewModel lapPhieuNhapPageViewModel)
         {
             _authenticationService = authenticationService;
             _PhieuNhapVatTuService = PhieuNhapVatTuService;
+            _lapPhieuNhapPageViewModel = lapPhieuNhapPageViewModel; 
             _ = LoadAsync();
             IsDeleteMode = false;
         }
@@ -70,7 +75,11 @@ namespace GarageManagement.ViewModels
         public void Load(PhieuNhapVatTu item)
         {
             ListPhieuNhapVatTu.Add(item);
-
+            _allPhieu.Add(item);
+            for (int i = 0; i < _allPhieu.Count; i++)
+            {
+                _allPhieu[i].STT = i + 1;
+            }
             for (int i = 0; i < ListPhieuNhapVatTu.Count; i++)
             {
                 ListPhieuNhapVatTu[i].STT = i + 1;
@@ -109,9 +118,42 @@ namespace GarageManagement.ViewModels
 
 
         [RelayCommand]
-        private void Add()
+        private async Task Add()
         {
+            await _lapPhieuNhapPageViewModel.LoadListVatTuAsync();
 
+            var view = new LapPhieuNhapPage(_lapPhieuNhapPageViewModel);
+
+            var wrapper = new ContentPage
+            {
+                Content = view,
+                Padding = 0
+            };
+
+            var win = new Window
+            {
+                Page = wrapper,
+                Title = "Tạo phiếu nhập mới",
+                MaximumHeight = 600,
+                MaximumWidth = 800,
+                MinimumHeight = 600,
+                MinimumWidth = 800
+            };
+
+            // callback khi lưu thành công
+            _lapPhieuNhapPageViewModel.OnPhieuNhapAdded = async (PhieuNhapVatTu phieuNhapVatTu) =>
+            {
+                Load(phieuNhapVatTu);        // nhét vào list hiện tại
+                  // hoặc reload full để chắc cú
+                                    // Replace this line:
+                                    // win.Close();     // đóng cửa sổ
+
+                // With the following workaround for .NET MAUI (since Window.Close() does not exist):
+                Application.Current?.CloseWindow(win); // đóng cửa sổ    // đóng cửa sổ
+                await LoadAsync();
+            };
+
+            Application.Current.OpenWindow(win);
         }
 
         [RelayCommand]
