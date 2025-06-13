@@ -2,12 +2,22 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microcharts;
+using SkiaSharp;
 using System.Collections.ObjectModel;
+using Microcharts;
+using Microcharts.Maui;
+using SkiaSharp;
+using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace GarageManagement.ViewModels
 {
     public partial class BaoCaoDoanSoPageViewModel: BaseViewModel
     {
+        [ObservableProperty]
+        private Chart pieChart;
+
         [ObservableProperty]
         private List<int> months=new List<int>();
         [ObservableProperty]
@@ -38,7 +48,6 @@ namespace GarageManagement.ViewModels
             APIClientService<HieuXe> hieuXeService)
         {
             for (int i = 1; i <= 12; i++) months.Add(i);
-            SelectedMonth = DateTime.Now.Month;
             _phieuthutienservice = phieuthutienservice;
             _carservice = carservice;
             _phieusuachuaservice = phieusuachuaservce;
@@ -46,7 +55,7 @@ namespace GarageManagement.ViewModels
             _hieuXeService = hieuXeService;
             _ = LoadAsync();
             foreach (var item in listphieusuachua) years.Add(item.NgaySuaChua.Year);
-            SelectedYear = DateTime.UtcNow.Year;
+            
             tongDoanhSo = listphieusuachua.Sum(u => u.TongTien);
             _ = GenerateBaoCao();
         }
@@ -60,20 +69,24 @@ namespace GarageManagement.ViewModels
                 tmp.Add(item.NgaySuaChua.Year);
             }
             Years = new ObservableCollection<int>(tmp);
+            SelectedMonth = DateTime.Now.Month;
+            SelectedYear = DateTime.UtcNow.Year;
+            await GenerateBaoCao(); 
         }
         private async Task GenerateBaoCao()
         {
             BaoCaoList.Clear();
             Dictionary<string, double> tmplist= new Dictionary<string, double>();
-            foreach (var item in listphieusuachua)
+            var localListPhieuSuaChua = new List<PhieuSuaChua>(listphieusuachua);
+            foreach (var item in localListPhieuSuaChua)
             {
                 var car = await _carservice.GetByID(item.XeId);
                 if (car != null)
                 {
-                    HieuXe hieuXe= await _hieuXeService.GetByID(car.HieuXeId);
+                    HieuXe hieuXe = await _hieuXeService.GetByID(car.HieuXeId);
                     if (!tmplist.ContainsKey(hieuXe.TenHieuXe))
                     {
-                        tmplist[hieuXe.TenHieuXe] = item.TongTien; 
+                        tmplist[hieuXe.TenHieuXe] = item.TongTien;
                     }
                     else
                     {
@@ -114,11 +127,36 @@ namespace GarageManagement.ViewModels
                     HieuXe = item.Key,
                     ThanhTien = item.Value,
                     SoLuotSua = sum,
-                    TiLe = item.Value / TongDoanhSo * 100
+                    TiLe = Math.Round(item.Value / TongDoanhSo * 100, 2)
                 });
             }
+            UpdateChart(); 
         }
-        
+
+        private void UpdateChart()
+        {
+            var entries = BaoCaoList.Select(item => new ChartEntry((float)item.ThanhTien)
+            {
+                Label = item.HieuXe,
+                ValueLabel = item.ThanhTien.ToString("N0"),
+                Color = SKColor.Parse(GetRandomColorHex())
+            }).ToList();
+
+            PieChart = new PieChart
+            {
+                Entries = entries,
+                // You can set BackgroundColor or LabelTextSize if needed
+                // BackgroundColor = SKColors.White,
+                // LabelTextSize = 32
+            };
+        }
+
+        private static string GetRandomColorHex()
+        {
+            var rand = new Random();
+            return string.Format("{0:X6}", rand.Next(0x1000000));
+        }
+
         public async Task OnDateChanged()
         {
             var newlistPhieuSuaChua = await _phieusuachuaservice.GetListOnSpecialRequirement($"GetListByMonthAndYear/{selectedMonth}/{selectedYear}");
@@ -143,6 +181,7 @@ namespace GarageManagement.ViewModels
             //var currentaccount=JsonSerializer.Deserialize<taiKhoanSession>(json);
             //if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
+
     }
     public class BaoCaoDoanhThuVM
     {

@@ -23,5 +23,8 @@ namespace APIClassLibrary.APIModels
         public Guid? KhachHangId { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        public bool IsSelected { get; set; }
+
     }
 }

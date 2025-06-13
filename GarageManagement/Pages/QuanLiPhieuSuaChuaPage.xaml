@@ -127,8 +127,7 @@
                         <!-- Cột Ngày Sửa Chữa -->
                         <ColumnDefinition Width="1*" />
                         <!-- Cột Tổng Tiền -->
-                        <ColumnDefinition Width="0.5*" />
-                        <!-- Cột Hành động -->
+                       
                     </Grid.ColumnDefinitions>
                     <Label Text="" Grid.Column="0" 
                            FontAttributes="Bold" 
@@ -166,12 +165,7 @@
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="Hành động" Grid.Column="6" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"
-                           HorizontalTextAlignment="Center"
-                           FontSize="14"/>
+                    
                 </Grid>
             </Frame>
 
@@ -204,8 +198,7 @@
                                     <!-- Cột Ngày Sửa Chữa -->
                                     <ColumnDefinition Width="1*" />
                                     <!-- Cột Tổng Tiền -->
-                                    <ColumnDefinition Width="0.5*" />
-                                    <!-- Cột Hành động -->
+                                    
                                 </Grid.ColumnDefinitions>
                                 <CheckBox IsChecked="{Binding IsSelected}"
                                           Margin="10,0,0,0"
@@ -245,31 +238,7 @@
                                        HorizontalTextAlignment="Center"
                                        FontSize="13"
                                        Margin="5"/>
-                                <Button Text="Sửa"
-                                        Command="{Binding Source={x:Reference RootContentView}, Path=BindingContext.EditCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        Grid.Column="6"
-                                        BackgroundColor="#3B82F6"
-                                        TextColor="White"
-                                        HeightRequest="40"
-                                        FontFamily="OpenSans-SemiBold">
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroupList>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                                <VisualState x:Name="Pressed">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#2563EB" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateGroupList>
-                                    </VisualStateManager.VisualStateGroups>
-                                </Button>
+                                
                             </Grid>
                         </Frame>
                     </DataTemplate>

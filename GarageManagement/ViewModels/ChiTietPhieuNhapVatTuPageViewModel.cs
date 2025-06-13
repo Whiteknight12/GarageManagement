@@ -51,7 +51,7 @@ namespace GarageManagement.ViewModels
                             item.ThanhTien = item.SoLuong * item.DonGia;
                         }
                     }
-                    ListChiTietPhieuNhap = new ObservableCollection<ChiTietPhieuNhapVatTu>(list);
+                    ListChiTietPhieuNhap = new ObservableCollection<ChiTietPhieuNhapVatTu>(newList);
                 }
             }
         }

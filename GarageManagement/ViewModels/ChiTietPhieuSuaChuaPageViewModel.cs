@@ -23,6 +23,8 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private ObservableCollection<ChiTietPhieuSuaChua> listNoiDung = new ObservableCollection<ChiTietPhieuSuaChua>();
 
+        [ObservableProperty] private bool isEmpty;
+
         [ObservableProperty]
         private string bienSoXe;
 
@@ -49,6 +51,7 @@ namespace GarageManagement.ViewModels
             _xeService = xeService;
             _vtChiTietPhieuService = vtChiTietPhieuService;
             _vatTuService = vatTuService;
+            IsEmpty = false;
         }
 
         public async Task LoadAsync()
@@ -73,6 +76,7 @@ namespace GarageManagement.ViewModels
                             item.GiaTienCong = tienCong?.DonGiaLoaiTienCong;
                             var tmpList = await _vtChiTietPhieuService.GetAll();
                             item.ListSpecifiedVTPT = new ObservableCollection<VTPTChiTietPhieuSuaChua>(tmpList.Where(U => U.ChiTietPhieuSuaChuaId == item.Id));
+                            IsEmpty = item.ListSpecifiedVTPT.Count == 0 ? true : false; 
                             double sum = item.GiaTienCong??0;
                             if (item.ListSpecifiedVTPT is not null)
                             {

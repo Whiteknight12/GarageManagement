@@ -4,6 +4,7 @@ using CommunityToolkit.Maui;
 using GarageManagement.Pages;
 using GarageManagement.Services;
 using GarageManagement.ViewModels;
+using Microcharts.Maui;
 using Microsoft.Extensions.Logging;
 
 namespace GarageManagement;
@@ -17,6 +18,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit()
+            .UseMicrocharts()
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

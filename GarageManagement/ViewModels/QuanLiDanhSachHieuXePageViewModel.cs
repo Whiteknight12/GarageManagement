@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GarageManagement.ViewModels
 {
@@ -19,6 +20,28 @@ namespace GarageManagement.ViewModels
     {
         [ObservableProperty]
         private ObservableCollection<HieuXe> listHieuXe = new();
+
+        [ObservableProperty]
+        private HieuXe selectedHieuXe;
+
+        [ObservableProperty]
+        private bool isDetailPaneVisible;
+
+        public ICommand OpenHieuXeDetailCommand => new Command<HieuXe>(xe =>
+        {
+            SelectedHieuXe = xe;
+            IsDetailPaneVisible = true;
+        });
+
+        [RelayCommand]
+        private void SuaHieuXe(HieuXe xe)
+        {
+            if (xe == null) return;
+            SelectedHieuXe = xe;
+            // Đây là pane sửa cũ, sẽ bind SelectedHieuXe để hiển thị detail
+            MessagingCenter.Send(this, "ShowEditHieuXe", xe.Id);
+        }
+
 
         [ObservableProperty]
         private bool isDeleteMode;
@@ -77,11 +100,11 @@ namespace GarageManagement.ViewModels
             Application.Current.OpenWindow(newWindow);
         }
 
-        [RelayCommand]
-        public void SuaHieuXe(Guid Id)
-        {
-            MessagingCenter.Send(this, "ShowEditHieuXe", Id);
-        }
+        //[RelayCommand]
+        //public void SuaHieuXe(Guid Id)
+        //{
+        //    MessagingCenter.Send(this, "ShowEditHieuXe", Id);
+        //}
 
         [RelayCommand]
         private void ToggleDeleteMode()

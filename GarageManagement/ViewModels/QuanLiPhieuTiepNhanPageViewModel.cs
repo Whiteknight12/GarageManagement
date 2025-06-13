@@ -52,9 +52,26 @@ namespace GarageManagement.ViewModels
             }
         }
 
+        [ObservableProperty] private bool isDeleteMode;
+        [RelayCommand] private void ToggleDeleteMode() => IsDeleteMode = !IsDeleteMode;
+
+        [RelayCommand]
+        private async Task Delete()
+        {
+            var selected = ListPhieuTiepNhan.Where(p => p.IsSelected).ToList();
+            foreach (var item in selected)
+                await _phieuTiepNhanService.Delete(item.Id);   // hoặc API xoá của bạn
+
+            foreach (var item in selected)
+                ListPhieuTiepNhan.Remove(item);
+
+            IsDeleteMode = false;
+        }
+
+
         private void IndexCalculator(ObservableCollection<PhieuTiepNhan> list)
         {
-            int c = 0;
+            int c = 1;
             foreach (var item in list)
             {
                 item.IdForUI = c++;
@@ -79,11 +96,6 @@ namespace GarageManagement.ViewModels
         {
 
         }
-
-        [RelayCommand]
-        public async void Delete(Guid Id)
-        {
-            
-        }
+      
     }
 }

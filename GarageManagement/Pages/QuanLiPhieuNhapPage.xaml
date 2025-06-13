@@ -30,6 +30,75 @@
                 </VerticalStackLayout>
             </Frame>
 
+            <!-- ────────────── FILTER ────────────── -->
+            <Frame HasShadow="True"
+       Padding="20"
+       BackgroundColor="{DynamicResource CardBackgroundColor}">
+                <HorizontalStackLayout Spacing="14">
+
+                    <!-- Lọc theo thời gian -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Theo:"
+                   WidthRequest="65"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}" />
+
+                        <!-- Dropdown Ngày / Tháng / Năm -->
+                        <Picker ItemsSource="{Binding TimeFilterOptions}"
+                    SelectedItem="{Binding SelectedTimeFilter, Mode=TwoWay}"
+                    FontFamily="OpenSans-Regular"
+                    WidthRequest="110"
+                    HeightRequest="42"
+                    BackgroundColor="White"/>
+
+                        <!-- DatePicker: chỉ hiển thị khi chọn “Ngày” -->
+                        <DatePicker Date="{Binding SelectedDate, Mode=TwoWay}"
+                        IsVisible="{Binding IsDayFilter}"
+                        HeightRequest="42"
+                        WidthRequest="140" />
+
+                        <!-- Tháng / Năm: Entry đơn giản -->
+                        <Entry Placeholder="MM/yyyy"
+                   Text="{Binding MonthYearText, Mode=TwoWay}"
+                   IsVisible="{Binding IsMonthFilter}"
+                   HeightRequest="42"
+                   WidthRequest="120"
+                   FontFamily="OpenSans-Regular"
+                   BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Lọc theo giá -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Giá từ:"
+                   WidthRequest="60"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}" />
+                        <Entry Placeholder="Min"
+                   Text="{Binding PriceFromText, Mode=TwoWay}"
+                   Keyboard="Numeric"
+                   WidthRequest="100"
+                   HeightRequest="42"
+                   FontFamily="OpenSans-Regular"
+                   BackgroundColor="White"/>
+
+                        <Label Text="đến"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}" />
+
+                        <Entry Placeholder="Max"
+                   Text="{Binding PriceToText, Mode=TwoWay}"
+                   Keyboard="Numeric"
+                   WidthRequest="100"
+                   HeightRequest="42"
+                   FontFamily="OpenSans-Regular"
+                   BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                </HorizontalStackLayout>
+            </Frame>
+            <!-- ─────────── END FILTER ─────────── -->
+
+            
             <!-- Các nút chức năng -->
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
                 <Button Text="Thêm"
@@ -123,8 +192,6 @@
                         <!-- Cột Ngày Nhập -->
                         <ColumnDefinition Width="1*" />
                         <!-- Cột Tổng Tiền -->
-                        <ColumnDefinition Width="0.5*" />
-                        <!-- Cột Hành động -->
                     </Grid.ColumnDefinitions>
                     <Label Text="" Grid.Column="0" 
                            FontAttributes="Bold" 
@@ -145,12 +212,6 @@
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
                     <Label Text="Tổng Tiền" Grid.Column="3" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"
-                           HorizontalTextAlignment="Center"
-                           FontSize="14"/>
-                    <Label Text="Hành động" Grid.Column="4" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
@@ -181,8 +242,7 @@
                                     <!-- Cột Ngày Nhập -->
                                     <ColumnDefinition Width="1*" />
                                     <!-- Cột Tổng Tiền -->
-                                    <ColumnDefinition Width="0.5*" />
-                                    <!-- Cột Hành động -->
+                                    
                                 </Grid.ColumnDefinitions>
                                 <CheckBox IsChecked="{Binding IsSelected}"
                                           Margin="10,0,0,0"
@@ -208,31 +268,6 @@
                                        VerticalOptions="Center"
                                        FontSize="13"
                                        Margin="5"/>
-                                <Button Text="Sửa"
-                                        Command="{Binding Source={x:Reference RootContentView}, Path=BindingContext.EditCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        Grid.Column="4"
-                                        BackgroundColor="#3B82F6"
-                                        TextColor="White"
-                                        HeightRequest="40"
-                                        FontFamily="OpenSans-SemiBold">
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroupList>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                                <VisualState x:Name="Pressed">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#2563EB" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateGroupList>
-                                    </VisualStateManager.VisualStateGroups>
-                                </Button>
                             </Grid>
                         </Frame>
                     </DataTemplate>

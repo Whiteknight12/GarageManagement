@@ -27,4 +27,11 @@ public partial class BaoCaoDoanhSoPage : ContentView
 		base.OnSizeAllocated(width, height);
         _ = _viewmodel.LoadAsync();
     }
+    private async void OnDateChanged(object sender, EventArgs e)
+    {
+        if (BindingContext is BaoCaoDoanSoPageViewModel vm)
+        {
+            await vm.OnDateChanged();
+        }
+    }
 }
