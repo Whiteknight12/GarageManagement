@@ -3,6 +3,7 @@ using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Pages;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,8 +12,19 @@ namespace GarageManagement.ViewModels
 {
     public partial class LoaiTienCongPageViewModel : BaseViewModel
     {
-        [ObservableProperty]
-        private ObservableCollection<TienCong> listTienCong = new();
+        private List<TienCong> _allTienCong = new();
+
+        [ObservableProperty] private ObservableCollection<TienCong> listTienCong = new();
+
+        [ObservableProperty] private string nameFilter = string.Empty;
+        [ObservableProperty] private string priceFromText = string.Empty;
+        [ObservableProperty] private string priceToText = string.Empty;
+
+        partial void OnNameFilterChanged(string _) => ApplyFilter();
+        partial void OnPriceFromTextChanged(string _) => ApplyFilter();
+        partial void OnPriceToTextChanged(string _) => ApplyFilter();
+
+        
 
         [ObservableProperty]
         private bool isDeleteMode;
@@ -31,13 +43,42 @@ namespace GarageManagement.ViewModels
 
         public async Task LoadAsync()
         {
-            var list = await _tienCongService.GetAll();
-            ListTienCong = new ObservableCollection<TienCong>(list);
+            _allTienCong = await _tienCongService.GetAll() ?? new();
+            ApplyFilter();
         }
 
+        /* ========== LOCAL ADD (khi tạo mới) ========== */
         public void Load(TienCong item)
         {
-            ListTienCong.Add(item);
+            if (item == null) return;
+            if (_allTienCong.Any(x => x.Id == item.Id)) return;
+
+            _allTienCong.Add(item);
+            ApplyFilter();
+        }
+
+        /* ========== FILTER ========== */
+        private void ApplyFilter()
+        {
+            IEnumerable<TienCong> q = _allTienCong;
+
+            /* ---- theo tên ---- */
+            if (!string.IsNullOrWhiteSpace(NameFilter))
+            {
+                var key = NameFilter.Trim().ToLower();
+                q = q.Where(t => (t.TenLoaiTienCong ?? "")
+                                 .ToLower()
+                                 .Contains(key));
+            }
+
+            /* ---- theo giá ---- */
+            if (double.TryParse(PriceFromText, out var minPrice))
+                q = q.Where(t => t.DonGiaLoaiTienCong >= minPrice);
+
+            if (double.TryParse(PriceToText, out var maxPrice))
+                q = q.Where(t => t.DonGiaLoaiTienCong <= maxPrice);
+
+            ListTienCong = new ObservableCollection<TienCong>(q);
         }
 
         //[RelayCommand]
@@ -83,16 +124,16 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private void Delete()
+        private async Task DeleteAsync()
         {
-            var selectedItems = ListTienCong.Where(x => x.IsSelected).ToList();
-            foreach (var item in selectedItems)
+            var selected = ListTienCong.Where(x => x.IsSelected).ToList();
+            foreach (var t in selected)
             {
-                _ = _tienCongService.Delete(item.Id);
-                ListTienCong.Remove(item);
+                await _tienCongService.Delete(t.Id);
+                _allTienCong.Remove(t);
             }
-
             IsDeleteMode = false;
+            ApplyFilter();
         }
 
         [RelayCommand]

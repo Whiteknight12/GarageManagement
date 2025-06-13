@@ -11,8 +11,22 @@ namespace GarageManagement.ViewModels
 {
     public partial class QuanLiDanhSachLoaiVatTuPageViewModel : BaseViewModel
     {
-        [ObservableProperty]
-        private ObservableCollection<VatTuPhuTung> listVatTuPhuTung = new();
+        private List<VatTuPhuTung> _allVatTu = new();          // dữ liệu gốc
+
+        [ObservableProperty] private ObservableCollection<VatTuPhuTung> listVatTuPhuTung = new();
+
+        [ObservableProperty] private string nameFilter = string.Empty;
+        [ObservableProperty] private string priceFromText = string.Empty;
+        [ObservableProperty] private string priceToText = string.Empty;
+        [ObservableProperty] private string quantityFromText = string.Empty;
+        [ObservableProperty] private string quantityToText = string.Empty;
+
+        partial void OnNameFilterChanged(string _) => ApplyFilter();
+        partial void OnPriceFromTextChanged(string _) => ApplyFilter();
+        partial void OnPriceToTextChanged(string _) => ApplyFilter();
+        partial void OnQuantityFromTextChanged(string _) => ApplyFilter();
+        partial void OnQuantityToTextChanged(string _) => ApplyFilter();
+
 
         [ObservableProperty]
         private bool isDeleteMode;
@@ -33,20 +47,8 @@ namespace GarageManagement.ViewModels
         {
             try
             {
-                var list = await _vatTuPhuTungService.GetAll();
-                ListVatTuPhuTung.Clear();
-                if (list != null && list.Any())
-                {
-                    foreach (var item in list)
-                    {
-                        ListVatTuPhuTung.Add(item);
-                    }
-                    Debug.WriteLine($"Loaded {ListVatTuPhuTung.Count} items.");
-                }
-                else
-                {
-                    Debug.WriteLine("No items loaded from API.");
-                }
+                _allVatTu = await _vatTuPhuTungService.GetAll() ?? new();
+                ApplyFilter();
             }
             catch (Exception ex)
             {
@@ -54,13 +56,45 @@ namespace GarageManagement.ViewModels
             }
         }
 
+        /* ---------- LOCAL ADD (sau khi tạo mới) ---------- */
         public void Load(VatTuPhuTung item)
         {
-            if (item != null && !ListVatTuPhuTung.Any(x => x.VatTuPhuTungId == item.VatTuPhuTungId))
+            if (item == null) return;
+            if (_allVatTu.Any(x => x.VatTuPhuTungId == item.VatTuPhuTungId)) return;
+
+            _allVatTu.Add(item);
+            ApplyFilter();
+        }
+
+        /* ---------- FILTER ---------- */
+        private void ApplyFilter()
+        {
+            IEnumerable<VatTuPhuTung> q = _allVatTu;
+
+            /* --- theo tên --- */
+            if (!string.IsNullOrWhiteSpace(NameFilter))
             {
-                ListVatTuPhuTung.Add(item);
-                Debug.WriteLine($"Added new item: {item.TenLoaiVatTuPhuTung}");
+                var key = NameFilter.Trim().ToLower();
+                q = q.Where(v => (v.TenLoaiVatTuPhuTung ?? "")
+                                 .ToLower()
+                                 .Contains(key));
             }
+
+            /* --- theo giá --- */
+            if (double.TryParse(PriceFromText, out var minPrice))
+                q = q.Where(v => v.DonGiaBanLoaiVatTuPhuTung >= minPrice);
+
+            if (double.TryParse(PriceToText, out var maxPrice))
+                q = q.Where(v => v.DonGiaBanLoaiVatTuPhuTung <= maxPrice);
+
+            /* --- theo số lượng tồn --- */
+            if (int.TryParse(QuantityFromText, out var minQty))
+                q = q.Where(v => v.SoLuong >= minQty);
+
+            if (int.TryParse(QuantityToText, out var maxQty))
+                q = q.Where(v => v.SoLuong <= maxQty);
+
+            ListVatTuPhuTung = new ObservableCollection<VatTuPhuTung>(q);
         }
 
         [RelayCommand]
@@ -97,16 +131,16 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private async void Delete()
+        private async Task DeleteAsync()
         {
-            var selectedItems = ListVatTuPhuTung.Where(x => x.IsSelected).ToList();
-            foreach (var item in selectedItems)
+            var selected = ListVatTuPhuTung.Where(x => x.IsSelected).ToList();
+            foreach (var v in selected)
             {
-                await _vatTuPhuTungService.Delete(item.VatTuPhuTungId);
-                ListVatTuPhuTung.Remove(item);
+                await _vatTuPhuTungService.Delete(v.VatTuPhuTungId);
+                _allVatTu.Remove(v);
             }
-
             IsDeleteMode = false;
+            ApplyFilter();
         }
 
         [RelayCommand]

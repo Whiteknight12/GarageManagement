@@ -17,5 +17,10 @@ namespace APIClassLibrary.APIModels
         public bool? KhaDung { get; set; }
         public double? TienNo { get; set; }
         public string? ImageUrl { get; set; }
+
+        public string TenHieuXe { get; set; }
+
+        public string TenChuXe { get; set; }
+        public string CCCDChuXe { get; set; }
     }
 }

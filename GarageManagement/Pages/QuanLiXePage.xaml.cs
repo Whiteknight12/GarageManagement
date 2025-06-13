@@ -1,3 +1,4 @@
+
 using APIClassLibrary;
 using APIClassLibrary.APIModels;
 using GarageManagement.ViewModels;
@@ -6,7 +7,7 @@ namespace GarageManagement.Pages;
 
 public partial class QuanLiXePage : ContentView
 {
-	private readonly QuanLiXePageViewModel _quanLiXePageViewModel;
+	public readonly QuanLiXePageViewModel _quanLiXePageViewModel;
     public QuanLiXePage(APIClientService<Xe> carservice,
 		APIClientService<ChiTietPhieuSuaChua> noidungphieuservice,
 		APIClientService<PhieuSuaChua> phieuservice,
@@ -15,7 +16,13 @@ public partial class QuanLiXePage : ContentView
 		_quanLiXePageViewModel = quanLiXePageViewModel;
 		BindingContext = quanLiXePageViewModel; 
 		InitializeComponent();
-	}
+        MessagingCenter.Subscribe<ChiTietKhachHangViewModel, Guid>(
+            this, "ReloadCustomerList", (sender, Id) =>
+            {
+                _ = _quanLiXePageViewModel.LoadAsync();
+            });
+        
+    }
 
 	protected override void OnSizeAllocated(double width, double height)
 	{

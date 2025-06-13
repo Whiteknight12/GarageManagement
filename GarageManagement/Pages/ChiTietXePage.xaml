@@ -67,6 +67,17 @@
                     </VerticalStackLayout>
 
                     <VerticalStackLayout>
+                        <Label Text="Tiền nợ của xe:"
+           FontSize="16"
+           FontAttributes="Bold"
+           TextColor="{DynamicResource TextColor}"/>
+                        <Entry Text="{Binding TienNoCuaXe, Mode=TwoWay}"
+           FontSize="16"
+           IsReadOnly="{Binding IsReadOnly}"
+           TextColor="{DynamicResource TextColor}" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
 
                         <Label Text="Trạng thái:"
                            FontSize="16"
@@ -235,6 +246,19 @@
                     <BoxView/>
 
                     <VerticalStackLayout>
+                        <Label Text="CCCD"
+           FontSize="16"
+           FontAttributes="Bold"
+           TextColor="{DynamicResource TextColor}" />
+                        <Label Text="{Binding CCCD}"
+           FontSize="16"
+           Margin="15, 10, 0, 0"
+           TextColor="{DynamicResource TextColor}" />
+                    </VerticalStackLayout>
+
+                    <BoxView/>
+
+                    <VerticalStackLayout>
                         <Label Text="Điện thoại chủ xe"
                                FontAttributes="Bold"
                                FontSize="16"
@@ -262,7 +286,7 @@
                     <BoxView/>
 
                     <VerticalStackLayout>
-                        <Label Text="Tiền nợ: "
+                        <Label Text="Tiền nợ chủ xe: "
                            FontSize="16"
                            FontAttributes="Bold"
                            TextColor="{DynamicResource TextColor}" />

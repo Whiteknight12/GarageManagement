@@ -18,6 +18,7 @@ public partial class MainPage : ContentPage
     private readonly ChiTietPhieuSuaChuaPage _chiTietPhieuSuaChuaPage;
     private readonly ChiTietNhanVienPage _chiTietNhanVienPage;
     private readonly LapPhieuNhapPage _lapPhieuNhapPage;
+
     public MainPage(MainPageViewModel viewModel, 
         ChiTietXePage chiTietXePage, 
         AddNewAccountPage addNewAccountPage,
@@ -86,6 +87,22 @@ public partial class MainPage : ContentPage
             {
                 _viewModel.CloseRightPane();
                 _chiTietXePage._viewModel.ExitEditMode();   
+            }
+            else
+            {
+                _chiTietXePage.setCarId(carId);
+                _ = _chiTietXePage._viewModel.LoadAsync();
+                _viewModel.ShowRightPane(_chiTietXePage);
+            }
+        });
+        MessagingCenter.Subscribe<QuanLiXePageViewModel, Guid>(
+        this, "ShowCarDetails",
+        (sender, carId) =>
+        {
+            if (_viewModel.IsRightPaneVisible)
+            {
+                _viewModel.CloseRightPane();
+                _chiTietXePage._viewModel.ExitEditMode();
             }
             else
             {
@@ -265,5 +282,6 @@ public partial class MainPage : ContentPage
         MessagingCenter.Unsubscribe<QuanLiNhanVienPageViewModel, Guid>(this, "ShowStaffDetails");
         MessagingCenter.Unsubscribe<LapPhieuNhapPageViewModel, Guid>(this, "LapPhieuNhap");
         MessagingCenter.Unsubscribe<LoaiTienCongPageViewModel, ContentView>(this, "ShowRightPane");
+        MessagingCenter.Unsubscribe<QuanLiXePageViewModel, Guid>(this, "ShowCarDetails");
     }
 }

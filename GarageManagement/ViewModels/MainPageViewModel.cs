@@ -203,10 +203,10 @@ namespace GarageManagement.ViewModels
             }
 
             QlXeActive = parameter == "QLXe";
-            //if (QlXeActive == true)
-            //{
-            //    _ = _quanLiXePage._viewModel.LoadAsync();
-            //}
+            if (QlXeActive == true)
+            {
+                _ = _quanLiXePage._quanLiXePageViewModel.LoadAsync();
+            }
 
             ThuTienActive = parameter == "ThuTien";
             if (ThuTienActive == true)

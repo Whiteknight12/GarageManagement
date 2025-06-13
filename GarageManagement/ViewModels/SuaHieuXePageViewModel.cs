@@ -13,7 +13,10 @@ namespace GarageManagement.ViewModels
 
         public Guid hieuXeID;
         private string oldTenHieuXe;
-
+        [ObservableProperty]
+        private bool isUpdating = false;
+        [ObservableProperty]
+        private bool isReadOnly = true;
         [ObservableProperty]
         private string tenHieuXe;
 
@@ -27,8 +30,22 @@ namespace GarageManagement.ViewModels
             var result = await _hieuXeService.GetByID(hieuXeID);
             TenHieuXe = result.TenHieuXe ?? string.Empty;
             oldTenHieuXe = TenHieuXe;
+            IsUpdating = false;
+            IsReadOnly = true; 
         }
-
+        [RelayCommand]
+        private void ToggleUpdate()
+        {
+            IsReadOnly = false;
+            IsUpdating = true;
+        }
+        [RelayCommand]
+        private void Cancel()
+        {
+            IsReadOnly = true;
+            IsUpdating = false;
+            TenHieuXe = oldTenHieuXe;
+        }
         [RelayCommand]
         public async Task UpdateHieuXe()
         {
