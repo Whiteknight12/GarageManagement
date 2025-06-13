@@ -29,6 +29,63 @@
                 </VerticalStackLayout>
             </Frame>
 
+            <Frame Padding="20" BackgroundColor="{DynamicResource CardBackgroundColor}" HasShadow="True">
+                <HorizontalStackLayout Spacing="16">
+
+                    <!-- Tên khách -->
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="Tên KH:"
+                   WidthRequest="80" VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}"/>
+                        <Entry Text="{Binding NameFilter}" Placeholder="Tên"
+                   WidthRequest="150" HeightRequest="42"
+                   FontFamily="OpenSans-Regular" BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                    <!-- CCCD -->
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="CCCD:" WidthRequest="60" VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}"/>
+                        <Entry Text="{Binding CccdFilter}" Placeholder="CCCD"
+                   WidthRequest="140" HeightRequest="42"
+                   FontFamily="OpenSans-Regular" BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Biển số -->
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="Biển số:" WidthRequest="75" VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}"/>
+                        <Entry Text="{Binding BienSoFilter}" Placeholder="Biển số"
+                   WidthRequest="120" HeightRequest="42"
+                   FontFamily="OpenSans-Regular" BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Ngày thu -->
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="Ngày:" WidthRequest="45" VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}"/>
+                        <DatePicker Date="{Binding SelectedDate}" Format="dd/MM/yyyy"
+                        WidthRequest="150" HeightRequest="42"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Giá -->
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="Giá từ:" WidthRequest="60" VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}"/>
+                        <Entry Text="{Binding PriceFromText}" Placeholder="Min"
+                   Keyboard="Numeric" WidthRequest="100" HeightRequest="42"
+                   FontFamily="OpenSans-Regular" BackgroundColor="White"/>
+                        <Label Text="đến" VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}"/>
+                        <Entry Text="{Binding PriceToText}" Placeholder="Max"
+                   Keyboard="Numeric" WidthRequest="100" HeightRequest="42"
+                   FontFamily="OpenSans-Regular" BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                </HorizontalStackLayout>
+            </Frame>
+
+
             <!-- Các nút chức năng -->
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
                 <Button Text="Thêm"

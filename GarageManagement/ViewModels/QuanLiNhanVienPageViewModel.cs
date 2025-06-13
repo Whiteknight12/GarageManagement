@@ -47,6 +47,9 @@ namespace GarageManagement.ViewModels
             IsDetailPaneVisible = false;
             IsEditing = false;
             IsNotEditing = true;
+            MessagingCenter.Subscribe<ChiTietNhanVienPageViewModel>(
+                    this, "ReloadNhanVienList",
+                    async _ => await LoadAsync());
         }
         partial void OnIsEditingChanged(bool value) => IsNotEditing = !value;
         public async Task LoadAsync()
@@ -198,5 +201,12 @@ namespace GarageManagement.ViewModels
                 IsNotEditing = true; 
             }
         }
+
+        [RelayCommand]
+        private void GoToChiTietNhanVienPage(Guid Id)
+        {
+            MessagingCenter.Send(this, "ShowStaffDetails", Id);
+        }
+
     }
 }

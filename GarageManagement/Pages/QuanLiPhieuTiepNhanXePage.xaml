@@ -30,6 +30,65 @@
                        TextColor="{DynamicResource TextColor}"/>
             </Frame>
 
+            <Frame Padding="20" HasShadow="True"
+       BackgroundColor="{DynamicResource CardBackgroundColor}">
+                <HorizontalStackLayout Spacing="14">
+
+                    <!-- Biển số -->
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="Biển số:"
+                   WidthRequest="75"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}" />
+                        <Entry Text="{Binding BienSoFilter}"
+                   Placeholder="Biển số"
+                   WidthRequest="130"
+                   HeightRequest="42"
+                   BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                    <!-- CCCD -->
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="CCCD:"
+                   WidthRequest="60"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}" />
+                        <Entry Text="{Binding CccdFilter}"
+                   Placeholder="CCCD"
+                   WidthRequest="140"
+                   HeightRequest="42"
+                   BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Tên KH -->
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="Tên KH:"
+                   WidthRequest="70"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}" />
+                        <Entry Text="{Binding NameFilter}"
+                   Placeholder="Họ tên"
+                   WidthRequest="150"
+                   HeightRequest="42"
+                   BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Ngày tiếp nhận -->
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="Ngày:"
+                   WidthRequest="45"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}" />
+                        <DatePicker Date="{Binding SelectedDate}"
+                        Format="dd/MM/yyyy"
+                        WidthRequest="150"
+                        HeightRequest="42"/>
+                    </HorizontalStackLayout>
+
+                </HorizontalStackLayout>
+            </Frame>
+
+
             <!-- ─────────── Nút chức năng ─────────── -->
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
                 <!-- Thêm -->

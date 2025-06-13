@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Services;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace GarageManagement.ViewModels
 {
@@ -18,6 +19,25 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<KhachHang> _khachHangService;
         private readonly APIClientService<Xe> _xeService;
         private readonly AuthenticationService _authenticationService;
+
+        [ObservableProperty] private string nameFilter = string.Empty;
+        [ObservableProperty] private string cccdFilter = string.Empty;
+        [ObservableProperty] private string bienSoFilter = string.Empty;
+
+        [ObservableProperty] private DateTime? selectedDate = null;     // null = không lọc ngày
+
+        [ObservableProperty] private string priceFromText = "";
+        [ObservableProperty] private string priceToText = "";
+
+        // Khi bất kỳ filter thay đổi => ApplyFilter()
+        partial void OnNameFilterChanged(string _) => ApplyFilter();
+        partial void OnCccdFilterChanged(string _) => ApplyFilter();
+        partial void OnBienSoFilterChanged(string _) => ApplyFilter();
+        partial void OnSelectedDateChanged(DateTime? _) => ApplyFilter();
+        partial void OnPriceFromTextChanged(string _) => ApplyFilter();
+        partial void OnPriceToTextChanged(string _) => ApplyFilter();
+
+        private List<PhieuThuTien> _allPhieu = new();
 
         public QuanLiPhieuThuTienPageViewModel(APIClientService<PhieuThuTien> phieuThuTienService,
             APIClientService<KhachHang> khachHangService,
@@ -60,7 +80,9 @@ namespace GarageManagement.ViewModels
                     pt.BienSoXe = xe.BienSo;
                 }
             }
-            ListPhieuThuTien = new ObservableCollection<PhieuThuTien>(listPhieu);
+
+            _allPhieu = listPhieu;
+            ApplyFilter();
         }
 
         public void Load(PhieuThuTien item)
@@ -116,6 +138,46 @@ namespace GarageManagement.ViewModels
                 ListPhieuThuTien[i].STT = i + 1;
             }
             IsDeleteMode = false;
+        }
+
+        private void ApplyFilter()
+        {
+            IEnumerable<PhieuThuTien> q = _allPhieu;
+
+            // Tên KH
+            if (!string.IsNullOrWhiteSpace(NameFilter))
+            {
+                var k = NameFilter.Trim().ToLower();
+                q = q.Where(p => (p.TenKhachHang ?? "").ToLower().Contains(k));
+            }
+
+            // CCCD
+            if (!string.IsNullOrWhiteSpace(CccdFilter))
+            {
+                var k = CccdFilter.Trim().ToLower();
+                q = q.Where(p => (p.CCCD ?? "").ToLower().Contains(k));
+            }
+
+            // Biển số
+            if (!string.IsNullOrWhiteSpace(BienSoFilter))
+            {
+                var k = BienSoFilter.Trim().ToLower();
+                q = q.Where(p => (p.BienSoXe ?? "").ToLower().Contains(k));
+            }
+
+            // Ngày thu tiền
+            if (SelectedDate is DateTime d)
+            {
+                q = q.Where(p => p.NgayThuTien.Date == d.Date);
+            }
+
+            // Giá từ / đến
+            if (double.TryParse(PriceFromText, NumberStyles.Any, CultureInfo.InvariantCulture, out var min))
+                q = q.Where(p => p.SoTienThu >= min);
+            if (double.TryParse(PriceToText, NumberStyles.Any, CultureInfo.InvariantCulture, out var max))
+                q = q.Where(p => p.SoTienThu <= max);
+
+            ListPhieuThuTien = new ObservableCollection<PhieuThuTien>(q);
         }
     }
 }

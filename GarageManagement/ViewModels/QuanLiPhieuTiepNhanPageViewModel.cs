@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace GarageManagement.ViewModels
 {
@@ -14,8 +15,23 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<Xe> _xeService;
         private readonly APIClientService<KhachHang> _khachHangService;
 
+
         [ObservableProperty]
         private ObservableCollection<PhieuTiepNhan> listPhieuTiepNhan = new ObservableCollection<PhieuTiepNhan>();
+
+        private List<PhieuTiepNhan> _allPhieu = new();
+
+        // ============================ FILTERS =========================
+        [ObservableProperty] private DateTime? selectedDate = null;        // null = không lọc ngày
+        [ObservableProperty] private string bienSoFilter = string.Empty;
+        [ObservableProperty] private string cccdFilter = string.Empty;
+        [ObservableProperty] private string nameFilter = string.Empty;
+
+        // Khi thay đổi → lọc lại
+        partial void OnSelectedDateChanged(DateTime? _) => ApplyFilter();
+        partial void OnBienSoFilterChanged(string _) => ApplyFilter();
+        partial void OnCccdFilterChanged(string _) => ApplyFilter();
+        partial void OnNameFilterChanged(string _) => ApplyFilter();
 
         public QuanLiPhieuTiepNhanPageViewModel(APIClientService<PhieuTiepNhan> phieuTiepNhanService,
             APIClientService<Xe> xeService,
@@ -46,7 +62,8 @@ namespace GarageManagement.ViewModels
                             item.KhachHangId = kh.Id;
                         }
                     }
-                    ListPhieuTiepNhan = new ObservableCollection<PhieuTiepNhan>(list);
+                    _allPhieu = list;
+                    ApplyFilter();
                     IndexCalculator(ListPhieuTiepNhan);
                 }
             }
@@ -96,6 +113,50 @@ namespace GarageManagement.ViewModels
         {
 
         }
-      
+
+        private async Task ApplyFilter()
+        {
+            IEnumerable<PhieuTiepNhan> q = _allPhieu;
+
+            // Ngày
+            if (SelectedDate is DateTime d)
+                q = q.Where(p => p.NgayTiepNhan.Value.Date == d.Date);
+
+            // Biển số
+            if (!string.IsNullOrWhiteSpace(BienSoFilter))
+            {
+                var k = BienSoFilter.Trim().ToLower();
+                q = q.Where(p => (p.BienSoXe ?? "").ToLower().Contains(k));
+            }
+
+            // CCCD
+            if (!string.IsNullOrWhiteSpace(CccdFilter))
+            {
+                var k = CccdFilter.Trim().ToLower();
+                var temp = new List<PhieuTiepNhan>(); 
+                foreach (var item in q)
+                {
+                    if (item.KhachHangId is not null)
+                    {
+                        var kh = await _khachHangService.GetByID(item.KhachHangId.Value);
+                        if (kh != null && (kh.CCCD ?? "").ToLower().Contains(k))
+                        {
+                            temp.Add(item);
+                        }
+                    }
+                }
+                q = temp.AsEnumerable();
+            }
+
+            // Tên KH
+            if (!string.IsNullOrWhiteSpace(NameFilter))
+            {
+                var k = NameFilter.Trim().ToLower();
+                q = q.Where(p => (p.TenKhachHang ?? "").ToLower().Contains(k));
+            }
+
+            ListPhieuTiepNhan = new ObservableCollection<PhieuTiepNhan>(q);
+        }
+
     }
 }

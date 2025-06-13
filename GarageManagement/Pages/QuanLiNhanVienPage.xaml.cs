@@ -9,6 +9,13 @@ public partial class QuanLiNhanVienPage : ContentView
 	{
 		InitializeComponent();
 		BindingContext = viewModel;
-		_viewModel = viewModel; 
+		_viewModel = viewModel;
+
+        MessagingCenter.Subscribe<ChiTietNhanVienPageViewModel>(this, "ShowStaffDetails", async (sender) =>
+        {
+            await _viewModel.LoadAsync();
+        });
+
     }
+    
 }

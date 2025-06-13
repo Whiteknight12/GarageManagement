@@ -30,6 +30,73 @@
                 </VerticalStackLayout>
             </Frame>
 
+            <!-- BỘ LỌC -->
+            <Frame Padding="20"
+       BackgroundColor="{DynamicResource CardBackgroundColor}"
+       HasShadow="True">
+                <HorizontalStackLayout Spacing="20">
+
+                    <!-- Biển số xe -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Biển số:"
+                   WidthRequest="85"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}" />
+                        <Entry Placeholder="Biển số xe"
+                   Text="{Binding BienSoFilter}"
+                   WidthRequest="140"
+                   HeightRequest="42"
+                   FontFamily="OpenSans-Regular"
+                   BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Ngày sửa chữa -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Ngày SC:"
+                   WidthRequest="85"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}" />
+                        <DatePicker Date="{Binding SelectedRepairDate}"
+                        Format="dd/MM/yyyy"
+                        WidthRequest="150"
+                        HeightRequest="42"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Giá từ -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Giá từ:"
+                   WidthRequest="60"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}" />
+                        <Entry Placeholder="Min"
+                   Text="{Binding PriceFromText}"
+                   Keyboard="Numeric"
+                   WidthRequest="110"
+                   HeightRequest="42"
+                   FontFamily="OpenSans-Regular"
+                   BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Giá đến -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="đến:"
+                   WidthRequest="40"
+                   VerticalOptions="Center"
+                   TextColor="{DynamicResource TextColor}" />
+                        <Entry Placeholder="Max"
+                   Text="{Binding PriceToText}"
+                   Keyboard="Numeric"
+                   WidthRequest="110"
+                   HeightRequest="42"
+                   FontFamily="OpenSans-Regular"
+                   BackgroundColor="White"/>
+                    </HorizontalStackLayout>
+
+                </HorizontalStackLayout>
+            </Frame>
+
+
+
             <!-- Các nút chức năng -->
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
                 <Button Text="Thêm"

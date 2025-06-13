@@ -12,6 +12,20 @@ namespace GarageManagement.ViewModels
     {
         [ObservableProperty]
         private ObservableCollection<PhieuSuaChua> listPhieuSuaChua = new();
+
+        [ObservableProperty] private string bienSoFilter = string.Empty;
+        [ObservableProperty] private DateTime selectedRepairDate = DateTime.Today;
+        [ObservableProperty] private string priceFromText = string.Empty;
+        [ObservableProperty] private string priceToText = string.Empty;
+
+        // Khi các field thay đổi → lọc lại
+        partial void OnBienSoFilterChanged(string _) => ApplyFilter();
+        partial void OnSelectedRepairDateChanged(DateTime _) => ApplyFilter();
+        partial void OnPriceFromTextChanged(string _) => ApplyFilter();
+        partial void OnPriceToTextChanged(string _) => ApplyFilter();
+
+        private List<PhieuSuaChua> _allPhieu = new();
+
         [ObservableProperty]
         private bool isDeleteMode;
         private readonly APIClientService<PhieuSuaChua> _phieuSuaChuaService;
@@ -49,7 +63,9 @@ namespace GarageManagement.ViewModels
                     ps.BienSoXe = xe.BienSo; // Giả định Xe có thuộc tính BienSoXe
                 }
             }
-            ListPhieuSuaChua = new ObservableCollection<PhieuSuaChua>(listPhieu);
+
+            _allPhieu = listPhieu;   // lưu danh sách gốc
+            ApplyFilter();
         }
 
         public void Load(PhieuSuaChua item)
@@ -111,6 +127,35 @@ namespace GarageManagement.ViewModels
         private void ViewDetailPhieuSuaChua(Guid id)
         {
            MessagingCenter.Send(this, "ViewChiTietPhieuSuaChua", id);
+        }
+
+        private void ApplyFilter()
+        {
+            IEnumerable<PhieuSuaChua> q = _allPhieu;
+
+            /* --- Biển số --- */
+            if (!string.IsNullOrWhiteSpace(BienSoFilter))
+            {
+                var key = BienSoFilter.Trim().ToLower();
+                q = q.Where(p => (p.BienSoXe ?? "").ToLower().Contains(key));
+            }
+
+            /* --- Ngày sửa chữa (so khớp đúng ngày) --- */
+            // Nếu người dùng không muốn lọc ngày -> bỏ chọn DatePicker (SelectedRepairDate = DateTime.MinValue)
+            if (SelectedRepairDate != DateTime.MinValue)
+            {
+                var d = SelectedRepairDate.Date;
+                q = q.Where(p => p.NgaySuaChua.Date == d);
+            }
+
+            /* --- Giá từ / đến --- */
+            if (double.TryParse(PriceFromText, out var min))
+                q = q.Where(p => (p.TongTien ) >= min);
+
+            if (double.TryParse(PriceToText, out var max))
+                q = q.Where(p => (p.TongTien ) <= max);
+
+            ListPhieuSuaChua = new ObservableCollection<PhieuSuaChua>(q);
         }
     }
 }

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.ChiTietNhanVienPage"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20" MaximumWidthRequest="1000">
+
+         
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   CornerRadius="10" Padding="15" HasShadow="True">
+                <Label Text="Chi Tiết Nhân Viên"
+                       FontSize="30"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="{DynamicResource TextColor}"/>
+            </Frame>
+
+        
+            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   CornerRadius="10" Padding="15" HasShadow="True">
+
+                <VerticalStackLayout Spacing="15">
+                    <!-- CCCD -->
+                        <VerticalStackLayout>
+                            <Label Text="CCCD"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding CCCD, Mode=TwoWay}"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"/>
+                        </VerticalStackLayout>
+
+                        <!-- Họ tên -->
+                        <VerticalStackLayout>
+                            <Label Text="Họ và tên"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding HoTen, Mode=TwoWay}"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"/>
+                        </VerticalStackLayout>
+
+                        <!-- Tuổi -->
+                        <VerticalStackLayout>
+                            <Label Text="Tuổi"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding Tuoi, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"/>
+                        </VerticalStackLayout>
+
+                        <!-- Giới tính -->
+                        <VerticalStackLayout>
+                            <Label Text="Giới tính"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding GioiTinh, Mode=TwoWay}"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"/>
+                        </VerticalStackLayout>
+
+                        <!-- Địa chỉ -->
+                        <VerticalStackLayout>
+                            <Label Text="Địa chỉ"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}"/>
+                            <Editor Text="{Binding DiaChi, Mode=TwoWay}"
+                                AutoSize="TextChanges"
+                                IsReadOnly="{Binding IsReadOnly}"
+                                FontSize="16"
+                                TextColor="{DynamicResource TextColor}"/>
+                        </VerticalStackLayout>
+
+                        <!-- SĐT -->
+                        <VerticalStackLayout>
+                            <Label Text="Số điện thoại"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding SoDienThoai, Mode=TwoWay}"
+                               Keyboard="Telephone"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"/>
+                        </VerticalStackLayout>
+
+                        <!-- Email -->
+                        <VerticalStackLayout>
+                            <Label Text="Email"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding Email, Mode=TwoWay}"
+                               Keyboard="Email"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"/>
+                        </VerticalStackLayout>
+
+                        <!-- Tài khoản Id -->
+                        <VerticalStackLayout>
+                            <Label Text="Tài khoản Id"
+                               FontSize="16" FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding TaiKhoanId, Mode=TwoWay}"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"/>
+                        </VerticalStackLayout>
+
+                    
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="Cập nhật thông tin nhân viên"
+                    Command="{Binding ToggleUpdateCommand}"
+                    BackgroundColor="#10B981"
+                    TextColor="White"
+                    IsVisible="{Binding IsReadOnly}"/>
+
+            <!-- Chế độ cập nhật -->
+            <Button Text="Lưu"
+                    Command="{Binding UpdateCommand}"
+                    BackgroundColor="#10B981"
+                    TextColor="White"
+                    IsVisible="{Binding IsUpdating}"/>
+
+            <Button Text="Hủy"
+                    Command="{Binding ExitUpdateCommand}"
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    IsVisible="{Binding IsUpdating}"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

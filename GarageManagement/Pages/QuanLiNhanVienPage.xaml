@@ -215,7 +215,7 @@
 
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer
-                                        Command="{Binding BindingContext.ViewDetailNhanVienCommand, Source={x:Reference RootContentView}}"
+                                        Command="{Binding BindingContext.GoToChiTietNhanVienPageCommand, Source={x:Reference RootContentView}}"
                                         CommandParameter="{Binding Id}"/>
                                 </Frame.GestureRecognizers>
 
@@ -273,122 +273,183 @@
                 </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
-
+        <BoxView
+    Grid.Column="0"
+    HorizontalOptions="End"
+    VerticalOptions="Fill"
+    WidthRequest="1"
+    BackgroundColor="LightGray"
+    IsVisible="{Binding IsDetailPaneVisible}"
+  />
         <!-- ====================== CHI TIẾT ====================== -->
-        <Frame Grid.Column="1"
-               WidthRequest="320"
-               HasShadow="True"
-               Padding="20"
-               BackgroundColor="{DynamicResource CardBackgroundColor}"
-               IsVisible="{Binding IsDetailPaneVisible}">
-            <VerticalStackLayout Spacing="12">
+        <ScrollView Grid.Column="1" IsVisible="{Binding IsDetailPaneVisible}">
+            <VerticalStackLayout Spacing="20" Padding="20" MaximumWidthRequest="1000">
                 <HorizontalStackLayout>
-                    <Label Text="Chi Tiết Nhân Viên"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"/>
-                    <Button Text="✕"
-                            Command="{Binding CloseDetailPaneCommand}"
-                            HorizontalOptions="EndAndExpand"
-                            BackgroundColor="Transparent"
-                            TextColor="{DynamicResource TextColor}"
-                            FontFamily="OpenSans-SemiBold"/>
+                    
+                    <!-- Header -->
+                    <Frame
+      BackgroundColor="{DynamicResource CardBackgroundColor}"
+      CornerRadius="10"
+      Padding="15"
+      HasShadow="True">
+                        <HorizontalStackLayout>
+
+                            <!-- Tiêu đề -->
+                            <Label
+          Text="Thêm nhân viên mới"
+          FontSize="30"
+          FontAttributes="Bold"
+          HorizontalOptions="CenterAndExpand"
+          TextColor="{DynamicResource TextColor}" />
+                        </HorizontalStackLayout>
+                    </Frame>
+                    <!-- Nút X trở về -->
+                    <Button
+Text="✕"
+Command="{Binding CloseDetailPaneCommand}"
+BackgroundColor="Transparent"
+TextColor="{DynamicResource TextColor}"
+FontFamily="OpenSans-SemiBold"/>
                 </HorizontalStackLayout>
 
-                <!-- Các field giữ nguyên -->
-                <Label FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}" Text="CCCD:"/>
-                <Entry  Text="{Binding SelectedNhanVien.CCCD}" FontFamily="OpenSans-Regular"
-                       TextColor="{DynamicResource TextColor}" IsEnabled="{Binding IsEditing}"
-                        BackgroundColor="White"/>
+                <!-- Nội dung form -->
+                <Frame
+      BackgroundColor="{DynamicResource CardBackgroundColor}"
+      CornerRadius="10"
+      Padding="15"
+      HasShadow="True">
+                    <VerticalStackLayout Spacing="15">
 
-                <Label FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}" Text="Họ Tên:"/>
-                <Entry  Text="{Binding SelectedNhanVien.HoTen}" FontFamily="OpenSans-Regular"
-                       TextColor="{DynamicResource TextColor}" BackgroundColor="White" IsEnabled="{Binding IsEditing}"/>
+                        <!-- CCCD -->
+                        <VerticalStackLayout>
+                            <Label
+            Text="CCCD"
+            FontSize="16"
+            FontAttributes="Bold"
+            TextColor="{DynamicResource TextColor}" />
+                            <Entry
+            Text="{Binding SelectedNhanVien.CCCD, Mode=TwoWay}"
+            FontSize="16"
+            TextColor="{DynamicResource TextColor}" />
+                        </VerticalStackLayout>
 
-                <Label FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}" Text="Tuổi:"/>
-                <Entry  Text="{Binding SelectedNhanVien.Tuoi}" FontFamily="OpenSans-Regular"
-                       TextColor="{DynamicResource TextColor}" BackgroundColor="White" IsEnabled="{Binding IsEditing}"/>
+                        <!-- Họ và tên -->
+                        <VerticalStackLayout>
+                            <Label
+            Text="Họ và tên"
+            FontSize="16"
+            FontAttributes="Bold"
+            TextColor="{DynamicResource TextColor}" />
+                            <Entry
+            Text="{Binding SelectedNhanVien.HoTen, Mode=TwoWay}"
+            FontSize="16"
+            TextColor="{DynamicResource TextColor}" />
+                        </VerticalStackLayout>
 
-                <Label FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}" Text="Giới Tính:"/>
-                <Entry  Text="{Binding SelectedNhanVien.GioiTinh}" FontFamily="OpenSans-Regular"
-                       TextColor="{DynamicResource TextColor}" BackgroundColor="White" IsEnabled="{Binding IsEditing}"/>
+                        <!-- Tuổi -->
+                        <VerticalStackLayout>
+                            <Label
+            Text="Tuổi"
+            FontSize="16"
+            FontAttributes="Bold"
+            TextColor="{DynamicResource TextColor}" />
+                            <Entry
+            Text="{Binding SelectedNhanVien.Tuoi, Mode=TwoWay}"
+            Keyboard="Numeric"
+            FontSize="16"
+            TextColor="{DynamicResource TextColor}" />
+                        </VerticalStackLayout>
 
-                <Label FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}" Text="Địa Chỉ:"/>
-                <Entry  Text="{Binding SelectedNhanVien.DiaChi}" FontFamily="OpenSans-Regular"
-                       TextColor="{DynamicResource TextColor}" BackgroundColor="White" IsEnabled="{Binding IsEditing}"/>
+                        <!-- Giới tính -->
+                        <VerticalStackLayout>
+                            <Label
+            Text="Giới tính"
+            FontSize="16"
+            FontAttributes="Bold"
+            TextColor="{DynamicResource TextColor}" />
+                            <Entry
+            Text="{Binding SelectedNhanVien.GioiTinh, Mode=TwoWay}"
+            FontSize="16"
+            TextColor="{DynamicResource TextColor}" />
+                        </VerticalStackLayout>
 
-                <Label FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}" Text="SĐT:"/>
-                <Entry  Text="{Binding SelectedNhanVien.SoDienThoai}" FontFamily="OpenSans-Regular"
-                       TextColor="{DynamicResource TextColor}" BackgroundColor="White" IsEnabled="{Binding IsEditing}"/>
+                        <!-- Địa chỉ -->
+                        <VerticalStackLayout>
+                            <Label
+            Text="Địa chỉ"
+            FontSize="16"
+            FontAttributes="Bold"
+            TextColor="{DynamicResource TextColor}" />
+                            <Editor
+            Text="{Binding SelectedNhanVien.DiaChi, Mode=TwoWay}"
+            AutoSize="TextChanges"
+            FontSize="16"
+            TextColor="{DynamicResource TextColor}" />
+                        </VerticalStackLayout>
 
-                <Label FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
-       TextColor="{DynamicResource TextColor}" Text="Email: "/>
-                <Entry  Text="{Binding SelectedNhanVien.Email}" FontFamily="OpenSans-Regular"
-       TextColor="{DynamicResource TextColor}" IsEnabled="{Binding IsEditing}" BackgroundColor="White" />
+                        <!-- Số điện thoại -->
+                        <VerticalStackLayout>
+                            <Label
+            Text="Số điện thoại"
+            FontSize="16"
+            FontAttributes="Bold"
+            TextColor="{DynamicResource TextColor}" />
+                            <Entry
+            Text="{Binding SelectedNhanVien.SoDienThoai, Mode=TwoWay}"
+            Keyboard="Telephone"
+            FontSize="16"
+            TextColor="{DynamicResource TextColor}" />
+                        </VerticalStackLayout>
 
-                <Label FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
-       TextColor="{DynamicResource TextColor}" Text="Tài khoản Id"/>
-                <Entry  Text="{Binding SelectedNhanVien.TaiKhoanId}" FontFamily="OpenSans-Regular"
-       TextColor="{DynamicResource TextColor}" IsEnabled="{Binding IsEditing}" BackgroundColor="White" />
+                        <!-- Email -->
+                        <VerticalStackLayout>
+                            <Label
+            Text="Email"
+            FontSize="16"
+            FontAttributes="Bold"
+            TextColor="{DynamicResource TextColor}" />
+                            <Entry
+            Text="{Binding SelectedNhanVien.Email, Mode=TwoWay}"
+            Keyboard="Email"
+            FontSize="16"
+            TextColor="{DynamicResource TextColor}" />
+                        </VerticalStackLayout>
 
-                <Grid ColumnDefinitions="*,*">
-                    <Button Grid.Column="0" Text="Sửa"
-    Command="{Binding EditDetailCommand}"
-    IsVisible="{Binding IsNotEditing, Converter={StaticResource FalseConverter}}"
-    BackgroundColor="#3B82F6"
-    TextColor="White"
-    HeightRequest="40"
-    FontFamily="OpenSans-SemiBold">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroupList>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#3B82F6"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#2563EB"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateGroupList>
-                        </VisualStateManager.VisualStateGroups>
-                    </Button>
-                    <Button Grid.Column="1" Text="Lưu"
-    Command="{Binding SaveDetailCommand}"
-    IsVisible="{Binding IsEditing}"
-    BackgroundColor="#10B981"
-    TextColor="White"
-    HeightRequest="40"
-    FontFamily="OpenSans-SemiBold">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroupList>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualState x:Name="Normal">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#3B82F6"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="Pressed">
-                                        <VisualState.Setters>
-                                            <Setter Property="BackgroundColor" Value="#2563EB"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateGroupList>
-                        </VisualStateManager.VisualStateGroups>
-                    </Button>
-                </Grid>
+                        <!-- Tài khoản Id -->
+                        <VerticalStackLayout>
+                            <Label
+            Text="Tài khoản Id"
+            FontSize="16"
+            FontAttributes="Bold"
+            TextColor="{DynamicResource TextColor}" />
+                            <Entry
+            Text="{Binding SelectedNhanVien.TaiKhoanId, Mode=TwoWay}"
+            FontSize="16"
+            TextColor="{DynamicResource TextColor}" />
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Luôn hiển thị 2 nút Lưu / Hủy ở đáy -->
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Button
+        Text="Lưu"
+        Command="{Binding SaveDetailAsyncCommand}"
+        BackgroundColor="#10B981"
+        TextColor="White"
+        WidthRequest="140"
+        HeightRequest="48"/>
+                    <Button
+        Text="Hủy"
+        Command="{Binding CloseDetailPaneCommand}"
+        BackgroundColor="Gray"
+        TextColor="White"
+        WidthRequest="140"
+        HeightRequest="48"/>
+                </HorizontalStackLayout>
+
             </VerticalStackLayout>
-        </Frame>
+        </ScrollView>
     </Grid>
 </ContentView>
