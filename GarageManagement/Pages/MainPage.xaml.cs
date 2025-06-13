@@ -235,6 +235,20 @@ public partial class MainPage : ContentPage
                     _viewModel.ShowRightPane(_lapPhieuNhapPage);
                 }
             });
+        MessagingCenter.Subscribe<LoaiTienCongPageViewModel, ContentView>(
+            this, "ShowRightPane",
+                (sender, content) =>
+                {
+                    if (_viewModel.IsRightPaneVisible)
+                    {
+                        _viewModel.CloseRightPane();
+                    }
+                    else
+                    {
+                        _viewModel.ShowRightPane(content);
+                    }
+                });
+
     }
 
     protected override void OnDisappearing()
@@ -250,5 +264,6 @@ public partial class MainPage : ContentPage
         MessagingCenter.Unsubscribe<QuanLiPhieuSuaChuaPageViewModel, Guid>(this, "ViewChiTietPhieuSuaChua");
         MessagingCenter.Unsubscribe<QuanLiNhanVienPageViewModel, Guid>(this, "ShowStaffDetails");
         MessagingCenter.Unsubscribe<LapPhieuNhapPageViewModel, Guid>(this, "LapPhieuNhap");
+        MessagingCenter.Unsubscribe<LoaiTienCongPageViewModel, ContentView>(this, "ShowRightPane");
     }
 }

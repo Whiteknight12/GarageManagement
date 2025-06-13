@@ -89,6 +89,9 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private ContentView rightPaneContent;
 
+        [ObservableProperty]
+        private bool quanLiDanhSachLoaiTienCongActive = false;
+
         private readonly TiepNhanXePage _tiepNhanXe;
         private readonly TaoPhieuSuaChuaPage _taoPhieuSuaChua;
         private readonly LapPhieuNhapPage _taoPhieuNhap;
@@ -109,6 +112,9 @@ namespace GarageManagement.ViewModels
         private readonly QuanLiPhieuThuTienPage _quanLiPhieuThuTienPage;
         private readonly QuanLiPhieuSuaChuaPage _quanLiPhieuSuaChuaPage;
         private readonly QuanLiPhieuTiepNhanXePage _quanLiPhieuTiepNhanXePage;
+        private readonly LoaiTienCongPage _loaiTienCongPage;
+        private readonly ThemLoaiTienCongPage _themLoaiTienCongPage;
+        private readonly ThemLoaiVatTuPhuTungPage _themLoaiVatTuPhuTungPage;
 
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
@@ -130,7 +136,10 @@ namespace GarageManagement.ViewModels
             QuanLiPhieuNhapPage quanLiPhieuNhapPage,
             QuanLiPhieuThuTienPage quanLiPhieuThuTienPage,
             QuanLiPhieuSuaChuaPage quanLiPhieuSuaChuaPage,
-            QuanLiPhieuTiepNhanXePage quanLiPhieuTiepNhanXePage)
+            QuanLiPhieuTiepNhanXePage quanLiPhieuTiepNhanXePage,
+            LoaiTienCongPage loaiTienCongPage,
+            ThemLoaiTienCongPage themLoaiTienCongPage,
+            ThemLoaiVatTuPhuTungPage themLoaiVatTuPhuTungPage)
         {
             _viewModel = viewModel;
             currentPageContent = new NhanSuMainPage(_viewModel);
@@ -158,6 +167,9 @@ namespace GarageManagement.ViewModels
             _quanLiPhieuThuTienPage = quanLiPhieuThuTienPage;
             _quanLiPhieuSuaChuaPage = quanLiPhieuSuaChuaPage;
             _quanLiPhieuTiepNhanXePage = quanLiPhieuTiepNhanXePage;
+            _loaiTienCongPage = loaiTienCongPage;
+            _themLoaiTienCongPage = themLoaiTienCongPage;
+            _themLoaiVatTuPhuTungPage = themLoaiVatTuPhuTungPage;
             _ = LoadUserAsync();
         }
 
@@ -209,10 +221,13 @@ namespace GarageManagement.ViewModels
             }
 
             QuanLiDanhSachLoaiVatTuActive = parameter == "QLDanhSachLoaiVatTu";
-            //if (QuanLiDanhSachLoaiVatTuActive == true)
-            //{
-            //    _ = _quanLiDanhSachLoaiVatTuPage._viewModel.LoadAsync();
-            //}
+            if (QuanLiDanhSachLoaiVatTuActive == true)
+            {
+                if (_quanLiDanhSachLoaiVatTuPage.BindingContext is QuanLiDanhSachLoaiVatTuPageViewModel viewModel)
+                {
+                    _ = viewModel.LoadAsync();
+                }
+            }
 
             PhanQuyenActive = parameter == "PhanQuyen";
             if (PhanQuyenActive == true)
@@ -268,6 +283,21 @@ namespace GarageManagement.ViewModels
                 _ = _quanLiPhieuTiepNhanXePage._viewModel.LoadAsync();
             }
 
+            //QuanLiDanhSachLoaiTienCongActive = parameter == "QLDanhSachLoaiTienCong";
+            //if (QuanLiDanhSachLoaiTienCongActive == true)
+            //{
+            //    _ = _loaiTienCongPage._viewModel.LoadAsync();
+            //}
+
+            QuanLiDanhSachLoaiTienCongActive = parameter == "QLDanhSachLoaiTienCong";
+            if (QuanLiDanhSachLoaiTienCongActive == true)
+            {
+                if (_loaiTienCongPage.BindingContext is LoaiTienCongPageViewModel viewModel)
+                {
+                    _ = viewModel.LoadAsync(); 
+                }
+            }
+
             CurrentPageContent = parameter switch
             {
                 "Home" => new NhanSuMainPage(_viewModel),
@@ -288,6 +318,7 @@ namespace GarageManagement.ViewModels
                 "QuanLiPhieuThuTien" => _quanLiPhieuThuTienPage,
                 "QuanLiPhieuSuaChua" => _quanLiPhieuSuaChuaPage,
                 "QuanLiPhieuTiepNhan" => _quanLiPhieuTiepNhanXePage,
+                "QLDanhSachLoaiTienCong" => _loaiTienCongPage,
                 _ => new NhanSuMainPage(_viewModel)
             };
 

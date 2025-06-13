@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.ThemLoaiVatTuPhuTungPage"
+             Title="Thêm Loại Vật Tư Phụ Tùng">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="0,10,0,0" />
+            </Style>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Margin" Value="0,5,0,10" />
+                <Setter Property="BackgroundColor" Value="#F5F5F5" />
+                <Setter Property="HeightRequest" Value="40" />
+            </Style>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#2196F3" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Margin" Value="5,10" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Header -->
+            <Label Text="Thêm Loại Vật Tư Phụ Tùng" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" />
+
+            <!-- Tên loại vật tư phụ tùng -->
+            <Label Text="Tên loại vật tư phụ tùng:" Style="{StaticResource LabelStyle}" />
+            <Entry Placeholder="Nhập tên loại vật tư phụ tùng..." Text="{Binding TenLoaiVatTuPhuTung}" Style="{StaticResource EntryStyle}" />
+
+            <!-- Số lượng -->
+            <Label Text="Số lượng:" Style="{StaticResource LabelStyle}" />
+            <Entry Placeholder="Nhập số lượng..." Text="{Binding SoLuong}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" />
+
+            <!-- Đơn giá bán -->
+            <Label Text="Đơn giá bán:" Style="{StaticResource LabelStyle}" />
+            <Entry Placeholder="Nhập đơn giá bán..." Text="{Binding DonGiaBanLoaiVatTuPhuTung}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" />
+
+            <!-- Buttons -->
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Lưu" Command="{Binding SaveCommand}" Style="{StaticResource ButtonStyle}" />
+                <Button Text="Hủy" Command="{Binding CancelCommand}" Style="{StaticResource ButtonStyle}" BackgroundColor="#E53935" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

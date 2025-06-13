@@ -12,5 +12,6 @@ namespace APIClassLibrary.APIModels
         public string TenLoaiVatTuPhuTung { get; set; }
         public int SoLuong { get; set; }
         public double DonGiaBanLoaiVatTuPhuTung { get; set; }
+        public bool IsSelected { get; set; } = false;
     }
 }

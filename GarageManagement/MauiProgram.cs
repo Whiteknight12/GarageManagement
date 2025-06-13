@@ -89,6 +89,10 @@ public static class MauiProgram
         builder.Services.AddTransient<QuanLiPhieuSuaChuaPage>();
         builder.Services.AddTransient<QuanLiPhieuThuTienPage>();
         builder.Services.AddTransient<ChiTietPhieuNhapVatTuPage>();
+        builder.Services.AddTransient<ChiTietPhieuSuaChuaPage>();
+        builder.Services.AddTransient<LoaiTienCongPage>();
+        builder.Services.AddTransient<ThemLoaiTienCongPage>();
+        builder.Services.AddTransient<ThemLoaiVatTuPhuTungPage>();
         builder.Services.AddTransient<ChiTietPhieuSuaChuaPage>();   
         builder.Services.AddTransient<ChiTietNhanVienPage>();
 
@@ -119,6 +123,13 @@ public static class MauiProgram
         builder.Services.AddTransient<QuanLiPhieuThuTienPageViewModel>();
         builder.Services.AddTransient<ChiTietPhieuNhapVatTuPageViewModel>();
         builder.Services.AddTransient<ChiTietPhieuSuaChuaPageViewModel>();
+        builder.Services.AddTransient<LoaiTienCongPageViewModel>();
+        builder.Services.AddTransient<ThemLoaiTienCongPageViewModel>();
+        builder.Services.AddTransient<ThemLoaiVatTuPhuTungPageViewModel>();
+        builder.Services.AddTransient<QuanLiDanhSachLoaiVatTuPageViewModel>(provider =>
+    new QuanLiDanhSachLoaiVatTuPageViewModel(
+        provider.GetService<APIClientService<VatTuPhuTung>>(),
+        provider.GetService<ThemLoaiVatTuPhuTungPageViewModel>()));
         builder.Services.AddTransient<ChiTietNhanVienPageViewModel>(); 
 
         builder.Services.AddLogging(logging =>
