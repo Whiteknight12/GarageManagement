@@ -40,9 +40,18 @@ namespace WebAPI.Controllers
             await _applicationDbContext.SaveChangesAsync();
             Guid thucTheId = Guid.Empty;
             var idProperty = typeof(T).GetProperty("Id");
+            var specialIdProperty = typeof(T).GetProperty("VatTuPhuTungId");
             if (idProperty != null && idProperty.PropertyType == typeof(Guid))
             {
                 var value = idProperty.GetValue(entity);
+                if (value is Guid guidValue)
+                {
+                    thucTheId = guidValue;
+                }
+            }
+            else if (specialIdProperty != null && specialIdProperty.PropertyType == typeof(Guid))
+            {
+                var value = specialIdProperty.GetValue(entity);
                 if (value is Guid guidValue)
                 {
                     thucTheId = guidValue;
