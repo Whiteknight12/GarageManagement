@@ -1,50 +1,94 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:GarageManagement.ViewModels"
+             xmlns:service="clr-namespace:GarageManagement.Services"
              x:Class="GarageManagement.Pages.ThemLoaiTienCongPage"
-             Title="Thêm Loại Tiền Công">
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="LabelStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="Margin" Value="0,10,0,0" />
-            </Style>
-            <Style x:Key="EntryStyle" TargetType="Entry">
-                <Setter Property="FontSize" Value="14" />
-                <Setter Property="Margin" Value="0,5,0,10" />
-                <Setter Property="BackgroundColor" Value="#F5F5F5" />
-                <Setter Property="HeightRequest" Value="40" />
-            </Style>
-            <Style x:Key="ButtonStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#2196F3" />
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="CornerRadius" Value="8" />
-                <Setter Property="HeightRequest" Value="45" />
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="Margin" Value="5,10" />
-            </Style>
+            <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="20" />
+                <On Platform="iOS" Value="20" />
+                <On Platform="Windows" Value="20" />
+            </OnPlatform>
+            <OnPlatform x:Key="ButtonCornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="12" />
+                <On Platform="iOS" Value="12" />
+                <On Platform="Windows" Value="12" />
+            </OnPlatform>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
-            <!-- Header -->
-            <Label Text="Thêm Loại Tiền Công" FontSize="22" FontAttributes="Bold" HorizontalOptions="Center" />
+        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="600">
 
-            <!-- Tên loại tiền công -->
-            <Label Text="Tên loại tiền công:" Style="{StaticResource LabelStyle}" />
-            <Entry Placeholder="Nhập tên loại tiền công..." Text="{Binding TenLoaiTienCong}" Style="{StaticResource EntryStyle}" />
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="25"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <VerticalStackLayout Spacing="25">
+                    <Label Text="Thêm Loại Tiền Công"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalOptions="Center" />
 
-            <!-- Đơn giá -->
-            <Label Text="Đơn giá:" Style="{StaticResource LabelStyle}" />
-            <Entry Placeholder="Nhập đơn giá..." Text="{Binding DonGiaLoaiTienCong}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" />
+                    <Label Text="Tên loại tiền công:"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}" />
 
-            <!-- Buttons -->
-            <HorizontalStackLayout Spacing="10">
-                <Button Text="Lưu" Command="{Binding SaveCommand}" Style="{StaticResource ButtonStyle}" />
-                <Button Text="Hủy" Command="{Binding CancelCommand}" Style="{StaticResource ButtonStyle}" BackgroundColor="#E53935" />
-            </HorizontalStackLayout>
+                    <Entry Placeholder="Nhập tên loại tiền công..."
+                           Text="{Binding TenLoaiTienCong}"
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                           TextColor="{DynamicResource TextColor}"
+                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                           FontSize="14"
+                           HeightRequest="42"
+                           FontFamily="OpenSans-Regular" />
+
+                    <Label Text="Đơn giá:"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}" />
+
+                    <Entry Placeholder="Nhập đơn giá..."
+                           Text="{Binding DonGiaLoaiTienCong}"
+                           Keyboard="Numeric"
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                           TextColor="{DynamicResource TextColor}"
+                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                           FontSize="14"
+                           HeightRequest="42"
+                           FontFamily="OpenSans-Regular" />
+
+                    <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
+                        <Button Text="Lưu"
+                                Command="{Binding SaveCommand}"
+                                BackgroundColor="#3B82F6"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontFamily="OpenSans-SemiBold"
+                                HeightRequest="45"
+                                CornerRadius="{StaticResource ButtonCornerRadiusHandler}" />
+
+                        <Button Text="Hủy"
+                                Command="{Binding CancelCommand}"
+                                BackgroundColor="#EF4444"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                FontFamily="OpenSans-SemiBold"
+                                HeightRequest="45"
+                                CornerRadius="{StaticResource ButtonCornerRadiusHandler}" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

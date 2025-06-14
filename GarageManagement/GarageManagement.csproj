@@ -96,6 +96,9 @@
 	  <MauiXaml Update="Pages\AddNewAccountPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\BaoCaoDoanhSoListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\BaoCaoDoanhSoPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

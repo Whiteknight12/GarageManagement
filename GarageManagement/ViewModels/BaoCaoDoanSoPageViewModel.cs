@@ -5,11 +5,6 @@ using CommunityToolkit.Mvvm.Input;
 using Microcharts;
 using SkiaSharp;
 using System.Collections.ObjectModel;
-using Microcharts;
-using Microcharts.Maui;
-using SkiaSharp;
-using System.Linq;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace GarageManagement.ViewModels
 {
@@ -67,21 +62,27 @@ namespace GarageManagement.ViewModels
 
         public async Task LoadAsync()
         {
-            // lấy tất cả phiếu sửa chữa 1 lần
             listphieusuachua = await _phieusuachuaservice.GetAll() ?? new List<PhieuSuaChua>();
 
-            // đổ năm vào combobox (loại trùng)
             Years = new ObservableCollection<int>(
                         listphieusuachua
                         .Select(p => p.NgaySuaChua.Year)
                         .Distinct()
                         .OrderBy(y => y));
 
-            // tính tổng doanh số
+            OnPropertyChanged(nameof(Years));
+
+            // Gán sau khi Years đã được tạo → đảm bảo SelectedYear nằm trong danh sách
+            if (Years.Contains(DateTime.Now.Year))
+                SelectedYear = DateTime.Now.Year;
+            else
+                SelectedYear = Years.FirstOrDefault();  // fallback
+
             TongDoanhSo = listphieusuachua.Sum(p => p.TongTien);
 
-            await GenerateBaoCao();      // duy nhất 1 lần
+            await GenerateBaoCao();
         }
+
 
         private async Task GenerateBaoCao()
         {
@@ -160,16 +161,6 @@ namespace GarageManagement.ViewModels
                 TongDoanhSo = listphieusuachua.Sum(u => u.TongTien);
             }
             await GenerateBaoCao();
-        }
-
-      
-        [RelayCommand]
-        private async Task GoBack()
-        {
-            //var json = await SecureStorage.GetAsync(STORAGE_KEY);
-            //if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
-            //var currentaccount=JsonSerializer.Deserialize<taiKhoanSession>(json);
-            //if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
 
     }

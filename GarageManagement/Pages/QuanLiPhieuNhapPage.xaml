@@ -38,7 +38,7 @@
 
                     <!-- Lọc theo thời gian -->
                     <HorizontalStackLayout Spacing="10">
-                        <Label Text="Theo:"
+                        <Label Text="Lọc theo:"
                    WidthRequest="65"
                    VerticalOptions="Center"
                    TextColor="{DynamicResource TextColor}" />
@@ -47,14 +47,19 @@
                         <Picker ItemsSource="{Binding TimeFilterOptions}"
                     SelectedItem="{Binding SelectedTimeFilter, Mode=TwoWay}"
                     FontFamily="OpenSans-Regular"
-                    WidthRequest="110"
+                    WidthRequest="150"
                     HeightRequest="42"
                     BackgroundColor="{DynamicResource BackgroundColor}"
                                 TextColor="{DynamicResource TextColor}"/>
 
+                        <Label Text="Chọn ngày:"
+WidthRequest="80"
+VerticalOptions="Center"
+TextColor="{DynamicResource TextColor}" />
+                        
                         <!-- DatePicker: chỉ hiển thị khi chọn “Ngày” -->
                         <DatePicker Date="{Binding SelectedDate, Mode=TwoWay}"
-                        IsVisible="{Binding IsDayFilter}"
+                   
                         HeightRequest="42"
                         WidthRequest="140" 
                             BackgroundColor="{DynamicResource BackgroundColor}"

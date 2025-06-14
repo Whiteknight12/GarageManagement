@@ -102,10 +102,14 @@ namespace GarageManagement.ViewModels
             _carservice = carservice;
             _hieuxeservice = hieuXeService;
             _khachHangService = khachHangService;
+            IsReadOnly = true;
+            IsUpdating = false;
         }
 
         public async Task LoadAsync()
         {
+            IsReadOnly = true;
+            IsUpdating = false;
             var obj = await _carservice.GetByID(CarId);
             var hieuXe = await _hieuxeservice.GetByID(obj.HieuXeId);
             var khachHang = await _khachHangService.GetByID(obj.KhachHangId);

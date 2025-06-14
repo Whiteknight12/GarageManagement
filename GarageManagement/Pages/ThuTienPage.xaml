@@ -58,28 +58,47 @@
                            TextColor="{DynamicResource TextColor}"
                            VerticalOptions="Center"/>
 
-                    <Picker Grid.Row="1" Grid.Column="0"
-                            x:Name="FilterFieldPicker"
-                            TitleColor="{DynamicResource PlaceholderColor}"
-                            ItemsSource="{Binding FilterFields}"
-                            SelectedItem="{Binding SelectedFilterField, Mode=TwoWay}"
-                            ItemDisplayBinding="{Binding .}"
-                            FontSize="16"
-                            FontFamily="OpenSans-Regular"
-                            TextColor="{DynamicResource TextColor}"
-                            HeightRequest="45"
-                            Margin="0,5,0,0"/>
+                    <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Spacing="20">
+                        <Label 
+       Text="Chọn trường lọc:"
+       FontSize="16"
+       FontAttributes="Bold"
+       FontFamily="OpenSans-Regular"
+       TextColor="{DynamicResource TextColor}"
+       VerticalOptions="Center"/>
+                        <Picker 
+        x:Name="FilterFieldPicker"
+        TitleColor="{DynamicResource PlaceholderColor}"
+        ItemsSource="{Binding FilterFields}"
+        SelectedItem="{Binding SelectedFilterField, Mode=TwoWay}"
+        ItemDisplayBinding="{Binding .}"
+        FontSize="16"
+        FontFamily="OpenSans-Regular"
+        TextColor="{DynamicResource TextColor}"
+        HeightRequest="45"
+        Margin="0,5,0,0"
+                            WidthRequest="150"/>
+                    </HorizontalStackLayout>
 
-                    <Entry Grid.Row="1" Grid.Column="1"
-                           x:Name="FilterValueEntry"
-                           Placeholder="Nhập giá trị lọc"
-                           PlaceholderColor="{DynamicResource PlaceholderColor}"
-                           Text="{Binding FilterValue, Mode=TwoWay}"
-                           FontSize="16"
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}"
-                           HeightRequest="45"
-                           Margin="0,5,0,0"/>
+                    <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="20">
+                        <Label 
+Text="Nhập giá trị lọc:"
+FontSize="16"
+FontAttributes="Bold"
+FontFamily="OpenSans-Regular"
+TextColor="{DynamicResource TextColor}"
+VerticalOptions="Center"/>
+                        <Entry 
+       x:Name="FilterValueEntry"
+       Placeholder="Vd: CCCD/Tên/Email/SĐT"
+       PlaceholderColor="{DynamicResource PlaceholderColor}"
+       Text="{Binding FilterValue, Mode=TwoWay}"
+       FontSize="16"
+       FontFamily="OpenSans-Regular"
+       TextColor="{DynamicResource TextColor}"
+       HeightRequest="45"
+       Margin="0,5,0,0"/>
+                    </HorizontalStackLayout>
 
                     <Button Grid.Row="1" Grid.Column="2"
                             Text="Lọc"

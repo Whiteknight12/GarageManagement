@@ -2,6 +2,7 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using GarageManagement.Services;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
@@ -29,6 +30,12 @@ namespace GarageManagement.ViewModels
         [ObservableProperty] private string priceFromText = "";
         [ObservableProperty] private string priceToText = "";
 
+        public List<string> DateFilterOptions { get; } = new() { "Tất cả", "Lọc theo ngày" };
+        [ObservableProperty] private string selectedDateOption = "Tất cả";
+        public bool IsDateVisible => SelectedDateOption == "Lọc theo ngày";
+        partial void OnSelectedDateOptionChanged(string _) => ApplyFilter();
+
+
         // Khi bất kỳ filter thay đổi => ApplyFilter()
         partial void OnNameFilterChanged(string _) => ApplyFilter();
         partial void OnCccdFilterChanged(string _) => ApplyFilter();
@@ -39,16 +46,23 @@ namespace GarageManagement.ViewModels
 
         private List<PhieuThuTien> _allPhieu = new();
 
+        private readonly ThuTienPageViewModel _thuTienPageViewModel;
+        private readonly APIClientService<HieuXe> _hieuXeService;
+
         public QuanLiPhieuThuTienPageViewModel(APIClientService<PhieuThuTien> phieuThuTienService,
             APIClientService<KhachHang> khachHangService,
             APIClientService<Xe> xeService,
             ILogger<QuanLiPhieuThuTienPageViewModel> logger,
-            AuthenticationService authenticationService)
+            AuthenticationService authenticationService,
+            ThuTienPageViewModel thuTienPageViewModel,
+            APIClientService<HieuXe> hieuXeService)
         {
             _authenticationService = authenticationService;
             _phieuThuTienService = phieuThuTienService;
             _khachHangService = khachHangService;
             _xeService = xeService;
+            _thuTienPageViewModel = thuTienPageViewModel;
+            _hieuXeService = hieuXeService; 
             _ = LoadAsync();
             IsDeleteMode = false;
         }
@@ -96,9 +110,31 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private void Add()
+        private async Task Add()
         {
-            // Logic để thêm phiếu thu tiền mới (có thể mở một trang mới để nhập thông tin)
+            var view = new ThuTienPage(_thuTienPageViewModel, _xeService, _hieuXeService);
+            var page = new ContentPage
+            {
+                Content = view,
+                Padding = 0
+            };
+            var win = new Window
+            {
+                Page = page,
+                MinimumHeight = 1000,
+                MinimumWidth = 1200
+            };
+            _thuTienPageViewModel.OnPhieuThuTienAdded = async (PhieuThuTien phieuThuTien) =>
+            {
+                Load(phieuThuTien);        // nhét vào list hiện tại
+                                           // hoặc reload full để chắc cú
+                                           // Replace this line:
+                                           // win.Close();     // đóng cửa sổ
+                                           // With the following workaround for .NET MAUI (since Window.Close() does not exist):
+                Application.Current?.CloseWindow(win); // đóng cửa sổ    // đóng cửa sổ
+                await LoadAsync();
+            };
+            Application.Current.OpenWindow(win);
         }
 
         [RelayCommand]

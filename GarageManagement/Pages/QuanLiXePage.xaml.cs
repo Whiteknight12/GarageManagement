@@ -20,8 +20,7 @@ public partial class QuanLiXePage : ContentView
             this, "ReloadCustomerList", (sender, Id) =>
             {
                 _ = _quanLiXePageViewModel.LoadAsync();
-            });
-        
+            });																	
     }
 
 	protected override void OnSizeAllocated(double width, double height)

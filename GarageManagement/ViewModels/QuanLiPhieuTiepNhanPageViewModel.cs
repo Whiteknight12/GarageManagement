@@ -21,6 +21,12 @@ namespace GarageManagement.ViewModels
 
         private List<PhieuTiepNhan> _allPhieu = new();
 
+        public List<string> DateFilterOptions { get; } = new() { "Tất cả", "Lọc theo ngày" };
+        [ObservableProperty] private string selectedDateOption = "Tất cả";
+        public bool IsDateVisible => SelectedDateOption == "Lọc theo ngày";
+        partial void OnSelectedDateOptionChanged(string _) => ApplyFilter();
+
+
         // ============================ FILTERS =========================
         [ObservableProperty] private DateTime? selectedDate = null;        // null = không lọc ngày
         [ObservableProperty] private string bienSoFilter = string.Empty;

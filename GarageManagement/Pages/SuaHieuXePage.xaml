@@ -24,7 +24,7 @@
                 x:Name="HieuXeEntry"
                 Text="{Binding TenHieuXe}"
                 Placeholder="Nhập tên hiệu xe"
-                IsEnabled="{Binding IsEditing}"
+                IsEnabled="{Binding IsUpdating}"
                 FontSize="16" />
             <Button
     Text="Sửa hiệu xe"

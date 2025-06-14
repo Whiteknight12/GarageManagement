@@ -1,4 +1,5 @@
 ﻿
+using APIClassLibrary;
 using APIClassLibrary.APIModels;
 using GarageManagement.ViewModels;
 
@@ -7,12 +8,15 @@ namespace GarageManagement.Pages;
 public partial class LapPhieuNhapPage : ContentView
 {
     private bool _isDarkMode = false;
+    private readonly APIClientService<VatTuPhuTung> _vatTuService; 
     public readonly LapPhieuNhapPageViewModel _viewModel;
-    public LapPhieuNhapPage(LapPhieuNhapPageViewModel viewModel)
+    public LapPhieuNhapPage(LapPhieuNhapPageViewModel viewModel,
+        APIClientService<VatTuPhuTung> vatTuService)
     {
         InitializeComponent();
         BindingContext = viewModel;
         _viewModel = viewModel;
+        _vatTuService = vatTuService; 
     }
 
     private void OnSoLuongChanged(object sender, EventArgs e)
@@ -36,8 +40,8 @@ public partial class LapPhieuNhapPage : ContentView
                 _viewModel.TongGiaTien = listGiaTien.Sum(l => l.Value);
             }
         }
-    }
-    private void OnLoaiVatTuPicked(object sender, EventArgs e)
+    }   
+    private async void OnLoaiVatTuPicked(object sender, EventArgs e)
     {
         if (sender is Picker picker && picker.BindingContext is ChiTietPhieuNhapVatTu chiTietPhieuNhapVatTu)
         {
@@ -65,6 +69,9 @@ public partial class LapPhieuNhapPage : ContentView
             else if (chiTietPhieuNhapVatTu.VatTuId != null)
             {
                 _viewModel.listChiTietId.Add(chiTietPhieuNhapVatTu.VatTuId.Value);
+                var vt = await _vatTuService.GetByID(chiTietPhieuNhapVatTu.VatTuId.Value);
+                chiTietPhieuNhapVatTu.DonGia = vt.DonGiaBanLoaiVatTuPhuTung;
+                chiTietPhieuNhapVatTu.OnPropertyChanged(nameof(chiTietPhieuNhapVatTu.DonGia));
             }
             //cập nhật lại tránh bị trùng 
             _viewModel.listChiTietId = _viewModel.ListChiTietPhieuNhap

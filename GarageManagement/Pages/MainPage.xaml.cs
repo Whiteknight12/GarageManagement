@@ -18,9 +18,9 @@ public partial class MainPage : ContentPage
     private readonly ChiTietPhieuSuaChuaPage _chiTietPhieuSuaChuaPage;
     private readonly ChiTietNhanVienPage _chiTietNhanVienPage;
     private readonly LapPhieuNhapPage _lapPhieuNhapPage;
-
+    private readonly BaoCaoDoanhSoListPage _baoCaoDoanhSoListPage;
     public MainPage(MainPageViewModel viewModel, 
-        ChiTietXePage chiTietXePage, 
+        ChiTietXePage chiTietXePage,
         AddNewAccountPage addNewAccountPage,
         SuaHieuXePage suaHieuXePage,
         ChiTietKhachHangPage chiTietKhachHangPage,
@@ -28,7 +28,8 @@ public partial class MainPage : ContentPage
         ChiTietPhieuNhapVatTuPage chiTietPhieuNhapVatTuPage,
         ChiTietPhieuSuaChuaPage chiTietPhieuSuaChuaPage,
         ChiTietNhanVienPage chiTietNhanVienPage,
-        LapPhieuNhapPage lapPhieuNhapPage)
+        LapPhieuNhapPage lapPhieuNhapPage,
+        BaoCaoDoanhSoListPage baoCaoDoanhSoListPage)
     {
         InitializeComponent();
         BindingContext = viewModel;
@@ -42,6 +43,7 @@ public partial class MainPage : ContentPage
         _chiTietPhieuSuaChuaPage = chiTietPhieuSuaChuaPage;
         _chiTietNhanVienPage = chiTietNhanVienPage;
         _lapPhieuNhapPage = lapPhieuNhapPage;
+        _baoCaoDoanhSoListPage = baoCaoDoanhSoListPage;
     }
 
     private void OnCollapseClicked(object sender, EventArgs e)

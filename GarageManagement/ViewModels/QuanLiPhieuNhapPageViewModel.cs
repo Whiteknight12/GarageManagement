@@ -12,20 +12,23 @@ namespace GarageManagement.ViewModels
     public partial class QuanLiPhieuNhapPageViewModel : BaseViewModel
     {
         public ObservableCollection<string> TimeFilterOptions { get; } =
-        new ObservableCollection<string> { "Ngày", "Tháng", "Năm" };
+        new ObservableCollection<string> { "Tất cả", "Ngày", "Tháng", "Năm" };
 
-        [ObservableProperty] private string selectedTimeFilter = "Ngày";
+        [ObservableProperty] private string selectedTimeFilter = "Tất cả";
 
-        [ObservableProperty] private DateTime selectedDate = DateTime.Today;   // cho “Ngày”
+        [ObservableProperty] private DateTime selectedDate = DateTime.UtcNow;   // cho “Ngày”
 
         [ObservableProperty] private string priceFromText = "";
         [ObservableProperty] private string priceToText = "";
-
+        private readonly APIClientService<VatTuPhuTung> _vatTuService;
         private readonly LapPhieuNhapPageViewModel _lapPhieuNhapPageViewModel; 
 
         // helper cho Visible
-        public bool IsDayFilter => SelectedTimeFilter == "Ngày";
+        public bool IsDayFilter => SelectedTimeFilter == "Tất cả";
         public bool IsMonthFilter => SelectedTimeFilter == "Tháng";
+
+ 
+        public bool IsDateVisible => SelectedTimeFilter != "Tất cả";
 
 
         // giữ danh sách gốc
@@ -46,11 +49,13 @@ namespace GarageManagement.ViewModels
         public QuanLiPhieuNhapPageViewModel(APIClientService<PhieuNhapVatTu> PhieuNhapVatTuService,
             ILogger<QuanLiPhieuNhapPageViewModel> logger,
             AuthenticationService authenticationService,
-            LapPhieuNhapPageViewModel lapPhieuNhapPageViewModel)
+            LapPhieuNhapPageViewModel lapPhieuNhapPageViewModel,
+            APIClientService<VatTuPhuTung> vatTuService)
         {
             _authenticationService = authenticationService;
             _PhieuNhapVatTuService = PhieuNhapVatTuService;
-            _lapPhieuNhapPageViewModel = lapPhieuNhapPageViewModel; 
+            _lapPhieuNhapPageViewModel = lapPhieuNhapPageViewModel;
+            _vatTuService = vatTuService; 
             _ = LoadAsync();
             IsDeleteMode = false;
         }
@@ -102,8 +107,9 @@ namespace GarageManagement.ViewModels
             }
             else if (SelectedTimeFilter == "Năm")
             {
-                q = q.Where(p => p.NgayNhap.Year == SelectedDate.Year); 
+                q = q.Where(p => p.NgayNhap.Year == SelectedDate.Year);
             }
+            // "Tất cả" thì không lọc gì hết
 
             /*––– LỌC GIÁ –––*/
             if (double.TryParse(PriceFromText, out var min))
@@ -115,14 +121,12 @@ namespace GarageManagement.ViewModels
             ListPhieuNhapVatTu = new ObservableCollection<PhieuNhapVatTu>(q);
         }
 
-
-
         [RelayCommand]
         private async Task Add()
         {
             await _lapPhieuNhapPageViewModel.LoadListVatTuAsync();
 
-            var view = new LapPhieuNhapPage(_lapPhieuNhapPageViewModel);
+            var view = new LapPhieuNhapPage(_lapPhieuNhapPageViewModel, _vatTuService);
 
             var wrapper = new ContentPage
             {
