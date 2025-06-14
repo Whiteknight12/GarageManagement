@@ -38,13 +38,11 @@
 
                     <Label Grid.Row="1" Grid.Column="0"
                      FontSize="16"
-FontAttributes="Bold"
-FontFamily="OpenSans-Regular"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-Regular"
                         TextColor="{DynamicResource TextColor}"
                         Text="Username"
-                           VerticalOptions="Center"
-                       />
-
+                           VerticalOptions="Center"/>
 
                     <Frame
                       Grid.Row="1" Grid.Column="1"
@@ -65,8 +63,8 @@ FontFamily="OpenSans-Regular"
 
                     <Label Grid.Row="1" Grid.Column="2"
                      FontSize="16"
-FontAttributes="Bold"
-FontFamily="OpenSans-Regular"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-Regular"
                         TextColor="{DynamicResource TextColor}"
                         Text="Tên chủ sở hữu"
                            VerticalOptions="Center"
@@ -92,13 +90,12 @@ FontFamily="OpenSans-Regular"
 
                 
                     <Label  Grid.Row="1" Grid.Column="4"
-                     FontSize="16"
-FontAttributes="Bold"
-FontFamily="OpenSans-Regular"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-Regular"
                         TextColor="{DynamicResource TextColor}"
                         Text="CCCD chủ"
-                           VerticalOptions="Center"
-                       />
+                        VerticalOptions="Center"/>
 
                     <Frame
                       Grid.Row="1" Grid.Column="5"
@@ -120,12 +117,11 @@ FontFamily="OpenSans-Regular"
 
                     <Label  Grid.Row="1" Grid.Column="6"
                      FontSize="16"
-FontAttributes="Bold"
-FontFamily="OpenSans-Regular"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-Regular"
                         TextColor="{DynamicResource TextColor}"
                         Text="Chọn vai trò"
-                           VerticalOptions="Center"
-                       />
+                           VerticalOptions="Center"/>
 
                     <Frame
                       Grid.Row="1" Grid.Column="7"

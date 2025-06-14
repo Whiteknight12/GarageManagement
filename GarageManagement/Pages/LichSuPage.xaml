@@ -5,10 +5,250 @@
              x:Class="GarageManagement.Pages.LichSuPage"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
-    <Grid Padding="20">
+    <Grid Padding="20" RowSpacing="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Text="Lịch sử hệ thống"
+           Grid.Row="0"
+           FontSize="25"
+           HorizontalTextAlignment="Center"
+           FontAttributes="Bold"
+           Padding="0,0,0,10"
+           Margin="20, 0, 20, 20"
+           TextColor="{DynamicResource TextColor}" />
+
+        <Frame HasShadow="True"
+               Grid.Row="1" 
+                BackgroundColor="{DynamicResource CardBackgroundColor}"
+                Padding="20"
+                Margin="0, 0, 0, 25"
+                CornerRadius="{StaticResource CornerRadiusHandler}">
+            <Grid RowSpacing="10" ColumnSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8"
+                   Text="Lọc lịch sử theo: Thời điểm/Hành động/Loại dữ liệu/ID dữ liệu"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   FontFamily="OpenSans-Regular"
+                   TextColor="{DynamicResource TextColor}"
+                   VerticalOptions="Center"/>
+
+                <Label Grid.Row="1" Grid.Column="0"
+                 FontSize="16"
+                    FontAttributes="Bold"
+                    FontFamily="OpenSans-Regular"
+                    TextColor="{DynamicResource TextColor}"
+                    Text="Từ ngày"
+                    VerticalOptions="Center"/>
+
+                <Label Grid.Row="2" Grid.Column="0"
+                 FontSize="16"
+                    FontAttributes="Bold"
+                    FontFamily="OpenSans-Regular"
+                    TextColor="{DynamicResource TextColor}"
+                    Text="Đến ngày"
+                    VerticalOptions="Center"/>
+
+                <Label Grid.Row="1" Grid.Column="1"
+                   Text="Từ ngày"
+                   FontSize="14"
+                   FontAttributes="Bold"
+                   FontFamily="OpenSans-Regular"
+                   TextColor="{DynamicResource TextColor}"
+                   VerticalOptions="Center"/>
+
+                <Frame Grid.Row="1" Grid.Column="1"
+                   Padding="0"
+                   HasShadow="False"
+                   HeightRequest="40"
+                   BackgroundColor="{DynamicResource InputBackgroundColor}"
+                   BorderColor="{DynamicResource TextColor}"
+                   CornerRadius="8">
+                    <DatePicker
+                        Date="{Binding TuNgay, Mode=TwoWay}"
+                        Format="dd/MM/yyyy"
+                        FontSize="14"
+                        FontFamily="OpenSans-Regular"
+                        TextColor="{DynamicResource TextColor}"
+                        BackgroundColor="Transparent"
+                        Margin="10,0"
+                        VerticalOptions="Center"/>
+                </Frame>
+
+                <Label Grid.Row="2" Grid.Column="1"
+                   Text="Đến ngày"
+                   FontSize="14"
+                   FontAttributes="Bold"
+                   FontFamily="OpenSans-Regular"
+                   TextColor="{DynamicResource TextColor}"
+                   VerticalOptions="Center"/>
+
+                <Frame Grid.Row="2" Grid.Column="1"
+                   Padding="0"
+                   HasShadow="False"
+                   HeightRequest="40"
+                   BackgroundColor="{DynamicResource InputBackgroundColor}"
+                   BorderColor="{DynamicResource TextColor}"
+                   CornerRadius="8">
+                    <DatePicker
+                        Date="{Binding DenNgay, Mode=TwoWay}"
+                        Format="dd/MM/yyyy"
+                        FontSize="14"
+                        FontFamily="OpenSans-Regular"
+                        TextColor="{DynamicResource TextColor}"
+                        BackgroundColor="Transparent"
+                        Margin="10,0"
+                        VerticalOptions="Center"/>
+                </Frame>
+
+                <Label Grid.Row="1" Grid.Column="2"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    FontFamily="OpenSans-Regular"
+                    TextColor="{DynamicResource TextColor}"
+                    Text="Hành động"
+                    VerticalOptions="Center"/>
+
+                <Frame
+                  Grid.Row="1" Grid.Column="3"
+                  Padding="0"
+                  HasShadow="False"
+                  HeightRequest="45"
+                  BackgroundColor="{DynamicResource InputBackgroundColor}"
+                  BorderColor="{DynamicResource TextColor}"
+                  CornerRadius="8">
+                    <Picker
+                       ItemsSource="{Binding ListHanhDong}"
+                       ItemDisplayBinding="{Binding .}"
+                       SelectedItem="{Binding SelectedAction}"
+                       FontSize="16"
+                       FontFamily="OpenSans-Regular"
+                       TextColor="{DynamicResource TextColor}"
+                       HeightRequest="45"/>
+                </Frame>
+
+                <Label  Grid.Row="1" Grid.Column="4"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    FontFamily="OpenSans-Regular"
+                    TextColor="{DynamicResource TextColor}"
+                    Text="Loại dữ liệu"
+                    VerticalOptions="Center"/>
+
+                <Frame
+                  Grid.Row="1" Grid.Column="5"
+                  Padding="0"
+                  HasShadow="False"
+                  HeightRequest="45"
+                  BackgroundColor="{DynamicResource InputBackgroundColor}"
+                  BorderColor="{DynamicResource TextColor}"
+                  CornerRadius="8">
+                    <Picker
+                       ItemsSource="{Binding ListLoaiDuLieu}"
+                       ItemDisplayBinding="{Binding .}"
+                       SelectedItem="{Binding SelectedAction}"
+                       FontSize="16"
+                       FontFamily="OpenSans-Regular"
+                       TextColor="{DynamicResource TextColor}"
+                       HeightRequest="45"/>
+                </Frame>
+
+                <Label  Grid.Row="1" Grid.Column="6"
+                 FontSize="16"
+                    FontAttributes="Bold"
+                    FontFamily="OpenSans-Regular"
+                    TextColor="{DynamicResource TextColor}"
+                    Text="ID dữ liệu"
+                    VerticalOptions="Center"/>
+
+                <Frame
+                  Grid.Row="1" Grid.Column="7"
+                  Padding="0"
+                  HasShadow="False"
+                  HeightRequest="45"
+                  BackgroundColor="{DynamicResource InputBackgroundColor}"
+                  BorderColor="{DynamicResource TextColor}"
+                  CornerRadius="8">
+                    <Entry 
+                       Placeholder="Nhập giá trị"
+                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                       Text="{Binding CCCDValue, Mode=TwoWay}"
+                       FontSize="16"
+                       FontFamily="OpenSans-Regular"
+                       TextColor="{DynamicResource TextColor}"
+                       HeightRequest="45"/>
+                </Frame>
+
+                <Button Grid.Row="3" 
+                    Grid.ColumnSpan="8"
+                    Text="Lọc"
+                    Command="{Binding FilterCommand}"
+                    BackgroundColor="#3B82F6"
+                    TextColor="White"
+                    HeightRequest="48"
+                    FontAttributes="Bold"
+                    FontFamily="OpenSans-SemiBold"
+                    MaximumWidthRequest="200"
+                    CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#2563EB" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+            </Grid>
+        </Frame>
+
         <CollectionView ItemsSource="{Binding LichSuList}"
-                        SelectionMode="None"
-                        EmptyView="Không có lịch sử nào được ghi nhận.">
+                        Grid.Row="2"
+                        SelectionMode="None">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                    <Image Source="empty_history.png" WidthRequest="80" HeightRequest="80"/>
+                    <Label Text="Không có lịch sử nào"
+                        TextColor="{DynamicResource TextColor}"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"/>
+                    <Label Text="Dữ liệu lịch sử sẽ hiển thị tại đây khi có phát sinh hành động."
+                       TextColor="{DynamicResource TextColor}"
+                       FontSize="13"
+                       HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Margin="0,5"
@@ -22,15 +262,19 @@
                                    TextColor="{DynamicResource TextColor}"
                                    FontAttributes="Bold"
                                    FontSize="14"/>
-                            <Label Text="{Binding HanhDong}"
+                            <Label Text="{Binding HanhDong, StringFormat='Hành động: {0}'}"
                                    FontSize="13"
                                    TextColor="#2a557f"
                                    FontAttributes="Bold"/>
+                            <Label Text="Chi tiết thông tin: "
+                                    FontSize="13"
+                                    TextColor="{DynamicResource TextColor}"
+                                    FontAttributes="Bold"/>
                             <Label Text="{Binding NoiDung}"
                                    FontSize="13"
                                    TextColor="{DynamicResource TextColor}"
                                    LineBreakMode="WordWrap"/>
-                            <Label Text="{Binding LoaiThucTheLienQuan}"
+                            <Label Text="{Binding LoaiThucTheLienQuan, StringFormat='Loại dữ liệu: {0}'}"
                                    FontSize="12"
                                    TextColor="Gray"/>
                         </VerticalStackLayout>
