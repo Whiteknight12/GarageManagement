@@ -13,7 +13,7 @@ public partial class BaoCaoTonPage : ContentView
 		BindingContext = _viewModel;
     }
 
-	public void onDateChanged(object sender, EventArgs e)
+	public void OnDateChanged(object sender, EventArgs e)
 	{
 		_=_viewModel.onDateChanged();
     }
