@@ -10,5 +10,6 @@ namespace APIClassLibrary.APIModels
     {
         public Guid Id { get; set; }
         public int Thang { get; set; }
+        public int Nam { get; set; }
     }
 }

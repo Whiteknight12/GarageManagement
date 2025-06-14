@@ -12,104 +12,176 @@
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
+    <!-- Grid chia 2 cột: bên trái là danh sách, bên phải là hidden pane -->
+    <Grid ColumnDefinitions="*,Auto">
 
-            <!-- Tiêu đề -->
-            <Frame HasShadow="True"
-                   BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   Padding="20">
-                <Label Text="QUẢN LÝ BÁO CÁO DOANH SỐ"
-                       FontSize="20"
-                       FontAttributes="Bold"
-                       FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}"
-                       HorizontalOptions="Center" />
-            </Frame>
+        <!-- ========== DANH SÁCH ========= -->
+        <ScrollView Grid.Column="0">
+            <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
 
-            <!-- Các nút chức năng -->
-            <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
-                <Button Text="Thêm"
-                        Command="{Binding AddCommand}"
-                        BackgroundColor="#3B82F6"
-                        TextColor="White"
-                        HeightRequest="48"
-                        FontAttributes="Bold"
-                        FontFamily="OpenSans-SemiBold" />
+                <!-- Tiêu đề -->
+                <Frame HasShadow="True"
+                       BackgroundColor="{DynamicResource CardBackgroundColor}"
+                       Padding="20">
+                    <Label Text="QUẢN LÝ BÁO CÁO DOANH SỐ"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalOptions="Center" />
+                </Frame>
 
-                <Button Text="{Binding IsDeleteMode, Converter={StaticResource DeleteModeTextConverter}}"
-                        Command="{Binding ToggleDeleteModeCommand}"
-                        BackgroundColor="#3B82F6"
-                        TextColor="White"
-                        HeightRequest="48"
-                        FontAttributes="Bold"
-                        FontFamily="OpenSans-SemiBold" />
+                <!-- Các nút chức năng -->
+                <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
+                    <Button Text="Thêm"
+                            Command="{Binding AddCommand}"
+                            BackgroundColor="#3B82F6"
+                            TextColor="White"
+                            HeightRequest="48"
+                            FontAttributes="Bold"
+                            FontFamily="OpenSans-SemiBold" />
 
-                <Button Text="Xoá các mục đã chọn"
-                        Command="{Binding DeleteCommand}"
-                        IsVisible="{Binding IsDeleteMode}"
-                        BackgroundColor="#EF4444"
-                        TextColor="White"
-                        HeightRequest="48"
-                        FontAttributes="Bold"
-                        FontFamily="OpenSans-SemiBold" />
-            </HorizontalStackLayout>
+                    <Button Text="{Binding IsDeleteMode, Converter={StaticResource DeleteModeTextConverter}}"
+                            Command="{Binding ToggleDeleteModeCommand}"
+                            BackgroundColor="#3B82F6"
+                            TextColor="White"
+                            HeightRequest="48"
+                            FontAttributes="Bold"
+                            FontFamily="OpenSans-SemiBold" />
 
-            <!-- Tiêu đề bảng -->
-            <Frame HasShadow="True"
-                   BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   Padding="20">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                        <ColumnDefinition Width="1*" />
-                    </Grid.ColumnDefinitions>
-                    <Label Text="" Grid.Column="0" />
-                    <Label Text="STT" Grid.Column="1" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" HorizontalTextAlignment="Center" />
-                    <Label Text="Tháng" Grid.Column="2" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" HorizontalTextAlignment="Center" />
-                    <Label Text="Tổng Doanh Thu" Grid.Column="3" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" HorizontalTextAlignment="Center" />
-                </Grid>
-            </Frame>
+                    <Button Text="Xoá các mục đã chọn"
+                            Command="{Binding DeleteCommand}"
+                            IsVisible="{Binding IsDeleteMode}"
+                            BackgroundColor="#EF4444"
+                            TextColor="White"
+                            HeightRequest="48"
+                            FontAttributes="Bold"
+                            FontFamily="OpenSans-SemiBold" />
+                </HorizontalStackLayout>
 
-            <!-- Danh sách báo cáo -->
-            <CollectionView ItemsSource="{Binding BaoCaoList}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame HasShadow="True"
-                               BackgroundColor="{DynamicResource CardBackgroundColor}"
-                               Padding="20"
-                               Margin="0,12,0,0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                </Grid.ColumnDefinitions>
+                <!-- Header bảng -->
+                <Frame HasShadow="True"
+                       BackgroundColor="{DynamicResource CardBackgroundColor}"
+                       Padding="20">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="" Grid.Column="0" />
+                        <Label Text="STT" Grid.Column="1" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" HorizontalTextAlignment="Center" />
+                        <Label Text="Tháng" Grid.Column="2" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" HorizontalTextAlignment="Center" />
+                        <Label Text="Năm" Grid.Column="3" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" HorizontalTextAlignment="Center" />
+                        <Label Text="Tổng Doanh Thu" Grid.Column="4" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" HorizontalTextAlignment="Center" />
+                    </Grid>
+                </Frame>
 
-                                <CheckBox IsChecked="{Binding IsSelected}"
-                                          Grid.Column="0"
-                                          Margin="10,0,0,0"
-                                          IsVisible="{Binding Path=BindingContext.IsDeleteMode, Source={x:Reference RootContentView}}" />
+                <!-- Danh sách báo cáo -->
+                <CollectionView ItemsSource="{Binding ListBaoCao}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame HasShadow="True"
+                                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                                   Padding="20"
+                                   Margin="0,12,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
 
-                                <Label Text="{Binding STT}" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="{DynamicResource TextColor}" />
-                                <Label Text="{Binding Thang}" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="{DynamicResource TextColor}" />
-                                <Label Text="{Binding TongDoanhThu, StringFormat='{}{0:N0} VNĐ'}" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="{DynamicResource TextColor}" />
-                            </Grid>
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={x:Reference RootContentView}, Path=BindingContext.ViewDetailCommand}"
-                                                      CommandParameter="{Binding Id}" />
-                            </Frame.GestureRecognizers>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-                </CollectionView.ItemsLayout>
-            </CollectionView>
+                                    <CheckBox IsChecked="{Binding IsSelected}"
+                                              Grid.Column="0"
+                                              Margin="10,0,0,0"
+                                              IsVisible="{Binding Path=BindingContext.IsDeleteMode, Source={x:Reference RootContentView}}" />
 
-        </VerticalStackLayout>
-    </ScrollView>
+                                    <Label Text="{Binding IdForUI}" Grid.Column="1" HorizontalTextAlignment="Center" TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="{Binding Thang}" Grid.Column="2" HorizontalTextAlignment="Center" TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="{Binding Nam}" Grid.Column="3" HorizontalTextAlignment="Center" TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="{Binding TongDoanhThu, StringFormat='{}{0:N0} VNĐ'}" Grid.Column="4" HorizontalTextAlignment="Center" TextColor="{DynamicResource TextColor}" />
+                                </Grid>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference RootContentView}, Path=BindingContext.ViewDetailCommand}"
+                                                          CommandParameter="{Binding Id}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- BoxView tách cột -->
+        <BoxView Grid.Column="0"
+                 HorizontalOptions="End"
+                 VerticalOptions="Fill"
+                 WidthRequest="1"
+                 BackgroundColor="LightGray"
+                 IsVisible="{Binding IsDetailPaneVisible}" />
+
+        <!-- ========== HIDDEN PANE ========= -->
+        <ScrollView Grid.Column="1" IsVisible="{Binding IsDetailPaneVisible}">
+            <VerticalStackLayout Padding="20" Spacing="20" MaximumWidthRequest="500">
+
+                <HorizontalStackLayout>
+                    <Label Text="Thêm báo cáo doanh số"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           BackgroundColor="{DynamicResource BackgroundColor}"
+                           TextColor="{DynamicResource TextColor}" />
+                    <Button Text="✕"
+                            Command="{Binding CloseDetailPaneCommand}"
+                            BackgroundColor="{DynamicResource BackgroundColor}"
+                            TextColor="{DynamicResource TextColor}" />
+                </HorizontalStackLayout>
+
+                <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+                       CornerRadius="10"
+                       Padding="20"
+                       HasShadow="True">
+                    <VerticalStackLayout Spacing="16">
+
+                        <Label Text="Tháng" FontAttributes="Bold"
+                               BackgroundColor="{DynamicResource BackgroundColor}"
+                               TextColor="{DynamicResource TextColor}" />
+                        <Picker ItemsSource="{Binding Months}" 
+                                SelectedItem="{Binding SelectedMonth, Mode=TwoWay}"
+                                BackgroundColor="{DynamicResource BackgroundColor}"
+                                TextColor="{DynamicResource TextColor}" />
+
+                        <Label Text="Năm" FontAttributes="Bold"
+                               BackgroundColor="{DynamicResource BackgroundColor}"
+                               TextColor="{DynamicResource TextColor}" />
+                        <Picker ItemsSource="{Binding Years}" 
+                                SelectedItem="{Binding SelectedYear, Mode=TwoWay}"
+                                BackgroundColor="{DynamicResource BackgroundColor}"
+                                TextColor="{DynamicResource TextColor}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="16">
+                    <Button Text="Lưu"
+                            Command="{Binding SaveCommand}"
+                            BackgroundColor="#10B981"
+                            WidthRequest="120"
+                            TextColor="{DynamicResource TextColor}" />
+                    <Button Text="Huỷ"
+                            Command="{Binding CloseDetailPaneCommand}"
+                            BackgroundColor="Gray"
+                            TextColor="{DynamicResource TextColor}"
+                            WidthRequest="120" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
 </ContentView>
