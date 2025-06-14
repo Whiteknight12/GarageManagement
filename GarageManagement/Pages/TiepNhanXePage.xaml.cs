@@ -8,7 +8,8 @@ public partial class TiepNhanXePage : ContentView
 {
 	public readonly TiepNhanXePageViewModel _viewModel;
 	
-	public TiepNhanXePage(APIClientService<PhieuTiepNhan> service, APIClientService<ThamSo> ruleService, 
+	public TiepNhanXePage(APIClientService<PhieuTiepNhan> service, 
+		APIClientService<ThamSo> ruleService, 
 		APIClientService<Xe> carService,
 		APIClientService<HieuXe> hieuxeService,
 		APIClientService<KhachHang> userService,

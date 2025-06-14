@@ -145,6 +145,7 @@ namespace GarageManagement.ViewModels
             NgayTiepNhan = DateTime.UtcNow.ToLocalTime();
             IsCarExists = false;
             IsCarNotFound = true;
+            MessagingCenter.Send(this, "ReloadData");
         }
 
         [RelayCommand]

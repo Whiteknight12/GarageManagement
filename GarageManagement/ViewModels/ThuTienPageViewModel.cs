@@ -109,12 +109,17 @@ namespace GarageManagement.ViewModels
                 CCCD = filtered.CCCD; 
                 GioiTinh = filtered.GioiTinh;
                 var xeListBySDT = await _carservice.GetListOnSpecialRequirement($"PhoneNumber/{filtered.SoDienThoai}");
-                if (xeListBySDT != null)
+                if (xeListBySDT != null && xeListBySDT.Count != 0)
                 {
                     SelectedBienSo = xeListBySDT[0];
                     ListBienSo.Clear();
                     available = false; 
                     ListBienSo = new ObservableCollection<Xe>(xeListBySDT);
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Thông báo", "Khách hàng trên không có xe trong gara, không thể thu tiền", "OK");
+                    return;  
                 }
                 IsCustomerFound = true;
                 SelectedBienSo = ListBienSo[0];

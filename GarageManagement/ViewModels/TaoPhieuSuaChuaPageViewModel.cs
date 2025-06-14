@@ -20,7 +20,10 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<KhachHang> _userservice;
         private readonly APIClientService<NoiDungSuaChua> _noidungsuachuaService;
         private readonly APIClientService<VTPTChiTietPhieuSuaChua> _vtptChiTietPhieuSuaChuaService;
+        private readonly APIClientService<ThamSo> _thamSoService;
+        private readonly APIClientService<PhieuTiepNhan> _phieuTiepNhanService;
         public delegate void OnPhieuSuaChuaAddedDelegate(PhieuSuaChua phieuSuaChua);
+        
         public OnPhieuSuaChuaAddedDelegate OnPhieuSuaChuaAdded { get; set; }
         [ObservableProperty]
         private ObservableCollection<string> listBienSoXe=new ObservableCollection<string>();
@@ -53,7 +56,10 @@ namespace GarageManagement.ViewModels
             APIClientService<PhieuSuaChua> phieuservice,
             APIClientService<KhachHang> userservice,
             APIClientService<NoiDungSuaChua> noidungsuachuaService,
-            APIClientService<VTPTChiTietPhieuSuaChua> vtptChiTietPhieuSuaChuaService)
+            APIClientService<VTPTChiTietPhieuSuaChua> vtptChiTietPhieuSuaChuaService
+, APIClientService<PhieuTiepNhan> phieuTiepNhanService,
+            APIClientService<ThamSo> thamSoService
+   )
         {
             _carservice = carservice;
             _tiencongservice = tiencongservice;
@@ -63,15 +69,30 @@ namespace GarageManagement.ViewModels
             _userservice = userservice;
             _noidungsuachuaService = noidungsuachuaService;
             _vtptChiTietPhieuSuaChuaService = vtptChiTietPhieuSuaChuaService;
+            _phieuTiepNhanService = phieuTiepNhanService; 
+            _thamSoService = thamSoService;
         }
 
         public async Task LoadAsync()
         {
+            double mul;
+            var tile = await _thamSoService.GetThroughtSpecialRoute("TiLeDonGiaBan");
+            mul = tile.GiaTri;
             var listcar = await _carservice.GetAll();
-            if (listcar is not null)
+            var listPhieu = await _phieuTiepNhanService.GetAll();
+            var pl = listPhieu.Where(p => p.DaHoanThanhBaoTri == false);
+            var ps = pl.Select(p => p.XeId).ToList();
+            var lc = new List<Xe>(); 
+            foreach(var p in ps)
+            {
+                var xe = await _carservice.GetByID(p);
+                lc.Add(xe);
+            }
+            
+            if (lc is not null)
             {
                 ListBienSoXe.Clear();
-                foreach (var car in listcar)
+                foreach (var car in lc)
                 {
                     ListBienSoXe.Add(car.BienSo);
                 }
@@ -88,7 +109,10 @@ namespace GarageManagement.ViewModels
             if (listphutung is not null)
             {
                 ListVatTuPhuTung.Clear();
-                foreach (var vattu in listphutung) ListVatTuPhuTung.Add(vattu);
+                foreach (var vattu in listphutung)
+                {
+                    ListVatTuPhuTung.Add(vattu);
+                }
                 OnPropertyChanged(nameof(ListVatTuPhuTung));
             }
             var listNoiDungSuaChua = await _noidungsuachuaService.GetAll();

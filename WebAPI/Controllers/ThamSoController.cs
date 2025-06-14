@@ -54,5 +54,19 @@ namespace WebAPI.Controllers
         {
             return await base.Delete(id);
         }
+        [HttpGet("TiLeDonGiaBan")]
+        public async Task<ActionResult<ThamSo>> GetTiLe()
+        {
+            var result = await _db.thamSos.FirstOrDefaultAsync(u => u.TenThamSo == "TiLeDonGiaBan");
+            if (result is not null) return Ok(result);
+            return NotFound();
+        }
+        [HttpGet("VuotSoTienNo")]
+        public async Task<ActionResult<ThamSo>> GetVuotSoTienNo()
+        {
+            var result = await _db.thamSos.FirstOrDefaultAsync(u => u.TenThamSo == "VuotSoTienNo");
+            if (result is not null) return Ok(result);
+            return NotFound();
+        }
     }
 }

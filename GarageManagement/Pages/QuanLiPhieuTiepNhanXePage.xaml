@@ -234,34 +234,22 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
                                 <!-- Biển số – tap để xem xe -->
                                 <Label Text="{Binding BienSoXe}"
                                        Grid.Column="3"
-                                       TextDecorations="Underline"
-                                       TextColor="Blue"
+                                       TextColor="{DynamicResource TextColor}"
                                        FontFamily="OpenSans-Regular"
                                        FontSize="13"
                                        HorizontalTextAlignment="Center"
-                                       VerticalOptions="Center">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference RootContentView},
-                                                                               Path=BindingContext.ShowXeDetailCommand}"
-                                                              CommandParameter="{Binding XeId}"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
+                                       VerticalOptions="Center"/>
+
 
                                 <!-- Chủ xe – tap để xem KH -->
                                 <Label Text="{Binding TenKhachHang}"
                                        Grid.Column="4"
-                                       TextDecorations="Underline"
-                                       TextColor="Blue"
+                                       TextColor="{DynamicResource TextColor}"
                                        FontFamily="OpenSans-Regular"
                                        FontSize="13"
                                        HorizontalTextAlignment="Center"
-                                       VerticalOptions="Center">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference RootContentView},
-                                                                               Path=BindingContext.ShowKhachHangDetailCommand}"
-                                                              CommandParameter="{Binding KhachHangId}"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
+                                       VerticalOptions="Center"/>
+
 
                                 <Label Text="{Binding TinhTrang}"
                                        Grid.Column="5"
@@ -271,6 +259,11 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
                                        HorizontalTextAlignment="Center"
                                        VerticalOptions="Center"/>
                             </Grid>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference RootContentView},
+                                       Path=BindingContext.ShowXeDetailCommand}"
+                      CommandParameter="{Binding XeId}"/>
+                            </Frame.GestureRecognizers>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

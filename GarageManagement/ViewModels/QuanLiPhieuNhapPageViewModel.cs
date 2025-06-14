@@ -21,7 +21,9 @@ namespace GarageManagement.ViewModels
         [ObservableProperty] private string priceFromText = "";
         [ObservableProperty] private string priceToText = "";
         private readonly APIClientService<VatTuPhuTung> _vatTuService;
-        private readonly LapPhieuNhapPageViewModel _lapPhieuNhapPageViewModel; 
+        private readonly LapPhieuNhapPageViewModel _lapPhieuNhapPageViewModel;
+        private readonly APIClientService<ChiTietPhieuNhapVatTu> _chiTietPhieuNhapService; 
+
 
         // helper cho Visible
         public bool IsDayFilter => SelectedTimeFilter == "Tất cả";
@@ -50,14 +52,26 @@ namespace GarageManagement.ViewModels
             ILogger<QuanLiPhieuNhapPageViewModel> logger,
             AuthenticationService authenticationService,
             LapPhieuNhapPageViewModel lapPhieuNhapPageViewModel,
-            APIClientService<VatTuPhuTung> vatTuService)
+            APIClientService<VatTuPhuTung> vatTuService,
+            APIClientService<ChiTietPhieuNhapVatTu> chiTiet)
         {
             _authenticationService = authenticationService;
             _PhieuNhapVatTuService = PhieuNhapVatTuService;
             _lapPhieuNhapPageViewModel = lapPhieuNhapPageViewModel;
             _vatTuService = vatTuService; 
+            _chiTietPhieuNhapService = chiTiet;
             _ = LoadAsync();
             IsDeleteMode = false;
+
+            MessagingCenter.Subscribe<ChinhSuaPhieuNhapPageViewModel>(this, "PhieuNhapUpdated", async _ =>
+            {
+                // refresh your list
+                await LoadAsync();
+
+                // unsubscribe so you don’t leak
+                MessagingCenter.Unsubscribe<ChinhSuaPhieuNhapPageViewModel>(this, "PhieuNhapUpdated");
+            });
+
         }
 
         public async Task LoadAsync()
@@ -158,12 +172,6 @@ namespace GarageManagement.ViewModels
             };
 
             Application.Current.OpenWindow(win);
-        }
-
-        [RelayCommand]
-        private void Edit(Guid id)
-        {
-
         }
 
         [RelayCommand]

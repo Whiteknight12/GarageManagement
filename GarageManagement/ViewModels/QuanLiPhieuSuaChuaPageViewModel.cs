@@ -45,22 +45,26 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<Xe> _xeService; // Service để lấy thông tin xe
         private readonly TaoPhieuSuaChuaPageViewModel _taoPhieuSuaChuaPageViewModel;
 
-        APIClientService<TienCong> _congservice;
-        APIClientService<ChiTietPhieuSuaChua> _noidungphieuservice;
-        APIClientService<VatTuPhuTung> _vatTuService;
+        private readonly APIClientService<TienCong> _congservice;
+        private readonly APIClientService<ChiTietPhieuSuaChua> _noidungphieuservice;
+        private readonly APIClientService<VatTuPhuTung> _vatTuService;
+
+        private readonly APIClientService<ThamSo> _thamSoService;
 
         public QuanLiPhieuSuaChuaPageViewModel(APIClientService<PhieuSuaChua> phieuSuaChuaService,
             APIClientService<Xe> xeService,
             ILogger<QuanLiPhieuSuaChuaPageViewModel> logger,
             AuthenticationService authenticationService,
-            TaoPhieuSuaChuaPageViewModel taoPhieuSuaChuaPageViewModel)
+            TaoPhieuSuaChuaPageViewModel taoPhieuSuaChuaPageViewModel,
+            APIClientService<ThamSo> thamSoService)
         {
             _authenticationService = authenticationService;
             _phieuSuaChuaService = phieuSuaChuaService;
             _xeService = xeService;
-            _taoPhieuSuaChuaPageViewModel = taoPhieuSuaChuaPageViewModel; 
+            _taoPhieuSuaChuaPageViewModel = taoPhieuSuaChuaPageViewModel;
             _ = LoadAsync();
             IsDeleteMode = false;
+            _thamSoService = thamSoService;
         }
 
         public async Task LoadAsync()
@@ -100,7 +104,7 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private async Task Add()
         {
-            var view = new TaoPhieuSuaChuaPage(_xeService, _congservice, _vatTuService, _noidungphieuservice, _phieuSuaChuaService ,_taoPhieuSuaChuaPageViewModel, _vatTuService);
+            var view = new TaoPhieuSuaChuaPage(_xeService, _congservice, _vatTuService, _noidungphieuservice, _phieuSuaChuaService ,_taoPhieuSuaChuaPageViewModel, _vatTuService, _thamSoService);
             var wrapper = new ContentPage
             {
                 Content = view,

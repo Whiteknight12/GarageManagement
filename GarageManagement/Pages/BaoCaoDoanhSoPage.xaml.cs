@@ -12,26 +12,26 @@ public partial class BaoCaoDoanhSoPage : ContentView
 		InitializeComponent();
 	}
 
-	private async void OnMonthChanged(object sender, EventArgs e)
-	{
-		await _viewmodel.OnDateChanged();
-	}
+	//private async void OnMonthChanged(object sender, EventArgs e)
+	//{
+	//	await _viewmodel.OnDateChanged();
+	//}
 
-	private async void OnYearChanged(object sender, EventArgs e)
-	{
-		await _viewmodel.OnDateChanged();
-	}
+	//private async void OnYearChanged(object sender, EventArgs e)
+	//{
+	//	await _viewmodel.OnDateChanged();
+	//}
 
-	protected override void OnSizeAllocated(double width, double height)
-	{
-		base.OnSizeAllocated(width, height);
-        _ = _viewmodel.LoadAsync();
-    }
-    private async void OnDateChanged(object sender, EventArgs e)
-    {
-        if (BindingContext is BaoCaoDoanSoPageViewModel vm)
-        {
-            await vm.OnDateChanged();
-        }
-    }
+	//protected override void OnSizeAllocated(double width, double height)
+	//{
+	//	base.OnSizeAllocated(width, height);
+	//	_ = _viewmodel.LoadAsync();
+	//}
+	//   private async void OnDateChanged(object sender, EventArgs e)
+	//   {
+	//       if (BindingContext is BaoCaoDoanSoPageViewModel vm)
+	//       {
+	//           await vm.OnDateChanged();
+	//       }
+	//   }
 }

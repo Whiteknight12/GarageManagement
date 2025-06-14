@@ -299,11 +299,20 @@
                 </VerticalStackLayout>
             </Frame>
 
-            <Button Text="Cập nhật thông tin xe" 
-                    Command="{Binding ToggleEditModeCommand}" 
-                    BackgroundColor="#10B981" 
-                    IsVisible="{Binding IsReadOnly}"
-                    TextColor="White"/>
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Cập nhật thông tin xe" 
+        Command="{Binding ToggleEditModeCommand}" 
+        BackgroundColor="#10B981" 
+        IsVisible="{Binding IsReadOnly}"
+                        WidthRequest="220"
+        TextColor="White"/>
+                <Button Text="Đánh dấu hoàn thành bảo trì" 
+Command="{Binding MarkAsDoneCommand}" 
+BackgroundColor="#10B981" 
+IsVisible="{Binding IsReadOnly}"
+TextColor="White"
+                         WidthRequest="220"/>
+            </HorizontalStackLayout>
 
             <Button Text="Cập nhật" 
                 Command="{Binding UpdateCarCommand}" 
