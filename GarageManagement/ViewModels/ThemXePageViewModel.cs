@@ -44,6 +44,9 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private bool isCustomerFound;
 
+        public delegate void OnXeAddedDelegate(Xe xe);
+        public OnXeAddedDelegate OnXeAdded { get; set; }
+
         private Guid chuXeId = Guid.NewGuid();
         private readonly APIClientService<Xe> _xeService;
         private readonly APIClientService<KhachHang> _customerService;
@@ -95,7 +98,7 @@ namespace GarageManagement.ViewModels
             {
                 chuXeId = chuXe.Id; 
             }
-            await _xeService.Create(new Xe
+            var xe= await _xeService.Create(new Xe
             {
                 Id = Guid.NewGuid(),
                 Ten = TenXe,
@@ -117,6 +120,7 @@ namespace GarageManagement.ViewModels
             SoDienThoai = string.Empty;
             DiaChi = string.Empty;
             Email = string.Empty;
+            OnXeAdded?.Invoke(xe);
         }
 
         [RelayCommand]

@@ -22,6 +22,9 @@ namespace GarageManagement.ViewModels
         private string bienSo;
 
         [ObservableProperty]
+        private double tienNoCuaXe; 
+
+        [ObservableProperty]
         private string tenChuXe;
 
         [ObservableProperty]
@@ -35,6 +38,9 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty]
         private double tienNoCuaChuXe;
+
+        [ObservableProperty]
+        private string cCCD; 
 
         [ObservableProperty]
         private bool isReadOnly = true;
@@ -96,10 +102,14 @@ namespace GarageManagement.ViewModels
             _carservice = carservice;
             _hieuxeservice = hieuXeService;
             _khachHangService = khachHangService;
+            IsReadOnly = true;
+            IsUpdating = false;
         }
 
         public async Task LoadAsync()
         {
+            IsReadOnly = true;
+            IsUpdating = false;
             var obj = await _carservice.GetByID(CarId);
             if (obj is null) return;
             var hieuXe = await _hieuxeservice.GetByID(obj.HieuXeId);
@@ -111,6 +121,8 @@ namespace GarageManagement.ViewModels
             if (hieuXe is not null) SelectedHieuXe = ListHieuXe?.FirstOrDefault(x => x.Id == obj.HieuXeId);
             BienSo = obj.BienSo;
             TenChuXe = khachHang.HoVaTen;
+            TienNoCuaXe = obj.TienNo.GetValueOrDefault(); 
+            CCCD = khachHang.CCCD;
             DienThoai = khachHang.SoDienThoai;
             DiaChi = khachHang.DiaChi;
             bool tmp = obj.KhaDung ?? false;

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:GarageManagement.ViewModels"
              xmlns:service="clr-namespace:GarageManagement.Services"
-             x:Class="GarageManagement.Pages.ThemHieuXePage"
+             x:Class="GarageManagement.Pages.ThemLoaiVatTuPhuTungPage"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
     <ContentPage.Resources>
@@ -29,27 +29,60 @@
                    Padding="25"
                    CornerRadius="{StaticResource CornerRadiusHandler}">
                 <VerticalStackLayout Spacing="25">
-                    <Label Text="Thêm Hiệu Xe"
+                    <Label Text="Thêm Loại Vật Tư Phụ Tùng"
                            FontSize="22"
                            FontAttributes="Bold"
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalOptions="Center" />
 
-                    <Label Text="Tên Hiệu Xe:"
+                    <Label Text="Tên loại vật tư phụ tùng:"
                            FontSize="16"
                            FontAttributes="Bold"
                            FontFamily="OpenSans-Regular"
                            TextColor="{DynamicResource TextColor}" />
 
-                    <Entry Placeholder="Nhập tên hiệu xe"
-                           Text="{Binding TenHieuXe}"
+                    <Entry Placeholder="Nhập tên loại vật tư phụ tùng..."
+                           Text="{Binding TenLoaiVatTuPhuTung}"
                            BackgroundColor="{DynamicResource InputBackgroundColor}"
                            TextColor="{DynamicResource TextColor}"
                            PlaceholderColor="{DynamicResource PlaceholderColor}"
                            FontSize="14"
                            HeightRequest="42"
-                         
+                  
+                           FontFamily="OpenSans-Regular" />
+
+                    <Label Text="Số lượng:"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}" />
+
+                    <Entry Placeholder="Nhập số lượng..."
+                           Text="{Binding SoLuong}"
+                           Keyboard="Numeric"
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                           TextColor="{DynamicResource TextColor}"
+                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                           FontSize="14"
+                           HeightRequest="42"
+               
+                           FontFamily="OpenSans-Regular" />
+
+                    <Label Text="Đơn giá bán:"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}" />
+
+                    <Entry Placeholder="Nhập đơn giá bán..."
+                           Text="{Binding DonGiaBanLoaiVatTuPhuTung}"
+                           Keyboard="Numeric"
+                           BackgroundColor="{DynamicResource InputBackgroundColor}"
+                           TextColor="{DynamicResource TextColor}"
+                           PlaceholderColor="{DynamicResource PlaceholderColor}"
+                           FontSize="14"
+                           HeightRequest="42"
                            FontFamily="OpenSans-Regular" />
 
                     <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">

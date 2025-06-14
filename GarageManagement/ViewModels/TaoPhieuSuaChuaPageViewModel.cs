@@ -20,7 +20,8 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<KhachHang> _userservice;
         private readonly APIClientService<NoiDungSuaChua> _noidungsuachuaService;
         private readonly APIClientService<VTPTChiTietPhieuSuaChua> _vtptChiTietPhieuSuaChuaService;
-
+        public delegate void OnPhieuSuaChuaAddedDelegate(PhieuSuaChua phieuSuaChua);
+        public OnPhieuSuaChuaAddedDelegate OnPhieuSuaChuaAdded { get; set; }
         [ObservableProperty]
         private ObservableCollection<string> listBienSoXe=new ObservableCollection<string>();
 
@@ -230,6 +231,7 @@ namespace GarageManagement.ViewModels
             SelectedBienSoXe = null;
             ListNoiDung = new ObservableCollection<ChiTietPhieuSuaChua>();
             TongThanhTien = 0;
+            OnPhieuSuaChuaAdded?.Invoke(obj);
         }
 
         [RelayCommand]

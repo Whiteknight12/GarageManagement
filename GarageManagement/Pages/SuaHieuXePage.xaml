@@ -24,14 +24,27 @@
                 x:Name="HieuXeEntry"
                 Text="{Binding TenHieuXe}"
                 Placeholder="Nhập tên hiệu xe"
+                IsEnabled="{Binding IsUpdating}"
                 FontSize="16" />
-
+            <Button
+    Text="Sửa hiệu xe"
+    BackgroundColor="CadetBlue"
+    TextColor="White"
+    FontSize="16"
+    Command="{Binding ToggleUpdateCommand}" 
+                IsVisible="{Binding IsReadOnly}"/>
             <Button
                 Text="Lưu"
                 BackgroundColor="CadetBlue"
                 TextColor="White"
                 FontSize="16"
-                Command="{Binding UpdateHieuXeCommand}" />
+                Command="{Binding UpdateHieuXeCommand}" IsVisible="{Binding IsUpdating}"/>
+            <Button
+    Text="Huỷ"
+    BackgroundColor="CadetBlue"
+    TextColor="White"
+    FontSize="16"
+    Command="{Binding CancelCommand}" IsVisible="{Binding IsUpdating}"/>
 
         </VerticalStackLayout>
     </ScrollView>

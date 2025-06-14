@@ -36,11 +36,15 @@
                        TextColor="{DynamicResource TextColor}"
                        VerticalOptions="Center"/>
 
-                    <Entry Grid.Row="1" Grid.Column="0"
-                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                    <Label Grid.Row="1" Grid.Column="0"
+                     FontSize="16"
+FontAttributes="Bold"
+FontFamily="OpenSans-Regular"
                         TextColor="{DynamicResource TextColor}"
                         Text="Username"
-                        IsReadOnly="True"/>
+                           VerticalOptions="Center"
+                       />
+
 
                     <Frame
                       Grid.Row="1" Grid.Column="1"
@@ -59,11 +63,14 @@
                            TextColor="{DynamicResource TextColor}"/>
                     </Frame>
 
-                    <Entry Grid.Row="1" Grid.Column="2"
-                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                    <Label Grid.Row="1" Grid.Column="2"
+                     FontSize="16"
+FontAttributes="Bold"
+FontFamily="OpenSans-Regular"
                         TextColor="{DynamicResource TextColor}"
                         Text="Tên chủ sở hữu"
-                        IsReadOnly="True"/>
+                           VerticalOptions="Center"
+                       />
 
                     <Frame
                       Grid.Row="1" Grid.Column="3"
@@ -83,11 +90,15 @@
                            HeightRequest="45"/>
                     </Frame>
 
-                    <Entry Grid.Row="1" Grid.Column="4"
-                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                
+                    <Label  Grid.Row="1" Grid.Column="4"
+                     FontSize="16"
+FontAttributes="Bold"
+FontFamily="OpenSans-Regular"
                         TextColor="{DynamicResource TextColor}"
-                        Text="CCCD chủ sở hữu"
-                        IsReadOnly="True"/>
+                        Text="CCCD chủ"
+                           VerticalOptions="Center"
+                       />
 
                     <Frame
                       Grid.Row="1" Grid.Column="5"
@@ -107,11 +118,14 @@
                            HeightRequest="45"/>
                     </Frame>
 
-                    <Entry Grid.Row="1" Grid.Column="6"
-                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                    <Label  Grid.Row="1" Grid.Column="6"
+                     FontSize="16"
+FontAttributes="Bold"
+FontFamily="OpenSans-Regular"
                         TextColor="{DynamicResource TextColor}"
-                        Text="Vai trò"
-                        IsReadOnly="True"/>
+                        Text="Chọn vai trò"
+                           VerticalOptions="Center"
+                       />
 
                     <Frame
                       Grid.Row="1" Grid.Column="7"

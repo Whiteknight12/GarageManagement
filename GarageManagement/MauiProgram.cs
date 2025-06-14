@@ -57,6 +57,7 @@ public static class MauiProgram
         builder.Services.AddAPIClientService<VTPTChiTietPhieuSuaChua>(x => x.BaseAddress = baseaddress, $"{nameof(VTPTChiTietPhieuSuaChua)}");
         builder.Services.AddAPIClientService<LichSu>(x=>x.BaseAddress = baseaddress, $"{nameof(LichSu)}");
 
+
         builder.Services.AddScoped<AuthenticationService>(provider=>
 		{
             return new AuthenticationService(baseaddress);
@@ -90,11 +91,16 @@ public static class MauiProgram
         builder.Services.AddTransient<QuanLiPhieuSuaChuaPage>();
         builder.Services.AddTransient<QuanLiPhieuThuTienPage>();
         builder.Services.AddTransient<ChiTietPhieuNhapVatTuPage>();
+        builder.Services.AddTransient<ChiTietPhieuSuaChuaPage>();
+        builder.Services.AddTransient<LoaiTienCongPage>();
+        builder.Services.AddTransient<ThemLoaiTienCongPage>();
+        builder.Services.AddTransient<ThemLoaiVatTuPhuTungPage>();
         builder.Services.AddTransient<ChiTietPhieuSuaChuaPage>();   
         builder.Services.AddTransient<ChiTietNhanVienPage>();
         builder.Services.AddTransient<NhanSuMainPage>();
         builder.Services.AddTransient<DanhSachXeKhachHangPage>();
         builder.Services.AddTransient<LichSuPage>();
+        builder.Services.AddTransient<BaoCaoDoanhSoListPage>();
 
         builder.Services.AddTransient<TaoPhieuSuaChuaPageViewModel>();
 		builder.Services.AddTransient<ThuTienPageViewModel>();
@@ -123,6 +129,14 @@ public static class MauiProgram
         builder.Services.AddTransient<QuanLiPhieuThuTienPageViewModel>();
         builder.Services.AddTransient<ChiTietPhieuNhapVatTuPageViewModel>();
         builder.Services.AddTransient<ChiTietPhieuSuaChuaPageViewModel>();
+        builder.Services.AddTransient<LoaiTienCongPageViewModel>();
+        builder.Services.AddTransient<ThemLoaiTienCongPageViewModel>();
+        builder.Services.AddTransient<ThemLoaiVatTuPhuTungPageViewModel>();
+        builder.Services.AddTransient<BaoCaoDoanhSoListPageViewModel>();
+        builder.Services.AddTransient<QuanLiDanhSachLoaiVatTuPageViewModel>(provider =>
+    new QuanLiDanhSachLoaiVatTuPageViewModel(
+        provider.GetService<APIClientService<VatTuPhuTung>>(),
+        provider.GetService<ThemLoaiVatTuPhuTungPageViewModel>()));
         builder.Services.AddTransient<ChiTietNhanVienPageViewModel>(); 
         builder.Services.AddTransient<DanhSachXeKhachHangPageViewModel>();
         builder.Services.AddTransient<LichSuPageViewModel>();

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.LoaiTienCongPage"
+             x:Name="RootContentView"
+             xmlns:service="clr-namespace:GarageManagement.Services"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <service:DeleteModeTextConverter x:Key="DeleteModeTextConverter" />
+        </ResourceDictionary>
+        <Style x:Key="HeaderLabelStyle" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontFamily"     Value="OpenSans-SemiBold"/>
+            <Setter Property="FontSize"       Value="14"/>
+            <Setter Property="TextColor"      Value="{DynamicResource TextColor}"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        </Style>
+
+    </ContentView.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
+
+            <!-- Tiêu đề -->
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Quản Lý Loại Tiền Công" 
+                           FontSize="18" 
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalOptions="Start"/>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Padding="20" BackgroundColor="{DynamicResource CardBackgroundColor}">
+                <HorizontalStackLayout Spacing="14">
+                    <!-- Tên -->
+                    <HorizontalStackLayout Spacing="8">
+                        <Label Text="Tên:"   VerticalOptions="Center"
+               TextColor="{DynamicResource TextColor}"/>
+                        <Entry WidthRequest="160"
+               Placeholder="lọc tên"
+               Text="{Binding NameFilter, Mode=TwoWay}"
+               BackgroundColor="{DynamicResource BackgroundColor}"/>
+                    </HorizontalStackLayout>
+
+                    <!-- Giá từ -->
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="Giá từ:" VerticalOptions="Center"
+               TextColor="{DynamicResource TextColor}"/>
+                        <Entry WidthRequest="100" Keyboard="Numeric"
+               Text="{Binding PriceFromText, Mode=TwoWay}"
+               BackgroundColor="{DynamicResource BackgroundColor}"/>
+                        <Label Text="đến" VerticalOptions="Center"
+               TextColor="{DynamicResource TextColor}"/>
+                        <Entry WidthRequest="100" Keyboard="Numeric"
+               Text="{Binding PriceToText, Mode=TwoWay}"
+               BackgroundColor="{DynamicResource BackgroundColor}"/>
+                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <!-- Các nút chức năng -->
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
+                <Button Text="Thêm"
+                        Command="{Binding AddCommand}" 
+                        BackgroundColor="#3B82F6"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#2563EB" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+
+                <Button Text="{Binding IsDeleteMode, Converter={StaticResource DeleteModeTextConverter}}"
+        Command="{Binding ToggleDeleteModeCommand}"
+        BackgroundColor="#EF4444"
+        TextColor="White"
+        HeightRequest="48"
+        FontAttributes="Bold"
+        FontFamily="OpenSans-SemiBold">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#2563EB" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+
+                <Button Text="Xoá các mục đã chọn"
+        Command="{Binding DeleteCommand}"
+        IsVisible="{Binding IsDeleteMode}"
+        BackgroundColor="#EF4444"
+        TextColor="White"
+        HeightRequest="48"
+        FontAttributes="Bold"
+        FontFamily="OpenSans-SemiBold">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#EF4444" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#DC2626" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+            </HorizontalStackLayout>
+
+            <!-- Tiêu đề cột -->
+            <!-- HEADER -->
+            <Frame HasShadow="True"
+       BackgroundColor="{DynamicResource CardBackgroundColor}"
+       Padding="20">
+                <Grid>
+                    <!-- 5 cột:  chk |  ID  |   Tên   |  Đơn giá | H.động -->
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <!-- chỗ cho CheckBox -->
+                        <ColumnDefinition Width="100"/>
+                        <!-- ID -->
+                        <ColumnDefinition Width="2*"/>
+                        <!-- Tên loại TC -->
+                        <ColumnDefinition Width="2*"/>
+                        <!-- Đơn giá -->
+                        
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0"/>
+                    <!-- placeholder -->
+                    <Label Grid.Column="1" Text="ID"                 Style="{StaticResource HeaderLabelStyle}"/>
+                    <Label Grid.Column="2" Text="Tên Loại Tiền Công" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="Center"/>
+                    <Label Grid.Column="3" Text="Đơn Giá"            Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="Center"/>
+                    
+                </Grid>
+            </Frame>
+
+
+            <!-- Danh sách loại tiền công -->
+            <CollectionView ItemsSource="{Binding ListTienCong}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   Margin="0,12,0,0">
+
+                            <Grid ColumnSpacing="10">
+                                <!-- khớp 100 % với header -->
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Checkbox (ẩn bằng Opacity để giữ chỗ) -->
+                                <CheckBox Grid.Column="0"
+                              IsChecked="{Binding IsSelected}"
+                              Opacity="{Binding Path=BindingContext.IsDeleteMode,
+                                                Source={x:Reference RootContentView},
+                                                Converter={StaticResource BoolToOpacityConverter}}"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Center"/>
+
+                                <!-- ID -->
+                                <Label Grid.Column="1"
+                           Text="{Binding Id}"
+                           FontSize="13"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"
+                           LineBreakMode="TailTruncation"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="Center"/>
+
+                                <!-- Tên loại -->
+                                <Label Grid.Column="2"
+                           Text="{Binding TenLoaiTienCong}"
+                           FontSize="13"
+                           FontFamily="OpenSans-Regular"
+                                       HorizontalOptions="Center"
+                           TextColor="{DynamicResource TextColor}"
+                           VerticalOptions="Center"/>
+
+                                <!-- Đơn giá -->
+                                <Label Grid.Column="3"
+                           Text="{Binding DonGiaLoaiTienCong, StringFormat='{0:N0} đ'}"
+                           FontSize="13"
+                           FontFamily="OpenSans-Regular"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"
+                           VerticalOptions="Center"/>
+
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

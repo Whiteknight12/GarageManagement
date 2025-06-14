@@ -4,72 +4,75 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Services;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
 {
     public partial class QuanLiKhachHangPageViewModel : BaseViewModel
     {
-        [ObservableProperty]
-        private ObservableCollection<KhachHang> listKhachHang = new();
+        // ===== LIST & FILTER =====
+        [ObservableProperty] private ObservableCollection<KhachHang> listKhachHang = new();
+        private List<KhachHang> _allKhachHang = new();
 
         [ObservableProperty] private string cccdFilter = string.Empty;
         [ObservableProperty] private string nameFilter = string.Empty;
         [ObservableProperty] private string phoneFilter = string.Empty;
         [ObservableProperty] private string emailFilter = string.Empty;
 
-        /*  Giữ danh sách gốc để ApplyFilter không bị mất dữ liệu   */
-        private List<KhachHang> _allKhachHang = new();
+        [ObservableProperty] private List<string> listGioiTinh = new List<string>(); 
 
-        /* ---------- auto-trigger khi entry đổi text ---------- */
         partial void OnCccdFilterChanged(string _) => ApplyFilter();
         partial void OnNameFilterChanged(string _) => ApplyFilter();
         partial void OnPhoneFilterChanged(string _) => ApplyFilter();
         partial void OnEmailFilterChanged(string _) => ApplyFilter();
 
-        [ObservableProperty]
-        private bool isDeleteMode;
+        // ===== PANE & EDIT MODE =====
+        [ObservableProperty] private bool isAddPaneVisible;
+        [ObservableProperty] private bool isEditing;
+        [ObservableProperty] private bool isNotEditing = true;   // mặc định đang “xem”
+        [ObservableProperty] private KhachHang? editingCustomer; // bind trong pane
+
+        partial void OnIsEditingChanged(bool value) => IsNotEditing = !value;
+
+        // ===== DELETE MODE =====
+        [ObservableProperty] private bool isDeleteMode;
+
+        // ===== SERVICE =====
         private readonly APIClientService<KhachHang> _khachHangService;
         private readonly AuthenticationService _authenticationService;
 
-        public QuanLiKhachHangPageViewModel(APIClientService<KhachHang> khachHangService,
+        public QuanLiKhachHangPageViewModel(
+            APIClientService<KhachHang> khachHangService,
             ILogger<QuanLiKhachHangPageViewModel> logger,
             AuthenticationService authenticationService)
         {
-            _authenticationService = authenticationService;
             _khachHangService = khachHangService;
+            _authenticationService = authenticationService;
+
             _ = LoadAsync();
+
+            IsAddPaneVisible = false;
             IsDeleteMode = false;
+            ListGioiTinh.Add("Nam");
+            ListGioiTinh.Add("Nữ");
         }
 
+        // ------------------ LOAD DATA ------------------
         public async Task LoadAsync()
         {
             _ = _authenticationService.FettaiKhoanSession();
             var httpClient = _khachHangService.GetHttpClient;
-            var token = _authenticationService.GetCurrentAccountStatus.Token;
-            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            httpClient.DefaultRequestHeaders.Authorization =
+                new System.Net.Http.Headers.AuthenticationHeaderValue(
+                    "Bearer",
+                    _authenticationService.GetCurrentAccountStatus.Token);
 
-            _allKhachHang = await _khachHangService.GetAll() ?? new List<KhachHang>();
+            _allKhachHang = await _khachHangService.GetAll() ?? new();
 
             for (int i = 0; i < _allKhachHang.Count; i++)
                 _allKhachHang[i].STT = i + 1;
 
-            ApplyFilter();   // hiển thị theo bộ lọc hiện hành (khởi đầu rỗng)
-        }
-
-        public void Load(KhachHang item)
-        {
-            ListKhachHang.Add(item);
-            // Cập nhật STT cho tất cả khách hàng
-            for (int i = 0; i < ListKhachHang.Count; i++)
-            {
-                ListKhachHang[i].STT = i + 1;
-            }
+            ApplyFilter(); // respect bộ lọc hiện tại
         }
 
         private void ApplyFilter()
@@ -78,77 +81,130 @@ namespace GarageManagement.ViewModels
 
             if (!string.IsNullOrWhiteSpace(CccdFilter))
             {
-                var key = CccdFilter.Trim().ToLower();
-                query = query.Where(kh => (kh.CCCD ?? "").ToLower().Contains(key));
+                var k = CccdFilter.Trim().ToLower();
+                query = query.Where(kh => (kh.CCCD ?? "").ToLower().Contains(k));
             }
             if (!string.IsNullOrWhiteSpace(NameFilter))
             {
-                var key = NameFilter.Trim().ToLower();
-                query = query.Where(kh => (kh.HoVaTen ?? "").ToLower().Contains(key));
+                var k = NameFilter.Trim().ToLower();
+                query = query.Where(kh => (kh.HoVaTen ?? "").ToLower().Contains(k));
             }
             if (!string.IsNullOrWhiteSpace(PhoneFilter))
             {
-                var key = PhoneFilter.Trim().ToLower();
-                query = query.Where(kh => (kh.SoDienThoai ?? "").ToLower().Contains(key));
+                var k = PhoneFilter.Trim().ToLower();
+                query = query.Where(kh => (kh.SoDienThoai ?? "").ToLower().Contains(k));
             }
             if (!string.IsNullOrWhiteSpace(EmailFilter))
             {
-                var key = EmailFilter.Trim().ToLower();
-                query = query.Where(kh => (kh.Email ?? "").ToLower().Contains(key));
+                var k = EmailFilter.Trim().ToLower();
+                query = query.Where(kh => (kh.Email ?? "").ToLower().Contains(k));
             }
 
             ListKhachHang = new ObservableCollection<KhachHang>(query);
         }
 
+        // ------------------ ADD / EDIT FLOW ------------------
         [RelayCommand]
         private void Add()
         {
-            // Logic để thêm khách hàng mới (có thể mở một trang mới để nhập thông tin)
+            EditingCustomer = new KhachHang
+            {
+                Id = Guid.Empty // mark as “mới toanh”
+            };
+            IsAddPaneVisible = true;
+            IsEditing = true;
         }
 
         [RelayCommand]
-        private void Edit()
+        private void EditDetail()   // gọi khi bấm nút “Sửa” trong page chi tiết
         {
-            // Logic để sửa khách hàng (có thể mở một trang để chỉnh sửa thông tin khách hàng được chọn)
+            if (EditingCustomer == null) return;
+            IsEditing = true;
         }
 
+        [RelayCommand]
+        private async Task SaveCustomerAsync()  // XAML đang bind SaveCustomerCommand
+        {
+            if (EditingCustomer == null) return;
+
+            if (EditingCustomer.Id == Guid.Empty)
+            {
+                // ➕ Thêm mới
+                await _khachHangService.Create(EditingCustomer);
+            }
+            else
+            {
+                // ✏️ Cập nhật
+                await _khachHangService.Update(EditingCustomer);
+            }
+
+            // reload danh sách & STT
+            await LoadAsync();
+
+            // đổi về chế độ xem
+            IsEditing = false;
+            EditingCustomer = null; 
+        }
+
+        [RelayCommand]
+        private void CancelCustomer()   // XAML bind CancelCustomerCommand
+        {
+            CloseDetailPane();
+        }
+
+        [RelayCommand]
+        private void CloseDetailPane()
+        {
+            IsAddPaneVisible = false;
+            EditingCustomer = null;
+
+            if (IsEditing)
+            {
+                IsEditing = false;
+                IsNotEditing = true;
+            }
+        }
+
+        // ------------------ DELETE MODE ------------------
         [RelayCommand]
         private void ToggleDeleteMode()
         {
             IsDeleteMode = !IsDeleteMode;
-            if (!IsDeleteMode) // Khi hủy chế độ xóa
+
+            if (!IsDeleteMode)
             {
-                var updatedList = new List<KhachHang>(ListKhachHang);
-                foreach (var kh in updatedList)
-                {
+                foreach (var kh in ListKhachHang)
                     kh.IsSelected = false;
-                }
-                // Gán lại ListKhachHang để buộc giao diện làm mới
-                ListKhachHang = new ObservableCollection<KhachHang>(updatedList);
+
+                // force UI refresh
+                ListKhachHang = new ObservableCollection<KhachHang>(ListKhachHang);
             }
         }
 
         [RelayCommand]
         private async Task Delete()
         {
-            var selectedItems = ListKhachHang.Where(x => x.IsSelected).ToList();
-            foreach (var item in selectedItems)
+            var selected = ListKhachHang.Where(x => x.IsSelected).ToList();
+
+            foreach (var kh in selected)
             {
-                await _khachHangService.Delete(item.Id);
-                ListKhachHang.Remove(item);
+                await _khachHangService.Delete(kh.Id);
+                ListKhachHang.Remove(kh);
             }
-            // Cập nhật STT sau khi xóa
+
+            // rebuild STT
             for (int i = 0; i < ListKhachHang.Count; i++)
-            {
                 ListKhachHang[i].STT = i + 1;
-            }
+
             IsDeleteMode = false;
+            CloseDetailPane();
         }
 
+        // ------------------ NAV TO FULL DETAIL PAGE ------------------
         [RelayCommand]
-        private void GoToChiTietKhachHangPage(Guid Id)
+        private void GoToChiTietKhachHangPage(Guid id)
         {
-            MessagingCenter.Send(this, "ShowCustomerDetails", Id);
+            MessagingCenter.Send(this, "ShowCustomerDetails", id);
         }
     }
 }

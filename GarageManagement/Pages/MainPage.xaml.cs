@@ -17,16 +17,19 @@ public partial class MainPage : ContentPage
     private readonly ChiTietPhieuNhapVatTuPage _chiTietPhieuNhapVatTuPage;
     private readonly ChiTietPhieuSuaChuaPage _chiTietPhieuSuaChuaPage;
     private readonly ChiTietNhanVienPage _chiTietNhanVienPage;
-
+    private readonly LapPhieuNhapPage _lapPhieuNhapPage;
+    private readonly BaoCaoDoanhSoListPage _baoCaoDoanhSoListPage;
     public MainPage(MainPageViewModel viewModel, 
-        ChiTietXePage chiTietXePage, 
+        ChiTietXePage chiTietXePage,
         AddNewAccountPage addNewAccountPage,
         SuaHieuXePage suaHieuXePage,
         ChiTietKhachHangPage chiTietKhachHangPage,
         SuaTaiKhoanPage suaTaiKhoanPage,
         ChiTietPhieuNhapVatTuPage chiTietPhieuNhapVatTuPage,
         ChiTietPhieuSuaChuaPage chiTietPhieuSuaChuaPage,
-        ChiTietNhanVienPage chiTietNhanVienPage)
+        ChiTietNhanVienPage chiTietNhanVienPage,
+        LapPhieuNhapPage lapPhieuNhapPage,
+        BaoCaoDoanhSoListPage baoCaoDoanhSoListPage)
     {
         InitializeComponent();
         BindingContext = viewModel;
@@ -39,6 +42,8 @@ public partial class MainPage : ContentPage
         _chiTietPhieuNhapVatTuPage = chiTietPhieuNhapVatTuPage;
         _chiTietPhieuSuaChuaPage = chiTietPhieuSuaChuaPage;
         _chiTietNhanVienPage = chiTietNhanVienPage;
+        _lapPhieuNhapPage = lapPhieuNhapPage;
+        _baoCaoDoanhSoListPage = baoCaoDoanhSoListPage;
     }
 
     private void OnCollapseClicked(object sender, EventArgs e)
@@ -84,6 +89,22 @@ public partial class MainPage : ContentPage
             {
                 _viewModel.CloseRightPane();
                 _chiTietXePage._viewModel.ExitEditMode();   
+            }
+            else
+            {
+                _chiTietXePage.setCarId(carId);
+                _ = _chiTietXePage._viewModel.LoadAsync();
+                _viewModel.ShowRightPane(_chiTietXePage);
+            }
+        });
+        MessagingCenter.Subscribe<QuanLiXePageViewModel, Guid>(
+        this, "ShowCarDetails",
+        (sender, carId) =>
+        {
+            if (_viewModel.IsRightPaneVisible)
+            {
+                _viewModel.CloseRightPane();
+                _chiTietXePage._viewModel.ExitEditMode();
             }
             else
             {
@@ -219,6 +240,34 @@ public partial class MainPage : ContentPage
                     _viewModel.ShowRightPane(_chiTietNhanVienPage);
                 }
             });
+        MessagingCenter.Subscribe<QuanLiPhieuNhapPageViewModel, Guid>(
+            this, "LapPhieuNhap", (sender, id) =>
+            {
+                if (_viewModel.IsRightPaneVisible)
+                {
+                    _viewModel.CloseRightPane();
+                }
+                else
+                {
+                    _lapPhieuNhapPage._viewModel.id = id;
+                    _ = _lapPhieuNhapPage._viewModel.LoadListVatTuAsync();
+                    _viewModel.ShowRightPane(_lapPhieuNhapPage);
+                }
+            });
+        MessagingCenter.Subscribe<LoaiTienCongPageViewModel, ContentView>(
+            this, "ShowRightPane",
+                (sender, content) =>
+                {
+                    if (_viewModel.IsRightPaneVisible)
+                    {
+                        _viewModel.CloseRightPane();
+                    }
+                    else
+                    {
+                        _viewModel.ShowRightPane(content);
+                    }
+                });
+
     }
 
     protected override void OnDisappearing()
@@ -233,5 +282,8 @@ public partial class MainPage : ContentPage
         MessagingCenter.Unsubscribe<QuanLiPhieuNhapPageViewModel, PhieuNhapVatTu>(this, "ViewChiTietPhieuNhap");
         MessagingCenter.Unsubscribe<QuanLiPhieuSuaChuaPageViewModel, Guid>(this, "ViewChiTietPhieuSuaChua");
         MessagingCenter.Unsubscribe<QuanLiNhanVienPageViewModel, Guid>(this, "ShowStaffDetails");
+        MessagingCenter.Unsubscribe<LapPhieuNhapPageViewModel, Guid>(this, "LapPhieuNhap");
+        MessagingCenter.Unsubscribe<LoaiTienCongPageViewModel, ContentView>(this, "ShowRightPane");
+        MessagingCenter.Unsubscribe<QuanLiXePageViewModel, Guid>(this, "ShowCarDetails");
     }
 }

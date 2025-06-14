@@ -2,6 +2,7 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using GarageManagement.Services;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
@@ -18,28 +19,46 @@ namespace GarageManagement.ViewModels
         [ObservableProperty] private string priceFromText = string.Empty;
         [ObservableProperty] private string priceToText = string.Empty;
 
+        public ObservableCollection<string> TimeFilterOptions { get; } =
+    new ObservableCollection<string> { "Tất cả", "Ngày" };
+
+        [ObservableProperty]
+        private string selectedTimeFilter = "Tất cả";
+
+
         // Khi các field thay đổi → lọc lại
         partial void OnBienSoFilterChanged(string _) => ApplyFilter();
         partial void OnSelectedRepairDateChanged(DateTime _) => ApplyFilter();
+        partial void OnSelectedTimeFilterChanged(string _) => ApplyFilter();
+
         partial void OnPriceFromTextChanged(string _) => ApplyFilter();
         partial void OnPriceToTextChanged(string _) => ApplyFilter();
 
         private List<PhieuSuaChua> _allPhieu = new();
+
+        public bool IsDateVisible => SelectedTimeFilter == "Ngày";
 
         [ObservableProperty]
         private bool isDeleteMode;
         private readonly APIClientService<PhieuSuaChua> _phieuSuaChuaService;
         private readonly AuthenticationService _authenticationService;
         private readonly APIClientService<Xe> _xeService; // Service để lấy thông tin xe
+        private readonly TaoPhieuSuaChuaPageViewModel _taoPhieuSuaChuaPageViewModel;
+
+        APIClientService<TienCong> _congservice;
+        APIClientService<ChiTietPhieuSuaChua> _noidungphieuservice;
+        APIClientService<VatTuPhuTung> _vatTuService;
 
         public QuanLiPhieuSuaChuaPageViewModel(APIClientService<PhieuSuaChua> phieuSuaChuaService,
             APIClientService<Xe> xeService,
             ILogger<QuanLiPhieuSuaChuaPageViewModel> logger,
-            AuthenticationService authenticationService)
+            AuthenticationService authenticationService,
+            TaoPhieuSuaChuaPageViewModel taoPhieuSuaChuaPageViewModel)
         {
             _authenticationService = authenticationService;
             _phieuSuaChuaService = phieuSuaChuaService;
             _xeService = xeService;
+            _taoPhieuSuaChuaPageViewModel = taoPhieuSuaChuaPageViewModel; 
             _ = LoadAsync();
             IsDeleteMode = false;
         }
@@ -79,9 +98,34 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private void Add()
+        private async Task Add()
         {
-            // Logic để thêm phiếu sửa chữa mới (có thể mở một trang mới để nhập thông tin)
+            var view = new TaoPhieuSuaChuaPage(_xeService, _congservice, _vatTuService, _noidungphieuservice, _phieuSuaChuaService ,_taoPhieuSuaChuaPageViewModel, _vatTuService);
+            var wrapper = new ContentPage
+            {
+                Content = view,
+                Padding = 0
+            };
+            var win = new Window
+            {
+                Page = wrapper,
+                Title = "Tạo sửa chữa mới",
+                MaximumHeight = 600,
+                MaximumWidth = 800,
+                MinimumHeight = 600,
+                MinimumWidth = 800
+            };
+            _taoPhieuSuaChuaPageViewModel.OnPhieuSuaChuaAdded = async (PhieuSuaChua phieuSuaChua) =>
+            {
+                Load(phieuSuaChua);        // nhét vào list hiện tại
+                                             // hoặc reload full để chắc cú
+                                             // Replace this line:
+                                             // win.Close();     // đóng cửa sổ
+                // With the following workaround for .NET MAUI (since Window.Close() does not exist):
+                Application.Current?.CloseWindow(win); // đóng cửa sổ    // đóng cửa sổ
+                await LoadAsync();
+            };
+            Application.Current.OpenWindow(win);
         }
 
         [RelayCommand]
@@ -140,22 +184,23 @@ namespace GarageManagement.ViewModels
                 q = q.Where(p => (p.BienSoXe ?? "").ToLower().Contains(key));
             }
 
-            /* --- Ngày sửa chữa (so khớp đúng ngày) --- */
-            // Nếu người dùng không muốn lọc ngày -> bỏ chọn DatePicker (SelectedRepairDate = DateTime.MinValue)
-            if (SelectedRepairDate != DateTime.MinValue)
+            /* --- Ngày sửa chữa --- */
+            if (SelectedTimeFilter == "Ngày" && SelectedRepairDate != DateTime.MinValue)
             {
                 var d = SelectedRepairDate.Date;
                 q = q.Where(p => p.NgaySuaChua.Date == d);
             }
+            // "Tất cả" thì bỏ qua lọc ngày
 
             /* --- Giá từ / đến --- */
             if (double.TryParse(PriceFromText, out var min))
-                q = q.Where(p => (p.TongTien ) >= min);
+                q = q.Where(p => (p.TongTien) >= min);
 
             if (double.TryParse(PriceToText, out var max))
-                q = q.Where(p => (p.TongTien ) <= max);
+                q = q.Where(p => (p.TongTien) <= max);
 
             ListPhieuSuaChua = new ObservableCollection<PhieuSuaChua>(q);
         }
+
     }
 }

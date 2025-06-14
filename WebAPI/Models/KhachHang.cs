@@ -13,6 +13,7 @@ namespace WebAPI.Models
         public string DiaChi { get; set; }
         public string SoDienThoai { get; set; }
         public Guid? TaiKhoanId { get; set; }
+        // không dùng đến, tính trong UI 
         public double TienNo { get; set; }
         public string? Email { get; set; }
         public string GioiTinh { get; set; } = string.Empty;

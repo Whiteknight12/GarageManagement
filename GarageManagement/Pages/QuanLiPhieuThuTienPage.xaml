@@ -30,61 +30,82 @@
             </Frame>
 
             <Frame Padding="20" BackgroundColor="{DynamicResource CardBackgroundColor}" HasShadow="True">
-                <HorizontalStackLayout Spacing="16">
+                <VerticalStackLayout Spacing="16">
+                    <HorizontalStackLayout Spacing="16">
 
-                    <!-- Tên khách -->
-                    <HorizontalStackLayout Spacing="6">
-                        <Label Text="Tên KH:"
-                   WidthRequest="80" VerticalOptions="Center"
-                   TextColor="{DynamicResource TextColor}"/>
-                        <Entry Text="{Binding NameFilter}" Placeholder="Tên"
-                   WidthRequest="150" HeightRequest="42"
-                   FontFamily="OpenSans-Regular" BackgroundColor="White"/>
+                        <!-- Tên khách -->
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="Tên KH:"
+                                   WidthRequest="80" VerticalOptions="Center"
+                                   TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding NameFilter}" Placeholder="Tên"
+                                   WidthRequest="150" HeightRequest="42"
+                                   FontFamily="OpenSans-Regular" BackgroundColor="{DynamicResource BackgroundColor}"/>
+                        </HorizontalStackLayout>
+
+                        <!-- CCCD -->
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="CCCD:" WidthRequest="60" VerticalOptions="Center"
+                                   TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding CccdFilter}" Placeholder="CCCD"
+                                   WidthRequest="140" HeightRequest="42"
+                                   FontFamily="OpenSans-Regular" BackgroundColor="{DynamicResource BackgroundColor}"/>
+                        </HorizontalStackLayout>
+
+                        <!-- Biển số -->
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="Biển số:" WidthRequest="75" VerticalOptions="Center"
+                                   TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding BienSoFilter}" Placeholder="Biển số"
+                                   WidthRequest="120" HeightRequest="42"
+                                   FontFamily="OpenSans-Regular" BackgroundColor="{DynamicResource BackgroundColor}"/>
+                        </HorizontalStackLayout>
+
                     </HorizontalStackLayout>
 
-                    <!-- CCCD -->
-                    <HorizontalStackLayout Spacing="6">
-                        <Label Text="CCCD:" WidthRequest="60" VerticalOptions="Center"
-                   TextColor="{DynamicResource TextColor}"/>
-                        <Entry Text="{Binding CccdFilter}" Placeholder="CCCD"
-                   WidthRequest="140" HeightRequest="42"
-                   FontFamily="OpenSans-Regular" BackgroundColor="White"/>
-                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="30">
 
-                    <!-- Biển số -->
-                    <HorizontalStackLayout Spacing="6">
-                        <Label Text="Biển số:" WidthRequest="75" VerticalOptions="Center"
-                   TextColor="{DynamicResource TextColor}"/>
-                        <Entry Text="{Binding BienSoFilter}" Placeholder="Biển số"
-                   WidthRequest="120" HeightRequest="42"
-                   FontFamily="OpenSans-Regular" BackgroundColor="White"/>
-                    </HorizontalStackLayout>
+                        <!-- Lọc theo ngày -->
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="Lọc theo:" WidthRequest="70" VerticalOptions="Center"
+                                   TextColor="{DynamicResource TextColor}"/>
+                            <Picker ItemsSource="{Binding DateFilterOptions}"
+                                    SelectedItem="{Binding SelectedDateOption}"
+                                    TextColor="{DynamicResource TextColor}"
+                                    WidthRequest="130"
+                                    HeightRequest="42"
+                                    FontFamily="OpenSans-Regular"
+                                    BackgroundColor="{DynamicResource BackgroundColor}"/>
+                        </HorizontalStackLayout>
 
-                    <!-- Ngày thu -->
-                    <HorizontalStackLayout Spacing="6">
-                        <Label Text="Ngày:" WidthRequest="45" VerticalOptions="Center"
-                   TextColor="{DynamicResource TextColor}"/>
-                        <DatePicker Date="{Binding SelectedDate}" Format="dd/MM/yyyy"
-                        WidthRequest="150" HeightRequest="42"/>
-                    </HorizontalStackLayout>
+                        <!-- Ngày thu -->
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="Ngày:" WidthRequest="45" VerticalOptions="Center"
+                                   TextColor="{DynamicResource TextColor}"/>
+                            <DatePicker Date="{Binding SelectedDate}" Format="dd/MM/yyyy"
+                                        
+                                        WidthRequest="150" HeightRequest="42"
+                                        BackgroundColor="{DynamicResource BackgroundColor}"
+                                        TextColor="{DynamicResource TextColor}"/>
+                        </HorizontalStackLayout>
 
-                    <!-- Giá -->
-                    <HorizontalStackLayout Spacing="6">
-                        <Label Text="Giá từ:" WidthRequest="60" VerticalOptions="Center"
-                   TextColor="{DynamicResource TextColor}"/>
-                        <Entry Text="{Binding PriceFromText}" Placeholder="Min"
-                   Keyboard="Numeric" WidthRequest="100" HeightRequest="42"
-                   FontFamily="OpenSans-Regular" BackgroundColor="White"/>
-                        <Label Text="đến" VerticalOptions="Center"
-                   TextColor="{DynamicResource TextColor}"/>
-                        <Entry Text="{Binding PriceToText}" Placeholder="Max"
-                   Keyboard="Numeric" WidthRequest="100" HeightRequest="42"
-                   FontFamily="OpenSans-Regular" BackgroundColor="White"/>
-                    </HorizontalStackLayout>
+                        <!-- Giá -->
+                        <HorizontalStackLayout Spacing="6">
+                            <Label Text="Giá từ:" WidthRequest="60" VerticalOptions="Center"
+                                   TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding PriceFromText}" Placeholder="Min"
+                                   Keyboard="Numeric" WidthRequest="100" HeightRequest="42"
+                                   FontFamily="OpenSans-Regular" BackgroundColor="{DynamicResource BackgroundColor}"/>
+                            <Label Text="đến" VerticalOptions="Center"
+                                   TextColor="{DynamicResource TextColor}"/>
+                            <Entry Text="{Binding PriceToText}" Placeholder="Max"
+                                   Keyboard="Numeric" WidthRequest="100" HeightRequest="42"
+                                   FontFamily="OpenSans-Regular" BackgroundColor="{DynamicResource BackgroundColor}"/>
+                        </HorizontalStackLayout>
 
-                </HorizontalStackLayout>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
             </Frame>
-
 
             <!-- Các nút chức năng -->
             <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
@@ -189,8 +210,6 @@
                         <!-- Cột Ngày Thu Tiền -->
                         <ColumnDefinition Width="1*" />
                         <!-- Cột Số Tiền Thu -->
-                        <ColumnDefinition Width="0.5*" />
-                        <!-- Cột Hành động -->
                     </Grid.ColumnDefinitions>
                     <Label Text="" Grid.Column="0" 
                            FontAttributes="Bold" 
@@ -246,12 +265,6 @@
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="Hành động" Grid.Column="9" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"
-                           HorizontalTextAlignment="Center"
-                           FontSize="14"/>
                 </Grid>
             </Frame>
 
@@ -283,8 +296,6 @@
                                     <!-- Cột Ngày Thu Tiền -->
                                     <ColumnDefinition Width="1*" />
                                     <!-- Cột Số Tiền Thu -->
-                                    <ColumnDefinition Width="0.5*" />
-                                    <!-- Cột Hành động -->
                                 </Grid.ColumnDefinitions>
                                 <CheckBox IsChecked="{Binding IsSelected}"
                                           Margin="10,0,0,0"
@@ -344,32 +355,7 @@
                                        HorizontalTextAlignment="Center"
                                        VerticalOptions="Center"
                                        FontSize="13"
-                                       Margin="5"/>
-                                <Button Text="Sửa"
-                                        Command="{Binding Source={x:Reference RootContentView}, Path=BindingContext.EditCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        Grid.Column="9"
-                                        BackgroundColor="#3B82F6"
-                                        TextColor="White"
-                                        HeightRequest="40"
-                                        FontFamily="OpenSans-SemiBold">
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroupList>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                                <VisualState x:Name="Pressed">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#2563EB" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateGroupList>
-                                    </VisualStateManager.VisualStateGroups>
-                                </Button>
+                                       Margin="5"/> 
                             </Grid>
                         </Frame>
                     </DataTemplate>

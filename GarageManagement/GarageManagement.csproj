@@ -84,10 +84,19 @@
 	  <Compile Update="Pages\QuanLiPhieuNhapPage.xaml.cs">
 	    <DependentUpon>QuanLiPhieuNhapPage.xaml</DependentUpon>
 	  </Compile>
+		<Compile Update="Pages\LoaiTienCongPage.xaml.cs">
+			<DependentUpon>LoaiTienCongPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\ThemLoaiTienCongPage.xaml.cs">
+			<DependentUpon>ThemLoaiTienCongPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Pages\AddNewAccountPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\BaoCaoDoanhSoListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\BaoCaoDoanhSoPage.xaml">
@@ -111,8 +120,11 @@
 	  <MauiXaml Update="Pages\DanhSachXeKhachHangPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\LichSuPage.xaml">
+	  <MauiXaml Update="Pages\LoaiTienCongPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LichSuPage.xaml">
+		<Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
@@ -169,6 +181,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ThemHieuXePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ThemLoaiTienCongPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ThemLoaiVatTuPhuTung.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ThemXePage.xaml">

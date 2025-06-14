@@ -67,8 +67,9 @@
                    Padding="20"
                    CornerRadius="{StaticResource CornerRadiusHandler}">
                 <HorizontalStackLayout Spacing="10">
-                    <Label Text="Tổng doanh số:" FontSize="16" FontAttributes="Bold" />
-                    <Label Text="{Binding TongDoanhSo}" FontSize="16" TextColor="Green" />
+                    <Label Text="Tổng doanh số:" FontSize="16" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+
+                    <Label Text="{Binding TongDoanhSo}"   FontAttributes="Bold" FontSize="16" TextColor="Green" />
                 </HorizontalStackLayout>
             </Frame>
 
@@ -112,20 +113,6 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </Frame>
-
-            <!-- Back Button -->
-            <Frame HasShadow="True"
-                   BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   Padding="20"
-                   CornerRadius="{StaticResource CornerRadiusHandler}">
-                <Button Text="QUAY LẠI"
-                        Command="{Binding GoBackCommand}"
-                        BackgroundColor="#10B981"
-                        TextColor="White"
-                        HeightRequest="48"
-                        CornerRadius="{StaticResource ButtonCornerRadiusHandler}"
-                        HorizontalOptions="Center" />
             </Frame>
         </VerticalStackLayout>
     </ScrollView>

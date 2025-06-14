@@ -14,9 +14,13 @@
 
         //these fields are used for UI purposes only
         //we should separate them from the model, can use DTOs or ViewModels
-        public string? TenHieuXe { get; set; }
+
         public string? TinhTrang { get; set; }  
         public List<PhieuSuaChua>? LichSuSuaChuaList { get; set; } = new List<PhieuSuaChua>();
         public List<PhieuTiepNhan>? LichSuTiepNhanList { get; set; } = new List<PhieuTiepNhan>();
+        public string TenHieuXe { get; set; }
+
+        public string TenChuXe { get; set; }
+        public string CCCDChuXe { get; set; }
     }
 }

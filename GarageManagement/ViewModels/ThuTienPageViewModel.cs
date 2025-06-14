@@ -54,6 +54,9 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<PhieuThuTien> _phieuthuservice;
         private readonly APIClientService<Xe> _carservice;
 
+        public delegate void OnPhieuThuTienAddedDelegate(PhieuThuTien phieuThuTien);
+        public OnPhieuThuTienAddedDelegate OnPhieuThuTienAdded { get; set; }
+
         public ThuTienPageViewModel(APIClientService<KhachHang> userservice,
             APIClientService<PhieuThuTien> phieuthuservice,
             APIClientService<Xe> carservice)

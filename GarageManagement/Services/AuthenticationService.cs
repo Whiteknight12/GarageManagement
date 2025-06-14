@@ -61,7 +61,7 @@ namespace GarageManagement.Services
         {
             var currentaccountjson=await SecureStorage.Default.GetAsync(STORAGE_KEY);
             if (currentaccountjson is not null) currentaccount=JsonSerializer.Deserialize<taiKhoanSession>(currentaccountjson);
-            if (DateTime.UtcNow >= currentaccount.Expiry) Logout();
+             if (DateTime.UtcNow >= currentaccount.Expiry) Logout();
         }
 
         public void Logout()

@@ -2,6 +2,7 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using GarageManagement.Services;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
@@ -11,18 +12,23 @@ namespace GarageManagement.ViewModels
     public partial class QuanLiPhieuNhapPageViewModel : BaseViewModel
     {
         public ObservableCollection<string> TimeFilterOptions { get; } =
-        new ObservableCollection<string> { "Ngày", "Tháng", "Năm" };
+        new ObservableCollection<string> { "Tất cả", "Ngày", "Tháng", "Năm" };
 
-        [ObservableProperty] private string selectedTimeFilter = "Ngày";
+        [ObservableProperty] private string selectedTimeFilter = "Tất cả";
 
-        [ObservableProperty] private DateTime selectedDate = DateTime.Today;   // cho “Ngày”
+        [ObservableProperty] private DateTime selectedDate = DateTime.UtcNow;   // cho “Ngày”
 
         [ObservableProperty] private string priceFromText = "";
         [ObservableProperty] private string priceToText = "";
+        private readonly APIClientService<VatTuPhuTung> _vatTuService;
+        private readonly LapPhieuNhapPageViewModel _lapPhieuNhapPageViewModel; 
 
         // helper cho Visible
-        public bool IsDayFilter => SelectedTimeFilter == "Ngày";
+        public bool IsDayFilter => SelectedTimeFilter == "Tất cả";
         public bool IsMonthFilter => SelectedTimeFilter == "Tháng";
+
+ 
+        public bool IsDateVisible => SelectedTimeFilter != "Tất cả";
 
 
         // giữ danh sách gốc
@@ -42,10 +48,14 @@ namespace GarageManagement.ViewModels
 
         public QuanLiPhieuNhapPageViewModel(APIClientService<PhieuNhapVatTu> PhieuNhapVatTuService,
             ILogger<QuanLiPhieuNhapPageViewModel> logger,
-            AuthenticationService authenticationService)
+            AuthenticationService authenticationService,
+            LapPhieuNhapPageViewModel lapPhieuNhapPageViewModel,
+            APIClientService<VatTuPhuTung> vatTuService)
         {
             _authenticationService = authenticationService;
             _PhieuNhapVatTuService = PhieuNhapVatTuService;
+            _lapPhieuNhapPageViewModel = lapPhieuNhapPageViewModel;
+            _vatTuService = vatTuService; 
             _ = LoadAsync();
             IsDeleteMode = false;
         }
@@ -70,7 +80,11 @@ namespace GarageManagement.ViewModels
         public void Load(PhieuNhapVatTu item)
         {
             ListPhieuNhapVatTu.Add(item);
-
+            _allPhieu.Add(item);
+            for (int i = 0; i < _allPhieu.Count; i++)
+            {
+                _allPhieu[i].STT = i + 1;
+            }
             for (int i = 0; i < ListPhieuNhapVatTu.Count; i++)
             {
                 ListPhieuNhapVatTu[i].STT = i + 1;
@@ -93,8 +107,9 @@ namespace GarageManagement.ViewModels
             }
             else if (SelectedTimeFilter == "Năm")
             {
-                q = q.Where(p => p.NgayNhap.Year == SelectedDate.Year); 
+                q = q.Where(p => p.NgayNhap.Year == SelectedDate.Year);
             }
+            // "Tất cả" thì không lọc gì hết
 
             /*––– LỌC GIÁ –––*/
             if (double.TryParse(PriceFromText, out var min))
@@ -106,12 +121,43 @@ namespace GarageManagement.ViewModels
             ListPhieuNhapVatTu = new ObservableCollection<PhieuNhapVatTu>(q);
         }
 
-
-
         [RelayCommand]
-        private void Add()
+        private async Task Add()
         {
+            await _lapPhieuNhapPageViewModel.LoadListVatTuAsync();
 
+            var view = new LapPhieuNhapPage(_lapPhieuNhapPageViewModel, _vatTuService);
+
+            var wrapper = new ContentPage
+            {
+                Content = view,
+                Padding = 0
+            };
+
+            var win = new Window
+            {
+                Page = wrapper,
+                Title = "Tạo phiếu nhập mới",
+                MaximumHeight = 600,
+                MaximumWidth = 800,
+                MinimumHeight = 600,
+                MinimumWidth = 800
+            };
+
+            // callback khi lưu thành công
+            _lapPhieuNhapPageViewModel.OnPhieuNhapAdded = async (PhieuNhapVatTu phieuNhapVatTu) =>
+            {
+                Load(phieuNhapVatTu);        // nhét vào list hiện tại
+                  // hoặc reload full để chắc cú
+                                    // Replace this line:
+                                    // win.Close();     // đóng cửa sổ
+
+                // With the following workaround for .NET MAUI (since Window.Close() does not exist):
+                Application.Current?.CloseWindow(win); // đóng cửa sổ    // đóng cửa sổ
+                await LoadAsync();
+            };
+
+            Application.Current.OpenWindow(win);
         }
 
         [RelayCommand]

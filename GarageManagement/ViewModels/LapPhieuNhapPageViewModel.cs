@@ -19,11 +19,16 @@ namespace GarageManagement.ViewModels
         private ObservableCollection<VatTuPhuTung> listVatTu = new();
         [ObservableProperty]
         private ObservableCollection<ChiTietPhieuNhapVatTu> listChiTietPhieuNhap = new();
-
+        [ObservableProperty]
+        DateTime selectedDate = DateTime.UtcNow; 
         private readonly APIClientService<VatTuPhuTung> _vatTuService;
         private readonly APIClientService<PhieuNhapVatTu> _phieuNhapVatTuService;
         private readonly APIClientService<ChiTietPhieuNhapVatTu> _chiTietPhieuNhapVatTuService;
 
+        public delegate void OnPhieuNhapAddedDelegate(PhieuNhapVatTu phieuNhapVatTu);
+        public OnPhieuNhapAddedDelegate OnPhieuNhapAdded { get; set; }
+
+        public Guid id; 
         public LapPhieuNhapPageViewModel(APIClientService<PhieuNhapVatTu> phieuNhapVatTuService,
             APIClientService<ChiTietPhieuNhapVatTu> chiTietPhieuNhapVatTuService,
             APIClientService<VatTuPhuTung> vatTuService)
@@ -70,10 +75,11 @@ namespace GarageManagement.ViewModels
                 Shell.Current.DisplayAlert("Cảnh báo", "Không được bỏ trống SỐ LƯỢNG và ĐƠN GIÁ", "OK");
                 return;
             }
+            
             var phieuNhapVatTu = new PhieuNhapVatTu
             {
                 Id = Guid.NewGuid(),
-                NgayNhap = DateTime.UtcNow.ToLocalTime(),
+                NgayNhap = SelectedDate,
                 TongTien = TongGiaTien
             };
             _ = _phieuNhapVatTuService.Create(phieuNhapVatTu);
@@ -93,7 +99,9 @@ namespace GarageManagement.ViewModels
             _ = toast.Show();
 
             ListChiTietPhieuNhap.Clear();
-            ListChiTietPhieuNhap.Add(new ChiTietPhieuNhapVatTu()); 
+            ListChiTietPhieuNhap.Add(new ChiTietPhieuNhapVatTu());
+            OnPhieuNhapAdded(phieuNhapVatTu);
+            SelectedDate = DateTime.UtcNow; 
         }
     }
 }

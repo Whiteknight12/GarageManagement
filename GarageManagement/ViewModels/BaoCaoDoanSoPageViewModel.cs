@@ -5,11 +5,6 @@ using CommunityToolkit.Mvvm.Input;
 using Microcharts;
 using SkiaSharp;
 using System.Collections.ObjectModel;
-using Microcharts;
-using Microcharts.Maui;
-using SkiaSharp;
-using System.Linq;
-using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace GarageManagement.ViewModels
 {
@@ -41,97 +36,93 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<HieuXe> _hieuXeService; 
         private string STORAGE_KEY = "user-account-status";
 
-        public BaoCaoDoanSoPageViewModel(APIClientService<PhieuThuTien> phieuthutienservice,
-            APIClientService<Xe> carservice,
-            APIClientService<PhieuSuaChua> phieusuachuaservce,
-            APIClientService<ChiTietPhieuSuaChua> noidungphieusuachuaservice,
-            APIClientService<HieuXe> hieuXeService)
+        public BaoCaoDoanSoPageViewModel(
+        APIClientService<PhieuThuTien> phieuthutienservice,
+        APIClientService<Xe> carservice,
+        APIClientService<PhieuSuaChua> phieusuachuaservce,
+        APIClientService<ChiTietPhieuSuaChua> noidungphieusuachuaservice,
+        APIClientService<HieuXe> hieuXeService)
         {
-            for (int i = 1; i <= 12; i++) months.Add(i);
             _phieuthutienservice = phieuthutienservice;
             _carservice = carservice;
             _phieusuachuaservice = phieusuachuaservce;
             _noidungphieusuachuaservice = noidungphieusuachuaservice;
             _hieuXeService = hieuXeService;
+
+            // Khởi gán danh sách tháng
+            Months = Enumerable.Range(1, 12).ToList();
+
+            // chọn mặc định
+            SelectedMonth = DateTime.Now.Month;
+            SelectedYear = DateTime.Now.Year;
+
+            // CHỈ gọi 1 lần, không gọi GenerateBaoCao ở đây
             _ = LoadAsync();
-            foreach (var item in listphieusuachua) years.Add(item.NgaySuaChua.Year);
-            
-            tongDoanhSo = listphieusuachua.Sum(u => u.TongTien);
-            _ = GenerateBaoCao();
         }
 
         public async Task LoadAsync()
         {
-            listphieusuachua = await _phieusuachuaservice.GetAll();
-            SortedSet<int> tmp= new SortedSet<int>();
-            foreach (var item in listphieusuachua)
-            {
-                tmp.Add(item.NgaySuaChua.Year);
-            }
-            Years = new ObservableCollection<int>(tmp);
-            SelectedMonth = DateTime.Now.Month;
-            SelectedYear = DateTime.UtcNow.Year;
-            await GenerateBaoCao(); 
+            listphieusuachua = await _phieusuachuaservice.GetAll() ?? new List<PhieuSuaChua>();
+
+            Years = new ObservableCollection<int>(
+                        listphieusuachua
+                        .Select(p => p.NgaySuaChua.Year)
+                        .Distinct()
+                        .OrderBy(y => y));
+
+            OnPropertyChanged(nameof(Years));
+
+            // Gán sau khi Years đã được tạo → đảm bảo SelectedYear nằm trong danh sách
+            if (Years.Contains(DateTime.Now.Year))
+                SelectedYear = DateTime.Now.Year;
+            else
+                SelectedYear = Years.FirstOrDefault();  // fallback
+
+            TongDoanhSo = listphieusuachua.Sum(p => p.TongTien);
+
+            await GenerateBaoCao();
         }
+
+
         private async Task GenerateBaoCao()
         {
-            BaoCaoList.Clear();
-            Dictionary<string, double> tmplist= new Dictionary<string, double>();
-            var localListPhieuSuaChua = new List<PhieuSuaChua>(listphieusuachua);
-            foreach (var item in localListPhieuSuaChua)
-            {
-                var car = await _carservice.GetByID(item.XeId);
-                if (car != null)
-                {
-                    HieuXe hieuXe = await _hieuXeService.GetByID(car.HieuXeId);
-                    if (!tmplist.ContainsKey(hieuXe.TenHieuXe))
-                    {
-                        tmplist[hieuXe.TenHieuXe] = item.TongTien;
-                    }
-                    else
-                    {
-                        tmplist[hieuXe.TenHieuXe] += item.TongTien;
-                    }
-                }
-            }
-            Dictionary<Guid, int> id_lan = new();
-            foreach (var item in listphieusuachua)
-            {
-                if (!id_lan.ContainsKey(item.XeId))
-                {
-                    id_lan[item.XeId] = 1; 
-                }
-                else
-                {
-                    id_lan[item.XeId] ++; 
-                }
-            }
-            var listHieuXe = await _hieuXeService.GetAll();
-            foreach (var item in tmplist)
-            {
-                int sum = 0;
-                var listcar = await _carservice.GetAll(); 
-                
-                var hieuXe = listHieuXe.FirstOrDefault(h => h.TenHieuXe == item.Key);
-                foreach (var i in id_lan)
-                {
-                    var car = listcar.FirstOrDefault(c => c.Id == i.Key);
-                    if (car != null && car.HieuXeId == hieuXe.Id)
-                    {
-                        sum += i.Value;
-                    }
-                }
+            // ---------- 1. Gom doanh thu theo hiệu xe (chuẩn hoá Trim + ToUpper) ----------
+            var revenueByBrand = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
+            var repairsCount = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
 
+            foreach (var psc in listphieusuachua)
+            {
+                var xe = await _carservice.GetByID(psc.XeId);
+                var hieuXe = xe is null ? null : await _hieuXeService.GetByID(xe.HieuXeId);
+                if (hieuXe == null) continue;
+
+                string brand = hieuXe.TenHieuXe?.Trim() ?? "Không rõ";
+
+                // cộng doanh thu
+                revenueByBrand.TryAdd(brand, 0);
+                revenueByBrand[brand] += psc.TongTien;
+
+                // đếm lượt sửa
+                repairsCount.TryAdd(brand, 0);
+                repairsCount[brand] += 1;
+            }
+
+            // ---------- 2. Đổ vào ObservableCollection (xóa – nạp lại) ----------
+            BaoCaoList.Clear();
+            foreach (var kv in revenueByBrand.OrderByDescending(k => k.Value))
+            {
                 BaoCaoList.Add(new BaoCaoDoanhThuVM
                 {
-                    HieuXe = item.Key,
-                    ThanhTien = item.Value,
-                    SoLuotSua = sum,
-                    TiLe = Math.Round(item.Value / TongDoanhSo * 100, 2)
+                    HieuXe = kv.Key,
+                    ThanhTien = kv.Value,
+                    SoLuotSua = repairsCount[kv.Key],
+                    TiLe = Math.Round(kv.Value / (TongDoanhSo == 0 ? 1 : TongDoanhSo) * 100, 2)
                 });
             }
-            UpdateChart(); 
+
+            UpdateChart();
         }
+
 
         private void UpdateChart()
         {
@@ -170,16 +161,6 @@ namespace GarageManagement.ViewModels
                 TongDoanhSo = listphieusuachua.Sum(u => u.TongTien);
             }
             await GenerateBaoCao();
-        }
-
-      
-        [RelayCommand]
-        private async Task GoBack()
-        {
-            //var json = await SecureStorage.GetAsync(STORAGE_KEY);
-            //if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
-            //var currentaccount=JsonSerializer.Deserialize<taiKhoanSession>(json);
-            //if (currentaccount.Role=="Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
         }
 
     }

@@ -48,7 +48,7 @@
                             <Entry Placeholder="Lọc CCCD"
                    Text="{Binding CccdFilter, Mode=TwoWay}"
                    FontFamily="OpenSans-Regular"
-                   BackgroundColor="White"
+                   BackgroundColor="{DynamicResource BackgroundColor}"
                    HeightRequest="42"
                    WidthRequest="200" />
                         </HorizontalStackLayout>
@@ -62,7 +62,7 @@
                             <Entry Placeholder="Lọc Họ tên"
                    Text="{Binding NameFilter, Mode=TwoWay}"
                    FontFamily="OpenSans-Regular"
-                   BackgroundColor="White"
+                   BackgroundColor="{DynamicResource BackgroundColor}"
                    HeightRequest="42"
                    WidthRequest="200" />
                         </HorizontalStackLayout>
@@ -76,7 +76,7 @@
                             <Entry Placeholder="Lọc SĐT"
                    Text="{Binding PhoneFilter, Mode=TwoWay}"
                    FontFamily="OpenSans-Regular"
-                   BackgroundColor="White"
+                   BackgroundColor="{DynamicResource BackgroundColor}"
                    HeightRequest="42"
                    WidthRequest="170" />
                         </HorizontalStackLayout>
@@ -367,10 +367,11 @@ FontFamily="OpenSans-SemiBold"/>
             FontSize="16"
             FontAttributes="Bold"
             TextColor="{DynamicResource TextColor}" />
-                            <Entry
-            Text="{Binding SelectedNhanVien.GioiTinh, Mode=TwoWay}"
-            FontSize="16"
-            TextColor="{DynamicResource TextColor}" />
+                            <Picker ItemsSource="{Binding ListGioiTinh}"
+        SelectedItem="{Binding SelectedNhanVien.GioiTinh}"
+        FontSize="16"
+        TextColor="{DynamicResource TextColor}"
+        BackgroundColor="White"/>
                         </VerticalStackLayout>
 
                         <!-- Địa chỉ -->

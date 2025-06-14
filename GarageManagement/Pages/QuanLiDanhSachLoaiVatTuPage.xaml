@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GarageManagement.Pages.QuanLiDanhSachLoaiVatTuPage"
              xmlns:service="clr-namespace:GarageManagement.Services"
+             x:Name="RootContentView"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
     <ContentView.Resources>
@@ -24,6 +25,52 @@
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalOptions="Start"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!--   THÊM HAI HÀNG ENTRY/PICKER NGAY TRÊN TIÊU ĐỀ CỘT   -->
+            <Frame Padding="20" BackgroundColor="{DynamicResource CardBackgroundColor}">
+                <VerticalStackLayout Spacing="12">
+                    <!-- dòng 1: Tên -->
+                    <HorizontalStackLayout Spacing="12">
+                        <Label Text="Tìm tên:" WidthRequest="90"
+                VerticalOptions="Center"
+                TextColor="{DynamicResource TextColor}"/>
+                        <Entry Placeholder="nhập tên vật tư"
+                Text="{Binding NameFilter, Mode=TwoWay}"
+                BackgroundColor="{DynamicResource BackgroundColor}"
+                WidthRequest="220"/>
+                    </HorizontalStackLayout>
+
+                    <!-- dòng 2: Giá & Số lượng -->
+                    <HorizontalStackLayout Spacing="12">
+
+                        <Label Text="Giá từ:" WidthRequest="70"
+                VerticalOptions="Center"
+                TextColor="{DynamicResource TextColor}"/>
+                        <Entry WidthRequest="100" Keyboard="Numeric"
+                Text="{Binding PriceFromText, Mode=TwoWay}"
+                BackgroundColor="{DynamicResource BackgroundColor}"/>
+
+                        <Label Text="đến" VerticalOptions="Center"
+                TextColor="{DynamicResource TextColor}"/>
+                        <Entry WidthRequest="100" Keyboard="Numeric"
+                Text="{Binding PriceToText, Mode=TwoWay}"
+                BackgroundColor="{DynamicResource BackgroundColor}"/>
+
+                        <Label Text="SL từ:" WidthRequest="70"
+                VerticalOptions="Center"
+                TextColor="{DynamicResource TextColor}" Margin="20,0,0,0"/>
+                        <Entry WidthRequest="80" Keyboard="Numeric"
+                Text="{Binding QuantityFromText, Mode=TwoWay}"
+                BackgroundColor="{DynamicResource BackgroundColor}"/>
+
+                        <Label Text="đến" VerticalOptions="Center"
+                TextColor="{DynamicResource TextColor}"/>
+                        <Entry WidthRequest="80" Keyboard="Numeric"
+                Text="{Binding QuantityToText, Mode=TwoWay}"
+                BackgroundColor="{DynamicResource BackgroundColor}"/>
+                    </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
 
@@ -53,8 +100,10 @@
                     </VisualStateManager.VisualStateGroups>
                 </Button>
 
-                <Button Text="Sửa"
-                        Command="{Binding EditCommand}"
+                
+
+                <Button Text="{Binding IsDeleteMode, Converter={StaticResource DeleteModeTextConverter}}"
+                        Command="{Binding ToggleDeleteModeCommand}"
                         BackgroundColor="#3B82F6"
                         TextColor="White"
                         HeightRequest="48"
@@ -65,7 +114,7 @@
                             <VisualStateGroup x:Name="CommonStates">
                                 <VisualState x:Name="Normal">
                                     <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
+                                        <Setter Property="BackgroundColor" Value="#3B82F6"/>
                                     </VisualState.Setters>
                                 </VisualState>
                                 <VisualState x:Name="Pressed">
@@ -78,7 +127,7 @@
                     </VisualStateManager.VisualStateGroups>
                 </Button>
 
-                <Button Text="Xoá"
+                <Button Text="Xóa các mục đã chọn"
                         Command="{Binding DeleteCommand}"
                         IsVisible="{Binding IsDeleteMode}"
                         BackgroundColor="#EF4444"
@@ -103,31 +152,6 @@
                         </VisualStateGroupList>
                     </VisualStateManager.VisualStateGroups>
                 </Button>
-
-                <Button Text="{Binding IsDeleteMode, Converter={StaticResource DeleteModeTextConverter}}"
-                        Command="{Binding ToggleDeleteModeCommand}"
-                        BackgroundColor="#3B82F6"
-                        TextColor="White"
-                        HeightRequest="48"
-                        FontAttributes="Bold"
-                        FontFamily="OpenSans-SemiBold">
-                    <VisualStateManager.VisualStateGroups>
-                        <VisualStateGroupList>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#2563EB" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateGroupList>
-                    </VisualStateManager.VisualStateGroups>
-                </Button>
             </HorizontalStackLayout>
 
             <Frame HasShadow="True"
@@ -139,6 +163,7 @@
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
+                       
                     </Grid.ColumnDefinitions>
                     <Label Text="ID" Grid.Column="0" 
                            FontAttributes="Bold" 
@@ -158,16 +183,17 @@
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="Hành động" Grid.Column="3" 
+                    <Label Text="Đơn Giá" Grid.Column="3" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
+                    
                 </Grid>
             </Frame>
 
-            <CollectionView ItemsSource="{Binding ListVatTu}">
+            <CollectionView ItemsSource="{Binding ListVatTuPhuTung}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame HasShadow="True"
@@ -180,18 +206,20 @@
                                     <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
+                                    
                                 </Grid.ColumnDefinitions>
                                 <StackLayout Orientation="Horizontal" Grid.Column="0">
                                     <CheckBox IsChecked="{Binding IsSelected}" 
-                                              IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentView}}, Path=BindingContext.IsDeleteMode}" />
-                                    <Label Text="{Binding Id}" 
+                                              IsVisible="{Binding Path=BindingContext.IsDeleteMode,
+                                      Source={x:Reference RootContentView}}" />
+                                    <Label Text="{Binding VatTuPhuTungId}" 
                                            FontFamily="OpenSans-Regular"
                                            TextColor="{DynamicResource TextColor}"
                                            HorizontalTextAlignment="Center"
                                            FontSize="13"
                                            Margin="5"/>
                                 </StackLayout>
-                                <Label Text="{Binding TenVatTu}" Grid.Column="1" 
+                                <Label Text="{Binding TenLoaiVatTuPhuTung}" Grid.Column="1" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
                                        HorizontalTextAlignment="Center"
@@ -203,63 +231,23 @@
                                        HorizontalTextAlignment="Center"
                                        FontSize="13"
                                        Margin="5"/>
-                                <Button Text="Chi tiết"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentView}}, Path=BindingContext.GoToChiTietVatTuPageCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        Grid.Column="3"
-                                        BackgroundColor="#3B82F6"
-                                        TextColor="White"
-                                        HeightRequest="40"
-                                        FontFamily="OpenSans-SemiBold">
-                                    <VisualStateManager.VisualStateGroups>
-                                        <VisualStateGroupList>
-                                            <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#3B82F6" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                                <VisualState x:Name="Pressed">
-                                                    <VisualState.Setters>
-                                                        <Setter Property="BackgroundColor" Value="#2563EB" />
-                                                    </VisualState.Setters>
-                                                </VisualState>
-                                            </VisualStateGroup>
-                                        </VisualStateGroupList>
-                                    </VisualStateManager.VisualStateGroups>
-                                </Button>
+                                <Label Text="{Binding DonGiaBanLoaiVatTuPhuTung, StringFormat='{0:N2}'}" Grid.Column="3" 
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       FontSize="13"
+                                       Margin="5"/>
+                                
                             </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
             </CollectionView>
 
-            <Button Text="QUAY LẠI"
-                    Command="{Binding GoBackCommand}"
-                    BackgroundColor="#10B981"
-                    TextColor="White"
-                    HeightRequest="48"
-                    FontAttributes="Bold"
-                    FontFamily="OpenSans-SemiBold"
-                    HorizontalOptions="Center"
-                    Margin="0,20,0,0">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroupList>
-                        <VisualStateGroup x:Name="CommonStates">
-                            <VisualState x:Name="Normal">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#10B981" />
-                                </VisualState.Setters>
-                            </VisualState>
-                            <VisualState x:Name="Pressed">
-                                <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="#059669" />
-                                </VisualState.Setters>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </VisualStateManager.VisualStateGroups>
-            </Button>
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentView>
