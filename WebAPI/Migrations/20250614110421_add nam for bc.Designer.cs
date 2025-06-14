@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Data;
 
@@ -11,9 +12,11 @@ using WebAPI.Data;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250614110421_add nam for bc")]
+    partial class addnamforbc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,9 +50,6 @@ namespace WebAPI.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Nam")
-                        .HasColumnType("int");
 
                     b.Property<int>("Thang")
                         .HasColumnType("int");
@@ -320,12 +320,12 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a06c587f-d9da-406c-b4b1-4f129c95a606"),
+                            Id = new Guid("d9841466-1801-4dcc-8293-ceb3f6de1920"),
                             TenNhom = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("6c1fd300-f2d6-434e-8a27-e7faacb4c6c3"),
+                            Id = new Guid("c96caccc-2b52-4a28-b2b5-72e84f4e73a8"),
                             TenNhom = "User"
                         });
                 });
@@ -469,18 +469,18 @@ namespace WebAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5d7b19b1-c904-41a1-b6ae-7075f6a13632"),
+                            Id = new Guid("02c78bcb-4a1b-4f71-91e1-afd1e69c3322"),
                             MatKhau = "admin123",
                             NgayCap = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NhomNguoiDungId = new Guid("a06c587f-d9da-406c-b4b1-4f129c95a606"),
+                            NhomNguoiDungId = new Guid("d9841466-1801-4dcc-8293-ceb3f6de1920"),
                             TenDangNhap = "admin"
                         },
                         new
                         {
-                            Id = new Guid("2749dcf3-bdd9-47c1-b512-455c33493008"),
+                            Id = new Guid("98f05182-5448-4423-ba08-fb718cf9b1c8"),
                             MatKhau = "user123",
                             NgayCap = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NhomNguoiDungId = new Guid("6c1fd300-f2d6-434e-8a27-e7faacb4c6c3"),
+                            NhomNguoiDungId = new Guid("c96caccc-2b52-4a28-b2b5-72e84f4e73a8"),
                             TenDangNhap = "user"
                         });
                 });

@@ -129,7 +129,6 @@ namespace GarageManagement.ViewModels
         private readonly ThemLoaiTienCongPage _themLoaiTienCongPage;
         private readonly ThemLoaiVatTuPhuTungPage _themLoaiVatTuPhuTungPage;
         private readonly BaoCaoDoanhSoListPage _baoCaoDoanhSoListPage;
-
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
             LapPhieuNhapPage taoPhieuNhap,
@@ -329,7 +328,7 @@ namespace GarageManagement.ViewModels
                 }
             }
             
-            BaoCaoDoanhSoListActive = parameter == "BaoCaoDoanhSoListPage";
+            BaoCaoDoanhSoListActive = parameter == "BaoCaoDoanhSoList";
             if (BaoCaoDoanhSoListActive == true)
             {
                 if (_baoCaoDoanhSoListPage.BindingContext is BaoCaoDoanhSoListPageViewModel viewModel)
