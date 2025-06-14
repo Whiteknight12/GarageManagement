@@ -68,6 +68,12 @@ namespace GarageManagement.ViewModels
         private bool quanLiPhieuTiepNhanActive = false;
 
         [ObservableProperty]
+        private bool quanLiLichSuActive = false;
+
+        [ObservableProperty]
+        private bool danhSachXeActive = false;
+
+        [ObservableProperty]
         private bool isCollapsed;
 
         [ObservableProperty]
@@ -82,6 +88,9 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty]
         private bool quanTriExpanded;
+
+        [ObservableProperty]
+        private bool khachHangExpanded;
 
         [ObservableProperty]
         private bool isRightPaneVisible = false;
@@ -109,6 +118,8 @@ namespace GarageManagement.ViewModels
         private readonly QuanLiPhieuThuTienPage _quanLiPhieuThuTienPage;
         private readonly QuanLiPhieuSuaChuaPage _quanLiPhieuSuaChuaPage;
         private readonly QuanLiPhieuTiepNhanXePage _quanLiPhieuTiepNhanXePage;
+        private readonly DanhSachXeKhachHangPage _danhSachXeKhachHangPage;
+        private readonly LichSuPage _quanLiLichSuPage;
 
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
@@ -130,11 +141,13 @@ namespace GarageManagement.ViewModels
             QuanLiPhieuNhapPage quanLiPhieuNhapPage,
             QuanLiPhieuThuTienPage quanLiPhieuThuTienPage,
             QuanLiPhieuSuaChuaPage quanLiPhieuSuaChuaPage,
-            QuanLiPhieuTiepNhanXePage quanLiPhieuTiepNhanXePage)
+            QuanLiPhieuTiepNhanXePage quanLiPhieuTiepNhanXePage,
+            DanhSachXeKhachHangPage danhSachXeKhachHangPage,
+            LichSuPage quanLiLichSuPage)
         {
             _viewModel = viewModel;
             currentPageContent = new NhanSuMainPage(_viewModel);
-        _tiepNhanXe = tiepNhanXe;
+            _tiepNhanXe = tiepNhanXe;
             _taoPhieuNhap = taoPhieuNhap;
             _taoPhieuSuaChua = taoPhieuSuaChua;
             _quanLiDanhSachHieuXe = quanLiDanhSachHieuXe;
@@ -158,6 +171,8 @@ namespace GarageManagement.ViewModels
             _quanLiPhieuThuTienPage = quanLiPhieuThuTienPage;
             _quanLiPhieuSuaChuaPage = quanLiPhieuSuaChuaPage;
             _quanLiPhieuTiepNhanXePage = quanLiPhieuTiepNhanXePage;
+            _danhSachXeKhachHangPage = danhSachXeKhachHangPage;
+            _quanLiLichSuPage = quanLiLichSuPage;
             _ = LoadUserAsync();
         }
 
@@ -268,6 +283,18 @@ namespace GarageManagement.ViewModels
                 _ = _quanLiPhieuTiepNhanXePage._viewModel.LoadAsync();
             }
 
+            DanhSachXeActive = parameter == "DanhSachXe";
+            if (DanhSachXeActive == true)
+            {
+                _ = _danhSachXeKhachHangPage._viewModel.LoadAsync();
+            }
+
+            QuanLiLichSuActive = parameter == "QuanLiLichSu";
+            if (QuanLiLichSuActive == true)
+            {
+                _= _quanLiLichSuPage._viewModel.LoadAsync();
+            }
+
             CurrentPageContent = parameter switch
             {
                 "Home" => new NhanSuMainPage(_viewModel),
@@ -288,6 +315,8 @@ namespace GarageManagement.ViewModels
                 "QuanLiPhieuThuTien" => _quanLiPhieuThuTienPage,
                 "QuanLiPhieuSuaChua" => _quanLiPhieuSuaChuaPage,
                 "QuanLiPhieuTiepNhan" => _quanLiPhieuTiepNhanXePage,
+                "DanhSachXe" => _danhSachXeKhachHangPage,
+                "QuanLiLichSu" => _quanLiLichSuPage,
                 _ => new NhanSuMainPage(_viewModel)
             };
 
@@ -305,6 +334,7 @@ namespace GarageManagement.ViewModels
                     {
                         TaoLapExpanded = false;
                         QuanTriExpanded = false;
+                        KhachHangExpanded = false;
                     }
                     break;
                 case "TaoLap":
@@ -313,6 +343,7 @@ namespace GarageManagement.ViewModels
                     {
                         QuanLyExpanded = false;
                         QuanTriExpanded = false;
+                        KhachHangExpanded = false;
                     }
                     break;
                 case "QuanTri":
@@ -321,6 +352,16 @@ namespace GarageManagement.ViewModels
                     {
                         QuanLyExpanded = false;
                         TaoLapExpanded = false;
+                        KhachHangExpanded = false;
+                    }
+                    break;
+                case "KhachHang":
+                    KhachHangExpanded = !KhachHangExpanded;
+                    if (KhachHangExpanded)
+                    {
+                        QuanLyExpanded = false;
+                        TaoLapExpanded = false;
+                        QuanTriExpanded = false;
                     }
                     break;
             }
@@ -353,6 +394,5 @@ namespace GarageManagement.ViewModels
             IsRightPaneVisible = false;
             RightPaneContent = null;
         }
-
     }
 }

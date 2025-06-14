@@ -101,6 +101,7 @@ namespace GarageManagement.ViewModels
         public async Task LoadAsync()
         {
             var obj = await _carservice.GetByID(CarId);
+            if (obj is null) return;
             var hieuXe = await _hieuxeservice.GetByID(obj.HieuXeId);
             var khachHang = await _khachHangService.GetByID(obj.KhachHangId);
             Name = obj.Ten;

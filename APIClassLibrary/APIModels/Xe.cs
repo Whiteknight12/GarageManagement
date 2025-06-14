@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace APIClassLibrary.APIModels
+﻿namespace APIClassLibrary.APIModels
 {
     public class Xe
     {
@@ -17,5 +11,12 @@ namespace APIClassLibrary.APIModels
         public bool? KhaDung { get; set; }
         public double? TienNo { get; set; }
         public string? ImageUrl { get; set; }
+
+        //these fields are used for UI purposes only
+        //we should separate them from the model, can use DTOs or ViewModels
+        public string? TenHieuXe { get; set; }
+        public string? TinhTrang { get; set; }  
+        public List<PhieuSuaChua>? LichSuSuaChuaList { get; set; } = new List<PhieuSuaChua>();
+        public List<PhieuTiepNhan>? LichSuTiepNhanList { get; set; } = new List<PhieuTiepNhan>();
     }
 }

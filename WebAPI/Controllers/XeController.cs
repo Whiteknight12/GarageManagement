@@ -53,6 +53,14 @@ namespace WebAPI.Controllers
             return NotFound();
         }
 
+        [HttpGet("customer-id/{customerId}")]
+        public async Task<ActionResult<IEnumerable<Xe>>> GetListByCustomerId(Guid customerId)
+        {
+            var xes = await _applicationDbContext.xes.Where(u => u.KhachHangId == customerId).ToListAsync();
+            if (xes is not null) return Ok(xes);
+            return NotFound();
+        }
+
         [HttpGet("Email/{email}")]
         public async Task<ActionResult<IEnumerable<Xe>>> GetListByEmail(string email)
         {

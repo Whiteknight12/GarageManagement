@@ -33,6 +33,7 @@ namespace WebAPI.Data
         public DbSet<ChiTietBaoCaoTon> chiTietBaoCaoTons { get; set; }
         public DbSet<NoiDungSuaChua> noiDungSuaChuas { get; set; }
         public DbSet<VTPTChiTietPhieuSuaChua> vtptChiTietPhieuSuaChuas { get; set; }
+        public DbSet<LichSu> lichSus { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

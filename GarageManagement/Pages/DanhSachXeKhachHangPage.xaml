@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.DanhSachXeKhachHangPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:service="clr-namespace:GarageManagement.Services"
+             BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <service:BoolToArrowConverter x:Key="BoolToArrowConverter" />
+            <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="20" />
+                <On Platform="iOS" Value="20" />
+                <On Platform="Windows" Value="20" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
+
+            <Frame HasShadow="True"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}"
+                   Padding="20"
+                   CornerRadius="{StaticResource CornerRadiusHandler}">
+                <Label Text="DANH SÁCH XE CỦA BẠN" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       FontFamily="OpenSans-SemiBold"
+                       TextColor="{DynamicResource TextColor}"
+                       HorizontalOptions="Start"/>
+            </Frame>
+
+            <Frame HasShadow="True"
+               BackgroundColor="{DynamicResource CardBackgroundColor}"
+               Padding="15"
+               CornerRadius="{StaticResource CornerRadiusHandler}">
+                <Grid ColumnSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*" />
+                        <ColumnDefinition Width="1.5*" />
+                        <ColumnDefinition Width="1.5*" />
+                        <ColumnDefinition Width="1.5*" />
+                        <ColumnDefinition Width="1.5*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Tên Xe" Grid.Column="0"
+                       FontAttributes="Bold"
+                       FontSize="13"
+                       TextColor="{DynamicResource TextColor}"
+                       HorizontalTextAlignment="Center" />
+
+                    <Label Text="Hiệu Xe" Grid.Column="1"
+                       FontAttributes="Bold"
+                       FontSize="13"
+                       TextColor="{DynamicResource TextColor}"
+                       HorizontalTextAlignment="Center" />
+
+                    <Label Text="Biển Số" Grid.Column="2"
+                       FontAttributes="Bold"
+                       FontSize="13"
+                       TextColor="{DynamicResource TextColor}"
+                       HorizontalTextAlignment="Center" />
+
+                    <Label Text="Tình Trạng" Grid.Column="3"
+                       FontAttributes="Bold"
+                       FontSize="13"
+                       TextColor="{DynamicResource TextColor}"
+                       HorizontalTextAlignment="Center" />
+
+                    <Label Text="Tiền nợ xe" Grid.Column="4"
+                       FontAttributes="Bold"
+                       FontSize="13"
+                       TextColor="{DynamicResource TextColor}"
+                       HorizontalTextAlignment="Center" />
+                </Grid>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding XeCuaToiList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
+                                   CornerRadius="{StaticResource CornerRadiusHandler}"
+                                   Padding="10"
+                                   Margin="5"
+                                   HasShadow="True">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ToggleXeSectionCommand}" CommandParameter="{Binding}" />
+                                </Frame.GestureRecognizers>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                        <ColumnDefinition Width="1.5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label TextColor="{DynamicResource TextColor}" Text="{Binding Xe.Ten}" Grid.Column="0" HorizontalTextAlignment="Center"/>
+                                    <Label TextColor="{DynamicResource TextColor}" Text="{Binding Xe.TenHieuXe}" Grid.Column="1" HorizontalTextAlignment="Center"/>
+                                    <Label TextColor="{DynamicResource TextColor}" Text="{Binding Xe.BienSo}" Grid.Column="2" HorizontalTextAlignment="Center"/>
+                                    <Label TextColor="{DynamicResource TextColor}" Text="{Binding Xe.TinhTrang}" Grid.Column="3" HorizontalTextAlignment="Center"/>
+                                    <Label TextColor="{DynamicResource TextColor}" Text="{Binding Xe.TienNo, StringFormat='{0:N0} đ'}" Grid.Column="4" HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding IsExpanded, Converter={StaticResource BoolToArrowConverter}}"
+                                       Grid.ColumnSpan="5"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="Center"
+                                       FontSize="16"
+                                       TextColor="{DynamicResource TextColor}" />
+                                </Grid>
+                            </Frame>
+
+                            <VerticalStackLayout Spacing="10" IsVisible="{Binding IsExpanded}">
+                                <!-- Lịch sử tiếp nhận -->
+                                <Frame BackgroundColor="#2a557f"
+                                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                                       Padding="10"
+                                       Margin="5"
+                                       MaximumWidthRequest="900"
+                                       HasShadow="True">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ToggleSectionCommand}" CommandParameter="LichSuTiepNhan" />
+                                    </Frame.GestureRecognizers>
+                                    <HorizontalStackLayout>
+                                        <Label Text="Lịch sử tiếp nhận"
+                                               TextColor="White"
+                                               FontAttributes="Bold"
+                                               FontSize="15"
+                                               HorizontalOptions="Start" />
+                                        <Label Text="{Binding LichSuTiepNhanExpanded, Converter={StaticResource BoolToArrowConverter}}"
+                                               VerticalOptions="Center"
+                                               Margin="5, 0, 0, 0"
+                                               TextColor="White"/>
+                                    </HorizontalStackLayout>
+                                </Frame>
+
+                                <VerticalStackLayout MaximumWidthRequest="850" Spacing="5" IsVisible="{Binding LichSuTiepNhanExpanded}">
+                                    <CollectionView ItemsSource="{Binding LichSuTiepNhanList}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Frame Padding="10" Margin="5" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="12">
+                                                    <VerticalStackLayout>
+                                                        <Label TextColor="{DynamicResource TextColor}" Text="{Binding Id, StringFormat='Phiếu tiếp nhận: {0}'}" FontSize="13" />
+                                                        <Label TextColor="{DynamicResource TextColor}" Text="{Binding NgayTiepNhan, StringFormat='Ngày tiếp nhận: {0:dd/MM/yyyy}'}" FontSize="13" />
+                                                        <Label TextColor="{DynamicResource TextColor}" Text="{Binding TinhTrang, StringFormat='Tình trạng: {0}'}" FontSize="13" />
+                                                    </VerticalStackLayout>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+
+                                <!-- Lịch sử sửa chữa -->
+                                <Frame BackgroundColor="#2a557f"
+                                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                                       Padding="10"
+                                       Margin="5"
+                                       MaximumWidthRequest="900"
+                                       HasShadow="True">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ToggleSectionCommand}" CommandParameter="LichSuSuaChua" />
+                                    </Frame.GestureRecognizers>
+                                    <HorizontalStackLayout>
+                                        <Label Text="Lịch sử sửa chữa"
+                                               TextColor="White"
+                                               FontAttributes="Bold"
+                                               FontSize="15"
+                                               HorizontalOptions="Start" />
+                                        <Label Text="{Binding LichSuSuaChuaExpanded, Converter={StaticResource BoolToArrowConverter}}"
+                                               VerticalOptions="Center"
+                                               Margin="5, 0, 0, 0"
+                                               TextColor="White" />
+                                    </HorizontalStackLayout>
+                                </Frame>
+
+                                <VerticalStackLayout MaximumWidthRequest="850" Spacing="5" IsVisible="{Binding LichSuSuaChuaExpanded}">
+                                    <CollectionView ItemsSource="{Binding LichSuSuaChuaList}">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Frame Padding="10" Margin="5" BackgroundColor="{DynamicResource CardBackgroundColor}" CornerRadius="12">
+                                                    <VerticalStackLayout>
+                                                        <Label TextColor="{DynamicResource TextColor}" Text="{Binding Id, StringFormat='Phiếu sữa chữa: {0}'}" FontSize="13" />
+                                                        <Label TextColor="{DynamicResource TextColor}" Text="{Binding NgaySuaChua, StringFormat='Ngày: {0:dd/MM/yyyy}'}" FontSize="13" />
+                                                        <Label TextColor="{DynamicResource TextColor}" Text="{Binding TongTien, StringFormat='Tổng tiền: {0:N0} đ'}" FontSize="13" />
+                                                    </VerticalStackLayout>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentView>

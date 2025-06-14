@@ -29,7 +29,7 @@ namespace GarageManagement.ViewModels
             if (isauthenticated && _authenticationservice.CurrentRole is not null)
             {
                 var toast=Toast.Make("Đăng nhập thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
-                if (_authenticationservice.CurrentRole=="User") await Shell.Current.GoToAsync("//MainPage");
+                await Shell.Current.GoToAsync("//MainPage");
                 await toast.Show();
             }
             else

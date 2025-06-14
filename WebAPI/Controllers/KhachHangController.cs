@@ -42,6 +42,14 @@ namespace WebAPI.Controllers
             return NotFound();
         }
 
+        [HttpGet("account-id/{accountId}")]
+        public async Task<ActionResult<KhachHang>> GetByAccountId(Guid accountId)
+        {
+            var result = await _applicationDbContext.khachHangs.FirstOrDefaultAsync(u => u.TaiKhoanId == accountId);
+            if (result is not null) return Ok(result);
+            return NotFound();
+        }
+
         [HttpGet]
         public override async Task<ActionResult<IEnumerable<KhachHang>>> GetAll()
         {

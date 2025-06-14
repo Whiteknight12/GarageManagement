@@ -17,6 +17,7 @@ namespace WebAPI.Controllers
         {
             _db = applicationDbContext;
         }
+
         [HttpGet]
         public override async Task<ActionResult<IEnumerable<NhanVien>>> GetAll()
         {

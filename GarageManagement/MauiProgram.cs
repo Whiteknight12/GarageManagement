@@ -55,6 +55,7 @@ public static class MauiProgram
         builder.Services.AddAPIClientService<ChiTietBaoCaoTon>(x => x.BaseAddress = baseaddress, $"{nameof(ChiTietBaoCaoTon)}");
         builder.Services.AddAPIClientService<NoiDungSuaChua>(x=>x.BaseAddress=baseaddress, nameof(NoiDungSuaChua));
         builder.Services.AddAPIClientService<VTPTChiTietPhieuSuaChua>(x => x.BaseAddress = baseaddress, $"{nameof(VTPTChiTietPhieuSuaChua)}");
+        builder.Services.AddAPIClientService<LichSu>(x=>x.BaseAddress = baseaddress, $"{nameof(LichSu)}");
 
         builder.Services.AddScoped<AuthenticationService>(provider=>
 		{
@@ -91,6 +92,9 @@ public static class MauiProgram
         builder.Services.AddTransient<ChiTietPhieuNhapVatTuPage>();
         builder.Services.AddTransient<ChiTietPhieuSuaChuaPage>();   
         builder.Services.AddTransient<ChiTietNhanVienPage>();
+        builder.Services.AddTransient<NhanSuMainPage>();
+        builder.Services.AddTransient<DanhSachXeKhachHangPage>();
+        builder.Services.AddTransient<LichSuPage>();
 
         builder.Services.AddTransient<TaoPhieuSuaChuaPageViewModel>();
 		builder.Services.AddTransient<ThuTienPageViewModel>();
@@ -120,6 +124,8 @@ public static class MauiProgram
         builder.Services.AddTransient<ChiTietPhieuNhapVatTuPageViewModel>();
         builder.Services.AddTransient<ChiTietPhieuSuaChuaPageViewModel>();
         builder.Services.AddTransient<ChiTietNhanVienPageViewModel>(); 
+        builder.Services.AddTransient<DanhSachXeKhachHangPageViewModel>();
+        builder.Services.AddTransient<LichSuPageViewModel>();
 
         builder.Services.AddLogging(logging =>
         {
