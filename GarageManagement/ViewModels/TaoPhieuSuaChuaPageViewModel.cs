@@ -21,8 +21,6 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<NoiDungSuaChua> _noidungsuachuaService;
         private readonly APIClientService<VTPTChiTietPhieuSuaChua> _vtptChiTietPhieuSuaChuaService;
 
-        public delegate void OnPhieuSuaChuaAddedDelegate(PhieuSuaChua phieuSuaChua);
-
         private readonly APIClientService<ThamSo> _thamSoService;
         private readonly APIClientService<PhieuTiepNhan> _phieuTiepNhanService;
         public delegate void OnPhieuSuaChuaAddedDelegate(PhieuSuaChua phieuSuaChua);

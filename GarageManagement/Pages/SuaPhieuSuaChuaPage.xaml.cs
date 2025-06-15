@@ -13,22 +13,8 @@ public partial class SuaPhieuSuaChuaPage : ContentView
 		InitializeComponent();
 		_viewModel = viewModel;
 		BindingContext = _viewModel;
-        Task.Run(async () =>
-        {
-            await _viewModel.LoadAsync();
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                // Lấy converter từ Resources và set dữ liệu
-                var vtptConverter = (VatTuPhuTungIdConverter)Resources["VTPTConverter"];
-                var ndConverter = (NoiDungSuaChuaConverter)Resources["NDConverter"];
-
-                vtptConverter.VatTuList = _viewModel.ListVatTuPhuTung;
-                ndConverter.NoiDungList = _viewModel.ListNoiDungSuaChua;
-
-                // Trigger binding update để picker hiển thị đúng
-                OnPropertyChanged(nameof(_viewModel.ListNoiDung));
-            });
-        });
+        VTPTIdConverter.VatTuList = viewModel.ListVatTuPhuTung;
+        NDSCIdConverter.NoiDungList = viewModel.ListNoiDungSuaChua;
     }
 
     private async void OnVTPTChanged(object sender, EventArgs e)

@@ -7,8 +7,8 @@
              BackgroundColor="{DynamicResource BackgroundColor}">
 
     <ContentView.Resources>
-        <service:VatTuPhuTungIdConverter x:Key="VTPTConverter"/>
-        <service:NoiDungSuaChuaConverter x:Key="NDConverter"/>
+        <service:VatTuPhuTungIdConverter x:Key="VTPTConverter" x:Name="VTPTIdConverter"/>
+        <service:NoiDungSuaChuaConverter x:Key="NDConverter" x:Name="NDSCIdConverter"/>
 
         <service:PickerConverterService x:Key="IDConverter"/>
 
