@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using WebAPI.Data;
 using WebAPI.Models;
 
@@ -11,8 +13,10 @@ namespace WebAPI.Controllers
     [ApiController]
     public class PhanQuyenController : BaseController<PhanQuyen>
     {
+        
         public PhanQuyenController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
+           
         }
         [HttpGet]
         public override async Task<ActionResult<IEnumerable<PhanQuyen>>> GetAll()
@@ -43,5 +47,6 @@ namespace WebAPI.Controllers
         {
             return await base.Delete(id);
         }
+        
     }
 }

@@ -46,9 +46,9 @@ namespace APIClassLibrary
         }
         public async Task<T?> GetThroughtSpecialRoute(string route, string parameter="")
         {
-            string url = "";
-            if (parameter.Equals("")) url = $"/api/{_endpoint}/{route}";
-            else url = $"/api/{_endpoint}/{route}/{parameter}";
+            string url = string.IsNullOrEmpty(parameter)
+        ? $"{route}"
+        : $"{route}/{Uri.EscapeDataString(parameter)}";
             var response = await _httpclient.GetAsync(url);
             if (response.IsSuccessStatusCode) return await response.Content.ReadFromJsonAsync<T>();
             return null;
