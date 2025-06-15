@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -8,6 +8,7 @@ using WebAPI.Authorization;
 using WebAPI.Data;
 using WebAPI.Middlewares;
 using WebAPI.Service;
+using Quartz;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,7 +81,32 @@ builder.Services.AddLogging(logging =>
 {
     logging.AddConsole();
     logging.SetMinimumLevel(LogLevel.Information);
-}); 
+});
+//quartz implementation
+builder.Services.AddQuartz(q =>
+{
+    q.UseMicrosoftDependencyInjectionJobFactory();
+
+    // Job Key
+    var jobKey = new JobKey("MonthlyJob");
+
+    // Đăng ký job
+    q.AddJob<MonthlyJobService>(opts => opts.WithIdentity(jobKey));
+
+    // Trigger 1: Đầu tháng lúc 00:00 ngày 1
+    q.AddTrigger(opts => opts
+        .ForJob(jobKey)
+        .WithIdentity("FirstDayTrigger")
+        .WithCronSchedule("0 0 0 1 * ?")); // 00:00 ngày 1 hàng tháng
+
+    // Trigger 2: Cuối tháng lúc 23:59
+    q.AddTrigger(opts => opts
+        .ForJob(jobKey)
+        .WithIdentity("LastDayTrigger")
+        .WithCronSchedule("0 59 23 L * ?")); // 23:59 ngày cuối tháng
+});
+builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

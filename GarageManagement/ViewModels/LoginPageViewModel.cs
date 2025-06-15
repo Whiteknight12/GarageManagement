@@ -28,8 +28,8 @@ namespace GarageManagement.ViewModels
             var isauthenticated = await _authenticationservice.Authentication(username, password);
             if (isauthenticated && _authenticationservice.CurrentRole is not null)
             {
-                var toast=Toast.Make("Đăng nhập thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
-                await Shell.Current.GoToAsync("//MainPage");
+                var toast = Toast.Make("Đăng nhập thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
+                await Shell.Current.GoToAsync($"{nameof(MainPage)}");
                 await toast.Show();
             }
             else

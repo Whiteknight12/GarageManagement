@@ -1,6 +1,8 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,7 +36,9 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private double tongThanhTien;
 
-        public Guid phieuSuaId { get; set; } 
+        public Guid phieuSuaId { get; set; }
+
+        private readonly SuaPhieuSuaChuaPage _suaPhieuSuaChuaPage;
 
         public ChiTietPhieuSuaChuaPageViewModel(APIClientService<ChiTietPhieuSuaChua> chiTietPhieuSuaService, 
             APIClientService<PhieuSuaChua> phieuSuaService,
@@ -42,7 +46,8 @@ namespace GarageManagement.ViewModels
             APIClientService<TienCong> tienCongService,
             APIClientService<Xe> xeService,
             APIClientService<VTPTChiTietPhieuSuaChua> vtChiTietPhieuService,
-            APIClientService<VatTuPhuTung> vatTuService)
+            APIClientService<VatTuPhuTung> vatTuService,
+            SuaPhieuSuaChuaPage suaPhieuSuaChuaPage)
         {
             _chiTietPhieuSuaService = chiTietPhieuSuaService;
             _phieuSuaService = phieuSuaService;
@@ -51,6 +56,7 @@ namespace GarageManagement.ViewModels
             _xeService = xeService;
             _vtChiTietPhieuService = vtChiTietPhieuService;
             _vatTuService = vatTuService;
+            _suaPhieuSuaChuaPage=suaPhieuSuaChuaPage;
             IsEmpty = false;
         }
 
@@ -95,6 +101,28 @@ namespace GarageManagement.ViewModels
                     }
                 }
             }
+        }
+
+        [RelayCommand]
+        private void Edit()
+        {
+            var wrapper = new ContentPage
+            {
+                Content = _suaPhieuSuaChuaPage,
+                Padding = 0
+            };
+            _suaPhieuSuaChuaPage._viewModel.phieuSuaChuaId = phieuSuaId;
+            _=_suaPhieuSuaChuaPage._viewModel.LoadAsync();
+            var newWindow = new Window
+            {
+                Page = wrapper,
+                Title = "Sửa phiếu sữa chữa",
+                MaximumHeight = 800,
+                MaximumWidth = 1000,
+                MinimumHeight = 800,
+                MinimumWidth = 1000
+            };
+            Application.Current.OpenWindow(newWindow);
         }
     }
 }

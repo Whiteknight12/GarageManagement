@@ -140,6 +140,13 @@
                          TextColor="{DynamicResource TextColor}" />
                 </HorizontalStackLayout>
             </Frame>
+
+            <Button
+                Text="Sửa thông tin"
+                BackgroundColor="DarkSeaGreen"
+                TextColor="White"
+                Command="{Binding EditCommand}"/>
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentView>
