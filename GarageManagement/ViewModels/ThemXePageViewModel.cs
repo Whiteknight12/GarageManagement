@@ -121,6 +121,7 @@ namespace GarageManagement.ViewModels
             DiaChi = string.Empty;
             Email = string.Empty;
             OnXeAdded?.Invoke(xe);
+            MessagingCenter.Send(this, "ReloadData");
         }
 
         [RelayCommand]

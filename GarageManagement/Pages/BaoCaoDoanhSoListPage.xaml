@@ -169,7 +169,7 @@
                 </Frame>
 
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="16">
-                    <Button Text="Lưu"
+                    <Button Text="Tạo báo cáo"
                             Command="{Binding SaveCommand}"
                             BackgroundColor="#10B981"
                             WidthRequest="120"

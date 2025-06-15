@@ -154,5 +154,73 @@ namespace GarageManagement.ViewModels
         {
             Shell.Current.GoToAsync("..");
         }
+
+
+        [ObservableProperty] private VatTuPhuTung selectedVatTu;
+        [ObservableProperty] private bool isDetailPaneVisible;
+        [ObservableProperty] private bool isEditing;
+        [ObservableProperty] private bool isNotEditing = true;
+
+        private VatTuPhuTung _originalVatTu;
+
+        partial void OnSelectedVatTuChanged(VatTuPhuTung value)
+        {
+            IsDetailPaneVisible = value != null;
+            IsEditing = false;
+            IsNotEditing = true;
+        }
+
+        [RelayCommand]
+        private async Task ShowDetail(Guid id)
+        {
+            var item = await _vatTuPhuTungService.GetByID(id);
+            SelectedVatTu = item;
+            IsDetailPaneVisible = true; 
+        }
+
+        [RelayCommand]
+        private void CloseDetail()
+        {
+            SelectedVatTu = null;
+            IsDetailPaneVisible = false;
+        }
+
+        [RelayCommand]
+        private void EditDetail()
+        {
+            if (SelectedVatTu == null) return;
+            _originalVatTu = new VatTuPhuTung
+            {
+                VatTuPhuTungId = SelectedVatTu.VatTuPhuTungId,
+                TenLoaiVatTuPhuTung = SelectedVatTu.TenLoaiVatTuPhuTung,
+                SoLuong = SelectedVatTu.SoLuong,
+                DonGiaBanLoaiVatTuPhuTung = SelectedVatTu.DonGiaBanLoaiVatTuPhuTung
+            };
+            IsEditing = true;
+            IsNotEditing = false;
+        }
+
+        [RelayCommand]
+        private async Task SaveDetail()
+        {
+            if (SelectedVatTu == null) return;
+            await _vatTuPhuTungService.Update(SelectedVatTu);
+            IsEditing = false;
+            IsNotEditing = true;
+            await LoadAsync();
+        }
+
+        [RelayCommand]
+        private void CancelDetail()
+        {
+            if (_originalVatTu != null)
+            {
+                SelectedVatTu.TenLoaiVatTuPhuTung = _originalVatTu.TenLoaiVatTuPhuTung;
+                SelectedVatTu.SoLuong = _originalVatTu.SoLuong;
+                SelectedVatTu.DonGiaBanLoaiVatTuPhuTung = _originalVatTu.DonGiaBanLoaiVatTuPhuTung;
+            }
+            IsEditing = false;
+            IsNotEditing = true;
+        }
     }
 }

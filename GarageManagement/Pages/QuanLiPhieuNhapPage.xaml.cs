@@ -10,5 +10,7 @@ public partial class QuanLiPhieuNhapPage : ContentView
         InitializeComponent();
         BindingContext = viewModel;
         _viewModel = viewModel;
+
+        
     }
 }

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:service="clr-namespace:GarageManagement.Services"
+    x:Class="GarageManagement.Pages.ChinhSuaPhieuThuTienPage"
+    Title="Chỉnh Sửa Phiếu Thu Tiền"
+    BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="20" />
+                <On Platform="iOS" Value="20" />
+                <On Platform="Windows" Value="20" />
+            </OnPlatform>
+            <OnPlatform x:Key="ButtonCornerRadiusHandler" x:TypeArguments="x:Double">
+                <On Platform="Android" Value="12" />
+                <On Platform="iOS" Value="12" />
+                <On Platform="Windows" Value="12" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="25" MaximumWidthRequest="1000">
+
+            <!-- Tiêu đề -->
+            <Frame HasShadow="True"
+             BackgroundColor="{DynamicResource CardBackgroundColor}"
+             Padding="20"
+             CornerRadius="{StaticResource CornerRadiusHandler}">
+                <Label Text="CHỈNH SỬA PHIẾU THU TIỀN"
+               FontSize="24"
+               FontAttributes="Bold"
+               FontFamily="OpenSans-SemiBold"
+               TextColor="{DynamicResource TextColor}"
+               HorizontalOptions="Center"/>
+            </Frame>
+
+            <!-- Lọc khách hàng -->
+            <Frame HasShadow="True"
+             BackgroundColor="{DynamicResource CardBackgroundColor}"
+             Padding="20"
+             CornerRadius="{StaticResource CornerRadiusHandler}">
+                <Grid RowSpacing="10" ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                 Text="Lọc khách hàng theo: CCCD/Tên/Email/SĐT"
+                 FontSize="16" FontAttributes="Bold"
+                 TextColor="{DynamicResource TextColor}"/>
+
+                    <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Spacing="20">
+                        <Label Text="Trường lọc:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" VerticalOptions="Center"/>
+                        <Picker
+              ItemsSource="{Binding FilterFields}"
+              SelectedItem="{Binding SelectedFilterField}"
+              ItemDisplayBinding="{Binding .}"
+              WidthRequest="150"/>
+                    </HorizontalStackLayout>
+
+                    <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="20">
+                        <Label Text="Giá trị:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" VerticalOptions="Center"/>
+                        <Entry Placeholder="Vd: CCCD/Tên/Email/SĐT" Text="{Binding FilterValue}" WidthRequest="180"/>
+                    </HorizontalStackLayout>
+
+                    <Button Grid.Row="1" Grid.Column="2"
+                  Text="Lọc"
+                  Command="{Binding FilterCommand}"
+                  BackgroundColor="#3B82F6"
+                  TextColor="White"
+                  CornerRadius="{StaticResource ButtonCornerRadiusHandler}"/>
+                </Grid>
+            </Frame>
+
+            <!-- Form chỉnh sửa -->
+            <Frame HasShadow="True"
+       BackgroundColor="{DynamicResource CardBackgroundColor}"
+       Padding="20"
+       >
+                <Grid RowSpacing="10" ColumnSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Tiêu đề cột -->
+                    <Label Grid.Row="0" Grid.Column="0"
+               Text="Xe của khách:"
+               FontAttributes="Bold"
+               TextColor="{DynamicResource TextColor}"/>
+                    <Label Grid.Row="0" Grid.Column="1" Margin="30,0,0,0"
+               Text="Ngày thu:"
+               FontAttributes="Bold"
+               TextColor="{DynamicResource TextColor}"/>
+                    <Label Grid.Row="0" Grid.Column="2"
+               Text="Số tiền:"
+               FontAttributes="Bold"
+               TextColor="{DynamicResource TextColor}"/>
+
+                    <!-- Picker Xe -->
+                    <Picker Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1"
+                ItemsSource="{Binding ListBienSo}"
+                SelectedItem="{Binding SelectedBienSo, Mode=TwoWay}"
+                          
+                ItemDisplayBinding="{Binding BienSo}"
+                 />
+
+                    <!-- DatePicker -->
+                    <DatePicker Grid.Row="1" Grid.Column="1" Margin="30,0,0,0"
+                    Date="{Binding NgayThuTien}"
+                    Format="dd/MM/yyyy" />
+
+                    <!-- Entry số tiền -->
+                    <Entry Grid.Row="1" Grid.Column="2"
+               Text="{Binding SoTienThu}"
+               Keyboard="Numeric"
+               Placeholder="Nhập số tiền" />
+                </Grid>
+            </Frame>
+
+            <!-- Thông tin khách & xe -->
+            <Frame HasShadow="True"
+             BackgroundColor="{DynamicResource CardBackgroundColor}"
+             Padding="20"
+             CornerRadius="{StaticResource CornerRadiusHandler}">
+                <Grid RowSpacing="20" ColumnSpacing="30">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                 Text="Thông tin hiện tại" FontSize="30"
+              FontAttributes="Bold"
+                 TextColor="{DynamicResource TextColor}"
+                 HorizontalOptions="Center"/>
+
+                    <!-- Khách hàng -->
+                    <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="8" IsVisible="{Binding IsCustomerFound}" Margin="150,0,0,0">
+                        <Label Text="Chủ xe:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" FontSize="24"/>
+                        <HorizontalStackLayout Spacing="30" >
+                            <Label Text="Tên: " FontSize="20" FontAttributes="Bold"/>
+                            <Label Text="{Binding SelectedChuXe.HoVaTen}" FontSize="20"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="30">
+                            <Label Text="CCCD: " FontSize="20" FontAttributes="Bold"/>
+                            <Label Text="{Binding SelectedChuXe.CCCD}" FontSize="20"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="30">
+                            <Label Text="Email: " FontSize="20" FontAttributes="Bold"/>
+                            <Label Text="{Binding SelectedChuXe.Email}" FontSize="20"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="30">
+                            <Label Text="SĐT: " FontSize="20" FontAttributes="Bold"/>
+                            <Label Text="{Binding SelectedChuXe.SoDienThoai}" FontSize="20"/>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+
+                    <!-- Xe -->
+                    <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8" IsVisible="{Binding IsCustomerFound}" Margin="0,0,100,0">
+                        <Label Text="Xe được chọn:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}"  FontSize="24"/>
+
+                        <HorizontalStackLayout Spacing="30" >
+                            <Label Text="Tên xe: " FontSize="20" FontAttributes="Bold"/>
+                            <Label Text="{Binding SelectedBienSo.Ten}" FontSize="20"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="30">
+                            <Label Text="Biển số xe: " FontSize="20" FontAttributes="Bold"/>
+                            <Label Text="{Binding SelectedBienSo.BienSo}" FontSize="20"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="30">
+                            <Label Text="Hiệu xe: " FontSize="20" FontAttributes="Bold"/>
+                            <Label Text="{Binding TenHieuXe}" FontSize="20"/>
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="30">
+                            <Label Text="Tiền nợ của xe: " FontSize="20" FontAttributes="Bold"/>
+                            <Label Text="{Binding TienNoXeSelected}" FontSize="20"/>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Nút xác nhận & quay lại -->
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                <Button Text="Xác nhận"
+                Command="{Binding UpdateCommand}"
+                BackgroundColor="#10B981"
+                TextColor="White"
+                CornerRadius="{StaticResource ButtonCornerRadiusHandler}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

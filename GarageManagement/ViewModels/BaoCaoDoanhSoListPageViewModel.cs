@@ -2,6 +2,7 @@
 using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GarageManagement.Pages;
 using System.Collections.ObjectModel;
 
 namespace GarageManagement.ViewModels
@@ -13,6 +14,7 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<Xe> _carService;
         private readonly APIClientService<HieuXe> _hieuXeService;
         private readonly APIClientService<ChiTietBaoCaoDoanhThuThang> _chiTietService;
+        private readonly BaoCaoDoanSoPageViewModel _baoCaoDoanhSoPageViewModel; 
 
         [ObservableProperty]
         private bool isDetailPaneVisible;
@@ -45,7 +47,8 @@ namespace GarageManagement.ViewModels
             APIClientService<PhieuSuaChua> phieuSuaChuaService,
             APIClientService<Xe> carService,
             APIClientService<HieuXe> hieuXeService,
-            APIClientService<ChiTietBaoCaoDoanhThuThang> chiTietService)
+            APIClientService<ChiTietBaoCaoDoanhThuThang> chiTietService,
+            BaoCaoDoanSoPageViewModel baoCaoDoanhSoPageViewModel)
         {
             _baoCaoService = baoCaoService;
             _phieuSuaChuaService = phieuSuaChuaService;
@@ -53,6 +56,7 @@ namespace GarageManagement.ViewModels
             _hieuXeService = hieuXeService;
             _chiTietService = chiTietService;
             _ = LoadAsync();
+            _baoCaoDoanhSoPageViewModel = baoCaoDoanhSoPageViewModel;
         }
 
         [ObservableProperty]
@@ -120,10 +124,28 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private void ViewDetail(Guid id)
+        private async Task ViewDetail(Guid id)
         {
-            MessagingCenter.Send(this, "ViewChiTietBaoCaoDoanhSo", id);
+            var baoCao = _allBaoCao.FirstOrDefault(bc => bc.Id == id);
+            if (baoCao == null) return;
+
+            var vm = _baoCaoDoanhSoPageViewModel;
+            await vm.LoadAsync(baoCao);
+
+            var view = new BaoCaoDoanhSoPage(vm);
+            var wrapper = new ContentPage { Content = view, Padding = 0 };
+
+            var win = new Window
+            {
+                Page = wrapper,
+                Title = "Chi tiết báo cáo doanh số",
+                MaximumHeight = 700,
+                MaximumWidth = 900
+            };
+
+            Application.Current.OpenWindow(win);
         }
+
 
         [RelayCommand]
         private void Add()
@@ -153,6 +175,13 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private async Task Save()
         {
+            var now = DateTime.Now;
+            if (SelectedMonth == now.Month && SelectedYear == now.Year)
+            {
+                await Shell.Current.DisplayAlert("Không thể tạo báo cáo", "Tháng hiện tại chưa kết thúc. Vui lòng chọn tháng trước đó.", "OK");
+                return;
+            }
+
             var listPhieu = await _phieuSuaChuaService.GetListOnSpecialRequirement($"GetListByMonthAndYear/{SelectedMonth}/{SelectedYear}")
                             ?? new List<PhieuSuaChua>();
 

@@ -1,8 +1,6 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
 using GarageManagement.ViewModels;
-using Microsoft.Extensions.Logging.Abstractions;
-using System.Threading.Tasks;
 
 namespace GarageManagement.Pages;
 
@@ -10,21 +8,25 @@ public partial class TaoPhieuSuaChuaPage : ContentView
 {
 	public readonly TaoPhieuSuaChuaPageViewModel _viewmodel;
 	private readonly APIClientService<VatTuPhuTung> _vatTuService;
+    private readonly APIClientService<ThamSo> _thamSoService;
 
-	public TaoPhieuSuaChuaPage(APIClientService<Xe> carservice,
+    
+    public TaoPhieuSuaChuaPage(APIClientService<Xe> carservice,
 		APIClientService<TienCong> congservice,
 		APIClientService<VatTuPhuTung> vattuservice,
 		APIClientService<ChiTietPhieuSuaChua> noidungphieuservice,
 		APIClientService<PhieuSuaChua> phieuservice,
 		TaoPhieuSuaChuaPageViewModel viewmodel,
-		APIClientService<VatTuPhuTung> vatTuService)
+		APIClientService<VatTuPhuTung> vatTuService,
+        APIClientService<ThamSo> tham)
 	{
 		InitializeComponent();
 		BindingContext = viewmodel;
 		_viewmodel = viewmodel;
         _vatTuService = vatTuService;
+        _thamSoService = tham;
     }
-
+    
 	private async void OnVTPTChanged(object sender, EventArgs e)
 	{
         if (sender is Picker picker && picker.SelectedItem is VatTuPhuTung vtpt)
@@ -44,7 +46,8 @@ public partial class TaoPhieuSuaChuaPage : ContentView
                     vtptList.OnPropertyChanged(nameof(vtptList.DonGia));
                     return;
                 }
-                vtptList.DonGia = vtpt.DonGiaBanLoaiVatTuPhuTung;
+                var mul = await _thamSoService.GetThroughtSpecialRoute("TiLeDonGiaBan");
+                vtptList.DonGia = vtpt.DonGiaBanLoaiVatTuPhuTung * mul.GiaTri;
                 vtptList.OnPropertyChanged(nameof(vtptList.DonGia));
                 var updateItem=_viewmodel.ListNoiDung.FirstOrDefault(u => u.NoiDungId == vtptList.IdForUI);
                 if (updateItem is not null)

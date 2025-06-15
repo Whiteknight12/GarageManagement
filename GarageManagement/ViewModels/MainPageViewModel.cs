@@ -243,7 +243,7 @@ namespace GarageManagement.ViewModels
             BaoCaoDoanhSoActive = parameter == "BaoCaoDoanhSo";
             if (BaoCaoDoanhSoActive == true)
             {
-                _ = _baoCaoDoanhSoPage._viewmodel.LoadAsync();
+                //_ = _baoCaoDoanhSoPage._viewmodel.LoadAsync();
             }
 
             QuanLiDanhSachLoaiVatTuActive = parameter == "QLDanhSachLoaiVatTu";

@@ -115,9 +115,14 @@
                 <HorizontalStackLayout Spacing="10" HorizontalOptions="Start">
                     <Label Text="Tổng tiền:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
                     <Label Text="{Binding TongTien, StringFormat='{0:N0} VNĐ'}" TextColor="{DynamicResource TextColor}" />
+                    
+
                 </HorizontalStackLayout>
             </Frame>
-
+            <Button Text="Chỉnh sửa"
+HorizontalOptions="Center"
+                    WidthRequest="250"
+Command="{Binding EditCommand}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentView>

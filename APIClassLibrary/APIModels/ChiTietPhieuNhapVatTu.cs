@@ -24,5 +24,23 @@ namespace APIClassLibrary.APIModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        VatTuPhuTung? selectedVatTu;
+        public VatTuPhuTung? SelectedVatTu
+        {
+            get => selectedVatTu;
+            set
+            {
+                if (selectedVatTu != value)
+                {
+                    selectedVatTu = value;
+                    VatTuId = value?.VatTuPhuTungId;
+                    DonGia = value?.DonGiaBanLoaiVatTuPhuTung;
+                    OnPropertyChanged(nameof(SelectedVatTu));
+                    OnPropertyChanged(nameof(VatTuId));
+                    OnPropertyChanged(nameof(DonGia));
+                }
+            }
+        }
     }
 }

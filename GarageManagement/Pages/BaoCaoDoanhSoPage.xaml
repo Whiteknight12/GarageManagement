@@ -28,7 +28,7 @@
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
                    CornerRadius="{StaticResource CornerRadiusHandler}">
-                <Label Text="BÁO CÁO DOANH SỐ"
+                <Label Text="CHI TIẾT BÁO CÁO DOANH SỐ"
                        FontSize="20"
                        FontAttributes="Bold"
                        FontFamily="OpenSans-SemiBold"
@@ -36,40 +36,14 @@
                        HorizontalOptions="Center" />
             </Frame>
 
-            <!-- Filters -->
-            <Frame HasShadow="True"
-                   BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   Padding="20"
-                   CornerRadius="{StaticResource CornerRadiusHandler}">
-                <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
-                    <Picker Title="Chọn tháng"
-                            ItemsSource="{Binding Months}"
-                            SelectedItem="{Binding SelectedMonth, Mode=TwoWay}"
-                            SelectedIndexChanged="OnDateChanged"
-                            WidthRequest="150"
-                            HeightRequest="60"
-                            BackgroundColor="{DynamicResource InputBackgroundColor}"
-                            TextColor="{DynamicResource TextColor}" />
-                    <Picker Title="Chọn năm"
-                            ItemsSource="{Binding Years}"
-                            SelectedItem="{Binding SelectedYear, Mode=TwoWay}"
-                            SelectedIndexChanged="OnDateChanged"
-                            WidthRequest="150"
-                            HeightRequest="60"
-                            BackgroundColor="{DynamicResource InputBackgroundColor}"
-                            TextColor="{DynamicResource TextColor}" />
-                </HorizontalStackLayout>
-            </Frame>
-
-            <!-- Total Sales -->
+            <!-- Tổng doanh thu -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
                    CornerRadius="{StaticResource CornerRadiusHandler}">
                 <HorizontalStackLayout Spacing="10">
                     <Label Text="Tổng doanh số:" FontSize="16" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
-
-                    <Label Text="{Binding TongDoanhSo}"   FontAttributes="Bold" FontSize="16" TextColor="Green" />
+                    <Label Text="{Binding TongDoanhSo}" FontAttributes="Bold" FontSize="16" TextColor="Green" />
                 </HorizontalStackLayout>
             </Frame>
 
@@ -81,7 +55,7 @@
                 <chart:ChartView
                     Chart="{Binding PieChart}"
                     HeightRequest="250"
-                    HorizontalOptions="FillAndExpand"
+                  
                     VerticalOptions="Start" />
             </Frame>
 

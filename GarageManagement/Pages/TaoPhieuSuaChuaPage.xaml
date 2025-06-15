@@ -121,7 +121,7 @@
 
                                     <StackLayout Grid.Column="3" Spacing="2">
                                         <Label Text="Thành tiền:" FontAttributes="Bold" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
-                                        <Label Text="{Binding ThanhTien}" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
+                                        <Label Text="{Binding ThanhTien, StringFormat='{0:N2} VNĐ'}" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
                                     </StackLayout>
 
                                     <Button Grid.Column="5"
@@ -211,7 +211,7 @@
                                                     TextChanged="OnSoLuongChanged" />
 
                                                 <Label Grid.Row="1" Grid.Column="2"
-                                                    Text="{Binding DonGia, StringFormat='{0:N0} VNĐ'}"
+                                                    Text="{Binding DonGia, StringFormat='{0:N2} VNĐ'}"
                                                     FontSize="14"
                                                     TextColor="{DynamicResource TextColor}"
                                                     HorizontalTextAlignment="Center" />

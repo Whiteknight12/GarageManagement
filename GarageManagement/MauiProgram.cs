@@ -103,6 +103,8 @@ public static class MauiProgram
         builder.Services.AddTransient<BaoCaoDoanhSoListPage>();
         builder.Services.AddTransient<BaoCaoTonPage>();
         builder.Services.AddTransient<SuaPhieuSuaChuaPage>();
+        builder.Services.AddTransient<ChinhSuaPhieuNhapPage>();
+        builder.Services.AddTransient<ChinhSuaPhieuThuTienPage>();
 
         builder.Services.AddTransient<TaoPhieuSuaChuaPageViewModel>();
 		builder.Services.AddTransient<ThuTienPageViewModel>();
@@ -135,6 +137,8 @@ public static class MauiProgram
         builder.Services.AddTransient<ThemLoaiTienCongPageViewModel>();
         builder.Services.AddTransient<ThemLoaiVatTuPhuTungPageViewModel>();
         builder.Services.AddTransient<BaoCaoDoanhSoListPageViewModel>();
+        builder.Services.AddTransient<ChinhSuaPhieuNhapPageViewModel>();
+        builder.Services.AddTransient<ChinhSuaPhieuThuTienPageViewModel>();
         builder.Services.AddTransient<QuanLiDanhSachLoaiVatTuPageViewModel>(provider =>
             new QuanLiDanhSachLoaiVatTuPageViewModel(
             provider.GetService<APIClientService<VatTuPhuTung>>(),

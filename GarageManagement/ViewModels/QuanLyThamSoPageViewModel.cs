@@ -52,23 +52,47 @@ namespace GarageManagement.ViewModels
         {
             if (SelectedParameter == null) return;
 
-            // Cập nhật giá trị tham số trong danh sách
-            var parameterToUpdate = Parameters.FirstOrDefault(p => p.TenThamSo == SelectedParameter.TenThamSo);
+            // 2) SoXeToiDaTiepNhan phải là số nguyên và không âm
+            if (SelectedParameter.TenThamSo == "SoXeToiDaTiepNhan"
+                && (SelectedParameter.GiaTri < 0 || SelectedParameter.GiaTri % 1 != 0))
+            {
+                await Shell.Current.DisplayAlert(
+                    "Thông báo",
+                    "Số xe tối đa tiếp nhận phải là số nguyên không âm.",
+                    "OK");
+                return;
+            }
+
+            // 3) VuotSoTienNo chỉ được 0 hoặc 1
+            if (SelectedParameter.TenThamSo == "VuotSoTienNo"
+                && SelectedParameter.GiaTri != 0
+                && SelectedParameter.GiaTri != 1)
+            {
+                await Shell.Current.DisplayAlert(
+                    "Thông báo",
+                    "Giá trị \"Vượt số tiền nợ\" chỉ được nhập 0 hoặc 1.",
+                    "OK");
+                return;
+            }
+
+            // cập nhật lên server, tắt form…
+            var parameterToUpdate = Parameters
+                .FirstOrDefault(p => p.TenThamSo == SelectedParameter.TenThamSo);
             if (parameterToUpdate != null)
             {
-                var index = Parameters.IndexOf(parameterToUpdate); 
+                var idx = Parameters.IndexOf(parameterToUpdate);
                 parameterToUpdate.GiaTri = SelectedParameter.GiaTri;
                 parameterToUpdate.MoTa = SelectedParameter.MoTa;
                 await _thamSoService.Update(parameterToUpdate);
-                Parameters[index] = parameterToUpdate;
+                Parameters[idx] = parameterToUpdate;
             }
 
-            // Ẩn form và thông báo
             IsEditFormVisible = false;
-            var toast = Toast.Make("Thay đổi giá trị thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
-            await toast.Show();
-            await LoadAsync(); 
+            await Toast.Make("Thay đổi giá trị thành công", CommunityToolkit.Maui.Core.ToastDuration.Short).Show();
+            await LoadAsync();
         }
+
+
 
         public async Task LoadAsync()
         {

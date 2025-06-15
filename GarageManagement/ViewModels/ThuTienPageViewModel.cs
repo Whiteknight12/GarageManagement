@@ -109,12 +109,17 @@ namespace GarageManagement.ViewModels
                 CCCD = filtered.CCCD; 
                 GioiTinh = filtered.GioiTinh;
                 var xeListBySDT = await _carservice.GetListOnSpecialRequirement($"PhoneNumber/{filtered.SoDienThoai}");
-                if (xeListBySDT != null)
+                if (xeListBySDT != null && xeListBySDT.Count != 0)
                 {
                     SelectedBienSo = xeListBySDT[0];
                     ListBienSo.Clear();
                     available = false; 
                     ListBienSo = new ObservableCollection<Xe>(xeListBySDT);
+                }
+                else
+                {
+                    await Shell.Current.DisplayAlert("Thông báo", "Khách hàng trên không có xe trong gara, không thể thu tiền", "OK");
+                    return;  
                 }
                 IsCustomerFound = true;
                 SelectedBienSo = ListBienSo[0];
@@ -158,11 +163,6 @@ namespace GarageManagement.ViewModels
             if (string.IsNullOrEmpty(DienThoai))
             {
                 await Shell.Current.DisplayAlert("Error", "Không được bỏ trống số điện thoại", "OK");
-                return;
-            }
-            if (NgayThuTien.Date < DateTime.Now.Date)
-            {
-                await Shell.Current.DisplayAlert("Error", "Ngày thu tiền không được nhỏ hơn ngày hiện tại", "OK");
                 return;
             }
             if (string.IsNullOrEmpty(SoTienThu))
@@ -214,6 +214,7 @@ namespace GarageManagement.ViewModels
             //if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
             var toast = Toast.Make("Thông tin phiếu thu đã được hệ thống lưu trữ.", CommunityToolkit.Maui.Core.ToastDuration.Short);
             await toast.Show();
+            MessagingCenter.Send(this, "PhieuThuTienCreated"); 
         }
     }
 }
