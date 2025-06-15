@@ -11,8 +11,8 @@
             <service:DeleteModeTextConverter x:Key="DeleteModeTextConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-
-    <ScrollView>
+    <Grid ColumnDefinitions="*,Auto">
+        <ScrollView Grid.Column="0">
         <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="1000">
 
             <!-- Tiêu đề -->
@@ -357,7 +357,12 @@
                                        FontSize="13"
                                        Margin="5"/> 
                             </Grid>
-                        </Frame>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+            Command="{Binding Source={x:Reference RootContentView}, Path=BindingContext.ShowDetailCommand}"
+            CommandParameter="{Binding Id}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 <CollectionView.ItemsLayout>
@@ -366,4 +371,71 @@
             </CollectionView>
         </VerticalStackLayout>
     </ScrollView>
+        <BoxView Grid.Column="0"
+             HorizontalOptions="End"
+             WidthRequest="1"
+             BackgroundColor="LightGray"/>
+
+        <!-- Right: detail-pane -->
+        <ScrollView Grid.Column="1"
+                Padding="20"
+                BackgroundColor="{DynamicResource BackgroundColor}"
+                IsVisible="{Binding IsDetailPaneVisible}">
+            <VerticalStackLayout Spacing="16">
+
+                <!-- Close -->
+                <Button Text="✕"
+                Command="{Binding CloseDetailCommand}"
+                HorizontalOptions="End"
+                BackgroundColor="Transparent"
+                TextColor="{DynamicResource TextColor}"/>
+                <Frame Padding="20" BackgroundColor="{DynamicResource CardBackgroundColor}" HasShadow="True">
+                    <Label Text="Chi tiết phiếu thu tiền"
+               FontSize="20"
+               FontAttributes="Bold"
+               TextColor="{DynamicResource TextColor}"/>
+                </Frame>
+                <Frame Padding="20" BackgroundColor="{DynamicResource CardBackgroundColor}" HasShadow="True">
+                    <VerticalStackLayout Spacing="20">
+                        <!-- Mã phiếu -->
+                        <Label Text="{Binding SelectedPhieuThuTien.Id, StringFormat='Mã phiếu: {0}'}"
+FontAttributes="Bold"
+TextColor="{DynamicResource TextColor}"/>
+
+                        <!-- Ngày thu -->
+                        <Label Text="{Binding SelectedPhieuThuTien.NgayThuTien, StringFormat='Ngày: {0:dd/MM/yyyy}'}" FontAttributes="Bold"
+TextColor="{DynamicResource TextColor}"/>
+
+                        <!-- Khách hàng -->
+                        <Label Text="{Binding SelectedPhieuThuTien.TenKhachHang, StringFormat='Khách hàng: {0}'}"  FontAttributes="Bold"
+TextColor="{DynamicResource TextColor}"/>
+
+                        <Label Text="{Binding SelectedPhieuThuTien.CCCD, StringFormat='CCCD: {0}'}" FontAttributes="Bold"
+TextColor="{DynamicResource TextColor}"/>
+
+                        <Label Text="{Binding SelectedPhieuThuTien.Email, StringFormat='Email: {0}'}" FontAttributes="Bold"
+TextColor="{DynamicResource TextColor}"/>
+
+                        <!-- Xe -->
+                        <Label Text="{Binding SelectedPhieuThuTien.TenXe, StringFormat='Tên xe: {0}'}" FontAttributes="Bold"
+TextColor="{DynamicResource TextColor}"/>
+
+                        <Label Text="{Binding SelectedPhieuThuTien.BienSoXe, StringFormat='Biển số xe: {0}'}" FontAttributes="Bold"
+TextColor="{DynamicResource TextColor}"/>
+
+                        <Label Text="{Binding SelectedPhieuThuTien.SoTienThu, StringFormat='Số tiền thu: {0:N0} VNĐ'}" FontAttributes="Bold"
+TextColor="{DynamicResource TextColor}"/>
+                    </VerticalStackLayout>
+                </Frame>
+                <!-- nút Edit -->
+                <Button Text="Chỉnh sửa"
+                Command="{Binding EditDetailCommand}"
+                        CommandParameter="{Binding SelectedPhieuThuTien.Id}"
+                BackgroundColor="#10B981"
+                TextColor="White"
+                        WidthRequest="250"
+                HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentView>

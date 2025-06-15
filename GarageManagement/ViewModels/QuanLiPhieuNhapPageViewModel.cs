@@ -68,8 +68,8 @@ namespace GarageManagement.ViewModels
                 // refresh your list
                 await LoadAsync();
 
-                // unsubscribe so you don’t leak
-                MessagingCenter.Unsubscribe<ChinhSuaPhieuNhapPageViewModel>(this, "PhieuNhapUpdated");
+                //// unsubscribe so you don’t leak
+                //MessagingCenter.Unsubscribe<ChinhSuaPhieuNhapPageViewModel>(this, "PhieuNhapUpdated");
             });
 
         }

@@ -218,17 +218,23 @@ namespace GarageManagement.ViewModels
         public async Task MarkAsDone()
         {
             var car = await _carservice.GetByID(carId);
-            car.KhaDung = false;
-            _carservice.Update(car);
             var ps = await _phieuTiepNhanService.GetAll();
             var ps2 = ps.Where(p => p.XeId == car.Id);
             var ps3 = ps2.OrderByDescending(p => p.NgayTiepNhan);
             var p = ps3.FirstOrDefault();
-            if (p != null)
+            if (p.DaHoanThanhBaoTri == true)
             {
-                p.DaHoanThanhBaoTri = true;
-                _phieuTiepNhanService.Update(p); 
+                await Shell.Current.DisplayAlert(
+                    "Thông báo",
+                    "",
+                    "OK");
+                return;
             }
+            p.DaHoanThanhBaoTri = true;
+            _phieuTiepNhanService.Update(p);
+            car.KhaDung = false;
+            _carservice.Update(car);
+            
         }
     }
 }

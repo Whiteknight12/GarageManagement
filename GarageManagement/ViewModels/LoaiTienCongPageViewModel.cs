@@ -147,5 +147,79 @@ namespace GarageManagement.ViewModels
         {
             Shell.Current.GoToAsync("..");
         }
+
+        [ObservableProperty] private TienCong selectedTienCong;
+        [ObservableProperty] private bool isDetailPaneVisible;
+        [ObservableProperty] private bool isEditing;
+        [ObservableProperty] private bool isNotEditing = true;
+
+        // backup bản gốc để hủy
+        private TienCong _originalTienCong;
+
+        // Khi SelectedTienCong thay đổi, show pane và reset chế độ edit
+        partial void OnSelectedTienCongChanged(TienCong value)
+        {
+            IsDetailPaneVisible = value != null;
+            IsEditing = false;
+            IsNotEditing = true;
+        }
+
+
+        [RelayCommand]
+        private void ShowDetail(TienCong tien)
+        {
+            SelectedTienCong = tien;
+        }
+
+        [RelayCommand]
+        private void CloseDetail()
+        {
+            SelectedTienCong = null;
+            IsDetailPaneVisible = false;
+        }
+
+        [RelayCommand]
+        private void EditDetail()
+        {
+            if (SelectedTienCong == null) return;
+            // lưu tạm
+            _originalTienCong = new TienCong
+            {
+                Id = SelectedTienCong.Id,
+                TenLoaiTienCong = SelectedTienCong.TenLoaiTienCong,
+                DonGiaLoaiTienCong = SelectedTienCong.DonGiaLoaiTienCong
+            };
+            IsEditing = true;
+            IsNotEditing = false;
+        }
+        
+        [RelayCommand]
+        private async Task SaveDetail()
+        {
+            if (SelectedTienCong == null) return;
+
+            await _tienCongService.Update(SelectedTienCong);
+
+            var tien = await _tienCongService.GetByID(SelectedTienCong.Id);
+            // refresh danh sách
+            await LoadAsync();
+            IsEditing = false;
+            IsNotEditing = true;
+            ShowDetail(tien); 
+        }
+
+        [RelayCommand]
+        private void CancelDetail()
+        {
+            if (_originalTienCong != null)
+            {
+                // phục hồi
+                SelectedTienCong.TenLoaiTienCong = _originalTienCong.TenLoaiTienCong;
+                SelectedTienCong.DonGiaLoaiTienCong = _originalTienCong.DonGiaLoaiTienCong;
+            }
+            IsEditing = false;
+            IsNotEditing = true;
+        }
+
     }
 }

@@ -153,11 +153,7 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Thông báo", "Không có nội dung sữa chữa", "OK");
                 return;
             }
-            if (NgaySuaChua.Date<DateTime.UtcNow.ToLocalTime().Date)
-            {
-                await Shell.Current.DisplayAlert("Thông báo", "Ngày sửa chữa không được nhỏ hơn ngày hiện tại!", "OK");
-                return;
-            }
+           
             foreach (var item in ListNoiDung)
             {
                 if (string.IsNullOrEmpty(item.NoiDungSuaChuaId.ToString()))

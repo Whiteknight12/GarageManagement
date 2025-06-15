@@ -101,8 +101,8 @@
                             TextColor="{DynamicResource TextColor}" />
                         <Picker 
                             BackgroundColor="{DynamicResource InputBackgroundColor}"
-                            ItemsSource="{Binding ListGioiTinh}"
-                            SelectedItem="{Binding SelectedGioiTinh}"
+                            ItemsSource="{Binding ListGioiTinh, Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedGioiTinh, Mode=TwoWay}"
                             IsEnabled="{Binding IsUpdating}"
                             FontSize="16"
                             TextColor="{DynamicResource TextColor}" />

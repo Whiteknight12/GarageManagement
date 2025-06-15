@@ -20,6 +20,8 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<KhachHang> _khachHangService;
         private readonly APIClientService<Xe> _xeService;
         private readonly AuthenticationService _authenticationService;
+        private readonly ChinhSuaPhieuThuTienPageViewModel _chinhSuaPhieuThuTienPageViewModel;
+
 
         [ObservableProperty] private string nameFilter = string.Empty;
         [ObservableProperty] private string cccdFilter = string.Empty;
@@ -55,16 +57,23 @@ namespace GarageManagement.ViewModels
             ILogger<QuanLiPhieuThuTienPageViewModel> logger,
             AuthenticationService authenticationService,
             ThuTienPageViewModel thuTienPageViewModel,
-            APIClientService<HieuXe> hieuXeService)
+            APIClientService<HieuXe> hieuXeService,
+            ChinhSuaPhieuThuTienPageViewModel chinhSuaPhieuThuTienPageViewModel)
         {
             _authenticationService = authenticationService;
             _phieuThuTienService = phieuThuTienService;
             _khachHangService = khachHangService;
             _xeService = xeService;
             _thuTienPageViewModel = thuTienPageViewModel;
-            _hieuXeService = hieuXeService; 
+            _hieuXeService = hieuXeService;
             _ = LoadAsync();
             IsDeleteMode = false;
+            _chinhSuaPhieuThuTienPageViewModel = chinhSuaPhieuThuTienPageViewModel;
+            MessagingCenter.Subscribe<ThuTienPageViewModel>(this, "PhieuThuTienCreated", async _ =>
+            {
+                // refresh your list
+                await LoadAsync();
+            });
         }
 
         public async Task LoadAsync()
@@ -214,6 +223,76 @@ namespace GarageManagement.ViewModels
                 q = q.Where(p => p.SoTienThu <= max);
 
             ListPhieuThuTien = new ObservableCollection<PhieuThuTien>(q);
+        }
+
+        [ObservableProperty] private PhieuThuTien _selectedPhieuThuTien;
+        [ObservableProperty] private bool _isDetailPaneVisible;
+
+        partial void OnSelectedPhieuThuTienChanged(PhieuThuTien value)
+        {
+            IsDetailPaneVisible = value != null;
+            // reset chế độ edit
+        }
+
+        [RelayCommand]
+        public async void ShowDetail(Guid id)
+        {
+            var item = await _phieuThuTienService.GetByID(id);
+            
+            var khach = await _khachHangService.GetByID(item.KhachHangId);
+            var xe = await _xeService.GetByID(item.XeId);
+            item.TenKhachHang = khach.HoVaTen;
+            item.CCCD = khach.CCCD;
+            item.Email = khach.Email;
+            item.TenXe = xe.Ten;
+            item.BienSoXe = xe.BienSo;
+            SelectedPhieuThuTien = item;
+            IsDetailPaneVisible = true; 
+        }
+
+        [RelayCommand]
+        public void CloseDetail()
+        {
+            SelectedPhieuThuTien = null;
+        }
+
+        [RelayCommand]
+        public void EditDetail(Guid id)
+        {
+            ChinhSuaPhieuThuTienPage view = new ChinhSuaPhieuThuTienPage(_chinhSuaPhieuThuTienPageViewModel, id);
+
+            var win = new Window
+            {
+                Page = view,
+                Title = "Tạo phiếu thu tiền mới",
+                MinimumHeight = 600,
+                MinimumWidth = 800
+            };
+            MessagingCenter.Subscribe<ChinhSuaPhieuThuTienPageViewModel>(this, "PhieuThuTienUpdated", async _ =>
+            {
+                // refresh your list
+                await LoadAsync();
+                ShowDetail(SelectedPhieuThuTien.Id); 
+                // close the **exact** edit window
+                Application.Current.CloseWindow(win);
+
+                // unsubscribe so you don’t leak
+                MessagingCenter.Unsubscribe<ChinhSuaPhieuThuTienPageViewModel>(this, "PhieuThuTienUpdated");
+            });
+            //// callback khi lưu thành công
+            //_chinhSuaPhieuThuTienPageViewModel.OnPhieuNhapAdded = async (PhieuNhapVatTu phieuNhapVatTu) =>
+            //{
+            //    Load(phieuNhapVatTu);        // nhét vào list hiện tại
+            //                                 // hoặc reload full để chắc cú
+            //                                 // Replace this line:
+            //                                 // win.Close();     // đóng cửa sổ
+
+            //    // With the following workaround for .NET MAUI (since Window.Close() does not exist):
+            //    Application.Current?.CloseWindow(win); // đóng cửa sổ    // đóng cửa sổ
+            //    await LoadAsync();
+            //};
+
+            Application.Current.OpenWindow(win);
         }
     }
 }

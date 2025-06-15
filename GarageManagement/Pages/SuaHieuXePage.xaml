@@ -9,6 +9,7 @@
 
             <Label
                 TextColor="{DynamicResource TextColor}"
+                BackgroundColor="{DynamicResource BackgroundColor}"
                 Text="Sửa Hiệu Xe"
                 FontSize="24"
                 FontAttributes="Bold"
@@ -16,11 +17,13 @@
 
             <Label
                 TextColor="{DynamicResource TextColor}"
+                BackgroundColor="{DynamicResource BackgroundColor}"
                 Text="Tên hiệu xe:"
                 FontSize="16" />
 
             <Entry
                 TextColor="{DynamicResource TextColor}"
+                BackgroundColor="{DynamicResource BackgroundColor}"
                 x:Name="HieuXeEntry"
                 Text="{Binding TenHieuXe}"
                 Placeholder="Nhập tên hiệu xe"
@@ -28,23 +31,25 @@
                 FontSize="16" />
             <Button
     Text="Sửa hiệu xe"
-    BackgroundColor="CadetBlue"
+    BackgroundColor="#10B981"
     TextColor="White"
     FontSize="16"
     Command="{Binding ToggleUpdateCommand}" 
                 IsVisible="{Binding IsReadOnly}"/>
-            <Button
-                Text="Lưu"
-                BackgroundColor="CadetBlue"
-                TextColor="White"
-                FontSize="16"
-                Command="{Binding UpdateHieuXeCommand}" IsVisible="{Binding IsUpdating}"/>
-            <Button
-    Text="Huỷ"
-    BackgroundColor="CadetBlue"
-    TextColor="White"
-    FontSize="16"
-    Command="{Binding CancelCommand}" IsVisible="{Binding IsUpdating}"/>
+            <HorizontalStackLayout Spacing="20" HorizontalOptions="Center">
+                <Button
+            Text="Lưu"
+            BackgroundColor="#10B981"
+            TextColor="White"
+            FontSize="16"
+            Command="{Binding UpdateHieuXeCommand}" IsVisible="{Binding IsUpdating}" WidthRequest="200"/>
+                <Button
+Text="Huỷ"
+BackgroundColor="Gray"
+TextColor="White"
+FontSize="16"
+Command="{Binding CancelCommand}" IsVisible="{Binding IsUpdating}" WidthRequest="200"/>
+            </HorizontalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>

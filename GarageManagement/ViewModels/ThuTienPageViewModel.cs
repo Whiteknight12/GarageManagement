@@ -165,11 +165,6 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Error", "Không được bỏ trống số điện thoại", "OK");
                 return;
             }
-            if (NgayThuTien.Date < DateTime.Now.Date)
-            {
-                await Shell.Current.DisplayAlert("Error", "Ngày thu tiền không được nhỏ hơn ngày hiện tại", "OK");
-                return;
-            }
             if (string.IsNullOrEmpty(SoTienThu))
             {
                 await Shell.Current.DisplayAlert("Error", "Không được bỏ trống số tiền thu", "OK");
@@ -219,6 +214,7 @@ namespace GarageManagement.ViewModels
             //if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
             var toast = Toast.Make("Thông tin phiếu thu đã được hệ thống lưu trữ.", CommunityToolkit.Maui.Core.ToastDuration.Short);
             await toast.Show();
+            MessagingCenter.Send(this, "PhieuThuTienCreated"); 
         }
     }
 }

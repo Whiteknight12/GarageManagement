@@ -73,6 +73,8 @@ namespace WebAPI.Controllers
         {
             Guid entityId = Guid.Empty;
             var idProperty = typeof(T).GetProperty("Id");
+            if (idProperty == null)
+                idProperty = typeof(T).GetProperty("VatTuPhuTungId"); 
             if (idProperty == null || idProperty.PropertyType != typeof(Guid))
                 return BadRequest("Entity must have a Guid Id property");
             var idValue = idProperty.GetValue(entity);

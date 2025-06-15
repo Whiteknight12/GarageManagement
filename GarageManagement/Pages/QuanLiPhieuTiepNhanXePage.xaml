@@ -10,11 +10,16 @@
     <!-- converter cho nút “Xoá / Huỷ” -->
     <ContentView.Resources>
         <ResourceDictionary>
+            <!-- converter cho nút “Xoá / Huỷ” -->
             <service:DeleteModeTextConverter x:Key="DeleteModeTextConverter"/>
+            <!-- Converter cho boolean -> text hoàn thành -->
+            <service:BoolToCompletionTextConverter x:Key="BoolToCompletionTextConverter"
+                                          CompletedText="Đã hoàn thành"
+                                          NotCompletedText="Chưa hoàn thành"/>
         </ResourceDictionary>
     </ContentView.Resources>
-
-    <ScrollView>
+    <Grid ColumnDefinitions="*,Auto">
+        <ScrollView Grid.Column="0">
         <VerticalStackLayout Padding="30"
                              Spacing="20"
                              MaximumWidthRequest="1000">
@@ -63,7 +68,7 @@
 
                         <!-- Tên KH -->
                         <HorizontalStackLayout Spacing="6">
-                            <Label Text="Tên KH:"
+                            <Label Text="Tên KH:" Margin="20,0,20,0"
            WidthRequest="70"
            VerticalOptions="Center"
            TextColor="{DynamicResource TextColor}" />
@@ -79,7 +84,7 @@
 
                     <!-- Bộ lọc ngày -->
                     <HorizontalStackLayout>
-                        <Label Text="Lọc theo:" WidthRequest="70" VerticalOptions="Center"
+                            <Label Text="Lọc theo:" WidthRequest="70" VerticalOptions="Center" Margin="0,0,20,0"
 TextColor="{DynamicResource TextColor}"/>
                         <Picker ItemsSource="{Binding DateFilterOptions}"
                                 SelectedItem="{Binding SelectedDateOption}"
@@ -241,7 +246,6 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
                                        VerticalOptions="Center"/>
 
 
-                                <!-- Chủ xe – tap để xem KH -->
                                 <Label Text="{Binding TenKhachHang}"
                                        Grid.Column="4"
                                        TextColor="{DynamicResource TextColor}"
@@ -261,8 +265,8 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
                             </Grid>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Source={x:Reference RootContentView},
-                                       Path=BindingContext.ShowXeDetailCommand}"
-                      CommandParameter="{Binding XeId}"/>
+                                       Path=BindingContext.ShowRightPaneCommand}"
+                      CommandParameter="{Binding Id}"/>
                             </Frame.GestureRecognizers>
                         </Frame>
                     </DataTemplate>
@@ -274,4 +278,126 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
 
         </VerticalStackLayout>
     </ScrollView>
+        <BoxView Grid.Column="0" 
+             HorizontalOptions="End" 
+             WidthRequest="1" 
+             BackgroundColor="LightGray" />
+        <ScrollView Grid.Column="1" MinimumWidthRequest="350"
+                Padding="20"
+                BackgroundColor="{DynamicResource BackgroundColor}"
+                IsVisible="{Binding IsDetailPaneVisible}">
+            <VerticalStackLayout Spacing="16">
+
+                <!-- Close button -->
+                <Button Text="✕" Command="{Binding CloseRightPaneCommand}" HorizontalOptions="End" BackgroundColor="Transparent" />
+                <Frame HasShadow="True"
+       Padding="20"
+       BackgroundColor="{DynamicResource CardBackgroundColor}">
+                    <Label Text="Chi tiết phiếu tiếp nhận" FontSize="20" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                </Frame>
+                <Frame HasShadow="True"
+       Padding="20"
+       BackgroundColor="{DynamicResource CardBackgroundColor}">
+                    <VerticalStackLayout Spacing="20">
+                        <!-- Mã phiếu -->
+                        <HorizontalStackLayout>
+                            <Label Text="Mã phiếu:" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" />
+                            <Label Text="{Binding SelectedPhieuTiepNhan.Id}" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" />
+                        </HorizontalStackLayout>
+
+
+                        <!-- Ngày tiếp nhận -->
+                        <Label Text="{Binding SelectedPhieuTiepNhan.NgayTiepNhan, StringFormat='Ngày: {0:dd/MM/yyyy HH:mm}'}" TextColor="{DynamicResource TextColor}" FontAttributes="Bold">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsEditing}" Value="True">
+                                    <Setter Property="IsVisible" Value="False" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <DatePicker Date="{Binding SelectedPhieuTiepNhan.NgayTiepNhan, Mode=TwoWay}" Format="dd/MM/yyyy HH:mm" IsVisible="{Binding IsEditing}" BackgroundColor="{DynamicResource CardBackgroundColor}" TextColor="{DynamicResource TextColor}"/>
+
+                        <!-- Filter & select car section -->
+                        <Frame HasShadow="True" Padding="10" Margin="0,10,0,0" IsVisible="{Binding IsEditing}" BackgroundColor="{DynamicResource CardBackgroundColor}">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="Lọc xe để chọn" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+
+                                <!-- Filter fields -->
+                                <HorizontalStackLayout Spacing="6">
+                                    <Entry Placeholder="Biển số" Text="{Binding XeBienSoFilter, Mode=TwoWay}" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource CardBackgroundColor}"/>
+                                    <Entry Placeholder="CCCD chủ" Text="{Binding XeCccdFilter, Mode=TwoWay}" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource CardBackgroundColor}"/>
+                                    <Entry Placeholder="SĐT chủ" Keyboard="Telephone" Text="{Binding XePhoneFilter, Mode=TwoWay}" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource CardBackgroundColor}"/>
+                                </HorizontalStackLayout>
+
+                                <!-- Header labels for result columns -->
+                                <HorizontalStackLayout Spacing="20" Padding="5,0">
+                                    <Label Text="Biển số xe" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="CCCD"       FontAttributes="Bold" TextColor="{DynamicResource TextColor}"  Margin="15,0,30,0"/>
+                                    <Label Text="SĐT"        FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                                </HorizontalStackLayout>
+
+                                <!-- Filtered list -->
+                                <CollectionView ItemsSource="{Binding FilteredXe}" SelectionMode="Single" SelectedItem="{Binding SelectedXeForPhieu, Mode=TwoWay}">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Padding="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*" />
+                                                    <ColumnDefinition Width="2*" />
+                                                    <ColumnDefinition Width="2*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding BienSo}" Grid.Column="0" TextColor="{DynamicResource TextColor}" />
+                                                <Label Text="{Binding Owner.CCCD}" Grid.Column="1" TextColor="{DynamicResource TextColor}" />
+                                                <Label Text="{Binding Owner.SoDienThoai}" Grid.Column="2" TextColor="{DynamicResource TextColor}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Selected car info -->
+                        <Frame HasShadow="False" Padding="10" IsVisible="{Binding IsEditing}" BackgroundColor="{DynamicResource CardBackgroundColor}">
+                            <VerticalStackLayout Spacing="6">
+                                <Label Text="Xe đã chọn:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                                <Label Text="{Binding SelectedPhieuTiepNhan.BienSoXe, StringFormat='Biển số: {0}'}" TextColor="{DynamicResource TextColor}" />
+                                <Label Text="{Binding SelectedXeForPhieu.Owner.HoVaTen, StringFormat='Chủ: {0}'}" TextColor="{DynamicResource TextColor}" />
+                                <Label Text="{Binding SelectedXeForPhieu.Owner.CCCD, StringFormat='CCCD: {0}'}" TextColor="{DynamicResource TextColor}" />
+                                <Label Text="{Binding SelectedXeForPhieu.Owner.SoDienThoai, StringFormat='SĐT: {0}'}" TextColor="{DynamicResource TextColor}" />
+                            </VerticalStackLayout>
+                        </Frame>
+
+                        <!-- Display when not editing -->
+                        <Label Text="{Binding SelectedPhieuTiepNhan.BienSoXe, StringFormat='Biển số xe: {0}'}" TextColor="{DynamicResource TextColor}" FontAttributes="Bold">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsEditing}" Value="True">
+                                    <Setter Property="IsVisible" Value="False" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+
+                        <!-- Maintenance status -->
+                        <HorizontalStackLayout VerticalOptions="Center" Spacing="6">
+                            <Label Text="Tình trạng bảo trì:" VerticalOptions="Center" TextColor="{DynamicResource TextColor}" FontAttributes="Bold"/>
+                            <Label Text="{Binding SelectedPhieuTiepNhan.DaHoanThanhBaoTri, Converter={StaticResource BoolToCompletionTextConverter}}" VerticalOptions="Center" TextColor="{DynamicResource TextColor}" FontAttributes="Bold" />
+                        </HorizontalStackLayout>
+                        <Switch IsToggled="{Binding SelectedPhieuTiepNhan.DaHoanThanhBaoTri, Mode=TwoWay}" IsVisible="{Binding IsEditing}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Edit / Save / Cancel buttons -->
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Button Text="Chỉnh Sửa thông tin" FontAttributes="Bold" Command="{Binding EditDetailedCommand}" IsVisible="{Binding IsNotEditing}" BackgroundColor="Green" TextColor="White" />
+                    <HorizontalStackLayout Spacing="10" IsVisible="{Binding IsEditing}">
+                        <Button Text="Lưu" Command="{Binding SaveDetailedCommand}" BackgroundColor="Green" TextColor="White" />
+                        <Button Text="Hủy" Command="{Binding CancelDetailedCommand}" BackgroundColor="Gray" TextColor="White" />
+                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+
+
+    </Grid>
 </ContentView>
+
