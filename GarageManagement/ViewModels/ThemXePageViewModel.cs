@@ -4,9 +4,6 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
 {
@@ -76,8 +73,7 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Thông báo", "Xe phải có chủ xe", "OK");
                 return;
             }
-            var chuXe = await _customerService.GetThroughtSpecialRoute("PhoneNumber", SoDienThoai);
-            
+            var chuXe = await _customerService.GetThroughtSpecialRoute("PhoneNumber", SoDienThoai);           
             if (ChuXeExist == false)
             {  
                 if (int.TryParse(this.Tuoi, out var tuoi)) 
@@ -98,7 +94,20 @@ namespace GarageManagement.ViewModels
             {
                 chuXeId = chuXe.Id; 
             }
-            var xe= await _xeService.Create(new Xe
+            var listXe = await _xeService.GetAll();
+            if (listXe is not null)
+            {
+                foreach (var item in listXe)
+                {
+                    if (BienSoXe==item.BienSo)
+                    {
+                        await Shell.Current.DisplayAlert("Thông báo", "Biển số xe đã tồn tại", "OK");
+                        BienSoXe = "";
+                        return;
+                    }
+                }
+            }
+            var xe = await _xeService.Create(new Xe
             {
                 Id = Guid.NewGuid(),
                 Ten = TenXe,

@@ -41,6 +41,18 @@ namespace GarageManagement.ViewModels
                     return;
                 }
 
+                var listVTPT = await _vatTuPhuTungService.GetAll();
+                if (listVTPT is not null)
+                {
+                    foreach (var item in listVTPT)
+                    {
+                        if (item.TenLoaiVatTuPhuTung==TenLoaiVatTuPhuTung)
+                        {
+                            await Toast.Make("Tên loại vật tư bị trùng", CommunityToolkit.Maui.Core.ToastDuration.Short).Show();
+                            return;
+                        }
+                    }
+                }
                 var newVatTu = await _vatTuPhuTungService.Create(new VatTuPhuTung
                 {
                     VatTuPhuTungId = Guid.NewGuid(),

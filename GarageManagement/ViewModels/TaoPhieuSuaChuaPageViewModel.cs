@@ -77,9 +77,9 @@ namespace GarageManagement.ViewModels
 
         public async Task LoadAsync()
         {
-            double mul;
+            //double mul;
             var tile = await _thamSoService.GetThroughtSpecialRoute("TiLeDonGiaBan");
-            mul = tile.GiaTri;
+            //mul = tile.GiaTri;
             var listcar = await _carservice.GetAll();
             var listPhieu = await _phieuTiepNhanService.GetAll();
             var pl = listPhieu.Where(p => p.DaHoanThanhBaoTri == false);
@@ -200,11 +200,13 @@ namespace GarageManagement.ViewModels
             }
             foreach (var item in ListNoiDung)
             {
+                var tienCong = await _tiencongservice.GetByID(item.TienCongId??Guid.Empty);
                 var chiTietPhieuSuaChua=await _noidungphieuservice.Create(new ChiTietPhieuSuaChua
                 {
                     NoiDungSuaChuaId=item.NoiDungSuaChuaId,
                     PhieuSuaChuaId = obj.Id,
                     TienCongId = item.TienCongId,
+                    TienCongApDung=tienCong?.DonGiaLoaiTienCong ?? 0,
                     ThanhTien = item.ThanhTien
                 });
                 if (chiTietPhieuSuaChua is null)
@@ -224,11 +226,13 @@ namespace GarageManagement.ViewModels
                         await Shell.Current.DisplayAlert("Thông báo", "Không được bỏ trống số lượng", "OK");
                         return; 
                     }
+                    var tmp_vtpt = await _vattuservice.GetByID(chiTietVTPT.SelectedVTPTId ?? Guid.Empty);
                     var result = await _vtptChiTietPhieuSuaChuaService.Create(new VTPTChiTietPhieuSuaChua
                     {
                         Id = Guid.NewGuid(),
                         ChiTietPhieuSuaChuaId = chiTietPhieuSuaChua.Id,
                         VatTuPhuTungId = chiTietVTPT.SelectedVTPTId ?? Guid.Empty,
+                        DonGiaVTPTApDung=tmp_vtpt?.DonGiaBanLoaiVatTuPhuTung??0,
                         SoLuong = chiTietVTPT.SoLuong
                     });
                     if (result is null)

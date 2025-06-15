@@ -162,6 +162,7 @@
             <Entry
                 Placeholder="Nhập tên đăng nhập"
                 Text="{Binding NewUsername}" 
+                TextChanged="OnUsernameChanged"
                 BackgroundColor="{DynamicResource InputBackgroundColor}"
                 TextColor="{DynamicResource TextColor}"/>
 

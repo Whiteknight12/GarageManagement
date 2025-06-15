@@ -1,3 +1,4 @@
+﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
 using GarageManagement.ViewModels;
 
@@ -7,9 +8,13 @@ public partial class AddNewAccountPage : ContentView
 {
     public AddNewAccountPageViewModel _viewModel;
 
-    public AddNewAccountPage(AddNewAccountPageViewModel viewModel)
+    private readonly APIClientService<TaiKhoan> _taiKhoanService;
+
+    public AddNewAccountPage(AddNewAccountPageViewModel viewModel,
+        APIClientService<TaiKhoan> taiKhoanService)
     {
         _viewModel = viewModel;
+        _taiKhoanService = taiKhoanService;
         BindingContext = _viewModel;
         InitializeComponent();
     }
@@ -22,5 +27,21 @@ public partial class AddNewAccountPage : ContentView
         _viewModel.HoVaTen = user.HoVaTen ?? "";
         _viewModel.CCCD = user.CCCD ?? "";
         _viewModel.PhoneNumber = user.SDT ?? "";
+    }
+
+    public async void OnUsernameChanged(object sender, EventArgs e)
+    {
+        if (sender is Entry entry)
+        {
+            var listTK = await _taiKhoanService.GetAll();
+            foreach (var item in listTK)
+            {
+                if (item.TenDangNhap==entry.Text)
+                {
+                    await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập đã tồn tại", "OK");
+                    return;
+                }
+            }
+        }
     }
 }

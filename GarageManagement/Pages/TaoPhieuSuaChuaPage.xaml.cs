@@ -46,8 +46,8 @@ public partial class TaoPhieuSuaChuaPage : ContentView
                     vtptList.OnPropertyChanged(nameof(vtptList.DonGia));
                     return;
                 }
-                var mul = await _thamSoService.GetThroughtSpecialRoute("TiLeDonGiaBan");
-                vtptList.DonGia = vtpt.DonGiaBanLoaiVatTuPhuTung * mul.GiaTri;
+                //var mul = await _thamSoService.GetThroughtSpecialRoute("TiLeDonGiaBan");
+                vtptList.DonGia = vtpt.DonGiaBanLoaiVatTuPhuTung; //* mul.GiaTri;
                 vtptList.OnPropertyChanged(nameof(vtptList.DonGia));
                 var updateItem=_viewmodel.ListNoiDung.FirstOrDefault(u => u.NoiDungId == vtptList.IdForUI);
                 if (updateItem is not null)

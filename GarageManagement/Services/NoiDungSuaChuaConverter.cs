@@ -1,22 +1,24 @@
 ﻿using APIClassLibrary.APIModels;
-using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace GarageManagement.Services
 {
     public class NoiDungSuaChuaConverter: IValueConverter
     {
-        public IEnumerable<NoiDungSuaChua> NoiDungList { get; set; }
+        public ObservableCollection<NoiDungSuaChua> NoiDungList { get; set; }
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is Guid id && NoiDungList != null)
             {
-                return NoiDungList.FirstOrDefault(x => x.Id == id);
+                if (NoiDungList is not null && NoiDungList.Any())
+                {
+                    var returnItem= NoiDungList.FirstOrDefault(x => x.Id == id);
+                    if ( returnItem != null ) return returnItem;
+                }     
             }
             return null;
         }
