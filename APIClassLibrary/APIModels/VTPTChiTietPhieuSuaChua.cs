@@ -24,6 +24,22 @@ namespace APIClassLibrary.APIModels
         public string? TenLoaiVatTuPhuTung { get; set; }
         public Guid? SelectedVTPTId { get; set; }
 
+        //for UI only
+        private VatTuPhuTung? _selectedVatTu;
+        public VatTuPhuTung? SelectedVatTu
+        {
+            get => _selectedVatTu;
+            set
+            {
+                if (_selectedVatTu != value)
+                {
+                    _selectedVatTu = value;
+                    OnPropertyChanged(nameof(SelectedVatTu));
+                    VatTuPhuTungId = value?.VatTuPhuTungId ?? Guid.Empty;
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged(string propertyName)
         {

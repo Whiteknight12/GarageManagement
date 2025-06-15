@@ -19,8 +19,7 @@ namespace GarageManagement.ViewModels
         [ObservableProperty] private string priceFromText = string.Empty;
         [ObservableProperty] private string priceToText = string.Empty;
 
-        public ObservableCollection<string> TimeFilterOptions { get; } =
-    new ObservableCollection<string> { "Tất cả", "Ngày" };
+        public ObservableCollection<string> TimeFilterOptions { get; } = new ObservableCollection<string> { "Tất cả", "Ngày" };
 
         [ObservableProperty]
         private string selectedTimeFilter = "Tất cả";
@@ -44,6 +43,7 @@ namespace GarageManagement.ViewModels
         private readonly AuthenticationService _authenticationService;
         private readonly APIClientService<Xe> _xeService; // Service để lấy thông tin xe
         private readonly TaoPhieuSuaChuaPageViewModel _taoPhieuSuaChuaPageViewModel;
+        private readonly SuaPhieuSuaChuaPage _suaPhieuSuaChuaPage;
 
         APIClientService<TienCong> _congservice;
         APIClientService<ChiTietPhieuSuaChua> _noidungphieuservice;
@@ -53,12 +53,14 @@ namespace GarageManagement.ViewModels
             APIClientService<Xe> xeService,
             ILogger<QuanLiPhieuSuaChuaPageViewModel> logger,
             AuthenticationService authenticationService,
-            TaoPhieuSuaChuaPageViewModel taoPhieuSuaChuaPageViewModel)
+            TaoPhieuSuaChuaPageViewModel taoPhieuSuaChuaPageViewModel,
+            SuaPhieuSuaChuaPage suaPhieuSuaChuaPage)
         {
             _authenticationService = authenticationService;
             _phieuSuaChuaService = phieuSuaChuaService;
             _xeService = xeService;
-            _taoPhieuSuaChuaPageViewModel = taoPhieuSuaChuaPageViewModel; 
+            _taoPhieuSuaChuaPageViewModel = taoPhieuSuaChuaPageViewModel;
+            _suaPhieuSuaChuaPage = suaPhieuSuaChuaPage;
             _ = LoadAsync();
             IsDeleteMode = false;
         }
@@ -131,7 +133,22 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private void Edit(Guid id)
         {
-            // Logic để sửa phiếu sửa chữa dựa trên id (có thể mở một trang để chỉnh sửa thông tin)
+            var wrapper = new ContentPage
+            {
+                Content = _suaPhieuSuaChuaPage,
+                Padding = 0
+            };
+            _suaPhieuSuaChuaPage._viewModel.phieuSuaChuaId= id;
+            var newWindow = new Window
+            {
+                Page = wrapper,
+                Title = "Sửa phiếu sữa chữa",
+                MaximumHeight = 600,
+                MaximumWidth = 800,
+                MinimumHeight = 600,
+                MinimumWidth = 800
+            };
+            Application.Current.OpenWindow(newWindow);
         }
 
         [RelayCommand]

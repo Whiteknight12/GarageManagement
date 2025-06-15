@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GarageManagement.Pages.SuaPhieuSuaChuaPage"
              xmlns:viewmodel="clr-namespace:GarageManagement.ViewModels"
              xmlns:service="clr-namespace:GarageManagement.Services"
-             x:Class="GarageManagement.Pages.TaoPhieuSuaChuaPage"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
     <ContentView.Resources>
-        <ResourceDictionary>
-            <service:PickerConverterService x:Key="IDConverter"/>
-            <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
-                <On Platform="Android" Value="20" />
-                <On Platform="iOS" Value="20" />
-                <On Platform="Windows" Value="20" />
-            </OnPlatform>
-            <OnPlatform x:Key="ButtonCornerRadiusHandler" x:TypeArguments="x:Double">
-                <On Platform="Android" Value="12" />
-                <On Platform="iOS" Value="12" />
-                <On Platform="Windows" Value="12" />
-            </OnPlatform>
-            <OnPlatform x:Key="DeleteButtonCornerRadiusHandler" x:TypeArguments="x:Double">
-                <On Platform="Android" Value="10" />
-                <On Platform="iOS" Value="10" />
-                <On Platform="Windows" Value="10" />
-            </OnPlatform>
-        </ResourceDictionary>
+        <service:VatTuPhuTungIdConverter x:Key="VTPTConverter"/>
+        <service:NoiDungSuaChuaConverter x:Key="NDConverter"/>
+
+        <service:PickerConverterService x:Key="IDConverter"/>
+
+        <OnPlatform x:Key="CornerRadiusHandler" x:TypeArguments="x:Double">
+            <On Platform="Android" Value="20" />
+            <On Platform="iOS" Value="20" />
+            <On Platform="Windows" Value="20" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="ButtonCornerRadiusHandler" x:TypeArguments="x:Double">
+            <On Platform="Android" Value="12" />
+            <On Platform="iOS" Value="12" />
+            <On Platform="Windows" Value="12" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="DeleteButtonCornerRadiusHandler" x:TypeArguments="x:Double">
+            <On Platform="Android" Value="10" />
+            <On Platform="iOS" Value="10" />
+            <On Platform="Windows" Value="10" />
+        </OnPlatform>
     </ContentView.Resources>
 
     <ScrollView>
@@ -34,7 +38,7 @@
                    HasShadow="True"
                    CornerRadius="{StaticResource CornerRadiusHandler}">
                 <VerticalStackLayout Spacing="12">
-                    <Label Text="LẬP PHIẾU SỮA CHỮA" 
+                    <Label Text="CẬP NHẬT PHIẾU SỮA CHỮA" 
                            FontAttributes="Bold" 
                            FontSize="20" 
                            FontFamily="OpenSans-SemiBold"
@@ -103,9 +107,9 @@
                                                FontFamily="OpenSans-Regular" 
                                                TextColor="{DynamicResource TextColor}"/>
                                         <Picker TitleColor="{DynamicResource PlaceholderColor}"
-                                            ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListNoiDungSuaChua}"
+                                            ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SuaPhieuSuaChuaPageViewModel}}, Path=ListNoiDungSuaChua}"
                                             ItemDisplayBinding="{Binding TenNoiDungSuaChua}"
-                                            SelectedItem="{Binding NoiDungSuaChuaId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
+                                            SelectedItem="{Binding NoiDungSuaChuaId, Mode=TwoWay, Converter={StaticResource NDConverter}}"
                                             SelectedIndexChanged="OnNoiDungSuaChuaChanged"
                                             BackgroundColor="{DynamicResource InputBackgroundColor}"
                                             TextColor="{DynamicResource TextColor}"
@@ -131,7 +135,7 @@
                                         HeightRequest="40"
                                         FontFamily="OpenSans-SemiBold"
                                         CornerRadius="{StaticResource DeleteButtonCornerRadiusHandler}"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=RemoveCommand}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SuaPhieuSuaChuaPageViewModel}}, Path=RemoveCommand}"
                                         CommandParameter="{Binding NoiDungId}">
                                         <VisualStateManager.VisualStateGroups>
                                             <VisualStateGroupList>
@@ -192,10 +196,10 @@
 
                                                 <Picker Grid.Row="1" Grid.Column="0"
                                                     TitleColor="{DynamicResource TextColor}"
-                                                    ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=ListVatTuPhuTung}"
+                                                    ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SuaPhieuSuaChuaPageViewModel}}, Path=ListVatTuPhuTung}"
                                                     ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
                                                     SelectedIndexChanged="OnVTPTChanged"
-                                                    SelectedItem="{Binding SelectedVTPTId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
+                                                    SelectedItem="{Binding SelectedVTPTId, Mode=TwoWay, Converter={StaticResource VTPTConverter}}"
                                                     BackgroundColor="{DynamicResource InputBackgroundColor}"
                                                     TextColor="{DynamicResource TextColor}"
                                                     HeightRequest="45" />
@@ -221,7 +225,7 @@
                                                     BackgroundColor="#EF4444"
                                                     TextColor="White"
                                                     HeightRequest="30"
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=RemoveVTPTCommand}"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SuaPhieuSuaChuaPageViewModel}}, Path=RemoveVTPTCommand}"
                                                     CommandParameter="{Binding IdForDeleteUI}" />
                                             </Grid>
                                         </DataTemplate>
@@ -233,7 +237,7 @@
                                     TextColor="White"
                                     HeightRequest="40"
                                     CornerRadius="8"
-                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TaoPhieuSuaChuaPageViewModel}}, Path=AddVTPTCommand}"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SuaPhieuSuaChuaPageViewModel}}, Path=AddVTPTCommand}"
                                     CommandParameter="{Binding NoiDungId}" />
                             </StackLayout>
                         </Frame>

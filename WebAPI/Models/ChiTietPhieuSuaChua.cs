@@ -11,6 +11,6 @@ namespace WebAPI.Models
         public Guid TienCongId { get; set; }
         public Guid NoiDungSuaChuaId { get; set; }
 
-        public double ThanhTien {  get; set; } 
+        public double ThanhTien {  get; set; }
     }
 }   

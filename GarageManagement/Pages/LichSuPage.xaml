@@ -5,7 +5,7 @@
              x:Class="GarageManagement.Pages.LichSuPage"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
-    <Grid Padding="20" RowSpacing="10">
+    <Grid Padding="20" RowSpacing="10" MaximumWidthRequest="1000">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

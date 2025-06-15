@@ -22,6 +22,8 @@ namespace GarageManagement.ViewModels
         private int selectedYear;
         [ObservableProperty]
         private int selectedMonth;
+        [ObservableProperty]
+        private bool hasData;
 
         private readonly APIClientService<ChiTietBaoCaoTon> _chiTietService;
         private readonly APIClientService<BaoCaoTon> _baoCaoService;
@@ -51,15 +53,18 @@ namespace GarageManagement.ViewModels
 
         public async Task onDateChanged()
         {
-            if (SelectedYear == 0 || SelectedMonth == 0)
+            if (SelectedYear ==0 || SelectedMonth == 0)
             {
                 return;
+            }
+            if (SelectedYear==DateTime.UtcNow.ToLocalTime().Year && SelectedMonth==DateTime.UtcNow.ToLocalTime().Month)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Chưa thể xem báo cáo tồn của tháng này", "OK");
             }
             BaoCaoList.Clear();
             var chiTietBaoCao = await _chiTietService.GetListOnSpecialRequirement($"month-and-year/{SelectedMonth}/{SelectedYear}");
             if (chiTietBaoCao is not null) BaoCaoList= new ObservableCollection<ChiTietBaoCaoTon>(chiTietBaoCao);
+            if (!BaoCaoList.Any()) HasData = false;
         }
-
-        
     }
 }

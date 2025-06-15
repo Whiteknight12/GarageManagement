@@ -305,23 +305,43 @@
                         </Frame.GestureRecognizers>
                     </Frame>
                     <Frame BackgroundColor="{Binding BaoCaoDoanhSoListActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-    CornerRadius="{StaticResource CornerRadiusHandler}"
-    Padding="10"
-    Margin="5"
-    HasShadow="True">
+                            CornerRadius="{StaticResource CornerRadiusHandler}"
+                            Padding="10"
+                            Margin="5"
+                            HasShadow="True">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Quản lí bc tháng"
-           TextColor="White"
-           FontSize="14"
-           FontFamily="OpenSans-Regular"
-           HorizontalOptions="Center"
-           LineBreakMode="WordWrap"
-           MaximumWidthRequest="120"
-           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="BaoCaoDoanhSoList" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Frame BackgroundColor="{Binding QuanLiBaoCaoTonActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+                        CornerRadius="{StaticResource CornerRadiusHandler}"
+                        Padding="10"
+                        Margin="5"
+                        HasShadow="True">
+                        <HorizontalStackLayout>
+                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                            <Label Text="Quản lí báo cáo tồn"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                        </HorizontalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiBaoCaoTon" />
                         </Frame.GestureRecognizers>
                     </Frame>
                 </VerticalStackLayout>

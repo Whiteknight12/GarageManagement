@@ -8,6 +8,7 @@ namespace GarageManagement.Pages;
 public partial class MainPage : ContentPage
 {
     private readonly MainPageViewModel _viewModel;
+    private bool _subscribed = false;
 
     private ChiTietXePage _chiTietXePage;
     private AddNewAccountPage _addNewAccountPage;
@@ -65,6 +66,7 @@ public partial class MainPage : ContentPage
     protected override void OnAppearing()
     {
         base.OnAppearing();
+        if (_subscribed) return;
         MessagingCenter.Subscribe<TiepNhanXePageViewModel, Guid>(
         this, "ShowCarDetails",
         (sender, carId) =>
@@ -267,7 +269,7 @@ public partial class MainPage : ContentPage
                         _viewModel.ShowRightPane(content);
                     }
                 });
-
+        _subscribed = true;
     }
 
     protected override void OnDisappearing()

@@ -22,6 +22,22 @@ namespace APIClassLibrary.APIModels
         //ten noi dung sua chua de xu li trong UI, khong luu vao db
         public string? TenNoiDungSuaChua { get; set; }
 
+        //For UI only
+        private NoiDungSuaChua? _selectedNoiDungSuaChua;
+        public NoiDungSuaChua? SelectedNoiDungSuaChua
+        {
+            get => _selectedNoiDungSuaChua;
+            set
+            {
+                if (_selectedNoiDungSuaChua != value)
+                {
+                    _selectedNoiDungSuaChua = value;
+                    OnPropertyChanged(nameof(SelectedNoiDungSuaChua));
+                    NoiDungSuaChuaId = value?.Id;
+                }
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged(string propertyName)
         {
