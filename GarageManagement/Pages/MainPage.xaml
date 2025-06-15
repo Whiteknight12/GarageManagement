@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:service="clr-namespace:GarageManagement.Services"
              x:Class="GarageManagement.Pages.MainPage"
+             x:Name="RootContentView"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
     <ContentPage.Resources>
@@ -88,7 +89,7 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
-                           HasShadow="True">
+                           HasShadow="True" IsVisible="{Binding QuanLiDanhSachXePermission}" >
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="QL DS Xe"
@@ -108,7 +109,7 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
-                           HasShadow="True">
+                           HasShadow="True" IsVisible="{Binding QuanLiDanhSachHieuXePermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="QL DS Hiệu Xe"
@@ -128,7 +129,7 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
-                           HasShadow="True">
+                           HasShadow="True" IsVisible="{Binding QuanLiDanhSachLoaiVatTuPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="QL DS Loại Vật Tư Phụ Tùng"
@@ -148,7 +149,7 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
-                           HasShadow="True">
+                           HasShadow="True" IsVisible="{Binding QuanLiDanhSachLoaiTienCongPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="QL DS Loại Tiền Công"
@@ -168,7 +169,7 @@
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
                             Margin="5"
-                            HasShadow="True">
+                            HasShadow="True" IsVisible="{Binding QuanLiNhanVienPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Quản lí nhân viên"
@@ -188,7 +189,7 @@
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
                             Margin="5"
-                            HasShadow="True">
+                            HasShadow="True" IsVisible="{Binding QuanLiKhachHangPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Quản lí khách hàng"
@@ -208,7 +209,7 @@
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
                             Margin="5"
-                            HasShadow="True">
+                            HasShadow="True" IsVisible="{Binding QuanLiPhieuNhapPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Quản lí phiếu nhập"
@@ -228,7 +229,7 @@
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
                             Margin="5"
-                            HasShadow="True">
+                            HasShadow="True" IsVisible="{Binding QuanLiPhieuSuaChuaPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Quản lí phiếu sữa chữa"
@@ -248,7 +249,7 @@
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
                             Margin="5"
-                            HasShadow="True">
+                            HasShadow="True" IsVisible="{Binding QuanLiPhieuThuTienPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Quản lí phiếu thu tiền"
@@ -268,7 +269,7 @@
                         CornerRadius="{StaticResource CornerRadiusHandler}"
                         Padding="10"
                         Margin="5"
-                        HasShadow="True">
+                        HasShadow="True" IsVisible="{Binding QuanLiPhieuTiepNhanPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Quản lí phiếu tiếp nhận"
@@ -288,7 +289,7 @@
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
                             Margin="5"
-                            HasShadow="True">
+                            HasShadow="True" IsVisible="{Binding QuanLiBaoCaoThangPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Quản lí bc tháng"
@@ -308,7 +309,7 @@
                         CornerRadius="{StaticResource CornerRadiusHandler}"
                         Padding="10"
                         Margin="5"
-                        HasShadow="True">
+                        HasShadow="True" IsVisible="{Binding QuanLiBaoCaoTonPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Quản lí báo cáo tồn"
@@ -355,7 +356,7 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
-                           HasShadow="True">
+                           HasShadow="True" IsVisible="{Binding TiepNhanXePermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Tiếp Nhận Xe"
@@ -375,7 +376,7 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
-                           HasShadow="True">
+                           HasShadow="True" IsVisible="{Binding LapPhieuSuaChuaPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Lập Phiếu Sửa Chữa"
@@ -395,7 +396,7 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
-                           HasShadow="True">
+                           HasShadow="True" IsVisible="{Binding LapPhieuNhapPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Lập Phiếu Nhập"
@@ -415,7 +416,7 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
-                           HasShadow="True">
+                           HasShadow="True" IsVisible="{Binding LapPhieuThuTienPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Lập Phiếu Thu Tiền"
@@ -462,7 +463,7 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
-                           HasShadow="True">
+                           HasShadow="True" >
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Phân Quyền"
@@ -482,7 +483,7 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
-                           HasShadow="True">
+                           HasShadow="True" IsVisible="{Binding ThayDoiThamSoPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Thay Đổi Tham Số"
@@ -502,7 +503,7 @@
                         CornerRadius="{StaticResource CornerRadiusHandler}"
                         Padding="10"
                         Margin="5"
-                        HasShadow="True">
+                        HasShadow="True" IsVisible="{Binding QuanLiDanhSachTaiKhoanPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="QL DS Tài Khoản"
@@ -522,7 +523,7 @@
                         CornerRadius="{StaticResource CornerRadiusHandler}"
                         Padding="10"
                         Margin="5"
-                        HasShadow="True">
+                        HasShadow="True" IsVisible="{Binding QuanLiLichSuPermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Quản lí lịch sử"
@@ -569,7 +570,7 @@
                        CornerRadius="{StaticResource CornerRadiusHandler}"
                        Padding="10"
                        Margin="5"
-                       HasShadow="True">
+                       HasShadow="True" IsVisible="{Binding KhachHangXemDanhSachXePermission}">
                         <HorizontalStackLayout>
                             <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
                             <Label Text="Xem danh sách xe"

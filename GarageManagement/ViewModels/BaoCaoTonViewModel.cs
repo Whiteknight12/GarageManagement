@@ -57,7 +57,11 @@ namespace GarageManagement.ViewModels
             {
                 return;
             }
-            if (SelectedYear==DateTime.UtcNow.ToLocalTime().Year && SelectedMonth==DateTime.UtcNow.ToLocalTime().Month)
+            if (SelectedYear > DateTime.UtcNow.ToLocalTime().Year)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Chưa thể xem báo cáo tồn của năm này", "OK");
+            }
+            if (SelectedMonth >= DateTime.UtcNow.ToLocalTime().Month && SelectedYear == DateTime.UtcNow.ToLocalTime().Year)
             {
                 await Shell.Current.DisplayAlert("Thông báo", "Chưa thể xem báo cáo tồn của tháng này", "OK");
             }
