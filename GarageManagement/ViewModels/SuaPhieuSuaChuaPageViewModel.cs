@@ -54,8 +54,6 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private ObservableCollection<NoiDungSuaChua> listNoiDungSuaChua = new ObservableCollection<NoiDungSuaChua>();
 
-
-
         public SuaPhieuSuaChuaPageViewModel(APIClientService<ChiTietPhieuSuaChua> chiTietPhieuSuaService,
             APIClientService<PhieuSuaChua> phieuSuaService,
             APIClientService<NoiDungSuaChua> noiDungSuaService,
@@ -112,13 +110,6 @@ namespace GarageManagement.ViewModels
                 foreach (var item in listNoiDungSuaChua) ListNoiDungSuaChua.Add(item);
                 OnPropertyChanged(nameof(ListNoiDungSuaChua));
             }
-            if (ListNoiDung.Count == 0)
-            {
-                ListNoiDung.Add(new ChiTietPhieuSuaChua
-                {
-                    NoiDungId = index++
-                });
-            }
             await LoadPhieuSuaChuaAsync(phieuSuaChuaId);
         }
 
@@ -130,49 +121,27 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Thông báo", "Không tìm thấy phiếu sửa chữa", "OK");
                 return;
             }
-
-            // Gán thông tin chính
-            phieuSuaChuaId = phieuId;
             NgaySuaChua = phieu.NgaySuaChua;
-
-            // Biển số xe
             var xe = await _xeService.GetByID(phieu.XeId);
             SelectedBienSoXe = xe?.BienSo;
-
-            // Load chi tiết
             var chiTietList = await _chiTietPhieuSuaService.GetAll();
             var listND = chiTietList.Where(u => u.PhieuSuaChuaId == phieuId).ToList();
-
-            ListNoiDung.Clear();
-
             foreach (var item in listND)
             {
                 var tienCong = await _tienCongService.GetByID(item.TienCongId ?? Guid.Empty);
                 var noiDung = await _noiDungSuaService.GetByID(item.NoiDungSuaChuaId ?? Guid.Empty);
-
                 double sum = tienCong?.DonGiaLoaiTienCong ?? 0;
-
-                var chiTiet = new ChiTietPhieuSuaChua
-                {
-                    NoiDungId = index++,
-                    NoiDungSuaChuaId = item.NoiDungSuaChuaId,
-                    SelectedNoiDungSuaChua = ListNoiDungSuaChua.FirstOrDefault(x => x.Id == item.NoiDungSuaChuaId),
-                    TienCongId = item.TienCongId,
-                    GiaTienCong = tienCong?.DonGiaLoaiTienCong,
-                    ThanhTien = 0,
-                    ListSpecifiedVTPT = new ObservableCollection<VTPTChiTietPhieuSuaChua>()
-                };
-
-                // Load VTPT
+                item.NoiDungId = index++;
+                item.SelectedNoiDungSuaChua = ListNoiDungSuaChua.FirstOrDefault(x => x.Id == item.NoiDungSuaChuaId);
+                item.ListSpecifiedVTPT = new ObservableCollection<VTPTChiTietPhieuSuaChua>();
                 var vtptList = await _vtptChiTietPhieuSuaChuaService.GetAll();
                 var listVTPT = vtptList.Where(v => v.ChiTietPhieuSuaChuaId == item.Id).ToList();
-
                 foreach (var vt in listVTPT)
                 {
                     var vtptObj = await _vatTuService.GetByID(vt.VatTuPhuTungId);
                     var vtpt = new VTPTChiTietPhieuSuaChua
                     {
-                        IdForUI = chiTiet.NoiDungId ?? 0,
+                        IdForUI = item.NoiDungId ?? 0,
                         IdForDeleteUI = indexVTPT++,
                         VatTuPhuTungId = vt.VatTuPhuTungId,
                         SelectedVTPTId = vt.VatTuPhuTungId,
@@ -181,14 +150,11 @@ namespace GarageManagement.ViewModels
                         SoLuong = vt.SoLuong
                     };
                     sum += (vtpt.DonGia ?? 0) * vtpt.SoLuong;
-                    chiTiet.ListSpecifiedVTPT.Add(vtpt);
+                    item.ListSpecifiedVTPT.Add(vtpt);
                 }
-
-                chiTiet.ThanhTien = sum;
-                ListNoiDung.Add(chiTiet);
             }
-
-            TongThanhTien = ListNoiDung.Sum(u => u.ThanhTien ?? 0);
+            ListNoiDung = new ObservableCollection<ChiTietPhieuSuaChua>(listND);
+            TongThanhTien = phieu.TongTien;
         }
 
 

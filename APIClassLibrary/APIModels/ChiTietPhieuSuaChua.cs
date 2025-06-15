@@ -9,6 +9,7 @@ namespace APIClassLibrary.APIModels
         public Guid Id { get; set; }
         public Guid PhieuSuaChuaId { get; set; }
         public Guid? TienCongId { get; set; }
+        public double? TienCongApDung { get; set; }
         public Guid? NoiDungSuaChuaId { get; set; }
 
         public double? ThanhTien { get; set; }

@@ -131,6 +131,19 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Lỗi", "Vui lòng chọn người dùng để tạo tài khoản", "OK");
                 return;
             }
+            var listTK=await _accountService.GetAll();
+            if (listTK is not null)
+            {
+                foreach (var item in listTK)
+                {
+                    if (item.TenDangNhap == NewUsername)
+                    {
+                        await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập đã tồn tại", "OK");
+                        NewUsername = "";
+                        return;
+                    }
+                }
+            }
             var result=await _accountService.Create(new TaiKhoan()
             {
                 TenDangNhap=NewUsername,

@@ -36,7 +36,19 @@ namespace GarageManagement.ViewModels
                 await Toast.Make("Đơn giá không hợp lệ", CommunityToolkit.Maui.Core.ToastDuration.Short).Show();
                 return;
             }
-
+            var listTC = await _tienCongService.GetAll();
+            if (listTC is not null)
+            {
+                foreach (var item in listTC)
+                {
+                    if (item.TenLoaiTienCong==TenLoaiTienCong)
+                    {
+                        var newToast = Toast.Make("Tên loại tiền công bị trùng", CommunityToolkit.Maui.Core.ToastDuration.Short);
+                        await newToast.Show();
+                        return;
+                    }
+                }
+            }
             var newTienCong = await _tienCongService.Create(new TienCong
             {
                 Id = Guid.NewGuid(),

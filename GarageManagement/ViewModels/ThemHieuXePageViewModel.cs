@@ -27,6 +27,18 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private async Task Save()
         {
+            var listHieuXe=await _hieuXeService.GetAll();
+            if (listHieuXe is not null)
+            {
+                foreach (var item in listHieuXe)
+                {
+                    if (item.TenHieuXe==TenHieuXe)
+                    {
+                        await Shell.Current.DisplayAlert("Thông báo", "Hiệu xe đã tồn tại", "OK");
+                        return;
+                    }
+                }
+            }
             var newHieuXe = await _hieuXeService.Create(new HieuXe
             {
                 Id = Guid.NewGuid(),
@@ -37,6 +49,7 @@ namespace GarageManagement.ViewModels
             TenHieuXe = string.Empty;
             OnHieuXeAdded(newHieuXe);
         }
+
         [RelayCommand]
         private void Cancel()
         {

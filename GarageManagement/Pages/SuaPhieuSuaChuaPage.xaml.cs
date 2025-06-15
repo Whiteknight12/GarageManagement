@@ -13,8 +13,18 @@ public partial class SuaPhieuSuaChuaPage : ContentView
 		InitializeComponent();
 		_viewModel = viewModel;
 		BindingContext = _viewModel;
-        VTPTIdConverter.VatTuList = viewModel.ListVatTuPhuTung;
-        NDSCIdConverter.NoiDungList = viewModel.ListNoiDungSuaChua;
+    }
+
+    protected override async void OnParentSet()
+    {
+        base.OnParentSet();
+
+        if (Parent != null)
+        {
+            await _viewModel.LoadAsync();
+            VTPTIdConverter.VatTuList = _viewModel.ListVatTuPhuTung;
+            NDSCIdConverter.NoiDungList = _viewModel.ListNoiDungSuaChua;
+        }
     }
 
     private async void OnVTPTChanged(object sender, EventArgs e)

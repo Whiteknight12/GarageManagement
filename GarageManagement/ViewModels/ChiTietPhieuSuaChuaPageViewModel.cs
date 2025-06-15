@@ -78,8 +78,7 @@ namespace GarageManagement.ViewModels
                         {
                             var noiDung = await _noiDungSuaService.GetByID(item.NoiDungSuaChuaId??Guid.Empty);
                             item.TenNoiDungSuaChua = noiDung?.TenNoiDungSuaChua;
-                            var tienCong = await _tienCongService.GetByID(item.TienCongId??Guid.Empty);
-                            item.GiaTienCong = tienCong?.DonGiaLoaiTienCong;
+                            item.GiaTienCong = item.TienCongApDung;
                             var tmpList = await _vtChiTietPhieuService.GetAll();
                             item.ListSpecifiedVTPT = new ObservableCollection<VTPTChiTietPhieuSuaChua>(tmpList.Where(U => U.ChiTietPhieuSuaChuaId == item.Id));
                             IsEmpty = item.ListSpecifiedVTPT.Count == 0 ? true : false; 
@@ -90,7 +89,7 @@ namespace GarageManagement.ViewModels
                                 {
                                     var vatTu = await _vatTuService.GetByID(vtpt.VatTuPhuTungId);
                                     vtpt.TenLoaiVatTuPhuTung = vatTu?.TenLoaiVatTuPhuTung;
-                                    vtpt.DonGia = vatTu?.DonGiaBanLoaiVatTuPhuTung;
+                                    vtpt.DonGia = vtpt.DonGiaVTPTApDung;
                                     sum += ((vtpt.DonGia??0) * vtpt.SoLuong);
                                 }
                             }
@@ -112,7 +111,7 @@ namespace GarageManagement.ViewModels
                 Padding = 0
             };
             _suaPhieuSuaChuaPage._viewModel.phieuSuaChuaId = phieuSuaId;
-            _=_suaPhieuSuaChuaPage._viewModel.LoadAsync();
+            //_=_suaPhieuSuaChuaPage._viewModel.LoadAsync();
             var newWindow = new Window
             {
                 Page = wrapper,

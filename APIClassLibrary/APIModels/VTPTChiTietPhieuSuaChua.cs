@@ -12,6 +12,7 @@ namespace APIClassLibrary.APIModels
         public Guid Id { get; set; } 
         public Guid ChiTietPhieuSuaChuaId { get; set; }
         public Guid VatTuPhuTungId { get; set; }
+        public double DonGiaVTPTApDung { get; set; }
         public int SoLuong { get; set; }
 
         //don gia vtpt de xu li UI, khong luu vao db

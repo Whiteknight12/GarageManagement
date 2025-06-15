@@ -48,6 +48,18 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Thông báo", "Không được bỏ trống mật khẩu", "OK");
                 return;
             }
+            var listTK=await _accountService.GetAll();
+            if (listTK is not null)
+            {
+                foreach (var item in listTK)
+                {
+                    if (item.TenDangNhap==TenDangNhap)
+                    {
+                        await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập đã tồn tại", "OK");
+                        return;
+                    }
+                }
+            }
             var result = await _accountService.GetByID(taiKhoanId);
             if (result is not null)
             {

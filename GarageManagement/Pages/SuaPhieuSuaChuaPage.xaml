@@ -109,7 +109,7 @@
                                         <Picker TitleColor="{DynamicResource PlaceholderColor}"
                                             ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SuaPhieuSuaChuaPageViewModel}}, Path=ListNoiDungSuaChua}"
                                             ItemDisplayBinding="{Binding TenNoiDungSuaChua}"
-                                            SelectedItem="{Binding NoiDungSuaChuaId, Mode=TwoWay, Converter={StaticResource NDConverter}}"
+                                            SelectedItem="{Binding SelectedNoiDungSuaChua, Mode=TwoWay}"
                                             SelectedIndexChanged="OnNoiDungSuaChuaChanged"
                                             BackgroundColor="{DynamicResource InputBackgroundColor}"
                                             TextColor="{DynamicResource TextColor}"
