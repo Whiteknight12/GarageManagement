@@ -6,10 +6,11 @@ namespace GarageManagement.Pages;
 public partial class LoginPage : ContentPage
 {
     private bool _isPassword = true;
-    public LoginPage(AuthenticationService service)
+    
+    public LoginPage(LoginPageViewModel loginPageViewModel)
 	{
 		InitializeComponent();
-        BindingContext=new LoginPageViewModel(service);
+        BindingContext = loginPageViewModel; 
     }
 
     public void OnRegisterTapped(object sender, EventArgs e)

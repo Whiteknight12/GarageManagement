@@ -137,6 +137,7 @@ namespace GarageManagement.ViewModels
         private readonly ThemLoaiVatTuPhuTungPage _themLoaiVatTuPhuTungPage;
         private readonly BaoCaoDoanhSoListPage _baoCaoDoanhSoListPage;
         private readonly BaoCaoTonPage _baoCaoTonPage;
+        private readonly ChangePasswordPageViewmodel _changePasswordPageViewmodel; 
         
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
@@ -168,7 +169,8 @@ namespace GarageManagement.ViewModels
             BaoCaoTonPage baoCaoTonPage,
             APIClientService<PhanQuyen> phanQuyenService,
             APIClientService<ChucNang> chucNangService,
-            APIClientService<TaiKhoan> taiKhoaS)
+            APIClientService<TaiKhoan> taiKhoaS,
+            ChangePasswordPageViewmodel changePasswordPageViewmodel)
         {
             _viewModel = viewModel;
             currentPageContent = new NhanSuMainPage(_viewModel);
@@ -205,7 +207,8 @@ namespace GarageManagement.ViewModels
             _baoCaoTonPage = baoCaoTonPage;
             _phanQuyenService = phanQuyenService;
             _chucNangService = chucNangService;
-            _taiKhoanService = taiKhoaS; 
+            _taiKhoanService = taiKhoaS;
+            _changePasswordPageViewmodel = changePasswordPageViewmodel; 
             _ = LoadUserAsync();
             LoadPermissionAsync(); 
         }
@@ -592,6 +595,26 @@ namespace GarageManagement.ViewModels
         {
             IsRightPaneVisible = false;
             RightPaneContent = null;
+        }
+        [RelayCommand]
+        public async void ChangePassword()
+        {
+            await _authenticationServices.FettaiKhoanSession();
+            var status = _authenticationServices.GetCurrentAccountStatus;
+
+            var view = new ChangePasswordPage(_changePasswordPageViewmodel, status.AccountId.Value); 
+            var wrapper = new ContentPage
+            {
+                Content = view,
+                Padding = 0
+            };
+            var window = new Window
+            {
+                Page = wrapper,
+                MaximumHeight = 500,
+                MaximumWidth=  600
+            };
+            Application.Current.OpenWindow(window);
         }
     }
 }

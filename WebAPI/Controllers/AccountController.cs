@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Text;
 using WebAPI.Data;
 using WebAPI.IdentityModel;
 using WebAPI.Service;
@@ -27,5 +30,34 @@ namespace WebAPI.Controllers
             if (result is null) return Unauthorized();
             return result;
         }
+
+        [HttpGet("reset-password/{username}")]
+        public async Task<ActionResult<string>> ResetPassword(string username)
+        {
+            var user = await _dbContext.taiKhoans.FirstAsync(us => us.TenDangNhap == username);
+            user.MatKhau = GenerateRandomPassword(10);
+            _dbContext.taiKhoans.Update(user);
+            await _dbContext.SaveChangesAsync();
+            return Ok(user.MatKhau); 
+        }
+        
+
+        private string GenerateRandomPassword(int length)
+        {
+            const string charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                 + "abcdefghijklmnopqrstuvwxyz"
+                                 + "0123456789";
+            var bytes = new byte[length];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(bytes);
+            var sb = new StringBuilder(length);
+            foreach (var b in bytes)
+            {
+                // b mod charset.Length để chọn ký tự
+                sb.Append(charset[b % charset.Length]);
+            }
+            return sb.ToString();
+        }
     }
+
 }
