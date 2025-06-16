@@ -148,13 +148,13 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <!-- CheckBox -->
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="1.6*"/>
                         <!-- STT -->
-                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="1*"/>
                         <!-- Ngày -->
-                        <ColumnDefinition Width="1.2*"/>
+                        <ColumnDefinition Width="1*"/>
                         <!-- Biển số -->
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
                         <!-- Chủ xe -->
                         <ColumnDefinition Width="*"/>
                         <!-- Tình trạng -->
@@ -162,7 +162,7 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
 
                     <Label Text=""
                            Grid.Column="0"/>
-                    <Label Text="STT"
+                    <Label Text="Id"
                            Grid.Column="1"
                            FontAttributes="Bold"
                            FontFamily="OpenSans-SemiBold"
@@ -207,11 +207,11 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <!-- CheckBox -->
-                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="1.6*"/>
                                     <!-- STT -->
-                                    <ColumnDefinition Width="1.5*"/>
-                                    <ColumnDefinition Width="1.2*"/>
-                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
@@ -221,8 +221,9 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
                                           IsVisible="{Binding Path=BindingContext.IsDeleteMode,
                                                               Source={x:Reference RootContentView}}"/>
 
-                                <Label Text="{Binding IdForUI}"
+                                <Label Text="{Binding Id}"
                                        Grid.Column="1"
+                                    
                                        FontFamily="OpenSans-Regular"
                                        FontSize="13"
                                        TextColor="{DynamicResource TextColor}"

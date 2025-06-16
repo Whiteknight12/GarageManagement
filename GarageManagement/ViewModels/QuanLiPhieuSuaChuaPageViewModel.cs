@@ -147,10 +147,8 @@ namespace GarageManagement.ViewModels
             {
                 Page = wrapper,
                 Title = "Sửa phiếu sữa chữa",
-                MaximumHeight = 600,
-                MaximumWidth = 800,
-                MinimumHeight = 600,
-                MinimumWidth = 800
+                MinimumHeight = 1000,
+                MinimumWidth = 1200
             };
             Application.Current.OpenWindow(newWindow);
         }

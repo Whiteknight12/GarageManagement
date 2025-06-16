@@ -22,5 +22,7 @@
 
         public string TenChuXe { get; set; }
         public string CCCDChuXe { get; set; }
+
+        public bool IsSelected { get; set; } = false;
     }
 }

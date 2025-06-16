@@ -201,8 +201,6 @@
                         <ColumnDefinition Width="1*" />
                         <!-- Cột CCCD -->
                         <ColumnDefinition Width="1*" />
-                        <!-- Cột Email -->
-                        <ColumnDefinition Width="1*" />
                         <!-- Cột Tên Xe -->
                         <ColumnDefinition Width="1*" />
                         <!-- Cột Biển Số Xe -->
@@ -217,7 +215,7 @@
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="STT" Grid.Column="1" 
+                    <Label Text="Id" Grid.Column="1" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
@@ -229,37 +227,31 @@
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="CCCD" Grid.Column="3" 
+                        <Label Text="CCCD" Grid.Column="3" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="Email" Grid.Column="4" 
+                        <Label Text="Tên Xe" Grid.Column="4" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="Tên Xe" Grid.Column="5" 
+                    <Label Text="Biển Số Xe" Grid.Column="5" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="Biển Số Xe" Grid.Column="6" 
+                    <Label Text="Ngày Thu Tiền" Grid.Column="6" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            FontSize="14"/>
-                    <Label Text="Ngày Thu Tiền" Grid.Column="7" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"
-                           HorizontalTextAlignment="Center"
-                           FontSize="14"/>
-                    <Label Text="Số Tiền Thu" Grid.Column="8" 
+                    <Label Text="Số Tiền Thu" Grid.Column="7" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
@@ -287,8 +279,6 @@
                                     <ColumnDefinition Width="1*" />
                                     <!-- Cột CCCD -->
                                     <ColumnDefinition Width="1*" />
-                                    <!-- Cột Email -->
-                                    <ColumnDefinition Width="1*" />
                                     <!-- Cột Tên Xe -->
                                     <ColumnDefinition Width="1*" />
                                     <!-- Cột Biển Số Xe -->
@@ -302,7 +292,7 @@
                                           IsVisible="{Binding Path=BindingContext.IsDeleteMode, Source={x:Reference RootContentView}}"
                                           Grid.Column="0" />
                                 <Label VerticalOptions="Center"
-                                       Text="{Binding STT}" Grid.Column="1" 
+                                       Text="{Binding Id}" Grid.Column="1" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
                                        FontSize="13"
@@ -314,42 +304,35 @@
                                        VerticalOptions="Center"
                                        FontSize="13"
                                        Margin="5"/>
-                                <Label Text="{Binding CCCD}" Grid.Column="3" 
+                                    <Label Text="{Binding CCCD}" Grid.Column="3" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
                                        HorizontalTextAlignment="Center"
                                        VerticalOptions="Center"
                                        FontSize="13"
                                        Margin="5"/>
-                                <Label Text="{Binding Email}" Grid.Column="4" 
+                                    <Label Text="{Binding TenXe}" Grid.Column="4" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
                                        HorizontalTextAlignment="Center"
                                        VerticalOptions="Center"
                                        FontSize="13"
                                        Margin="5"/>
-                                <Label Text="{Binding TenXe}" Grid.Column="5" 
+                                <Label Text="{Binding BienSoXe}" Grid.Column="5" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
                                        HorizontalTextAlignment="Center"
                                        VerticalOptions="Center"
                                        FontSize="13"
                                        Margin="5"/>
-                                <Label Text="{Binding BienSoXe}" Grid.Column="6" 
+                                <Label Text="{Binding NgayThuTien, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="6" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
                                        HorizontalTextAlignment="Center"
                                        VerticalOptions="Center"
                                        FontSize="13"
                                        Margin="5"/>
-                                <Label Text="{Binding NgayThuTien, StringFormat='{0:dd/MM/yyyy}'}" Grid.Column="7" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalTextAlignment="Center"
-                                       VerticalOptions="Center"
-                                       FontSize="13"
-                                       Margin="5"/>
-                                <Label Text="{Binding SoTienThu, StringFormat='{0:N0} VNĐ'}" Grid.Column="8" 
+                                <Label Text="{Binding SoTienThu, StringFormat='{0:N0} VNĐ'}" Grid.Column="7" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
                                        HorizontalTextAlignment="Center"

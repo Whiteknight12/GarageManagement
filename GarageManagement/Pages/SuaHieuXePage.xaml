@@ -15,20 +15,43 @@
                 FontAttributes="Bold"
                 HorizontalOptions="Center" />
 
-            <Label
-                TextColor="{DynamicResource TextColor}"
-                BackgroundColor="{DynamicResource BackgroundColor}"
-                Text="Tên hiệu xe:"
-                FontSize="16" />
+            <HorizontalStackLayout Spacing="20">
+                <Label VerticalOptions="Center"
+                    FontAttributes="Bold"
+    TextColor="{DynamicResource TextColor}"
+    BackgroundColor="{DynamicResource BackgroundColor}"
+    Text="Id"
+    FontSize="16" />
 
-            <Entry
-                TextColor="{DynamicResource TextColor}"
-                BackgroundColor="{DynamicResource BackgroundColor}"
-                x:Name="HieuXeEntry"
-                Text="{Binding TenHieuXe}"
-                Placeholder="Nhập tên hiệu xe"
-                IsEnabled="{Binding IsUpdating}"
-                FontSize="16" />
+                <Entry Margin="78,0,0,0"
+    TextColor="{DynamicResource TextColor}"
+    BackgroundColor="{DynamicResource BackgroundColor}"
+    
+    Text="{Binding Id}"
+
+    IsReadOnly="True"
+    FontSize="16" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="20">
+                <Label VerticalOptions="Center"
+                    FontAttributes="Bold"
+                    
+TextColor="{DynamicResource TextColor}"
+BackgroundColor="{DynamicResource BackgroundColor}"
+Text="Tên hiệu xe:"
+FontSize="16" />
+
+                <Entry
+TextColor="{DynamicResource TextColor}"
+BackgroundColor="{DynamicResource BackgroundColor}"
+x:Name="HieuXeEntry"
+Text="{Binding TenHieuXe}"
+                    MinimumWidthRequest="200"
+Placeholder="Nhập tên hiệu xe"
+IsEnabled="{Binding IsUpdating}"
+FontSize="16" />
+            </HorizontalStackLayout>
             <Button
     Text="Sửa hiệu xe"
     BackgroundColor="#10B981"

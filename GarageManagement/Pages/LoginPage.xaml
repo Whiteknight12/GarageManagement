@@ -125,7 +125,7 @@
 
                     <Grid ColumnDefinitions="*,*" Margin="0,5">
                         <HorizontalStackLayout Grid.Column="0" Spacing="5">
-                            <CheckBox Color="#10B981" VerticalOptions="Center"/>
+                            <CheckBox Color="#10B981" VerticalOptions="Center" IsChecked="{Binding IsRememberMe}"/>
                             <Label Text="Nhớ mật khẩu"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
@@ -174,29 +174,6 @@
                         </VisualStateManager.VisualStateGroups>
                     </Button>
                 </VerticalStackLayout>
-            </Frame>
-
-            <Frame HasShadow="True"
-                   BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   Padding="20"
-                   >
-                <HorizontalStackLayout Spacing="5" HorizontalOptions="Center">
-                    <Label Text="Chưa có tài khoản?"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}"
-                           VerticalOptions="Center"/>
-                    <Label Text="Đăng ký ngay"
-                           FontSize="14"
-                           FontAttributes="Bold"
-                           FontFamily="OpenSans-Regular"
-                           TextColor="#3B82F6"
-                           VerticalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnRegisterTapped"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                </HorizontalStackLayout>
             </Frame>
         </VerticalStackLayout>
     </ScrollView>

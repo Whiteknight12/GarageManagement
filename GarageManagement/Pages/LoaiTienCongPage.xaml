@@ -161,16 +161,18 @@
                         <!-- Tên loại TC -->
                         <ColumnDefinition Width="2*"/>
                         <!-- Đơn giá -->
-                        
-                    </Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
 
                     <Label Grid.Column="0"/>
                     <!-- placeholder -->
-                    <Label Grid.Column="1" Text="ID"                 Style="{StaticResource HeaderLabelStyle}"/>
+                    <Label Grid.Column="1" Text="Id"                 Style="{StaticResource HeaderLabelStyle}"/>
                     <Label Grid.Column="2" Text="Tên Loại Tiền Công" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="Center"/>
                     <Label Grid.Column="3" Text="Đơn Giá"            Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="Center"/>
-                    
-                </Grid>
+                        <Label Grid.Column="4"
+       Text="Nội dung sửa chữa"
+       Style="{StaticResource HeaderLabelStyle}" />
+                    </Grid>
             </Frame>
 
 
@@ -190,7 +192,8 @@
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="2*"/>
                                     <ColumnDefinition Width="2*"/>
-                                </Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                    </Grid.ColumnDefinitions>
 
                                 <!-- Checkbox (ẩn bằng Opacity để giữ chỗ) -->
                                 <CheckBox Grid.Column="0"
@@ -207,7 +210,7 @@
                            FontSize="13"
                            FontFamily="OpenSans-Regular"
                            TextColor="{DynamicResource TextColor}"
-                           LineBreakMode="TailTruncation"
+                          
                            HorizontalTextAlignment="Center"
                            VerticalOptions="Center"/>
 
@@ -228,9 +231,15 @@
                            TextColor="{DynamicResource TextColor}"
                            HorizontalTextAlignment="Center"
                            VerticalOptions="Center"/>
+                                    <Label Grid.Column="4"
+       Text="{Binding TenNoiDungSuaChua}"
+       FontSize="13"
+       FontFamily="OpenSans-Regular"
+       TextColor="{DynamicResource TextColor}"
+       HorizontalTextAlignment="Center"
+       VerticalOptions="Center"/>
 
-
-                            </Grid>
+                                </Grid>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer
             NumberOfTapsRequired="1"
@@ -304,6 +313,21 @@ IsVisible="{Binding IsEditing}"
 Keyboard="Numeric"
 BackgroundColor="{DynamicResource BackgroundColor}"
 TextColor="{DynamicResource TextColor}" />
+
+                        <Label Text="{Binding SelectedTienCong.TenNoiDungSuaChua, StringFormat='Nội dung sửa chữa: {0}'}"
+       FontAttributes="Bold"
+       TextColor="{DynamicResource TextColor}">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsEditing}" Value="True">
+                                    <Setter Property="IsVisible" Value="False"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <Entry Text="{Binding SelectedTienCong.TenNoiDungSuaChua, Mode=TwoWay}"
+       FontSize="16"
+       TextColor="{DynamicResource TextColor}"
+       IsVisible="{Binding IsEditing}"
+       BackgroundColor="{DynamicResource BackgroundColor}"/>
                     </VerticalStackLayout>
                 </Frame>
 

@@ -187,7 +187,7 @@
 
                         <Label Text="" Grid.Column="0" FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
                                TextColor="{DynamicResource TextColor}" HorizontalTextAlignment="Center" FontSize="14"/>
-                        <Label Text="STT" Grid.Column="1" FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
+                        <Label Text="Id" Grid.Column="1" FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
                                TextColor="{DynamicResource TextColor}" HorizontalTextAlignment="Center" FontSize="14"/>
                         <Label Text="CCCD" Grid.Column="2" FontAttributes="Bold" FontFamily="OpenSans-SemiBold"
                                TextColor="{DynamicResource TextColor}" HorizontalTextAlignment="Center" FontSize="14"/>
@@ -236,7 +236,7 @@
                                               IsVisible="{Binding Path=BindingContext.IsDeleteMode, Source={x:Reference RootContentView}}"
                                               Grid.Column="0"/>
 
-                                    <Label Text="{Binding STT}" Grid.Column="1" FontFamily="OpenSans-Regular"
+                                    <Label Text="{Binding Id}" Grid.Column="1" FontFamily="OpenSans-Regular"
                                            TextColor="{DynamicResource TextColor}" FontSize="13"
                                            HorizontalTextAlignment="Center" VerticalOptions="Center"/>
 
