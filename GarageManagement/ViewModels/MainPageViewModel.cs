@@ -106,6 +106,10 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private bool quanLiDanhSachLoaiTienCongActive = false;
 
+        private readonly APIClientService<PhanQuyen> _phanQuyenService;
+        private readonly APIClientService<ChucNang> _chucNangService;
+        private readonly APIClientService<TaiKhoan> _taiKhoanService;
+
         private readonly TiepNhanXePage _tiepNhanXe;
         private readonly TaoPhieuSuaChuaPage _taoPhieuSuaChua;
         private readonly LapPhieuNhapPage _taoPhieuNhap;
@@ -133,7 +137,7 @@ namespace GarageManagement.ViewModels
         private readonly ThemLoaiVatTuPhuTungPage _themLoaiVatTuPhuTungPage;
         private readonly BaoCaoDoanhSoListPage _baoCaoDoanhSoListPage;
         private readonly BaoCaoTonPage _baoCaoTonPage;
-
+        
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
             LapPhieuNhapPage taoPhieuNhap,
@@ -161,7 +165,10 @@ namespace GarageManagement.ViewModels
             ThemLoaiTienCongPage themLoaiTienCongPage,
             ThemLoaiVatTuPhuTungPage themLoaiVatTuPhuTungPage,
             BaoCaoDoanhSoListPage baoCaoDoanhSoListPage,
-            BaoCaoTonPage baoCaoTonPage)
+            BaoCaoTonPage baoCaoTonPage,
+            APIClientService<PhanQuyen> phanQuyenService,
+            APIClientService<ChucNang> chucNangService,
+            APIClientService<TaiKhoan> taiKhoaS)
         {
             _viewModel = viewModel;
             currentPageContent = new NhanSuMainPage(_viewModel);
@@ -196,8 +203,139 @@ namespace GarageManagement.ViewModels
             _themLoaiVatTuPhuTungPage = themLoaiVatTuPhuTungPage;
             _baoCaoDoanhSoListPage = baoCaoDoanhSoListPage;
             _baoCaoTonPage = baoCaoTonPage;
+            _phanQuyenService = phanQuyenService;
+            _chucNangService = chucNangService;
+            _taiKhoanService = taiKhoaS; 
             _ = LoadUserAsync();
+            LoadPermissionAsync(); 
         }
+
+
+        [ObservableProperty] private bool quanLiDanhSachXePermission;
+        
+        [ObservableProperty] private bool quanLiDanhSachHieuXePermission;
+       
+        [ObservableProperty] private bool quanLiDanhSachLoaiVatTuPermission;
+     
+        [ObservableProperty] private bool quanLiDanhSachLoaiTienCongPermission;
+       
+        [ObservableProperty] private bool quanLiNhanVienPermission;
+       
+        [ObservableProperty] private bool quanLiKhachHangPermission;
+      
+        [ObservableProperty] private bool quanLiPhieuNhapPermission;
+
+        [ObservableProperty] private bool quanLiPhieuSuaChuaPermission;
+
+        [ObservableProperty] private bool quanLiPhieuThuTienPermission;
+
+        [ObservableProperty] private bool quanLiPhieuTiepNhanPermission;
+
+        [ObservableProperty] private bool quanLiBaoCaoThangPermission;
+
+        [ObservableProperty] private bool quanLiBaoCaoTonPermission;
+
+        [ObservableProperty] private bool tiepNhanXePermission;
+
+        [ObservableProperty] private bool lapPhieuSuaChuaPermission;
+
+        [ObservableProperty] private bool lapPhieuNhapPermission;
+
+        [ObservableProperty] private bool lapPhieuThuTienPermission;
+
+        [ObservableProperty] private bool phanQuyenPermission;
+
+        [ObservableProperty] private bool thayDoiThamSoPermission;
+
+        [ObservableProperty] private bool quanLiDanhSachTaiKhoanPermission;
+
+        [ObservableProperty] private bool quanLiLichSuPermission;
+
+        [ObservableProperty] private bool khachHangXemDanhSachXePermission;
+
+        [ObservableProperty] private bool quanLiSection;
+
+        [ObservableProperty] private bool quanTriSection;
+
+        [ObservableProperty] private bool taoLapSection;
+
+        [ObservableProperty] private bool khachHangSection;
+        private async void LoadPermissionAsync()
+        {
+            await _authenticationServices.FettaiKhoanSession();
+            var status = _authenticationServices.GetCurrentAccountStatus;
+            var acc = await _taiKhoanService.GetByID(status.AccountId.Value);
+
+            // Lấy tất cả quyền của nhóm người dùng này
+            var pqs = await _phanQuyenService.GetAll();
+            var myPerms = pqs
+                .Where(pq => pq.NhomNguoiDungId == acc.NhomNguoiDungId)
+                .ToList();
+
+            // Đọc về tất cả tên chức năng, lowercase để dễ so sánh
+            var names = new HashSet<string>(
+                await Task.WhenAll(
+                    myPerms.Select(async pq => {
+                        var c = await _chucNangService.GetByID(pq.ChucNangId);
+                        return c?.TenChucNang?.Trim().ToLower();
+                    })
+                )
+            );
+
+            // Bật/tắt từng flag dựa trên việc tên đó có trong set hay không
+            QuanLiDanhSachXePermission = names.Contains("quan li danh sach xe");
+            QuanLiDanhSachHieuXePermission = names.Contains("quan li danh sach hieu xe");
+            QuanLiDanhSachLoaiVatTuPermission = names.Contains("quan li danh sach loai vat tu");
+            QuanLiDanhSachLoaiTienCongPermission = names.Contains("quan li danh sach loai tien cong");
+            QuanLiNhanVienPermission = names.Contains("quan li nhan vien");
+            QuanLiKhachHangPermission = names.Contains("quan li khach hang");
+            QuanLiPhieuNhapPermission = names.Contains("quan li phieu nhap");
+            QuanLiPhieuSuaChuaPermission = names.Contains("quan li phieu sua chua");
+            QuanLiPhieuThuTienPermission = names.Contains("quan li phieu thu tien");
+            QuanLiPhieuTiepNhanPermission = names.Contains("quan li phieu tiep nhan");
+            QuanLiBaoCaoThangPermission = names.Contains("quan li bao cao thang");
+            QuanLiBaoCaoTonPermission = names.Contains("quan li bao cao ton");
+            TiepNhanXePermission = names.Contains("tiep nhan xe");
+            LapPhieuSuaChuaPermission = names.Contains("lap phieu sua chua");
+            LapPhieuNhapPermission = names.Contains("lap phieu nhap");
+            LapPhieuThuTienPermission = names.Contains("lap phieu thu tien");
+            PhanQuyenPermission = names.Contains("phan quyen");
+            ThayDoiThamSoPermission = names.Contains("thay doi tham so");
+            QuanLiDanhSachTaiKhoanPermission = names.Contains("quan li danh sach tai khoan");
+            QuanLiLichSuPermission = names.Contains("quan li lich su");
+            KhachHangXemDanhSachXePermission = names.Contains("khach hang xem danh sach xe");
+
+            QuanLiSection =
+       QuanLiDanhSachXePermission
+    || QuanLiDanhSachHieuXePermission
+    || QuanLiDanhSachLoaiVatTuPermission
+    || QuanLiDanhSachLoaiTienCongPermission
+    || QuanLiNhanVienPermission
+    || QuanLiKhachHangPermission
+    || QuanLiPhieuNhapPermission
+    || QuanLiPhieuSuaChuaPermission
+    || QuanLiPhieuThuTienPermission
+    || QuanLiPhieuTiepNhanPermission
+    || QuanLiBaoCaoThangPermission
+    || QuanLiBaoCaoTonPermission;
+
+            TaoLapSection =
+       TiepNhanXePermission
+    || LapPhieuNhapPermission
+    || LapPhieuSuaChuaPermission
+    || LapPhieuThuTienPermission;
+
+            QuanTriSection =
+       PhanQuyenPermission
+    || ThayDoiThamSoPermission
+    || QuanLiDanhSachTaiKhoanPermission
+    || QuanLiLichSuPermission;
+
+            KhachHangSection =
+       QuanLiKhachHangPermission
+    || KhachHangXemDanhSachXePermission;
+        }
+
 
         [RelayCommand]
         public void Navigate(string parameter)

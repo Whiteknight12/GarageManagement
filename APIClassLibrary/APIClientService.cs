@@ -46,12 +46,21 @@ namespace APIClassLibrary
         }
         public async Task<T?> GetThroughtSpecialRoute(string route, string parameter="")
         {
-            string url = "";
-            if (parameter.Equals("")) url = $"/api/{_endpoint}/{route}";
-            else url = $"/api/{_endpoint}/{route}/{parameter}";
-            var response = await _httpclient.GetAsync(url);
-            if (response.IsSuccessStatusCode) return await response.Content.ReadFromJsonAsync<T>();
-            return null;
+
+            var p = string.IsNullOrWhiteSpace(parameter)
+        ? ""
+        : $"/{Uri.EscapeDataString(parameter)}";
+
+            // nếu route chính là "name" thì coi như nó là root
+            bool isRoot = route.Equals("name", StringComparison.OrdinalIgnoreCase);
+
+            string path = isRoot
+                ? $"/{route}{p}"
+                : $"/api/{_endpoint}/{route}{p}";
+
+            var response = await _httpclient.GetAsync(path);
+            if (!response.IsSuccessStatusCode) return default;
+            return await response.Content.ReadFromJsonAsync<T>();
         }
 
         public async Task<List<T>?> GetListOnSpecialRequirement(string route)

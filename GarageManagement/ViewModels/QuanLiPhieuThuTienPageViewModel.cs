@@ -66,7 +66,7 @@ namespace GarageManagement.ViewModels
             _xeService = xeService;
             _thuTienPageViewModel = thuTienPageViewModel;
             _hieuXeService = hieuXeService;
-            _ = LoadAsync();
+            //_ = LoadAsync();
             IsDeleteMode = false;
             _chinhSuaPhieuThuTienPageViewModel = chinhSuaPhieuThuTienPageViewModel;
             MessagingCenter.Subscribe<ThuTienPageViewModel>(this, "PhieuThuTienCreated", async _ =>

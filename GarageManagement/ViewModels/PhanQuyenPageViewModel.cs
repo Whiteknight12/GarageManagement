@@ -3,6 +3,7 @@ using APIClassLibrary.APIModels;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Services;
+using Microsoft.Maui.Controls.Internals;
 using System.Collections.ObjectModel;
 
 namespace GarageManagement.ViewModels
@@ -23,29 +24,68 @@ namespace GarageManagement.ViewModels
         private ObservableCollection<ChucNang> allChucNangList = new();
         public NhomNguoiDung nhomNguoiDung { get; set; } = new NhomNguoiDung();
 
-        [ObservableProperty] private bool quanLyDsXePermission;
-        [ObservableProperty] private bool quanLyDsHieuXePermission;
-        [ObservableProperty] private bool quanLyDsVatTuPhuTungPermission;
-        [ObservableProperty] private bool quanLyDsTienCongPermission;
-        [ObservableProperty] private bool baoCaoDoanhSoPermission;
+        public Guid QuanLiDanhSachXeId;
+        [ObservableProperty] private bool quanLiDanhSachXePermission;
+
+        public Guid QuanLiDanhSachHieuXeId;
+        [ObservableProperty] private bool quanLiDanhSachHieuXePermission;
+
+        public Guid QuanLiDanhSachLoaiVatTuId;
+        [ObservableProperty] private bool quanLiDanhSachLoaiVatTuPermission;
+
+        public Guid QuanLiDanhSachLoaiTienCongId;
+        [ObservableProperty] private bool quanLiDanhSachLoaiTienCongPermission;
+
+        public  Guid QuanLiNhanVienId;
+        [ObservableProperty] private bool quanLiNhanVienPermission;
+
+        public  Guid QuanLiKhachHangId;
+        [ObservableProperty] private bool quanLiKhachHangPermission;
+
+        public  Guid QuanLiPhieuNhapId;
+        [ObservableProperty] private bool quanLiPhieuNhapPermission;
+
+        public  Guid QuanLiPhieuSuaChuaId;
+        [ObservableProperty] private bool quanLiPhieuSuaChuaPermission;
+
+        public  Guid QuanLiPhieuThuTienId;
+        [ObservableProperty] private bool quanLiPhieuThuTienPermission;
+
+        public  Guid QuanLiPhieuTiepNhanId;
+        [ObservableProperty] private bool quanLiPhieuTiepNhanPermission;
+
+        public  Guid QuanLiBaoCaoThangId;
+        [ObservableProperty] private bool quanLiBaoCaoThangPermission;
+
+        public  Guid QuanLiBaoCaoTonId;
+        [ObservableProperty] private bool quanLiBaoCaoTonPermission;
+
+        public Guid TiepNhanXeId;
         [ObservableProperty] private bool tiepNhanXePermission;
+
+        public Guid LapPhieuSuaChuaId;
         [ObservableProperty] private bool lapPhieuSuaChuaPermission;
+
+        public Guid LapPhieuNhapId;
         [ObservableProperty] private bool lapPhieuNhapPermission;
+
+        public Guid LapPhieuThuTienId;
         [ObservableProperty] private bool lapPhieuThuTienPermission;
+
+        public Guid PhanQuyenId;
         [ObservableProperty] private bool phanQuyenPermission;
+
+        public Guid ThayDoiThamSoId;
         [ObservableProperty] private bool thayDoiThamSoPermission;
 
-        public static readonly Guid QuanLyDsXeId = Guid.Parse("C4499274-4040-484A-A2E0-8A720D20F746");
-        public static readonly Guid QuanLyDsHieuXeId = Guid.Parse("56AE504B-B798-480D-8F85-4790C5B9CDA4");
-        public static readonly Guid QuanLyDsVatTuPhuTungId = Guid.Parse("38A14419-703A-4AF2-AC20-FC20638651EA");
-        public static readonly Guid QuanLyDsTienCongId = Guid.Parse("9AF76DFB-A2FF-4808-B19A-568696C8114F");
-        public static readonly Guid BaoCaoDoanhSoId = Guid.Parse("307E83AD-C656-4F30-B46E-70C6B3864EEA");
-        public static readonly Guid TiepNhanXeId = Guid.Parse("C325D903-549A-4DED-B93C-140C34233854");
-        public static readonly Guid LapPhieuSuaChuaId = Guid.Parse("6405F669-38D7-48E4-B127-D5FAD358AB5D");
-        public static readonly Guid LapPhieuNhapId = Guid.Parse("BABDD343-BCC0-4455-83D0-9522F9952CBC");
-        public static readonly Guid LapPhieuThuTienId = Guid.Parse("F2B39EC8-F20F-45FF-88FB-579402B88AF6");
-        public static readonly Guid PhanQuyenId = Guid.Parse("94521B9A-1BBB-48E1-B254-E7D76408EE69");
-        public static readonly Guid ThayDoiThamSoId = Guid.Parse("BCB8F586-C5D8-456B-A01A-037E6B866FC6");
+        public Guid QuanLiDanhSachTaiKhoanId;
+        [ObservableProperty] private bool quanLiDanhSachTaiKhoanPermission;
+
+        public Guid QuanLiLichSuId;
+        [ObservableProperty] private bool quanLiLichSuPermission;
+
+        public Guid KhachHangXemDanhSachXeId;
+        [ObservableProperty] private bool khachHangXemDanhSachXePermission;
 
         public PhanQuyenPageViewModel(APIClientService<PhanQuyen> phanQuyenService,
             APIClientService<NhomNguoiDung> nhomNguoiDungService,
@@ -60,6 +100,28 @@ namespace GarageManagement.ViewModels
         }
         public async Task LoadAsync()
         {
+            var a = await _chucNangService.GetThroughtSpecialRoute("name", "quan li danh sach xe"); 
+            QuanLiDanhSachXeId = (a).Id;
+            QuanLiDanhSachHieuXeId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li danh sach hieu xe")).Id;
+            QuanLiDanhSachLoaiVatTuId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li danh sach loai vat tu")).Id;
+            QuanLiDanhSachLoaiTienCongId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li danh sach loai tien cong")).Id;
+            QuanLiNhanVienId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li nhan vien")).Id;
+            QuanLiKhachHangId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li khach hang")).Id;
+            QuanLiPhieuNhapId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li phieu nhap")).Id;
+            QuanLiPhieuSuaChuaId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li phieu sua chua")).Id;
+            QuanLiPhieuThuTienId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li phieu thu tien")).Id;
+            QuanLiPhieuTiepNhanId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li phieu tiep nhan")).Id;
+            QuanLiBaoCaoThangId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li bao cao thang")).Id;
+            QuanLiBaoCaoTonId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li bao cao ton")).Id;
+            TiepNhanXeId = (await _chucNangService.GetThroughtSpecialRoute("name", "tiep nhan xe")).Id;
+            LapPhieuSuaChuaId = (await _chucNangService.GetThroughtSpecialRoute("name", "lap phieu sua chua")).Id;
+            LapPhieuNhapId = (await _chucNangService.GetThroughtSpecialRoute("name", "lap phieu nhap")).Id;
+            LapPhieuThuTienId = (await _chucNangService.GetThroughtSpecialRoute("name", "lap phieu thu tien")).Id;
+            PhanQuyenId = (await _chucNangService.GetThroughtSpecialRoute("name", "phan quyen")).Id;
+            ThayDoiThamSoId = (await _chucNangService.GetThroughtSpecialRoute("name", "thay doi tham so")).Id;
+            QuanLiDanhSachTaiKhoanId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li danh sach tai khoan")).Id;
+            QuanLiLichSuId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li lich su")).Id;
+            KhachHangXemDanhSachXeId = (await _chucNangService.GetThroughtSpecialRoute("name", "khach hang xem danh sach xe")).Id;
             try
             {
                 _ = _authenticationService.FettaiKhoanSession();
@@ -134,42 +196,66 @@ namespace GarageManagement.ViewModels
         {
             if (nhomNguoiDung.Id == Guid.Empty) return;
 
-            // Tải danh sách chức năng đã được phân quyền cho vai trò này
+            // Tải danh sách phân quyền hiện có cho vai trò này
             var allPhanQuyen = await _phanQuyenService.GetAll();
-            var existingPermissions = allPhanQuyen.Where(p => p.NhomNguoiDungId == nhomNguoiDung.Id).ToList();
+            var existingPermissions = allPhanQuyen
+                .Where(p => p.NhomNguoiDungId == nhomNguoiDung.Id)
+                .Select(p => p.ChucNangId)
+                .ToList();
+
             ChucNangList.Clear();
 
             // Reset tất cả các quyền
-            QuanLyDsXePermission = false;
-            QuanLyDsHieuXePermission = false;
-            QuanLyDsVatTuPhuTungPermission = false;
-            QuanLyDsTienCongPermission = false;
-            BaoCaoDoanhSoPermission = false;
+            QuanLiDanhSachXePermission = false;
+            QuanLiDanhSachHieuXePermission = false;
+            QuanLiDanhSachLoaiVatTuPermission = false;
+            QuanLiDanhSachLoaiTienCongPermission = false;
+            QuanLiNhanVienPermission = false;
+            QuanLiKhachHangPermission = false;
+            QuanLiPhieuNhapPermission = false;
+            QuanLiPhieuSuaChuaPermission = false;
+            QuanLiPhieuThuTienPermission = false;
+            QuanLiPhieuTiepNhanPermission = false;
+            QuanLiBaoCaoThangPermission = false;
+            QuanLiBaoCaoTonPermission = false;
             TiepNhanXePermission = false;
             LapPhieuSuaChuaPermission = false;
             LapPhieuNhapPermission = false;
             LapPhieuThuTienPermission = false;
             PhanQuyenPermission = false;
             ThayDoiThamSoPermission = false;
+            QuanLiDanhSachTaiKhoanPermission = false;
+            QuanLiLichSuPermission = false;
+            KhachHangXemDanhSachXePermission = false;
 
-            // Cập nhật trạng thái quyền dựa trên dữ liệu từ DB
-            foreach (var permission in existingPermissions)
+            // Áp dụng các quyền đã có
+            foreach (var chucNangId in existingPermissions)
             {
-                var chucNangId = permission.ChucNangId;
                 ChucNangList.Add(chucNangId);
 
-                if (chucNangId == QuanLyDsXeId) QuanLyDsXePermission = true;
-                else if (chucNangId == QuanLyDsHieuXeId) QuanLyDsHieuXePermission = true;
-                else if (chucNangId == QuanLyDsVatTuPhuTungId) QuanLyDsVatTuPhuTungPermission = true;
-                else if (chucNangId == QuanLyDsTienCongId) QuanLyDsTienCongPermission = true;
-                else if (chucNangId == BaoCaoDoanhSoId) BaoCaoDoanhSoPermission = true;
+                if (chucNangId == QuanLiDanhSachXeId) QuanLiDanhSachXePermission = true;
+                else if (chucNangId == QuanLiDanhSachHieuXeId) QuanLiDanhSachHieuXePermission = true;
+                else if (chucNangId == QuanLiDanhSachLoaiVatTuId) QuanLiDanhSachLoaiVatTuPermission = true;
+                else if (chucNangId == QuanLiDanhSachLoaiTienCongId) QuanLiDanhSachLoaiTienCongPermission = true;
+                else if (chucNangId == QuanLiNhanVienId) QuanLiNhanVienPermission = true;
+                else if (chucNangId == QuanLiKhachHangId) QuanLiKhachHangPermission = true;
+                else if (chucNangId == QuanLiPhieuNhapId) QuanLiPhieuNhapPermission = true;
+                else if (chucNangId == QuanLiPhieuSuaChuaId) QuanLiPhieuSuaChuaPermission = true;
+                else if (chucNangId == QuanLiPhieuThuTienId) QuanLiPhieuThuTienPermission = true;
+                else if (chucNangId == QuanLiPhieuTiepNhanId) QuanLiPhieuTiepNhanPermission = true;
+                else if (chucNangId == QuanLiBaoCaoThangId) QuanLiBaoCaoThangPermission = true;
+                else if (chucNangId == QuanLiBaoCaoTonId) QuanLiBaoCaoTonPermission = true;
                 else if (chucNangId == TiepNhanXeId) TiepNhanXePermission = true;
                 else if (chucNangId == LapPhieuSuaChuaId) LapPhieuSuaChuaPermission = true;
                 else if (chucNangId == LapPhieuNhapId) LapPhieuNhapPermission = true;
                 else if (chucNangId == LapPhieuThuTienId) LapPhieuThuTienPermission = true;
                 else if (chucNangId == PhanQuyenId) PhanQuyenPermission = true;
                 else if (chucNangId == ThayDoiThamSoId) ThayDoiThamSoPermission = true;
+                else if (chucNangId == QuanLiDanhSachTaiKhoanId) QuanLiDanhSachTaiKhoanPermission = true;
+                else if (chucNangId == QuanLiLichSuId) QuanLiLichSuPermission = true;
+                else if (chucNangId == KhachHangXemDanhSachXeId) KhachHangXemDanhSachXePermission = true;
             }
         }
+
     }
 }

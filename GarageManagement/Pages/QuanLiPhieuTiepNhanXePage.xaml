@@ -289,7 +289,7 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
             <VerticalStackLayout Spacing="16">
 
                 <!-- Close button -->
-                <Button Text="✕" Command="{Binding CloseRightPaneCommand}" HorizontalOptions="End" BackgroundColor="Transparent" />
+                <Button Text="✕" Command="{Binding CloseRightPaneCommand}" HorizontalOptions="End" TextColor="{DynamicResource TextColor}" BackgroundColor="Transparent"/>
                 <Frame HasShadow="True"
        Padding="20"
        BackgroundColor="{DynamicResource CardBackgroundColor}">

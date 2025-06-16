@@ -40,7 +40,7 @@ namespace GarageManagement.ViewModels
             _vatTuPhuTungService = vatTuPhuTungService;
             _themLoaiVatTuPhuTungPageViewModel = themLoaiVatTuPhuTungPageViewModel;
             IsDeleteMode = false;
-            _ = LoadAsync();
+            //_ = LoadAsync();
         }
 
         public async Task LoadAsync()

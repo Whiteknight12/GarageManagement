@@ -37,8 +37,8 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<KhachHang> _khachHangService;
         private readonly APIClientService<HieuXe> _hieuXeService;
         private readonly AuthenticationService _authenticationService;
-        private readonly ThemXePageViewModel _themXePageViewModel; 
-        
+        private readonly ThemXePageViewModel _themXePageViewModel;
+
 
         private List<Xe> _allXe = new();
         [ObservableProperty]
@@ -62,12 +62,15 @@ namespace GarageManagement.ViewModels
         {
             _authenticationService = authenticationService;
             _carservice = carservice;
-            _ = LoadAsync();
+            //_ = LoadAsync();
             _phieuservice = phieuservice;
             _noidungphieuservice = noidungphieuservice;
             _khachHangService = khachHangService;
             _hieuXeService = hieuXeService;
             _themXePageViewModel = themXePageViewModel;
+            MessagingCenter.Subscribe<ChiTietXePageViewModel>(
+                    this, "XeUpdated",
+                    async _ => await LoadAsync());
         }
 
         private void ApplyFilter()
@@ -179,7 +182,7 @@ namespace GarageManagement.ViewModels
             SelectedXe = null;
             IsDetailPaneVisible = false;
         }
-        
+
         [RelayCommand]
         private void ToggleDeleteMode()
         {
@@ -306,5 +309,6 @@ namespace GarageManagement.ViewModels
         {
             MessagingCenter.Send(this, "ShowCarDetails", XeId);
         }
+
     }
 }

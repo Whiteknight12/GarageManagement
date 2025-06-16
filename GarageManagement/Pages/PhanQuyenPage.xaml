@@ -94,514 +94,270 @@
         </Frame>
 
         <!-- Bố cục ngang: Quản lý, Tạo lập, Quản trị -->
-        <Grid ColumnDefinitions="*,*,*" HeightRequest="400">
+        <Grid ColumnDefinitions="*,*,*, *" HeightRequest="400">
             <!-- Phần Quản lý (trái) với ScrollView -->
+
+            <!-- Quản Lý (cột 0) -->
             <ScrollView Grid.Column="0">
                 <VerticalStackLayout Spacing="20" Padding="0,0,5,0">
-                    <Label Text="Quản Lý" 
-                           FontSize="18" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"/>
-                    <!-- Quản Lý Danh Sách Xe -->
-                    <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,0,0,12">
+                    <Label Text="Quản Lý" FontSize="18" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+
+                    <!-- Quản lý danh sách xe -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
                         <VerticalStackLayout Spacing="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="Quản Lý Danh Sách Xe" 
-                                       FontSize="16" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-SemiBold"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalOptions="Start"/>
-                                <CheckBox Grid.Column="1" 
-                                          IsChecked="{Binding QuanLyDsXePermission, Mode=TwoWay}"
-                                          Color="Blue"
-                                          CheckedChanged="OnCheckBoxChanged"
-                                          AutomationId="QuanLyDsXeCheckBox"/>
-                            </Grid>
-                            <Grid x:Name="QuanLyDsXeAccordion" IsVisible="False">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="https://via.placeholder.com/150" 
-                                       Aspect="AspectFit" 
-                                       HeightRequest="150" 
-                                       Margin="0,10,0,0" 
-                                       Grid.Row="0"/>
-                                <Label Text="Giao diện Quản Lý Danh Sách Xe cho phép quản trị viên xem, tìm kiếm, và chỉnh sửa thông tin xe trong hệ thống."
-                                       FontSize="14" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Grid.Row="1" 
-                                       Margin="0,10,0,0"/>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Quản Lý Danh Sách Xe" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiDanhSachXePermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiDanhSachXeCheckBox"/>
                             </Grid>
                         </VerticalStackLayout>
                     </Frame>
-                    <!-- Quản Lý Danh Sách Hiệu Xe -->
-                    <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,0,0,12">
+
+                    <!-- Quản lý danh sách hiệu xe -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
                         <VerticalStackLayout Spacing="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="Quản Lý Danh Sách Hiệu Xe" 
-                                       FontSize="16" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-SemiBold"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalOptions="Start"/>
-                                <CheckBox Grid.Column="1" 
-                                          IsChecked="{Binding QuanLyDsHieuXePermission, Mode=TwoWay}"
-                                          Color="Blue"
-                                          CheckedChanged="OnCheckBoxChanged"
-                                          AutomationId="QuanLyDsHieuXeCheckBox"/>
-                            </Grid>
-                            <Grid x:Name="QuanLyDsHieuXeAccordion" IsVisible="False">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="https://via.placeholder.com/150" 
-                                       Aspect="AspectFit" 
-                                       HeightRequest="150" 
-                                       Margin="0,10,0,0" 
-                                       Grid.Row="0"/>
-                                <Label Text="Giao diện Quản Lý Danh Sách Hiệu Xe cho phép quản trị viên quản lý danh sách hiệu xe trong hệ thống."
-                                       FontSize="14" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Grid.Row="1" 
-                                       Margin="0,10,0,0"/>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Quản Lý Danh Sách Hiệu Xe" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiDanhSachHieuXePermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiDanhSachHieuXeCheckBox"/>
                             </Grid>
                         </VerticalStackLayout>
                     </Frame>
-                    <!-- Quản Lý Danh Sách Loại Vật Tư Phụ Tùng -->
-                    <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,0,0,12">
+
+                    <!-- Quản lý danh sách loại vật tư -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
                         <VerticalStackLayout Spacing="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="Quản Lý Danh Sách Loại Vật Tư Phụ Tùng" 
-                                       FontSize="16" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-SemiBold"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalOptions="Start"/>
-                                <CheckBox Grid.Column="1" 
-                                          IsChecked="{Binding QuanLyDsVatTuPhuTungPermission, Mode=TwoWay}"
-                                          Color="Blue"
-                                          CheckedChanged="OnCheckBoxChanged"
-                                          AutomationId="QuanLyDsVatTuPhuTungCheckBox"/>
-                            </Grid>
-                            <Grid x:Name="QuanLyDsVatTuPhuTungAccordion" IsVisible="False">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="https://via.placeholder.com/150" 
-                                       Aspect="AspectFit" 
-                                       HeightRequest="150" 
-                                       Margin="0,10,0,0" 
-                                       Grid.Row="0"/>
-                                <Label Text="Giao diện Quản Lý Danh Sách Loại Vật Tư Phụ Tùng cho phép quản lý danh mục vật tư và phụ tùng."
-                                       FontSize="14" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Grid.Row="1" 
-                                       Margin="0,10,0,0"/>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Quản Lý Danh Sách Loại Vật Tư" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiDanhSachLoaiVatTuPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiDanhSachLoaiVatTuCheckBox"/>
                             </Grid>
                         </VerticalStackLayout>
                     </Frame>
-                    <!-- Quản Lý Danh Sách Loại Tiền Công -->
-                    <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,0,0,12">
+
+                    <!-- Quản lý danh sách loại tiền công -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
                         <VerticalStackLayout Spacing="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="Quản Lý Danh Sách Loại Tiền Công" 
-                                       FontSize="16" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-SemiBold"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalOptions="Start"/>
-                                <CheckBox Grid.Column="1" 
-                                          IsChecked="{Binding QuanLyDsTienCongPermission, Mode=TwoWay}"
-                                          Color="Blue"
-                                          CheckedChanged="OnCheckBoxChanged"
-                                          AutomationId="QuanLyDsTienCongCheckBox"/>
-                            </Grid>
-                            <Grid x:Name="QuanLyDsTienCongAccordion" IsVisible="False">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="https://via.placeholder.com/150" 
-                                       Aspect="AspectFit" 
-                                       HeightRequest="150" 
-                                       Margin="0,10,0,0" 
-                                       Grid.Row="0"/>
-                                <Label Text="Giao diện Quản Lý Danh Sách Loại Tiền Công cho phép quản lý các mức giá tiền công sửa chữa."
-                                       FontSize="14" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Grid.Row="1" 
-                                       Margin="0,10,0,0"/>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Quản Lý Danh Sách Loại Tiền Công" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiDanhSachLoaiTienCongPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiDanhSachLoaiTienCongCheckBox"/>
                             </Grid>
                         </VerticalStackLayout>
                     </Frame>
-                    <!-- Báo Cáo Doanh Số -->
-                    <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,0,0,12">
+
+                    <!-- Quản lý nhân viên -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
                         <VerticalStackLayout Spacing="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="Báo Cáo Doanh Số" 
-                                       FontSize="16" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-SemiBold"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalOptions="Start"/>
-                                <CheckBox Grid.Column="1" 
-                                          IsChecked="{Binding BaoCaoDoanhSoPermission, Mode=TwoWay}"
-                                          Color="Blue"
-                                          CheckedChanged="OnCheckBoxChanged"
-                                          AutomationId="BaoCaoDoanhSoCheckBox"/>
-                            </Grid>
-                            <Grid x:Name="BaoCaoDoanhSoAccordion" IsVisible="False">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="https://via.placeholder.com/150" 
-                                       Aspect="AspectFit" 
-                                       HeightRequest="150" 
-                                       Margin="0,10,0,0" 
-                                       Grid.Row="0"/>
-                                <Label Text="Giao diện Báo Cáo Doanh Số cho phép người dùng xem thống kê doanh thu và xuất báo cáo."
-                                       FontSize="14" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Grid.Row="1" 
-                                       Margin="0,10,0,0"/>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Quản Lý Nhân Viên" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiNhanVienPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiNhanVienCheckBox"/>
                             </Grid>
                         </VerticalStackLayout>
                     </Frame>
+
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <VerticalStackLayout Spacing="16">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Quản Lý Khách Hàng" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiKhachHangPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiKhachHangCheckBox"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <VerticalStackLayout Spacing="16">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Quản Lý Nhân Viên" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiNhanVienPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiNhanVienCheckBox"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Quản Lý Phiếu Nhập" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiPhieuNhapPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiPhieuNhapCheckBox"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Quản lý phiếu sửa chữa -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Quản Lý Phiếu Sửa Chữa" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiPhieuSuaChuaPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiPhieuSuaChuaCheckBox"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Quản lý phiếu thu tiền -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Quản Lý Phiếu Thu Tiền" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiPhieuThuTienPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiPhieuThuTienCheckBox"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Quản lý phiếu tiếp nhận -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Quản Lý Phiếu Tiếp Nhận" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiPhieuTiepNhanPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiPhieuTiepNhanCheckBox"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Quản lý báo cáo tháng -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Quản Lý Báo Cáo Tháng" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiBaoCaoThangPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiBaoCaoThangCheckBox"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Quản lý báo cáo tồn -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Quản Lý Báo Cáo Tồn" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding QuanLiBaoCaoTonPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="QuanLiBaoCaoTonCheckBox"/>
+                        </Grid>
+                    </Frame>
+
                 </VerticalStackLayout>
             </ScrollView>
 
-            <!-- Phần Tạo lập (giữa) với ScrollView -->
+            <!-- Tạo Lập (cột 1) -->
             <ScrollView Grid.Column="1">
                 <VerticalStackLayout Spacing="20" Padding="5,0,5,0">
-                    <Label Text="Tạo Lập" 
-                           FontSize="18" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"/>
+                    <Label Text="Tạo Lập" FontSize="18" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+
                     <!-- Tiếp Nhận Xe -->
-                    <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,0,0,12">
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
                         <VerticalStackLayout Spacing="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="Tiếp Nhận Xe" 
-                                       FontSize="16" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-SemiBold"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalOptions="Start"/>
-                                <CheckBox Grid.Column="1" 
-                                          IsChecked="{Binding TiepNhanXePermission, Mode=TwoWay}"
-                                          Color="Blue"
-                                          CheckedChanged="OnCheckBoxChanged"
-                                          AutomationId="TiepNhanXeCheckBox"/>
-                            </Grid>
-                            <Grid x:Name="TiepNhanXeAccordion" IsVisible="False">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="https://via.placeholder.com/150" 
-                                       Aspect="AspectFit" 
-                                       HeightRequest="150" 
-                                       Margin="0,10,0,0" 
-                                       Grid.Row="0"/>
-                                <Label Text="Giao diện Tiếp Nhận Xe cho phép nhập thông tin xe vào hệ thống để bắt đầu quy trình sửa chữa hoặc bảo dưỡng."
-                                       FontSize="14" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Grid.Row="1" 
-                                       Margin="0,10,0,0"/>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Tiếp Nhận Xe" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding TiepNhanXePermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="TiepNhanXeCheckBox"/>
                             </Grid>
                         </VerticalStackLayout>
+                    </Frame>
+
+                    <!-- Lập Phiếu Sửa Chữa -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Lập Phiếu Sửa Chữa" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding LapPhieuSuaChuaPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="LapPhieuSuaChuaCheckBox"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Lập Phiếu Nhập -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Lập Phiếu Nhập" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding LapPhieuNhapPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="LapPhieuNhapCheckBox"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Lập Phiếu Thu Tiền -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Lập Phiếu Thu Tiền" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding LapPhieuThuTienPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="LapPhieuThuTienCheckBox"/>
+                        </Grid>
                     </Frame>
                     <!-- Lập Phiếu Sửa Chữa -->
-                    <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,0,0,12">
-                        <VerticalStackLayout Spacing="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="Lập Phiếu Sửa Chữa" 
-                                       FontSize="16" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-SemiBold"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalOptions="Start"/>
-                                <CheckBox Grid.Column="1" 
-                                          IsChecked="{Binding LapPhieuSuaChuaPermission, Mode=TwoWay}"
-                                          Color="Blue"
-                                          CheckedChanged="OnCheckBoxChanged"
-                                          AutomationId="LapPhieuSuaChuaCheckBox"/>
-                            </Grid>
-                            <Grid x:Name="LapPhieuSuaChuaAccordion" IsVisible="False">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="https://via.placeholder.com/150" 
-                                       Aspect="AspectFit" 
-                                       HeightRequest="150" 
-                                       Margin="0,10,0,0" 
-                                       Grid.Row="0"/>
-                                <Label Text="Giao diện Lập Phiếu Sửa Chữa cho phép tạo phiếu ghi nhận các công việc sửa chữa và vật tư sử dụng."
-                                       FontSize="14" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Grid.Row="1" 
-                                       Margin="0,10,0,0"/>
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Frame>
-                    <!-- Lập Phiếu Nhập -->
-                    <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,0,0,12">
-                        <VerticalStackLayout Spacing="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="Lập Phiếu Nhập" 
-                                       FontSize="16" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-SemiBold"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalOptions="Start"/>
-                                <CheckBox Grid.Column="1" 
-                                          IsChecked="{Binding LapPhieuNhapPermission, Mode=TwoWay}"
-                                          Color="Blue"
-                                          CheckedChanged="OnCheckBoxChanged"
-                                          AutomationId="LapPhieuNhapCheckBox"/>
-                            </Grid>
-                            <Grid x:Name="LapPhieuNhapAccordion" IsVisible="False">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="https://via.placeholder.com/150" 
-                                       Aspect="AspectFit" 
-                                       HeightRequest="150" 
-                                       Margin="0,10,0,0" 
-                                       Grid.Row="0"/>
-                                <Label Text="Giao diện Lập Phiếu Nhập cho phép nhập thông tin phiếu nhập vật tư, bao gồm loại vật tư, số lượng, đơn giá, và lưu vào hệ thống."
-                                       FontSize="14" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Grid.Row="1" 
-                                       Margin="0,10,0,0"/>
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Frame>
-                    <!-- Lập Phiếu Thu Tiền -->
-                    <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,0,0,12">
-                        <VerticalStackLayout Spacing="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="Lập Phiếu Thu Tiền" 
-                                       FontSize="16" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-SemiBold"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalOptions="Start"/>
-                                <CheckBox Grid.Column="1" 
-                                          IsChecked="{Binding LapPhieuThuTienPermission, Mode=TwoWay}"
-                                          Color="Blue"
-                                          CheckedChanged="OnCheckBoxChanged"
-                                          AutomationId="LapPhieuThuTienCheckBox"/>
-                            </Grid>
-                            <Grid x:Name="LapPhieuThuTienAccordion" IsVisible="False">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="https://via.placeholder.com/150" 
-                                       Aspect="AspectFit" 
-                                       HeightRequest="150" 
-                                       Margin="0,10,0,0" 
-                                       Grid.Row="0"/>
-                                <Label Text="Giao diện Lập Phiếu Thu Tiền cho phép ghi nhận và in hóa đơn thanh toán cho khách hàng."
-                                       FontSize="14" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Grid.Row="1" 
-                                       Margin="0,10,0,0"/>
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Frame>
+                    <!-- ... Frame tương tự cho LapPhieuSuaChua, LapPhieuNhap, LapPhieuThuTien -->
                 </VerticalStackLayout>
             </ScrollView>
 
-            <!-- Phần Quản trị (phải) với ScrollView -->
+            <!-- Quản Trị (cột 2) -->
             <ScrollView Grid.Column="2">
                 <VerticalStackLayout Spacing="20" Padding="5,0,0,0">
-                    <Label Text="Quản Trị" 
-                           FontSize="18" 
-                           FontAttributes="Bold" 
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"/>
+                    <Label Text="Quản Trị" FontSize="18" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+
                     <!-- Phân Quyền -->
-                    <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,0,0,12">
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
                         <VerticalStackLayout Spacing="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="Phân Quyền" 
-                                       FontSize="16" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-SemiBold"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalOptions="Start"/>
-                                <CheckBox Grid.Column="1" 
-                                          IsChecked="{Binding PhanQuyenPermission, Mode=TwoWay}"
-                                          Color="Blue"
-                                          CheckedChanged="OnCheckBoxChanged"
-                                          AutomationId="PhanQuyenCheckBox"/>
-                            </Grid>
-                            <Grid x:Name="PhanQuyenAccordion" IsVisible="False">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="https://via.placeholder.com/150" 
-                                       Aspect="AspectFit" 
-                                       HeightRequest="150" 
-                                       Margin="0,10,0,0" 
-                                       Grid.Row="0"/>
-                                <Label Text="Giao diện Phân Quyền cho phép quản trị viên phân quyền truy cập cho các vai trò khác nhau."
-                                       FontSize="14" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Grid.Row="1" 
-                                       Margin="0,10,0,0"/>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Phân Quyền" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding PhanQuyenPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="PhanQuyenCheckBox"/>
                             </Grid>
                         </VerticalStackLayout>
                     </Frame>
+
                     <!-- Thay Đổi Tham Số -->
                     <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,0,0,12">
+       BackgroundColor="{DynamicResource CardBackgroundColor}"
+       Padding="20"
+       CornerRadius="{StaticResource CornerRadiusHandler}"
+       Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Thay Đổi Tham Số"
+           FontSize="16"
+           FontAttributes="Bold"
+           FontFamily="OpenSans-SemiBold"
+           TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1"
+              IsChecked="{Binding ThayDoiThamSoPermission, Mode=TwoWay}"
+              Color="Blue"
+              CheckedChanged="OnCheckBoxChanged"
+              AutomationId="ThayDoiThamSoCheckBox"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Quản Lý Danh Sách Tài Khoản -->
+                    <Frame HasShadow="True"
+       BackgroundColor="{DynamicResource CardBackgroundColor}"
+       Padding="20"
+       CornerRadius="{StaticResource CornerRadiusHandler}"
+       Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Quản Lý Danh Sách Tài Khoản"
+           FontSize="16"
+           FontAttributes="Bold"
+           FontFamily="OpenSans-SemiBold"
+           TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1"
+              IsChecked="{Binding QuanLiDanhSachTaiKhoanPermission, Mode=TwoWay}"
+              Color="Blue"
+              CheckedChanged="OnCheckBoxChanged"
+              AutomationId="QuanLiDanhSachTaiKhoanCheckBox"/>
+                        </Grid>
+                    </Frame>
+
+                    <!-- Quản Lý Lịch Sử -->
+                    <Frame HasShadow="True"
+       BackgroundColor="{DynamicResource CardBackgroundColor}"
+       Padding="20"
+       CornerRadius="{StaticResource CornerRadiusHandler}"
+       Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Quản Lý Lịch Sử"
+           FontSize="16"
+           FontAttributes="Bold"
+           FontFamily="OpenSans-SemiBold"
+           TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1"
+              IsChecked="{Binding QuanLiLichSuPermission, Mode=TwoWay}"
+              Color="Blue"
+              CheckedChanged="OnCheckBoxChanged"
+              AutomationId="QuanLiLichSuCheckBox"/>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Khách Hàng (cột 3) -->
+            <ScrollView Grid.Column="3">
+                <VerticalStackLayout Spacing="20" Padding="5,0,0,0">
+                    <Label Text="Khách Hàng" FontSize="18" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+
+                    <!-- Khách hàng xem danh sách xe -->
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
                         <VerticalStackLayout Spacing="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Label Text="Thay Đổi Tham Số" 
-                                       FontSize="16" 
-                                       FontAttributes="Bold" 
-                                       FontFamily="OpenSans-SemiBold"
-                                       TextColor="{DynamicResource TextColor}"
-                                       HorizontalOptions="Start"/>
-                                <CheckBox Grid.Column="1" 
-                                          IsChecked="{Binding ThayDoiThamSoPermission, Mode=TwoWay}"
-                                          Color="Blue"
-                                          CheckedChanged="OnCheckBoxChanged"
-                                          AutomationId="ThayDoiThamSoCheckBox"/>
-                            </Grid>
-                            <Grid x:Name="ThayDoiThamSoAccordion" IsVisible="False">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Image Source="https://via.placeholder.com/150" 
-                                       Aspect="AspectFit" 
-                                       HeightRequest="150" 
-                                       Margin="0,10,0,0" 
-                                       Grid.Row="0"/>
-                                <Label Text="Giao diện Thay Đổi Tham Số cho phép quản trị viên chỉnh sửa các thông số hệ thống (ví dụ: giá mặc định, cấu hình)."
-                                       FontSize="14" 
-                                       FontFamily="OpenSans-Regular"
-                                       TextColor="{DynamicResource TextColor}"
-                                       Grid.Row="1" 
-                                       Margin="0,10,0,0"/>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Label Text="Xem Danh Sách Xe" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding KhachHangXemDanhSachXePermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="KhachHangXemDanhSachXeCheckBox"/>
                             </Grid>
                         </VerticalStackLayout>
                     </Frame>
                 </VerticalStackLayout>
             </ScrollView>
-        </Grid>
 
+        </Grid>
         <!-- Nút lưu -->
         
     </VerticalStackLayout>

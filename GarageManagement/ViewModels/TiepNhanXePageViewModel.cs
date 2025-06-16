@@ -98,6 +98,13 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public async Task AddNewCarRecord()
         {
+            var soXeTiepNhanToiDa = await _ruleService.GetThroughtSpecialRoute("SoXeToiDaTiepNhan");
+            var listTiepNhan = await _recordService.GetListOnSpecialRequirement($"DayAndMonth/{DateTime.UtcNow.ToLocalTime().Day}/{DateTime.UtcNow.ToLocalTime().Month}");
+            if (listTiepNhan?.Count >= (int)soXeTiepNhanToiDa?.GiaTri)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Đã đạt số lượng xe tiếp nhận tối đa trong ngày", "OK");
+                return;
+            }
             if (!IsCarExists || IsCarNotFound)
             {
                 Shell.Current?.DisplayAlert("Thông báo", "Xe không tồn tại trong hệ thống, vui lòng kiểm tra lại thông tin xe.", "OK");
@@ -131,13 +138,7 @@ namespace GarageManagement.ViewModels
                     }
                 }
             }
-            var soXeTiepNhanToiDa = await _ruleService.GetThroughtSpecialRoute("SoXeTiepNhanToiDaMotNgay");
-            var listTiepNhan = await _recordService.GetListOnSpecialRequirement($"DayAndMonth/{DateTime.UtcNow.ToLocalTime().Day}/{DateTime.UtcNow.ToLocalTime().Month}");
-            if (listTiepNhan?.Count>=soXeTiepNhanToiDa?.GiaTri)
-            {
-                await Shell.Current.DisplayAlert("Thông báo", "Đã đạt số lượng xe tiếp nhận tối đa trong ngày", "OK");
-                return;
-            }
+            
             await _recordService.Create(new PhieuTiepNhan()
             {
                 Id=Guid.NewGuid(),

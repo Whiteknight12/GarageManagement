@@ -27,41 +27,71 @@ public partial class PhanQuyenPage : ContentView
             Guid chucNangId = Guid.Empty;
             bool isChecked = e.Value;
 
-            // Xác định Guid của chức năng dựa trên x:Name của CheckBox
+            // Xác định Guid của chức năng dựa trên AutomationId của CheckBox
             switch (checkBox.AutomationId)
             {
-                case "QuanLyDsXeCheckBox":
-                    chucNangId = PhanQuyenPageViewModel.QuanLyDsXeId;
+                case "QuanLiDanhSachXeCheckBox":
+                    chucNangId = _viewModel.QuanLiDanhSachXeId;
                     break;
-                case "QuanLyDsHieuXeCheckBox":
-                    chucNangId = PhanQuyenPageViewModel.QuanLyDsHieuXeId;
+                case "QuanLiDanhSachHieuXeCheckBox":
+                    chucNangId = _viewModel.QuanLiDanhSachHieuXeId;
                     break;
-                case "QuanLyDsVatTuPhuTungCheckBox":
-                    chucNangId = PhanQuyenPageViewModel.QuanLyDsVatTuPhuTungId;
+                case "QuanLiDanhSachLoaiVatTuCheckBox":
+                    chucNangId = _viewModel.QuanLiDanhSachLoaiVatTuId;
                     break;
-                case "QuanLyDsTienCongCheckBox":
-                    chucNangId = PhanQuyenPageViewModel.QuanLyDsTienCongId;
+                case "QuanLiDanhSachLoaiTienCongCheckBox":
+                    chucNangId = _viewModel.QuanLiDanhSachLoaiTienCongId;
                     break;
-                case "BaoCaoDoanhSoCheckBox":
-                    chucNangId = PhanQuyenPageViewModel.BaoCaoDoanhSoId;
+                case "QuanLiNhanVienCheckBox":
+                    chucNangId = _viewModel.QuanLiNhanVienId;
+                    break;
+                case "QuanLiKhachHangCheckBox":
+                    chucNangId = _viewModel.QuanLiKhachHangId;
+                    break;
+                case "QuanLiPhieuNhapCheckBox":
+                    chucNangId = _viewModel.QuanLiPhieuNhapId;
+                    break;
+                case "QuanLiPhieuSuaChuaCheckBox":
+                    chucNangId =    _viewModel.QuanLiPhieuSuaChuaId;
+                    break;
+                case "QuanLiPhieuThuTienCheckBox":
+                    chucNangId = _viewModel.QuanLiPhieuThuTienId;
+                    break;
+                case "QuanLiPhieuTiepNhanCheckBox":
+                    chucNangId = _viewModel.QuanLiPhieuTiepNhanId;
+                    break;
+                case "QuanLiBaoCaoThangCheckBox":
+                    chucNangId = _viewModel.QuanLiBaoCaoThangId;
+                    break;
+                case "QuanLiBaoCaoTonCheckBox":
+                    chucNangId = _viewModel.QuanLiBaoCaoTonId;
                     break;
                 case "TiepNhanXeCheckBox":
-                    chucNangId = PhanQuyenPageViewModel.TiepNhanXeId;
+                    chucNangId = _viewModel.TiepNhanXeId;
                     break;
                 case "LapPhieuSuaChuaCheckBox":
-                    chucNangId = PhanQuyenPageViewModel.LapPhieuSuaChuaId;
+                    chucNangId = _viewModel.LapPhieuSuaChuaId;
                     break;
                 case "LapPhieuNhapCheckBox":
-                    chucNangId = PhanQuyenPageViewModel.LapPhieuNhapId;
+                    chucNangId = _viewModel.LapPhieuNhapId;
                     break;
                 case "LapPhieuThuTienCheckBox":
-                    chucNangId = PhanQuyenPageViewModel.LapPhieuThuTienId;
+                    chucNangId = _viewModel.LapPhieuThuTienId;
                     break;
                 case "PhanQuyenCheckBox":
-                    chucNangId = PhanQuyenPageViewModel.PhanQuyenId;
+                    chucNangId = _viewModel.PhanQuyenId;
                     break;
                 case "ThayDoiThamSoCheckBox":
-                    chucNangId = PhanQuyenPageViewModel.ThayDoiThamSoId;
+                    chucNangId = _viewModel.ThayDoiThamSoId;
+                    break;
+                case "QuanLiDanhSachTaiKhoanCheckBox":
+                    chucNangId = _viewModel.QuanLiDanhSachTaiKhoanId;
+                    break;
+                case "QuanLiLichSuCheckBox":
+                    chucNangId = _viewModel.QuanLiLichSuId;
+                    break;
+                case "KhachHangXemDanhSachXeCheckBox":
+                    chucNangId = _viewModel.KhachHangXemDanhSachXeId;
                     break;
             }
 
@@ -69,21 +99,18 @@ public partial class PhanQuyenPage : ContentView
             {
                 if (isChecked)
                 {
-                    // Thêm ChucNangId vào ChucNangList nếu được check
+                    // Thêm Permission nếu được check
                     if (!viewModel.ChucNangList.Contains(chucNangId))
-                    {
                         viewModel.ChucNangList.Add(chucNangId);
-                    }
                 }
                 else
                 {
-                    // Xóa ChucNangId khỏi ChucNangList nếu bỏ check
+                    // Bỏ Permission nếu bỏ check
                     if (viewModel.ChucNangList.Contains(chucNangId))
-                    {
                         viewModel.ChucNangList.Remove(chucNangId);
-                    }
                 }
             }
         }
     }
+
 }

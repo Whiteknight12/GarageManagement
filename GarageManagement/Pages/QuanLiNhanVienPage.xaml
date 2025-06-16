@@ -330,7 +330,8 @@ FontFamily="OpenSans-SemiBold"/>
                             <Entry
             Text="{Binding SelectedNhanVien.CCCD, Mode=TwoWay}"
             FontSize="16"
-            TextColor="{DynamicResource TextColor}" />
+            TextColor="{DynamicResource TextColor}" 
+                                BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </VerticalStackLayout>
 
                         <!-- Họ và tên -->
@@ -343,7 +344,8 @@ FontFamily="OpenSans-SemiBold"/>
                             <Entry
             Text="{Binding SelectedNhanVien.HoTen, Mode=TwoWay}"
             FontSize="16"
-            TextColor="{DynamicResource TextColor}" />
+            TextColor="{DynamicResource TextColor}" 
+                                BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </VerticalStackLayout>
 
                         <!-- Tuổi -->
@@ -357,7 +359,8 @@ FontFamily="OpenSans-SemiBold"/>
             Text="{Binding SelectedNhanVien.Tuoi, Mode=TwoWay}"
             Keyboard="Numeric"
             FontSize="16"
-            TextColor="{DynamicResource TextColor}" />
+            TextColor="{DynamicResource TextColor}"
+                                BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </VerticalStackLayout>
 
                         <!-- Giới tính -->
@@ -371,7 +374,7 @@ FontFamily="OpenSans-SemiBold"/>
         SelectedItem="{Binding SelectedNhanVien.GioiTinh}"
         FontSize="16"
         TextColor="{DynamicResource TextColor}"
-        BackgroundColor="White"/>
+        BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </VerticalStackLayout>
 
                         <!-- Địa chỉ -->
@@ -385,7 +388,8 @@ FontFamily="OpenSans-SemiBold"/>
             Text="{Binding SelectedNhanVien.DiaChi, Mode=TwoWay}"
             AutoSize="TextChanges"
             FontSize="16"
-            TextColor="{DynamicResource TextColor}" />
+            TextColor="{DynamicResource TextColor}" 
+                                BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </VerticalStackLayout>
 
                         <!-- Số điện thoại -->
@@ -399,7 +403,8 @@ FontFamily="OpenSans-SemiBold"/>
             Text="{Binding SelectedNhanVien.SoDienThoai, Mode=TwoWay}"
             Keyboard="Telephone"
             FontSize="16"
-            TextColor="{DynamicResource TextColor}" />
+            TextColor="{DynamicResource TextColor}" 
+                                BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </VerticalStackLayout>
 
                         <!-- Email -->
@@ -413,11 +418,12 @@ FontFamily="OpenSans-SemiBold"/>
             Text="{Binding SelectedNhanVien.Email, Mode=TwoWay}"
             Keyboard="Email"
             FontSize="16"
-            TextColor="{DynamicResource TextColor}" />
+            TextColor="{DynamicResource TextColor}"
+                                BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </VerticalStackLayout>
 
                         <!-- Tài khoản Id -->
-                        <VerticalStackLayout>
+                        <VerticalStackLayout IsVisible="False">
                             <Label
             Text="Tài khoản Id"
             FontSize="16"
@@ -426,7 +432,8 @@ FontFamily="OpenSans-SemiBold"/>
                             <Entry
             Text="{Binding SelectedNhanVien.TaiKhoanId, Mode=TwoWay}"
             FontSize="16"
-            TextColor="{DynamicResource TextColor}" />
+            TextColor="{DynamicResource TextColor}"
+                                BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </VerticalStackLayout>
 
                     </VerticalStackLayout>
@@ -436,7 +443,7 @@ FontFamily="OpenSans-SemiBold"/>
                 <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
                     <Button
         Text="Lưu"
-        Command="{Binding SaveDetailAsyncCommand}"
+        Command="{Binding SaveDetailCommand}"
         BackgroundColor="#10B981"
         TextColor="White"
         WidthRequest="140"

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
@@ -23,7 +24,7 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private string hoTen;
         [ObservableProperty]
-        private int tuoi;
+        private string tuoi;
         [ObservableProperty]
         private string diaChi;
         [ObservableProperty]
@@ -58,7 +59,7 @@ namespace GarageManagement.ViewModels
                 CCCD = result.CCCD;
                 GioiTinh = result.GioiTinh;
                 HoTen = result.HoTen;
-                Tuoi = result.Tuoi;
+                Tuoi = result.Tuoi.ToString();
                 DiaChi = result.DiaChi;
                 SoDienThoai = result.SoDienThoai;
                 Email = result.Email;
@@ -84,28 +85,89 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public async Task Update()
         {
-            var result = await _nhanVienService.GetByID(Id);
-            if (result is not null)
+            // 0. Validate Tuổi phải parse được và >=1
+            if (!int.TryParse(Tuoi, out var tuoiParsed) || tuoiParsed <= 0)
             {
-                result.CCCD = CCCD;
-                result.GioiTinh = GioiTinh;
-                result.HoTen = HoTen;
-                result.Tuoi = Tuoi; 
-                result.DiaChi = DiaChi;
-                result.SoDienThoai = SoDienThoai;
-                result.Email = Email;
-                await _nhanVienService.Update(result);
-                var toast = Toast.Make("Cập nhật thông tin khách hàng thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
-                await toast.Show();
+                await Shell.Current.DisplayAlert("Lỗi", "Tuổi phải là số nguyên dương", "OK");
+                return;
+            }
+
+            // 1. Lấy bản gốc
+            var original = await _nhanVienService.GetByID(Id);
+            if (original != null)
+            {
+                // So sánh từng field, dùng tuoiParsed thay vì int.Parse
+                if (original.CCCD == CCCD
+                 && original.GioiTinh == GioiTinh
+                 && original.HoTen == HoTen
+                 && original.Tuoi == tuoiParsed
+                 && original.DiaChi == DiaChi
+                 && original.SoDienThoai == SoDienThoai
+                 && original.Email == Email)
+                {
+                    await Shell.Current.DisplayAlert(
+                        "Thông báo",
+                        "Không có thay đổi nào được thực hiện.",
+                        "OK");
+                    return;
+                }
+            }
+
+            // 2. Các validation regex khác
+            var cccdPattern = new Regex(@"^\d+$");
+            if (!cccdPattern.IsMatch(CCCD))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "CCCD chỉ được chứa chữ số", "OK");
+                return;
+            }
+            var namePattern = new Regex(@"^[\p{L}\s]+$");
+            if (!namePattern.IsMatch(HoTen))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Họ tên chỉ được chứa chữ cái", "OK");
+                return;
+            }
+            var phonePattern = new Regex(@"^\d{10,11}$");
+            if (!phonePattern.IsMatch(SoDienThoai))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Số điện thoại phải từ 10–11 chữ số", "OK");
+                return;
+            }
+            var emailPattern = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            if (!emailPattern.IsMatch(Email))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Email không đúng định dạng", "OK");
+                return;
+            }
+
+            // 3. Thực hiện cập nhật
+            if (original is not null)
+            {
+                original.CCCD = CCCD;
+                original.GioiTinh = GioiTinh;
+                original.HoTen = HoTen;
+                original.Tuoi = tuoiParsed;   // dùng parsed
+                original.DiaChi = DiaChi;
+                original.SoDienThoai = SoDienThoai;
+                original.Email = Email;
+                await _nhanVienService.Update(original);
+
+                await Shell.Current.DisplayAlert(
+                    "Thông báo",
+                    "Cập nhật thông tin nhân viên thành công",
+                    "OK");
                 await ExitUpdate();
                 MessagingCenter.Send(this, "ReloadNhanVienList");
             }
             else
             {
-                var toast = Toast.Make("Cập nhật thông tin khách hàng thất bại", CommunityToolkit.Maui.Core.ToastDuration.Short);
-                await toast.Show();
+                await Shell.Current.DisplayAlert(
+                    "Thông báo",
+                    "Cập nhật thông tin nhân viên thất bại",
+                    "OK");
                 await ExitUpdate();
             }
         }
+
+
     }
 }

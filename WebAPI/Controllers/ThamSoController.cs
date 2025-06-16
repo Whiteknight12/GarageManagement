@@ -68,5 +68,12 @@ namespace WebAPI.Controllers
             if (result is not null) return Ok(result);
             return NotFound();
         }
+        [HttpGet("SoXeToiDaTiepNhan")]
+        public async Task<ActionResult<ThamSo>> GetSoXeToiDaTiepNhan()
+        {
+            var result = await _db.thamSos.FirstOrDefaultAsync(u => u.TenThamSo == "SoXeToiDaTiepNhan");
+            if (result is not null) return Ok(result);
+            return NotFound();
+        }
     }
 }

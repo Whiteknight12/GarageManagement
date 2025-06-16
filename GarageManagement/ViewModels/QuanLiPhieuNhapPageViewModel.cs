@@ -60,7 +60,7 @@ namespace GarageManagement.ViewModels
             _lapPhieuNhapPageViewModel = lapPhieuNhapPageViewModel;
             _vatTuService = vatTuService; 
             _chiTietPhieuNhapService = chiTiet;
-            _ = LoadAsync();
+            //_ = LoadAsync();
             IsDeleteMode = false;
 
             MessagingCenter.Subscribe<ChinhSuaPhieuNhapPageViewModel>(this, "PhieuNhapUpdated", async _ =>

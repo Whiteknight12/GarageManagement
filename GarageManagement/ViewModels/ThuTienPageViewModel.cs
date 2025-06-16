@@ -53,19 +53,21 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<KhachHang> _userservice;
         private readonly APIClientService<PhieuThuTien> _phieuthuservice;
         private readonly APIClientService<Xe> _carservice;
+        private readonly APIClientService<ThamSo> _thamSoService; 
 
         public delegate void OnPhieuThuTienAddedDelegate(PhieuThuTien phieuThuTien);
         public OnPhieuThuTienAddedDelegate OnPhieuThuTienAdded { get; set; }
 
         public ThuTienPageViewModel(APIClientService<KhachHang> userservice,
             APIClientService<PhieuThuTien> phieuthuservice,
-            APIClientService<Xe> carservice)
+            APIClientService<Xe> carservice, APIClientService<ThamSo> thamSoService)
         {
             _userservice = userservice;
             _carservice = carservice;
             _phieuthuservice = phieuthuservice;
             ngayThuTien = DateTime.Now;
             SelectedFilterField = "CCCD"; // Giá trị mặc định
+            _thamSoService = thamSoService;
             _ = LoadAsync();
         }
 
@@ -145,6 +147,7 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private async Task XacNhan()
         {
+            var thamso = _thamSoService.GetThroughtSpecialRoute("VuotSoTienNo");  
             if (string.IsNullOrEmpty(Email))
             {
                 await Shell.Current.DisplayAlert("Error", "Không được bỏ trống email", "OK");

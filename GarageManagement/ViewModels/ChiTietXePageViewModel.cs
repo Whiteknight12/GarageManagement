@@ -98,6 +98,8 @@ namespace GarageManagement.ViewModels
 
         public Guid selectedKhachHangId;
 
+        private List<KhachHang> khs = new(); 
+
         private readonly APIClientService<Xe> _carservice;
         private readonly APIClientService<HieuXe> _hieuxeservice;
         private readonly APIClientService<KhachHang> _khachHangService;
@@ -116,8 +118,11 @@ namespace GarageManagement.ViewModels
             _phieuTiepNhanService = phieuTiepNhanService;
         }
 
+
+
         public async Task LoadAsync()
         {
+            khs = await _khachHangService.GetAll(); 
             IsReadOnly = true;
             IsUpdating = false;
             var obj = await _carservice.GetByID(CarId);
@@ -185,20 +190,34 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Thông báo", "Vui lòng nhập tên xe", "OK");
                 return;
             }
+            var allCars = await _carservice.GetAll();
+            if (allCars.Any(x => x.BienSo == BienSo && x.Id != CarId))
+            {
+                await Shell.Current.DisplayAlert(
+                    "Thông báo",
+                    "Biển số này đã có trong hệ thống, vui lòng nhập biển số khác",
+                    "OK");
+                return;
+            }
             var car = await _carservice.GetByID(CarId);
             if (car is not null)
             {
                 car.Ten = Name;
                 car.BienSo = BienSo;
                 car.HieuXeId = SelectedHieuXe.Id;
+                car.TienNo = TienNoCuaXe; 
                 // update obj.KhaDung from selected status
                 car.KhaDung = SelectedTrangThaiXe == "Đang tiếp nhận trong Gara";
                 car.KhachHangId = selectedKhachHangId;
                 await _carservice.Update(car);
+                var khach = await _khachHangService.GetByID(SelectedKhachHang.Id);
+                khach.TienNo = TienNoCuaChuXe;
+                await _khachHangService.Update(khach); 
                 var toast = Toast.Make("Cập nhật xe thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
                 await LoadAsync();
                 await toast.Show();
             }
+            MessagingCenter.Send(this, "XeUpdated"); 
         }
 
         [RelayCommand]
@@ -210,15 +229,42 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        public async Task Filter()
+        public void Filter()
         {
-            await LoadAsync();
-            var list = ListKhachHang.ToList();
-            if (!string.IsNullOrEmpty(NameValue)) list = list.Where(x => x.HoVaTen.Contains(NameValue, StringComparison.OrdinalIgnoreCase)).ToList();
-            if (!string.IsNullOrEmpty(EmailValue)) list = list.Where(x => x.Email?.Contains(EmailValue, StringComparison.OrdinalIgnoreCase) ?? false).ToList();
-            if (!string.IsNullOrEmpty(CCCDValue)) list = list.Where(x => x.CCCD.Contains(CCCDValue, StringComparison.OrdinalIgnoreCase)).ToList();
-            if (!string.IsNullOrEmpty(PhoneValue)) list = list.Where(x => x.SoDienThoai.Contains(PhoneValue, StringComparison.OrdinalIgnoreCase)).ToList();
+            var list = khs.ToList();
+
+            if (!string.IsNullOrWhiteSpace(CCCDValue))
+                list = list
+                    .Where(x => !string.IsNullOrWhiteSpace(x.CCCD)
+                                && x.CCCD.Contains(CCCDValue, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+            if (!string.IsNullOrWhiteSpace(NameValue))
+                list = list
+                    .Where(x => !string.IsNullOrWhiteSpace(x.HoVaTen)
+                                && x.HoVaTen.Contains(NameValue, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+            if (!string.IsNullOrWhiteSpace(EmailValue))
+                list = list
+                    .Where(x => !string.IsNullOrWhiteSpace(x.Email)
+                                && x.Email.Contains(EmailValue, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+            if (!string.IsNullOrWhiteSpace(PhoneValue))
+                list = list
+                    .Where(x => !string.IsNullOrWhiteSpace(x.SoDienThoai)
+                                && x.SoDienThoai.Contains(PhoneValue, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+            if (SelectedKhachHang != null && !list.Contains(SelectedKhachHang))
+            {
+                SelectedKhachHang = null;
+            }
+
             ListKhachHang = new ObservableCollection<KhachHang>(list);
+
+            OnPropertyChanged(nameof(ListKhachHang));
         }
 
         [RelayCommand]

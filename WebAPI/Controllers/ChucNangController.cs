@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
 using WebAPI.Models;
 
@@ -11,8 +12,11 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ChucNangController : BaseController<ChucNang>
     {
-        public ChucNangController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
+        private readonly ApplicationDbContext _db; 
+        public ChucNangController(ApplicationDbContext applicationDbContext
+            ) : base(applicationDbContext)
         {
+            _db = applicationDbContext;        
         }
         [HttpGet]
         public override async Task<ActionResult<IEnumerable<ChucNang>>> GetAll()
@@ -42,6 +46,12 @@ namespace WebAPI.Controllers
         public override async Task<ActionResult> Delete(Guid id)
         {
             return await base.Delete(id);
+        }
+        [HttpGet("/name/{name}")]
+        public async Task<ActionResult> GetIdByName(string name)
+        {
+            var c = await _db.chucNangs.FirstOrDefaultAsync(cn => name.Equals(cn.TenChucNang.ToLower()));
+            return Ok(c);
         }
     }
 }
