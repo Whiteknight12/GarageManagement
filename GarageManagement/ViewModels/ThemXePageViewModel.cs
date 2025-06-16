@@ -125,7 +125,7 @@ namespace GarageManagement.ViewModels
             }
             else
             {
-                chuXeId = chuXe.Id; 
+                chuXeId = chuXe?.Id ?? Guid.Empty; 
             }
             var listXe = await _xeService.GetAll();
             
@@ -241,7 +241,7 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private async Task XemChiTietChuXe()
+        private void XemChiTietChuXe()
         {
             
         }

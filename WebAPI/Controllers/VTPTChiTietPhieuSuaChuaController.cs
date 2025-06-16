@@ -11,9 +11,11 @@ namespace WebAPI.Controllers
     [ApiController]
     public class VTPTChiTietPhieuSuaChuaController : BaseController<VTPTChiTietPhieuSuaChua>
     {
+        private readonly ApplicationDbContext _db;
+        
         public VTPTChiTietPhieuSuaChuaController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
-            
+            _db=applicationDbContext;
         }
 
         [HttpGet]
@@ -26,6 +28,14 @@ namespace WebAPI.Controllers
         public override async Task<ActionResult<VTPTChiTietPhieuSuaChua>> GetById(Guid id)
         {
             return await base.GetById(id);
+        }
+
+        [HttpGet("ChiTietPhieuSuaChuaId/{id}")]
+        public async Task<ActionResult<IEnumerable<VTPTChiTietPhieuSuaChua>>> getListByChiTietPhieuSuaChuaId(Guid id)
+        {
+            var result=_db.vtptChiTietPhieuSuaChuas.Where(u=>u.ChiTietPhieuSuaChuaId == id).ToList();
+            if (result.Count == 0) return NotFound();
+            return Ok(result);
         }
 
         [HttpPost]

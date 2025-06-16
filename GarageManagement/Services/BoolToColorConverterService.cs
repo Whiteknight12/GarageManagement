@@ -13,6 +13,7 @@ namespace GarageManagement.Services
         {
             return (bool)value ? Color.FromHex("#3498DB") : Color.FromHex("#2C3E50");
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

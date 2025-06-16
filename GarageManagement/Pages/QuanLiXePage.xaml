@@ -284,60 +284,59 @@ FontFamily="OpenSans-SemiBold">
                                         <ColumnDefinition Width="1*" />
                                     </Grid.ColumnDefinitions>
                                     <CheckBox IsChecked="{Binding IsSelected}"
-                  Grid.Column="0"
-                 
+                                              Grid.Column="0"
                                               VerticalOptions="Center"
-                  IsVisible="{Binding Path=BindingContext.IsDeleteMode,
+                                              IsVisible="{Binding Path=BindingContext.IsDeleteMode,
                                       Source={x:Reference RootContentView}}"/>
                                     <Label Text="{Binding Id}"
-                                   Grid.Column="1"
-                                   FontSize="13"
-                                   FontFamily="OpenSans-Regular"
-                                   TextColor="{DynamicResource TextColor}"
-                                   HorizontalTextAlignment="Center"
-                                   LineBreakMode="TailTruncation"
-                                   Margin="5"/>
+                                       Grid.Column="1"
+                                       FontSize="13"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       LineBreakMode="TailTruncation"
+                                       Margin="5"/>
                                     <Label Text="{Binding Ten}"
-                                   Grid.Column="2"
-                                   FontSize="13"
-                                   FontFamily="OpenSans-Regular"
-                                   TextColor="{DynamicResource TextColor}"
-                                   HorizontalTextAlignment="Center"
-                                   Margin="5"/>
+                                       Grid.Column="2"
+                                       FontSize="13"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="5"/>
                                     <Label Text="{Binding TenHieuXe}"
-                                   Grid.Column="3"
-                                   FontSize="13"
-                                   FontFamily="OpenSans-Regular"
-                                   TextColor="{DynamicResource TextColor}"
-                                   HorizontalTextAlignment="Center"
-                                   Margin="5"/>
+                                       Grid.Column="3"
+                                       FontSize="13"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="5"/>
                                     <Label Text="{Binding BienSo}"
-                                   Grid.Column="4"
-                                   FontSize="13"
-                                   FontFamily="OpenSans-Regular"
-                                   TextColor="{DynamicResource TextColor}"
-                                   HorizontalTextAlignment="Center"
-                                   Margin="5"/>
+                                       Grid.Column="4"
+                                       FontSize="13"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="5"/>
                                     <Label Text="{Binding TenChuXe}"
-                                   Grid.Column="5"
-                                   FontSize="13"
-                                   FontFamily="OpenSans-Regular"
-                                   TextColor="{DynamicResource TextColor}"
-                                   HorizontalTextAlignment="Center"
-                                   Margin="5"/>
+                                       Grid.Column="5"
+                                       FontSize="13"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                        Margin="5"/>
                                     <Label Text="{Binding TienNo}"
-                                   Grid.Column="6"
-                                   FontSize="13"
-                                   FontFamily="OpenSans-Regular"
-                                   TextColor="{DynamicResource TextColor}"
-                                   HorizontalTextAlignment="Center"
-                                   Margin="5"/>
+                                       Grid.Column="6"
+                                       FontSize="13"
+                                       FontFamily="OpenSans-Regular"
+                                       TextColor="{DynamicResource TextColor}"
+                                       HorizontalTextAlignment="Center"
+                                       Margin="5"/>
                                 </Grid>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer NumberOfTapsRequired="1"
-            Command="{Binding BindingContext.ShowXeDetailCommand,
-                              Source={x:Reference RootContentView}}"
-            CommandParameter="{Binding Id}" />
+                                      Command="{Binding BindingContext.ShowXeDetailCommand,
+                                      Source={x:Reference RootContentView}}"
+                                      CommandParameter="{Binding Id}" />
                                 </Frame.GestureRecognizers>
                             </Frame>
                         </DataTemplate>
@@ -366,61 +365,59 @@ FontFamily="OpenSans-SemiBold">
                 <!-- Tiêu đề + nút đóng -->
                 <HorizontalStackLayout>
                     <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   CornerRadius="10"
-                   Padding="15"
-                   HasShadow="True">
-                        <HorizontalStackLayout
-                            >
+                           CornerRadius="10"
+                           Padding="15"
+                           HasShadow="True">
+                        <HorizontalStackLayout>
                             <Label Text="Chi tiết xe"
-FontSize="30"
-FontAttributes="Bold"
-HorizontalOptions="Center"
-TextColor="{DynamicResource TextColor}" 
-        IsVisible="{Binding IsViewing}"/>
+                                FontSize="30"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                TextColor="{DynamicResource TextColor}" 
+                                IsVisible="{Binding IsViewing}"/>
                             <Label Text="Sửa thông tin xe"
-                       FontSize="30"
-                       FontAttributes="Bold"
-                       HorizontalOptions="Center"
-                       TextColor="{DynamicResource TextColor}" 
+                               FontSize="30"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               TextColor="{DynamicResource TextColor}" 
                                IsVisible="{Binding IsEditing}"/>
                         </HorizontalStackLayout>
                     </Frame>
                     <Button Text="✕"
-                    Command="{Binding CloseDetailPaneCommand}"
-                    BackgroundColor="Transparent"
-                    TextColor="{DynamicResource TextColor}"
-                    FontFamily="OpenSans-SemiBold" 
-                            HorizontalOptions="End"
-                        />
+                            Command="{Binding CloseDetailPaneCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="{DynamicResource TextColor}"
+                            FontFamily="OpenSans-SemiBold" 
+                            HorizontalOptions="End"/>
                 </HorizontalStackLayout>
 
                 <!-- Form nhập -->
                 <Frame BackgroundColor="{DynamicResource CardBackgroundColor}"
-               CornerRadius="10"
-               Padding="15"
-               HasShadow="True">
+                       CornerRadius="10"
+                       Padding="15"
+                       HasShadow="True">
 
                     <VerticalStackLayout Spacing="15">
 
                         <!-- Tên xe -->
                         <VerticalStackLayout>
                             <Label Text="Tên xe"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="{DynamicResource TextColor}" />
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
                             <Entry Text="{Binding SelectedXe.Ten, Mode=TwoWay}"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}"
-                           BackgroundColor="{DynamicResource BackgroundColor}" 
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"
+                               BackgroundColor="{DynamicResource BackgroundColor}" 
                                    IsEnabled="{Binding IsEditing}"/>
                         </VerticalStackLayout>
 
                         <!-- Tên hiệu xe -->
                         <VerticalStackLayout>
                             <Label Text="Tên hiệu xe"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="{DynamicResource TextColor}" />
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
                             <!-- Nếu đã có list hiệu xe, dùng Picker; nếu không thì Entry -->
                             <!-- Picker version -->
                             <!--<Picker ItemsSource="{Binding ListHieuXe}"
@@ -431,58 +428,58 @@ TextColor="{DynamicResource TextColor}"
 
                             <!-- Entry version -->
                             <Entry Text="{Binding SelectedXe.TenHieuXe, Mode=TwoWay}"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}"
-                           BackgroundColor="{DynamicResource BackgroundColor}" IsEnabled="{Binding IsEditing}" />
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"
+                               BackgroundColor="{DynamicResource BackgroundColor}" IsEnabled="{Binding IsEditing}" />
                         </VerticalStackLayout>
 
                         <!-- Biển số xe -->
                         <VerticalStackLayout>
                             <Label Text="Biển số xe"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="{DynamicResource TextColor}" />
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
                             <Entry Text="{Binding SelectedXe.BienSo, Mode=TwoWay}"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}"
-                           BackgroundColor="{DynamicResource BackgroundColor}" IsEnabled="{Binding IsEditing}"/>
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"
+                               BackgroundColor="{DynamicResource BackgroundColor}" IsEnabled="{Binding IsEditing}"/>
                         </VerticalStackLayout>
 
                         <!-- Tên chủ xe -->
                         <VerticalStackLayout>
                             <Label Text="Tên chủ xe"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="{DynamicResource TextColor}" />
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
                             <Entry Text="{Binding SelectedXe.TenChuXe, Mode=TwoWay}"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}"
-                           BackgroundColor="{DynamicResource BackgroundColor}" IsEnabled="{Binding IsEditing}"/>
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"
+                               BackgroundColor="{DynamicResource BackgroundColor}" IsEnabled="{Binding IsEditing}"/>
                         </VerticalStackLayout>
 
                         <!-- CCCD chủ xe -->
                         <VerticalStackLayout>
                             <Label Text="CCCD chủ xe"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="{DynamicResource TextColor}" />
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
                             <Entry Text="{Binding SelectedXe.CCCDChuXe, Mode=TwoWay}"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}"
-                           BackgroundColor="{DynamicResource BackgroundColor}" IsEnabled="{Binding IsEditing}"/>
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"
+                               BackgroundColor="{DynamicResource BackgroundColor}" IsEnabled="{Binding IsEditing}"/>
                         </VerticalStackLayout>
 
                         <!-- Tiền nợ -->
                         <VerticalStackLayout>
                             <Label Text="Tiền nợ"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           TextColor="{DynamicResource TextColor}" />
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="{DynamicResource TextColor}" />
                             <Entry Text="{Binding SelectedXe.TienNo, Mode=TwoWay}"
-                           Keyboard="Numeric"
-                           FontSize="16"
-                           TextColor="{DynamicResource TextColor}"
-                           BackgroundColor="{DynamicResource BackgroundColor}" IsEnabled="{Binding IsEditing}"/>
+                               Keyboard="Numeric"
+                               FontSize="16"
+                               TextColor="{DynamicResource TextColor}"
+                               BackgroundColor="{DynamicResource BackgroundColor}" IsEnabled="{Binding IsEditing}"/>
                         </VerticalStackLayout>
 
                     </VerticalStackLayout>
@@ -499,15 +496,15 @@ TextColor="{DynamicResource TextColor}"
                         />
                 <HorizontalStackLayout Spacing="12" HorizontalOptions="Center" IsVisible="{Binding IsEditing}">
                     <Button Text="Lưu"
-                    Command="{Binding SaveXeCommand}"
-                    MinimumWidthRequest="150"
-                    BackgroundColor="#10B981"
-                    TextColor="White" />
+                        Command="{Binding SaveXeCommand}"
+                        MinimumWidthRequest="150"
+                        BackgroundColor="#10B981"
+                        TextColor="White" />
                     <Button Text="Huỷ"
-                    Command="{Binding CancelXeCommand}"
-                    MinimumWidthRequest="150"
-                    BackgroundColor="Gray"
-                    TextColor="White" />
+                        Command="{Binding CancelXeCommand}"
+                        MinimumWidthRequest="150"
+                        BackgroundColor="Gray"
+                        TextColor="White" />
                 </HorizontalStackLayout>
 
             </VerticalStackLayout>

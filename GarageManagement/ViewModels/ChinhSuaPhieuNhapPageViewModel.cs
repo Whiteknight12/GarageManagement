@@ -44,19 +44,18 @@ namespace GarageManagement.ViewModels
         {
             // 1) Load all parts into your VM list
             var allVatTu = await _vatTuService.GetAll();
-            ListVatTu = new ObservableCollection<VatTuPhuTung>(allVatTu);
+            if (allVatTu is not null) ListVatTu = new ObservableCollection<VatTuPhuTung>(allVatTu);
+            else allVatTu = new List<VatTuPhuTung>();
 
-            // 2) Fetch the master record
-            var phieuNhap = await _phieuNhapVatTuService.GetByID(PhieuNhapId);
-            if (phieuNhap == null)
-                return;
+                // 2) Fetch the master record
+                var phieuNhap = await _phieuNhapVatTuService.GetByID(PhieuNhapId);
+            if (phieuNhap == null) return;
 
             SelectedDate = phieuNhap.NgayNhap;
             TongGiaTien = phieuNhap.TongTien;
 
             // 3) Pull back all detail rows, then filter & enrich
-            var allChiTiet = await _chiTietPhieuNhapVatTuService.GetAll()
-                              ?? new List<ChiTietPhieuNhapVatTu>();
+            var allChiTiet = await _chiTietPhieuNhapVatTuService.GetAll() ?? new List<ChiTietPhieuNhapVatTu>();
             var list = allChiTiet
                        .Where(x => x.PhieuNhapId == PhieuNhapId)
                        .Select(item =>
@@ -103,6 +102,11 @@ namespace GarageManagement.ViewModels
             }
 
             var updatedPhieu = await _phieuNhapVatTuService.GetByID(PhieuNhapId);
+            if (updatedPhieu == null)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Không tìm thấy phiếu nhập", "OK");
+                return;
+            }
             updatedPhieu.NgayNhap = SelectedDate;
             updatedPhieu.TongTien = listChiTiet.Sum(x => (x.DonGia ?? 0) * (x.SoLuong ?? 0));
 
@@ -134,8 +138,7 @@ namespace GarageManagement.ViewModels
             OnUpdateSuccess?.Invoke();
             MessagingCenter.Send(this, "PhieuNhapUpdated");
             var win = Application.Current.Windows.LastOrDefault();
-            if (win != null)
-                Application.Current.CloseWindow(win);
+            if (win != null) Application.Current.CloseWindow(win);
         }
     }
 } 

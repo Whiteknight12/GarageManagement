@@ -7,8 +7,9 @@ namespace GarageManagement.Pages;
 public partial class SuaPhieuSuaChuaPage : ContentView
 {
 	public readonly SuaPhieuSuaChuaPageViewModel _viewModel;
-	
-	public SuaPhieuSuaChuaPage(SuaPhieuSuaChuaPageViewModel viewModel)
+    private bool _isUiInitialized = false;
+
+    public SuaPhieuSuaChuaPage(SuaPhieuSuaChuaPageViewModel viewModel)
 	{
 		InitializeComponent();
 		_viewModel = viewModel;
@@ -22,6 +23,7 @@ public partial class SuaPhieuSuaChuaPage : ContentView
         if (Parent != null)
         {
             await _viewModel.LoadAsync();
+            _isUiInitialized = true;
             VTPTIdConverter.VatTuList = _viewModel.ListVatTuPhuTung;
             NDSCIdConverter.NoiDungList = _viewModel.ListNoiDungSuaChua;
         }
@@ -29,6 +31,7 @@ public partial class SuaPhieuSuaChuaPage : ContentView
 
     private async void OnVTPTChanged(object sender, EventArgs e)
     {
+        if (_viewModel.IsInitializing) return;
         if (sender is Picker picker && picker.SelectedItem is VatTuPhuTung vtpt)
         {
             if (picker.BindingContext is VTPTChiTietPhieuSuaChua vtptList)
@@ -37,7 +40,11 @@ public partial class SuaPhieuSuaChuaPage : ContentView
                 var item = chiTiet?.ListSpecifiedVTPT?.Where(u => u.SelectedVTPTId == vtpt.VatTuPhuTungId);
                 if (item?.Count() >= 2)
                 {
-                    await Shell.Current.DisplayAlert("Error", "Vật tư phụ tùng đã được chọn trước đó", "OK");
+                    var page = GetParentPage(this);
+                    if (page != null)
+                    {
+                        await page.DisplayAlert("Thông báo", "Vật tư phụ tùng không đủ", "OK");
+                    }
                     vtptList.SelectedVTPTId = null;
                     vtptList.OnPropertyChanged(nameof(vtptList.SelectedVTPTId));
                     vtptList.DonGia = null;
@@ -48,6 +55,9 @@ public partial class SuaPhieuSuaChuaPage : ContentView
                 }
                 vtptList.DonGia = vtpt.DonGiaBanLoaiVatTuPhuTung;
                 vtptList.OnPropertyChanged(nameof(vtptList.DonGia));
+                vtptList.TenLoaiVatTuPhuTung = vtpt.TenLoaiVatTuPhuTung;
+                vtptList.OnPropertyChanged(nameof(vtptList.TenLoaiVatTuPhuTung));
+
                 var updateItem = _viewModel.ListNoiDung.FirstOrDefault(u => u.NoiDungId == vtptList.IdForUI);
                 if (updateItem is not null)
                 {
@@ -62,10 +72,16 @@ public partial class SuaPhieuSuaChuaPage : ContentView
 
     private async void OnSoLuongChanged(object sender, TextChangedEventArgs e)
     {
+        if (_viewModel.IsInitializing || !_isUiInitialized || _viewModel.IsLoadingDetails) return;
         if (sender is Entry entry && entry.BindingContext is VTPTChiTietPhieuSuaChua vtptItem)
         {
             if (vtptItem != null)
             {
+                if (vtptItem.IsFirstTextChanged)
+                {
+                    vtptItem.IsFirstTextChanged = false;
+                    return;
+                }
                 string newText = e.NewTextValue;
                 if (int.TryParse(newText, out int soLuong))
                 {
@@ -78,7 +94,11 @@ public partial class SuaPhieuSuaChuaPage : ContentView
                         }
                         if (c > _viewModel.ListVatTuPhuTung?.FirstOrDefault(u => u.VatTuPhuTungId == vtptItem.SelectedVTPTId)?.SoLuong)
                         {
-                            await Shell.Current.DisplayAlert("Thông báo", "Số lượng vật tư phụ tùng không đủ", "OK");
+                            var page = GetParentPage(this);
+                            if (page != null)
+                            {
+                                await page.DisplayAlert("Thông báo", "Số lượng vật tư phụ tùng không đủ", "OK");
+                            }
                             vtptItem.SoLuong = 0;
                             vtptItem.OnPropertyChanged(nameof(vtptItem.SoLuong));
                             return;
@@ -120,12 +140,20 @@ public partial class SuaPhieuSuaChuaPage : ContentView
 
     private async void OnNoiDungSuaChuaChanged(object sender, EventArgs e)
     {
+        if (_viewModel.IsInitializing) return;
         if (sender is Picker picker && picker.BindingContext is ChiTietPhieuSuaChua noiDung)
         {
             var tmpList = _viewModel.ListNoiDung.Where(u => u.NoiDungSuaChuaId == noiDung.NoiDungSuaChuaId);
+            var selected = _viewModel.ListNoiDungSuaChua.FirstOrDefault(u => u.Id == noiDung.NoiDungSuaChuaId);
+            noiDung.SelectedNoiDungSuaChua = selected;
+            noiDung.OnPropertyChanged(nameof(noiDung.SelectedNoiDungSuaChua));
             if (tmpList.Count() >= 2)
             {
-                await Shell.Current.DisplayAlert("Thông báo", "Nội dung sữa chữa đã được chọn trước đó", "OK");
+                var page = GetParentPage(this);
+                if (page != null)
+                {
+                    await page.DisplayAlert("Thông báo", "Nội dung sữa chữa đã được chọn trước đó", "OK");
+                }
                 noiDung.NoiDungSuaChuaId = null;
                 noiDung.TienCongId = null;
                 noiDung.GiaTienCong = null;
@@ -145,5 +173,17 @@ public partial class SuaPhieuSuaChuaPage : ContentView
             }
             _viewModel.TongThanhTien = _viewModel.ListNoiDung.Sum(u => u.ThanhTien ?? 0);
         }
+    }
+
+    private Page? GetParentPage(Element element)
+    {
+        while (element != null)
+        {
+            if (element is Page page)
+                return page;
+
+            element = element.Parent;
+        }
+        return null;
     }
 }

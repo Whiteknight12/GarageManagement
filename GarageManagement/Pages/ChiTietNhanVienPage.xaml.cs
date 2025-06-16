@@ -13,7 +13,7 @@ public partial class ChiTietNhanVienPage : ContentView
         set
         {
             _staffIdString = value;
-            if (Guid.TryParse(value, out var g)) _viewModel.id = g;
+            if (Guid.TryParse(value, out var g)) _viewModel.Id = g;
         }
     }
     public readonly ChiTietNhanVienPageViewModel _viewModel;

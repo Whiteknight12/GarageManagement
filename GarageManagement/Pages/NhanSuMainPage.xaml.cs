@@ -13,6 +13,7 @@ public partial class NhanSuMainPage : ContentView
         BindingContext = _viewModel;
     }
 
+    [Obsolete]
     protected override void OnParentSet()
     {
         base.OnParentSet();

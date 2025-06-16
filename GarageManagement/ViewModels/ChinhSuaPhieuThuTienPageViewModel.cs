@@ -32,8 +32,7 @@ namespace GarageManagement.ViewModels
 
         // lọc
         [ObservableProperty]
-        private ObservableCollection<string> filterFields =
-            new ObservableCollection<string> { "CCCD", "Tên", "SĐT", "Email" };
+        private ObservableCollection<string> filterFields = new ObservableCollection<string> { "CCCD", "Tên", "SĐT", "Email" };
         [ObservableProperty] private string selectedFilterField;
         [ObservableProperty] private string filterValue;
 
@@ -62,28 +61,39 @@ namespace GarageManagement.ViewModels
         {
             // 1) load phiếu
             var pt = await _phieuService.GetByID(id);
-            if (pt == null) return;
+            if (pt == null)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Không tìm thấy phiếu thu tiền", "OK");
+                return;
+            }
 
             SelectedPhieu = pt;
 
             // 2) load danh sách khách hàng để chọn (giống ThuTienPage)
             var kus = await _khService.GetAll();
-            ListChuXe = new ObservableCollection<KhachHang>(kus);
+            if (kus is not null) ListChuXe = new ObservableCollection<KhachHang>(kus);
+            else kus = new List<KhachHang>();
 
             // 3) chọn lại KH hiện tại
-            SelectedChuXe = kus.Find(k => k.Id == pt.KhachHangId);
-            DienThoai = SelectedChuXe?.SoDienThoai;
-            Email = SelectedChuXe?.Email;
+            SelectedChuXe = kus.Find(k => k.Id == pt.KhachHangId) ?? new KhachHang() { 
+                SoDienThoai="", 
+                Email="" };
+            DienThoai = SelectedChuXe?.SoDienThoai ?? "";
+            Email = SelectedChuXe?.Email ?? "";
 
             // 4) lấy xe của KH
             var xeList = await _xeService.GetListOnSpecialRequirement($"PhoneNumber/{DienThoai}");
-            ListBienSo = new ObservableCollection<Xe>(xeList);
-            SelectedBienSo = xeList.Find(x => x.Id == pt.XeId);
+            if (xeList is not null) ListBienSo = new ObservableCollection<Xe>(xeList);
+            else xeList = new List<Xe>();
+            SelectedBienSo = xeList.Find(x => x.Id == pt.XeId) ?? new Xe()
+            {
+                //if we can't find the car, then it's empty 
+            };
 
             // 5) load thông tin nợ/hiệu xe
             var hx = await _hieuXeService.GetByID(SelectedBienSo.HieuXeId);
-            TenHieuXe = hx?.TenHieuXe;
-            TienNoXeSelected = SelectedBienSo.TienNo.ToString();
+            TenHieuXe = hx?.TenHieuXe ?? "";
+            TienNoXeSelected = SelectedBienSo.TienNo.ToString() ?? "";
 
             // 6) hiển thị ngày & số tiền
             NgayThuTien = pt.NgayThuTien;
@@ -121,7 +131,7 @@ namespace GarageManagement.ViewModels
             {
                 SelectedChuXe = filtered;
                 DienThoai = filtered.SoDienThoai;
-                Email = filtered.Email;
+                Email = filtered.Email ?? "";
                 CCCD = filtered.CCCD;
                 GioiTinh = filtered.GioiTinh;
                 var xeListBySDT = await _xeService.GetListOnSpecialRequirement($"PhoneNumber/{filtered.SoDienThoai}");
@@ -210,7 +220,7 @@ namespace GarageManagement.ViewModels
             if (SelectedBienSo.TienNo == 0) SelectedBienSo.KhaDung = false;
             await _xeService.Update(SelectedBienSo);
             await _khService.Update(SelectedChuXe);
-            TienNoXeSelected = SelectedBienSo.TienNo.ToString();
+            TienNoXeSelected = SelectedBienSo.TienNo.ToString() ?? "";
             SoTienThu = string.Empty;
             
             var toast = Toast.Make("Thông tin phiếu thu đã được cập nhật.", CommunityToolkit.Maui.Core.ToastDuration.Short);
@@ -236,10 +246,10 @@ namespace GarageManagement.ViewModels
         {
             // 1) Load lại thông tin hiệu xe
             var hx = await _hieuXeService.GetByID(xe.HieuXeId);
-            TenHieuXe = hx?.TenHieuXe;
+            TenHieuXe = hx?.TenHieuXe ?? "";
 
             // 2) Cập nhật lại tiền nợ của xe
-            TienNoXeSelected = xe.TienNo.ToString();
+            TienNoXeSelected = xe.TienNo.ToString() ?? "";
         }
     }
 }

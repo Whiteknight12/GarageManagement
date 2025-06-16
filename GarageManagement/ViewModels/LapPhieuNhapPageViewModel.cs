@@ -11,16 +11,22 @@ namespace GarageManagement.ViewModels
     public partial class LapPhieuNhapPageViewModel : BaseViewModel
     {
         public List<Guid> listChiTietId = new();
+
         [ObservableProperty]
         private ObservableCollection<VatTuPhuTung> pickerSource = new(); 
+
         [ObservableProperty]
         private double tongGiaTien;
+
         [ObservableProperty]
         private ObservableCollection<VatTuPhuTung> listVatTu = new();
+
         [ObservableProperty]
         private ObservableCollection<ChiTietPhieuNhapVatTu> listChiTietPhieuNhap = new();
+
         [ObservableProperty]
         DateTime selectedDate = DateTime.UtcNow; 
+
         private readonly APIClientService<VatTuPhuTung> _vatTuService;
         private readonly APIClientService<PhieuNhapVatTu> _phieuNhapVatTuService;
         private readonly APIClientService<ChiTietPhieuNhapVatTu> _chiTietPhieuNhapVatTuService;

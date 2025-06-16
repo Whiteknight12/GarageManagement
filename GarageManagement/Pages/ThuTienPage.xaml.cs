@@ -32,7 +32,7 @@ public partial class ThuTienPage : ContentView
 			foreach (var item in list) _viewmodel.ListBienSo.Add(item);
 		}
 		_viewmodel.DienThoai = sdt;
-		_viewmodel.Email = _viewmodel.SelectedChuXe.Email;
+		_viewmodel.Email = _viewmodel.SelectedChuXe.Email ??"";
 		_viewmodel.SelectedBienSo = _viewmodel.ListBienSo[0];
     }
 
@@ -49,9 +49,9 @@ public partial class ThuTienPage : ContentView
 			{
 				if(hieuXe.Id == _viewmodel.SelectedBienSo.HieuXeId)
 				{
-                    _viewmodel.TenHieuXe = hieuXe.TenHieuXe;
-					_viewmodel.TienNoXeSelected = _viewmodel.SelectedBienSo.TienNo.ToString(); 
-					break;
+                    _viewmodel.TenHieuXe = hieuXe.TenHieuXe ?? "";
+					_viewmodel.TienNoXeSelected = _viewmodel.SelectedBienSo.TienNo.ToString() ?? ""; 
+					break; 
                 }
 			}
 		}

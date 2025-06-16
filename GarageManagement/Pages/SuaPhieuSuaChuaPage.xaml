@@ -101,18 +101,30 @@
                                     </Grid.ColumnDefinitions>
 
                                     <StackLayout Grid.Column="0" Spacing="2">
-                                        <Label Text="Nội dung sửa chữa:" 
+                                        <Label Text="Nội dung sửa chữa hiện tại:" 
                                                FontAttributes="Bold" 
                                                FontSize="16" 
                                                FontFamily="OpenSans-Regular" 
                                                TextColor="{DynamicResource TextColor}"/>
+                                        <Label Text="{Binding SelectedNoiDungSuaChua.TenNoiDungSuaChua}" 
+                                           FontAttributes="Bold" 
+                                           FontSize="16" 
+                                           FontFamily="OpenSans-Regular" 
+                                           TextColor="{DynamicResource TextColor}"/>
+                                        <Button
+                                            Text="Sửa nội dung"
+                                            TextColor="White"
+                                            BackgroundColor="CadetBlue"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SuaPhieuSuaChuaPageViewModel}}, Path=UpdateNoiDungSuaChuaCommand}"
+                                            CommandParameter="{Binding NoiDungId}"/>
                                         <Picker TitleColor="{DynamicResource PlaceholderColor}"
                                             ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SuaPhieuSuaChuaPageViewModel}}, Path=ListNoiDungSuaChua}"
                                             ItemDisplayBinding="{Binding TenNoiDungSuaChua}"
-                                            SelectedItem="{Binding SelectedNoiDungSuaChua, Mode=TwoWay}"
+                                            SelectedItem="{Binding NoiDungSuaChuaId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
                                             SelectedIndexChanged="OnNoiDungSuaChuaChanged"
                                             BackgroundColor="{DynamicResource InputBackgroundColor}"
                                             TextColor="{DynamicResource TextColor}"
+                                            IsVisible="{Binding isUpdatingNoiDungSuaChua}"
                                             HeightRequest="45" />
                                     </StackLayout>
 
@@ -120,12 +132,12 @@
 
                                     <StackLayout Grid.Column="2" Spacing="2">
                                         <Label Text="Tiền công:" FontAttributes="Bold" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
-                                        <Label Text="{Binding GiaTienCong}" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
+                                        <Label Text="{Binding GiaTienCong, StringFormat='{0:N0} VNĐ'}" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
                                     </StackLayout>
 
                                     <StackLayout Grid.Column="3" Spacing="2">
                                         <Label Text="Thành tiền:" FontAttributes="Bold" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
-                                        <Label Text="{Binding ThanhTien}" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
+                                        <Label Text="{Binding ThanhTien, StringFormat='{0:N0} VNĐ'}" FontSize="16" FontFamily="OpenSans-Regular" TextColor="{DynamicResource TextColor}"/>
                                     </StackLayout>
 
                                     <Button Grid.Column="5"
@@ -156,7 +168,7 @@
                                     </Button>
                                 </Grid>
 
-                                <Label Text="Vật tư phụ tùng:" 
+                                <Label Text="Vật tư phụ tùng hiện tại:" 
                                        FontAttributes="Bold" 
                                        FontSize="16" 
                                        TextColor="{DynamicResource TextColor}" />
@@ -168,6 +180,7 @@
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="1.5*" />
@@ -175,11 +188,12 @@
                                                     <ColumnDefinition Width="1.5*" />
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-
+                                                
                                                 <Label Grid.Row="0" Grid.Column="0" 
-                                                       Text="Loại vật tư phụ tùng" 
-                                                       FontAttributes="Bold" 
-                                                       TextColor="{DynamicResource TextColor}" />
+                                                   Text="{Binding TenLoaiVatTuPhuTung}" 
+                                                   FontAttributes="Bold" 
+                                                   TextColor="{DynamicResource TextColor}" />
+                                                
                                                 <Label Grid.Row="0" 
                                                        Grid.Column="1" Text="Số lượng" 
                                                        FontAttributes="Bold" 
@@ -194,14 +208,23 @@
                                                     TextColor="{DynamicResource TextColor}"/>
                                                 <Label Grid.Row="0" Grid.Column="3" Text="" />
 
-                                                <Picker Grid.Row="1" Grid.Column="0"
+                                                <Button
+                                                    Text="Sửa VTPT"
+                                                    TextColor="White"
+                                                    BackgroundColor="CadetBlue"
+                                                    Grid.Row="1" Grid.Column="0"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SuaPhieuSuaChuaPageViewModel}}, Path=UpdateVTPTCommand}"
+                                                    CommandParameter="{Binding IdForDeleteUI}"/>
+
+                                                <Picker Grid.Row="2" Grid.Column="0"
                                                     TitleColor="{DynamicResource TextColor}"
                                                     ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:SuaPhieuSuaChuaPageViewModel}}, Path=ListVatTuPhuTung}"
                                                     ItemDisplayBinding="{Binding TenLoaiVatTuPhuTung}"
                                                     SelectedIndexChanged="OnVTPTChanged"
-                                                    SelectedItem="{Binding SelectedVTPTId, Mode=TwoWay, Converter={StaticResource VTPTConverter}}"
+                                                    SelectedItem="{Binding SelectedVTPTId, Mode=TwoWay, Converter={StaticResource IDConverter}}"
                                                     BackgroundColor="{DynamicResource InputBackgroundColor}"
                                                     TextColor="{DynamicResource TextColor}"
+                                                    IsVisible="{Binding isUpdatingVTPT}"
                                                     HeightRequest="45" />
 
                                                 <Entry Grid.Row="1" Grid.Column="1"
@@ -282,7 +305,7 @@
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"/>
-                    <Label Text="{Binding TongThanhTien}" 
+                    <Label Text="{Binding TongThanhTien, StringFormat='{0:N0} VNĐ'}" 
                            FontSize="16" 
                            FontFamily="OpenSans-Regular"
                            TextColor="{DynamicResource TextColor}" 

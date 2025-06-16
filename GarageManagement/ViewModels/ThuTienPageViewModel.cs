@@ -107,7 +107,7 @@ namespace GarageManagement.ViewModels
             {
                 SelectedChuXe = filtered;
                 DienThoai = filtered.SoDienThoai;
-                Email = filtered.Email;
+                Email = filtered.Email ?? "";
                 CCCD = filtered.CCCD; 
                 GioiTinh = filtered.GioiTinh;
                 var xeListBySDT = await _carservice.GetListOnSpecialRequirement($"PhoneNumber/{filtered.SoDienThoai}");
@@ -136,7 +136,7 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private async Task GoBack()
+        private void GoBack()
         {
             //var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
             //if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);
@@ -199,17 +199,17 @@ namespace GarageManagement.ViewModels
             await _phieuthuservice.Create(new PhieuThuTien
             {
                 Id = Guid.NewGuid(),
-                NgayThuTien = ngayThuTien,
-                SoTienThu = double.Parse(soTienThu),
-                XeId = selectedBienSo.Id,
-                KhachHangId = selectedChuXe.Id
+                NgayThuTien = NgayThuTien,
+                SoTienThu = double.Parse(SoTienThu),
+                XeId = SelectedBienSo.Id,
+                KhachHangId = SelectedChuXe.Id
             });
             SelectedChuXe.TienNo -= double.Parse(SoTienThu);
             SelectedBienSo.TienNo -= double.Parse(SoTienThu);
             if (SelectedBienSo.TienNo == 0) SelectedBienSo.KhaDung = false;
             await _carservice.Update(SelectedBienSo);
             await _userservice.Update(SelectedChuXe);
-            TienNoXeSelected = SelectedBienSo.TienNo.ToString();
+            TienNoXeSelected = SelectedBienSo.TienNo.ToString() ?? "";
             SoTienThu = string.Empty; 
             //var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
             //if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}", true);

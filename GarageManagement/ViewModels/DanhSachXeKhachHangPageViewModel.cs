@@ -52,8 +52,12 @@ namespace GarageManagement.ViewModels
                         .Where(p => p.NgayTiepNhan.HasValue)
                         .OrderByDescending(p => p.NgayTiepNhan)
                         .FirstOrDefault();
-                    if (phieuGanNhat.DaHoanThanhBaoTri) xe.TinhTrang = "Đã hoàn thành bảo trì";
-                    else xe.TinhTrang = "Xe đang tiếp nhận và bảo trì trong Gara";
+                    if (phieuGanNhat is not null)
+                    {
+                        if (phieuGanNhat.DaHoanThanhBaoTri) xe.TinhTrang = "Đã hoàn thành bảo trì";
+                        else xe.TinhTrang = "Xe đang tiếp nhận và bảo trì trong Gara";
+                    }
+                    else xe.TinhTrang = "Xe chưa được tiếp nhận lần nào";
                 }
                 var lichSuSuaChua = await _phieuSuaChuaService.GetListOnSpecialRequirement($"GetListByBienSoXe/{xe.BienSo}");
                 if (lichSuSuaChua is not null) xe.LichSuSuaChuaList = lichSuSuaChua;

@@ -132,11 +132,16 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private async void ShowRightPane(Guid id)
+        private async Task ShowRightPane(Guid id)
         {
             var p = await _phieuTiepNhanService.GetByID(id);
-            var xe = await _xeService.GetByID(p.XeId);
-            p.BienSoXe = xe.BienSo; 
+            if (p is null)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Không tìm thấy phiếu tiếp nhận", "OK");
+                return;
+            }
+            var xe = await _xeService.GetByID(p.XeId); 
+            p.BienSoXe = xe?.BienSo ?? ""; 
             SelectedPhieuTiepNhan = p;
             OnPropertyChanged(nameof(SelectedPhieuTiepNhan.BienSoXe));
         }
@@ -151,7 +156,7 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        public async void Edit(Guid Id)
+        public void Edit(Guid Id)
         {
 
         }
@@ -159,11 +164,13 @@ namespace GarageManagement.ViewModels
         private async Task ApplyFilter()
         {
             IEnumerable<PhieuTiepNhan> q = _allPhieu;
-
+            if (q is null || !q.Any())
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Không có phiếu tiếp nhận nào", "OK");
+                return;
+            }
             // Ngày
-            if (SelectedDate is DateTime d)
-                q = q.Where(p => p.NgayTiepNhan.Value.Date == d.Date);
-
+            if (SelectedDate is DateTime d) q = q.Where(p => p.NgayTiepNhan.Value.Date == d.Date);
             // Biển số
             if (!string.IsNullOrWhiteSpace(BienSoFilter))
             {
@@ -203,11 +210,11 @@ namespace GarageManagement.ViewModels
         private async Task Add()
         {
             var view = new TiepNhanXePage(_phieuTiepNhanService,
-       _ruleService,
-        _xeService,
-        _hieuxeService,
-        _khachHangService,
-        _groupService, _tiepNhanXePageViewModel);
+                                        _ruleService,
+                                        _xeService,
+                                        _hieuxeService,
+                                        _khachHangService,
+                                        _groupService, _tiepNhanXePageViewModel);
 
             var wrapper = new ContentPage { Content = view, Padding = 0 };
             var editWindow = new Window
@@ -278,12 +285,14 @@ namespace GarageManagement.ViewModels
             IsEditing = false;
             IsNotEditing = true; 
         }
+
         public class XeWithOwner
         {
             public Guid Id { get; init; }
             public string BienSo { get; init; }
             public KhachHang Owner { get; init; }
         }
+
         [ObservableProperty]
         private ObservableCollection<XeWithOwner> allXe;
         [ObservableProperty]
