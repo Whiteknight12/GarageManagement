@@ -30,7 +30,7 @@ namespace GarageManagement.ViewModels
         private string usernameValue;
 
         [ObservableProperty]
-        private NhomNguoiDung selectedRole;
+        private string selectedRole;
 
         public QuanLiTaiKhoanPageViewModel(APIClientService<TaiKhoan> accountService,
             APIClientService<KhachHang> customerService,
@@ -100,9 +100,11 @@ namespace GarageManagement.ViewModels
                 var list = ListTaiKhoan.Where(u => u.CCCD.ToLower().Contains(CCCDValue.ToLower())).ToList();
                 ListTaiKhoan = new ObservableCollection<TaiKhoan>(list);
             }
-            if (SelectedRole is not null && SelectedRole.TenNhom != "Trống")
+            if (SelectedRole != null && SelectedRole != "Trống")
             {
-                var list = ListTaiKhoan.Where(u => u.NhomNguoiDungId == SelectedRole.Id).ToList();
+                var roles = await _groupUserService.GetAll(); 
+                var role = roles.FirstOrDefault(x => x.TenNhom == SelectedRole);
+                var list = ListTaiKhoan.Where(u => u.NhomNguoiDungId == role.Id).ToList();
                 ListTaiKhoan = new ObservableCollection<TaiKhoan>(list);
             }
         }

@@ -29,7 +29,7 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private async Task Save()
+        private async Task Save()   
         {
             if (!double.TryParse(DonGiaLoaiTienCong, out double donGia))
             {

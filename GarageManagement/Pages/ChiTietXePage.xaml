@@ -46,9 +46,13 @@
                            FontSize="16"
                            FontAttributes="Bold"
                            TextColor="{DynamicResource TextColor}"/>
+                        <Entry Text="{Binding SelectedHieuXe.TenHieuXe, Mode=TwoWay}" IsVisible="{Binding IsReadOnly}"
+   IsReadOnly="True"
+   FontSize="16"
+   TextColor="{DynamicResource TextColor}" />
                         <Picker 
-                           ItemsSource="{Binding ListHieuXe}"
-                           IsEnabled="{Binding IsUpdating}"
+                           ItemsSource="{Binding ListHieuXe}"   
+                           IsVisible="{Binding IsUpdating}"
                            ItemDisplayBinding="{Binding TenHieuXe}"
                            SelectedItem="{Binding SelectedHieuXe}"
                            FontSize="16"
@@ -74,7 +78,8 @@
                         <Entry Text="{Binding TienNoCuaXe, Mode=TwoWay}"
            FontSize="16"
            IsReadOnly="{Binding IsReadOnly}"
-           TextColor="{DynamicResource TextColor}" />
+           TextColor="{DynamicResource TextColor}"
+                               Keyboard="Numeric"/>
                     </VerticalStackLayout>
 
                     <VerticalStackLayout>
@@ -128,7 +133,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-                               Text="Lọc tài khoản theo: CCCD/Tên/Email/Số điện thoại"
+                               Text="Lọc tài khoản theo: CCCD và Tên"
                                FontSize="16"
                                FontAttributes="Bold"
                                FontFamily="OpenSans-Regular"
@@ -167,13 +172,13 @@
                                HeightRequest="45"
                                Margin="0,5,0,0"/>
 
-                            <Entry Grid.Row="3" Grid.Column="0"
+                            <Entry Grid.Row="3" Grid.Column="0" 
                                 BackgroundColor="{DynamicResource InputBackgroundColor}"
                                 TextColor="{DynamicResource TextColor}"
                                 Text="Email"
                                 IsReadOnly="True"/>
 
-                            <Entry Grid.Row="3" Grid.Column="1"
+                            <Entry Grid.Row="3" Grid.Column="1" 
                                Placeholder="Nhập giá trị lọc"
                                PlaceholderColor="{DynamicResource PlaceholderColor}"
                                Text="{Binding EmailValue, Mode=TwoWay}"
@@ -183,13 +188,13 @@
                                HeightRequest="45"
                                Margin="0,5,0,0"/>
 
-                            <Entry Grid.Row="4" Grid.Column="0"
+                            <Entry Grid.Row="4" Grid.Column="0" 
                                 BackgroundColor="{DynamicResource InputBackgroundColor}"
                                 TextColor="{DynamicResource TextColor}"
                                 Text="Số điện thoại"
                                 IsReadOnly="True"/>
 
-                            <Entry Grid.Row="4" Grid.Column="1"
+                            <Entry Grid.Row="4" Grid.Column="1" 
                                Placeholder="Nhập giá trị lọc"
                                PlaceholderColor="{DynamicResource PlaceholderColor}"
                                Text="{Binding PhoneValue, Mode=TwoWay}"

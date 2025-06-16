@@ -35,9 +35,27 @@ namespace GarageManagement.ViewModels
         {
             try
             {
-                if (!int.TryParse(SoLuong, out int soLuongValue) || !double.TryParse(DonGiaBanLoaiVatTuPhuTung, out double donGiaValue))
+                // Initialize variables to avoid CS0165 error
+                int soLuongValue = 0;
+                double donGiaValue = 0;
+
+                // Validate and parse input values
+                if (!int.TryParse(SoLuong, out soLuongValue) || soLuongValue < 0)
                 {
-                    await Toast.Make("Số lượng hoặc đơn giá không hợp lệ", CommunityToolkit.Maui.Core.ToastDuration.Short).Show();
+                    
+                    await Shell.Current.DisplayAlert(
+                        "Thông báo",
+                        "Số lượng phải là số không âm",
+                        "OK");
+                    return;
+                }
+
+                if (!double.TryParse(DonGiaBanLoaiVatTuPhuTung, out donGiaValue) || donGiaValue < 0)
+                {
+                    await Shell.Current.DisplayAlert(
+                        "Thông báo",
+                        "Đơn giá  phải là số không âm",
+                        "OK");
                     return;
                 }
 
@@ -48,7 +66,10 @@ namespace GarageManagement.ViewModels
                     {
                         if (item.TenLoaiVatTuPhuTung==TenLoaiVatTuPhuTung)
                         {
-                            await Toast.Make("Tên loại vật tư bị trùng", CommunityToolkit.Maui.Core.ToastDuration.Short).Show();
+                            await Shell.Current.DisplayAlert(
+                    "Thông báo",
+                    "Tên loại vật tư bị trùng",
+                    "OK");
                             return;
                         }
                     }

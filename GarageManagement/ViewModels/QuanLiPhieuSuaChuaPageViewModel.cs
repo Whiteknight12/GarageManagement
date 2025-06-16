@@ -64,7 +64,7 @@ namespace GarageManagement.ViewModels
             _xeService = xeService;
             _taoPhieuSuaChuaPageViewModel = taoPhieuSuaChuaPageViewModel;
             _suaPhieuSuaChuaPage = suaPhieuSuaChuaPage;
-            _ = LoadAsync();
+            //_ = LoadAsync();
             IsDeleteMode = false;
             _thamSoService = thamSoService;
         }

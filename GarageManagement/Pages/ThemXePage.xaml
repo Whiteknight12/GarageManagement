@@ -39,6 +39,8 @@
                 </VerticalStackLayout>
             </Frame>
 
+            <VerticalStackLayout IsVisible="{Binding IsVehicleFormVisible}" Spacing="20">
+
             <!-- Thông tin xe -->
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
@@ -87,6 +89,18 @@
                 </VerticalStackLayout>
             </Frame>
 
+            <Button
+    Text="Tiếp theo"
+    Command="{Binding NextStepCommand}"
+    BackgroundColor="#10B981"
+    TextColor="White"
+    CornerRadius="12"
+    HeightRequest="50"
+                WidthRequest="250"/>
+            </VerticalStackLayout>
+            
+            <VerticalStackLayout IsVisible="{Binding IsCustomerFormVisible}" Spacing="20">
+            
             <Frame HasShadow="True"
                    BackgroundColor="{DynamicResource CardBackgroundColor}"
                    Padding="20"
@@ -261,9 +275,9 @@
                     </Grid>
 
                     <!-- Nút Xem chi tiết -->
-                    <Button Text="Xem chi tiết"
-                            Command="{Binding XemChiTietChuXeCommand}"
-                            BackgroundColor="#3B82F6"
+                    <Button Text="Huỷ chọn"
+                            Command="{Binding HuyChonCommand}"
+                            BackgroundColor="#10B981"
                             TextColor="White"
                             HeightRequest="40"
                             FontFamily="OpenSans-SemiBold"
@@ -361,14 +375,15 @@
                            HeightRequest="50"/>
                 </VerticalStackLayout>
             </Frame>
-
+       
             <!-- Nút hành động -->
-            <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
+            <HorizontalStackLayout Spacing="12" IsVisible="{Binding IsCustomerFormVisible}" HorizontalOptions="Center">
                 <Button Text="Lưu Xe Mới"
                         Command="{Binding SaveButtonClickCommand}"
-                        BackgroundColor="#2563EB"
+                        BackgroundColor="#10B981"
                         TextColor="White"
                         HeightRequest="48"
+                        WidthRequest="150"
                         FontAttributes="Bold"
                         FontFamily="OpenSans-SemiBold"
                         CornerRadius="{StaticResource ButtonCornerRadiusHandler}">
@@ -390,8 +405,9 @@
                     </VisualStateManager.VisualStateGroups>
                 </Button>
 
-                <Button Text="Quay lại"
-                        Command="{Binding BackCommand}"
+                <Button Text="Quay lại" 
+                        Command="{Binding PreviousStepCommand}"
+                        WidthRequest="150"
                         BackgroundColor="#6B7280"
                         TextColor="White"
                         HeightRequest="48"
@@ -416,7 +432,7 @@
                     </VisualStateManager.VisualStateGroups>
                 </Button>
             </HorizontalStackLayout>
-
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

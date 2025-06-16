@@ -2,7 +2,14 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GarageManagement.Pages.ChiTietNhanVienPage"
+             xmlns:service="clr-namespace:GarageManagement.Services"
              BackgroundColor="{DynamicResource BackgroundColor}">
+
+    <ContentView.Resources>
+    <ResourceDictionary>
+        <service:NullableGuidToTextConverter x:Key="GuidToText" />
+    </ResourceDictionary>
+    </ContentView.Resources>
 
     <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="20" MaximumWidthRequest="1000">
@@ -56,18 +63,33 @@
                                TextColor="{DynamicResource TextColor}"/>
                         </VerticalStackLayout>
 
-                        <!-- Giới tính -->
-                        <VerticalStackLayout>
-                            <Label Text="Giới tính"
-                               FontSize="16" FontAttributes="Bold"
-                               TextColor="{DynamicResource TextColor}"/>
-                            <Entry Text="{Binding GioiTinh, Mode=TwoWay}"
-                               IsReadOnly="{Binding IsReadOnly}"
-                               FontSize="16"
-                               TextColor="{DynamicResource TextColor}"/>
-                        </VerticalStackLayout>
+                    <!-- Giới tính -->
+                    <VerticalStackLayout>
+                        <Label Text="Giới tính"
+         FontSize="16"
+         FontAttributes="Bold"
+         TextColor="{DynamicResource TextColor}" />
 
-                        <!-- Địa chỉ -->
+                        <!-- Entry khi chỉ xem, trông như label -->
+                        <Entry
+    Text="{Binding GioiTinh}"
+    IsReadOnly="True"
+    IsVisible="{Binding IsReadOnly}"
+    FontSize="16"
+    TextColor="{DynamicResource TextColor}" />
+
+                        <!-- Picker khi đang cập nhật -->
+                        <Picker
+    ItemsSource="{Binding ListGioiTinh}"
+    SelectedItem="{Binding GioiTinh, Mode=TwoWay}"
+    IsVisible="{Binding IsUpdating}"
+    FontSize="16"
+    TextColor="{DynamicResource TextColor}" />
+                    </VerticalStackLayout>
+
+
+
+                    <!-- Địa chỉ -->
                         <VerticalStackLayout>
                             <Label Text="Địa chỉ"
                                FontSize="16" FontAttributes="Bold"
@@ -108,8 +130,8 @@
                             <Label Text="Tài khoản Id"
                                FontSize="16" FontAttributes="Bold"
                                TextColor="{DynamicResource TextColor}"/>
-                            <Entry Text="{Binding TaiKhoanId, Mode=TwoWay}"
-                               IsReadOnly="{Binding IsReadOnly}"
+                        <Entry Text="{Binding TaiKhoanId, Converter={StaticResource GuidToText}, Mode=TwoWay}"
+                               IsReadOnly="True"
                                FontSize="16"
                                TextColor="{DynamicResource TextColor}"/>
                         </VerticalStackLayout>

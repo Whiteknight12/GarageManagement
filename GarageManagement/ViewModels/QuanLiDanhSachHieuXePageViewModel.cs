@@ -59,7 +59,7 @@ namespace GarageManagement.ViewModels
         {
             _authenticationService = authenticationService;
             _hieuXeService = hieuXeService;
-            _ = LoadAsync();
+            //_ = LoadAsync();
             _themHieuXePageViewModel = themHieuXePageViewModel;
             IsDeleteMode = false;
         }
