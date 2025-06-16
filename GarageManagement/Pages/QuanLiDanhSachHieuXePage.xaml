@@ -14,7 +14,7 @@
     </ContentView.Resources>
 
     <!-- Single-column layout -->
-    <Grid>
+    <Grid MaximumWidthRequest="1000">
         <ScrollView>
             <VerticalStackLayout Padding="30" Spacing="20">
                 <!-- Title -->

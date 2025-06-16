@@ -58,8 +58,8 @@ namespace GarageManagement.ViewModels
             APIClientService<PhieuSuaChua> phieuservice,
             APIClientService<KhachHang> userservice,
             APIClientService<NoiDungSuaChua> noidungsuachuaService,
-            APIClientService<VTPTChiTietPhieuSuaChua> vtptChiTietPhieuSuaChuaService
-, APIClientService<PhieuTiepNhan> phieuTiepNhanService,
+            APIClientService<VTPTChiTietPhieuSuaChua> vtptChiTietPhieuSuaChuaService, 
+            APIClientService<PhieuTiepNhan> phieuTiepNhanService,
             APIClientService<ThamSo> thamSoService
    )
         {
@@ -88,7 +88,7 @@ namespace GarageManagement.ViewModels
             foreach(var p in ps)
             {
                 var xe = await _carservice.GetByID(p);
-                lc.Add(xe);
+                if (xe is not null) lc.Add(xe);
             }
             
             if (lc is not null)
@@ -214,37 +214,40 @@ namespace GarageManagement.ViewModels
                     await Shell.Current.DisplayAlert("Thông báo", "Có lỗi xảy ra khi tạo chi tiết phiếu sữa chữa", "OK");
                     return;
                 }
-                foreach (var chiTietVTPT in item.ListSpecifiedVTPT)
+                if (item.ListSpecifiedVTPT is not null)
                 {
-                    if (chiTietVTPT.SelectedVTPTId==null)
+                    foreach (var chiTietVTPT in item.ListSpecifiedVTPT)
                     {
-                        await Shell.Current.DisplayAlert("Thông báo", "Không được bỏ trống vật tư phụ tùng", "OK");
-                        return;
-                    }
-                    if (string.IsNullOrEmpty(chiTietVTPT.SoLuong.ToString()) || chiTietVTPT.SoLuong==0)
-                    {
-                        await Shell.Current.DisplayAlert("Thông báo", "Không được bỏ trống số lượng", "OK");
-                        return; 
-                    }
-                    var tmp_vtpt = await _vattuservice.GetByID(chiTietVTPT.SelectedVTPTId ?? Guid.Empty);
-                    var result = await _vtptChiTietPhieuSuaChuaService.Create(new VTPTChiTietPhieuSuaChua
-                    {
-                        Id = Guid.NewGuid(),
-                        ChiTietPhieuSuaChuaId = chiTietPhieuSuaChua.Id,
-                        VatTuPhuTungId = chiTietVTPT.SelectedVTPTId ?? Guid.Empty,
-                        DonGiaVTPTApDung=tmp_vtpt?.DonGiaBanLoaiVatTuPhuTung??0,
-                        SoLuong = chiTietVTPT.SoLuong
-                    });
-                    if (result is null)
-                    {
-                        await Shell.Current.DisplayAlert("Thông báo", "Có lỗi xảy ra", "OK");
-                        return;
-                    }
-                    var vtpt=await _vattuservice.GetByID(chiTietVTPT.SelectedVTPTId ?? Guid.Empty);
-                    if (vtpt is not null)
-                    {
-                        vtpt.SoLuong -= chiTietVTPT.SoLuong;
-                        await _vattuservice.Update(vtpt);
+                        if (chiTietVTPT.SelectedVTPTId == null)
+                        {
+                            await Shell.Current.DisplayAlert("Thông báo", "Không được bỏ trống vật tư phụ tùng", "OK");
+                            return;
+                        }
+                        if (string.IsNullOrEmpty(chiTietVTPT.SoLuong.ToString()) || chiTietVTPT.SoLuong == 0)
+                        {
+                            await Shell.Current.DisplayAlert("Thông báo", "Không được bỏ trống số lượng", "OK");
+                            return;
+                        }
+                        var tmp_vtpt = await _vattuservice.GetByID(chiTietVTPT.SelectedVTPTId ?? Guid.Empty);
+                        var result = await _vtptChiTietPhieuSuaChuaService.Create(new VTPTChiTietPhieuSuaChua
+                        {
+                            Id = Guid.NewGuid(),
+                            ChiTietPhieuSuaChuaId = chiTietPhieuSuaChua.Id,
+                            VatTuPhuTungId = chiTietVTPT.SelectedVTPTId ?? Guid.Empty,
+                            DonGiaVTPTApDung = tmp_vtpt?.DonGiaBanLoaiVatTuPhuTung ?? 0,
+                            SoLuong = chiTietVTPT.SoLuong
+                        });
+                        if (result is null)
+                        {
+                            await Shell.Current.DisplayAlert("Thông báo", "Có lỗi xảy ra", "OK");
+                            return;
+                        }
+                        var vtpt = await _vattuservice.GetByID(chiTietVTPT.SelectedVTPTId ?? Guid.Empty);
+                        if (vtpt is not null)
+                        {
+                            vtpt.SoLuong -= chiTietVTPT.SoLuong;
+                            await _vattuservice.Update(vtpt);
+                        }
                     }
                 }
             }
@@ -271,7 +274,7 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public void AddVTPT(int noiDungId)
         {
-            ListNoiDung?.FirstOrDefault(u => u.NoiDungId == noiDungId)?.ListSpecifiedVTPT.Add(new VTPTChiTietPhieuSuaChua
+            ListNoiDung?.FirstOrDefault(u => u.NoiDungId == noiDungId)?.ListSpecifiedVTPT?.Add(new VTPTChiTietPhieuSuaChua
             {
                 IdForUI=noiDungId,
                 IdForDeleteUI = indexVTPT++,
@@ -285,7 +288,7 @@ namespace GarageManagement.ViewModels
         {
             foreach (var item in ListNoiDung)
             {
-                var deleteItem = item.ListSpecifiedVTPT.FirstOrDefault(u => u.IdForDeleteUI == id);
+                var deleteItem = item.ListSpecifiedVTPT?.FirstOrDefault(u => u.IdForDeleteUI == id);
                 if (deleteItem is not null)
                 {
                     var updateItem = ListNoiDung.FirstOrDefault(u => u.NoiDungId == deleteItem.IdForUI);
@@ -296,7 +299,7 @@ namespace GarageManagement.ViewModels
                         updateItem.ThanhTien += updateItem.GiaTienCong ?? 0;
                         updateItem.OnPropertyChanged(nameof(updateItem.ThanhTien));
                     }
-                    item.ListSpecifiedVTPT.Remove(deleteItem);
+                    item.ListSpecifiedVTPT?.Remove(deleteItem);
                     item.OnPropertyChanged(nameof(item.ListSpecifiedVTPT));
                     break;
                 }

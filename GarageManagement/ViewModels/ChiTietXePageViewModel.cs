@@ -104,7 +104,9 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<PhieuTiepNhan> _phieuTiepNhanService; 
 
         public ChiTietXePageViewModel(APIClientService<Xe> carservice,
-            APIClientService<HieuXe> hieuXeService, APIClientService<KhachHang> khachHangService, APIClientService<PhieuTiepNhan> phieuTiepNhanService)
+            APIClientService<HieuXe> hieuXeService, 
+            APIClientService<KhachHang> khachHangService, 
+            APIClientService<PhieuTiepNhan> phieuTiepNhanService)
         {
             _carservice = carservice;
             _hieuxeservice = hieuXeService;
@@ -125,14 +127,15 @@ namespace GarageManagement.ViewModels
             Name = obj.Ten;
             Model = hieuXe?.TenHieuXe ?? string.Empty;
             var list = await _hieuxeservice.GetAll();
-            ListHieuXe = new ObservableCollection<HieuXe>(list);
-            if (hieuXe is not null) SelectedHieuXe = ListHieuXe.FirstOrDefault(x => x.Id == obj.HieuXeId);
+            if (list is not null) ListHieuXe = new ObservableCollection<HieuXe>(list);
+            else ListHieuXe = new ObservableCollection<HieuXe>();
+            if (hieuXe is not null) SelectedHieuXe = ListHieuXe.FirstOrDefault(x => x.Id == obj.HieuXeId) ?? new HieuXe();
             BienSo = obj.BienSo;
-            TenChuXe = khachHang.HoVaTen;
+            TenChuXe = khachHang?.HoVaTen ?? "";
             TienNoCuaXe = obj.TienNo.GetValueOrDefault();
-            CCCD = khachHang.CCCD;
-            DienThoai = khachHang.SoDienThoai;
-            DiaChi = khachHang.DiaChi;
+            CCCD = khachHang?.CCCD ?? "";
+            DienThoai = khachHang?.SoDienThoai ?? "";
+            DiaChi = khachHang?.DiaChi ?? "";
             // Set initial TinhTrang from object
             TinhTrang = (obj.KhaDung ?? false) ? "Đang tiếp nhận trong Gara" : "Không có trong Gara";
             ListTrangThaiXe = new ObservableCollection<string>
@@ -142,14 +145,17 @@ namespace GarageManagement.ViewModels
             };
             SelectedTrangThaiXe = TinhTrang; // will trigger OnSelectedTrangThaiXeChanged
 
-            var listXe = await _carservice.GetListOnSpecialRequirement($"PhoneNumber/{khachHang.SoDienThoai}");
-            if (listXe is not null) TienNoCuaChuXe = listXe.Sum(u => u.TienNo ?? 0);
+            if (khachHang is not null)
+            {
+                var listXe = await _carservice.GetListOnSpecialRequirement($"PhoneNumber/{khachHang.SoDienThoai}");
+                if (listXe is not null) TienNoCuaChuXe = listXe.Sum(u => u.TienNo ?? 0);
+            }
             var listKhachHang = await _khachHangService.GetAll();
             ListKhachHang = new ObservableCollection<KhachHang>(listKhachHang);
             if (khachHang is not null)
             {
                 selectedKhachHangId = ListKhachHang.FirstOrDefault(x => x.Id == obj.KhachHangId)?.Id ?? Guid.Empty;
-                SelectedKhachHang = ListKhachHang.FirstOrDefault(x => x.Id == obj.KhachHangId);
+                SelectedKhachHang = ListKhachHang.FirstOrDefault(x => x.Id == obj.KhachHangId) ?? new KhachHang();
             }
             SelectedFilterField = "CCCD";
         }
@@ -214,27 +220,35 @@ namespace GarageManagement.ViewModels
             if (!string.IsNullOrEmpty(PhoneValue)) list = list.Where(x => x.SoDienThoai.Contains(PhoneValue, StringComparison.OrdinalIgnoreCase)).ToList();
             ListKhachHang = new ObservableCollection<KhachHang>(list);
         }
+
         [RelayCommand]
         public async Task MarkAsDone()
         {
-            var car = await _carservice.GetByID(carId);
+            var car = await _carservice.GetByID(CarId);
             var ps = await _phieuTiepNhanService.GetAll();
-            var ps2 = ps.Where(p => p.XeId == car.Id);
-            var ps3 = ps2.OrderByDescending(p => p.NgayTiepNhan);
-            var p = ps3.FirstOrDefault();
-            if (p.DaHoanThanhBaoTri == true)
+            if (car is not null)
             {
-                await Shell.Current.DisplayAlert(
-                    "Thông báo",
-                    "",
-                    "OK");
+                var ps2 = ps.Where(p => p.XeId == car.Id);
+                var ps3 = ps2.OrderByDescending(p => p.NgayTiepNhan);
+                var p = ps3.FirstOrDefault();
+                if (p.DaHoanThanhBaoTri == true)
+                {
+                    await Shell.Current.DisplayAlert(
+                        "Thông báo",
+                        "",
+                        "OK");
+                    return;
+                }
+                p.DaHoanThanhBaoTri = true;
+                await _phieuTiepNhanService.Update(p);
+                car.KhaDung = false;
+                await _carservice.Update(car);
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Không tìm thấy xe", "OK");
                 return;
             }
-            p.DaHoanThanhBaoTri = true;
-            _phieuTiepNhanService.Update(p);
-            car.KhaDung = false;
-            _carservice.Update(car);
-            
         }
     }
 }

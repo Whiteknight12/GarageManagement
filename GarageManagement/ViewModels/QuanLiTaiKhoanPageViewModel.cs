@@ -92,12 +92,12 @@ namespace GarageManagement.ViewModels
             }
             if (!string.IsNullOrEmpty(NameValue))
             {
-                var list = ListTaiKhoan.Where(u => u.HoTenNguoiDung.ToLower().Contains(NameValue.ToLower())).ToList();
+                var list = ListTaiKhoan.Where(u => u.HoTenNguoiDung!=null && u.HoTenNguoiDung.ToLower().Contains(NameValue.ToLower())).ToList();
                 ListTaiKhoan = new ObservableCollection<TaiKhoan>(list);
             }
             if (!string.IsNullOrEmpty(CCCDValue))
             {
-                var list = ListTaiKhoan.Where(u => u.CCCD.ToLower().Contains(CCCDValue.ToLower())).ToList();
+                var list = ListTaiKhoan.Where(u => u.CCCD!=null && u.CCCD.ToLower().Contains(CCCDValue.ToLower())).ToList();
                 ListTaiKhoan = new ObservableCollection<TaiKhoan>(list);
             }
             if (SelectedRole is not null && SelectedRole.TenNhom != "Trống")

@@ -205,7 +205,12 @@ namespace GarageManagement.ViewModels
             await LoadAsync();
             IsEditing = false;
             IsNotEditing = true;
-            ShowDetail(tien); 
+            if (tien is not null) ShowDetail(tien);
+            else
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Tiền công không tồn tại", "OK");
+                return;
+            }
         }
 
         [RelayCommand]

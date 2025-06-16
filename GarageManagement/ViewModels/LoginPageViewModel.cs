@@ -20,12 +20,12 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public async Task Login()
         {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
             {
                 await Shell.Current.DisplayAlert("Login Failed", "Không được bỏ trống username hay password", "OK");
                 return;
             }
-            var isauthenticated = await _authenticationservice.Authentication(username, password);
+            var isauthenticated = await _authenticationservice.Authentication(Username, Password);
             if (isauthenticated && _authenticationservice.CurrentRole is not null)
             {
                 var toast = Toast.Make("Đăng nhập thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);

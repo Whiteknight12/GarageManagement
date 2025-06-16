@@ -83,7 +83,7 @@ namespace GarageManagement.ViewModels
                 BienSo = result.BienSo;
                 ownerId = result.KhachHangId;
                 var hieuXe=await _hieuXeService.GetByID(result.HieuXeId);
-                if (hieuXe is not null) TenHieuXe = hieuXe.TenHieuXe;
+                if (hieuXe is not null) TenHieuXe = hieuXe.TenHieuXe ?? "";
                 var khachHang = await _userService.GetByID(result.KhachHangId);
                 if (khachHang is not null)
                 {
@@ -114,6 +114,11 @@ namespace GarageManagement.ViewModels
                 return;
             }
             var car=await _carService.GetThroughtSpecialRoute($"BienSo/{BienSo}");
+            if (car is null)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Xe không tồn tại", "OK");
+                return;
+            }
             var listPhieuTiepNhan = await _recordService.GetListOnSpecialRequirement($"XeId/{car.Id}");
             if (listPhieuTiepNhan?.Count>0)
             {

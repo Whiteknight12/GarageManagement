@@ -41,9 +41,12 @@ namespace GarageManagement.ViewModels
         public async Task LoadAsync()
         {
             var phieuNhaps = await _phieuNhapService.GetAll();
-            List<int> years=phieuNhaps.Select(p => p.NgayNhap.Year).Distinct().ToList();
-            years.Sort();
-            Years = new ObservableCollection<int>(years);
+            if (phieuNhaps is not null)
+            {
+                List<int> years = phieuNhaps.Select(p => p.NgayNhap.Year).Distinct().ToList();
+                years.Sort();
+                Years = new ObservableCollection<int>(years);
+            }
             Months.Clear();
             for (int i=1; i <= 12; i++)
             {

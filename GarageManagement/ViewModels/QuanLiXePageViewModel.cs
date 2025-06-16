@@ -69,6 +69,7 @@ namespace GarageManagement.ViewModels
             _hieuXeService = hieuXeService;
             _themXePageViewModel = themXePageViewModel;
         }
+
         private void ApplyFilter()
         {
             IEnumerable<Xe> q = _allXe;
@@ -120,9 +121,9 @@ namespace GarageManagement.ViewModels
             var brand = await brandTask;
 
             // 3) copy vào object
-            xe.TenChuXe = owner?.HoVaTen;
-            xe.CCCDChuXe = owner?.CCCD;
-            xe.TenHieuXe = brand?.TenHieuXe;
+            xe.TenChuXe = owner?.HoVaTen ?? "";
+            xe.CCCDChuXe = owner?.CCCD ?? "";
+            xe.TenHieuXe = brand?.TenHieuXe ?? "";
 
             // 4) BÂY GIỜ mới gán cho UI
             SelectedXe = xe;
@@ -132,13 +133,14 @@ namespace GarageManagement.ViewModels
 
 
             var chuxe = await _khachHangService.GetByID(SelectedXe.KhachHangId);
-            SelectedXe.CCCDChuXe = chuxe.CCCD;
-            SelectedXe.TenChuXe = chuxe.HoVaTen;
+            SelectedXe.CCCDChuXe = chuxe?.CCCD ?? "";
+            SelectedXe.TenChuXe = chuxe?.HoVaTen ?? "";
             var hx = await _hieuXeService.GetByID(SelectedXe.HieuXeId);
-            SelectedXe.TenHieuXe = hx.TenHieuXe;
+            SelectedXe.TenHieuXe = hx?.TenHieuXe ?? "";
             IsDetailPaneVisible = true;
-            isEditing = false;
+            IsEditing = false;
         }
+
         [RelayCommand]
         private async Task Save()
         {
@@ -206,6 +208,7 @@ namespace GarageManagement.ViewModels
             IsNotEditing = false;
             IsViewing = false;
         }
+
         public async Task LoadAsync()
         {
             /* 1. Lấy token & danh sách xe 1 lần */
@@ -224,9 +227,9 @@ namespace GarageManagement.ViewModels
                 var brandTask = _hieuXeService.GetByID(xe.HieuXeId);
                 await Task.WhenAll(ownerTask, brandTask);
 
-                xe.TenChuXe = ownerTask.Result?.HoVaTen;
-                xe.CCCDChuXe = ownerTask.Result?.CCCD;
-                xe.TenHieuXe = brandTask.Result?.TenHieuXe;
+                xe.TenChuXe = ownerTask.Result?.HoVaTen ?? "";
+                xe.CCCDChuXe = ownerTask.Result?.CCCD ?? "";
+                xe.TenHieuXe = brandTask.Result?.TenHieuXe ?? "";
                 return xe;
             });
 
@@ -264,13 +267,15 @@ namespace GarageManagement.ViewModels
         {
             await Shell.Current.GoToAsync($"//{nameof(ChiTietXePage)}?parameterID={parameter}", true);
         }
+
         [RelayCommand]
         private async Task GoBack()
         {
             var json = await SecureStorage.Default.GetAsync(STORAGE_KEY);
+            if (json is null) return;
             if (string.IsNullOrEmpty(json)) await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
             var currentaccount = JsonSerializer.Deserialize<taiKhoanSession>(json);
-            if (currentaccount.Role == "Member") await Shell.Current.GoToAsync($"//{nameof(NhanSuMainPage)}", true);
+            await Shell.Current.GoToAsync($"//{nameof(MainPage)}", true);
         }
 
         [RelayCommand]
@@ -295,6 +300,7 @@ namespace GarageManagement.ViewModels
             };
             Application.Current?.OpenWindow(win); // mở cửa sổ mới
         }
+
         [RelayCommand]
         public void ShowXeDetail(Guid XeId)
         {

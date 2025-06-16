@@ -174,7 +174,12 @@ namespace GarageManagement.ViewModels
         private async Task ShowDetail(Guid id)
         {
             var item = await _vatTuPhuTungService.GetByID(id);
-            SelectedVatTu = item;
+            if (item is not null) SelectedVatTu = item;
+            else
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Vật tư phụ tùng không tồn tại", "OK");
+                return;
+            }
             IsDetailPaneVisible = true; 
         }
 

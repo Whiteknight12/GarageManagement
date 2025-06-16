@@ -52,7 +52,9 @@ namespace GarageManagement.ViewModels
                     this, "ReloadNhanVienList",
                     async _ => await LoadAsync());
         }
+
         partial void OnIsEditingChanged(bool value) => IsNotEditing = !value;
+
         public async Task LoadAsync()
         {
             _ = _authenticationService.FettaiKhoanSession();

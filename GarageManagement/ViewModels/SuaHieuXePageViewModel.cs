@@ -28,7 +28,7 @@ namespace GarageManagement.ViewModels
         public async Task LoadAsync()
         {
             var result = await _hieuXeService.GetByID(hieuXeID);
-            TenHieuXe = result.TenHieuXe ?? string.Empty;
+            TenHieuXe = result?.TenHieuXe ?? string.Empty;
             oldTenHieuXe = TenHieuXe;
             IsUpdating = false;
             IsReadOnly = true; 
@@ -60,6 +60,11 @@ namespace GarageManagement.ViewModels
                 return;
             }
             var hieuXe=await _hieuXeService.GetByID(hieuXeID);
+            if (hieuXe is null)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Hiệu xe không tồn tại", "OK");
+                return;
+            }
             hieuXe.TenHieuXe = TenHieuXe;
             await _hieuXeService.Update(hieuXe);
             var toast = Toast.Make("Cập nhật hiệu xe thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);

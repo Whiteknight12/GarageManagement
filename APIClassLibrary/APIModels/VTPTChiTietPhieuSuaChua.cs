@@ -24,6 +24,12 @@ namespace APIClassLibrary.APIModels
         //ten loai vtpt de xu li trong UI, khong luu vao db
         public string? TenLoaiVatTuPhuTung { get; set; }
         public Guid? SelectedVTPTId { get; set; }
+        //for UI only
+        public bool IsFirstTextChanged { get; set; } = true;
+        //for UI only
+        public bool isUpdatingVTPT { get; set; }
+        //for UI only 
+        public int oldValue { get; set; } = 0;
 
         //for UI only
         private VatTuPhuTung? _selectedVatTu;

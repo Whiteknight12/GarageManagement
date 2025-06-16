@@ -93,7 +93,7 @@ namespace GarageManagement.ViewModels
                 {
                     pt.TenKhachHang = khachHang.HoVaTen;
                     pt.CCCD = khachHang.CCCD;
-                    pt.Email = khachHang.Email;
+                    pt.Email = khachHang.Email ?? "";
                 }
                 // Load thông tin xe dựa trên XeId
                 var xe = await _xeService.GetByID(pt.XeId);
@@ -238,14 +238,18 @@ namespace GarageManagement.ViewModels
         public async void ShowDetail(Guid id)
         {
             var item = await _phieuThuTienService.GetByID(id);
-            
+            if (item is null)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Không tìm thấy phiếu thu tiền", "OK");
+                return;
+            }
             var khach = await _khachHangService.GetByID(item.KhachHangId);
             var xe = await _xeService.GetByID(item.XeId);
-            item.TenKhachHang = khach.HoVaTen;
-            item.CCCD = khach.CCCD;
-            item.Email = khach.Email;
-            item.TenXe = xe.Ten;
-            item.BienSoXe = xe.BienSo;
+            item.TenKhachHang = khach?.HoVaTen ?? "";
+            item.CCCD = khach?.CCCD ?? "";
+            item.Email = khach?.Email ?? "";
+            item.TenXe = xe?.Ten ?? "";
+            item.BienSoXe = xe?.BienSo ?? "";
             SelectedPhieuThuTien = item;
             IsDetailPaneVisible = true; 
         }

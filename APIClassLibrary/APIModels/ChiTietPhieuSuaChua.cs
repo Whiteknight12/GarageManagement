@@ -22,6 +22,8 @@ namespace APIClassLibrary.APIModels
         public ObservableCollection<VTPTChiTietPhieuSuaChua>? ListSpecifiedVTPT { get; set; } = new();
         //ten noi dung sua chua de xu li trong UI, khong luu vao db
         public string? TenNoiDungSuaChua { get; set; }
+        //for UI only
+        public bool isUpdatingNoiDungSuaChua { get; set;}
 
         //For UI only
         private NoiDungSuaChua? _selectedNoiDungSuaChua;

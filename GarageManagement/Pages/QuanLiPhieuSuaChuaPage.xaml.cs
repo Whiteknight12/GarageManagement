@@ -11,4 +11,22 @@ public partial class QuanLiPhieuSuaChuaPage : ContentView
         BindingContext = viewModel;
         _viewModel = viewModel;
     }
+
+    protected override void OnParentSet()
+    {
+        base.OnParentSet();
+
+        if (Parent != null)
+        {
+            MessagingCenter.Subscribe<SuaPhieuSuaChuaPageViewModel, Guid>(this, "ReloadPhieuSuaChuaList", (sender, id) =>
+            {
+                _ = _viewModel.LoadAsync();
+                MessagingCenter.Send(this, "ViewChiTietPhieuSuaChua", id);
+            });
+        }
+        else
+        {
+            MessagingCenter.Unsubscribe<SuaPhieuSuaChuaPageViewModel>(this, "ReloadPhieuSuaChuaList");
+        }
+    }
 }
