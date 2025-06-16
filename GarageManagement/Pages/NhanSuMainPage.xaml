@@ -9,7 +9,8 @@
 
     <!-- Gradient nền -->
     <ContentView.Background>
-        <LinearGradientBrush x:Name="AnimatedBrush" StartPoint="0,0" EndPoint="1,1"/>
+        <LinearGradientBrush x:Name="AnimatedBrush" StartPoint="-0.5,-0.5"
+                       EndPoint="1.5,1.5"/>
     </ContentView.Background>
 
 
