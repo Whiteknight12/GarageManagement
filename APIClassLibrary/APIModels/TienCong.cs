@@ -12,6 +12,7 @@ namespace APIClassLibrary.APIModels
         public string TenLoaiTienCong { get; set; }
         public double DonGiaLoaiTienCong { get; set; }
         public Guid NoiDungSuaChuaId { get; set; }
+        public string TenNoiDungSuaChua { get; set; }
         public bool IsSelected { get; set; } = false;
     }
 }

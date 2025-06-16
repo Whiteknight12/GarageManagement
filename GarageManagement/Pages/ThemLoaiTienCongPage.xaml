@@ -25,70 +25,88 @@
         <VerticalStackLayout Padding="30" Spacing="20" MaximumWidthRequest="600">
 
             <Frame HasShadow="True"
-                   BackgroundColor="{DynamicResource CardBackgroundColor}"
-                   Padding="25"
-                   CornerRadius="{StaticResource CornerRadiusHandler}">
+               BackgroundColor="{DynamicResource CardBackgroundColor}"
+               Padding="25"
+               CornerRadius="{StaticResource CornerRadiusHandler}">
                 <VerticalStackLayout Spacing="25">
                     <Label Text="Thêm Loại Tiền Công"
-                           FontSize="22"
-                           FontAttributes="Bold"
-                           FontFamily="OpenSans-SemiBold"
-                           TextColor="{DynamicResource TextColor}"
-                           HorizontalOptions="Center" />
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSans-SemiBold"
+                       TextColor="{DynamicResource TextColor}"
+                       HorizontalOptions="Center" />
 
+                    <!-- NEW: Nhập tên Nội dung sửa chữa -->
+                    <Label Text="Tên nội dung sửa chữa:"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSans-Regular"
+                       TextColor="{DynamicResource TextColor}" />
+                    <Entry Placeholder="Nhập tên nội dung sửa chữa..."
+                       Text="{Binding TenNoiDungSuaChua, Mode=TwoWay}"
+                       BackgroundColor="{DynamicResource InputBackgroundColor}"
+                       TextColor="{DynamicResource TextColor}"
+                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                       FontSize="14"
+                       HeightRequest="42"
+                       FontFamily="OpenSans-Regular" />
+
+                    <!-- Tên loại tiền công -->
                     <Label Text="Tên loại tiền công:"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}" />
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSans-Regular"
+                       TextColor="{DynamicResource TextColor}" />
 
                     <Entry Placeholder="Nhập tên loại tiền công..."
-                           Text="{Binding TenLoaiTienCong}"
-                           BackgroundColor="{DynamicResource InputBackgroundColor}"
-                           TextColor="{DynamicResource TextColor}"
-                           PlaceholderColor="{DynamicResource PlaceholderColor}"
-                           FontSize="14"
-                           HeightRequest="42"
-                           FontFamily="OpenSans-Regular" />
+                       Text="{Binding TenLoaiTienCong, Mode=TwoWay}"
+                       BackgroundColor="{DynamicResource InputBackgroundColor}"
+                       TextColor="{DynamicResource TextColor}"
+                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                       FontSize="14"
+                       HeightRequest="42"
+                       FontFamily="OpenSans-Regular" />
 
+                    <!-- Đơn giá -->
                     <Label Text="Đơn giá:"
-                           FontSize="16"
-                           FontAttributes="Bold"
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}" />
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       FontFamily="OpenSans-Regular"
+                       TextColor="{DynamicResource TextColor}" />
 
                     <Entry Placeholder="Nhập đơn giá..."
-                           Text="{Binding DonGiaLoaiTienCong}"
-                           Keyboard="Numeric"
-                           BackgroundColor="{DynamicResource InputBackgroundColor}"
-                           TextColor="{DynamicResource TextColor}"
-                           PlaceholderColor="{DynamicResource PlaceholderColor}"
-                           FontSize="14"
-                           HeightRequest="42"
-                           FontFamily="OpenSans-Regular" />
+                       Text="{Binding DonGiaLoaiTienCong, Mode=TwoWay}"
+                       Keyboard="Numeric"
+                       BackgroundColor="{DynamicResource InputBackgroundColor}"
+                       TextColor="{DynamicResource TextColor}"
+                       PlaceholderColor="{DynamicResource PlaceholderColor}"
+                       FontSize="14"
+                       HeightRequest="42"
+                       FontFamily="OpenSans-Regular" />
 
                     <HorizontalStackLayout Spacing="12" HorizontalOptions="Center">
                         <Button Text="Lưu"
-                                Command="{Binding SaveCommand}"
-                                BackgroundColor="#3B82F6"
-                                TextColor="White"
-                                FontAttributes="Bold"
-                                FontFamily="OpenSans-SemiBold"
-                                HeightRequest="45"
-                                CornerRadius="{StaticResource ButtonCornerRadiusHandler}" />
+                            Command="{Binding SaveCommand}"
+                            BackgroundColor="#3B82F6"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontFamily="OpenSans-SemiBold"
+                            HeightRequest="45"
+                            CornerRadius="{StaticResource ButtonCornerRadiusHandler}" />
 
                         <Button Text="Hủy"
-                                Command="{Binding CancelCommand}"
-                                BackgroundColor="#EF4444"
-                                TextColor="White"
-                                FontAttributes="Bold"
-                                FontFamily="OpenSans-SemiBold"
-                                HeightRequest="45"
-                                CornerRadius="{StaticResource ButtonCornerRadiusHandler}" />
+                            Command="{Binding CancelCommand}"
+                            BackgroundColor="#EF4444"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            FontFamily="OpenSans-SemiBold"
+                            HeightRequest="45"
+                            CornerRadius="{StaticResource ButtonCornerRadiusHandler}" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Frame>
 
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>

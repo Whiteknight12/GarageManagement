@@ -131,6 +131,9 @@ namespace GarageManagement.ViewModels
                     NoiDungId=index++
                 });
             }
+
+            _allBienSo = ListBienSoXe.ToList();
+            ApplyBienSoFilter();
         }
 
         [RelayCommand]
@@ -306,5 +309,24 @@ namespace GarageManagement.ViewModels
             }
             TongThanhTien = ListNoiDung.Sum(u => u.ThanhTien ?? 0);
         }
+
+        // lưu nguyên danh sách
+        private List<string> _allBienSo = new();
+
+        [ObservableProperty]
+        private string filterBienSo = string.Empty;
+        partial void OnFilterBienSoChanged(string value) => ApplyBienSoFilter();
+
+        [ObservableProperty]
+        private ObservableCollection<string> filteredBienSo = new();
+
+        private void ApplyBienSoFilter()
+        {
+            var q = string.IsNullOrWhiteSpace(FilterBienSo)
+                ? _allBienSo
+                : _allBienSo.Where(bs => bs.Contains(FilterBienSo, StringComparison.OrdinalIgnoreCase));
+            FilteredBienSo = new ObservableCollection<string>(q);
+        }
+
     }
 }

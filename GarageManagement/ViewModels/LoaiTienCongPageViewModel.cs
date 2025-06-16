@@ -1,5 +1,6 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Pages;
@@ -12,6 +13,7 @@ namespace GarageManagement.ViewModels
 {
     public partial class LoaiTienCongPageViewModel : BaseViewModel
     {
+        private readonly APIClientService<NoiDungSuaChua> _noiDungService;
         private List<TienCong> _allTienCong = new();
 
         [ObservableProperty] private ObservableCollection<TienCong> listTienCong = new();
@@ -33,17 +35,34 @@ namespace GarageManagement.ViewModels
         private readonly ThemLoaiTienCongPageViewModel _themLoaiTienCongPageViewModel;
 
         public LoaiTienCongPageViewModel(APIClientService<TienCong> tienCongService,
-                                         ThemLoaiTienCongPageViewModel themLoaiTienCongPageViewModel)
+                                         ThemLoaiTienCongPageViewModel themLoaiTienCongPageViewModel,
+                                         APIClientService<NoiDungSuaChua> noiDungService)
         {
             _tienCongService = tienCongService;
             _themLoaiTienCongPageViewModel = themLoaiTienCongPageViewModel;
             IsDeleteMode = false;
             _ = LoadAsync();
+            _noiDungService = noiDungService;
         }
 
         public async Task LoadAsync()
         {
+            // 1. Lấy toàn bộ tiền công
             _allTienCong = await _tienCongService.GetAll() ?? new();
+
+            // 2. Lấy toàn bộ nội dung sửa chữa và build map
+            var ndList = await _noiDungService.GetAll();
+            var ndDict = ndList.ToDictionary(x => x.Id, x => x.TenNoiDungSuaChua);
+
+            // 3. Gán vào mỗi bản ghi
+            foreach (var tc in _allTienCong)
+            {
+                if (ndDict.TryGetValue(tc.NoiDungSuaChuaId, out var ten))
+                    tc.TenNoiDungSuaChua = ten;
+                else
+                    tc.TenNoiDungSuaChua = "(Không xác định)";
+            }
+
             ApplyFilter();
         }
 
@@ -192,25 +211,59 @@ namespace GarageManagement.ViewModels
             IsEditing = true;
             IsNotEditing = false;
         }
-        
+
         [RelayCommand]
         private async Task SaveDetail()
         {
-            if (SelectedTienCong == null) return;
+            if (SelectedTienCong == null)
+                return;
 
-            await _tienCongService.Update(SelectedTienCong);
-
-            var tien = await _tienCongService.GetByID(SelectedTienCong.Id);
-            // refresh danh sách
-            await LoadAsync();
-            IsEditing = false;
-            IsNotEditing = true;
-            if (tien is not null) ShowDetail(tien);
-            else
+            // 0) Kiểm tra ID hai bảng phải hợp lệ
+            if (SelectedTienCong.Id == Guid.Empty || SelectedTienCong.NoiDungSuaChuaId == Guid.Empty)
             {
-                await Shell.Current.DisplayAlert("Thông báo", "Tiền công không tồn tại", "OK");
+                await Shell.Current.DisplayAlert("Lỗi", "Dữ liệu không hợp lệ, vui lòng kiểm tra lại.", "OK");
                 return;
             }
+
+            // 1) Kiểm tra trùng tên tiền công
+            var all = await _tienCongService.GetAll() ?? new List<TienCong>();
+            var duplicate = all
+                .Where(x => x.Id != SelectedTienCong.Id)
+                .Any(x => x.TenLoaiTienCong.Trim().Equals(SelectedTienCong.TenLoaiTienCong.Trim(), StringComparison.OrdinalIgnoreCase));
+            if (duplicate)
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Tên loại tiền công này đã tồn tại.", "OK");
+                return;
+            }
+
+            // 2) Cập nhật tên nội dung sửa chữa
+            var nd = new NoiDungSuaChua
+            {
+                Id = SelectedTienCong.NoiDungSuaChuaId,
+                TenNoiDungSuaChua = SelectedTienCong.TenNoiDungSuaChua.Trim()
+            };
+            await _noiDungService.Update(nd);
+
+            // 3) Cập nhật tiền công
+            await _tienCongService.Update(SelectedTienCong);
+
+            // 4) Reload danh sách để lấy dữ liệu mới nhất
+            await LoadAsync();
+
+            // 5) Hiển thị lại detail của bản ghi vừa lưu
+            var updated = _allTienCong.FirstOrDefault(x => x.Id == SelectedTienCong.Id);
+            if (updated != null)
+                ShowDetail(updated);
+            else
+                await Shell.Current.DisplayAlert("Thông báo", "Tiền công không tồn tại", "OK");
+
+            // 6) Toast thông báo thành công
+            var toast = Toast.Make("Cập nhật thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
+            await toast.Show();
+
+            // 7) Chuyển về chế độ view
+            IsEditing = false;
+            IsNotEditing = true;
         }
 
         [RelayCommand]
