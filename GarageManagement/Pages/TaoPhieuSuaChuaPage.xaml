@@ -49,7 +49,26 @@
                                VerticalOptions="Center"
                                Padding="20"/>
 
+                        <Entry
+                            Placeholder="Tìm biển số..."
+                            Text="{Binding FilterBienSo, Mode=TwoWay}"
+                            ClearButtonVisibility="WhileEditing"
+                            HorizontalOptions="Start"
+                            WidthRequest="200"
+                            HeightRequest="48"/>
+
+                        <!-- Picker chỉ hiển thị những biển số đã lọc -->
                         <Picker
+                             
+                             ItemsSource="{Binding FilteredBienSo}"
+                             SelectedItem="{Binding SelectedBienSoXe}"
+                             BackgroundColor="{DynamicResource InputBackgroundColor}"
+                             TextColor="{DynamicResource TextColor}"
+                             WidthRequest="250"
+                             HeightRequest="40"
+                                />
+                        
+                        <!--<Picker
                             TitleColor="{DynamicResource PlaceholderColor}"
                             ItemDisplayBinding="{Binding .}"
                             ItemsSource="{Binding ListBienSoXe}"
@@ -59,7 +78,7 @@
                             HeightRequest="40"
                             WidthRequest="250"
                             HorizontalOptions="Start"
-                            Margin="0,5,0,0" />
+                            Margin="0,5,0,0" />-->
 
                         <Label Text="Ngày sửa chữa:" 
                                Padding="50"

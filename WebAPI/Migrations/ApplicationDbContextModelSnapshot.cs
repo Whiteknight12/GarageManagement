@@ -319,18 +319,6 @@ namespace WebAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("nhomNguoiDungs");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ee0d6b19-2cd7-44e1-8da1-a8f2cba7d85e"),
-                            TenNhom = "Admin"
-                        },
-                        new
-                        {
-                            Id = new Guid("64e24bdb-de4f-4ba2-b7ef-e37e5d4a9f0c"),
-                            TenNhom = "User"
-                        });
                 });
 
             modelBuilder.Entity("WebAPI.Models.NoiDungSuaChua", b =>
@@ -469,23 +457,6 @@ namespace WebAPI.Migrations
 
                     b.ToTable("taiKhoans");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("859e3bad-c73f-47f4-87f2-3bfad6a477bf"),
-                            MatKhau = "admin123",
-                            NgayCap = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NhomNguoiDungId = new Guid("ee0d6b19-2cd7-44e1-8da1-a8f2cba7d85e"),
-                            TenDangNhap = "admin"
-                        },
-                        new
-                        {
-                            Id = new Guid("17bd6038-b700-460b-9af7-3523543a1f6d"),
-                            MatKhau = "user123",
-                            NgayCap = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NhomNguoiDungId = new Guid("64e24bdb-de4f-4ba2-b7ef-e37e5d4a9f0c"),
-                            TenDangNhap = "user"
-                        });
                 });
 
             modelBuilder.Entity("WebAPI.Models.ThamSo", b =>

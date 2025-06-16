@@ -109,6 +109,23 @@ builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
 var app = builder.Build();
 
+// Add after your database context is initialized
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ApplicationDbContext>();
+
+    // This will create the database if it doesn't exist
+    // Returns true if the database was created, false if it already existed
+    bool wasCreated = context.Database.EnsureCreated();
+
+    // Only seed if we just created a new database
+    if (wasCreated)
+    {
+        context.SeedInitialData();
+    }
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

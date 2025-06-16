@@ -37,41 +37,7 @@ namespace WebAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Tạo GUID cho các nhóm người dùng
-            var adminGroupId = Guid.NewGuid();
-            var userGroupId = Guid.NewGuid();
-
-            // Seed bảng NhomNguoiDung
-            modelBuilder.Entity<NhomNguoiDung>().HasData(
-                new NhomNguoiDung
-                {
-                    Id = adminGroupId,
-                    TenNhom = "Admin"
-                },
-                new NhomNguoiDung
-                {
-                    Id = userGroupId,
-                    TenNhom = "User"
-                }
-            );
-
-            // Seed bảng TaiKhoan
-            modelBuilder.Entity<TaiKhoan>().HasData(
-                new TaiKhoan
-                {
-                    Id = Guid.NewGuid(),
-                    TenDangNhap = "admin",
-                    MatKhau = "admin123", // Mật khẩu nên mã hóa bằng cách sử dụng Hash (chỉ là ví dụ)
-                    NhomNguoiDungId = adminGroupId
-                },
-                new TaiKhoan
-                {
-                    Id = Guid.NewGuid(),
-                    TenDangNhap = "user",
-                    MatKhau = "user123", // Mật khẩu nên mã hóa bằng cách sử dụng Hash (chỉ là ví dụ)
-                    NhomNguoiDungId = userGroupId
-                }
-            );
+            
         }
     }
 }

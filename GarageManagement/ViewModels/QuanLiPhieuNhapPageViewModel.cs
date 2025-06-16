@@ -71,7 +71,14 @@ namespace GarageManagement.ViewModels
                 //// unsubscribe so you don’t leak
                 //MessagingCenter.Unsubscribe<ChinhSuaPhieuNhapPageViewModel>(this, "PhieuNhapUpdated");
             });
+            MessagingCenter.Subscribe<LapPhieuNhapPageViewModel>(this, "PhieuNhapAdded", async _ =>
+            {
+                // refresh your list
+                await LoadAsync();
 
+                //// unsubscribe so you don’t leak
+                //MessagingCenter.Unsubscribe<ChinhSuaPhieuNhapPageViewModel>(this, "PhieuNhapUpdated");
+            });
         }
 
         public async Task LoadAsync()
@@ -89,6 +96,7 @@ namespace GarageManagement.ViewModels
 
             _allPhieu = list;         // bổ sung
             ApplyFilter();
+            ListPhieuNhapVatTu = new(list);
         }
 
         public void Load(PhieuNhapVatTu item)

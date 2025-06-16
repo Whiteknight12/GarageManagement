@@ -100,7 +100,8 @@ namespace GarageManagement.ViewModels
 
             ListChiTietPhieuNhap.Clear();
             ListChiTietPhieuNhap.Add(new ChiTietPhieuNhapVatTu());
-            OnPhieuNhapAdded(phieuNhapVatTu);
+            //OnPhieuNhapAdded(phieuNhapVatTu);
+            MessagingCenter.Send(this, "PhieuNhapAdded"); 
             SelectedDate = DateTime.UtcNow; 
         }
     }

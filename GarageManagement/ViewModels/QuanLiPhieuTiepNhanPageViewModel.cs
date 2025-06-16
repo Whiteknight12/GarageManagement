@@ -135,9 +135,9 @@ namespace GarageManagement.ViewModels
         private async void ShowRightPane(Guid id)
         {
             var p = await _phieuTiepNhanService.GetByID(id);
-            var xe = await _xeService.GetByID(p.XeId); 
+            var xe = await _xeService.GetByID(p.XeId);
+            p.BienSoXe = xe.BienSo; 
             SelectedPhieuTiepNhan = p;
-            SelectedPhieuTiepNhan.BienSoXe = xe.BienSo;
             OnPropertyChanged(nameof(SelectedPhieuTiepNhan.BienSoXe));
         }
 
