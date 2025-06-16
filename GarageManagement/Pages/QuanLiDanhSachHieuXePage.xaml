@@ -61,13 +61,15 @@
                        BackgroundColor="{DynamicResource CardBackgroundColor}"
                        Padding="20">
                     <Grid ColumnDefinitions="Auto, *">
-                        <Label Text="ID" Grid.Column="0"
+                        <Label Text="Id" Grid.Column="0"
+                               Margin="100,0,0,0"
+                               HorizontalOptions="Center"
                                FontAttributes="Bold"
                                FontFamily="OpenSans-SemiBold"
                                TextColor="{DynamicResource TextColor}"
                                HorizontalTextAlignment="Center"
                                FontSize="14" />
-                        <Label Text="Tên Hiệu Xe" Grid.Column="1"
+                        <Label Text="Tên Hiệu Xe" Grid.Column="1" Margin="150,0,0,0"
                                FontAttributes="Bold"
                                FontFamily="OpenSans-SemiBold"
                                TextColor="{DynamicResource TextColor}"
@@ -97,7 +99,8 @@
                                     <StackLayout Orientation="Horizontal" Grid.Column="0">
                                         <CheckBox IsChecked="{Binding IsSelected}"
                                                   IsVisible="{Binding Path=BindingContext.IsDeleteMode, Source={x:Reference RootContentView}}" />
-                                        <Label Text="{Binding IdForUI}"
+                                        <Label Text="{Binding Id}"
+                                               LineBreakMode="TailTruncation"
                                                FontFamily="OpenSans-Regular"
                                                TextColor="{DynamicResource TextColor}"
                                                HorizontalTextAlignment="Center"

@@ -187,6 +187,13 @@ namespace GarageManagement.ViewModels
         private void ToggleDeleteMode()
         {
             IsDeleteMode = !IsDeleteMode;
+
+            if (!IsDeleteMode)
+            {
+                foreach (var xe in _allXe)
+                    xe.IsSelected = false;
+                ApplyFilter();
+            }
         }
         [RelayCommand]
         private async Task CloseDetailPane()
@@ -309,6 +316,26 @@ namespace GarageManagement.ViewModels
         {
             MessagingCenter.Send(this, "ShowCarDetails", XeId);
         }
+        [RelayCommand]
+        private async void Delete()
+        {
+            // 1) Lọc ra những chiếc đã check
+            var toDelete = Listcar.Where(x => x.IsSelected).ToList();
+            if (toDelete.Count == 0)
+                return;
 
+            // 2) Gọi API xóa từng chiếc
+            foreach (var xe in toDelete)
+            {
+                await _carservice.Delete(xe.Id);
+                _allXe.Remove(xe);
+            }
+
+            // 3) Cập nhật lại danh sách hiển thị
+            ApplyFilter();
+
+            // 4) Tắt chế độ xóa
+            IsDeleteMode = false;
+        }
     }
 }

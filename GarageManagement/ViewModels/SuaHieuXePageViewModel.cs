@@ -20,6 +20,9 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private string tenHieuXe;
 
+        [ObservableProperty]
+        private Guid id; 
+
         public SuaHieuXePageViewModel(APIClientService<HieuXe> hieuXeService)
         {
             _hieuXeService = hieuXeService;
@@ -31,7 +34,8 @@ namespace GarageManagement.ViewModels
             TenHieuXe = result?.TenHieuXe ?? string.Empty;
             oldTenHieuXe = TenHieuXe;
             IsUpdating = false;
-            IsReadOnly = true; 
+            IsReadOnly = true;
+            Id = hieuXeID; 
         }
         [RelayCommand]
         private void ToggleUpdate()

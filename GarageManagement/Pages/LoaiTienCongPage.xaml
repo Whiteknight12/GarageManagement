@@ -166,7 +166,7 @@
 
                     <Label Grid.Column="0"/>
                     <!-- placeholder -->
-                    <Label Grid.Column="1" Text="ID"                 Style="{StaticResource HeaderLabelStyle}"/>
+                    <Label Grid.Column="1" Text="Id"                 Style="{StaticResource HeaderLabelStyle}"/>
                     <Label Grid.Column="2" Text="Tên Loại Tiền Công" Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="Center"/>
                     <Label Grid.Column="3" Text="Đơn Giá"            Style="{StaticResource HeaderLabelStyle}" HorizontalOptions="Center"/>
                         <Label Grid.Column="4"
@@ -210,7 +210,7 @@
                            FontSize="13"
                            FontFamily="OpenSans-Regular"
                            TextColor="{DynamicResource TextColor}"
-                           LineBreakMode="TailTruncation"
+                          
                            HorizontalTextAlignment="Center"
                            VerticalOptions="Center"/>
 

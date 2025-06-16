@@ -159,13 +159,13 @@
                    Padding="20">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="250" />
                         <ColumnDefinition Width="2*" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                        
                     </Grid.ColumnDefinitions>
-                    <Label Text="ID" Grid.Column="0" 
+                    <Label Text="Id" Grid.Column="0" 
                            FontAttributes="Bold" 
                            FontFamily="OpenSans-SemiBold"
                            TextColor="{DynamicResource TextColor}"
@@ -202,24 +202,31 @@
                                Margin="0,12,0,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="250" />
                                     <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     
                                 </Grid.ColumnDefinitions>
-                                <StackLayout Orientation="Horizontal" Grid.Column="0">
-                                    <CheckBox IsChecked="{Binding IsSelected}" 
-                                              IsVisible="{Binding Path=BindingContext.IsDeleteMode,
-                                      Source={x:Reference RootContentView}}" />
-                                    <Label Text="{Binding VatTuPhuTungId}" 
-                                           FontFamily="OpenSans-Regular"
-                                           TextColor="{DynamicResource TextColor}"
-                                           HorizontalTextAlignment="Center"
-                                           FontSize="13"
-                                           Margin="5"/>
-                                </StackLayout>
-                                <Label Text="{Binding TenLoaiVatTuPhuTung}" Grid.Column="1" 
+                                    <Grid Grid.Column="0" ColumnDefinitions="Auto, *" RowDefinitions="Auto">
+                                        <CheckBox Grid.Column="0"
+            IsChecked="{Binding IsSelected}"
+            Opacity="{Binding Path=BindingContext.IsDeleteMode,
+                                                Source={x:Reference RootContentView},
+                                                Converter={StaticResource BoolToOpacityConverter}}"
+            VerticalOptions="Center"/>
+                                        <Label   Grid.Column="1"
+           Text="{Binding VatTuPhuTungId}"
+           LineBreakMode="WordWrap"
+           MaxLines="2"
+           HorizontalOptions="Fill"
+           VerticalOptions="Center"
+           TextColor="{DynamicResource TextColor}"
+           FontFamily="OpenSans-Regular"
+           FontSize="13"
+           Margin="5"/>
+                                    </Grid>
+                                    <Label Text="{Binding TenLoaiVatTuPhuTung}" Grid.Column="1" 
                                        FontFamily="OpenSans-Regular"
                                        TextColor="{DynamicResource TextColor}"
                                        HorizontalTextAlignment="Center"

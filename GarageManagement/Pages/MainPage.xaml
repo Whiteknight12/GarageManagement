@@ -7,6 +7,15 @@
              BackgroundColor="{DynamicResource BackgroundColor}">
 
     <ContentPage.Resources>
+        <Style x:Key="NavButtonStyle" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="Padding"      Value="8" />
+            <Setter Property="Margin"       Value="4" />
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="HasShadow"    Value="False"/>
+            <Setter Property="BackgroundColor" 
+          Value="{StaticResource InactiveBackgroundColor}"/>
+        </Style>
         <ResourceDictionary>
             <service:BoolToColorConverterService x:Key="BoolToColorConverter" />
             <service:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter" />
@@ -70,6 +79,7 @@
                         <TapGestureRecognizer Command="{Binding ToggleSectionCommand}" CommandParameter="QuanLy" />
                     </Frame.GestureRecognizers>
                     <HorizontalStackLayout>
+                        <Label VerticalOptions="Center">🗂️</Label>
                         <Label Text="Quản lý"
                                TextColor="White"
                                FontAttributes="Bold"
@@ -83,16 +93,17 @@
                                TextColor="White" />
                     </HorizontalStackLayout>
                 </Frame>
-                <VerticalStackLayout Spacing="5"
+                <VerticalStackLayout Spacing="5" 
                                      IsVisible="{Binding QuanLyExpanded}">
                     <Frame BackgroundColor="{Binding QlXeActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
+                           Style="{StaticResource NavButtonStyle}"
                            Margin="5"
                            HasShadow="True" IsVisible="{Binding QuanLiDanhSachXePermission}" >
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="QL DS Xe"
+                            <Label Text="🚙"/>
+                            <Label Text=" Danh sách xe"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
@@ -108,19 +119,22 @@
                     <Frame BackgroundColor="{Binding QlDanhSachHieuXeActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
+                           Style="{StaticResource NavButtonStyle}"
                            Margin="5"
                            HasShadow="True" IsVisible="{Binding QuanLiDanhSachHieuXePermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="QL DS Hiệu Xe"
+
+                            <Label Text="🏭"/>
+                            <Label Text=" Danh sách hiệu xe"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
-                                   HorizontalOptions="Center"
-                                   LineBreakMode="WordWrap"
+                                   HorizontalOptions="Start"
+                                   
                                    MaximumWidthRequest="120"
                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
+
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QLDanhSachHieuXe" />
                         </Frame.GestureRecognizers>
@@ -129,10 +143,11 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
+                           Style="{StaticResource NavButtonStyle}"
                            HasShadow="True" IsVisible="{Binding QuanLiDanhSachLoaiVatTuPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="QL DS Loại Vật Tư Phụ Tùng"
+                            <Label Text="📦"/>
+                            <Label Text=" Danh sách vật tư"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
@@ -149,16 +164,16 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
+                            Style="{StaticResource NavButtonStyle}"
                            HasShadow="True" IsVisible="{Binding QuanLiDanhSachLoaiTienCongPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="QL DS Loại Tiền Công"
+                            <Label Text="💵"/>
+                            <Label Text=" DS loại tiền công"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
                                    HorizontalOptions="Center"
-                                   LineBreakMode="WordWrap"
-                                   MaximumWidthRequest="120"
+                                 
                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -169,16 +184,17 @@
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
                             Margin="5"
+                            Style="{StaticResource NavButtonStyle}"
                             HasShadow="True" IsVisible="{Binding QuanLiNhanVienPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Quản lí nhân viên"
+                            <Label>👥</Label>
+                            <Label Text="Danh sách nhân viên"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
                                    HorizontalOptions="Center"
                                    LineBreakMode="WordWrap"
-                                   MaximumWidthRequest="120"
+                                 
                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -188,17 +204,18 @@
                     <Frame BackgroundColor="{Binding QuanLiKhachHangActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
+                            Style="{StaticResource NavButtonStyle}"
                             Margin="5"
                             HasShadow="True" IsVisible="{Binding QuanLiKhachHangPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Quản lí khách hàng"
+                            <Label>🤝</Label>
+                            <Label Text="Danh sách khách hàng"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
                                    HorizontalOptions="Center"
                                    LineBreakMode="WordWrap"
-                                   MaximumWidthRequest="120"
+                             
                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -209,16 +226,17 @@
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
                             Margin="5"
+                            Style="{StaticResource NavButtonStyle}"
                             HasShadow="True" IsVisible="{Binding QuanLiPhieuNhapPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Quản lí phiếu nhập"
+                            <Label>📥</Label>
+                            <Label Text="Danh sách phiếu nhập"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
                                    HorizontalOptions="Center"
                                    LineBreakMode="WordWrap"
-                                   MaximumWidthRequest="120"
+                                  
                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -229,16 +247,16 @@
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
                             Margin="5"
+                            Style="{StaticResource NavButtonStyle}"
                             HasShadow="True" IsVisible="{Binding QuanLiPhieuSuaChuaPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Quản lí phiếu sữa chữa"
+                            <Label>🔧</Label>
+                            <Label Text="DS phiếu sửa chữa"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
                                    HorizontalOptions="Center"
-                                   LineBreakMode="WordWrap"
-                                   MaximumWidthRequest="120"
+                                  
                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -248,17 +266,17 @@
                     <Frame BackgroundColor="{Binding QuanLiPhieuThuTienActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
+                            Style="{StaticResource NavButtonStyle}"
                             Margin="5"
                             HasShadow="True" IsVisible="{Binding QuanLiPhieuThuTienPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Quản lí phiếu thu tiền"
+                            <Label>🧾</Label>
+                            <Label Text="DS phiếu thu tiền"
                                     TextColor="White"
                                     FontSize="14"
                                     FontFamily="OpenSans-Regular"
                                     HorizontalOptions="Center"
-                                    LineBreakMode="WordWrap"
-                                    MaximumWidthRequest="120"
+                                    
                                     IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -269,16 +287,15 @@
                         CornerRadius="{StaticResource CornerRadiusHandler}"
                         Padding="10"
                         Margin="5"
+                            Style="{StaticResource NavButtonStyle}"
                         HasShadow="True" IsVisible="{Binding QuanLiPhieuTiepNhanPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Quản lí phiếu tiếp nhận"
+                            <Label>📋</Label>
+                            <Label Text="DS phiếu tiếp nhận"
                                TextColor="White"
                                FontSize="14"
                                FontFamily="OpenSans-Regular"
                                HorizontalOptions="Center"
-                               LineBreakMode="WordWrap"
-                               MaximumWidthRequest="120"
                                IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -289,16 +306,15 @@
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
                             Margin="5"
-                            HasShadow="True" IsVisible="{Binding QuanLiBaoCaoThangPermission}">
+                            HasShadow="True" IsVisible="{Binding QuanLiBaoCaoThangPermission}"
+                            Style="{StaticResource NavButtonStyle}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Quản lí bc tháng"
+                            <Label>📈</Label>
+                            <Label Text="DS báo cáo tháng"
                                TextColor="White"
                                FontSize="14"
                                FontFamily="OpenSans-Regular"
                                HorizontalOptions="Center"
-                               LineBreakMode="WordWrap"
-                               MaximumWidthRequest="120"
                                IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -308,17 +324,16 @@
                     <Frame BackgroundColor="{Binding QuanLiBaoCaoTonActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                         CornerRadius="{StaticResource CornerRadiusHandler}"
                         Padding="10"
+                            Style="{StaticResource NavButtonStyle}"
                         Margin="5"
                         HasShadow="True" IsVisible="{Binding QuanLiBaoCaoTonPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Quản lí báo cáo tồn"
+                            <Label>🗃️</Label>
+                            <Label Text="DS báo cáo tồn"
                                TextColor="White"
                                FontSize="14"
                                FontFamily="OpenSans-Regular"
                                HorizontalOptions="Center"
-                               LineBreakMode="WordWrap"
-                               MaximumWidthRequest="120"
                                IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -337,6 +352,7 @@
                         <TapGestureRecognizer Command="{Binding ToggleSectionCommand}" CommandParameter="TaoLap" />
                     </Frame.GestureRecognizers>
                     <HorizontalStackLayout>
+                        <Label VerticalOptions="Center">✍️</Label>
                         <Label Text="Tạo lập"
                                TextColor="White"
                                FontAttributes="Bold"
@@ -355,17 +371,16 @@
                     <Frame BackgroundColor="{Binding TiepNhanXeActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
+                            Style="{StaticResource NavButtonStyle}"
                            Margin="5"
                            HasShadow="True" IsVisible="{Binding TiepNhanXePermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Tiếp Nhận Xe"
+                            <Label>🚘</Label>
+                            <Label Text=" Tiếp Nhận Xe"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
                                    HorizontalOptions="Center"
-                                   LineBreakMode="WordWrap"
-                                   MaximumWidthRequest="120"
                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -376,16 +391,15 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
+                            Style="{StaticResource NavButtonStyle}"
                            HasShadow="True" IsVisible="{Binding LapPhieuSuaChuaPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Lập Phiếu Sửa Chữa"
+                            <Label>🔧</Label>
+                            <Label Text=" Lập Phiếu Sửa Chữa"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
                                    HorizontalOptions="Center"
-                                   LineBreakMode="WordWrap"
-                                   MaximumWidthRequest="120"
                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -395,17 +409,16 @@
                     <Frame BackgroundColor="{Binding TaoPhieuNhapActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
+                            Style="{StaticResource NavButtonStyle}"
                            Margin="5"
                            HasShadow="True" IsVisible="{Binding LapPhieuNhapPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Lập Phiếu Nhập"
+                            <Label>📥</Label>
+                            <Label Text=" Lập Phiếu Nhập"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
                                    HorizontalOptions="Center"
-                                   LineBreakMode="WordWrap"
-                                   MaximumWidthRequest="120"
                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -416,16 +429,15 @@
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
                            Margin="5"
-                           HasShadow="True" IsVisible="{Binding LapPhieuThuTienPermission}">
+                           HasShadow="True" IsVisible="{Binding LapPhieuThuTienPermission}"
+                            Style="{StaticResource NavButtonStyle}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Lập Phiếu Thu Tiền"
+                            <Label>🧾</Label>
+                            <Label Text=" Lập Phiếu Thu Tiền"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
                                    HorizontalOptions="Center"
-                                   LineBreakMode="WordWrap"
-                                   MaximumWidthRequest="120"
                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -444,6 +456,7 @@
                         <TapGestureRecognizer Command="{Binding ToggleSectionCommand}" CommandParameter="QuanTri" />
                     </Frame.GestureRecognizers>
                     <HorizontalStackLayout>
+                        <Label VerticalOptions="Center">⚙️</Label>
                         <Label Text="Quản trị"
                                TextColor="White"
                                FontAttributes="Bold"
@@ -462,11 +475,12 @@
                     <Frame BackgroundColor="{Binding PhanQuyenActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
+                            Style="{StaticResource NavButtonStyle}"
                            Margin="5"
                            HasShadow="True" IsVisible="{Binding PhanQuyenPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Phân Quyền"
+                            <Label>🗝️</Label>
+                            <Label Text=" Phân quyền"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
@@ -482,17 +496,16 @@
                     <Frame BackgroundColor="{Binding ThayDoiThamSoActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                            CornerRadius="{StaticResource CornerRadiusHandler}"
                            Padding="10"
+                            Style="{StaticResource NavButtonStyle}"
                            Margin="5"
                            HasShadow="True" IsVisible="{Binding ThayDoiThamSoPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Thay Đổi Tham Số"
+                            <Label>⚖️</Label>
+                            <Label Text=" Tham số hệ thống"
                                    TextColor="White"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
                                    HorizontalOptions="Center"
-                                   LineBreakMode="WordWrap"
-                                   MaximumWidthRequest="120"
                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -503,16 +516,15 @@
                         CornerRadius="{StaticResource CornerRadiusHandler}"
                         Padding="10"
                         Margin="5"
+                            Style="{StaticResource NavButtonStyle}"
                         HasShadow="True" IsVisible="{Binding QuanLiDanhSachTaiKhoanPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="QL DS Tài Khoản"
+                            <Label>👥</Label>
+                            <Label Text=" Danh sách tài khoản"
                                TextColor="White"
                                FontSize="14"
                                FontFamily="OpenSans-Regular"
                                HorizontalOptions="Center"
-                               LineBreakMode="WordWrap"
-                               MaximumWidthRequest="120"
                                IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -522,17 +534,16 @@
                     <Frame BackgroundColor="{Binding QuanLiLichSuActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                         CornerRadius="{StaticResource CornerRadiusHandler}"
                         Padding="10"
+                            Style="{StaticResource NavButtonStyle}"
                         Margin="5"
                         HasShadow="True" IsVisible="{Binding QuanLiLichSuPermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Quản lí lịch sử"
+                            <Label>⏰</Label>
+                            <Label Text=" Lịch sử hành động"
                                TextColor="White"
                                FontSize="14"
                                FontFamily="OpenSans-Regular"
                                HorizontalOptions="Center"
-                               LineBreakMode="WordWrap"
-                               MaximumWidthRequest="120"
                                IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -551,6 +562,7 @@
                         <TapGestureRecognizer Command="{Binding ToggleSectionCommand}" CommandParameter="KhachHang" />
                     </Frame.GestureRecognizers>
                     <HorizontalStackLayout>
+                        <Label VerticalOptions="Center">🙋</Label>
                         <Label Text="Khách hàng" 
                            TextColor="White"
                            FontAttributes="Bold"
@@ -570,16 +582,15 @@
                        CornerRadius="{StaticResource CornerRadiusHandler}"
                        Padding="10"
                        Margin="5"
+                            Style="{StaticResource NavButtonStyle}"
                        HasShadow="True" IsVisible="{Binding KhachHangXemDanhSachXePermission}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Xem danh sách xe"
+                            <Label>🚗</Label>
+                            <Label Text=" Xe của bạn"
                                TextColor="White"
                                FontSize="14"
                                FontFamily="OpenSans-Regular"
                                HorizontalOptions="Center"
-                               LineBreakMode="WordWrap"
-                               MaximumWidthRequest="120"
                                IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -593,15 +604,15 @@
                        CornerRadius="{StaticResource CornerRadiusHandler}"
                        Padding="10"
                        Margin="5"
+                        Style="{StaticResource NavButtonStyle}"
                        HasShadow="True">
                     <HorizontalStackLayout>
-                        <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                        <Label Text="Home"
+                        <Label>🏠</Label>
+                        <Label Text=" Home"
+                               
                                TextColor="White"
                                FontSize="14"
                                FontFamily="OpenSans-Regular"
-                               HorizontalOptions="Center"
-                               LineBreakMode="WordWrap"
                                IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                     </HorizontalStackLayout>
                     <Frame.GestureRecognizers>

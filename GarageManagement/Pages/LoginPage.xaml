@@ -125,7 +125,7 @@
 
                     <Grid ColumnDefinitions="*,*" Margin="0,5">
                         <HorizontalStackLayout Grid.Column="0" Spacing="5">
-                            <CheckBox Color="#10B981" VerticalOptions="Center"/>
+                            <CheckBox Color="#10B981" VerticalOptions="Center" IsChecked="{Binding IsRememberMe}"/>
                             <Label Text="Nhớ mật khẩu"
                                    FontSize="14"
                                    FontFamily="OpenSans-Regular"
