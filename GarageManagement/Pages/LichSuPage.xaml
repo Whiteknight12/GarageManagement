@@ -167,7 +167,7 @@
                     <Picker
                        ItemsSource="{Binding ListLoaiDuLieu}"
                        ItemDisplayBinding="{Binding .}"
-                       SelectedItem="{Binding SelectedAction}"
+                       SelectedItem="{Binding SelectedDataType}"
                        FontSize="16"
                        FontFamily="OpenSans-Regular"
                        TextColor="{DynamicResource TextColor}"
@@ -193,7 +193,7 @@
                     <Entry 
                        Placeholder="Nhập giá trị"
                        PlaceholderColor="{DynamicResource PlaceholderColor}"
-                       Text="{Binding CCCDValue, Mode=TwoWay}"
+                       Text="{Binding IDValue, Mode=TwoWay}"
                        FontSize="16"
                        FontFamily="OpenSans-Regular"
                        TextColor="{DynamicResource TextColor}"
