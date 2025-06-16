@@ -194,6 +194,9 @@
 	  <MauiXaml Update="Pages\TaoPhieuSuaChuaPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\TaoThongBaoPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\TaskBarChoicePopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

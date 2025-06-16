@@ -12,6 +12,7 @@ namespace WebAPI.Controllers
         public BaoCaoDoanhThuThangController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
+
         [HttpGet]
         public override async Task<ActionResult<IEnumerable<BaoCaoDoanhThuThang>>> GetAll()
         {

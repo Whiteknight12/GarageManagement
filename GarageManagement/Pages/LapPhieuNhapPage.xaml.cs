@@ -70,7 +70,7 @@ public partial class LapPhieuNhapPage : ContentView
             {
                 _viewModel.listChiTietId.Add(chiTietPhieuNhapVatTu.VatTuId.Value);
                 var vt = await _vatTuService.GetByID(chiTietPhieuNhapVatTu.VatTuId.Value);
-                chiTietPhieuNhapVatTu.DonGia = vt.DonGiaBanLoaiVatTuPhuTung;
+                chiTietPhieuNhapVatTu.DonGia = vt?.DonGiaBanLoaiVatTuPhuTung ?? 0;
                 chiTietPhieuNhapVatTu.OnPropertyChanged(nameof(chiTietPhieuNhapVatTu.DonGia));
             }
             //cập nhật lại tránh bị trùng 

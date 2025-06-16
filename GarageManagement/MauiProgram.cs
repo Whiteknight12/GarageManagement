@@ -56,6 +56,8 @@ public static class MauiProgram
         builder.Services.AddAPIClientService<NoiDungSuaChua>(x=>x.BaseAddress=baseaddress, nameof(NoiDungSuaChua));
         builder.Services.AddAPIClientService<VTPTChiTietPhieuSuaChua>(x => x.BaseAddress = baseaddress, $"{nameof(VTPTChiTietPhieuSuaChua)}");
         builder.Services.AddAPIClientService<LichSu>(x=>x.BaseAddress = baseaddress, $"{nameof(LichSu)}");
+        builder.Services.AddAPIClientService<ThongBao>(x=>x.BaseAddress=baseaddress, $"{nameof(ThongBao)}");
+        builder.Services.AddAPIClientService<NguoiDungThongBao>(x=>x.BaseAddress=baseaddress, $"{nameof(NguoiDungThongBao)}");
 
 
         builder.Services.AddScoped<AuthenticationService>(provider=>
@@ -106,6 +108,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ChinhSuaPhieuNhapPage>();
         builder.Services.AddTransient<ChinhSuaPhieuThuTienPage>();
         builder.Services.AddTransient<ChangePasswordPage>();
+        builder.Services.AddTransient<TaoThongBaoPage>();
 
         builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddTransient<TaoPhieuSuaChuaPageViewModel>();
@@ -151,6 +154,7 @@ public static class MauiProgram
         builder.Services.AddTransient<BaoCaoTonViewModel>();
         builder.Services.AddTransient<SuaPhieuSuaChuaPageViewModel>();
         builder.Services.AddTransient<ChangePasswordPageViewmodel>();
+        builder.Services.AddTransient<TaoThongBaoPageViewModel>();
 
         builder.Services.AddLogging(logging =>
         {

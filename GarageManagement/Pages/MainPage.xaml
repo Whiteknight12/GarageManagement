@@ -444,6 +444,26 @@
                             <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="ThuTien" />
                         </Frame.GestureRecognizers>
                     </Frame>
+                    <Frame BackgroundColor="{Binding TaoThongBaoActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True" IsVisible="{Binding TaoThongBaoPermission}">
+                        <HorizontalStackLayout>
+                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
+                            <Label Text="Tạo thông báo mới"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                        </HorizontalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TaoThongBao" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
                 </VerticalStackLayout>
 
                 <!-- Section: Quản trị -->
