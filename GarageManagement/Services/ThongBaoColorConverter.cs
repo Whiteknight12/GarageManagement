@@ -12,8 +12,12 @@ namespace GarageManagement.Services
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool daDoc = (bool)value;
-            return daDoc ? Color.FromArgb("#D1D5DB") : Color.FromArgb("#2563EB"); // Xám vs Xanh
+            // Khi đã đọc → xám nhạt; khi chưa đọc → xanh lá tươi
+            return daDoc
+                ? Color.FromArgb("#E5E7EB")  // gray-200
+                : Color.FromArgb("#22C55E"); // green-500
         }
+
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
             => throw new NotImplementedException();

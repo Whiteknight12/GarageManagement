@@ -87,6 +87,8 @@ namespace GarageManagement.ViewModels
         public Guid KhachHangXemDanhSachXeId;
         [ObservableProperty] private bool khachHangXemDanhSachXePermission;
 
+        public Guid TaoThongBaoId;
+        [ObservableProperty] private bool taoThongBaoPermission; 
         public PhanQuyenPageViewModel(APIClientService<PhanQuyen> phanQuyenService,
             APIClientService<NhomNguoiDung> nhomNguoiDungService,
             AuthenticationService authenticationService,
@@ -122,6 +124,7 @@ namespace GarageManagement.ViewModels
             QuanLiDanhSachTaiKhoanId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li danh sach tai khoan")).Id;
             QuanLiLichSuId = (await _chucNangService.GetThroughtSpecialRoute("name", "quan li lich su")).Id;
             KhachHangXemDanhSachXeId = (await _chucNangService.GetThroughtSpecialRoute("name", "khach hang xem danh sach xe")).Id;
+            TaoThongBaoId = (await _chucNangService.GetThroughtSpecialRoute("name", "tao thong bao")).Id;
             try
             {
                 _ = _authenticationService.FettaiKhoanSession();
@@ -189,7 +192,6 @@ namespace GarageManagement.ViewModels
                 });
             }
 
-            // Thông báo thành công (giả định)
         }
 
         public async Task OnVaiTroPicked()
@@ -227,7 +229,7 @@ namespace GarageManagement.ViewModels
             QuanLiDanhSachTaiKhoanPermission = false;
             QuanLiLichSuPermission = false;
             KhachHangXemDanhSachXePermission = false;
-
+            TaoThongBaoPermission = false;
             // Áp dụng các quyền đã có
             foreach (var chucNangId in existingPermissions)
             {
@@ -254,6 +256,7 @@ namespace GarageManagement.ViewModels
                 else if (chucNangId == QuanLiDanhSachTaiKhoanId) QuanLiDanhSachTaiKhoanPermission = true;
                 else if (chucNangId == QuanLiLichSuId) QuanLiLichSuPermission = true;
                 else if (chucNangId == KhachHangXemDanhSachXeId) KhachHangXemDanhSachXePermission = true;
+                else if (chucNangId == TaoThongBaoId) TaoThongBaoPermission = true;
             }
         }
 

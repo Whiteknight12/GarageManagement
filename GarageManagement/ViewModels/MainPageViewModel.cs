@@ -78,6 +78,8 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty]
         private bool quanLiBaoCaoTonActive = false;
+        [ObservableProperty]
+        private bool homeActive = false;
 
         [ObservableProperty]
         private bool isCollapsed;
@@ -218,6 +220,7 @@ namespace GarageManagement.ViewModels
             _changePasswordPageViewmodel = changePasswordPageViewmodel; 
             _taiKhoanService = taiKhoaS; 
             _taoThongBaoPage = taoThongBaoPage;
+            _nhanSuMainPage = nhanSuMainPage;
             _ = LoadUserAsync();
             LoadPermissionAsync(); 
         }
@@ -358,7 +361,11 @@ namespace GarageManagement.ViewModels
         public void Navigate(string parameter)
         {
             TrangChuActive = parameter == "Home";
-
+            if(TrangChuActive == true)
+            {
+                _ = _nhanSuMainPage._viewModel.LoadAsync();
+                _nhanSuMainPage.SetAgain(); 
+            }
             TiepNhanXeActive = parameter == "TiepNhanXe";
             //if (TiepNhanXeActive == true)
             //{
@@ -480,6 +487,7 @@ namespace GarageManagement.ViewModels
             //{
             //    _ = _loaiTienCongPage._viewModel.LoadAsync();
             //}
+            
 
             QuanLiDanhSachLoaiTienCongActive = parameter == "QLDanhSachLoaiTienCong";
             if (QuanLiDanhSachLoaiTienCongActive == true)

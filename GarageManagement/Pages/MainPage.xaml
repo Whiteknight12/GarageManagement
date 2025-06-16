@@ -448,16 +448,15 @@
                        CornerRadius="{StaticResource CornerRadiusHandler}"
                        Padding="10"
                        Margin="5"
-                       HasShadow="True" IsVisible="{Binding TaoThongBaoPermission}">
+                       HasShadow="True" IsVisible="{Binding TaoThongBaoPermission}"
+                            Style="{StaticResource NavButtonStyle}">
                         <HorizontalStackLayout>
-                            <Image Source="dotnet_bot.png" WidthRequest="24" HeightRequest="24" Margin="5" />
-                            <Label Text="Tạo thông báo mới"
+                            <Label>🔔</Label>
+                            <Label Text=" Tạo thông báo mới"
                                TextColor="White"
                                FontSize="14"
                                FontFamily="OpenSans-Regular"
                                HorizontalOptions="Center"
-                               LineBreakMode="WordWrap"
-                               MaximumWidthRequest="120"
                                IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -639,7 +638,25 @@
                         <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Home" />
                     </Frame.GestureRecognizers>
                 </Frame>
-                <Button Text="⚙️ Đổi TK và MK" Command="{Binding ChangePasswordCommand}"/>
+                <Frame BackgroundColor="{Binding TrangChuActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+       CornerRadius="{StaticResource CornerRadiusHandler}"
+       Padding="10"
+       Margin="5"
+        Style="{StaticResource NavButtonStyle}"
+       HasShadow="True">
+                    <HorizontalStackLayout>
+                        <Label>🔒</Label>
+                        <Label Text=" Đổi TK và MK"
+               
+               TextColor="White"
+               FontSize="14"
+               FontFamily="OpenSans-Regular"
+               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangePasswordCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
             </VerticalStackLayout>
         </ScrollView>
 
