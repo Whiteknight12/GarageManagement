@@ -1,38 +1,38 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Data;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    
+    [Route("api/[controller]")]
     [ApiController]
-    public class BaoCaoDoanhThuThangController : BaseController<BaoCaoDoanhThuThang>
+    public class NguoiDungThongBaoController : BaseController<NguoiDungThongBao>
     {
-        public BaoCaoDoanhThuThangController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
+        public NguoiDungThongBaoController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
 
         [HttpGet]
-        public override async Task<ActionResult<IEnumerable<BaoCaoDoanhThuThang>>> GetAll()
+        public override async Task<ActionResult<IEnumerable<NguoiDungThongBao>>> GetAll()
         {
             return await base.GetAll();
         }
 
         [HttpGet("{id}")]
-        public override async Task<ActionResult<BaoCaoDoanhThuThang>> GetById(Guid id)
+        public override async Task<ActionResult<NguoiDungThongBao>> GetById(Guid id)
         {
             return await base.GetById(id);
         }
 
         [HttpPost]
-        public override async Task<ActionResult<BaoCaoDoanhThuThang>> Create([FromBody] BaoCaoDoanhThuThang entity)
+        public override async Task<ActionResult<NguoiDungThongBao>> Create([FromBody] NguoiDungThongBao entity)
         {
             return await base.Create(entity);
         }
 
         [HttpPut]
-        public override async Task<ActionResult> Update([FromBody] BaoCaoDoanhThuThang entity)
+        public override async Task<ActionResult> Update([FromBody] NguoiDungThongBao entity)
         {
             return await base.Update(entity);
         }

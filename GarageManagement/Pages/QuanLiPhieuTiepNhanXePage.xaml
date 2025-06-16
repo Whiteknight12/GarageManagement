@@ -291,13 +291,13 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
                 <!-- Close button -->
                 <Button Text="✕" Command="{Binding CloseRightPaneCommand}" HorizontalOptions="End" TextColor="{DynamicResource TextColor}" BackgroundColor="Transparent"/>
                 <Frame HasShadow="True"
-       Padding="20"
-       BackgroundColor="{DynamicResource CardBackgroundColor}">
+                   Padding="20"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}">
                     <Label Text="Chi tiết phiếu tiếp nhận" FontSize="20" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
                 </Frame>
                 <Frame HasShadow="True"
-       Padding="20"
-       BackgroundColor="{DynamicResource CardBackgroundColor}">
+                   Padding="20"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}">
                     <VerticalStackLayout Spacing="20">
                         <!-- Mã phiếu -->
                         <HorizontalStackLayout>
@@ -395,9 +395,6 @@ TextColor="{DynamicResource TextColor}" Margin="20"/>
 
             </VerticalStackLayout>
         </ScrollView>
-
-
-
     </Grid>
 </ContentView>
 

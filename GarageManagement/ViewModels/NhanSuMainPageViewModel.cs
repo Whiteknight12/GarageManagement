@@ -52,7 +52,8 @@ namespace GarageManagement.ViewModels
             SoDienThoai = result?.SoDienThoai ?? "";
             Email = result?.Email ?? "";
             HoVaTen = TenNguoiDung;
-            AvatarUrl = "male_staff_icon.png";
+            if (result?.GioiTinh == "Nam") AvatarUrl = "male_staff_icon.png";
+            else AvatarUrl = "female_staff_icon.png";
         }
     }
 }

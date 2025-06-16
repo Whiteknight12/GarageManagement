@@ -96,14 +96,6 @@
                     <Label HorizontalOptions="Center" Text="{Binding DiaChi, StringFormat='Địa chỉ: {0}'}" TextColor="{DynamicResource TextColor}"/>
                     <Label HorizontalOptions="Center" Text="{Binding SoDienThoai, StringFormat='Số điện thoại: {0}'}" TextColor="{DynamicResource TextColor}"/>
                     <Label HorizontalOptions="Center" Text="{Binding Email, StringFormat='Email: {0}'}" TextColor="{DynamicResource TextColor}"/>
-
-                    <Button Text="Cập nhật thông tin"
-                            HorizontalOptions="Center"
-                            BackgroundColor="#007788"
-                            TextColor="White"
-                            CornerRadius="10"
-                            Padding="10,5"
-                            Command="{Binding CapNhatThongTinCommand}" />
                 </StackLayout>
             </StackLayout>
         </Frame>

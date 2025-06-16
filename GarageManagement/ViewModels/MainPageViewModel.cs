@@ -106,6 +106,9 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private bool quanLiDanhSachLoaiTienCongActive = false;
 
+        [ObservableProperty]
+        private bool taoThongBaoActive = false;
+
         private readonly APIClientService<PhanQuyen> _phanQuyenService;
         private readonly APIClientService<ChucNang> _chucNangService;
         private readonly APIClientService<TaiKhoan> _taiKhoanService;
@@ -137,6 +140,7 @@ namespace GarageManagement.ViewModels
         private readonly ThemLoaiVatTuPhuTungPage _themLoaiVatTuPhuTungPage;
         private readonly BaoCaoDoanhSoListPage _baoCaoDoanhSoListPage;
         private readonly BaoCaoTonPage _baoCaoTonPage;
+        private readonly TaoThongBaoPage _taoThongBaoPage;
         
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
@@ -168,7 +172,8 @@ namespace GarageManagement.ViewModels
             BaoCaoTonPage baoCaoTonPage,
             APIClientService<PhanQuyen> phanQuyenService,
             APIClientService<ChucNang> chucNangService,
-            APIClientService<TaiKhoan> taiKhoaS)
+            APIClientService<TaiKhoan> taiKhoaS,
+            TaoThongBaoPage taoThongBaoPage)
         {
             _viewModel = viewModel;
             currentPageContent = new NhanSuMainPage(_viewModel);
@@ -206,6 +211,7 @@ namespace GarageManagement.ViewModels
             _phanQuyenService = phanQuyenService;
             _chucNangService = chucNangService;
             _taiKhoanService = taiKhoaS; 
+            _taoThongBaoPage = taoThongBaoPage;
             _ = LoadUserAsync();
             LoadPermissionAsync(); 
         }
@@ -260,6 +266,9 @@ namespace GarageManagement.ViewModels
         [ObservableProperty] private bool taoLapSection;
 
         [ObservableProperty] private bool khachHangSection;
+
+        [ObservableProperty] private bool taoThongBaoPermission;
+
         private async void LoadPermissionAsync()
         {
             await _authenticationServices.FettaiKhoanSession();
@@ -304,6 +313,7 @@ namespace GarageManagement.ViewModels
             QuanLiDanhSachTaiKhoanPermission = names.Contains("quan li danh sach tai khoan");
             QuanLiLichSuPermission = names.Contains("quan li lich su");
             KhachHangXemDanhSachXePermission = names.Contains("khach hang xem danh sach xe");
+            TaoThongBaoPermission = names.Contains("tao thong bao");
 
             QuanLiSection =
        QuanLiDanhSachXePermission
@@ -323,7 +333,8 @@ namespace GarageManagement.ViewModels
        TiepNhanXePermission
     || LapPhieuNhapPermission
     || LapPhieuSuaChuaPermission
-    || LapPhieuThuTienPermission;
+    || LapPhieuThuTienPermission
+    || TaoThongBaoPermission;
 
             QuanTriSection =
        PhanQuyenPermission
@@ -491,6 +502,15 @@ namespace GarageManagement.ViewModels
                 }
             }
 
+            TaoThongBaoActive = parameter == "TaoThongBao";
+            if (TaoThongBaoActive == true)
+            {
+                if (_taoThongBaoPage.BindingContext is TaoThongBaoPageViewModel viewModel)
+                {
+                    _=viewModel.LoadAsync();
+                }
+            }
+
             CurrentPageContent = parameter switch
             {
                 "Home" => new NhanSuMainPage(_viewModel),
@@ -516,6 +536,7 @@ namespace GarageManagement.ViewModels
                 "QLDanhSachLoaiTienCong" => _loaiTienCongPage,
                 "BaoCaoDoanhSoList" => _baoCaoDoanhSoListPage,
                 "QuanLiBaoCaoTon" => _baoCaoTonPage,
+                "TaoThongBao" => _taoThongBaoPage,
                 _ => new NhanSuMainPage(_viewModel)
             };
 
