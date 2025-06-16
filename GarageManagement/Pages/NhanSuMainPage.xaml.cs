@@ -1,4 +1,6 @@
-﻿using GarageManagement.ViewModels;
+﻿using APIClassLibrary;
+using APIClassLibrary.APIModels;
+using GarageManagement.ViewModels;
 
 namespace GarageManagement.Pages;
 
@@ -10,11 +12,15 @@ public partial class NhanSuMainPage : ContentView
     const float Lmin = 0.2f, Lmax = 0.75f;
     const int StopCount = 30;
 
-    public NhanSuMainPage(NhanSuMainPageViewModel viewModel)
+    private readonly APIClientService<NguoiDungThongBao> _ndtbService;
+
+    public NhanSuMainPage(NhanSuMainPageViewModel viewModel,
+        APIClientService<NguoiDungThongBao> ndtbService)
     {
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
+        _ndtbService = ndtbService;
 
         InitGradientStops(StopCount);
         StartClock();
@@ -62,7 +68,6 @@ public partial class NhanSuMainPage : ContentView
         });
     }
 
-    [Obsolete]
     protected override void OnParentSet()
     {
         base.OnParentSet();
@@ -71,6 +76,8 @@ public partial class NhanSuMainPage : ContentView
             _isAnimating = false;
             _isClockRunning = false;
         }
+        MessagingCenter.Subscribe<NhanSuMainPageViewModel>(this, "ScrollRight", (sender) => ScrollToRight());
+        MessagingCenter.Subscribe<NhanSuMainPageViewModel>(this, "ScrollLeft", (sender) => ScrollToLeft());
     }
 
     void StartClock()
@@ -98,5 +105,49 @@ public partial class NhanSuMainPage : ContentView
         base.OnSizeAllocated(width, height);
         if (width > 0 && height > 0)
             _ = _viewModel.LoadAsync();
+    }
+
+    public async void OnThongBaoCheckedChanged(object sender, EventArgs e)
+    {
+        if (sender is CheckBox checkbox && checkbox.BindingContext is ThongBao thongBao)
+        {
+            // Nếu đã đánh dấu là đã đọc và chưa có bản ghi thì mới tạo
+            if (checkbox.IsChecked)
+            {
+                var nguoiDungThongBao = new NguoiDungThongBao
+                {
+                    Id=Guid.NewGuid(),
+                    nguoiDungId = _viewModel.NguoiDungId,
+                    thongBaoId = thongBao.Id
+                };
+
+                try
+                {
+                    var result=await _ndtbService.Create(nguoiDungThongBao);
+                    thongBao.DaDoc = true;
+                    thongBao.Visible = false;
+                    thongBao.OnPropertyChanged(nameof(thongBao.DaDoc));
+                    thongBao.OnPropertyChanged(nameof(thongBao.Visible));
+                }
+                catch (Exception ex)
+                {
+                    //log e out
+                }
+            }
+        }
+    }
+
+    private async void ScrollToRight()
+    {
+        double currentX = ThongBaoScrollView.ScrollX;
+        await ThongBaoScrollView.ScrollToAsync(currentX + 250, 0, true); // scroll +250px
+    }
+
+    private async void ScrollToLeft()
+    {
+        double currentX = ThongBaoScrollView.ScrollX;
+        double newX = currentX - 250;
+        if (newX < 0) newX = 0;
+        await ThongBaoScrollView.ScrollToAsync(newX, 0, true);
     }
 }

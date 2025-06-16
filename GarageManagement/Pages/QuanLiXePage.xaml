@@ -51,78 +51,78 @@
 
                 <!-- ───── FILTER XE ───── -->
                 <Frame HasShadow="True"
-       Padding="20"
-       BackgroundColor="{DynamicResource CardBackgroundColor}">
+                   Padding="20"
+                   BackgroundColor="{DynamicResource CardBackgroundColor}">
 
                     <VerticalStackLayout Spacing="14" >
                         <HorizontalStackLayout>
                         <!-- Biển số -->
                         <HorizontalStackLayout Spacing="12">
                             <Label Text="Biển số:"
-                   WidthRequest="80"
-                   VerticalOptions="Center"
-                   TextColor="{DynamicResource TextColor}" />
+                               WidthRequest="80"
+                               VerticalOptions="Center"
+                               TextColor="{DynamicResource TextColor}" />
                             <Entry Placeholder="Lọc biển số"
-                   Text="{Binding BienSoFilter, Mode=TwoWay}"
-                   FontFamily="OpenSans-Regular"
-                   BackgroundColor="{DynamicResource BackgroundColor}"
-                   HeightRequest="42"
-                   WidthRequest="170" />
+                               Text="{Binding BienSoFilter, Mode=TwoWay}"
+                               FontFamily="OpenSans-Regular"
+                               BackgroundColor="{DynamicResource BackgroundColor}"
+                               HeightRequest="42"
+                               WidthRequest="170" />
                         </HorizontalStackLayout>
 
                         <!-- CCCD chủ xe -->
                         <HorizontalStackLayout Spacing="12">
                             <Label Text="CCCD:"
-                   WidthRequest="100"
-                   VerticalOptions="Center"
-                   TextColor="{DynamicResource TextColor}" 
+                                   WidthRequest="100"
+                                   VerticalOptions="Center"
+                                   TextColor="{DynamicResource TextColor}" 
                                    Padding="20"/>
                             <Entry Placeholder="Lọc CCCD"
-                   Text="{Binding CccdFilter, Mode=TwoWay}"
-                   FontFamily="OpenSans-Regular"
-                   BackgroundColor="{DynamicResource BackgroundColor}"
-                   HeightRequest="42"
-                   WidthRequest="200" />
+                               Text="{Binding CccdFilter, Mode=TwoWay}"
+                               FontFamily="OpenSans-Regular"
+                               BackgroundColor="{DynamicResource BackgroundColor}"
+                               HeightRequest="42"
+                               WidthRequest="200" />
                         </HorizontalStackLayout>
 
                         <!-- Hiệu xe -->
                         <HorizontalStackLayout Spacing="12">
                             <Label Text="Hiệu xe:"
-                   WidthRequest="100"
-                   VerticalOptions="Center"
-                   TextColor="{DynamicResource TextColor}" Padding="20"/>
+                               WidthRequest="100"
+                               VerticalOptions="Center"
+                               TextColor="{DynamicResource TextColor}" Padding="20"/>
                             <Picker ItemsSource="{Binding ListHieuXe}"
-                    SelectedItem="{Binding SelectedHieuXe}"
-                    FontFamily="OpenSans-Regular"
-                    HeightRequest="42"
-                    WidthRequest="170"
-                    TextColor="{DynamicResource TextColor}"
-                    BackgroundColor="{DynamicResource BackgroundColor}" />
+                                SelectedItem="{Binding SelectedHieuXe}"
+                                FontFamily="OpenSans-Regular"
+                                HeightRequest="42"
+                                WidthRequest="170"
+                                TextColor="{DynamicResource TextColor}"
+                                BackgroundColor="{DynamicResource BackgroundColor}" />
                         </HorizontalStackLayout>
                         </HorizontalStackLayout>
                         <!-- Tiền nợ -->
                         <HorizontalStackLayout Spacing="6">
                             <Label Text="Tiền nợ:"
-                   WidthRequest="80"
-                   VerticalOptions="Center"
-                   TextColor="{DynamicResource TextColor}" />
+                               WidthRequest="80"
+                               VerticalOptions="Center"
+                               TextColor="{DynamicResource TextColor}" />
                             <Entry Placeholder="Từ"
-                   Text="{Binding DebtFromText, Mode=TwoWay}"
-                   Keyboard="Numeric"
-                   FontFamily="OpenSans-Regular"
-                   BackgroundColor="{DynamicResource BackgroundColor}"
-                   HeightRequest="42"
-                   WidthRequest="90" />
+                               Text="{Binding DebtFromText, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               FontFamily="OpenSans-Regular"
+                               BackgroundColor="{DynamicResource BackgroundColor}"
+                               HeightRequest="42"
+                               WidthRequest="90" />
                             <Label Text="—"
-                   VerticalOptions="Center"
-                   TextColor="{DynamicResource TextColor}" />
+                               VerticalOptions="Center"
+                               TextColor="{DynamicResource TextColor}" />
                             <Entry Placeholder="Đến"
-                   Text="{Binding DebtToText, Mode=TwoWay}"
-                   Keyboard="Numeric"
-                   FontFamily="OpenSans-Regular"
-                   BackgroundColor="{DynamicResource BackgroundColor}"
-                   HeightRequest="42"
-                   WidthRequest="90" />
+                               Text="{Binding DebtToText, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               FontFamily="OpenSans-Regular"
+                               BackgroundColor="{DynamicResource BackgroundColor}"
+                               HeightRequest="42"
+                               WidthRequest="90" />
                         </HorizontalStackLayout>
                         
                     </VerticalStackLayout>
@@ -133,12 +133,12 @@
                 <HorizontalStackLayout Spacing="12" HorizontalOptions="Start">
                     <!-- Thêm -->
                     <Button Text="Thêm"
-Command="{Binding AddCommand}"
-BackgroundColor="#3B82F6"
-TextColor="White"
-HeightRequest="48"
-FontAttributes="Bold"
-FontFamily="OpenSans-SemiBold">
+                        Command="{Binding AddCommand}"
+                        BackgroundColor="#3B82F6"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroupList>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -159,12 +159,12 @@ FontFamily="OpenSans-SemiBold">
 
                     <!-- Bật / tắt chế độ xoá -->
                     <Button Text="{Binding IsDeleteMode, Converter={StaticResource DeleteModeTextConverter}}"
-Command="{Binding ToggleDeleteModeCommand}"
-BackgroundColor="#3B82F6"
-TextColor="White"
-HeightRequest="48"
-FontAttributes="Bold"
-FontFamily="OpenSans-SemiBold">
+                        Command="{Binding ToggleDeleteModeCommand}"
+                        BackgroundColor="#3B82F6"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroupList>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -185,13 +185,13 @@ FontFamily="OpenSans-SemiBold">
 
                     <!-- Xoá mục đã chọn -->
                     <Button Text="Xoá các mục đã chọn"
-Command="{Binding DeleteCommand}"
-IsVisible="{Binding IsDeleteMode}"
-BackgroundColor="#EF4444"
-TextColor="White"
-HeightRequest="48"
-FontAttributes="Bold"
-FontFamily="OpenSans-SemiBold">
+                        Command="{Binding DeleteCommand}"
+                        IsVisible="{Binding IsDeleteMode}"
+                        BackgroundColor="#EF4444"
+                        TextColor="White"
+                        HeightRequest="48"
+                        FontAttributes="Bold"
+                        FontFamily="OpenSans-SemiBold">
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroupList>
                                 <VisualStateGroup x:Name="CommonStates">
@@ -212,9 +212,9 @@ FontFamily="OpenSans-SemiBold">
                 </HorizontalStackLayout>
 
                 <Frame HasShadow="True"
-               BackgroundColor="{DynamicResource CardBackgroundColor}"
-               Padding="20"
-               CornerRadius="{StaticResource CornerRadiusHandler}">
+                    BackgroundColor="{DynamicResource CardBackgroundColor}"
+                    Padding="20"
+                    CornerRadius="{StaticResource CornerRadiusHandler}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -226,35 +226,35 @@ FontFamily="OpenSans-SemiBold">
                         </Grid.ColumnDefinitions>
                         <Label Text=""      Grid.Column="0"/>
                         <Label Text="Id" Grid.Column="1" 
-                       FontSize="14"
-                       FontAttributes="Bold" 
-                       FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}"
-                       HorizontalTextAlignment="Center"/>
+                           FontSize="14"
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"/>
                         <Label Text="Tên Xe" Grid.Column="2" 
-                       FontSize="14"
-                       FontAttributes="Bold" 
-                       FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}"
-                       HorizontalTextAlignment="Center"/>
+                           FontSize="14"
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"/>
                         <Label Text="Biển Số" Grid.Column="3" 
-                       FontSize="14"
-                       FontAttributes="Bold" 
-                       FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}"
-                       HorizontalTextAlignment="Center"/>
+                           FontSize="14"
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"/>
                         <Label Text="Chủ Xe" Grid.Column="4" 
-                       FontSize="14"
-                       FontAttributes="Bold" 
-                       FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}"
-                       HorizontalTextAlignment="Center"/>
+                           FontSize="14"
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"/>
                         <Label Text="Tiền Nợ" Grid.Column="5" 
-                       FontSize="14"
-                       FontAttributes="Bold" 
-                       FontFamily="OpenSans-SemiBold"
-                       TextColor="{DynamicResource TextColor}"
-                       HorizontalTextAlignment="Center"/>
+                           FontSize="14"
+                           FontAttributes="Bold" 
+                           FontFamily="OpenSans-SemiBold"
+                           TextColor="{DynamicResource TextColor}"
+                           HorizontalTextAlignment="Center"/>
                     </Grid>
                 </Frame>
 
@@ -262,10 +262,10 @@ FontFamily="OpenSans-SemiBold">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame HasShadow="True"
-                           BackgroundColor="{DynamicResource CardBackgroundColor}"
-                           Padding="20"
-                           CornerRadius="{StaticResource CornerRadiusHandler}"
-                           Margin="0,12,0,0">
+                               BackgroundColor="{DynamicResource CardBackgroundColor}"
+                               Padding="20"
+                               CornerRadius="{StaticResource CornerRadiusHandler}"
+                               Margin="0,12,0,0">
                                 <Grid BackgroundColor="{Binding IsAvailable, Converter={StaticResource AvailabilityToColorConverter}}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>

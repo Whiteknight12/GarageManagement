@@ -9,8 +9,11 @@ namespace WebAPI.Controllers
     [ApiController]
     public class NguoiDungThongBaoController : BaseController<NguoiDungThongBao>
     {
+        private readonly ApplicationDbContext _db;
+        
         public NguoiDungThongBaoController(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
+            _db = applicationDbContext;
         }
 
         [HttpGet]
@@ -23,6 +26,14 @@ namespace WebAPI.Controllers
         public override async Task<ActionResult<NguoiDungThongBao>> GetById(Guid id)
         {
             return await base.GetById(id);
+        }
+
+        [HttpGet("nguoiDungIdAndThongBaoId/{nguoiDungId}/{thongBaoId}")]
+        public async Task<ActionResult<NguoiDungThongBao>> getByNguoiDungIdAndThongBaoId(Guid nguoiDungId, Guid thongBaoId)
+        {
+            var result = _db.nguoiDungThongBaos.FirstOrDefault(u => u.nguoiDungId == nguoiDungId && u.thongBaoId == thongBaoId);
+            if (result is not null) return Ok(result);
+            return NotFound();
         }
 
         [HttpPost]

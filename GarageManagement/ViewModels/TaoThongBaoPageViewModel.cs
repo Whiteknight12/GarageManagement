@@ -3,13 +3,7 @@ using APIClassLibrary.APIModels;
 using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using GarageManagement.Pages;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
 {
@@ -56,6 +50,7 @@ namespace GarageManagement.ViewModels
                     Id = Guid.NewGuid(),
                     Content = NoiDungThongBao,
                     isForAll=true,
+                    taoVaoLuc=DateTime.UtcNow.ToLocalTime()
                 };
             }
             else
@@ -65,6 +60,7 @@ namespace GarageManagement.ViewModels
                     Id = Guid.NewGuid(),
                     Content = NoiDungThongBao,
                     NhomNguoiDungId = SelectedNhomNguoiDung.Id,
+                    taoVaoLuc = DateTime.UtcNow.ToLocalTime()
                 };
             }
             var createdThongBao = await _thongBaoService.Create(thongBao);
@@ -77,6 +73,8 @@ namespace GarageManagement.ViewModels
             {
                 await Shell.Current.DisplayAlert("Thông báo", "Tạo thông báo thất bại", "OK");
             }
+            SelectedNhomNguoiDung = null;
+            NoiDungThongBao = "";
         }
     }
 }

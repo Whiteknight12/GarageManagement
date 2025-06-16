@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Pages;
 using GarageManagement.Services;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
@@ -141,6 +142,7 @@ namespace GarageManagement.ViewModels
         private readonly BaoCaoDoanhSoListPage _baoCaoDoanhSoListPage;
         private readonly BaoCaoTonPage _baoCaoTonPage;
         private readonly TaoThongBaoPage _taoThongBaoPage;
+        private readonly NhanSuMainPage _nhanSuMainPage;
         
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
@@ -173,10 +175,11 @@ namespace GarageManagement.ViewModels
             APIClientService<PhanQuyen> phanQuyenService,
             APIClientService<ChucNang> chucNangService,
             APIClientService<TaiKhoan> taiKhoaS,
-            TaoThongBaoPage taoThongBaoPage)
+            TaoThongBaoPage taoThongBaoPage,
+            NhanSuMainPage nhanSuMainPage)
         {
             _viewModel = viewModel;
-            currentPageContent = new NhanSuMainPage(_viewModel);
+            currentPageContent = nhanSuMainPage;
             _tiepNhanXe = tiepNhanXe;
             _taoPhieuNhap = taoPhieuNhap;
             _taoPhieuSuaChua = taoPhieuSuaChua;
@@ -513,7 +516,7 @@ namespace GarageManagement.ViewModels
 
             CurrentPageContent = parameter switch
             {
-                "Home" => new NhanSuMainPage(_viewModel),
+                "Home" => _nhanSuMainPage,
                 "TiepNhanXe" => _tiepNhanXe,
                 "TaoPhieuSuaChua" => _taoPhieuSuaChua,
                 "TaoPhieuNhap" => _taoPhieuNhap,
@@ -537,7 +540,7 @@ namespace GarageManagement.ViewModels
                 "BaoCaoDoanhSoList" => _baoCaoDoanhSoListPage,
                 "QuanLiBaoCaoTon" => _baoCaoTonPage,
                 "TaoThongBao" => _taoThongBaoPage,
-                _ => new NhanSuMainPage(_viewModel)
+                _ => _nhanSuMainPage
             };
 
             if (IsRightPaneVisible) CloseRightPane();
