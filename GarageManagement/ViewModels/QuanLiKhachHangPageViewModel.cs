@@ -49,7 +49,7 @@ namespace GarageManagement.ViewModels
             _khachHangService = khachHangService;
             _authenticationService = authenticationService;
 
-            _ = LoadAsync();
+            //_ = LoadAsync();
 
             IsAddPaneVisible = false;
             IsDeleteMode = false;

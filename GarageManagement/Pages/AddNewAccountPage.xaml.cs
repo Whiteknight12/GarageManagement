@@ -33,15 +33,15 @@ public partial class AddNewAccountPage : ContentView
     {
         if (sender is Entry entry)
         {
-            var listTK = await _taiKhoanService.GetAll();
-            foreach (var item in listTK)
-            {
-                if (item.TenDangNhap==entry.Text)
-                {
-                    await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập đã tồn tại", "OK");
-                    return;
-                }
-            }
+            //var listTK = await _taiKhoanService.GetAll();
+            //foreach (var item in listTK)
+            //{
+            //    if (item.TenDangNhap==entry.Text)
+            //    {
+            //        await Shell.Current.DisplayAlert("Thông báo", "Tên đăng nhập đã tồn tại", "OK");
+            //        return;
+            //    }
+            //}
         }
     }
 }

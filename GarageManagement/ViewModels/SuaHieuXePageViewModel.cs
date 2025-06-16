@@ -59,6 +59,12 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Thông báo", "Không có thay đổi nào được thực hiện.", "OK");
                 return;
             }
+            var hxs = await _hieuXeService.GetAll(); 
+            if(hxs.Any(hx=>hx.TenHieuXe == TenHieuXe))
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Đã tồn tại, nhập tên khác", "OK");
+                return;
+            }
             var hieuXe=await _hieuXeService.GetByID(hieuXeID);
             hieuXe.TenHieuXe = TenHieuXe;
             await _hieuXeService.Update(hieuXe);

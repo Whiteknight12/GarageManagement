@@ -1,10 +1,12 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Services;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace GarageManagement.ViewModels
 {
@@ -43,7 +45,7 @@ namespace GarageManagement.ViewModels
         {
             _authenticationService = authenticationService;
             _nhanVienService = nhanVienService;
-            _ = LoadAsync();
+            //_ = LoadAsync();
             IsDeleteMode = false;
             IsDetailPaneVisible = false;
             IsEditing = false;
@@ -126,30 +128,105 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private async Task SaveDetailAsync()
+        private async Task SaveDetail()
         {
             if (SelectedNhanVien == null) return;
 
+            if (string.IsNullOrWhiteSpace(SelectedNhanVien.CCCD))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập CCCD", "OK");
+                return;
+            }
+
+            // 1. Validate CCCD chỉ số
+            var cccdPattern = new Regex(@"^\d+$");
+            if (!cccdPattern.IsMatch(SelectedNhanVien.CCCD))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "CCCD chỉ được chứa chữ số", "OK");
+                return;
+            }
+
+            // 2. Check bắt buộc nhập họ tên
+            if (string.IsNullOrWhiteSpace(SelectedNhanVien.HoTen))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập họ và tên", "OK");
+                return;
+            }
+            // 3. Validate họ tên
+            var namePattern = new Regex(@"^[\p{L}\s]+$");
+            if (!namePattern.IsMatch(SelectedNhanVien.HoTen))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Họ và tên chỉ được chứa chữ cái", "OK");
+                return;
+            }
+
+            // 4. Tuổi
+            if (string.IsNullOrWhiteSpace(SelectedNhanVien.Tuoi.ToString()))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập tuổi", "OK");
+                return;
+            }
+            if (!int.TryParse(SelectedNhanVien.Tuoi.ToString(), out var tuoiParsed) || tuoiParsed <= 0)
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Tuổi phải là số nguyên dương", "OK");
+                return;
+            }
+
+            // 5. Giới tính
+            if (string.IsNullOrWhiteSpace(SelectedNhanVien.GioiTinh))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng chọn giới tính", "OK");
+                return;
+            }
+
+            // 6. SĐT
+            if (string.IsNullOrWhiteSpace(SelectedNhanVien.SoDienThoai))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập số điện thoại", "OK");
+                return;
+            }
+            var phonePattern = new Regex(@"^\d{10,11}$");
+            if (!phonePattern.IsMatch(SelectedNhanVien.SoDienThoai))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Số điện thoại phải từ 10–11 chữ số", "OK");
+                return;
+            }
+
+            // 7. Email
+            if (string.IsNullOrWhiteSpace(SelectedNhanVien.Email))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập email", "OK");
+                return;
+            }
+            var emailPattern = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            if (!emailPattern.IsMatch(SelectedNhanVien.Email))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Email không đúng định dạng", "OK");
+                return;
+            }
+
+            // Nếu pass hết thì tạo mới hoặc cập nhật
             if (SelectedNhanVien.Id == Guid.Empty)
             {
-                // thêm mới
                 await _nhanVienService.Create(SelectedNhanVien);
             }
             else
             {
-                // cập nhật
                 await _nhanVienService.Update(SelectedNhanVien);
             }
-            // làm lại STT
+            var toast = Toast.Make("Lưu nhân viên thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
+            await toast.Show();
+
+            // Cập nhật lại STT và trạng thái editing
             for (int i = 0; i < ListNhanVien.Count; i++)
                 ListNhanVien[i].STT = i + 1;
 
-            // khoá ô nhập + chuyển về chế độ xem
             IsEditing = false;
-            IsNotEditing = true; 
-            await LoadAsync(); 
-
+            IsNotEditing = true;
+            CloseDetailPane();
+            await LoadAsync();
         }
+
 
         [RelayCommand]
         private void ToggleDeleteMode()
@@ -210,4 +287,4 @@ namespace GarageManagement.ViewModels
         }
 
     }
-}
+}   

@@ -55,7 +55,7 @@ namespace GarageManagement.ViewModels
             _carService = carService;
             _hieuXeService = hieuXeService;
             _chiTietService = chiTietService;
-            _ = LoadAsync();
+            //_ = LoadAsync();
             _baoCaoDoanhSoPageViewModel = baoCaoDoanhSoPageViewModel;
         }
 

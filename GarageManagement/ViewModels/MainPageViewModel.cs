@@ -253,6 +253,13 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty] private bool khachHangXemDanhSachXePermission;
 
+        [ObservableProperty] private bool quanLiSection;
+
+        [ObservableProperty] private bool quanTriSection;
+
+        [ObservableProperty] private bool taoLapSection;
+
+        [ObservableProperty] private bool khachHangSection;
         private async void LoadPermissionAsync()
         {
             await _authenticationServices.FettaiKhoanSession();
@@ -297,6 +304,36 @@ namespace GarageManagement.ViewModels
             QuanLiDanhSachTaiKhoanPermission = names.Contains("quan li danh sach tai khoan");
             QuanLiLichSuPermission = names.Contains("quan li lich su");
             KhachHangXemDanhSachXePermission = names.Contains("khach hang xem danh sach xe");
+
+            QuanLiSection =
+       QuanLiDanhSachXePermission
+    || QuanLiDanhSachHieuXePermission
+    || QuanLiDanhSachLoaiVatTuPermission
+    || QuanLiDanhSachLoaiTienCongPermission
+    || QuanLiNhanVienPermission
+    || QuanLiKhachHangPermission
+    || QuanLiPhieuNhapPermission
+    || QuanLiPhieuSuaChuaPermission
+    || QuanLiPhieuThuTienPermission
+    || QuanLiPhieuTiepNhanPermission
+    || QuanLiBaoCaoThangPermission
+    || QuanLiBaoCaoTonPermission;
+
+            TaoLapSection =
+       TiepNhanXePermission
+    || LapPhieuNhapPermission
+    || LapPhieuSuaChuaPermission
+    || LapPhieuThuTienPermission;
+
+            QuanTriSection =
+       PhanQuyenPermission
+    || ThayDoiThamSoPermission
+    || QuanLiDanhSachTaiKhoanPermission
+    || QuanLiLichSuPermission;
+
+            KhachHangSection =
+       QuanLiKhachHangPermission
+    || KhachHangXemDanhSachXePermission;
         }
 
 

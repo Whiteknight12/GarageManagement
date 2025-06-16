@@ -104,6 +104,33 @@ namespace GarageManagement.ViewModels
                 new ThamSo { Id = allThamSos[2].Id, TenThamSo = allThamSos[2].TenThamSo, GiaTri = allThamSos[2].GiaTri, MoTa = allThamSos[2].MoTa }
             };
         }
+
+        // dropdown cho VuotSoTienNo
+        public ObservableCollection<bool> BoolOptions { get; }
+            = new ObservableCollection<bool> { false, true };
+
+        [ObservableProperty]
+        private bool vuotSoTienNoSelectedBool;
+
+        partial void OnSelectedParameterChanged(ThamSo value)
+        {
+            // khi load lại 1 parameter
+            if (value?.TenThamSo == "VuotSoTienNo")
+            {
+                // nếu GiaTri == 1 → true, else false
+                VuotSoTienNoSelectedBool = value.GiaTri == 1;
+            }
+        }
+
+        partial void OnVuotSoTienNoSelectedBoolChanged(bool newValue)
+        {
+            // khi dropdown thay đổi, cập nhật lại GiaTri cho selectedParameter
+            if (SelectedParameter?.TenThamSo == "VuotSoTienNo")
+            {
+                SelectedParameter.GiaTri = newValue ? 1 : 0;
+                OnPropertyChanged(nameof(SelectedParameter));
+            }
+        }
     }
 }
 

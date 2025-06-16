@@ -151,14 +151,37 @@
                            FontAttributes="Bold"
                            FontFamily="OpenSans-Regular"
                            TextColor="{DynamicResource TextColor}"/>
-                    <Entry Text="{Binding SelectedParameter.GiaTri, Mode=TwoWay}"
-                           Keyboard="Numeric"
-                           FontSize="16"
-                           FontFamily="OpenSans-Regular"
-                           TextColor="{DynamicResource TextColor}"
-                           HeightRequest="48"
-                           Margin="0,5,0,0"
-                           HorizontalOptions="Fill"/>
+                    <Entry
+    Text="{Binding SelectedParameter.GiaTri, Mode=TwoWay}"
+    Keyboard="Numeric"
+    IsVisible="True">
+                        <Entry.Triggers>
+                            <DataTrigger
+      TargetType="Entry"
+      Binding="{Binding SelectedParameter.TenThamSo}"
+      Value="VuotSoTienNo">
+                                <!-- nếu TenThamSo == VuotSoTienNo thì ẩn Entry -->
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Entry.Triggers>
+                    </Entry>
+
+                    <!-- Dropdown True/False chỉ hiện khi VuotSoTienNo -->
+                    <Picker
+    ItemsSource="{Binding BoolOptions}"
+    SelectedItem="{Binding VuotSoTienNoSelectedBool, Mode=TwoWay}"
+    Title="Chọn True/False"
+    IsVisible="False">
+                        <Picker.Triggers>
+                            <DataTrigger
+      TargetType="Picker"
+      Binding="{Binding SelectedParameter.TenThamSo}"
+      Value="VuotSoTienNo">
+                                <!-- khi chọn đúng tham số VuotSoTienNo thì hiện Picker -->
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                        </Picker.Triggers>
+                    </Picker>
 
                     <Label Text="Mô tả:"
                            FontSize="16"
