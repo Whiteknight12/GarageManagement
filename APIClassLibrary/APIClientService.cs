@@ -53,6 +53,7 @@ namespace APIClassLibrary
             if (response.IsSuccessStatusCode) return await response.Content.ReadFromJsonAsync<T>();
             return null;
         }
+
         public async Task<List<T>?> GetListOnSpecialRequirement(string route)
         {
             var response = await _httpclient.GetAsync($"/api/{_endpoint}/{route}");
