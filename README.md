@@ -28,11 +28,7 @@ Download this project file directly [here](https://github.com/Whiteknight12/Gara
 ### 2. Install Sql Server Management Studio
 Download via [here](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) and enter Server name as _localhost_
 ![](https://i.ibb.co/mFr1GmDZ/Screenshot-2025-05-25-115516.png)
-### 3. Create database 
-Open Visual Studio and run ```update-database``` on Packet Manager Console 
-![](https://i.ibb.co/ymdKDNSX/Screenshot-2025-05-25-113406.png)
+### 3. Just run and enjoy the show!!!  
+Open Visual Studio and run this project instantly
 
-Or change direction to the solution folder in terminal and install EF Core CLI ``` dotnet tool install --global dotnet-ef
-``` then run ```dotnet ef database update```
-
-![](https://i.ibb.co/0pwMWNLC/Screenshot-2025-05-25-114458.png)
+![](https://iili.io/FCNI4Eu.png)
