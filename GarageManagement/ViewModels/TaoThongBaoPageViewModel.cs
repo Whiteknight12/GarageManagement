@@ -4,6 +4,7 @@ using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 
 namespace GarageManagement.ViewModels
 {
@@ -75,6 +76,7 @@ namespace GarageManagement.ViewModels
             }
             SelectedNhomNguoiDung = null;
             NoiDungThongBao = "";
+            MessagingCenter.Send(this, "NewThongBaoCreated");
         }
     }
 }

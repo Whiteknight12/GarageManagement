@@ -324,7 +324,7 @@
                     <Frame BackgroundColor="{Binding QuanLiBaoCaoTonActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                         CornerRadius="{StaticResource CornerRadiusHandler}"
                         Padding="10"
-                            Style="{StaticResource NavButtonStyle}"
+                        Style="{StaticResource NavButtonStyle}"
                         Margin="5"
                         HasShadow="True" IsVisible="{Binding QuanLiBaoCaoTonPermission}">
                         <HorizontalStackLayout>
@@ -338,6 +338,27 @@
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiBaoCaoTon" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Frame BackgroundColor="{Binding QuanLiThongBaoActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       Style="{StaticResource NavButtonStyle}"
+                       HasShadow="True" IsVisible="{Binding QuanLiThongBaoPermission}">
+                        <HorizontalStackLayout>
+                            <Label>📋</Label>
+                            <Label Text="Quản lí thông báo"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               HorizontalOptions="Center"
+                               LineBreakMode="WordWrap"
+                               MaximumWidthRequest="120"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                        </HorizontalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiThongBao" />
                         </Frame.GestureRecognizers>
                     </Frame>
                 </VerticalStackLayout>

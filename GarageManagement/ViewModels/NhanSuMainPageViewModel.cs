@@ -118,7 +118,11 @@ namespace GarageManagement.ViewModels
                         item.Visible = false;
                     }
                 }
-                DanhSachThongBao = new ObservableCollection<ThongBao>(listThongBao);
+                var sortedList = listThongBao
+                    .OrderBy(tb => tb.DaDoc ?? true) 
+                    .ThenByDescending(tb => tb.taoVaoLuc)
+                    .ToList();
+                DanhSachThongBao = new ObservableCollection<ThongBao>(sortedList);
             }
         }
 
