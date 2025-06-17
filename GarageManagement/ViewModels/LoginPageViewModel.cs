@@ -30,6 +30,8 @@ namespace GarageManagement.ViewModels
         private string password = string.Empty;
         [ObservableProperty]
         private bool isRememberMe;
+        [ObservableProperty]
+        private bool isLoading;
 
         public async void Init()
         {
@@ -45,9 +47,11 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         public async Task Login()
         {
+            IsLoading = true;
             var ok = await _authenticationService.Authentication(Username, Password);
             if (!ok || _authenticationService.CurrentRole is null)
             {
+                IsLoading = false;
                 await Shell.Current.DisplayAlert("Login Failed", "Tên đăng nhập hoặc mật khẩu không đúng", "OK");
                 return;
             }
@@ -68,6 +72,7 @@ namespace GarageManagement.ViewModels
             }
 
             // điều hướng vào app
+            IsLoading = false;
             await Shell.Current.GoToAsync(nameof(MainPage));
         }
 

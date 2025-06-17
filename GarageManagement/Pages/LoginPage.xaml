@@ -173,6 +173,14 @@
                             </VisualStateGroupList>
                         </VisualStateManager.VisualStateGroups>
                     </Button>
+
+                    <ActivityIndicator 
+                        IsRunning="{Binding IsLoading}" 
+                        IsVisible="{Binding IsLoading}" 
+                        Color="#10B981"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        HorizontalOptions="Center" />
                 </VerticalStackLayout>
             </Frame>
             

@@ -115,6 +115,20 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private bool quanLiThongBaoActive = false;
 
+        public bool IsAndroid => DeviceInfo.Platform == DevicePlatform.Android;
+
+        [ObservableProperty]
+        private bool isNavVisible;
+
+        [ObservableProperty]
+        private bool isWindowNavVisible;
+
+        [RelayCommand]
+        private void ToggleNav()
+        {
+            IsNavVisible = !IsNavVisible;
+        }
+
         private readonly APIClientService<PhanQuyen> _phanQuyenService;
         private readonly APIClientService<ChucNang> _chucNangService;
         private readonly APIClientService<TaiKhoan> _taiKhoanService;
@@ -229,6 +243,14 @@ namespace GarageManagement.ViewModels
             _nhanSuMainPage = nhanSuMainPage;
             _ = LoadUserAsync();
             LoadPermissionAsync(); 
+            if (IsAndroid)
+            {
+                IsWindowNavVisible = false;
+            }
+            else
+            {
+                IsWindowNavVisible = true;
+            }
         }
 
 
@@ -368,12 +390,12 @@ namespace GarageManagement.ViewModels
 
 
         [RelayCommand]
-        public void Navigate(string parameter)
+        public async Task Navigate(string parameter)
         {
             TrangChuActive = parameter == "Home";
             if(TrangChuActive == true)
             {
-                _ = _nhanSuMainPage._viewModel.LoadAsync();
+                await _nhanSuMainPage._viewModel.LoadAsync();
                 _nhanSuMainPage.SetAgain(); 
             }
             TiepNhanXeActive = parameter == "TiepNhanXe";
