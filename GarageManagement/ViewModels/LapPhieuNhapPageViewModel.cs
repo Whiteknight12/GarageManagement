@@ -78,10 +78,14 @@ namespace GarageManagement.ViewModels
             }
             if (listChiTiet.Any(d => (d.DonGia == null || d.SoLuong == null)))
             {
-                Shell.Current.DisplayAlert("Cảnh báo", "Không được bỏ trống SỐ LƯỢNG và ĐƠN GIÁ", "OK");
+                Shell.Current.DisplayAlert("Cảnh báo", "Không được bỏ trống SỐ LƯỢNG", "OK");
                 return;
             }
-            
+            if(listChiTiet.Any(t=>t.SoLuong == 0))
+            {
+                Shell.Current.DisplayAlert("Cảnh báo", "Không được nhập vật tư với số lượng bằng không", "OK");
+                return;
+            }
             var phieuNhapVatTu = new PhieuNhapVatTu
             {
                 Id = Guid.NewGuid(),
