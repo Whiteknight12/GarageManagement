@@ -89,7 +89,7 @@
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding ToggleXeSectionCommand}" CommandParameter="{Binding}" />
                                 </Frame.GestureRecognizers>
-                                <Grid>
+                                <Grid IsVisible="{OnPlatform Android=False Default=True}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="1.5*" />
                                         <ColumnDefinition Width="1.5*" />
@@ -109,6 +109,23 @@
                                        FontSize="16"
                                        TextColor="{DynamicResource TextColor}" />
                                 </Grid>
+                                <!-- Android form-style layout -->
+                                <VerticalStackLayout Spacing="5" IsVisible="{OnPlatform Android=True Default=False}">
+                                    <Label Text="Tên xe:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="{Binding Xe.Ten}" TextColor="{DynamicResource TextColor}" />
+
+                                    <Label Text="Hiệu xe:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="{Binding Xe.TenHieuXe}" TextColor="{DynamicResource TextColor}" />
+
+                                    <Label Text="Biển số:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="{Binding Xe.BienSo}" TextColor="{DynamicResource TextColor}" />
+
+                                    <Label Text="Tình trạng:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="{Binding Xe.TinhTrang}" TextColor="{DynamicResource TextColor}" />
+
+                                    <Label Text="Tiền nợ:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                                    <Label Text="{Binding Xe.TienNo, StringFormat='{0:N0} đ'}" TextColor="{DynamicResource TextColor}" />
+                                </VerticalStackLayout>
                             </Frame>
 
                             <VerticalStackLayout Spacing="10" IsVisible="{Binding IsExpanded}">

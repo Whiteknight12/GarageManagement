@@ -78,15 +78,34 @@ namespace GarageManagement.ViewModels
             var currentAccountId = currentAccount?.AccountId ?? Guid.Empty;
             
             var result = await _nhanVienService.GetThroughtSpecialRoute("TaiKhoanId", currentAccountId.ToString());
-            TenNguoiDung = result?.HoTen ?? "";
-            TenTaiKhoan = currentAccount?.Username ?? "";
-            Tuoi = result?.Tuoi.ToString() ?? "";
-            DiaChi = result?.DiaChi ?? "";
-            SoDienThoai = result?.SoDienThoai ?? "";
-            Email = result?.Email ?? "";
-            HoVaTen = TenNguoiDung;
-            if (result?.GioiTinh == "Nam") AvatarUrl = "male_staff_icon.png";
-            else AvatarUrl = "female_staff_icon.png";
+            if (result is not null)
+            {
+                TenNguoiDung = result?.HoTen ?? "";
+                TenTaiKhoan = currentAccount?.Username ?? "";
+                Tuoi = result?.Tuoi.ToString() ?? "";
+                DiaChi = result?.DiaChi ?? "";
+                SoDienThoai = result?.SoDienThoai ?? "";
+                Email = result?.Email ?? "";
+                HoVaTen = TenNguoiDung;
+                if (result?.GioiTinh == "Nam") AvatarUrl = "male_staff_icon.png";
+                else AvatarUrl = "female_staff_icon.png";
+            }
+            else
+            {
+                var kh = await _khService.GetThroughtSpecialRoute($"account-id/{currentAccountId}");
+                if (kh is not null)
+                {
+                    TenNguoiDung = kh?.HoVaTen ?? "";
+                    TenTaiKhoan = currentAccount?.Username ?? "";
+                    Tuoi = kh?.Tuoi.ToString() ?? "";
+                    DiaChi = kh?.DiaChi ?? "";
+                    SoDienThoai = kh?.SoDienThoai ?? "";
+                    Email = kh?.Email ?? "";
+                    HoVaTen = TenNguoiDung;
+                    if (kh?.GioiTinh == "Nam") AvatarUrl = "male_staff_icon.png";
+                    else AvatarUrl = "female_staff_icon.png";
+                }
+            }
 
             var listRole = await _roleService.GetAll();
             var role = listRole.FirstOrDefault(u => u.TenNhom == currentAccount?.Role);
@@ -122,7 +141,9 @@ namespace GarageManagement.ViewModels
                     .OrderBy(tb => tb.DaDoc ?? true) 
                     .ThenByDescending(tb => tb.taoVaoLuc)
                     .ToList();
-                DanhSachThongBao = new ObservableCollection<ThongBao>(sortedList);
+                DanhSachThongBao.Clear();
+                foreach (var item in sortedList)
+                    DanhSachThongBao.Add(item);
             }
         }
 
