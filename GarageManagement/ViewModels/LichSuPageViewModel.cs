@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace GarageManagement.ViewModels
@@ -38,10 +39,89 @@ namespace GarageManagement.ViewModels
         private Guid idValue;
 
         private readonly APIClientService<LichSu> _lichSuService;
+        private readonly APIClientService<Xe> _xeService;
+        private readonly APIClientService<PhieuTiepNhan> _phieuTiepNhanService;
+        private readonly APIClientService<ThamSo> _thamSoService;
+        private readonly APIClientService<HieuXe> _hieuXeService;
+        private readonly APIClientService<TienCong> _tienCongService;
+        private readonly APIClientService<PhieuSuaChua> _phieuSuaChuaService;
+        private readonly APIClientService<ChiTietPhieuSuaChua> _chiTietPhieuSuaChuaService;
+        private readonly APIClientService<VatTuPhuTung> _vatTuPhuTungService;
+        private readonly APIClientService<KhachHang> _khachHangService;
+        private readonly APIClientService<PhieuThuTien> _phieuThuTienService;
+        private readonly APIClientService<PhanQuyen> _phanQuyenService;
+        private readonly APIClientService<NhomNguoiDung> _nhomNguoiDungService;
+        private readonly APIClientService<ChucNang> _chucNangService;
+        private readonly APIClientService<TaiKhoan> _taiKhoanService;
+        private readonly APIClientService<NhanVien> _nhanVienService;
+        private readonly APIClientService<PhieuNhapVatTu> _phieuNhapVatTuService;
+        private readonly APIClientService<ChiTietPhieuNhapVatTu> _chiTietPhieuNhapVatTuService;
+        private readonly APIClientService<BaoCaoDoanhThuThang> _baoCaoDoanhThuThangService;
+        private readonly APIClientService<ChiTietBaoCaoDoanhThuThang> _chiTietBaoCaoDoanhThuThangService;
+        private readonly APIClientService<BaoCaoTon> _baoCaoTonService;
+        private readonly APIClientService<ChiTietBaoCaoTon> _chiTietBaoCaoTonService;
+        private readonly APIClientService<NoiDungSuaChua> _noiDungSuaChuaService;
+        private readonly APIClientService<VTPTChiTietPhieuSuaChua> _vtptChiTietPhieuSuaChuaService;
+        private readonly APIClientService<ThongBao> _thongBaoService;
+        private readonly APIClientService<NguoiDungThongBao> _nguoiDungThongBaoService;
 
-        public LichSuPageViewModel(APIClientService<LichSu> lichSuService)
+
+
+        public LichSuPageViewModel(
+        APIClientService<LichSu> lichSuService,
+        APIClientService<Xe> xeService,
+        APIClientService<PhieuTiepNhan> phieuTiepNhanService,
+        APIClientService<ThamSo> thamSoService,
+        APIClientService<HieuXe> hieuXeService,
+        APIClientService<TienCong> tienCongService,
+        APIClientService<PhieuSuaChua> phieuSuaChuaService,
+        APIClientService<ChiTietPhieuSuaChua> chiTietPhieuSuaChuaService,
+        APIClientService<VatTuPhuTung> vatTuPhuTungService,
+        APIClientService<KhachHang> khachHangService,
+        APIClientService<PhieuThuTien> phieuThuTienService,
+        APIClientService<PhanQuyen> phanQuyenService,
+        APIClientService<NhomNguoiDung> nhomNguoiDungService,
+        APIClientService<ChucNang> chucNangService,
+        APIClientService<TaiKhoan> taiKhoanService,
+        APIClientService<NhanVien> nhanVienService,
+        APIClientService<PhieuNhapVatTu> phieuNhapVatTuService,
+        APIClientService<ChiTietPhieuNhapVatTu> chiTietPhieuNhapVatTuService,
+        APIClientService<BaoCaoDoanhThuThang> baoCaoDoanhThuThangService,
+        APIClientService<ChiTietBaoCaoDoanhThuThang> chiTietBaoCaoDoanhThuThangService,
+        APIClientService<BaoCaoTon> baoCaoTonService,
+        APIClientService<ChiTietBaoCaoTon> chiTietBaoCaoTonService,
+        APIClientService<NoiDungSuaChua> noiDungSuaChuaService,
+        APIClientService<VTPTChiTietPhieuSuaChua> vtptChiTietPhieuSuaChuaService,
+        APIClientService<ThongBao> thongBaoService,
+        APIClientService<NguoiDungThongBao> nguoiDungThongBaoService
+    )
         {
-            _lichSuService= lichSuService;
+            _lichSuService = lichSuService;
+            _xeService = xeService;
+            _phieuTiepNhanService = phieuTiepNhanService;
+            _thamSoService = thamSoService;
+            _hieuXeService = hieuXeService;
+            _tienCongService = tienCongService;
+            _phieuSuaChuaService = phieuSuaChuaService;
+            _chiTietPhieuSuaChuaService = chiTietPhieuSuaChuaService;
+            _vatTuPhuTungService = vatTuPhuTungService;
+            _khachHangService = khachHangService;
+            _phieuThuTienService = phieuThuTienService;
+            _phanQuyenService = phanQuyenService;
+            _nhomNguoiDungService = nhomNguoiDungService;
+            _chucNangService = chucNangService;
+            _taiKhoanService = taiKhoanService;
+            _nhanVienService = nhanVienService;
+            _phieuNhapVatTuService = phieuNhapVatTuService;
+            _chiTietPhieuNhapVatTuService = chiTietPhieuNhapVatTuService;
+            _baoCaoDoanhThuThangService = baoCaoDoanhThuThangService;
+            _chiTietBaoCaoDoanhThuThangService = chiTietBaoCaoDoanhThuThangService;
+            _baoCaoTonService = baoCaoTonService;
+            _chiTietBaoCaoTonService = chiTietBaoCaoTonService;
+            _noiDungSuaChuaService = noiDungSuaChuaService;
+            _vtptChiTietPhieuSuaChuaService = vtptChiTietPhieuSuaChuaService;
+            _thongBaoService = thongBaoService;
+            _nguoiDungThongBaoService = nguoiDungThongBaoService;
         }
 
         public async Task LoadAsync()
@@ -128,30 +208,96 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private async Task Rollback(LichSu lichSu)
         {
-            //if (lichSu == null) return;
+            if (lichSu == null || string.IsNullOrEmpty(lichSu.LoaiThucTheLienQuan) || string.IsNullOrEmpty(lichSu.NoiDung))
+                return;
 
-            //switch (lichSu.HanhDong)
-            //{
-            //    case "Tạo mới":
-            //        await _lichSuService.Delete(lichSu.ThucTheLienQuanId);
-            //        break;
-            //    case "Cập nhật":
-            //        if (lichSu.BanSaoCu != null)
-            //        {
-            //            await _lichSuService.Update(lichSu.ThucTheLienQuanId, lichSu.BanSaoCu);
-            //        }
-            //        break;
-            //    case "Xóa":
-            //        if (lichSu.BanSaoCu != null)
-            //        {
-            //            await _lichSuService.Create(lichSu.BanSaoCu);
-            //        }
-            //        break;
-            //}
+            // Tìm type thực thể
+            var entityType = Type.GetType($"APIClassLibrary.APIModels.{lichSu.LoaiThucTheLienQuan}, APIClassLibrary");
+            if (entityType == null)
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Không tìm thấy loại thực thể.", "OK");
+                return;
+            }
 
-            //await Filter();
-            //await LoadAsync();
+            // Deserialize dữ liệu
+            var entity = JsonSerializer.Deserialize(lichSu.NoiDung, entityType);
+            if (entity == null)
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Không phân tích được nội dung.", "OK");
+                return;
+            }
+
+            // Lấy đúng DI tương ứng
+            object? service = lichSu.LoaiThucTheLienQuan switch
+            {
+                nameof(Xe) => _xeService,
+                nameof(PhieuTiepNhan) => _phieuTiepNhanService,
+                nameof(ThamSo) => _thamSoService,
+                nameof(HieuXe) => _hieuXeService,
+                nameof(TienCong) => _tienCongService,
+                nameof(PhieuSuaChua) => _phieuSuaChuaService,
+                nameof(ChiTietPhieuSuaChua) => _chiTietPhieuSuaChuaService,
+                nameof(VatTuPhuTung) => _vatTuPhuTungService,
+                nameof(KhachHang) => _khachHangService,
+                nameof(PhieuThuTien) => _phieuThuTienService,
+                nameof(PhanQuyen) => _phanQuyenService,
+                nameof(NhomNguoiDung) => _nhomNguoiDungService,
+                nameof(ChucNang) => _chucNangService,
+                nameof(TaiKhoan) => _taiKhoanService,
+                nameof(NhanVien) => _nhanVienService,
+                nameof(PhieuNhapVatTu) => _phieuNhapVatTuService,
+                nameof(ChiTietPhieuNhapVatTu) => _chiTietPhieuNhapVatTuService,
+                nameof(BaoCaoDoanhThuThang) => _baoCaoDoanhThuThangService,
+                nameof(ChiTietBaoCaoDoanhThuThang) => _chiTietBaoCaoDoanhThuThangService,
+                nameof(BaoCaoTon) => _baoCaoTonService,
+                nameof(ChiTietBaoCaoTon) => _chiTietBaoCaoTonService,
+                nameof(NoiDungSuaChua) => _noiDungSuaChuaService,
+                nameof(VTPTChiTietPhieuSuaChua) => _vtptChiTietPhieuSuaChuaService,
+                nameof(ThongBao) => _thongBaoService,
+                nameof(NguoiDungThongBao) => _nguoiDungThongBaoService,
+                _ => null
+            };
+
+            if (service == null)
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Không tìm thấy service phù hợp.", "OK");
+                return;
+            }
+
+            // Xác định hành động rollback
+            string methodName = lichSu.HanhDong switch
+            {
+                "Xóa" => "Create",         // rollback xóa = tạo lại
+                "Cập nhật" => "Update",    // rollback cập nhật = cập nhật lại
+                "Tạo mới" => "Delete",     // rollback tạo mới = xóa đi
+                _ => ""
+            };
+
+            if (string.IsNullOrEmpty(methodName))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Hành động không hợp lệ.", "OK");
+                return;
+            }
+
+            // Gọi method tương ứng
+            var method = service.GetType().GetMethod(methodName);
+            if (method == null)
+            {
+                await Shell.Current.DisplayAlert("Lỗi", $"Không tìm thấy phương thức {methodName}.", "OK");
+                return;
+            }
+
+            object[] parameters = methodName == "Delete"
+                ? new object[] { lichSu.ThucTheLienQuanId }
+                : new object[] { entity };
+
+            var result = method.Invoke(service, parameters);
+
+            if (result is Task task)
+                await task;
+
+            await Shell.Current.DisplayAlert("Thành công", "Rollback hoàn tất.", "OK");
+            await Filter();
         }
-
     }
 }

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:GarageManagement.ViewModels"
              x:Class="GarageManagement.Pages.LichSuPage"
+             x:Name="Lich"
              BackgroundColor="{DynamicResource BackgroundColor}">
 
     <Grid Padding="20" RowSpacing="10" MaximumWidthRequest="1000">
@@ -288,7 +289,7 @@
                                 BackgroundColor="Red"
                                 HeightRequest="36"
                                 CornerRadius="8"
-                                Command="{Binding BindingContext.RollbackCommand, Source={x:Reference Name=YourContentViewName}}"
+                                Command="{Binding BindingContext.RollbackCommand, Source={x:Reference Name=Lich}}"
                                 CommandParameter="{Binding}" />
 
                         </VerticalStackLayout>
