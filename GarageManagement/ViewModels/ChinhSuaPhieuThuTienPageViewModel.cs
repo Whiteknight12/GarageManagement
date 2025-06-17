@@ -11,6 +11,8 @@ namespace GarageManagement.ViewModels
 {
     public partial class ChinhSuaPhieuThuTienPageViewModel : BaseViewModel
     {
+
+        private double _originalSoTienThu;
         // dữ liệu gốc
         [ObservableProperty] private PhieuThuTien selectedPhieu;
 
@@ -41,13 +43,14 @@ namespace GarageManagement.ViewModels
         private readonly APIClientService<KhachHang> _khService;
         private readonly APIClientService<Xe> _xeService;
         private readonly APIClientService<HieuXe> _hieuXeService;
-
+        private readonly APIClientService<ThamSo> _thamSoService; 
         public bool available { get; set; } = false;
         public ChinhSuaPhieuThuTienPageViewModel(
             APIClientService<PhieuThuTien> phieuService,
             APIClientService<KhachHang> khService,
             APIClientService<Xe> xeService,
-            APIClientService<HieuXe> hieuXeService)
+            APIClientService<HieuXe> hieuXeService,
+            APIClientService<ThamSo> thamSoService)
         {
             _phieuService = phieuService;
             _khService = khService;
@@ -55,6 +58,7 @@ namespace GarageManagement.ViewModels
             _hieuXeService = hieuXeService;
             NgayThuTien = DateTime.Now;
             SelectedFilterField = "CCCD";
+            _thamSoService = thamSoService;
         }
 
         public async Task LoadAsync(Guid id)
@@ -94,7 +98,7 @@ namespace GarageManagement.ViewModels
             var hx = await _hieuXeService.GetByID(SelectedBienSo.HieuXeId);
             TenHieuXe = hx?.TenHieuXe ?? "";
             TienNoXeSelected = SelectedBienSo.TienNo.ToString() ?? "";
-
+            _originalSoTienThu = pt.SoTienThu;
             // 6) hiển thị ngày & số tiền
             NgayThuTien = pt.NgayThuTien;
             SoTienThu = pt.SoTienThu.ToString();
@@ -199,33 +203,60 @@ namespace GarageManagement.ViewModels
                     return;
                 }
             }
-            if (double.Parse(SoTienThu) > SelectedBienSo.TienNo)
+            if (double.Parse(SoTienThu) == _originalSoTienThu)
             {
-                await Shell.Current.DisplayAlert("Error", "Không được thu nhiều tiền hơn số tiền nợ của xe", "OK");
+                await Shell.Current.DisplayAlert("Error", "Số tiền thu mới phải khác số tiền thu cũ", "OK");
                 return;
             }
+            var ts = await _thamSoService.GetThroughtSpecialRoute("VuotSoTienNo"); 
+            if(ts.GiaTri == 0f && ts.GiaTri != 1f)
+            {
+                if (double.Parse(SoTienThu) > SelectedBienSo.TienNo)
+                {
+                    await Shell.Current.DisplayAlert("Error", "Không được thu nhiều tiền hơn số tiền nợ của xe", "OK");
+                    return;
+                }
+            }
+            
             if (string.IsNullOrEmpty(SelectedChuXe.Email) || SelectedChuXe.Email != Email)
             {
                 SelectedChuXe.Email = Email;
                 await _khService.Update(SelectedChuXe);
             }
+
+            // parse số tiền mới
+            var newThu = double.Parse(SoTienThu);
+
+            // bù nợ: add lại phần đã trừ cũ, rồi trừ phần mới
+            var diff = _originalSoTienThu - newThu;
+            SelectedChuXe.TienNo += diff;
+            SelectedBienSo.TienNo += diff;
+
+            // cập nhật dữ liệu lên server
+            if (SelectedChuXe.Email != Email)
+            {
+                SelectedChuXe.Email = Email;
+                await _khService.Update(SelectedChuXe);
+            }
+
             SelectedPhieu.XeId = SelectedBienSo.Id;
             SelectedPhieu.NgayThuTien = NgayThuTien;
             SelectedPhieu.KhachHangId = SelectedChuXe.Id;
-            SelectedPhieu.SoTienThu = double.Parse(SoTienThu); 
+            SelectedPhieu.SoTienThu = newThu;
             await _phieuService.Update(SelectedPhieu);
 
-            SelectedChuXe.TienNo -= double.Parse(SoTienThu);
-            SelectedBienSo.TienNo -= double.Parse(SoTienThu);
-            if (SelectedBienSo.TienNo == 0) SelectedBienSo.KhaDung = false;
             await _xeService.Update(SelectedBienSo);
             await _khService.Update(SelectedChuXe);
-            TienNoXeSelected = SelectedBienSo.TienNo.ToString() ?? "";
+
+            // sau khi update thành công, nếu muốn cho phép edit tiếp:
+            _originalSoTienThu = newThu;
+
             SoTienThu = string.Empty;
-            
+            TienNoXeSelected = SelectedBienSo.TienNo.ToString();
+
             var toast = Toast.Make("Thông tin phiếu thu đã được cập nhật.", CommunityToolkit.Maui.Core.ToastDuration.Short);
             await toast.Show();
-            MessagingCenter.Send(this, "PhieuThuTienUpdated"); 
+            MessagingCenter.Send(this, "PhieuThuTienUpdated");
         }
 
         [RelayCommand]

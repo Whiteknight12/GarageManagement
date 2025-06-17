@@ -1,38 +1,87 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:GarageManagement.Pages"
-             x:Class="GarageManagement.Pages.ChatBotPage"
              xmlns:service="clr-namespace:GarageManagement.Services"
-             BackgroundColor="{DynamicResource BackgroundColor}"
-             x:Name="ChatPage">
+             x:Class="GarageManagement.Pages.ChatBotPage"
+             BackgroundColor="{DynamicResource BackgroundColor}">
 
     <ContentView.Resources>
         <ResourceDictionary>
             <service:MessageColorConverter x:Key="BoolToColorConverter" />
+            <!-- Định nghĩa style cho Entry và Button -->
+            <Style x:Key="InputStyle" TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="{DynamicResource CardBackgroundColor}" />
+                <Setter Property="TextColor" Value="{DynamicResource TextColor}" />
+                
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="Margin" Value="0" />
+                
+            </Style>
+            <Style x:Key="SendButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="WidthRequest" Value="60" />
+            </Style>
         </ResourceDictionary>
     </ContentView.Resources>
-    
-    <VerticalStackLayout Padding="10" Spacing="10" MaximumWidthRequest="1000">
-        <CollectionView ItemsSource="{Binding Messages}" HeightRequest="500">
+
+    <Grid Padding="10" RowSpacing="10">
+        <!-- Row 0: Messages -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <CollectionView
+        Grid.Row="0"
+        ItemsSource="{Binding Messages}"
+        BackgroundColor="Transparent"
+        SelectionMode="None"
+        VerticalScrollBarVisibility="Always">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BackgroundColor="{Binding IsUser, Converter={StaticResource BoolToColorConverter}}"
-                           CornerRadius="12" Padding="8">
-                        <Label 
-                            TextColor="{DynamicResource TextColor}"
-                            Text="{Binding Text}" />
-                    </Frame>
+                    <!-- Dùng Grid để canh trái/phải -->
+                    <Grid Padding="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Bubble -->
+                        <Frame
+                Grid.Column="{Binding IsUser, Converter={StaticResource BoolToGridLengthConverter}, ConverterParameter='1;0;2'}"
+                BackgroundColor="{Binding IsUser, Converter={StaticResource BoolToColorConverter}}"
+                CornerRadius="16"
+                Padding="12"
+                HasShadow="False">
+                            <Label
+                  Text="{Binding Text}"
+                  TextColor="{DynamicResource TextColor}"
+                  LineBreakMode="WordWrap" />
+                        </Frame>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <HorizontalStackLayout Spacing="10">
-            <Entry x:Name="InputBox" 
-                   Placeholder="Nhập tin nhắn..." 
-                   Text="{Binding CurrentMessage, Mode=TwoWay}"
-                   TextColor="{DynamicResource TextColor}"
-                   HorizontalOptions="FillAndExpand"/>
-            <Button Text="Gửi" Command="{Binding SendMessageCommand}"/>
+        <!-- Row 1: Input area -->
+        <HorizontalStackLayout
+        Grid.Row="1"
+        Spacing="10"
+        Padding="0"
+        VerticalOptions="End">
+            <Entry
+          x:Name="InputBox"
+          Style="{StaticResource InputStyle}"
+          Placeholder="Nhập tin nhắn..."
+          Text="{Binding CurrentMessage, Mode=TwoWay}" />
+            <Button
+          Text="Gửi"
+          Style="{StaticResource SendButtonStyle}"
+          Command="{Binding SendMessageCommand}" />
         </HorizontalStackLayout>
-    </VerticalStackLayout>
+    </Grid>
+
 </ContentView>

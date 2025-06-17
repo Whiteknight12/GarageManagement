@@ -1,5 +1,6 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Services;
@@ -10,6 +11,7 @@ namespace GarageManagement.ViewModels
 {
     public partial class PhanQuyenPageViewModel : BaseViewModel
     {
+        [ObservableProperty] private string newVaiTro; 
         private readonly APIClientService<PhanQuyen> _phanQuyenService;
         private readonly APIClientService<NhomNguoiDung> _nhomNguoiDungService;
         private readonly AuthenticationService _authenticationService;
@@ -158,11 +160,31 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
+        private async Task Create()
+        {
+            if (string.IsNullOrEmpty(NewVaiTro))
+            {
+                await Shell.Current.DisplayAlert("Cảnh báo", "Tên trống, không thể thêm", "OK");
+                return;
+            }
+            var all = await _nhomNguoiDungService.GetAll();
+            if (all.Any(n => n.TenNhom.ToLower().TrimStart().TrimEnd().Equals(NewVaiTro.ToLower().TrimStart().TrimEnd())))
+            {
+                await Shell.Current.DisplayAlert("Cảnh báo", "Vai trò đã tồn tại, không thể thêm", "OK");
+                return;
+            }
+            await _nhomNguoiDungService.Create(new NhomNguoiDung { Id = Guid.NewGuid(), TenNhom = NewVaiTro });
+            NewVaiTro = string.Empty;
+            await LoadAsync();
+            Toast.Make("Thêm nhóm người dùng mới thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
+        }
+
+        [RelayCommand]
         public async Task SavePermissions()
         {
             if (nhomNguoiDung.Id == Guid.Empty)
             {
-                // Thông báo lỗi: Chưa chọn vai trò
+                await Shell.Current.DisplayAlert("Cảnh báo", "Chưa chọn vai trò", "OK");
                 return;
             }
 
@@ -259,6 +281,70 @@ namespace GarageManagement.ViewModels
                 else if (chucNangId == TaoThongBaoId) TaoThongBaoPermission = true;
             }
         }
+        [RelayCommand]
+        public async Task EditRole()
+        {
+            // 1. Check đã chọn role chưa
+            if (nhomNguoiDung == null || nhomNguoiDung.Id == Guid.Empty)
+            {
+                await Shell.Current.DisplayAlert("Cảnh báo", "Chưa chọn vai trò để sửa", "OK");
+                return;
+            }
 
+            // 2. Check tên mới có hợp lệ không
+            if (string.IsNullOrWhiteSpace(NewVaiTro))
+            {
+                await Shell.Current.DisplayAlert("Cảnh báo", "Tên vai trò không được để trống", "OK");
+                return;
+            }
+
+            // 3. Check trùng tên với role khác
+            if (RoleList.Any(r =>
+                r.Id != nhomNguoiDung.Id &&
+                r.TenNhom.Trim().ToLower() == NewVaiTro.Trim().ToLower()))
+            {
+                await Shell.Current.DisplayAlert("Cảnh báo", "Tên vai trò đã tồn tại", "OK");
+                return;
+            }
+
+            // 4. Cập nhật lên server
+            nhomNguoiDung.TenNhom = NewVaiTro.Trim();
+            await _nhomNguoiDungService.Update(nhomNguoiDung);
+
+            // 5. Thông báo & reload
+            await Shell.Current.DisplayAlert("Thành công", "Cập nhật vai trò thành công", "OK");
+            NewVaiTro = string.Empty;
+            await LoadAsync();
+        }
+
+        [RelayCommand]
+        public async Task DeleteRole()
+        {
+            // 1. Check đã chọn role chưa
+            if (nhomNguoiDung == null || nhomNguoiDung.Id == Guid.Empty)
+            {
+                await Shell.Current.DisplayAlert("Cảnh báo", "Chưa chọn vai trò để xóa", "OK");
+                return;
+            }
+
+            // 2. Xác nhận xóa
+            bool ok = await Shell.Current.DisplayAlert(
+                "Xác nhận xóa",
+                $"Bạn có chắc muốn xóa vai trò “{nhomNguoiDung.TenNhom}” không?",
+                "Xóa",
+                "Hủy"
+            );
+            if (!ok) return;
+
+            // 3. Xóa trên server
+            await _nhomNguoiDungService.Delete(nhomNguoiDung.Id);
+
+            // 4. Thông báo & reset UI
+            await Shell.Current.DisplayAlert("Thành công", "Xóa vai trò thành công", "OK");
+            NewVaiTro = string.Empty;
+            nhomNguoiDung = new NhomNguoiDung();
+            await LoadAsync();
+        }
     }
 }
+    

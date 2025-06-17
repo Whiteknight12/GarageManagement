@@ -356,8 +356,8 @@ FontFamily="OpenSans-SemiBold"/>
             FontAttributes="Bold"
             TextColor="{DynamicResource TextColor}" />
                             <Entry
-            Text="{Binding SelectedNhanVien.Tuoi, Mode=TwoWay}"
-            Keyboard="Numeric"
+             Text="{Binding TuoiInput, Mode=TwoWay}"
+   
             FontSize="16"
             TextColor="{DynamicResource TextColor}"
                                 BackgroundColor="{DynamicResource BackgroundColor}"/>

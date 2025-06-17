@@ -38,7 +38,7 @@ namespace WebAPI.Controllers
             user.MatKhau = GenerateRandomPassword(10);
             _dbContext.taiKhoans.Update(user);
             await _dbContext.SaveChangesAsync();
-            return Ok(user.MatKhau); 
+            return Ok("Mật khẩu đã được reset. Đây là mật khẩu tạm thời của bạn: " + user.MatKhau);  
         }
         
 

@@ -205,7 +205,7 @@ namespace GarageManagement.ViewModels
             {
                 Id = Guid.NewGuid(),
                 NgayThuTien = NgayThuTien,
-                SoTienThu = double.Parse(SoTienThu),
+                SoTienThu = double.Parse(SoTienThu),       
                 XeId = SelectedBienSo.Id,
                 KhachHangId = SelectedChuXe.Id
             });

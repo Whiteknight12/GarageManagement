@@ -115,11 +115,7 @@ namespace GarageManagement.ViewModels
             var win = new Window
             {
                 Page = wrapper,
-                Title = "Tạo sửa chữa mới",
-                MaximumHeight = 600,
-                MaximumWidth = 800,
-                MinimumHeight = 600,
-                MinimumWidth = 800
+                Title = "Tạo sửa chữa mới"
             };
             _taoPhieuSuaChuaPageViewModel.OnPhieuSuaChuaAdded = async (PhieuSuaChua phieuSuaChua) =>
             {
@@ -146,9 +142,7 @@ namespace GarageManagement.ViewModels
             var newWindow = new Window
             {
                 Page = wrapper,
-                Title = "Sửa phiếu sữa chữa",
-                MinimumHeight = 1000,
-                MinimumWidth = 1200
+                Title = "Sửa phiếu sữa chữa"
             };
             Application.Current.OpenWindow(newWindow);
         }

@@ -181,6 +181,21 @@ namespace GarageManagement.ViewModels
                 await Shell.Current.DisplayAlert("Không thể tạo báo cáo", "Tháng hiện tại chưa kết thúc. Vui lòng chọn tháng trước đó.", "OK");
                 return;
             }
+            var lbc = await _baoCaoService.GetAll();
+            if (lbc.Any(bc=>bc.Thang == SelectedMonth && bc.Nam == SelectedYear))
+            {
+                bool replace = await Shell.Current.DisplayAlert(
+                    "Báo cáo đã tồn tại",
+                    $"Báo cáo tháng {SelectedMonth}/{SelectedYear} đã tồn tại. Bạn có muốn xóa báo cáo cũ và tạo mới?",
+                    "OK",    // nút đồng ý
+                    "Hủy"    // nút hủy
+                    );
+                if (!replace)
+                    return;
+            }
+
+            var toRemove = lbc.FirstOrDefault(bc => bc.Thang == SelectedMonth && bc.Nam == SelectedYear);
+            await _baoCaoService.Delete(toRemove.Id);
 
             var listPhieu = await _phieuSuaChuaService.GetListOnSpecialRequirement($"GetListByMonthAndYear/{SelectedMonth}/{SelectedYear}")
                             ?? new List<PhieuSuaChua>();
