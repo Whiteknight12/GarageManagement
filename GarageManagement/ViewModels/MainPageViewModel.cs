@@ -110,6 +110,9 @@ namespace GarageManagement.ViewModels
         [ObservableProperty]
         private bool taoThongBaoActive = false;
 
+        [ObservableProperty]
+        private bool quanLiThongBaoActive = false;
+
         private readonly APIClientService<PhanQuyen> _phanQuyenService;
         private readonly APIClientService<ChucNang> _chucNangService;
         private readonly APIClientService<TaiKhoan> _taiKhoanService;
@@ -143,6 +146,7 @@ namespace GarageManagement.ViewModels
         private readonly BaoCaoTonPage _baoCaoTonPage;
         private readonly TaoThongBaoPage _taoThongBaoPage;
         private readonly NhanSuMainPage _nhanSuMainPage;
+        private readonly QuanLiThongBaoPage _quanLiThongBaoPage;
         
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
@@ -176,7 +180,8 @@ namespace GarageManagement.ViewModels
             APIClientService<ChucNang> chucNangService,
             APIClientService<TaiKhoan> taiKhoaS,
             TaoThongBaoPage taoThongBaoPage,
-            NhanSuMainPage nhanSuMainPage)
+            NhanSuMainPage nhanSuMainPage,
+            QuanLiThongBaoPage quanLiThongBaoPage)
         {
             _viewModel = viewModel;
             currentPageContent = nhanSuMainPage;
@@ -215,6 +220,7 @@ namespace GarageManagement.ViewModels
             _chucNangService = chucNangService;
             _taiKhoanService = taiKhoaS; 
             _taoThongBaoPage = taoThongBaoPage;
+            _quanLiThongBaoPage = quanLiThongBaoPage;
             _ = LoadUserAsync();
             LoadPermissionAsync(); 
         }
@@ -272,6 +278,8 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty] private bool taoThongBaoPermission;
 
+        [ObservableProperty] private bool quanLiThongBaoPermission;
+
         private async void LoadPermissionAsync()
         {
             await _authenticationServices.FettaiKhoanSession();
@@ -317,37 +325,39 @@ namespace GarageManagement.ViewModels
             QuanLiLichSuPermission = names.Contains("quan li lich su");
             KhachHangXemDanhSachXePermission = names.Contains("khach hang xem danh sach xe");
             TaoThongBaoPermission = names.Contains("tao thong bao");
+            QuanLiThongBaoPermission = names.Contains("quan li thong bao");
 
             QuanLiSection =
-       QuanLiDanhSachXePermission
-    || QuanLiDanhSachHieuXePermission
-    || QuanLiDanhSachLoaiVatTuPermission
-    || QuanLiDanhSachLoaiTienCongPermission
-    || QuanLiNhanVienPermission
-    || QuanLiKhachHangPermission
-    || QuanLiPhieuNhapPermission
-    || QuanLiPhieuSuaChuaPermission
-    || QuanLiPhieuThuTienPermission
-    || QuanLiPhieuTiepNhanPermission
-    || QuanLiBaoCaoThangPermission
-    || QuanLiBaoCaoTonPermission;
+                   QuanLiDanhSachXePermission
+                || QuanLiDanhSachHieuXePermission
+                || QuanLiDanhSachLoaiVatTuPermission
+                || QuanLiDanhSachLoaiTienCongPermission
+                || QuanLiNhanVienPermission
+                || QuanLiKhachHangPermission
+                || QuanLiPhieuNhapPermission
+                || QuanLiPhieuSuaChuaPermission
+                || QuanLiPhieuThuTienPermission
+                || QuanLiPhieuTiepNhanPermission
+                || QuanLiBaoCaoThangPermission
+                || QuanLiThongBaoPermission
+                || QuanLiBaoCaoTonPermission;
 
             TaoLapSection =
-       TiepNhanXePermission
-    || LapPhieuNhapPermission
-    || LapPhieuSuaChuaPermission
-    || LapPhieuThuTienPermission
-    || TaoThongBaoPermission;
+                   TiepNhanXePermission
+                || LapPhieuNhapPermission
+                || LapPhieuSuaChuaPermission
+                || LapPhieuThuTienPermission
+                || TaoThongBaoPermission;
 
             QuanTriSection =
-       PhanQuyenPermission
-    || ThayDoiThamSoPermission
-    || QuanLiDanhSachTaiKhoanPermission
-    || QuanLiLichSuPermission;
+                    PhanQuyenPermission
+                || ThayDoiThamSoPermission
+                || QuanLiDanhSachTaiKhoanPermission
+                || QuanLiLichSuPermission;
 
             KhachHangSection =
-       QuanLiKhachHangPermission
-    || KhachHangXemDanhSachXePermission;
+                   QuanLiKhachHangPermission
+                || KhachHangXemDanhSachXePermission;
         }
 
 
@@ -514,6 +524,15 @@ namespace GarageManagement.ViewModels
                 }
             }
 
+            QuanLiThongBaoActive = parameter == "QuanLiThongBao";
+            if (QuanLiThongBaoActive == true)
+            {
+                if (_quanLiThongBaoPage.BindingContext is QuanLiThongBaoPageViewModel viewModel)
+                {
+                    _= viewModel.LoadAsync();
+                }
+            }
+
             CurrentPageContent = parameter switch
             {
                 "Home" => _nhanSuMainPage,
@@ -540,6 +559,7 @@ namespace GarageManagement.ViewModels
                 "BaoCaoDoanhSoList" => _baoCaoDoanhSoListPage,
                 "QuanLiBaoCaoTon" => _baoCaoTonPage,
                 "TaoThongBao" => _taoThongBaoPage,
+                "QuanLiThongBao"=>_quanLiThongBaoPage,
                 _ => _nhanSuMainPage
             };
 

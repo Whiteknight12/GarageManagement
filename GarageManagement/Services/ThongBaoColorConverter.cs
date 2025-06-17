@@ -12,7 +12,7 @@ namespace GarageManagement.Services
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool daDoc = (bool)value;
-            return daDoc ? Color.FromArgb("#D1D5DB") : Color.FromArgb("#2563EB"); // Xám vs Xanh
+            return daDoc ? Color.FromArgb("#E5E7EB") : Color.FromArgb("#3B82F6");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

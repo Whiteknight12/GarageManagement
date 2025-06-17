@@ -14,10 +14,6 @@
                        EndPoint="1.5,1.5"/>
     </ContentView.Background>
 
-    <ContentView.Resources>
-        <service:ThongBaoColorConverter x:Key="ThongBaoColorConverter"/>
-    </ContentView.Resources>
-
     <!-- Cuộn nếu nội dung vượt khung -->
     <ScrollView MaximumWidthRequest="1000">
         <VerticalStackLayout Spacing="20" Padding="20">
@@ -196,6 +192,10 @@
                                 <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal"/>
                             </CollectionView.ItemsLayout>
 
+                            <CollectionView.Resources>
+                                <service:ThongBaoColorConverter x:Key="ThongBaoColorConverter"/>
+                            </CollectionView.Resources>
+
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Frame Padding="10"
@@ -213,7 +213,7 @@
                                                Text="{Binding Content}"
                                                FontSize="14"
                                                LineBreakMode="WordWrap"
-                                               TextColor="White"
+                                               TextColor="Black"
                                                HorizontalOptions="Fill"
                                                VerticalOptions="Start" />
 
@@ -223,19 +223,30 @@
                                                 BackgroundColor="Transparent" />
 
                                             <!-- CheckBox + thời gian -->
-                                            <HorizontalStackLayout Grid.Row="2"
-                                               HorizontalOptions="Fill"
-                                               VerticalOptions="End">
-                                                <CheckBox IsChecked="{Binding DaDoc, Mode=TwoWay}" 
-                                                  Color="White"
-                                                  IsVisible="{Binding Visible}"
-                                                  CheckedChanged="OnThongBaoCheckedChanged" />
+                                            <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Padding="0,5,0,0">
+                                                <!-- Cột trái: CheckBox và nhãn -->
+                                                <VerticalStackLayout Spacing="2" Grid.Column="0">
+                                                    <Label Text="Đánh dấu là đã đọc"
+                                                       FontSize="12"
+                                                       IsVisible="{Binding Visible}"
+                                                       TextColor="White"
+                                                       HorizontalOptions="Start"/>
+                                                    <CheckBox IsChecked="{Binding DaDoc, Mode=TwoWay}" 
+                                                      Color="White"
+                                                      IsVisible="{Binding Visible}"
+                                                      CheckedChanged="OnThongBaoCheckedChanged" />
+                                                </VerticalStackLayout>
 
-                                                <Label Text="{Binding taoVaoLuc, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
+                                                <!-- Cột phải: Thời gian nằm sát bên phải -->
+                                                <Label Grid.Column="1"
+                                                   Text="{Binding taoVaoLuc, StringFormat='{0:dd/MM/yyyy HH:mm}'}"
                                                    FontSize="12"
-                                                   TextColor="White"
-                                                   VerticalOptions="Center"/>
-                                            </HorizontalStackLayout>
+                                                   TextColor="Black"
+                                                   VerticalOptions="End"
+                                                   HorizontalOptions="End"
+                                                   Margin="10,0,0,0"/>
+                                            </Grid>
+
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
