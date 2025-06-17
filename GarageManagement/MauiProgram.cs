@@ -107,10 +107,12 @@ public static class MauiProgram
         builder.Services.AddTransient<SuaPhieuSuaChuaPage>();
         builder.Services.AddTransient<ChinhSuaPhieuNhapPage>();
         builder.Services.AddTransient<ChinhSuaPhieuThuTienPage>();
+        builder.Services.AddTransient<ChangePasswordPage>();
         builder.Services.AddTransient<TaoThongBaoPage>();
         builder.Services.AddTransient<QuanLiThongBaoPage>();
         builder.Services.AddTransient<ChiTietThongBaoPage>();
 
+        builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddTransient<TaoPhieuSuaChuaPageViewModel>();
 		builder.Services.AddTransient<ThuTienPageViewModel>();
 		builder.Services.AddTransient<BaoCaoDoanSoPageViewModel>();
@@ -153,6 +155,7 @@ public static class MauiProgram
         builder.Services.AddTransient<LichSuPageViewModel>();
         builder.Services.AddTransient<BaoCaoTonViewModel>();
         builder.Services.AddTransient<SuaPhieuSuaChuaPageViewModel>();
+        builder.Services.AddTransient<ChangePasswordPageViewmodel>();
         builder.Services.AddTransient<TaoThongBaoPageViewModel>();
         builder.Services.AddTransient<QuanLiThongBaoPageViewModel>();
         builder.Services.AddTransient<ChiTietThongBaoPageViewModel>();
@@ -163,6 +166,12 @@ public static class MauiProgram
             logging.AddDebug();   // Ghi log ra debug window
             logging.SetMinimumLevel(LogLevel.Information); // Ghi tất cả log từ Information trở lên
         });
+
+        builder.Services
+       .Configure<SmtpOptions>(builder.Configuration.GetSection("Smtp"));
+     
+        builder.Services.AddSingleton<IEmailService, SmtpEmailService>();
+
 
 #if DEBUG
         builder.Logging.AddDebug();

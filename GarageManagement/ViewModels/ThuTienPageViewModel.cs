@@ -147,7 +147,7 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private async Task XacNhan()
         {
-            var thamso = _thamSoService.GetThroughtSpecialRoute("VuotSoTienNo");  
+            var thamso = await _thamSoService.GetThroughtSpecialRoute("VuotSoTienNo");  
             if (string.IsNullOrEmpty(Email))
             {
                 await Shell.Current.DisplayAlert("Error", "Không được bỏ trống email", "OK");
@@ -186,11 +186,16 @@ namespace GarageManagement.ViewModels
                     return;
                 }
             }
-            if (double.Parse(SoTienThu) > SelectedBienSo.TienNo)
+            if(thamso.GiaTri == 0f && thamso.GiaTri != 1f)
             {
-                await Shell.Current.DisplayAlert("Error", "Không được thu nhiều tiền hơn số tiền nợ của chủ xe", "OK");
-                return;
+
+                if (double.Parse(SoTienThu) > SelectedBienSo.TienNo)
+                {
+                    await Shell.Current.DisplayAlert("Error", "Không được thu nhiều tiền hơn số tiền nợ", "OK");
+                    return;
+                }
             }
+
             if (string.IsNullOrEmpty(SelectedChuXe.Email) || SelectedChuXe.Email != Email)
             {
                 SelectedChuXe.Email = Email;

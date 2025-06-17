@@ -93,6 +93,9 @@ public partial class PhanQuyenPage : ContentView
                 case "KhachHangXemDanhSachXeCheckBox":
                     chucNangId = _viewModel.KhachHangXemDanhSachXeId;
                     break;
+                case "TaoThongBaoCheckBox":
+                    chucNangId = _viewModel.TaoThongBaoId;
+                    break;
             }
 
             if (chucNangId != Guid.Empty)

@@ -179,7 +179,7 @@
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QLDanhSachLoaiTienCong" />
                         </Frame.GestureRecognizers>
-                    </Frame>    
+                    </Frame>
                     <Frame BackgroundColor="{Binding QuanLiNhanVienActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
                             CornerRadius="{StaticResource CornerRadiusHandler}"
                             Padding="10"
@@ -469,17 +469,15 @@
                        CornerRadius="{StaticResource CornerRadiusHandler}"
                        Padding="10"
                        Margin="5"
-                        Style="{StaticResource NavButtonStyle}"
-                       HasShadow="True" IsVisible="{Binding TaoThongBaoPermission}">
+                       HasShadow="True" IsVisible="{Binding TaoThongBaoPermission}"
+                            Style="{StaticResource NavButtonStyle}">
                         <HorizontalStackLayout>
                             <Label>🔔</Label>
-                            <Label Text="Tạo thông báo mới"
+                            <Label Text=" Tạo thông báo mới"
                                TextColor="White"
                                FontSize="14"
                                FontFamily="OpenSans-Regular"
                                HorizontalOptions="Center"
-                               LineBreakMode="WordWrap"
-                               MaximumWidthRequest="120"
                                IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
@@ -659,6 +657,25 @@
                     </HorizontalStackLayout>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Home" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Frame BackgroundColor="{Binding TrangChuActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+       CornerRadius="{StaticResource CornerRadiusHandler}"
+       Padding="10"
+       Margin="5"
+        Style="{StaticResource NavButtonStyle}"
+       HasShadow="True">
+                    <HorizontalStackLayout>
+                        <Label>🔒</Label>
+                        <Label Text=" Đổi TK và MK"
+               
+               TextColor="White"
+               FontSize="14"
+               FontFamily="OpenSans-Regular"
+               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ChangePasswordCommand}"/>
                     </Frame.GestureRecognizers>
                 </Frame>
             </VerticalStackLayout>

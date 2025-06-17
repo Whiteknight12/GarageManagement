@@ -140,9 +140,9 @@
                                TextColor="#3B82F6"
                                HorizontalOptions="End"
                                VerticalOptions="Center">
-                            <!--<Label.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnForgotPasswordTapped"/>
-                            </Label.GestureRecognizers>-->
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                            </Label.GestureRecognizers>
                         </Label>
                     </Grid>
 
@@ -175,6 +175,7 @@
                     </Button>
                 </VerticalStackLayout>
             </Frame>
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

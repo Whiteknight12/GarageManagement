@@ -6,7 +6,7 @@ namespace GarageManagement.Pages;
 
 public partial class NhanSuMainPage : ContentView
 {
-    private readonly NhanSuMainPageViewModel _viewModel;
+    public readonly NhanSuMainPageViewModel _viewModel;
     bool _isAnimating, _isClockRunning;
     const float Hue = 0.58f, Sat = 0.4f;
     const float Lmin = 0.2f, Lmax = 0.75f;
@@ -42,6 +42,12 @@ public partial class NhanSuMainPage : ContentView
                 Color = Color.FromHsla(Hue, Sat, l)
             });
         }
+    }
+
+    public void SetAgain()
+    {
+        AnimateBackground();
+        StartClock(); 
     }
 
     void AnimateBackground()

@@ -78,6 +78,8 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty]
         private bool quanLiBaoCaoTonActive = false;
+        [ObservableProperty]
+        private bool homeActive = false;
 
         [ObservableProperty]
         private bool isCollapsed;
@@ -144,6 +146,7 @@ namespace GarageManagement.ViewModels
         private readonly ThemLoaiVatTuPhuTungPage _themLoaiVatTuPhuTungPage;
         private readonly BaoCaoDoanhSoListPage _baoCaoDoanhSoListPage;
         private readonly BaoCaoTonPage _baoCaoTonPage;
+        private readonly ChangePasswordPageViewmodel _changePasswordPageViewmodel; 
         private readonly TaoThongBaoPage _taoThongBaoPage;
         private readonly NhanSuMainPage _nhanSuMainPage;
         private readonly QuanLiThongBaoPage _quanLiThongBaoPage;
@@ -179,6 +182,7 @@ namespace GarageManagement.ViewModels
             APIClientService<PhanQuyen> phanQuyenService,
             APIClientService<ChucNang> chucNangService,
             APIClientService<TaiKhoan> taiKhoaS,
+            ChangePasswordPageViewmodel changePasswordPageViewmodel,
             TaoThongBaoPage taoThongBaoPage,
             NhanSuMainPage nhanSuMainPage,
             QuanLiThongBaoPage quanLiThongBaoPage)
@@ -218,9 +222,11 @@ namespace GarageManagement.ViewModels
             _baoCaoTonPage = baoCaoTonPage;
             _phanQuyenService = phanQuyenService;
             _chucNangService = chucNangService;
+            _changePasswordPageViewmodel = changePasswordPageViewmodel; 
             _taiKhoanService = taiKhoaS; 
             _taoThongBaoPage = taoThongBaoPage;
             _quanLiThongBaoPage = quanLiThongBaoPage;
+            _nhanSuMainPage = nhanSuMainPage;
             _ = LoadUserAsync();
             LoadPermissionAsync(); 
         }
@@ -365,7 +371,11 @@ namespace GarageManagement.ViewModels
         public void Navigate(string parameter)
         {
             TrangChuActive = parameter == "Home";
-
+            if(TrangChuActive == true)
+            {
+                _ = _nhanSuMainPage._viewModel.LoadAsync();
+                _nhanSuMainPage.SetAgain(); 
+            }
             TiepNhanXeActive = parameter == "TiepNhanXe";
             //if (TiepNhanXeActive == true)
             //{
@@ -487,6 +497,7 @@ namespace GarageManagement.ViewModels
             //{
             //    _ = _loaiTienCongPage._viewModel.LoadAsync();
             //}
+            
 
             QuanLiDanhSachLoaiTienCongActive = parameter == "QLDanhSachLoaiTienCong";
             if (QuanLiDanhSachLoaiTienCongActive == true)
@@ -636,6 +647,26 @@ namespace GarageManagement.ViewModels
         {
             IsRightPaneVisible = false;
             RightPaneContent = null;
+        }
+        [RelayCommand]
+        public async void ChangePassword()
+        {
+            await _authenticationServices.FettaiKhoanSession();
+            var status = _authenticationServices.GetCurrentAccountStatus;
+
+            var view = new ChangePasswordPage(_changePasswordPageViewmodel, status.AccountId.Value); 
+            var wrapper = new ContentPage
+            {
+                Content = view,
+                Padding = 0
+            };
+            var window = new Window
+            {
+                Page = wrapper,
+                MaximumHeight = 500,
+                MaximumWidth=  600
+            };
+            Application.Current.OpenWindow(window);
         }
     }
 }

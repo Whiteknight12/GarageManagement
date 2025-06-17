@@ -258,6 +258,13 @@
                             <CheckBox Grid.Column="1" IsChecked="{Binding LapPhieuThuTienPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="LapPhieuThuTienCheckBox"/>
                         </Grid>
                     </Frame>
+
+                    <Frame HasShadow="True" BackgroundColor="{DynamicResource CardBackgroundColor}" Padding="20" CornerRadius="{StaticResource CornerRadiusHandler}" Margin="0,0,0,12">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Tạo thông báo" FontSize="16" FontAttributes="Bold" FontFamily="OpenSans-SemiBold" TextColor="{DynamicResource TextColor}"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding TaoThongBaoPermission, Mode=TwoWay}" Color="Blue" CheckedChanged="OnCheckBoxChanged" AutomationId="TaoThongBaoCheckBox"/>
+                        </Grid>
+                    </Frame>
                     <!-- Lập Phiếu Sửa Chữa -->
                     <!-- ... Frame tương tự cho LapPhieuSuaChua, LapPhieuNhap, LapPhieuThuTien -->
                 </VerticalStackLayout>
