@@ -265,6 +265,18 @@ namespace GarageManagement.ViewModels
         {
             if (SelectedPhieuTiepNhan == null) return;
             // gọi API Update
+
+            if (SelectedPhieuTiepNhan.XeId == Guid.Empty || SelectedPhieuTiepNhan.NgayTiepNhan == null)
+            {
+                await Shell.Current.DisplayAlert("Thông báo", "Vui lòng chọn xe và ngày tiếp nhận", "OK");
+                return;
+            }
+            var all = await _phieuTiepNhanService.GetAll();
+            if (all.Any(p => p.XeId == SelectedPhieuTiepNhan.XeId && p.DaHoanThanhBaoTri == false && SelectedPhieuTiepNhan.DaHoanThanhBaoTri == false))
+            {
+                await Shell.Current.DisplayAlert("Cảnh báo", "Xe này đang được tiếp nhận trong gara, không thể sửa phiếu mới có cùng xe và trạng thái.", "OK");
+                return;
+            }
             await _phieuTiepNhanService.Update(SelectedPhieuTiepNhan);
             IsEditing = false;
             IsNotEditing = true;
