@@ -48,52 +48,52 @@
             <ScrollView Grid.Column="0"
                         IsVisible="{Binding IsWindowNavVisible}">
                 <VerticalStackLayout 
-        BackgroundColor="#264f76"
-        x:Name="CollapsibleToolbar"
-        Spacing="10"
-        Padding="10"
-        Grid.Column="0"
-        WidthRequest="200"
-        MinimumWidthRequest="80">
+                    BackgroundColor="#264f76"
+                    x:Name="CollapsibleToolbar"
+                    Spacing="10"
+                    Padding="10"
+                    Grid.Column="0"
+                    WidthRequest="200"
+                    MinimumWidthRequest="80">
 
                     <HorizontalStackLayout>
                         <Button Text="☰"
-                    x:Name="CollapseButton"
-                    TextColor="{DynamicResource TextColor}"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="End"
-                    VerticalOptions="Center"
-                    Clicked="OnCollapseClicked" />
+                            x:Name="CollapseButton"
+                            TextColor="{DynamicResource TextColor}"
+                            BackgroundColor="Transparent"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center"
+                            Clicked="OnCollapseClicked" />
 
                         <Label Text="Menu"
-                   TextColor="White"
-                   FontAttributes="Bold"
-                   FontFamily="OpenSans-SemiBold"
-                   FontSize="20"
-                   HorizontalOptions="Center"
-                   Margin="0,20,0,20" 
-                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSans-SemiBold"
+                           FontSize="20"
+                           HorizontalOptions="Center"
+                           Margin="0,20,0,20" 
+                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                     </HorizontalStackLayout>
 
                     <!-- Section: Quản lý -->
                     <Frame BackgroundColor="#2a557f" IsVisible="{Binding QuanLiSection}"
-               CornerRadius="{StaticResource CornerRadiusHandler}"
-               Padding="10"
-               Margin="5"
-               HasShadow="True">
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ToggleSectionCommand}" CommandParameter="QuanLy" />
                         </Frame.GestureRecognizers>
                         <HorizontalStackLayout>
                             <Label VerticalOptions="Center">🗂️</Label>
                             <Label Text="Quản lý"
-                       TextColor="White"
-                       FontAttributes="Bold"
-                       FontFamily="OpenSans-SemiBold"
-                       FontSize="16"
-                       HorizontalOptions="Center"
-                       Margin="5"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               FontFamily="OpenSans-SemiBold"
+                               FontSize="16"
+                               HorizontalOptions="Center"
+                               Margin="5"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             <Label Text="{Binding QuanLyExpanded, Converter={StaticResource BoolToArrowConverter}}"
                        VerticalOptions="Center"
                        TextColor="White" />
@@ -102,43 +102,43 @@
                     <VerticalStackLayout Spacing="5" 
                              IsVisible="{Binding QuanLyExpanded}">
                         <Frame BackgroundColor="{Binding QlXeActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   Padding="10"
-                   Style="{StaticResource NavButtonStyle}"
-                   Margin="5"
-                   HasShadow="True" IsVisible="{Binding QuanLiDanhSachXePermission}" >
+                           CornerRadius="{StaticResource CornerRadiusHandler}"
+                           Padding="10"
+                           Style="{StaticResource NavButtonStyle}"
+                           Margin="5"
+                           HasShadow="True" IsVisible="{Binding QuanLiDanhSachXePermission}" >
                             <HorizontalStackLayout>
                                 <Label Text="🚙"/>
                                 <Label Text=" Danh sách xe"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
-                           LineBreakMode="WordWrap"
-                           MaximumWidthRequest="120"
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="WordWrap"
+                                   MaximumWidthRequest="120"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QLXe" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QlDanhSachHieuXeActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   Padding="10"
-                   Style="{StaticResource NavButtonStyle}"
-                   Margin="5"
-                   HasShadow="True" IsVisible="{Binding QuanLiDanhSachHieuXePermission}">
+                           CornerRadius="{StaticResource CornerRadiusHandler}"
+                           Padding="10"
+                           Style="{StaticResource NavButtonStyle}"
+                           Margin="5"
+                           HasShadow="True" IsVisible="{Binding QuanLiDanhSachHieuXePermission}">
                             <HorizontalStackLayout>
 
                                 <Label Text="🏭"/>
                                 <Label Text=" Danh sách hiệu xe"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Start"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Start"
                            
-                           MaximumWidthRequest="120"
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   MaximumWidthRequest="120"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
 
                             <Frame.GestureRecognizers>
@@ -146,222 +146,222 @@
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiDanhSachLoaiVatTuActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   Padding="10"
-                   Margin="5"
-                   Style="{StaticResource NavButtonStyle}"
-                   HasShadow="True" IsVisible="{Binding QuanLiDanhSachLoaiVatTuPermission}">
+                               CornerRadius="{StaticResource CornerRadiusHandler}"
+                               Padding="10"
+                               Margin="5"
+                               Style="{StaticResource NavButtonStyle}"
+                               HasShadow="True" IsVisible="{Binding QuanLiDanhSachLoaiVatTuPermission}">
                             <HorizontalStackLayout>
                                 <Label Text="📦"/>
                                 <Label Text=" Danh sách vật tư"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
-                           LineBreakMode="WordWrap"
-                           MaximumWidthRequest="120"
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="WordWrap"
+                                   MaximumWidthRequest="120"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QLDanhSachLoaiVatTu" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiDanhSachLoaiTienCongActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   Padding="10"
-                   Margin="5"
-                    Style="{StaticResource NavButtonStyle}"
-                   HasShadow="True" IsVisible="{Binding QuanLiDanhSachLoaiTienCongPermission}">
+                               CornerRadius="{StaticResource CornerRadiusHandler}"
+                               Padding="10"
+                               Margin="5"
+                                Style="{StaticResource NavButtonStyle}"
+                               HasShadow="True" IsVisible="{Binding QuanLiDanhSachLoaiTienCongPermission}">
                             <HorizontalStackLayout>
                                 <Label Text="💵"/>
                                 <Label Text=" DS loại tiền công"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
                          
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QLDanhSachLoaiTienCong" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiNhanVienActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                    CornerRadius="{StaticResource CornerRadiusHandler}"
-                    Padding="10"
-                    Margin="5"
-                    Style="{StaticResource NavButtonStyle}"
-                    HasShadow="True" IsVisible="{Binding QuanLiNhanVienPermission}">
+                                CornerRadius="{StaticResource CornerRadiusHandler}"
+                                Padding="10"
+                                Margin="5"
+                                Style="{StaticResource NavButtonStyle}"
+                                HasShadow="True" IsVisible="{Binding QuanLiNhanVienPermission}">
                             <HorizontalStackLayout>
                                 <Label>👥</Label>
                                 <Label Text="Danh sách nhân viên"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
-                           LineBreakMode="WordWrap"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="WordWrap"
                          
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiNhanVien" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiKhachHangActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                    CornerRadius="{StaticResource CornerRadiusHandler}"
-                    Padding="10"
-                    Style="{StaticResource NavButtonStyle}"
-                    Margin="5"
-                    HasShadow="True" IsVisible="{Binding QuanLiKhachHangPermission}">
+                                CornerRadius="{StaticResource CornerRadiusHandler}"
+                                Padding="10"
+                                Style="{StaticResource NavButtonStyle}"
+                                Margin="5"
+                                HasShadow="True" IsVisible="{Binding QuanLiKhachHangPermission}">
                             <HorizontalStackLayout>
                                 <Label>🤝</Label>
                                 <Label Text="Danh sách khách hàng"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
-                           LineBreakMode="WordWrap"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="WordWrap"
                      
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiKhachHang" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiPhieuNhapActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                    CornerRadius="{StaticResource CornerRadiusHandler}"
-                    Padding="10"
-                    Margin="5"
-                    Style="{StaticResource NavButtonStyle}"
-                    HasShadow="True" IsVisible="{Binding QuanLiPhieuNhapPermission}">
+                            CornerRadius="{StaticResource CornerRadiusHandler}"
+                            Padding="10"
+                            Margin="5"
+                            Style="{StaticResource NavButtonStyle}"
+                            HasShadow="True" IsVisible="{Binding QuanLiPhieuNhapPermission}">
                             <HorizontalStackLayout>
                                 <Label>📥</Label>
                                 <Label Text="Danh sách phiếu nhập"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
-                           LineBreakMode="WordWrap"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="WordWrap"
                           
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiPhieuNhap" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiPhieuSuaChuaActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                    CornerRadius="{StaticResource CornerRadiusHandler}"
-                    Padding="10"
-                    Margin="5"
-                    Style="{StaticResource NavButtonStyle}"
-                    HasShadow="True" IsVisible="{Binding QuanLiPhieuSuaChuaPermission}">
+                                CornerRadius="{StaticResource CornerRadiusHandler}"
+                                Padding="10"
+                                Margin="5"
+                                Style="{StaticResource NavButtonStyle}"
+                                HasShadow="True" IsVisible="{Binding QuanLiPhieuSuaChuaPermission}">
                             <HorizontalStackLayout>
                                 <Label>🔧</Label>
                                 <Label Text="DS phiếu sửa chữa"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
                           
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiPhieuSuaChua" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiPhieuThuTienActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                    CornerRadius="{StaticResource CornerRadiusHandler}"
-                    Padding="10"
-                    Style="{StaticResource NavButtonStyle}"
-                    Margin="5"
-                    HasShadow="True" IsVisible="{Binding QuanLiPhieuThuTienPermission}">
+                                CornerRadius="{StaticResource CornerRadiusHandler}"
+                                Padding="10"
+                                Style="{StaticResource NavButtonStyle}"
+                                Margin="5"
+                                HasShadow="True" IsVisible="{Binding QuanLiPhieuThuTienPermission}">
                             <HorizontalStackLayout>
                                 <Label>🧾</Label>
                                 <Label Text="DS phiếu thu tiền"
-                            TextColor="White"
-                            FontSize="14"
-                            FontFamily="OpenSans-Regular"
-                            HorizontalOptions="Center"
+                                    TextColor="White"
+                                    FontSize="14"
+                                    FontFamily="OpenSans-Regular"
+                                    HorizontalOptions="Center"
                             
-                            IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                    IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiPhieuThuTien" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiPhieuTiepNhanActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                CornerRadius="{StaticResource CornerRadiusHandler}"
-                Padding="10"
-                Margin="5"
-                    Style="{StaticResource NavButtonStyle}"
-                HasShadow="True" IsVisible="{Binding QuanLiPhieuTiepNhanPermission}">
+                            CornerRadius="{StaticResource CornerRadiusHandler}"
+                            Padding="10"
+                            Margin="5"
+                            Style="{StaticResource NavButtonStyle}"
+                            HasShadow="True" IsVisible="{Binding QuanLiPhieuTiepNhanPermission}">
                             <HorizontalStackLayout>
                                 <Label>📋</Label>
                                 <Label Text="DS phiếu tiếp nhận"
-                       TextColor="White"
-                       FontSize="14"
-                       FontFamily="OpenSans-Regular"
-                       HorizontalOptions="Center"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiPhieuTiepNhan" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding BaoCaoDoanhSoListActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                    CornerRadius="{StaticResource CornerRadiusHandler}"
-                    Padding="10"
-                    Margin="5"
-                    HasShadow="True" IsVisible="{Binding QuanLiBaoCaoThangPermission}"
-                    Style="{StaticResource NavButtonStyle}">
+                            CornerRadius="{StaticResource CornerRadiusHandler}"
+                            Padding="10"
+                            Margin="5"
+                            HasShadow="True" IsVisible="{Binding QuanLiBaoCaoThangPermission}"
+                            Style="{StaticResource NavButtonStyle}">
                             <HorizontalStackLayout>
                                 <Label>📈</Label>
                                 <Label Text="DS báo cáo tháng"
-                       TextColor="White"
-                       FontSize="14"
-                       FontFamily="OpenSans-Regular"
-                       HorizontalOptions="Center"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="BaoCaoDoanhSoList" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiBaoCaoTonActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                CornerRadius="{StaticResource CornerRadiusHandler}"
-                Padding="10"
-                Style="{StaticResource NavButtonStyle}"
-                Margin="5"
-                HasShadow="True" IsVisible="{Binding QuanLiBaoCaoTonPermission}">
+                                CornerRadius="{StaticResource CornerRadiusHandler}"
+                                Padding="10"
+                                Style="{StaticResource NavButtonStyle}"
+                                Margin="5"
+                                HasShadow="True" IsVisible="{Binding QuanLiBaoCaoTonPermission}">
                             <HorizontalStackLayout>
                                 <Label>🗃️</Label>
                                 <Label Text="DS báo cáo tồn"
-                       TextColor="White"
-                       FontSize="14"
-                       FontFamily="OpenSans-Regular"
-                       HorizontalOptions="Center"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiBaoCaoTon" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiThongBaoActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-               CornerRadius="{StaticResource CornerRadiusHandler}"
-               Padding="10"
-               Margin="5"
-               Style="{StaticResource NavButtonStyle}"
-               HasShadow="True" IsVisible="{Binding QuanLiThongBaoPermission}">
+                               CornerRadius="{StaticResource CornerRadiusHandler}"
+                               Padding="10"
+                               Margin="5"
+                               Style="{StaticResource NavButtonStyle}"
+                               HasShadow="True" IsVisible="{Binding QuanLiThongBaoPermission}">
                             <HorizontalStackLayout>
                                 <Label>📋</Label>
                                 <Label Text="Quản lí thông báo"
-                       TextColor="White"
-                       FontSize="14"
-                       FontFamily="OpenSans-Regular"
-                       HorizontalOptions="Center"
-                       LineBreakMode="WordWrap"
-                       MaximumWidthRequest="120"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="WordWrap"
+                                   MaximumWidthRequest="120"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiThongBao" />
@@ -371,120 +371,120 @@
 
                     <!-- Section: Tạo lập -->
                     <Frame BackgroundColor="#2a557f" IsVisible="{Binding TaoLapSection}"
-               CornerRadius="{StaticResource CornerRadiusHandler}"
-               Padding="10"
-               Margin="5"
-               HasShadow="True">
+                           CornerRadius="{StaticResource CornerRadiusHandler}"
+                           Padding="10"
+                           Margin="5"
+                           HasShadow="True">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ToggleSectionCommand}" CommandParameter="TaoLap" />
                         </Frame.GestureRecognizers>
                         <HorizontalStackLayout>
                             <Label VerticalOptions="Center">✍️</Label>
                             <Label Text="Tạo lập"
-                       TextColor="White"
-                       FontAttributes="Bold"
-                       FontFamily="OpenSans-SemiBold"
-                       FontSize="16"
-                       HorizontalOptions="Center"
-                       Margin="5"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
-                            <Label Text="{Binding TaoLapExpanded, Converter={StaticResource BoolToArrowConverter}}"
-                       VerticalOptions="Center"
-                       TextColor="White" />
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               FontFamily="OpenSans-SemiBold"
+                               FontSize="16"
+                               HorizontalOptions="Center"
+                               Margin="5"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                    <Label Text="{Binding TaoLapExpanded, Converter={StaticResource BoolToArrowConverter}}"
+                               VerticalOptions="Center"
+                               TextColor="White" />
                         </HorizontalStackLayout>
                     </Frame>
                     <VerticalStackLayout Spacing="5"
                              IsVisible="{Binding TaoLapExpanded}">
                         <Frame BackgroundColor="{Binding TiepNhanXeActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   Padding="10"
-                    Style="{StaticResource NavButtonStyle}"
-                   Margin="5"
-                   HasShadow="True" IsVisible="{Binding TiepNhanXePermission}">
+                           CornerRadius="{StaticResource CornerRadiusHandler}"
+                           Padding="10"
+                            Style="{StaticResource NavButtonStyle}"
+                           Margin="5"
+                           HasShadow="True" IsVisible="{Binding TiepNhanXePermission}">
                             <HorizontalStackLayout>
                                 <Label>🚘</Label>
                                 <Label Text=" Tiếp Nhận Xe"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TiepNhanXe" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding TaoPhieuSuaChuaActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   Padding="10"
-                   Margin="5"
-                    Style="{StaticResource NavButtonStyle}"
-                   HasShadow="True" IsVisible="{Binding LapPhieuSuaChuaPermission}">
+                               CornerRadius="{StaticResource CornerRadiusHandler}"
+                               Padding="10"
+                               Margin="5"
+                                Style="{StaticResource NavButtonStyle}"
+                               HasShadow="True" IsVisible="{Binding LapPhieuSuaChuaPermission}">
                             <HorizontalStackLayout>
                                 <Label>🔧</Label>
                                 <Label Text=" Lập Phiếu Sửa Chữa"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TaoPhieuSuaChua" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding TaoPhieuNhapActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   Padding="10"
-                    Style="{StaticResource NavButtonStyle}"
-                   Margin="5"
-                   HasShadow="True" IsVisible="{Binding LapPhieuNhapPermission}">
+                               CornerRadius="{StaticResource CornerRadiusHandler}"
+                               Padding="10"
+                                Style="{StaticResource NavButtonStyle}"
+                               Margin="5"
+                               HasShadow="True" IsVisible="{Binding LapPhieuNhapPermission}">
                             <HorizontalStackLayout>
                                 <Label>📥</Label>
                                 <Label Text=" Lập Phiếu Nhập"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TaoPhieuNhap" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding ThuTienActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   Padding="10"
-                   Margin="5"
-                   HasShadow="True" IsVisible="{Binding LapPhieuThuTienPermission}"
-                    Style="{StaticResource NavButtonStyle}">
+                               CornerRadius="{StaticResource CornerRadiusHandler}"
+                               Padding="10"
+                               Margin="5"
+                               HasShadow="True" IsVisible="{Binding LapPhieuThuTienPermission}"
+                                Style="{StaticResource NavButtonStyle}">
                             <HorizontalStackLayout>
                                 <Label>🧾</Label>
                                 <Label Text=" Lập Phiếu Thu Tiền"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="ThuTien" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding TaoThongBaoActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-               CornerRadius="{StaticResource CornerRadiusHandler}"
-               Padding="10"
-               Margin="5"
-               HasShadow="True" IsVisible="{Binding TaoThongBaoPermission}"
-                    Style="{StaticResource NavButtonStyle}">
+                           CornerRadius="{StaticResource CornerRadiusHandler}"
+                           Padding="10"
+                           Margin="5"
+                           HasShadow="True" IsVisible="{Binding TaoThongBaoPermission}"
+                                Style="{StaticResource NavButtonStyle}">
                             <HorizontalStackLayout>
                                 <Label>🔔</Label>
                                 <Label Text=" Tạo thông báo mới"
-                       TextColor="White"
-                       FontSize="14"
-                       FontFamily="OpenSans-Regular"
-                       HorizontalOptions="Center"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="TaoThongBao" />
@@ -494,103 +494,103 @@
 
                     <!-- Section: Quản trị -->
                     <Frame BackgroundColor="#2a557f" IsVisible="{Binding QuanTriSection}"
-               CornerRadius="{StaticResource CornerRadiusHandler}"
-               Padding="10"
-               Margin="5"
-               HasShadow="True">
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                       HasShadow="True">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ToggleSectionCommand}" CommandParameter="QuanTri" />
                         </Frame.GestureRecognizers>
                         <HorizontalStackLayout>
                             <Label VerticalOptions="Center">⚙️</Label>
                             <Label Text="Quản trị"
-                       TextColor="White"
-                       FontAttributes="Bold"
-                       FontFamily="OpenSans-SemiBold"
-                       FontSize="16"
-                       HorizontalOptions="Center"
-                       Margin="5"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               FontFamily="OpenSans-SemiBold"
+                               FontSize="16"
+                               HorizontalOptions="Center"
+                               Margin="5"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             <Label Text="{Binding QuanTriExpanded, Converter={StaticResource BoolToArrowConverter}}"
-                       VerticalOptions="Center"
-                       TextColor="White" />
+                               VerticalOptions="Center"
+                               TextColor="White" />
                         </HorizontalStackLayout>
                     </Frame>
                     <VerticalStackLayout Spacing="5"
                              IsVisible="{Binding QuanTriExpanded}">
                         <Frame BackgroundColor="{Binding PhanQuyenActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   Padding="10"
-                    Style="{StaticResource NavButtonStyle}"
-                   Margin="5"
-                   HasShadow="True" IsVisible="{Binding PhanQuyenPermission}">
+                           CornerRadius="{StaticResource CornerRadiusHandler}"
+                           Padding="10"
+                            Style="{StaticResource NavButtonStyle}"
+                           Margin="5"
+                           HasShadow="True" IsVisible="{Binding PhanQuyenPermission}">
                             <HorizontalStackLayout>
                                 <Label>🗝️</Label>
                                 <Label Text=" Phân quyền"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
-                           LineBreakMode="WordWrap"
-                           MaximumWidthRequest="120"
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   LineBreakMode="WordWrap"
+                                   MaximumWidthRequest="120"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="PhanQuyen" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding ThayDoiThamSoActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                   CornerRadius="{StaticResource CornerRadiusHandler}"
-                   Padding="10"
-                    Style="{StaticResource NavButtonStyle}"
-                   Margin="5"
-                   HasShadow="True" IsVisible="{Binding ThayDoiThamSoPermission}">
+                           CornerRadius="{StaticResource CornerRadiusHandler}"
+                           Padding="10"
+                            Style="{StaticResource NavButtonStyle}"
+                           Margin="5"
+                           HasShadow="True" IsVisible="{Binding ThayDoiThamSoPermission}">
                             <HorizontalStackLayout>
                                 <Label>⚖️</Label>
                                 <Label Text=" Tham số hệ thống"
-                           TextColor="White"
-                           FontSize="14"
-                           FontFamily="OpenSans-Regular"
-                           HorizontalOptions="Center"
-                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="ThayDoiThamSo" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiTaiKhoanActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                CornerRadius="{StaticResource CornerRadiusHandler}"
-                Padding="10"
-                Margin="5"
-                    Style="{StaticResource NavButtonStyle}"
-                HasShadow="True" IsVisible="{Binding QuanLiDanhSachTaiKhoanPermission}">
+                            CornerRadius="{StaticResource CornerRadiusHandler}"
+                            Padding="10"
+                            Margin="5"
+                                Style="{StaticResource NavButtonStyle}"
+                            HasShadow="True" IsVisible="{Binding QuanLiDanhSachTaiKhoanPermission}">
                             <HorizontalStackLayout>
                                 <Label>👥</Label>
                                 <Label Text=" Danh sách tài khoản"
-                       TextColor="White"
-                       FontSize="14"
-                       FontFamily="OpenSans-Regular"
-                       HorizontalOptions="Center"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiTaiKhoan" />
                             </Frame.GestureRecognizers>
                         </Frame>
                         <Frame BackgroundColor="{Binding QuanLiLichSuActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-                CornerRadius="{StaticResource CornerRadiusHandler}"
-                Padding="10"
-                    Style="{StaticResource NavButtonStyle}"
-                Margin="5"
-                HasShadow="True" IsVisible="{Binding QuanLiLichSuPermission}">
+                            CornerRadius="{StaticResource CornerRadiusHandler}"
+                            Padding="10"
+                                Style="{StaticResource NavButtonStyle}"
+                            Margin="5"
+                            HasShadow="True" IsVisible="{Binding QuanLiLichSuPermission}">
                             <HorizontalStackLayout>
                                 <Label>⏰</Label>
                                 <Label Text=" Lịch sử hành động"
-                       TextColor="White"
-                       FontSize="14"
-                       FontFamily="OpenSans-Regular"
-                       HorizontalOptions="Center"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="QuanLiLichSu" />
@@ -600,44 +600,44 @@
 
                     <!-- Section: Khách hàng -->
                     <Frame BackgroundColor="#2a557f" IsVisible="{Binding KhachHangSection}"
-            CornerRadius="{StaticResource CornerRadiusHandler}"
-            Padding="10"
-            Margin="5"
-            HasShadow="True">
+                        CornerRadius="{StaticResource CornerRadiusHandler}"
+                        Padding="10"
+                        Margin="5"
+                        HasShadow="True">
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ToggleSectionCommand}" CommandParameter="KhachHang" />
                         </Frame.GestureRecognizers>
                         <HorizontalStackLayout>
                             <Label VerticalOptions="Center">🙋</Label>
                             <Label Text="Khách hàng" 
-                   TextColor="White"
-                   FontAttributes="Bold"
-                   FontFamily="OpenSans-SemiBold"
-                   FontSize="16"
-                   HorizontalOptions="Center"
-                   Margin="5"
-                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
-                            <Label Text="{Binding KhachHangExpanded, Converter={StaticResource BoolToArrowConverter}}"
-                   VerticalOptions="Center"
-                   TextColor="White" />
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               FontFamily="OpenSans-SemiBold"
+                               FontSize="16"
+                               HorizontalOptions="Center"
+                               Margin="5"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                        <Label Text="{Binding KhachHangExpanded, Converter={StaticResource BoolToArrowConverter}}"
+                               VerticalOptions="Center"
+                               TextColor="White" />
                         </HorizontalStackLayout>
                     </Frame>
                     <VerticalStackLayout Spacing="5"
-             IsVisible="{Binding KhachHangExpanded}">
-                        <Frame BackgroundColor="{Binding DanhSachXeActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-               CornerRadius="{StaticResource CornerRadiusHandler}"
-               Padding="10"
-               Margin="5"
-                    Style="{StaticResource NavButtonStyle}"
-               HasShadow="True" IsVisible="{Binding KhachHangXemDanhSachXePermission}">
+                         IsVisible="{Binding KhachHangExpanded}">
+                                    <Frame BackgroundColor="{Binding DanhSachXeActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+                           CornerRadius="{StaticResource CornerRadiusHandler}"
+                           Padding="10"
+                           Margin="5"
+                                Style="{StaticResource NavButtonStyle}"
+                           HasShadow="True" IsVisible="{Binding KhachHangXemDanhSachXePermission}">
                             <HorizontalStackLayout>
                                 <Label>🚗</Label>
                                 <Label Text=" Xe của bạn"
-                       TextColor="White"
-                       FontSize="14"
-                       FontFamily="OpenSans-Regular"
-                       HorizontalOptions="Center"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                                   TextColor="White"
+                                   FontSize="14"
+                                   FontFamily="OpenSans-Regular"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                             </HorizontalStackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="DanhSachXe" />
@@ -647,40 +647,58 @@
 
                     <!-- Home (không thuộc nhóm nào) -->
                     <Frame BackgroundColor="{Binding TrangChuActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-               CornerRadius="{StaticResource CornerRadiusHandler}"
-               Padding="10"
-               Margin="5"
-                Style="{StaticResource NavButtonStyle}"
-               HasShadow="True">
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                        Style="{StaticResource NavButtonStyle}"
+                       HasShadow="True">
                         <HorizontalStackLayout>
                             <Label>🏠</Label>
                             <Label Text=" Home"
                        
-                       TextColor="White"
-                       FontSize="14"
-                       FontFamily="OpenSans-Regular"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Home" />
                         </Frame.GestureRecognizers>
                     </Frame>
                     <Frame BackgroundColor="{Binding TrangChuActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-           CornerRadius="{StaticResource CornerRadiusHandler}"
-           Padding="10"
-           Margin="5"
-            Style="{StaticResource NavButtonStyle}"
-           HasShadow="True">
+                       CornerRadius="{StaticResource CornerRadiusHandler}"
+                       Padding="10"
+                       Margin="5"
+                        Style="{StaticResource NavButtonStyle}"
+                       HasShadow="True">
                         <HorizontalStackLayout>
                             <Label>🔒</Label>
                             <Label Text=" Đổi TK và MK"            
-                   TextColor="White"
-                   FontSize="14"
-                   FontFamily="OpenSans-Regular"
-                   IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                         </HorizontalStackLayout>
                         <Frame.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ChangePasswordCommand}"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Frame BackgroundColor="{Binding TrangChuActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+                        CornerRadius="{StaticResource CornerRadiusHandler}"
+                        Padding="10"
+                        Margin="5"
+                        Style="{StaticResource NavButtonStyle}"
+                        HasShadow="True">
+                        <HorizontalStackLayout>
+                            <Label>🏠</Label>
+                            <Label Text="Chatbot"
+                               TextColor="White"
+                               FontSize="14"
+                               FontFamily="OpenSans-Regular"
+                               IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                        </HorizontalStackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Chatbot" />
                         </Frame.GestureRecognizers>
                     </Frame>
                 </VerticalStackLayout>
@@ -696,6 +714,7 @@
             <BoxView Grid.Column="2" IsVisible="{Binding IsRightPaneVisible}" />
             <ContentView Grid.Column="3"
                          x:Name="RightPane"
+                         Content="{Binding RightPaneContent}"
                          IsVisible="{Binding IsRightPaneVisible}" />
         </Grid>
 
@@ -1286,30 +1305,51 @@
 
                 <!-- Home (không thuộc nhóm nào) -->
                 <Frame BackgroundColor="{Binding TrangChuActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-               CornerRadius="{StaticResource CornerRadiusHandler}"
-               Padding="10"
-               Margin="5"
-                Style="{StaticResource NavButtonStyle}"
-               HasShadow="True">
+                    CornerRadius="{StaticResource CornerRadiusHandler}"
+                    Padding="10"
+                    Margin="5"
+                    Style="{StaticResource NavButtonStyle}"
+                    HasShadow="True">
                     <HorizontalStackLayout>
                         <Label>🏠</Label>
                         <Label Text=" Home"
                        
-                       TextColor="White"
-                       FontSize="14"
-                       FontFamily="OpenSans-Regular"
-                       IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                           TextColor="White"
+                           FontSize="14"
+                           FontFamily="OpenSans-Regular"
+                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
                     </HorizontalStackLayout>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Home" />
                     </Frame.GestureRecognizers>
                 </Frame>
+
                 <Frame BackgroundColor="{Binding TrangChuActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
-           CornerRadius="{StaticResource CornerRadiusHandler}"
-           Padding="10"
-           Margin="5"
-            Style="{StaticResource NavButtonStyle}"
-           HasShadow="True">
+                    CornerRadius="{StaticResource CornerRadiusHandler}"
+                    Padding="10"
+                    Margin="5"
+                    Style="{StaticResource NavButtonStyle}"
+                    HasShadow="True">
+                    <HorizontalStackLayout>
+                        <Label>🏠</Label>
+                        <Label Text="Chatbot"
+       
+                           TextColor="White"
+                           FontSize="14"
+                           FontFamily="OpenSans-Regular"
+                           IsVisible="{Binding Source={x:Reference CollapsibleToolbar}, Path=WidthRequest, Converter={StaticResource WidthToVisibilityConverter}}"/>
+                    </HorizontalStackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="Chatbot" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame BackgroundColor="{Binding TrangChuActive, Converter={StaticResource BoolToColorConverter}, ConverterParameter={StaticResource ActiveBackgroundColor}}"
+                   CornerRadius="{StaticResource CornerRadiusHandler}"
+                   Padding="10"
+                   Margin="5"
+                    Style="{StaticResource NavButtonStyle}"
+                   HasShadow="True">
                     <HorizontalStackLayout>
                         <Label>🔒</Label>
                         <Label Text=" Đổi TK và MK"            

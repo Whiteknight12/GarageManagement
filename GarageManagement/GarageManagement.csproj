@@ -110,6 +110,9 @@
 	  <MauiXaml Update="Pages\ChangePasswordPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\ChatBotPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\ChinhSuaPhieuNhapPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

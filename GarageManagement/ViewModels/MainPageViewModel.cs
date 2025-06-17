@@ -164,6 +164,7 @@ namespace GarageManagement.ViewModels
         private readonly TaoThongBaoPage _taoThongBaoPage;
         private readonly NhanSuMainPage _nhanSuMainPage;
         private readonly QuanLiThongBaoPage _quanLiThongBaoPage;
+        private readonly ChatBotPage _chatBotPage;
         
         public MainPageViewModel(
             TiepNhanXePage tiepNhanXe,
@@ -199,7 +200,8 @@ namespace GarageManagement.ViewModels
             ChangePasswordPageViewmodel changePasswordPageViewmodel,
             TaoThongBaoPage taoThongBaoPage,
             NhanSuMainPage nhanSuMainPage,
-            QuanLiThongBaoPage quanLiThongBaoPage)
+            QuanLiThongBaoPage quanLiThongBaoPage,
+            ChatBotPage chatBotPage)
         {
             _viewModel = viewModel;
             currentPageContent = nhanSuMainPage;
@@ -241,6 +243,7 @@ namespace GarageManagement.ViewModels
             _taoThongBaoPage = taoThongBaoPage;
             _quanLiThongBaoPage = quanLiThongBaoPage;
             _nhanSuMainPage = nhanSuMainPage;
+            _chatBotPage = chatBotPage;
             _ = LoadUserAsync();
             LoadPermissionAsync(); 
             if (IsAndroid)
@@ -308,6 +311,8 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty] private bool quanLiThongBaoPermission;
 
+        [ObservableProperty] private bool chatBotPermission;
+
         private async void LoadPermissionAsync()
         {
             await _authenticationServices.FettaiKhoanSession();
@@ -354,6 +359,7 @@ namespace GarageManagement.ViewModels
             KhachHangXemDanhSachXePermission = names.Contains("khach hang xem danh sach xe");
             TaoThongBaoPermission = names.Contains("tao thong bao");
             QuanLiThongBaoPermission = names.Contains("tao thong bao");
+            ChatBotPermission = names.Contains("chatBot");
 
             QuanLiSection =
                    QuanLiDanhSachXePermission
@@ -593,6 +599,7 @@ namespace GarageManagement.ViewModels
                 "QuanLiBaoCaoTon" => _baoCaoTonPage,
                 "TaoThongBao" => _taoThongBaoPage,
                 "QuanLiThongBao"=>_quanLiThongBaoPage,
+                "Chatbot"=>_chatBotPage,
                 _ => _nhanSuMainPage
             };
 

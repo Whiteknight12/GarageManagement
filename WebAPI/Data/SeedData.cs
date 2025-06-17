@@ -72,7 +72,8 @@ namespace WebAPI.Data
                 ("phan quyen", Guid.NewGuid()),
                 ("thay doi tham so", Guid.NewGuid()),
                 ("quan li danh sach tai khoan", Guid.NewGuid()),
-                ("tao thong bao", Guid.NewGuid())
+                ("tao thong bao", Guid.NewGuid()),
+                ("chatBot", Guid.NewGuid() )
             };
 
             var chucNangList = functionList.Select(f => new ChucNang
