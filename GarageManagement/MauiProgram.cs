@@ -111,6 +111,7 @@ public static class MauiProgram
         builder.Services.AddTransient<TaoThongBaoPage>();
         builder.Services.AddTransient<QuanLiThongBaoPage>();
         builder.Services.AddTransient<ChiTietThongBaoPage>();
+        builder.Services.AddTransient<ChatBotPage>();
 
         builder.Services.AddTransient<LoginPageViewModel>();
         builder.Services.AddTransient<TaoPhieuSuaChuaPageViewModel>();
@@ -159,6 +160,7 @@ public static class MauiProgram
         builder.Services.AddTransient<TaoThongBaoPageViewModel>();
         builder.Services.AddTransient<QuanLiThongBaoPageViewModel>();
         builder.Services.AddTransient<ChiTietThongBaoPageViewModel>();
+        builder.Services.AddTransient<ChatBotPageViewmodel>();
 
         builder.Services.AddLogging(logging =>
         {

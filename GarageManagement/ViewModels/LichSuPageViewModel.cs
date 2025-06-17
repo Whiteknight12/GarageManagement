@@ -124,5 +124,34 @@ namespace GarageManagement.ViewModels
 
             LichSuList = new ObservableCollection<LichSu>(queryResults.OrderByDescending(x => x.ThoiDiemThucHien));
         }
+
+        [RelayCommand]
+        private async Task Rollback(LichSu lichSu)
+        {
+            //if (lichSu == null) return;
+
+            //switch (lichSu.HanhDong)
+            //{
+            //    case "Tạo mới":
+            //        await _lichSuService.Delete(lichSu.ThucTheLienQuanId);
+            //        break;
+            //    case "Cập nhật":
+            //        if (lichSu.BanSaoCu != null)
+            //        {
+            //            await _lichSuService.Update(lichSu.ThucTheLienQuanId, lichSu.BanSaoCu);
+            //        }
+            //        break;
+            //    case "Xóa":
+            //        if (lichSu.BanSaoCu != null)
+            //        {
+            //            await _lichSuService.Create(lichSu.BanSaoCu);
+            //        }
+            //        break;
+            //}
+
+            //await Filter();
+            //await LoadAsync();
+        }
+
     }
 }

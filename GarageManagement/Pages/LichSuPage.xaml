@@ -282,6 +282,15 @@
                             <Label Text="{Binding LoaiThucTheLienQuan, StringFormat='Loại dữ liệu: {0}'}"
                                    FontSize="12"
                                    TextColor="Gray"/>
+
+                            <Button Text="Rollback"
+                                TextColor="White"
+                                BackgroundColor="Red"
+                                HeightRequest="36"
+                                CornerRadius="8"
+                                Command="{Binding BindingContext.RollbackCommand, Source={x:Reference Name=YourContentViewName}}"
+                                CommandParameter="{Binding}" />
+
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>

@@ -97,7 +97,7 @@ builder.Services.AddQuartz(q =>
     q.AddTrigger(opts => opts
         .ForJob(jobKey)
         .WithIdentity("FirstDayTrigger")
-        .WithCronSchedule("0 0 0 1 * ?")); // 00:00 ngày 1 hàng tháng
+        .WithCronSchedule("0 0 0 1 * ?")); // 00:00 ngày 1 hàng tháng //.WithCronSchedule("0 0/1 * ? * *")); // Mỗi 1 phút
 
     // Trigger 2: Cuối tháng lúc 23:59
     q.AddTrigger(opts => opts
