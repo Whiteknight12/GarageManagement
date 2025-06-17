@@ -36,6 +36,10 @@ namespace GarageManagement.ViewModels
         private bool isEditing;
         [ObservableProperty] private bool isNotEditing;
 
+        [ObservableProperty]
+        private string tuoiInput = string.Empty;
+
+
         private readonly APIClientService<NhanVien> _nhanVienService;
         private readonly AuthenticationService _authenticationService;
 
@@ -114,7 +118,7 @@ namespace GarageManagement.ViewModels
             {
                 Id = Guid.Empty
             };
-
+            TuoiInput = string.Empty;
             // Mở pane + bật chế độ chỉnh sửa
             IsDetailPaneVisible = true;
             IsEditing = true;   // OnIsEditingChanged sẽ tự gán IsNotEditing = false
@@ -133,6 +137,8 @@ namespace GarageManagement.ViewModels
         private async Task SaveDetail()
         {
             if (SelectedNhanVien == null) return;
+
+          
 
             if (string.IsNullOrWhiteSpace(SelectedNhanVien.CCCD))
             {
@@ -163,17 +169,18 @@ namespace GarageManagement.ViewModels
             }
 
             // 4. Tuổi
-            if (string.IsNullOrWhiteSpace(SelectedNhanVien.Tuoi.ToString()))
+            if (string.IsNullOrWhiteSpace(TuoiInput))
             {
                 await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập tuổi", "OK");
                 return;
             }
-            if (!int.TryParse(SelectedNhanVien.Tuoi.ToString(), out var tuoiParsed) || tuoiParsed <= 0)
+            if (!int.TryParse(TuoiInput, out var tuoiParsed) || tuoiParsed <= 0)
             {
                 await Shell.Current.DisplayAlert("Lỗi", "Tuổi phải là số nguyên dương", "OK");
                 return;
             }
-
+            var t = int.Parse(TuoiInput);
+            SelectedNhanVien.Tuoi = t;
             // 5. Giới tính
             if (string.IsNullOrWhiteSpace(SelectedNhanVien.GioiTinh))
             {
@@ -266,6 +273,11 @@ namespace GarageManagement.ViewModels
         private void ViewDetailNhanVien(Guid id)
         {
             SelectedNhanVien = ListNhanVien.FirstOrDefault(nv => nv.Id == id);
+            if (SelectedNhanVien != null)
+            {
+                // khi edit, hiển thị giá trị cũ
+                TuoiInput = SelectedNhanVien.Tuoi.ToString();
+            }
             IsDetailPaneVisible = SelectedNhanVien != null;
             MessagingCenter.Send(this, "ViewChiTietNhanVien", id);
         }
@@ -287,6 +299,7 @@ namespace GarageManagement.ViewModels
         {
             MessagingCenter.Send(this, "ShowStaffDetails", Id);
         }
+
 
     }
 }   

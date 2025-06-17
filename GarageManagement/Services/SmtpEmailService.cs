@@ -39,7 +39,7 @@ namespace GarageManagement.Services
         public int Port { get; set; } = 587;
         public bool UseSsl { get; set; } = true;
         public string Username { get; set; } = "tophuquy2712@gmail.com";
-        public string Password { get; set; } = "";
+        public string Password { get; set; } = "mnct ujsg nbfi nkvl";
         public string FromAddress { get; set; } = "tophuquy2712@gmail.com"; 
     }
 }

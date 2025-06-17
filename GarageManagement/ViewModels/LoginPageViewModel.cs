@@ -89,6 +89,7 @@ namespace GarageManagement.ViewModels
                 if(!string.IsNullOrEmpty(kh.Email))
                 {
                     await _emailService.SendPasswordResetAsync(kh.Email, "https://localhost:7228/api/Account/reset-password"+"/"+tk.TenDangNhap); // Thay đổi link reset mật khẩu theo yêu cầu
+                    await Shell.Current.DisplayAlert("Thông báo", "Mật khẩu đã  được reset, vui lòng kiểm tra hộp thư điện tử.", "OK");
                 }
                 else
                 {
@@ -101,6 +102,8 @@ namespace GarageManagement.ViewModels
                 if (!string.IsNullOrEmpty(nv.Email))
                 {
                     await _emailService.SendPasswordResetAsync(nv.Email, "https://localhost:7228/api/Account/reset-password" + "/" + tk.TenDangNhap); // Thay đổi link reset mật khẩu theo yêu cầu
+                    await Shell.Current.DisplayAlert("Thông báo", "Mật khẩu đã  được reset, vui lòng kiểm tra hộp thư điện tử.", "OK");
+
                 }
                 else
                 {

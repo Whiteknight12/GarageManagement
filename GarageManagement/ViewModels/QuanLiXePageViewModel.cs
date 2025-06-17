@@ -296,11 +296,7 @@ namespace GarageManagement.ViewModels
             var win = new Window
             {
                 Page = themXePage,
-                Title = "Thêm xe mới",
-                MaximumHeight = 1000,
-                MaximumWidth = 1200,
-                MinimumHeight = 1000,
-                MinimumWidth = 1200
+                Title = "Thêm xe mới"
             };
             _themXePageViewModel.OnXeAdded = async (Xe xe) =>
             {

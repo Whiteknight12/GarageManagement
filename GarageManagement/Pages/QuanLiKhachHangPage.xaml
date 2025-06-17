@@ -342,8 +342,7 @@ FontFamily="OpenSans-SemiBold"/>
                                 <Label Text="Tuổi"
                                        FontSize="16" FontAttributes="Bold"
                                        TextColor="{DynamicResource TextColor}"/>
-                                <Entry Text="{Binding EditingCustomer.Tuoi, Mode=TwoWay}"
-                                       Keyboard="Numeric"
+                                <Entry Text="{Binding TuoiInput, Mode=TwoWay}"
                                        FontSize="16"
                                        TextColor="{DynamicResource TextColor}"
                                        BackgroundColor="{DynamicResource BackgroundColor}"/>
@@ -379,7 +378,6 @@ FontFamily="OpenSans-SemiBold"/>
                                        FontSize="16" FontAttributes="Bold"
                                        TextColor="{DynamicResource TextColor}"/>
                                 <Entry Text="{Binding EditingCustomer.SoDienThoai, Mode=TwoWay}"
-                                       Keyboard="Telephone"
                                        FontSize="16"
                                        TextColor="{DynamicResource TextColor}"
                                        BackgroundColor="{DynamicResource BackgroundColor}"/>

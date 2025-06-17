@@ -64,6 +64,7 @@
                         <Picker
               ItemsSource="{Binding FilterFields}"
               SelectedItem="{Binding SelectedFilterField}"
+                            TextColor="{DynamicResource TextColor}"
               ItemDisplayBinding="{Binding .}"
               WidthRequest="150"/>
                     </HorizontalStackLayout>
@@ -102,11 +103,11 @@
                     <Label Grid.Row="0" Grid.Column="0"
                Text="Xe của khách:"
                FontAttributes="Bold"
-               TextColor="{DynamicResource TextColor}"/>
+               TextColor="{DynamicResource TextColor}" />
                     <Label Grid.Row="0" Grid.Column="1" Margin="30,0,0,0"
                Text="Ngày thu:"
                FontAttributes="Bold"
-               TextColor="{DynamicResource TextColor}"/>
+               TextColor="{DynamicResource TextColor}" />
                     <Label Grid.Row="0" Grid.Column="2"
                Text="Số tiền:"
                FontAttributes="Bold"
@@ -116,20 +117,23 @@
                     <Picker Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1"
                 ItemsSource="{Binding ListBienSo}"
                 SelectedItem="{Binding SelectedBienSo, Mode=TwoWay}"
-                          
+                          TextColor="{DynamicResource TextColor}"
+                            BackgroundColor="{DynamicResource BackgroundColor}"
                 ItemDisplayBinding="{Binding BienSo}"
                  />
 
                     <!-- DatePicker -->
                     <DatePicker Grid.Row="1" Grid.Column="1" Margin="30,0,0,0"
                     Date="{Binding NgayThuTien}"
-                    Format="dd/MM/yyyy" />
+                    Format="dd/MM/yyyy" 
+                                TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource BackgroundColor}"/>
 
                     <!-- Entry số tiền -->
                     <Entry Grid.Row="1" Grid.Column="2"
                Text="{Binding SoTienThu}"
                Keyboard="Numeric"
-               Placeholder="Nhập số tiền" />
+               Placeholder="Nhập số tiền" 
+                           TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource BackgroundColor}"/>
                 </Grid>
             </Frame>
 
@@ -156,51 +160,51 @@
 
                     <!-- Khách hàng -->
                     <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="8" IsVisible="{Binding IsCustomerFound}" Margin="150,0,0,0">
-                        <Label Text="Chủ xe:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" FontSize="24"/>
+                        <Label Text="Chủ xe:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}"  FontSize="24"/>
                         <HorizontalStackLayout Spacing="30" >
-                            <Label Text="Tên: " FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="{Binding SelectedChuXe.HoVaTen}" FontSize="20"/>
+                            <Label Text="Tên: " FontSize="20" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                            <Label Text="{Binding SelectedChuXe.HoVaTen}" FontSize="20" TextColor="{DynamicResource TextColor}" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="30">
-                            <Label Text="CCCD: " FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="{Binding SelectedChuXe.CCCD}" FontSize="20"/>
+                            <Label Text="CCCD: " FontSize="20" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                            <Label Text="{Binding SelectedChuXe.CCCD}" FontSize="20" TextColor="{DynamicResource TextColor}" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="30">
-                            <Label Text="Email: " FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="{Binding SelectedChuXe.Email}" FontSize="20"/>
+                            <Label Text="Email: " FontSize="20" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                            <Label Text="{Binding SelectedChuXe.Email}" FontSize="20" TextColor="{DynamicResource TextColor}" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="30">
-                            <Label Text="SĐT: " FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="{Binding SelectedChuXe.SoDienThoai}" FontSize="20"/>
+                            <Label Text="SĐT: " FontSize="20" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" />
+                            <Label Text="{Binding SelectedChuXe.SoDienThoai}" FontSize="20" TextColor="{DynamicResource TextColor}" />
                         </HorizontalStackLayout>
 
                     </VerticalStackLayout>
 
                     <!-- Xe -->
                     <VerticalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8" IsVisible="{Binding IsCustomerFound}" Margin="0,0,100,0">
-                        <Label Text="Xe được chọn:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}"  FontSize="24"/>
+                        <Label Text="Xe được chọn:" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource BackgroundColor}"  FontSize="24"/>
 
                         <HorizontalStackLayout Spacing="30" >
-                            <Label Text="Tên xe: " FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="{Binding SelectedBienSo.Ten}" FontSize="20"/>
+                            <Label Text="Tên xe: " FontSize="20" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource BackgroundColor}"/>
+                            <Label Text="{Binding SelectedBienSo.Ten}" FontSize="20" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="30">
-                            <Label Text="Biển số xe: " FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="{Binding SelectedBienSo.BienSo}" FontSize="20"/>
+                            <Label Text="Biển số xe: " FontSize="20" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource BackgroundColor}"/>
+                            <Label Text="{Binding SelectedBienSo.BienSo}" FontSize="20" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="30">
-                            <Label Text="Hiệu xe: " FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="{Binding TenHieuXe}" FontSize="20"/>
+                            <Label Text="Hiệu xe: " FontSize="20" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource BackgroundColor}"/>
+                            <Label Text="{Binding TenHieuXe}" FontSize="20" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="30">
-                            <Label Text="Tiền nợ của xe: " FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="{Binding TienNoXeSelected}" FontSize="20"/>
+                            <Label Text="Tiền nợ của xe: " FontSize="20" FontAttributes="Bold" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource BackgroundColor}"/>
+                            <Label Text="{Binding TienNoXeSelected}" FontSize="20" TextColor="{DynamicResource TextColor}" BackgroundColor="{DynamicResource BackgroundColor}"/>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Grid>

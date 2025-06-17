@@ -1,10 +1,12 @@
 ﻿using APIClassLibrary;
 using APIClassLibrary.APIModels;
+using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using GarageManagement.Services;
 using Microsoft.Extensions.Logging;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 
 namespace GarageManagement.ViewModels
 {
@@ -31,6 +33,9 @@ namespace GarageManagement.ViewModels
         [ObservableProperty] private bool isEditing;
         [ObservableProperty] private bool isNotEditing = true;   // mặc định đang “xem”
         [ObservableProperty] private KhachHang? editingCustomer; // bind trong pane
+
+        [ObservableProperty]
+        private string tuoiInput = string.Empty;
 
         partial void OnIsEditingChanged(bool value) => IsNotEditing = !value;
 
@@ -123,28 +128,109 @@ namespace GarageManagement.ViewModels
         }
 
         [RelayCommand]
-        private async Task SaveCustomerAsync()  // XAML đang bind SaveCustomerCommand
+        private async Task SaveCustomerAsync()
         {
             if (EditingCustomer == null) return;
 
+            // 1. CCCD bắt buộc
+            if (string.IsNullOrWhiteSpace(EditingCustomer.CCCD))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập CCCD", "OK");
+                return;
+            }
+            // chỉ chứa chữ số
+            var cccdPattern = new Regex(@"^\d+$");
+            if (!cccdPattern.IsMatch(EditingCustomer.CCCD))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "CCCD chỉ được chứa chữ số", "OK");
+                return;
+            }
+
+            // 2. Họ và tên bắt buộc
+            if (string.IsNullOrWhiteSpace(EditingCustomer.HoVaTen))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập họ và tên", "OK");
+                return;
+            }
+            // chỉ chứa chữ cái và khoảng trắng
+            var namePattern = new Regex(@"^[\p{L}\s]+$");
+            if (!namePattern.IsMatch(EditingCustomer.HoVaTen))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Họ và tên chỉ được chứa chữ cái", "OK");
+                return;
+            }
+
+            // Trong SaveCustomerAsync()
+            if (string.IsNullOrWhiteSpace(TuoiInput))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập tuổi", "OK");
+                return;
+            }
+            // chỉ số nguyên dương
+            if (!Regex.IsMatch(TuoiInput, @"^\d+$"))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Tuổi phải là số nguyên dương", "OK");
+                return;
+            }
+            var tuoiParsed = int.Parse(TuoiInput);
+            EditingCustomer.Tuoi = tuoiParsed;
+
+            // 3. Giới tính bắt buộc
+            if (string.IsNullOrWhiteSpace(EditingCustomer.GioiTinh))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng chọn giới tính", "OK");
+                return;
+            }
+
+            // 4. Số điện thoại bắt buộc và định dạng 10–11 chữ số
+            if (string.IsNullOrWhiteSpace(EditingCustomer.SoDienThoai))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập số điện thoại", "OK");
+                return;
+            }
+            var phonePattern = new Regex(@"^\d{10,11}$");
+            if (!phonePattern.IsMatch(EditingCustomer.SoDienThoai))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Số điện thoại phải từ 10–11 chữ số", "OK");
+                return;
+            }
+
+            // 5. Email bắt buộc và hợp lệ
+            if (string.IsNullOrWhiteSpace(EditingCustomer.Email))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Vui lòng nhập email", "OK");
+                return;
+            }
+            var emailPattern = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            if (!emailPattern.IsMatch(EditingCustomer.Email))
+            {
+                await Shell.Current.DisplayAlert("Lỗi", "Email không đúng định dạng", "OK");
+                return;
+            }
+
+            // pass hết validation thì tạo mới hoặc cập nhật
             if (EditingCustomer.Id == Guid.Empty)
             {
-                // ➕ Thêm mới
                 await _khachHangService.Create(EditingCustomer);
             }
             else
             {
-                // ✏️ Cập nhật
                 await _khachHangService.Update(EditingCustomer);
             }
+
+            // thông báo success
+            var toast = Toast.Make("Lưu khách hàng thành công", CommunityToolkit.Maui.Core.ToastDuration.Short);
+            await toast.Show();
 
             // reload danh sách & STT
             await LoadAsync();
 
-            // đổi về chế độ xem
+            // đóng pane & reset state
             IsEditing = false;
-            EditingCustomer = null; 
+            IsNotEditing = true;
+            CloseDetailPane();
         }
+
 
         [RelayCommand]
         private void CancelCustomer()   // XAML bind CancelCustomerCommand
