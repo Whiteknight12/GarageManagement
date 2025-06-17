@@ -26,11 +26,11 @@
                     <!-- Editable Content -->
                     <Label Text="Nội dung thông báo:" FontSize="16" TextColor="{DynamicResource TextColor}" />
                     <Editor Text="{Binding NoiDungThongBao, Mode=TwoWay}"
-                            IsReadOnly="{Binding IsEditMode, Converter={StaticResource InverseBooleanConverter}}"
-                            AutoSize="TextChanges"
-                            HeightRequest="100"
-                            BackgroundColor="{DynamicResource InputBackgroundColor}"
-                            TextColor="{DynamicResource TextColor}" />
+                        IsReadOnly="{Binding IsNotEditMode}"
+                        AutoSize="TextChanges"
+                        HeightRequest="100"
+                        BackgroundColor="{DynamicResource InputBackgroundColor}"
+                        TextColor="{DynamicResource TextColor}" />
 
                     <!-- Editable Group -->
                     <Label Text="Nhóm người dùng nhận thông báo:" FontSize="16" TextColor="{DynamicResource TextColor}" />
@@ -51,7 +51,7 @@
                 <!-- Edit Button -->
                 <Button Text="Sửa thông báo"
                         Command="{Binding BatDauChinhSuaCommand}"
-                        IsVisible="{Binding IsEditMode, Converter={StaticResource InverseBooleanConverter}}"
+                        IsVisible="{Binding IsNotEditMode, Converter={StaticResource InverseBooleanConverter}}"
                         BackgroundColor="#3B82F6"
                         TextColor="White"
                         HeightRequest="50"

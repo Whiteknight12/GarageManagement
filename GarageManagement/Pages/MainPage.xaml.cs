@@ -20,6 +20,8 @@ public partial class MainPage : ContentPage
     private readonly ChiTietNhanVienPage _chiTietNhanVienPage;
     private readonly LapPhieuNhapPage _lapPhieuNhapPage;
     private readonly BaoCaoDoanhSoListPage _baoCaoDoanhSoListPage;
+    private readonly ChiTietThongBaoPage _ChiTietThongBaoPage;
+
     public MainPage(MainPageViewModel viewModel, 
         ChiTietXePage chiTietXePage,
         AddNewAccountPage addNewAccountPage,
@@ -30,7 +32,8 @@ public partial class MainPage : ContentPage
         ChiTietPhieuSuaChuaPage chiTietPhieuSuaChuaPage,
         ChiTietNhanVienPage chiTietNhanVienPage,
         LapPhieuNhapPage lapPhieuNhapPage,
-        BaoCaoDoanhSoListPage baoCaoDoanhSoListPage)
+        BaoCaoDoanhSoListPage baoCaoDoanhSoListPage,
+        ChiTietThongBaoPage chiTietThongBaoPage)
     {
         InitializeComponent();
         BindingContext = viewModel;
@@ -45,6 +48,7 @@ public partial class MainPage : ContentPage
         _chiTietNhanVienPage = chiTietNhanVienPage;
         _lapPhieuNhapPage = lapPhieuNhapPage;
         _baoCaoDoanhSoListPage = baoCaoDoanhSoListPage;
+        _ChiTietThongBaoPage = chiTietThongBaoPage;
     }
 
     private void OnCollapseClicked(object sender, EventArgs e)
@@ -269,6 +273,18 @@ public partial class MainPage : ContentPage
                         _viewModel.ShowRightPane(content);
                     }
                 });
+        MessagingCenter.Subscribe<QuanLiThongBaoPageViewModel, Guid>(
+        this, "ViewChiTietThongBao",
+        (sender, id) =>
+        {
+            if (_viewModel.IsRightPaneVisible) _viewModel.CloseRightPane();
+            else
+            {
+                _ChiTietThongBaoPage._viewModel.thongBaoId = id;
+                _ = _ChiTietThongBaoPage._viewModel.LoadAsync();
+                _viewModel.ShowRightPane(_ChiTietThongBaoPage); 
+            }
+        });
         _subscribed = true;
     }
 

@@ -22,5 +22,9 @@ public partial class QuanLiThongBaoPage : ContentView
         {
             await _viewModel.LoadAsync();
         });
+        MessagingCenter.Subscribe<ChiTietThongBaoPageViewModel>(this, "NewThongBaoCreated", async (sender) =>
+        {
+            await _viewModel.LoadAsync();
+        });
     }
 }

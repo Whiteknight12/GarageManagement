@@ -325,7 +325,7 @@ namespace GarageManagement.ViewModels
             QuanLiLichSuPermission = names.Contains("quan li lich su");
             KhachHangXemDanhSachXePermission = names.Contains("khach hang xem danh sach xe");
             TaoThongBaoPermission = names.Contains("tao thong bao");
-            QuanLiThongBaoPermission = names.Contains("quan li thong bao");
+            QuanLiThongBaoPermission = names.Contains("tao thong bao");
 
             QuanLiSection =
                    QuanLiDanhSachXePermission

@@ -175,7 +175,7 @@ namespace GarageManagement.ViewModels
         [RelayCommand]
         private void ShowThongBaoDetail(Guid id)
         {
-            // Ví dụ xử lý: mở popup hoặc chuyển trang, load chi tiết thông báo
+            MessagingCenter.Send(this, "ViewChiTietThongBao", id);
         }
     }
 }
