@@ -159,71 +159,76 @@
             </Frame>
 
             <Frame 
-    Padding="10"
-    CornerRadius="12"
-    BackgroundColor="{DynamicResource CardBackgroundColor}"
-    HasShadow="True"
-    VerticalOptions="Center">
+                Padding="10"
+                CornerRadius="12"
+                BackgroundColor="{DynamicResource CardBackgroundColor}"
+                HasShadow="True"
+                VerticalOptions="Center">
                 <VerticalStackLayout>
                     <!-- ========== DANH SÁCH THÔNG BÁO ========== -->
                     <Label Text="Thông báo mới"
-FontSize="18"
-FontAttributes="Bold"
-TextColor="{DynamicResource TextColor}"
-Margin="0,10,0,0" />
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        TextColor="{DynamicResource TextColor}"
+                        Margin="0,10,0,0" />
 
                     <Grid ColumnDefinitions="Auto,*,Auto"
- VerticalOptions="Center"
- Padding="5">
+                         VerticalOptions="Center"
+                         Padding="5">
 
                         <!-- Nút mũi tên trái -->
                         <Button Text="◀"
-     Command="{Binding ScrollToLeftCommand}"
-     FontSize="20"
-     WidthRequest="40"
-     HeightRequest="40"
-     BackgroundColor="Transparent"
-     TextColor="{DynamicResource TextColor}" />
+                             Command="{Binding ScrollToLeftCommand}"
+                             FontSize="20"
+                             WidthRequest="40"
+                             HeightRequest="40"
+                             BackgroundColor="Transparent"
+                             TextColor="{DynamicResource TextColor}" />
 
                         <!-- Danh sách ngang -->
                         <ScrollView Orientation="Horizontal"
-     x:Name="ThongBaoScrollView"
-     Grid.Column="1"
-     HorizontalScrollBarVisibility="Never">
+                             x:Name="ThongBaoScrollView"
+                             Grid.Column="1"
+                             HorizontalScrollBarVisibility="Never">
                             <HorizontalStackLayout x:Name="ThongBaoListLayout" Spacing="10">
                                 <!-- DataTemplate cho từng thông báo -->
                                 <CollectionView ItemsSource="{Binding DanhSachThongBao}"
-             SelectionMode="None">
+                                    SelectionMode="None">
 
                                     <CollectionView.ItemsLayout>
                                         <LinearItemsLayout ItemSpacing="10" Orientation="Horizontal"/>
                                     </CollectionView.ItemsLayout>
 
+                                    <CollectionView.Resources>
+                                        <service:ThongBaoColorConverter x:Key="ThongBaoColorConverter"/>
+                                    </CollectionView.Resources>
+
                                     <CollectionView.ItemTemplate>
                                         <DataTemplate>
                                             <Frame Padding="10"
-                        CornerRadius="12"
-                        HeightRequest="140"               
-                        BackgroundColor="{Binding DaDoc, Converter={StaticResource ThongBaoColorConverter}}"
-                         HasShadow="True">
+                                                CornerRadius="12"
+                                                WidthRequest="250"
+                                                HeightRequest="140"               
+                                                BackgroundColor="{Binding DaDoc, Converter={StaticResource ThongBaoColorConverter}}"
+                                                HasShadow="True">
 
                                                 <Grid RowDefinitions="Auto,*,Auto"   
-                             VerticalOptions="Fill">
+                                                    VerticalOptions="Fill">
                                                     <!-- Rộng theo nội dung -->
 
                                                     <!-- Nội dung thông báo -->
                                                     <Label Grid.Row="0"
-                                Text="{Binding Content}"
-                                FontSize="14"
-                                LineBreakMode="WordWrap"
-                                TextColor="White"
-                                HorizontalOptions="Fill"
-                                VerticalOptions="Start" />
+                                                        Text="{Binding Content}"
+                                                        FontSize="14"
+                                                        LineBreakMode="WordWrap"
+                                                        TextColor="Black"
+                                                        HorizontalOptions="Fill"
+                                                        VerticalOptions="Start" />
 
                                                     <!-- Khoảng đệm để đẩy phần chân xuống dưới -->
                                                     <BoxView Grid.Row="1"
-                                 VerticalOptions="Fill"
-                                 BackgroundColor="Transparent" />
+                                                         VerticalOptions="Fill"
+                                                         BackgroundColor="Transparent" />
 
                                             <!-- CheckBox + thời gian -->
                                             <Grid Grid.Row="2" ColumnDefinitions="*,Auto" Padding="0,5,0,0">
@@ -261,13 +266,13 @@ Margin="0,10,0,0" />
 
                         <!-- Nút mũi tên phải -->
                         <Button Text="▶"
-     Command="{Binding ScrollToRightCommand}"
-     FontSize="20"
-     WidthRequest="40"
-     HeightRequest="40"
-     BackgroundColor="Transparent"
-     TextColor="{DynamicResource TextColor}"
-     Grid.Column="2" />
+                         Command="{Binding ScrollToRightCommand}"
+                         FontSize="20"
+                         WidthRequest="40"
+                         HeightRequest="40"
+                         BackgroundColor="Transparent"
+                         TextColor="{DynamicResource TextColor}"
+                         Grid.Column="2" />
                     </Grid>
                 </VerticalStackLayout>
             </Frame>
