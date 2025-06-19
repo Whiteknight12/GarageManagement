@@ -63,10 +63,12 @@ namespace GarageManagement.ViewModels
             if (SelectedYear > DateTime.UtcNow.ToLocalTime().Year)
             {
                 await Shell.Current.DisplayAlert("Thông báo", "Chưa thể xem báo cáo tồn của năm này", "OK");
+                return;
             }
             if (SelectedMonth >= DateTime.UtcNow.ToLocalTime().Month && SelectedYear == DateTime.UtcNow.ToLocalTime().Year)
             {
                 await Shell.Current.DisplayAlert("Thông báo", "Chưa thể xem báo cáo tồn của tháng này", "OK");
+                return;
             }
             BaoCaoList.Clear();
             var chiTietBaoCao = await _chiTietService.GetListOnSpecialRequirement($"month-and-year/{SelectedMonth}/{SelectedYear}");

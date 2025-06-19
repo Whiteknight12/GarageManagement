@@ -46,7 +46,7 @@ namespace GarageManagement.ViewModels
 
         [ObservableProperty] private Xe? selectedXe;
         [ObservableProperty] private bool isDetailPaneVisible;
-        [ObservableProperty] private bool isEditing;
+        [ObservableProperty] private bool isEditing  =false;
         [ObservableProperty] private bool isNotEditing = true;
         [ObservableProperty] private bool isDeleteMode = false;
         [ObservableProperty] private bool isViewing = true;
